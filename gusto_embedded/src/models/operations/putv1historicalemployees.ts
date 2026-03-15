@@ -25,7 +25,7 @@ export type WorkAddress = {
   locationUuid?: string | undefined;
 };
 
-export type PutV1HistoricalEmployeesHomeAddress = {
+export type HomeAddress = {
   street1: string;
   street2?: string | null | undefined;
   city: string;
@@ -73,7 +73,7 @@ export type PutV1HistoricalEmployeesRequestBody = {
   dateOfBirth: string;
   ssn: string;
   workAddress: WorkAddress;
-  homeAddress: PutV1HistoricalEmployeesHomeAddress;
+  homeAddress: HomeAddress;
   termination: Termination;
   /**
    * Optional. If provided, the email address will be saved to the employee.
@@ -133,7 +133,7 @@ export function workAddressToJSON(workAddress: WorkAddress): string {
 }
 
 /** @internal */
-export type PutV1HistoricalEmployeesHomeAddress$Outbound = {
+export type HomeAddress$Outbound = {
   street_1: string;
   street_2?: string | null | undefined;
   city: string;
@@ -142,10 +142,10 @@ export type PutV1HistoricalEmployeesHomeAddress$Outbound = {
 };
 
 /** @internal */
-export const PutV1HistoricalEmployeesHomeAddress$outboundSchema: z.ZodType<
-  PutV1HistoricalEmployeesHomeAddress$Outbound,
+export const HomeAddress$outboundSchema: z.ZodType<
+  HomeAddress$Outbound,
   z.ZodTypeDef,
-  PutV1HistoricalEmployeesHomeAddress
+  HomeAddress
 > = z.object({
   street1: z.string(),
   street2: z.nullable(z.string()).optional(),
@@ -159,14 +159,8 @@ export const PutV1HistoricalEmployeesHomeAddress$outboundSchema: z.ZodType<
   });
 });
 
-export function putV1HistoricalEmployeesHomeAddressToJSON(
-  putV1HistoricalEmployeesHomeAddress: PutV1HistoricalEmployeesHomeAddress,
-): string {
-  return JSON.stringify(
-    PutV1HistoricalEmployeesHomeAddress$outboundSchema.parse(
-      putV1HistoricalEmployeesHomeAddress,
-    ),
-  );
+export function homeAddressToJSON(homeAddress: HomeAddress): string {
+  return JSON.stringify(HomeAddress$outboundSchema.parse(homeAddress));
 }
 
 /** @internal */
@@ -249,7 +243,7 @@ export type PutV1HistoricalEmployeesRequestBody$Outbound = {
   date_of_birth: string;
   ssn: string;
   work_address: WorkAddress$Outbound;
-  home_address: PutV1HistoricalEmployeesHomeAddress$Outbound;
+  home_address: HomeAddress$Outbound;
   termination: Termination$Outbound;
   email?: string | undefined;
   job: Job$Outbound;
@@ -270,7 +264,7 @@ export const PutV1HistoricalEmployeesRequestBody$outboundSchema: z.ZodType<
   dateOfBirth: z.string(),
   ssn: z.string(),
   workAddress: z.lazy(() => WorkAddress$outboundSchema),
-  homeAddress: z.lazy(() => PutV1HistoricalEmployeesHomeAddress$outboundSchema),
+  homeAddress: z.lazy(() => HomeAddress$outboundSchema),
   termination: z.lazy(() => Termination$outboundSchema),
   email: z.string().optional(),
   job: z.lazy(() => Job$outboundSchema),

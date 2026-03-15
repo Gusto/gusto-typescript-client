@@ -20,7 +20,7 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
-import { PostV1CompaniesCompanyIdPeopleBatchesResponseBody } from "../models/errors/postv1companiescompanyidpeoplebatches.js";
+import { PeopleBatchConflictError } from "../models/errors/peoplebatchconflicterror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -43,7 +43,7 @@ export type PeopleBatchesPostV1CompaniesCompanyIdPeopleBatchesMutationData =
 
 export type PeopleBatchesPostV1CompaniesCompanyIdPeopleBatchesMutationError =
   | NotFoundErrorObject
-  | PostV1CompaniesCompanyIdPeopleBatchesResponseBody
+  | PeopleBatchConflictError
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError

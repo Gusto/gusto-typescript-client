@@ -33,7 +33,9 @@ import { Result } from "../types/fp.js";
  * Get info about the current access token
  *
  * @remarks
- * Returns scope and resource information associated with the current access token.
+ * Returns scope and resource information associated with the current access token. Use this endpoint to verify the following for the current access token:
+ * * Resource (company, employee, contractor, or application) and resource owner
+ * * Access level
  */
 export function introspectionGetInfo(
   client: GustoEmbeddedCore,
@@ -163,7 +165,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, GetV1TokenInfoResponse$inboundSchema, { key: "object" }),
+    M.json(200, GetV1TokenInfoResponse$inboundSchema, { key: "Token-Info" }),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

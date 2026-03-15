@@ -10,6 +10,29 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
+ * Payment speed. READ-ONLY.
+ *
+ * @remarks
+ * - `1-day`: Next-day ACH (only for partners that opt in).
+ * - `2-day`: Two-day ACH.
+ * - `4-day`: Standard ACH.
+ */
+export const PaymentSpeed = {
+  OneMinusDay: "1-day",
+  TwoMinusDay: "2-day",
+  FourMinusDay: "4-day",
+} as const;
+/**
+ * Payment speed. READ-ONLY.
+ *
+ * @remarks
+ * - `1-day`: Next-day ACH (only for partners that opt in).
+ * - `2-day`: Two-day ACH.
+ * - `4-day`: Standard ACH.
+ */
+export type PaymentSpeed = ClosedEnum<typeof PaymentSpeed>;
+
+/**
  * The type of blocker
  */
 export const BlockerType = {
@@ -32,9 +55,6 @@ export type EarnedFastAchBlockers = {
   threshold?: number | undefined;
 };
 
-/**
- * Example response
- */
 export type PaymentConfigs = {
   /**
    * Company uuid
@@ -45,13 +65,18 @@ export type PaymentConfigs = {
    */
   partnerUuid?: string | undefined;
   /**
-   * Payment limit for 1-day or 2-day payroll
+   * Payment limit for 1-day or 2-day payroll (string representation of decimal).
    */
   fastPaymentLimit?: string | null | undefined;
   /**
-   * Payment speed for 1-day, 2-day, 4-day
+   * Payment speed. READ-ONLY.
+   *
+   * @remarks
+   * - `1-day`: Next-day ACH (only for partners that opt in).
+   * - `2-day`: Two-day ACH.
+   * - `4-day`: Standard ACH.
    */
-  paymentSpeed?: string | undefined;
+  paymentSpeed?: PaymentSpeed | undefined;
   /**
    * Whether the company is configured to use the partner-owned disbursement payment rail
    */
@@ -61,6 +86,10 @@ export type PaymentConfigs = {
    */
   earnedFastAchBlockers?: Array<EarnedFastAchBlockers> | undefined;
 };
+
+/** @internal */
+export const PaymentSpeed$inboundSchema: z.ZodNativeEnum<typeof PaymentSpeed> =
+  z.nativeEnum(PaymentSpeed);
 
 /** @internal */
 export const BlockerType$inboundSchema: z.ZodNativeEnum<typeof BlockerType> = z
@@ -99,7 +128,7 @@ export const PaymentConfigs$inboundSchema: z.ZodType<
   company_uuid: z.string().optional(),
   partner_uuid: z.string().optional(),
   fast_payment_limit: z.nullable(z.string()).optional(),
-  payment_speed: z.string().optional(),
+  payment_speed: PaymentSpeed$inboundSchema.optional(),
   partner_owned_disbursement: z.boolean().optional(),
   earned_fast_ach_blockers: z.array(
     z.lazy(() => EarnedFastAchBlockers$inboundSchema),

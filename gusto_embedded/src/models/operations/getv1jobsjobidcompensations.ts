@@ -15,11 +15,20 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1JobsJobIdCompensationsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1JobsJobIdCompensationsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1JobsJobIdCompensationsHeaderXGustoAPIVersion
+>;
 
 /**
  * Available options:
@@ -42,6 +51,12 @@ export type GetV1JobsJobIdCompensationsQueryParamInclude = ClosedEnum<
 
 export type GetV1JobsJobIdCompensationsRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1JobsJobIdCompensationsHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the job
    */
   jobId: string;
@@ -60,19 +75,20 @@ export type GetV1JobsJobIdCompensationsRequest = {
    * - all_compensations: Include all effective dated compensations for each job instead of only the current compensation
    */
   include?: GetV1JobsJobIdCompensationsQueryParamInclude | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1JobsJobIdCompensationsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
-  compensationList?: Array<Compensation> | undefined;
+  compensations?: Array<Compensation> | undefined;
 };
+
+/** @internal */
+export const GetV1JobsJobIdCompensationsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1JobsJobIdCompensationsHeaderXGustoAPIVersion> = z
+    .nativeEnum(GetV1JobsJobIdCompensationsHeaderXGustoAPIVersion);
 
 /** @internal */
 export const GetV1JobsJobIdCompensationsQueryParamInclude$outboundSchema:
@@ -81,11 +97,11 @@ export const GetV1JobsJobIdCompensationsQueryParamInclude$outboundSchema:
 
 /** @internal */
 export type GetV1JobsJobIdCompensationsRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   job_id: string;
   page?: number | undefined;
   per?: number | undefined;
   include?: string | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -94,16 +110,19 @@ export const GetV1JobsJobIdCompensationsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1JobsJobIdCompensationsRequest
 > = z.object({
+  xGustoAPIVersion:
+    GetV1JobsJobIdCompensationsHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
   jobId: z.string(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
   include: GetV1JobsJobIdCompensationsQueryParamInclude$outboundSchema
     .optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
-    jobId: "job_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    jobId: "job_id",
   });
 });
 
@@ -124,11 +143,11 @@ export const GetV1JobsJobIdCompensationsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Compensation-List": z.array(Compensation$inboundSchema).optional(),
+  Compensations: z.array(Compensation$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
-    "Compensation-List": "compensationList",
+    "Compensations": "compensations",
   });
 });
 

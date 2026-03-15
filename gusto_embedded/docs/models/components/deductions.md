@@ -1,7 +1,5 @@
 # Deductions
 
-An array of deductions for the employee.
-
 ## Example Usage
 
 ```typescript

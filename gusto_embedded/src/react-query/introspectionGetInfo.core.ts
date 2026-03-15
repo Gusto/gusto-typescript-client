@@ -11,10 +11,10 @@ import { GustoEmbeddedCore } from "../core.js";
 import { introspectionGetInfo } from "../funcs/introspectionGetInfo.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
   GetV1TokenInfoRequest,
   GetV1TokenInfoResponse,
+  XGustoAPIVersion,
 } from "../models/operations/getv1tokeninfo.js";
 import { unwrapAsync } from "../types/fp.js";
 export type IntrospectionGetInfoQueryData = GetV1TokenInfoResponse;
@@ -72,7 +72,7 @@ export function buildIntrospectionGetInfoQuery(
 }
 
 export function queryKeyIntrospectionGetInfo(
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: XGustoAPIVersion | undefined },
 ): QueryKey {
   return ["@gusto/embedded-api", "Introspection", "getInfo", parameters];
 }

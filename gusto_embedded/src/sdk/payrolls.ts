@@ -293,9 +293,7 @@ export class Payrolls extends ClientSDK {
    * Get all payroll blockers for a company
    *
    * @remarks
-   * Returns a list of reasons that prevent the company from running payrolls. See the [payroll blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers) for a complete list of reasons.
-   *
-   * The list is empty if there are no payroll blockers.
+   * Returns a list of reasons that prevent the company from running payrolls. See the [Payroll Blockers guide](doc:payroll-blockers) for a complete list of reasons. The list is empty if there are no payroll blockers.
    *
    * scope: `payrolls:run`
    */

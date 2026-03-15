@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -38,6 +39,7 @@ export type SignatoriesCreateMutationVariables = {
 export type SignatoriesCreateMutationData = PostV1CompanySignatoriesResponse;
 
 export type SignatoriesCreateMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -52,9 +54,15 @@ export type SignatoriesCreateMutationError =
  * Create a signatory
  *
  * @remarks
- * Create a company signatory with complete information.
- * A signatory can legally sign forms once the identity verification process is successful.
- * The signatory should be an officer, owner, general partner or LLC member manager, plan administrator, fiduciary, or an authorized representative who is designated to sign agreements on the company's behalf. An officer is the president, vice president, treasurer, chief accounting officer, etc. There can only be a single primary signatory in a company.
+ * Creates a company signatory with complete information. The company must not already have a signatory.
+ *
+ * A signatory can legally sign forms once the identity verification process is successful. The signatory should be an officer, owner, general partner or LLC member manager, plan administrator, fiduciary, or an authorized representative who is designated to sign agreements on the company's behalf. An officer is the president, vice president, treasurer, chief accounting officer, etc. There can only be a single primary signatory in a company.
+ *
+ * ### Webhooks
+ * - `signatory.created`: Fires when a signatory is successfully created.
+ *
+ * ### Related guides
+ * - [Signatory Events](doc:signatory-events)
  *
  * scope: `signatories:manage`
  */

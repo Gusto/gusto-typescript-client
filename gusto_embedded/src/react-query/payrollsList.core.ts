@@ -17,8 +17,8 @@ import {
   GetV1CompaniesCompanyIdPayrollsQueryParamInclude,
   GetV1CompaniesCompanyIdPayrollsRequest,
   GetV1CompaniesCompanyIdPayrollsResponse,
-  PayrollTypes,
   ProcessingStatuses,
+  QueryParamPayrollTypes,
   SortOrder,
 } from "../models/operations/getv1companiescompanyidpayrolls.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -92,7 +92,7 @@ export function queryKeyPayrollsList(
       | GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
       | undefined;
     processingStatuses?: Array<ProcessingStatuses> | undefined;
-    payrollTypes?: Array<PayrollTypes> | undefined;
+    payrollTypes?: Array<QueryParamPayrollTypes> | undefined;
     processed?: boolean | undefined;
     includeOffCycle?: boolean | undefined;
     include?:

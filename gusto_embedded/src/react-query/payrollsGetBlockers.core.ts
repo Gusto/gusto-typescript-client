@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsGetBlockers } from "../funcs/payrollsGetBlockers.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesPayrollBlockersCompanyUuidHeaderXGustoAPIVersion,
   GetV1CompaniesPayrollBlockersCompanyUuidRequest,
   GetV1CompaniesPayrollBlockersCompanyUuidResponse,
 } from "../models/operations/getv1companiespayrollblockerscompanyuuid.js";
@@ -74,7 +74,11 @@ export function buildPayrollsGetBlockersQuery(
 
 export function queryKeyPayrollsGetBlockers(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompaniesPayrollBlockersCompanyUuidHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

@@ -30,6 +30,12 @@ export type DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVe
 
 export type DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the company
    */
   companyId: string;
@@ -37,12 +43,6 @@ export type DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest = {
    * The UUID of the company bank account
    */
   bankAccountId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?:
-    | DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion
-    | undefined;
 };
 
 export type DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse = {
@@ -60,9 +60,9 @@ export const DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIV
 /** @internal */
 export type DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest$Outbound =
   {
+    "X-Gusto-API-Version": string;
     company_id: string;
     bank_account_id: string;
-    "X-Gusto-API-Version": string;
   };
 
 /** @internal */
@@ -72,16 +72,16 @@ export const DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest$outbound
     z.ZodTypeDef,
     DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest
   > = z.object({
-    companyId: z.string(),
-    bankAccountId: z.string(),
     xGustoAPIVersion:
       DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion$outboundSchema
         .default("2025-06-15"),
+    companyId: z.string(),
+    bankAccountId: z.string(),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       companyId: "company_id",
       bankAccountId: "bank_account_id",
-      xGustoAPIVersion: "X-Gusto-API-Version",
     });
   });
 

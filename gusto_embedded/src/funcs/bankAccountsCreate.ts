@@ -201,9 +201,11 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, PostV1CompaniesCompanyIdBankAccountsResponse$inboundSchema, {
-      key: "Company-Bank-Account",
-    }),
+    M.json(
+      [200, 201],
+      PostV1CompaniesCompanyIdBankAccountsResponse$inboundSchema,
+      { key: "Company-Bank-Account" },
+    ),
     M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail("4XX"),

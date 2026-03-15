@@ -12,6 +12,10 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
+import {
+  PeopleBatch,
+  PeopleBatch$inboundSchema,
+} from "../components/peoplebatch.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -176,7 +180,7 @@ export type Department = {
 /**
  * The unit accompanying the compensation rate. If the employee is an owner, rate should be `Paycheck`.
  */
-export const PostV1CompaniesCompanyIdPeopleBatchesPaymentUnit = {
+export const PaymentUnit = {
   Hour: "Hour",
   Week: "Week",
   Month: "Month",
@@ -186,9 +190,7 @@ export const PostV1CompaniesCompanyIdPeopleBatchesPaymentUnit = {
 /**
  * The unit accompanying the compensation rate. If the employee is an owner, rate should be `Paycheck`.
  */
-export type PostV1CompaniesCompanyIdPeopleBatchesPaymentUnit = ClosedEnum<
-  typeof PostV1CompaniesCompanyIdPeopleBatchesPaymentUnit
->;
+export type PaymentUnit = ClosedEnum<typeof PaymentUnit>;
 
 /**
  * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ( 'Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Commissioned employees ('Commission Only Exempt') earn wages based only on commission. Commissioned with overtime ('Commission Only Nonexempt') earn wages based on commission, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company. If selecting `Owner`, `payment_unit` must be `"Paycheck"`.
@@ -217,11 +219,7 @@ export type Compensation = {
   /**
    * The unit accompanying the compensation rate. If the employee is an owner, rate should be `Paycheck`.
    */
-  paymentUnit: PostV1CompaniesCompanyIdPeopleBatchesPaymentUnit;
-  /**
-   * The date when the compensation takes effect.
-   */
-  effectiveDate?: RFCDate | undefined;
+  paymentUnit: PaymentUnit;
   /**
    * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ( 'Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Commissioned employees ('Commission Only Exempt') earn wages based only on commission. Commissioned with overtime ('Commission Only Nonexempt') earn wages based on commission, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company. If selecting `Owner`, `payment_unit` must be `"Paycheck"`.
    */
@@ -327,7 +325,10 @@ export type Batch = {
    */
   compensation?: Compensation | undefined;
   /**
-   * Creates employee bank accounts and payment methods for direct deposit. If splitting payments by amount, the priority is set based on the order of the bank accounts in the array and the last bank account is the remainder account (should have `split_amount` set to `null`).
+   * Creates employee bank account(s) and payment method(s) for direct deposit. Payments can be split across accounts by Percentage or by Amount. If splitting payments by `Percentage`, all splits must have a `split_amount` and the percentages must add up to `100`.
+   *
+   * @remarks
+   * If splitting payments by `Amount`, the priority is set based on the order of the bank accounts in the array and the last bank account is the remainder account (should have `split_amount` set to `null`).
    */
   bankAccounts?: Array<BankAccounts> | undefined;
 };
@@ -361,32 +362,12 @@ export type PostV1CompaniesCompanyIdPeopleBatchesRequest = {
   requestBody: PostV1CompaniesCompanyIdPeopleBatchesRequestBody;
 };
 
-export const PostV1CompaniesCompanyIdPeopleBatchesStatus = {
-  Pending: "pending",
-  Processing: "processing",
-  Completed: "completed",
-  Failed: "failed",
-} as const;
-export type PostV1CompaniesCompanyIdPeopleBatchesStatus = ClosedEnum<
-  typeof PostV1CompaniesCompanyIdPeopleBatchesStatus
->;
-
-/**
- * created
- */
-export type PostV1CompaniesCompanyIdPeopleBatchesResponseBody = {
-  uuid?: string | undefined;
-  idempotencyKey?: string | undefined;
-  status?: PostV1CompaniesCompanyIdPeopleBatchesStatus | undefined;
-  batchAction?: string | undefined;
-};
-
 export type PostV1CompaniesCompanyIdPeopleBatchesResponse = {
   httpMeta: HTTPMetadata;
   /**
    * created
    */
-  object?: PostV1CompaniesCompanyIdPeopleBatchesResponseBody | undefined;
+  peopleBatch?: PeopleBatch | undefined;
 };
 
 /** @internal */
@@ -588,9 +569,8 @@ export function departmentToJSON(department: Department): string {
 }
 
 /** @internal */
-export const PostV1CompaniesCompanyIdPeopleBatchesPaymentUnit$outboundSchema:
-  z.ZodNativeEnum<typeof PostV1CompaniesCompanyIdPeopleBatchesPaymentUnit> = z
-    .nativeEnum(PostV1CompaniesCompanyIdPeopleBatchesPaymentUnit);
+export const PaymentUnit$outboundSchema: z.ZodNativeEnum<typeof PaymentUnit> = z
+  .nativeEnum(PaymentUnit);
 
 /** @internal */
 export const FlsaStatus$outboundSchema: z.ZodNativeEnum<typeof FlsaStatus> = z
@@ -600,7 +580,6 @@ export const FlsaStatus$outboundSchema: z.ZodNativeEnum<typeof FlsaStatus> = z
 export type Compensation$Outbound = {
   rate: string;
   payment_unit: string;
-  effective_date?: string | undefined;
   flsa_status: string;
 };
 
@@ -611,13 +590,11 @@ export const Compensation$outboundSchema: z.ZodType<
   Compensation
 > = z.object({
   rate: z.string(),
-  paymentUnit: PostV1CompaniesCompanyIdPeopleBatchesPaymentUnit$outboundSchema,
-  effectiveDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  paymentUnit: PaymentUnit$outboundSchema,
   flsaStatus: FlsaStatus$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     paymentUnit: "payment_unit",
-    effectiveDate: "effective_date",
     flsaStatus: "flsa_status",
   });
 });
@@ -803,46 +780,6 @@ export function postV1CompaniesCompanyIdPeopleBatchesRequestToJSON(
 }
 
 /** @internal */
-export const PostV1CompaniesCompanyIdPeopleBatchesStatus$inboundSchema:
-  z.ZodNativeEnum<typeof PostV1CompaniesCompanyIdPeopleBatchesStatus> = z
-    .nativeEnum(PostV1CompaniesCompanyIdPeopleBatchesStatus);
-
-/** @internal */
-export const PostV1CompaniesCompanyIdPeopleBatchesResponseBody$inboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdPeopleBatchesResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    uuid: z.string().optional(),
-    idempotency_key: z.string().optional(),
-    status: PostV1CompaniesCompanyIdPeopleBatchesStatus$inboundSchema
-      .optional(),
-    batch_action: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "idempotency_key": "idempotencyKey",
-      "batch_action": "batchAction",
-    });
-  });
-
-export function postV1CompaniesCompanyIdPeopleBatchesResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1CompaniesCompanyIdPeopleBatchesResponseBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1CompaniesCompanyIdPeopleBatchesResponseBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1CompaniesCompanyIdPeopleBatchesResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
 export const PostV1CompaniesCompanyIdPeopleBatchesResponse$inboundSchema:
   z.ZodType<
     PostV1CompaniesCompanyIdPeopleBatchesResponse,
@@ -850,12 +787,11 @@ export const PostV1CompaniesCompanyIdPeopleBatchesResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    object: z.lazy(() =>
-      PostV1CompaniesCompanyIdPeopleBatchesResponseBody$inboundSchema
-    ).optional(),
+    "People-Batch": PeopleBatch$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
+      "People-Batch": "peopleBatch",
     });
   });
 

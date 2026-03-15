@@ -26,8 +26,8 @@ import {
   GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdPayrollsQueryParamInclude,
   GetV1CompaniesCompanyIdPayrollsRequest,
-  PayrollTypes,
   ProcessingStatuses,
+  QueryParamPayrollTypes,
   SortOrder,
 } from "../models/operations/getv1companiescompanyidpayrolls.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -130,7 +130,7 @@ export function setPayrollsListData(
         | GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
         | undefined;
       processingStatuses?: Array<ProcessingStatuses> | undefined;
-      payrollTypes?: Array<PayrollTypes> | undefined;
+      payrollTypes?: Array<QueryParamPayrollTypes> | undefined;
       processed?: boolean | undefined;
       includeOffCycle?: boolean | undefined;
       include?:
@@ -161,7 +161,7 @@ export function invalidatePayrollsList(
           | GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
           | undefined;
         processingStatuses?: Array<ProcessingStatuses> | undefined;
-        payrollTypes?: Array<PayrollTypes> | undefined;
+        payrollTypes?: Array<QueryParamPayrollTypes> | undefined;
         processed?: boolean | undefined;
         includeOffCycle?: boolean | undefined;
         include?:

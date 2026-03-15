@@ -23,9 +23,9 @@ import {
   NotFoundErrorObject$inboundSchema,
 } from "../models/errors/notfounderrorobject.js";
 import {
-  PostV1CompaniesCompanyIdPeopleBatchesResponseBody,
-  PostV1CompaniesCompanyIdPeopleBatchesResponseBody$inboundSchema,
-} from "../models/errors/postv1companiescompanyidpeoplebatches.js";
+  PeopleBatchConflictError,
+  PeopleBatchConflictError$inboundSchema,
+} from "../models/errors/peoplebatchconflicterror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -59,7 +59,7 @@ export function peopleBatchesPostV1CompaniesCompanyIdPeopleBatches(
   Result<
     PostV1CompaniesCompanyIdPeopleBatchesResponse,
     | NotFoundErrorObject
-    | PostV1CompaniesCompanyIdPeopleBatchesResponseBody
+    | PeopleBatchConflictError
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -87,7 +87,7 @@ async function $do(
     Result<
       PostV1CompaniesCompanyIdPeopleBatchesResponse,
       | NotFoundErrorObject
-      | PostV1CompaniesCompanyIdPeopleBatchesResponseBody
+      | PeopleBatchConflictError
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -188,7 +188,7 @@ async function $do(
   const [result] = await M.match<
     PostV1CompaniesCompanyIdPeopleBatchesResponse,
     | NotFoundErrorObject
-    | PostV1CompaniesCompanyIdPeopleBatchesResponseBody
+    | PeopleBatchConflictError
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -200,13 +200,10 @@ async function $do(
     | SDKValidationError
   >(
     M.json(201, PostV1CompaniesCompanyIdPeopleBatchesResponse$inboundSchema, {
-      key: "object",
+      key: "People-Batch",
     }),
     M.jsonErr(404, NotFoundErrorObject$inboundSchema),
-    M.jsonErr(
-      409,
-      PostV1CompaniesCompanyIdPeopleBatchesResponseBody$inboundSchema,
-    ),
+    M.jsonErr(409, PeopleBatchConflictError$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

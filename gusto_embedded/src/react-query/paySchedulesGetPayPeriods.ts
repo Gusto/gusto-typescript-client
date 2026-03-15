@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,16 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompaniesCompanyIdPayPeriodsRequest } from "../models/operations/getv1companiescompanyidpayperiods.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion,
+  GetV1CompaniesCompanyIdPayPeriodsRequest,
+  PayrollTypes,
+} from "../models/operations/getv1companiescompanyidpayperiods.js";
+import { RFCDate } from "../types/rfcdate.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +48,8 @@ export {
 };
 
 export type PaySchedulesGetPayPeriodsQueryError =
+  | NotFoundErrorObject
+  | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -55,11 +63,13 @@ export type PaySchedulesGetPayPeriodsQueryError =
  * Get pay periods for a company
  *
  * @remarks
- * Pay periods are the foundation of payroll. Compensation, time & attendance, taxes, and expense reports all rely on when they happened. To begin submitting information for a given payroll, we need to agree on the time period.
+ * Pay periods are the foundation of payroll. Compensation, time & attendance, taxes, and expense reports all rely on when they happened.
  *
- * By default, this endpoint returns pay periods starting from 6 months ago to the date today.  Use the `start_date` and `end_date` parameters to change the scope of the response.  End dates can be up to 3 months in the future and there is no limit on start dates.
+ * To begin submitting information for a given payroll, we need to agree on the time period.
  *
- * Starting in version '2023-04-01', the eligible_employees attribute was removed from the response.  The eligible employees for a payroll are determined by the employee_compensations returned from the payrolls#prepare endpoint.
+ * By default, this endpoint returns pay periods starting from 6 months ago to the date today. Use the `start_date` and `end_date` parameters to change the scope of the response. End dates can be up to 3 months in the future and there is no limit on start dates.
+ *
+ * Starting in version 2023-04-01, the `eligible_employees` attribute was removed from the response. The eligible employees for a payroll are determined by the employee_compensations returned from the [PUT /v1/companies/{company_id}/payrolls/{payroll_id}/prepare](ref:put-v1-companies-company_id-payrolls-payroll_id-prepare) endpoint.
  *
  * scope: `payrolls:read`
  */
@@ -88,11 +98,13 @@ export function usePaySchedulesGetPayPeriods(
  * Get pay periods for a company
  *
  * @remarks
- * Pay periods are the foundation of payroll. Compensation, time & attendance, taxes, and expense reports all rely on when they happened. To begin submitting information for a given payroll, we need to agree on the time period.
+ * Pay periods are the foundation of payroll. Compensation, time & attendance, taxes, and expense reports all rely on when they happened.
  *
- * By default, this endpoint returns pay periods starting from 6 months ago to the date today.  Use the `start_date` and `end_date` parameters to change the scope of the response.  End dates can be up to 3 months in the future and there is no limit on start dates.
+ * To begin submitting information for a given payroll, we need to agree on the time period.
  *
- * Starting in version '2023-04-01', the eligible_employees attribute was removed from the response.  The eligible employees for a payroll are determined by the employee_compensations returned from the payrolls#prepare endpoint.
+ * By default, this endpoint returns pay periods starting from 6 months ago to the date today. Use the `start_date` and `end_date` parameters to change the scope of the response. End dates can be up to 3 months in the future and there is no limit on start dates.
+ *
+ * Starting in version 2023-04-01, the `eligible_employees` attribute was removed from the response. The eligible employees for a payroll are determined by the employee_compensations returned from the [PUT /v1/companies/{company_id}/payrolls/{payroll_id}/prepare](ref:put-v1-companies-company_id-payrolls-payroll_id-prepare) endpoint.
  *
  * scope: `payrolls:read`
  */
@@ -122,10 +134,12 @@ export function setPaySchedulesGetPayPeriodsData(
   queryKeyBase: [
     companyId: string,
     parameters: {
-      startDate?: string | undefined;
-      endDate?: string | undefined;
-      payrollTypes?: string | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion
+        | undefined;
+      startDate?: RFCDate | undefined;
+      endDate?: RFCDate | undefined;
+      payrollTypes?: PayrollTypes | undefined;
     },
   ],
   data: PaySchedulesGetPayPeriodsQueryData,
@@ -141,10 +155,12 @@ export function invalidatePaySchedulesGetPayPeriods(
     [
       companyId: string,
       parameters: {
-        startDate?: string | undefined;
-        endDate?: string | undefined;
-        payrollTypes?: string | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion
+          | undefined;
+        startDate?: RFCDate | undefined;
+        endDate?: RFCDate | undefined;
+        payrollTypes?: PayrollTypes | undefined;
       },
     ]
   >,

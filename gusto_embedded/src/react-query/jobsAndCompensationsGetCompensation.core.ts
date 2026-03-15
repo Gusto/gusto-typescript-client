@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { jobsAndCompensationsGetCompensation } from "../funcs/jobsAndCompensationsGetCompensation.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompensationsCompensationIdHeaderXGustoAPIVersion,
   GetV1CompensationsCompensationIdRequest,
   GetV1CompensationsCompensationIdResponse,
 } from "../models/operations/getv1compensationscompensationid.js";
@@ -75,7 +75,11 @@ export function buildJobsAndCompensationsGetCompensationQuery(
 
 export function queryKeyJobsAndCompensationsGetCompensation(
   compensationId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompensationsCompensationIdHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

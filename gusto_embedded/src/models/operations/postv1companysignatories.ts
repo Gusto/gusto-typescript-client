@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -12,36 +13,24 @@ import {
 } from "../components/httpmetadata.js";
 import { Signatory, Signatory$inboundSchema } from "../components/signatory.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  SignatoryCreateRequest,
+  SignatoryCreateRequest$Outbound,
+  SignatoryCreateRequest$outboundSchema,
+} from "../components/signatorycreaterequest.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The signatory's home address
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type HomeAddress = {
-  street1: string;
-  street2?: string | undefined;
-  city: string;
-  state: string;
-  zip: string;
-};
-
-export type PostV1CompanySignatoriesRequestBody = {
-  ssn: string;
-  firstName: string;
-  middleInitial?: string | undefined;
-  lastName: string;
-  email: string;
-  title: string;
-  phone: string;
-  birthday: string;
-  /**
-   * The signatory's home address
-   */
-  homeAddress: HomeAddress;
-};
+export const PostV1CompanySignatoriesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1CompanySignatoriesHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PostV1CompanySignatoriesHeaderXGustoAPIVersion
+>;
 
 export type PostV1CompanySignatoriesRequest = {
   /**
@@ -51,101 +40,28 @@ export type PostV1CompanySignatoriesRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostV1CompanySignatoriesRequestBody;
+  xGustoAPIVersion?: PostV1CompanySignatoriesHeaderXGustoAPIVersion | undefined;
+  signatoryCreateRequest: SignatoryCreateRequest;
 };
 
 export type PostV1CompanySignatoriesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
   signatory?: Signatory | undefined;
 };
 
 /** @internal */
-export type HomeAddress$Outbound = {
-  street_1: string;
-  street_2?: string | undefined;
-  city: string;
-  state: string;
-  zip: string;
-};
-
-/** @internal */
-export const HomeAddress$outboundSchema: z.ZodType<
-  HomeAddress$Outbound,
-  z.ZodTypeDef,
-  HomeAddress
-> = z.object({
-  street1: z.string(),
-  street2: z.string().optional(),
-  city: z.string(),
-  state: z.string(),
-  zip: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    street1: "street_1",
-    street2: "street_2",
-  });
-});
-
-export function homeAddressToJSON(homeAddress: HomeAddress): string {
-  return JSON.stringify(HomeAddress$outboundSchema.parse(homeAddress));
-}
-
-/** @internal */
-export type PostV1CompanySignatoriesRequestBody$Outbound = {
-  ssn: string;
-  first_name: string;
-  middle_initial?: string | undefined;
-  last_name: string;
-  email: string;
-  title: string;
-  phone: string;
-  birthday: string;
-  home_address: HomeAddress$Outbound;
-};
-
-/** @internal */
-export const PostV1CompanySignatoriesRequestBody$outboundSchema: z.ZodType<
-  PostV1CompanySignatoriesRequestBody$Outbound,
-  z.ZodTypeDef,
-  PostV1CompanySignatoriesRequestBody
-> = z.object({
-  ssn: z.string(),
-  firstName: z.string(),
-  middleInitial: z.string().optional(),
-  lastName: z.string(),
-  email: z.string(),
-  title: z.string(),
-  phone: z.string(),
-  birthday: z.string(),
-  homeAddress: z.lazy(() => HomeAddress$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    firstName: "first_name",
-    middleInitial: "middle_initial",
-    lastName: "last_name",
-    homeAddress: "home_address",
-  });
-});
-
-export function postV1CompanySignatoriesRequestBodyToJSON(
-  postV1CompanySignatoriesRequestBody: PostV1CompanySignatoriesRequestBody,
-): string {
-  return JSON.stringify(
-    PostV1CompanySignatoriesRequestBody$outboundSchema.parse(
-      postV1CompanySignatoriesRequestBody,
-    ),
-  );
-}
+export const PostV1CompanySignatoriesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PostV1CompanySignatoriesHeaderXGustoAPIVersion> = z
+    .nativeEnum(PostV1CompanySignatoriesHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PostV1CompanySignatoriesRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostV1CompanySignatoriesRequestBody$Outbound;
+  "Signatory-Create-Request": SignatoryCreateRequest$Outbound;
 };
 
 /** @internal */
@@ -155,13 +71,16 @@ export const PostV1CompanySignatoriesRequest$outboundSchema: z.ZodType<
   PostV1CompanySignatoriesRequest
 > = z.object({
   companyUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.lazy(() => PostV1CompanySignatoriesRequestBody$outboundSchema),
+  xGustoAPIVersion:
+    PostV1CompanySignatoriesHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
+  signatoryCreateRequest: SignatoryCreateRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    signatoryCreateRequest: "Signatory-Create-Request",
   });
 });
 

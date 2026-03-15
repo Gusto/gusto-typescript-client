@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -14,35 +15,55 @@ import {
   PayrollBlocker,
   PayrollBlocker$inboundSchema,
 } from "../components/payrollblocker.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompaniesPayrollBlockersCompanyUuidHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompaniesPayrollBlockersCompanyUuidHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetV1CompaniesPayrollBlockersCompanyUuidHeaderXGustoAPIVersion
+  >;
+
 export type GetV1CompaniesPayrollBlockersCompanyUuidRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompaniesPayrollBlockersCompanyUuidHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
   companyUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1CompaniesPayrollBlockersCompanyUuidResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
-  payrollBlockerList?: Array<PayrollBlocker> | undefined;
+  payrollBlockers?: Array<PayrollBlocker> | undefined;
 };
 
 /** @internal */
+export const GetV1CompaniesPayrollBlockersCompanyUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesPayrollBlockersCompanyUuidHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    GetV1CompaniesPayrollBlockersCompanyUuidHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export type GetV1CompaniesPayrollBlockersCompanyUuidRequest$Outbound = {
-  company_uuid: string;
   "X-Gusto-API-Version": string;
+  company_uuid: string;
 };
 
 /** @internal */
@@ -52,12 +73,14 @@ export const GetV1CompaniesPayrollBlockersCompanyUuidRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1CompaniesPayrollBlockersCompanyUuidRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1CompaniesPayrollBlockersCompanyUuidHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
-      companyUuid: "company_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyUuid: "company_uuid",
     });
   });
 
@@ -80,11 +103,11 @@ export const GetV1CompaniesPayrollBlockersCompanyUuidResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Payroll-Blocker-List": z.array(PayrollBlocker$inboundSchema).optional(),
+    "Payroll-Blockers": z.array(PayrollBlocker$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Payroll-Blocker-List": "payrollBlockerList",
+      "Payroll-Blockers": "payrollBlockers",
     });
   });
 

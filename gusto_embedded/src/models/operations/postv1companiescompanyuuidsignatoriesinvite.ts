@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -12,17 +13,26 @@ import {
 } from "../components/httpmetadata.js";
 import { Signatory, Signatory$inboundSchema } from "../components/signatory.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  SignatoryInviteRequest,
+  SignatoryInviteRequest$Outbound,
+  SignatoryInviteRequest$outboundSchema,
+} from "../components/signatoryinviterequest.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody = {
-  firstName?: string | undefined;
-  lastName?: string | undefined;
-  title?: string | undefined;
-  email: string;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion
+  >;
 
 export type PostV1CompaniesCompanyUuidSignatoriesInviteRequest = {
   /**
@@ -32,60 +42,33 @@ export type PostV1CompaniesCompanyUuidSignatoriesInviteRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody;
+  xGustoAPIVersion?:
+    | PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion
+    | undefined;
+  signatoryInviteRequest: SignatoryInviteRequest;
 };
 
 export type PostV1CompaniesCompanyUuidSignatoriesInviteResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
   signatory?: Signatory | undefined;
 };
 
 /** @internal */
-export type PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody$Outbound = {
-  first_name?: string | undefined;
-  last_name?: string | undefined;
-  title?: string | undefined;
-  email: string;
-};
-
-/** @internal */
-export const PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody$outboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody$Outbound,
-    z.ZodTypeDef,
-    PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody
-  > = z.object({
-    firstName: z.string().optional(),
-    lastName: z.string().optional(),
-    title: z.string().optional(),
-    email: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      firstName: "first_name",
-      lastName: "last_name",
-    });
-  });
-
-export function postV1CompaniesCompanyUuidSignatoriesInviteRequestBodyToJSON(
-  postV1CompaniesCompanyUuidSignatoriesInviteRequestBody:
-    PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody,
-): string {
-  return JSON.stringify(
-    PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody$outboundSchema.parse(
-      postV1CompaniesCompanyUuidSignatoriesInviteRequestBody,
-    ),
+export const PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion,
   );
-}
 
 /** @internal */
 export type PostV1CompaniesCompanyUuidSignatoriesInviteRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody$Outbound;
+  "Signatory-Invite-Request": SignatoryInviteRequest$Outbound;
 };
 
 /** @internal */
@@ -96,15 +79,15 @@ export const PostV1CompaniesCompanyUuidSignatoriesInviteRequest$outboundSchema:
     PostV1CompaniesCompanyUuidSignatoriesInviteRequest
   > = z.object({
     companyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody$outboundSchema
-    ),
+    xGustoAPIVersion:
+      PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
+    signatoryInviteRequest: SignatoryInviteRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      signatoryInviteRequest: "Signatory-Invite-Request",
     });
   });
 

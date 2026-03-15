@@ -184,7 +184,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, GetV1PeopleBatchesPeopleBatchUuidResponse$inboundSchema, {
-      key: "object",
+      key: "People-Batch-Results",
     }),
     M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.fail("4XX"),
