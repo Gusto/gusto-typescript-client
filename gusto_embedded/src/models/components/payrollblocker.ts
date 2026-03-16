@@ -4,22 +4,57 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Example response
+ * A unique identifier for the payroll blocker reason. For a complete list of blockers and their meanings, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers).
  */
+export const Key = {
+  CompanyOwnershipRequired: "company_ownership_required",
+  ContractorOnlyCompany: "contractor_only_company",
+  EftpsInError: "eftps_in_error",
+  GeocodeError: "geocode_error",
+  GeocodeNeeded: "geocode_needed",
+  InvalidSignatory: "invalid_signatory",
+  MissingAddresses: "missing_addresses",
+  MissingBankInfo: "missing_bank_info",
+  MissingBankVerification: "missing_bank_verification",
+  MissingEmployeeSetup: "missing_employee_setup",
+  MissingFederalTaxSetup: "missing_federal_tax_setup",
+  MissingForms: "missing_forms",
+  MissingIndustrySelection: "missing_industry_selection",
+  MissingPaySchedule: "missing_pay_schedule",
+  MissingSignatory: "missing_signatory",
+  MissingStateTaxSetup: "missing_state_tax_setup",
+  NeedsApproval: "needs_approval",
+  NeedsOnboarding: "needs_onboarding",
+  PayScheduleSetupNotComplete: "pay_schedule_setup_not_complete",
+  PendingInformationRequest: "pending_information_request",
+  PendingPayrollReview: "pending_payroll_review",
+  PendingRecoveryCase: "pending_recovery_case",
+  SoftSuspended: "soft_suspended",
+  Suspended: "suspended",
+} as const;
+/**
+ * A unique identifier for the payroll blocker reason. For a complete list of blockers and their meanings, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers).
+ */
+export type Key = ClosedEnum<typeof Key>;
+
 export type PayrollBlocker = {
   /**
-   * The unique identifier of the reason
+   * A unique identifier for the payroll blocker reason. For a complete list of blockers and their meanings, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers).
    */
-  key?: string | undefined;
+  key: Key;
   /**
-   * User-friendly message describing the payroll blocker.
+   * A human-readable message describing the payroll blocker and what action is needed to resolve it.
    */
-  message?: string | undefined;
+  message: string;
 };
+
+/** @internal */
+export const Key$inboundSchema: z.ZodNativeEnum<typeof Key> = z.nativeEnum(Key);
 
 /** @internal */
 export const PayrollBlocker$inboundSchema: z.ZodType<
@@ -27,8 +62,8 @@ export const PayrollBlocker$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  key: z.string().optional(),
-  message: z.string().optional(),
+  key: Key$inboundSchema,
+  message: z.string(),
 });
 
 export function payrollBlockerFromJSON(

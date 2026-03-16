@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -33,13 +37,14 @@ import { Result } from "../types/fp.js";
  * Get compensations for a job
  *
  * @remarks
- * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. By default the API returns only the current compensation - see the `include` query parameter for retrieving all compensations.
+ * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
  *
- * Note: Currently the API does not support creating multiple compensations per job - creating a compensation with the same `job_uuid` as another will fail with a relevant error.
+ * *Note: Currently the API does not support creating multiple compensations per job - creating a compensation with the same job_uuid as another will fail with a relevant error.*
  *
- * Use `flsa_status` to determine if an employee is eligible for overtime.
+ * Use `flsa_status` to determine if an employee is eligible for overtime
+ * By default the API returns only the current compensation - use the `include` parameter to return all compensations.
  *
- * scope: `jobs:read`
+ * scope: `compensations:read`
  */
 export function jobsAndCompensationsGetCompensations(
   client: GustoEmbeddedCore,
@@ -48,6 +53,7 @@ export function jobsAndCompensationsGetCompensations(
 ): APIPromise<
   Result<
     GetV1JobsJobIdCompensationsResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -73,6 +79,7 @@ async function $do(
   [
     Result<
       GetV1JobsJobIdCompensationsResponse,
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -174,6 +181,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1JobsJobIdCompensationsResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -184,9 +192,10 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, GetV1JobsJobIdCompensationsResponse$inboundSchema, {
-      key: "Compensation-List",
+      key: "Compensations",
     }),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

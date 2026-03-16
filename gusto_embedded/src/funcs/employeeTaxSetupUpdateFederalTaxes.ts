@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -34,10 +38,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update an employee's federal taxes
+ * Update federal taxes for an employee
  *
  * @remarks
- * Update attributes relevant for an employee's federal taxes.
+ * Updates federal tax (W4) information for an employee. Only rev_2020_w4 format is accepted for updates.
  *
  * scope: `employee_federal_taxes:write`
  */
@@ -48,6 +52,7 @@ export function employeeTaxSetupUpdateFederalTaxes(
 ): APIPromise<
   Result<
     PutV1EmployeesEmployeeIdFederalTaxesResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -74,6 +79,7 @@ async function $do(
   [
     Result<
       PutV1EmployeesEmployeeIdFederalTaxesResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -158,7 +164,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    errorCodes: ["404", "409", "422", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -173,6 +179,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1EmployeesEmployeeIdFederalTaxesResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -186,8 +193,9 @@ async function $do(
     M.json(200, PutV1EmployeesEmployeeIdFederalTaxesResponse$inboundSchema, {
       key: "Employee-Federal-Tax",
     }),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.jsonErr([409, 422], UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

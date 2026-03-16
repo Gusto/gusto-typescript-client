@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { signatoriesList } from "../funcs/signatoriesList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesCompanyUuidSignatoriesHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyUuidSignatoriesRequest,
   GetV1CompaniesCompanyUuidSignatoriesResponse,
 } from "../models/operations/getv1companiescompanyuuidsignatories.js";
@@ -72,7 +72,11 @@ export function buildSignatoriesListQuery(
 
 export function queryKeySignatoriesList(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyUuidSignatoriesHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

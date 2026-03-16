@@ -4,16 +4,16 @@
 
 ### Available Operations
 
-* [getFederalTaxes](#getfederaltaxes) - Get an employee's federal taxes
-* [updateFederalTaxes](#updatefederaltaxes) - Update an employee's federal taxes
+* [getFederalTaxes](#getfederaltaxes) - Get federal taxes for an employee
+* [updateFederalTaxes](#updatefederaltaxes) - Update federal taxes for an employee
 * [getStateTaxes](#getstatetaxes) - Get an employee's state taxes
 * [updateStateTaxes](#updatestatetaxes) - Update an employee's state taxes
 
 ## getFederalTaxes
 
-Get attributes relevant for an employee's federal taxes.
+Returns federal tax information for an employee. The response structure varies based on the w4_data_type (pre_2020_w4 or rev_2020_w4).
 
- scope: `employee_federal_taxes:read`
+scope: `employee_federal_taxes:read`
 
 ### Example Usage
 
@@ -108,13 +108,14 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## updateFederalTaxes
 
-Update attributes relevant for an employee's federal taxes.
+Updates federal tax (W4) information for an employee. Only rev_2020_w4 format is accepted for updates.
 
 scope: `employee_federal_taxes:write`
 
@@ -133,8 +134,6 @@ async function run() {
     employeeUuid: "<id>",
     requestBody: {
       version: "<value>",
-      filingStatus: "<value>",
-      w4DataType: "<value>",
     },
   });
 
@@ -163,8 +162,6 @@ async function run() {
     employeeUuid: "<id>",
     requestBody: {
       version: "<value>",
-      filingStatus: "<value>",
-      w4DataType: "<value>",
     },
   });
   if (res.ok) {
@@ -210,11 +207,11 @@ async function run() {
     requestBody: {
       version: "56a489ce86ed6c1b0f0cecc4050a0b01",
       filingStatus: "Single",
-      extraWithholding: "0.0",
+      extraWithholding: 0.0,
       twoJobs: true,
-      dependentsAmount: "0.0",
-      otherIncome: "0.0",
-      deductions: "0.0",
+      dependentsAmount: 0.0,
+      otherIncome: 0.0,
+      deductions: 0.0,
       w4DataType: "rev_2020_w4",
     },
   });
@@ -245,11 +242,11 @@ async function run() {
     requestBody: {
       version: "56a489ce86ed6c1b0f0cecc4050a0b01",
       filingStatus: "Single",
-      extraWithholding: "0.0",
+      extraWithholding: 0.0,
       twoJobs: true,
-      dependentsAmount: "0.0",
-      otherIncome: "0.0",
-      deductions: "0.0",
+      dependentsAmount: 0.0,
+      otherIncome: 0.0,
+      deductions: 0.0,
       w4DataType: "rev_2020_w4",
     },
   });
@@ -295,8 +292,6 @@ async function run() {
     employeeUuid: "<id>",
     requestBody: {
       version: "<value>",
-      filingStatus: "<value>",
-      w4DataType: "<value>",
     },
   });
 
@@ -325,8 +320,6 @@ async function run() {
     employeeUuid: "<id>",
     requestBody: {
       version: "<value>",
-      filingStatus: "<value>",
-      w4DataType: "<value>",
     },
   });
   if (res.ok) {
@@ -371,8 +364,6 @@ async function run() {
     employeeUuid: "<id>",
     requestBody: {
       version: "<value>",
-      filingStatus: "<value>",
-      w4DataType: "<value>",
     },
   });
 
@@ -401,8 +392,6 @@ async function run() {
     employeeUuid: "<id>",
     requestBody: {
       version: "<value>",
-      filingStatus: "<value>",
-      w4DataType: "<value>",
     },
   });
   if (res.ok) {
@@ -450,7 +439,8 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 409, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## getStateTaxes

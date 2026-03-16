@@ -11,76 +11,39 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+import { TokenInfo, TokenInfo$inboundSchema } from "../components/tokeninfo.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const XGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type XGustoAPIVersion = ClosedEnum<typeof XGustoAPIVersion>;
 
 export type GetV1TokenInfoRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-};
-
-/**
- * Information about the token resource.
- */
-export type Resource = {
-  /**
-   * Type of object
-   */
-  type: string;
-  /**
-   * UUID of object
-   */
-  uuid: string;
-};
-
-export const GetV1TokenInfoType = {
-  CompanyAdmin: "CompanyAdmin",
-  Employee: "Employee",
-  Contractor: "Contractor",
-} as const;
-export type GetV1TokenInfoType = ClosedEnum<typeof GetV1TokenInfoType>;
-
-/**
- * Information about the token owner
- */
-export type ResourceOwner = {
-  type: GetV1TokenInfoType;
-  /**
-   * UUID of resource owner
-   */
-  uuid: string;
-};
-
-/**
- * Example response
- */
-export type GetV1TokenInfoResponseBody = {
-  /**
-   * Space delimited string of accessible scopes.
-   */
-  scope: string;
-  /**
-   * Information about the token resource.
-   */
-  resource: Resource | null;
-  /**
-   * Information about the token owner
-   */
-  resourceOwner: ResourceOwner | null;
+  xGustoAPIVersion?: XGustoAPIVersion | undefined;
 };
 
 export type GetV1TokenInfoResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
-  object?: GetV1TokenInfoResponseBody | undefined;
+  tokenInfo?: TokenInfo | undefined;
 };
+
+/** @internal */
+export const XGustoAPIVersion$outboundSchema: z.ZodNativeEnum<
+  typeof XGustoAPIVersion
+> = z.nativeEnum(XGustoAPIVersion);
 
 /** @internal */
 export type GetV1TokenInfoRequest$Outbound = {
@@ -93,7 +56,7 @@ export const GetV1TokenInfoRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1TokenInfoRequest
 > = z.object({
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: XGustoAPIVersion$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",
@@ -109,86 +72,17 @@ export function getV1TokenInfoRequestToJSON(
 }
 
 /** @internal */
-export const Resource$inboundSchema: z.ZodType<
-  Resource,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.string(),
-  uuid: z.string(),
-});
-
-export function resourceFromJSON(
-  jsonString: string,
-): SafeParseResult<Resource, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Resource$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Resource' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetV1TokenInfoType$inboundSchema: z.ZodNativeEnum<
-  typeof GetV1TokenInfoType
-> = z.nativeEnum(GetV1TokenInfoType);
-
-/** @internal */
-export const ResourceOwner$inboundSchema: z.ZodType<
-  ResourceOwner,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: GetV1TokenInfoType$inboundSchema,
-  uuid: z.string(),
-});
-
-export function resourceOwnerFromJSON(
-  jsonString: string,
-): SafeParseResult<ResourceOwner, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResourceOwner$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResourceOwner' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetV1TokenInfoResponseBody$inboundSchema: z.ZodType<
-  GetV1TokenInfoResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  scope: z.string(),
-  resource: z.nullable(z.lazy(() => Resource$inboundSchema)),
-  resource_owner: z.nullable(z.lazy(() => ResourceOwner$inboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    "resource_owner": "resourceOwner",
-  });
-});
-
-export function getV1TokenInfoResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1TokenInfoResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetV1TokenInfoResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1TokenInfoResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
 export const GetV1TokenInfoResponse$inboundSchema: z.ZodType<
   GetV1TokenInfoResponse,
   z.ZodTypeDef,
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  object: z.lazy(() => GetV1TokenInfoResponseBody$inboundSchema).optional(),
+  "Token-Info": TokenInfo$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
+    "Token-Info": "tokenInfo",
   });
 });
 

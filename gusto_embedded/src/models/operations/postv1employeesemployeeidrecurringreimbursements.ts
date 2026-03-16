@@ -11,6 +11,10 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
+import {
+  RecurringReimbursement,
+  RecurringReimbursement$inboundSchema,
+} from "../components/recurringreimbursement.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -53,27 +57,12 @@ export type PostV1EmployeesEmployeeIdRecurringReimbursementsRequest = {
   requestBody: PostV1EmployeesEmployeeIdRecurringReimbursementsRequestBody;
 };
 
-/**
- * successful
- */
-export type PostV1EmployeesEmployeeIdRecurringReimbursementsResponseBody = {
-  uuid: string;
-  employeeUuid: string;
-  description: string;
-  amount: string;
-  version: string;
-  createdAt?: string | undefined;
-  updatedAt?: string | undefined;
-};
-
 export type PostV1EmployeesEmployeeIdRecurringReimbursementsResponse = {
   httpMeta: HTTPMetadata;
   /**
    * successful
    */
-  object?:
-    | PostV1EmployeesEmployeeIdRecurringReimbursementsResponseBody
-    | undefined;
+  recurringReimbursement?: RecurringReimbursement | undefined;
 };
 
 /** @internal */
@@ -153,43 +142,6 @@ export function postV1EmployeesEmployeeIdRecurringReimbursementsRequestToJSON(
 }
 
 /** @internal */
-export const PostV1EmployeesEmployeeIdRecurringReimbursementsResponseBody$inboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdRecurringReimbursementsResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    uuid: z.string(),
-    employee_uuid: z.string(),
-    description: z.string(),
-    amount: z.string(),
-    version: z.string(),
-    created_at: z.string().optional(),
-    updated_at: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_uuid": "employeeUuid",
-      "created_at": "createdAt",
-      "updated_at": "updatedAt",
-    });
-  });
-
-export function postV1EmployeesEmployeeIdRecurringReimbursementsResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1EmployeesEmployeeIdRecurringReimbursementsResponseBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1EmployeesEmployeeIdRecurringReimbursementsResponseBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PostV1EmployeesEmployeeIdRecurringReimbursementsResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
 export const PostV1EmployeesEmployeeIdRecurringReimbursementsResponse$inboundSchema:
   z.ZodType<
     PostV1EmployeesEmployeeIdRecurringReimbursementsResponse,
@@ -197,12 +149,11 @@ export const PostV1EmployeesEmployeeIdRecurringReimbursementsResponse$inboundSch
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    object: z.lazy(() =>
-      PostV1EmployeesEmployeeIdRecurringReimbursementsResponseBody$inboundSchema
-    ).optional(),
+    "Recurring-Reimbursement": RecurringReimbursement$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
+      "Recurring-Reimbursement": "recurringReimbursement",
     });
   });
 

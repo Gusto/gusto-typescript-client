@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -30,12 +34,12 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get an employee's federal taxes
+ * Get federal taxes for an employee
  *
  * @remarks
- * Get attributes relevant for an employee's federal taxes.
+ * Returns federal tax information for an employee. The response structure varies based on the w4_data_type (pre_2020_w4 or rev_2020_w4).
  *
- *  scope: `employee_federal_taxes:read`
+ * scope: `employee_federal_taxes:read`
  */
 export function employeeTaxSetupGetFederalTaxes(
   client: GustoEmbeddedCore,
@@ -44,6 +48,7 @@ export function employeeTaxSetupGetFederalTaxes(
 ): APIPromise<
   Result<
     GetV1EmployeesEmployeeIdFederalTaxesResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -69,6 +74,7 @@ async function $do(
   [
     Result<
       GetV1EmployeesEmployeeIdFederalTaxesResponse,
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -166,6 +172,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1EmployeesEmployeeIdFederalTaxesResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -178,7 +185,8 @@ async function $do(
     M.json(200, GetV1EmployeesEmployeeIdFederalTaxesResponse$inboundSchema, {
       key: "Employee-Federal-Tax",
     }),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

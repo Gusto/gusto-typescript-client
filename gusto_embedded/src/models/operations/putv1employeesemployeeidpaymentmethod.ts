@@ -15,51 +15,61 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The payment method type. If type is Check, then `split_by` and `splits` do not need to be populated. If type is Direct Deposit, `split_by` and `splits` are required.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const Type = {
-  DirectDeposit: "Direct Deposit",
-  Check: "Check",
+export const PutV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
- * The payment method type. If type is Check, then `split_by` and `splits` do not need to be populated. If type is Direct Deposit, `split_by` and `splits` are required.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion
+  >;
+
+/**
+ * The payment method type. If type is Check, split_by and splits do not need to be populated. If type is Direct Deposit, split_by and splits are required.
+ */
+export const Type = {
+  Check: "Check",
+  DirectDeposit: "Direct Deposit",
+} as const;
+/**
+ * The payment method type. If type is Check, split_by and splits do not need to be populated. If type is Direct Deposit, split_by and splits are required.
  */
 export type Type = ClosedEnum<typeof Type>;
 
 /**
- * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then amount is in cents and the last `split` amount must be `null` to capture the remainder.
+ * How the payment will be split. If Percentage, split amounts must add up to exactly 100. If Amount, values are in cents and the last split amount must be null to capture the remainder.
  */
 export const SplitBy = {
-  Amount: "Amount",
   Percentage: "Percentage",
+  Amount: "Amount",
 } as const;
 /**
- * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then amount is in cents and the last `split` amount must be `null` to capture the remainder.
+ * How the payment will be split. If Percentage, split amounts must add up to exactly 100. If Amount, values are in cents and the last split amount must be null to capture the remainder.
  */
 export type SplitBy = ClosedEnum<typeof SplitBy>;
 
 export type Splits = {
   /**
-   * The bank account UUID
+   * The bank account UUID.
    */
   uuid?: string | undefined;
   /**
-   * The bank account name
+   * The bank account name.
    */
   name?: string | undefined;
   /**
-   * The order of priority for each payment split, with priority 1 being the first bank account paid. Priority must be unique and sequential.
+   * Order of priority for each payment split; priority 1 is the first account paid. Must be unique and sequential.
    */
   priority?: number | undefined;
   /**
-   * If `split_by` is 'Amount', this is in cents (e.g., 500 for $5.00) and exactly one account must have a `split_amount` of `null` to capture the remainder. If `split_by` is 'Percentage', this is the percentage value (e.g., 60 for 60%).
+   * If split_by is Amount, value is in cents (e.g., 500 for $5.00) and exactly one account must have null to capture the remainder. If split_by is Percentage, value is the percentage (e.g., 60 for 60%).
    */
   splitAmount?: number | null | undefined;
 };
@@ -70,35 +80,46 @@ export type PutV1EmployeesEmployeeIdPaymentMethodRequestBody = {
    */
   version: string;
   /**
-   * The payment method type. If type is Check, then `split_by` and `splits` do not need to be populated. If type is Direct Deposit, `split_by` and `splits` are required.
+   * The payment method type. If type is Check, split_by and splits do not need to be populated. If type is Direct Deposit, split_by and splits are required.
    */
   type: Type;
   /**
-   * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then amount is in cents and the last `split` amount must be `null` to capture the remainder.
+   * How the payment will be split. If Percentage, split amounts must add up to exactly 100. If Amount, values are in cents and the last split amount must be null to capture the remainder.
    */
-  splitBy?: SplitBy | undefined;
-  splits?: Array<Splits> | undefined;
+  splitBy?: SplitBy | null | undefined;
+  /**
+   * Array of payment splits. Required when type is Direct Deposit.
+   */
+  splits?: Array<Splits> | null | undefined;
 };
 
 export type PutV1EmployeesEmployeeIdPaymentMethodRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the employee
    */
   employeeId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PutV1EmployeesEmployeeIdPaymentMethodRequestBody;
 };
 
 export type PutV1EmployeesEmployeeIdPaymentMethodResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
   employeePaymentMethod?: EmployeePaymentMethod | undefined;
 };
+
+/** @internal */
+export const PutV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion
+  > = z.nativeEnum(PutV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion);
 
 /** @internal */
 export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
@@ -126,7 +147,7 @@ export const Splits$outboundSchema: z.ZodType<
   uuid: z.string().optional(),
   name: z.string().optional(),
   priority: z.number().int().optional(),
-  splitAmount: z.nullable(z.number().int()).optional(),
+  splitAmount: z.nullable(z.number()).optional(),
 }).transform((v) => {
   return remap$(v, {
     splitAmount: "split_amount",
@@ -141,8 +162,8 @@ export function splitsToJSON(splits: Splits): string {
 export type PutV1EmployeesEmployeeIdPaymentMethodRequestBody$Outbound = {
   version: string;
   type: string;
-  split_by?: string | undefined;
-  splits?: Array<Splits$Outbound> | undefined;
+  split_by?: string | null | undefined;
+  splits?: Array<Splits$Outbound> | null | undefined;
 };
 
 /** @internal */
@@ -154,8 +175,8 @@ export const PutV1EmployeesEmployeeIdPaymentMethodRequestBody$outboundSchema:
   > = z.object({
     version: z.string(),
     type: Type$outboundSchema,
-    splitBy: SplitBy$outboundSchema.optional(),
-    splits: z.array(z.lazy(() => Splits$outboundSchema)).optional(),
+    splitBy: z.nullable(SplitBy$outboundSchema).optional(),
+    splits: z.nullable(z.array(z.lazy(() => Splits$outboundSchema))).optional(),
   }).transform((v) => {
     return remap$(v, {
       splitBy: "split_by",
@@ -175,8 +196,8 @@ export function putV1EmployeesEmployeeIdPaymentMethodRequestBodyToJSON(
 
 /** @internal */
 export type PutV1EmployeesEmployeeIdPaymentMethodRequest$Outbound = {
-  employee_id: string;
   "X-Gusto-API-Version": string;
+  employee_id: string;
   RequestBody: PutV1EmployeesEmployeeIdPaymentMethodRequestBody$Outbound;
 };
 
@@ -187,15 +208,17 @@ export const PutV1EmployeesEmployeeIdPaymentMethodRequest$outboundSchema:
     z.ZodTypeDef,
     PutV1EmployeesEmployeeIdPaymentMethodRequest
   > = z.object({
+    xGustoAPIVersion:
+      PutV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdPaymentMethodRequestBody$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      employeeId: "employee_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      employeeId: "employee_id",
       requestBody: "RequestBody",
     });
   });

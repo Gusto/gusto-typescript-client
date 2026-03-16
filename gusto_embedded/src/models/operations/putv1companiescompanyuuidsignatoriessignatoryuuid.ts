@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -12,35 +13,26 @@ import {
 } from "../components/httpmetadata.js";
 import { Signatory, Signatory$inboundSchema } from "../components/signatory.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  SignatoryUpdateRequest,
+  SignatoryUpdateRequest$Outbound,
+  SignatoryUpdateRequest$outboundSchema,
+} from "../components/signatoryupdaterequest.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress = {
-  street1?: string | undefined;
-  street2?: string | undefined;
-  city?: string | undefined;
-  state?: string | undefined;
-  zip?: string | undefined;
-};
-
-export type PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody = {
-  /**
-   * The current version of the object. See the versioning guide for information on how to use this field.
-   */
-  version?: string | undefined;
-  firstName?: string | undefined;
-  middleInitial?: string | undefined;
-  lastName?: string | undefined;
-  title?: string | undefined;
-  phone?: string | undefined;
-  birthday?: string | undefined;
-  ssn?: string | undefined;
-  homeAddress?:
-    | PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress
-    | undefined;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion
+  >;
 
 export type PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest = {
   /**
@@ -54,109 +46,27 @@ export type PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody;
+  xGustoAPIVersion?:
+    | PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion
+    | undefined;
+  signatoryUpdateRequest: SignatoryUpdateRequest;
 };
 
 export type PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
   signatory?: Signatory | undefined;
 };
 
 /** @internal */
-export type PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$Outbound =
-  {
-    street_1?: string | undefined;
-    street_2?: string | undefined;
-    city?: string | undefined;
-    state?: string | undefined;
-    zip?: string | undefined;
-  };
-
-/** @internal */
-export const PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$outboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$Outbound,
-    z.ZodTypeDef,
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress
-  > = z.object({
-    street1: z.string().optional(),
-    street2: z.string().optional(),
-    city: z.string().optional(),
-    state: z.string().optional(),
-    zip: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      street1: "street_1",
-      street2: "street_2",
-    });
-  });
-
-export function putV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddressToJSON(
-  putV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress:
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress,
-): string {
-  return JSON.stringify(
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$outboundSchema
-      .parse(putV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress),
+export const PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion,
   );
-}
-
-/** @internal */
-export type PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody$Outbound =
-  {
-    version?: string | undefined;
-    first_name?: string | undefined;
-    middle_initial?: string | undefined;
-    last_name?: string | undefined;
-    title?: string | undefined;
-    phone?: string | undefined;
-    birthday?: string | undefined;
-    ssn?: string | undefined;
-    home_address?:
-      | PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody$outboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody$Outbound,
-    z.ZodTypeDef,
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody
-  > = z.object({
-    version: z.string().optional(),
-    firstName: z.string().optional(),
-    middleInitial: z.string().optional(),
-    lastName: z.string().optional(),
-    title: z.string().optional(),
-    phone: z.string().optional(),
-    birthday: z.string().optional(),
-    ssn: z.string().optional(),
-    homeAddress: z.lazy(() =>
-      PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$outboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      firstName: "first_name",
-      middleInitial: "middle_initial",
-      lastName: "last_name",
-      homeAddress: "home_address",
-    });
-  });
-
-export function putV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBodyToJSON(
-  putV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody:
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody$outboundSchema
-      .parse(putV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody),
-  );
-}
 
 /** @internal */
 export type PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$Outbound =
@@ -164,8 +74,7 @@ export type PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$Outbound =
     company_uuid: string;
     signatory_uuid: string;
     "X-Gusto-API-Version": string;
-    RequestBody:
-      PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody$Outbound;
+    "Signatory-Update-Request": SignatoryUpdateRequest$Outbound;
   };
 
 /** @internal */
@@ -177,16 +86,16 @@ export const PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$outboundSc
   > = z.object({
     companyUuid: z.string(),
     signatoryUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody$outboundSchema
-    ),
+    xGustoAPIVersion:
+      PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
+    signatoryUpdateRequest: SignatoryUpdateRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",
       signatoryUuid: "signatory_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      signatoryUpdateRequest: "Signatory-Update-Request",
     });
   });
 

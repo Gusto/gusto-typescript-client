@@ -5,12 +5,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  FastPaymentLimitRequiredBody,
-  FastPaymentLimitRequiredBody$Outbound,
-  FastPaymentLimitRequiredBody$outboundSchema,
-} from "../components/fastpaymentlimitrequiredbody.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
@@ -20,72 +16,57 @@ import {
   PaymentConfigs$inboundSchema,
 } from "../components/paymentconfigs.js";
 import {
-  PaymentSpeedRequiredBody,
-  PaymentSpeedRequiredBody$Outbound,
-  PaymentSpeedRequiredBody$outboundSchema,
-} from "../components/paymentspeedrequiredbody.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  PaymentConfigsUpdateRequest,
+  PaymentConfigsUpdateRequest$Outbound,
+  PaymentConfigsUpdateRequest$outboundSchema,
+} from "../components/paymentconfigsupdaterequest.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PutV1CompanyPaymentConfigsRequestBody =
-  | FastPaymentLimitRequiredBody
-  | PaymentSpeedRequiredBody;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion
+>;
 
 export type PutV1CompanyPaymentConfigsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
   companyUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: FastPaymentLimitRequiredBody | PaymentSpeedRequiredBody;
+  paymentConfigsUpdateRequest: PaymentConfigsUpdateRequest;
 };
 
 export type PutV1CompanyPaymentConfigsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
   paymentConfigs?: PaymentConfigs | undefined;
 };
 
 /** @internal */
-export type PutV1CompanyPaymentConfigsRequestBody$Outbound =
-  | FastPaymentLimitRequiredBody$Outbound
-  | PaymentSpeedRequiredBody$Outbound;
-
-/** @internal */
-export const PutV1CompanyPaymentConfigsRequestBody$outboundSchema: z.ZodType<
-  PutV1CompanyPaymentConfigsRequestBody$Outbound,
-  z.ZodTypeDef,
-  PutV1CompanyPaymentConfigsRequestBody
-> = z.union([
-  FastPaymentLimitRequiredBody$outboundSchema,
-  PaymentSpeedRequiredBody$outboundSchema,
-]);
-
-export function putV1CompanyPaymentConfigsRequestBodyToJSON(
-  putV1CompanyPaymentConfigsRequestBody: PutV1CompanyPaymentConfigsRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1CompanyPaymentConfigsRequestBody$outboundSchema.parse(
-      putV1CompanyPaymentConfigsRequestBody,
-    ),
-  );
-}
+export const PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion> = z
+    .nativeEnum(PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PutV1CompanyPaymentConfigsRequest$Outbound = {
-  company_uuid: string;
   "X-Gusto-API-Version": string;
-  RequestBody:
-    | FastPaymentLimitRequiredBody$Outbound
-    | PaymentSpeedRequiredBody$Outbound;
+  company_uuid: string;
+  "Payment-Configs-Update-Request": PaymentConfigsUpdateRequest$Outbound;
 };
 
 /** @internal */
@@ -94,17 +75,17 @@ export const PutV1CompanyPaymentConfigsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1CompanyPaymentConfigsRequest
 > = z.object({
+  xGustoAPIVersion:
+    PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
   companyUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.union([
-    FastPaymentLimitRequiredBody$outboundSchema,
-    PaymentSpeedRequiredBody$outboundSchema,
-  ]),
+  paymentConfigsUpdateRequest: PaymentConfigsUpdateRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    companyUuid: "company_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    companyUuid: "company_uuid",
+    paymentConfigsUpdateRequest: "Payment-Configs-Update-Request",
   });
 });
 

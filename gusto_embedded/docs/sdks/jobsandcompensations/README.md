@@ -958,13 +958,14 @@ import {
 
 ## getCompensations
 
-Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. By default the API returns only the current compensation - see the `include` query parameter for retrieving all compensations.
+Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
 
-Note: Currently the API does not support creating multiple compensations per job - creating a compensation with the same `job_uuid` as another will fail with a relevant error.
+*Note: Currently the API does not support creating multiple compensations per job - creating a compensation with the same job_uuid as another will fail with a relevant error.*
 
-Use `flsa_status` to determine if an employee is eligible for overtime.
+Use `flsa_status` to determine if an employee is eligible for overtime
+By default the API returns only the current compensation - use the `include` parameter to return all compensations.
 
-scope: `jobs:read`
+scope: `compensations:read`
 
 ### Example Usage
 
@@ -1059,15 +1060,23 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## createCompensation
 
 Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
 
-scope: `jobs:write`
+### Prerequisites
+Before calling this endpoint:
+1. A [job](ref:post-v1-jobs-job_id) must exist for the employee
+
+### Webhooks
+- `employee_job_compensation.created`: Fires when a compensation is successfully created
+
+scope: `compensations:write`
 
 ### Example Usage: Basic
 
@@ -1082,7 +1091,8 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.jobsAndCompensations.createCompensation({
     jobId: "<id>",
-    requestBody: {
+    compensationsRequestBody: {
+      rate: "70000.00",
       paymentUnit: "Week",
       flsaStatus: "Salaried Nonexempt",
     },
@@ -1111,7 +1121,8 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await jobsAndCompensationsCreateCompensation(gustoEmbedded, {
     jobId: "<id>",
-    requestBody: {
+    compensationsRequestBody: {
+      rate: "70000.00",
       paymentUnit: "Week",
       flsaStatus: "Salaried Nonexempt",
     },
@@ -1156,7 +1167,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.jobsAndCompensations.createCompensation({
     jobId: "<id>",
-    requestBody: {
+    compensationsRequestBody: {
       rate: "60000.00",
       paymentUnit: "Year",
       flsaStatus: "Exempt",
@@ -1186,7 +1197,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await jobsAndCompensationsCreateCompensation(gustoEmbedded, {
     jobId: "<id>",
-    requestBody: {
+    compensationsRequestBody: {
       rate: "60000.00",
       paymentUnit: "Year",
       flsaStatus: "Exempt",
@@ -1232,11 +1243,11 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.jobsAndCompensations.createCompensation({
     jobId: "<id>",
-    requestBody: {
+    compensationsRequestBody: {
       rate: "7.00",
       paymentUnit: "Hour",
-      effectiveDate: "2023-01-01",
       flsaStatus: "Nonexempt",
+      effectiveDate: "2023-01-01",
       adjustForMinimumWage: true,
       minimumWages: [
         {
@@ -1269,11 +1280,11 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await jobsAndCompensationsCreateCompensation(gustoEmbedded, {
     jobId: "<id>",
-    requestBody: {
+    compensationsRequestBody: {
       rate: "7.00",
       paymentUnit: "Hour",
-      effectiveDate: "2023-01-01",
       flsaStatus: "Nonexempt",
+      effectiveDate: "2023-01-01",
       adjustForMinimumWage: true,
       minimumWages: [
         {
@@ -1322,7 +1333,8 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.jobsAndCompensations.createCompensation({
     jobId: "<id>",
-    requestBody: {
+    compensationsRequestBody: {
+      rate: "70000.00",
       paymentUnit: "Week",
       flsaStatus: "Salaried Nonexempt",
     },
@@ -1351,7 +1363,8 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await jobsAndCompensationsCreateCompensation(gustoEmbedded, {
     jobId: "<id>",
-    requestBody: {
+    compensationsRequestBody: {
+      rate: "70000.00",
       paymentUnit: "Week",
       flsaStatus: "Salaried Nonexempt",
     },
@@ -1396,7 +1409,8 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.jobsAndCompensations.createCompensation({
     jobId: "<id>",
-    requestBody: {
+    compensationsRequestBody: {
+      rate: "70000.00",
       paymentUnit: "Week",
       flsaStatus: "Salaried Nonexempt",
     },
@@ -1425,7 +1439,8 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await jobsAndCompensationsCreateCompensation(gustoEmbedded, {
     jobId: "<id>",
-    requestBody: {
+    compensationsRequestBody: {
+      rate: "70000.00",
       paymentUnit: "Week",
       flsaStatus: "Salaried Nonexempt",
     },
@@ -1475,6 +1490,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
@@ -1482,8 +1498,7 @@ import {
 
 Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
 
-scope: `jobs:read`
-
+scope: `compensations:read`
 
 ### Example Usage: Exempt
 
@@ -1655,15 +1670,19 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## updateCompensation
 
 Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
 
-scope: `jobs:write`
+### Webhooks
+- `employee_job_compensation.updated`: Fires when a compensation is successfully updated
+
+scope: `compensations:write`
 
 ### Example Usage: Basic
 
@@ -1678,7 +1697,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.jobsAndCompensations.updateCompensation({
     compensationId: "<id>",
-    requestBody: {
+    compensationsUpdateRequestBody: {
       version: "<value>",
     },
   });
@@ -1706,7 +1725,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await jobsAndCompensationsUpdateCompensation(gustoEmbedded, {
     compensationId: "<id>",
-    requestBody: {
+    compensationsUpdateRequestBody: {
       version: "<value>",
     },
   });
@@ -1750,7 +1769,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.jobsAndCompensations.updateCompensation({
     compensationId: "<id>",
-    requestBody: {
+    compensationsUpdateRequestBody: {
       version: "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872",
       rate: "60000.00",
       paymentUnit: "Year",
@@ -1781,7 +1800,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await jobsAndCompensationsUpdateCompensation(gustoEmbedded, {
     compensationId: "<id>",
-    requestBody: {
+    compensationsUpdateRequestBody: {
       version: "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872",
       rate: "60000.00",
       paymentUnit: "Year",
@@ -1828,7 +1847,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.jobsAndCompensations.updateCompensation({
     compensationId: "<id>",
-    requestBody: {
+    compensationsUpdateRequestBody: {
       version: "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872",
       rate: "7.00",
       paymentUnit: "Hour",
@@ -1865,7 +1884,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await jobsAndCompensationsUpdateCompensation(gustoEmbedded, {
     compensationId: "<id>",
-    requestBody: {
+    compensationsUpdateRequestBody: {
       version: "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872",
       rate: "7.00",
       paymentUnit: "Hour",
@@ -1918,7 +1937,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.jobsAndCompensations.updateCompensation({
     compensationId: "<id>",
-    requestBody: {
+    compensationsUpdateRequestBody: {
       version: "<value>",
     },
   });
@@ -1946,7 +1965,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await jobsAndCompensationsUpdateCompensation(gustoEmbedded, {
     compensationId: "<id>",
-    requestBody: {
+    compensationsUpdateRequestBody: {
       version: "<value>",
     },
   });
@@ -1990,7 +2009,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.jobsAndCompensations.updateCompensation({
     compensationId: "<id>",
-    requestBody: {
+    compensationsUpdateRequestBody: {
       version: "<value>",
     },
   });
@@ -2018,7 +2037,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await jobsAndCompensationsUpdateCompensation(gustoEmbedded, {
     compensationId: "<id>",
-    requestBody: {
+    compensationsUpdateRequestBody: {
       version: "<value>",
     },
   });
@@ -2067,6 +2086,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
@@ -2074,8 +2094,10 @@ import {
 
 Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. This endpoint deletes a compensation for a job that hasn't been processed on payroll.
 
-scope: `jobs:write`
+### Webhooks
+- `employee_job_compensation.destroyed`: Fires when a compensation is successfully deleted
 
+scope: `compensations:write`
 
 ### Example Usage
 
@@ -2161,5 +2183,6 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -30,10 +34,13 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get all company signatories
+ * Get the signatories for a company
  *
  * @remarks
- * Returns company signatories. Currently we only support a single signatory per company.
+ * Returns the signatories for a company. A company has at most one signatory.
+ *
+ * ## Related guides
+ * - [Signatory Events](doc:signatory-events)
  *
  * scope: `signatories:read`
  */
@@ -44,6 +51,7 @@ export function signatoriesList(
 ): APIPromise<
   Result<
     GetV1CompaniesCompanyUuidSignatoriesResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -69,6 +77,7 @@ async function $do(
   [
     Result<
       GetV1CompaniesCompanyUuidSignatoriesResponse,
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -166,6 +175,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1CompaniesCompanyUuidSignatoriesResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -176,9 +186,10 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, GetV1CompaniesCompanyUuidSignatoriesResponse$inboundSchema, {
-      key: "Signatory-List",
+      key: "Signatories",
     }),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

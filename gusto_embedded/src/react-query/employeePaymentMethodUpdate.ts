@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type EmployeePaymentMethodUpdateMutationData =
   PutV1EmployeesEmployeeIdPaymentMethodResponse;
 
 export type EmployeePaymentMethodUpdateMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -50,11 +52,10 @@ export type EmployeePaymentMethodUpdateMutationError =
   | SDKValidationError;
 
 /**
- * Update an employee's payment method
+ * Update payment method for an employee
  *
  * @remarks
- * Updates an employee's payment method. Note that creating an employee
- * bank account will also update the employee's payment method.
+ * Updates the payment method for an employee. Can set to Check or Direct Deposit with split configuration.
  *
  * scope: `employee_payment_methods:write`
  */

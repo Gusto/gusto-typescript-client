@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -37,20 +41,20 @@ import { Result } from "../types/fp.js";
  * Verify a company bank account
  *
  * @remarks
- * Verify a company bank account by confirming the two micro-deposits sent to the bank account. Note that the order of the two deposits specified in request parameters does not matter. There's a maximum of 5 verification attempts, after which we will automatically initiate a new set of micro-deposits and require the bank account to be verified with the new micro-deposits.
+ * Verify a company bank account by confirming the two micro-deposits sent to the bank account.
+ *
+ * Note that the order of the two deposits specified in request parameters does not matter.
+ * There's a maximum of 5 verification attempts, after which we will automatically initiate a new set of micro-deposits and require the bank account to be verified with the new micro-deposits.
  *
  * ### Bank account verification in demo
+ * In the demo environment, use the `POST /v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/send_test_deposits` endpoint to simulate the micro-deposits transfer and return the two amounts in the response. You can call this endpoint as many times as you wish to retrieve the values of the two micro-deposits.
  *
- * We provide the endpoint `POST '/v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/send_test_deposits'` to facilitate bank account verification in the demo environment. This endpoint simulates the micro-deposits transfer and returns them in the response. You can call this endpoint as many times as you wish to retrieve the values of the two micro deposits.
+ * ### Webhooks
+ * - `company.bank_account.verified`: Fires when the company bank account is successfully verified.
  *
- * ```
- *   POST '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/bank_accounts/ade55e57-4800-4059-9ecd-fa29cfeb6dd2/send_test_deposits'
- *
- *   {
- *     "deposit_1": 0.02,
- *     "deposit_2": 0.42
- *   }
- * ```
+ * ### Related guides
+ * - [Manage company bank accounts](doc:manage-company-bank-accounts)
+ * - [Bank Account Events](doc:bank-account-events)
  *
  * scope: `company_bank_accounts:write`
  */
@@ -61,6 +65,7 @@ export function bankAccountsVerify(
 ): APIPromise<
   Result<
     PutV1CompaniesCompanyIdBankAccountsVerifyResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -87,6 +92,7 @@ async function $do(
   [
     Result<
       PutV1CompaniesCompanyIdBankAccountsVerifyResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -112,7 +118,11 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON(
+    "body",
+    payload["Company-Bank-Account-Verify-Request"],
+    { explode: true },
+  );
 
   const pathParams = {
     bank_account_uuid: encodeSimple(
@@ -193,6 +203,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1CompaniesCompanyIdBankAccountsVerifyResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -208,8 +219,9 @@ async function $do(
       PutV1CompaniesCompanyIdBankAccountsVerifyResponse$inboundSchema,
       { key: "Company-Bank-Account" },
     ),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

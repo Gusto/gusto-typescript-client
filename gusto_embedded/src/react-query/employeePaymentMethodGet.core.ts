@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeePaymentMethodGet } from "../funcs/employeePaymentMethodGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdPaymentMethodRequest,
   GetV1EmployeesEmployeeIdPaymentMethodResponse,
 } from "../models/operations/getv1employeesemployeeidpaymentmethod.js";
@@ -74,7 +74,11 @@ export function buildEmployeePaymentMethodGetQuery(
 
 export function queryKeyEmployeePaymentMethodGet(
   employeeId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

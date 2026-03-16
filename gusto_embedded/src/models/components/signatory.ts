@@ -18,7 +18,7 @@ export type IdentityVerificationStatus = ClosedEnum<
   typeof IdentityVerificationStatus
 >;
 
-export type HomeAddress = {
+export type SignatoryHomeAddress = {
   street1?: string | undefined;
   street2?: string | undefined;
   city?: string | undefined;
@@ -62,7 +62,7 @@ export type Signatory = {
    * | null | Identity verification process has not been completed |
    */
   identityVerificationStatus?: IdentityVerificationStatus | null | undefined;
-  homeAddress?: HomeAddress | null | undefined;
+  homeAddress?: SignatoryHomeAddress | null | undefined;
 };
 
 /** @internal */
@@ -71,8 +71,8 @@ export const IdentityVerificationStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(IdentityVerificationStatus);
 
 /** @internal */
-export const HomeAddress$inboundSchema: z.ZodType<
-  HomeAddress,
+export const SignatoryHomeAddress$inboundSchema: z.ZodType<
+  SignatoryHomeAddress,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -89,13 +89,13 @@ export const HomeAddress$inboundSchema: z.ZodType<
   });
 });
 
-export function homeAddressFromJSON(
+export function signatoryHomeAddressFromJSON(
   jsonString: string,
-): SafeParseResult<HomeAddress, SDKValidationError> {
+): SafeParseResult<SignatoryHomeAddress, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => HomeAddress$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'HomeAddress' from JSON`,
+    (x) => SignatoryHomeAddress$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SignatoryHomeAddress' from JSON`,
   );
 }
 
@@ -118,7 +118,8 @@ export const Signatory$inboundSchema: z.ZodType<
   identity_verification_status: z.nullable(
     IdentityVerificationStatus$inboundSchema,
   ).optional(),
-  home_address: z.nullable(z.lazy(() => HomeAddress$inboundSchema)).optional(),
+  home_address: z.nullable(z.lazy(() => SignatoryHomeAddress$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "first_name": "firstName",

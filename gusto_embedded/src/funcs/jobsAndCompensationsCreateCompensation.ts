@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -39,7 +43,14 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
  *
- * scope: `jobs:write`
+ * ### Prerequisites
+ * Before calling this endpoint:
+ * 1. A [job](ref:post-v1-jobs-job_id) must exist for the employee
+ *
+ * ### Webhooks
+ * - `employee_job_compensation.created`: Fires when a compensation is successfully created
+ *
+ * scope: `compensations:write`
  */
 export function jobsAndCompensationsCreateCompensation(
   client: GustoEmbeddedCore,
@@ -48,6 +59,7 @@ export function jobsAndCompensationsCreateCompensation(
 ): APIPromise<
   Result<
     PostV1CompensationsCompensationIdResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -74,6 +86,7 @@ async function $do(
   [
     Result<
       PostV1CompensationsCompensationIdResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -97,7 +110,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload["Compensations-Request-Body"], {
+    explode: true,
+  });
 
   const pathParams = {
     job_id: encodeSimple("job_id", payload.job_id, {
@@ -171,6 +186,7 @@ async function $do(
 
   const [result] = await M.match<
     PostV1CompensationsCompensationIdResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -184,8 +200,9 @@ async function $do(
     M.json(201, PostV1CompensationsCompensationIdResponse$inboundSchema, {
       key: "Compensation",
     }),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

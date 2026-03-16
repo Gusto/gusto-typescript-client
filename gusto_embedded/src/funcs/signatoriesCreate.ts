@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -37,9 +41,15 @@ import { Result } from "../types/fp.js";
  * Create a signatory
  *
  * @remarks
- * Create a company signatory with complete information.
- * A signatory can legally sign forms once the identity verification process is successful.
- * The signatory should be an officer, owner, general partner or LLC member manager, plan administrator, fiduciary, or an authorized representative who is designated to sign agreements on the company's behalf. An officer is the president, vice president, treasurer, chief accounting officer, etc. There can only be a single primary signatory in a company.
+ * Creates a company signatory with complete information. The company must not already have a signatory.
+ *
+ * A signatory can legally sign forms once the identity verification process is successful. The signatory should be an officer, owner, general partner or LLC member manager, plan administrator, fiduciary, or an authorized representative who is designated to sign agreements on the company's behalf. An officer is the president, vice president, treasurer, chief accounting officer, etc. There can only be a single primary signatory in a company.
+ *
+ * ### Webhooks
+ * - `signatory.created`: Fires when a signatory is successfully created.
+ *
+ * ### Related guides
+ * - [Signatory Events](doc:signatory-events)
  *
  * scope: `signatories:manage`
  */
@@ -50,6 +60,7 @@ export function signatoriesCreate(
 ): APIPromise<
   Result<
     PostV1CompanySignatoriesResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -76,6 +87,7 @@ async function $do(
   [
     Result<
       PostV1CompanySignatoriesResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -98,7 +110,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload["Signatory-Create-Request"], {
+    explode: true,
+  });
 
   const pathParams = {
     company_uuid: encodeSimple("company_uuid", payload.company_uuid, {
@@ -174,6 +188,7 @@ async function $do(
 
   const [result] = await M.match<
     PostV1CompanySignatoriesResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -187,8 +202,9 @@ async function $do(
     M.json(200, PostV1CompanySignatoriesResponse$inboundSchema, {
       key: "Signatory",
     }),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

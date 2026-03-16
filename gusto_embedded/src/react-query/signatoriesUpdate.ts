@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type SignatoriesUpdateMutationData =
   PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse;
 
 export type SignatoriesUpdateMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -53,7 +55,10 @@ export type SignatoriesUpdateMutationError =
  * Update a signatory
  *
  * @remarks
- * Update a signatory that has been either invited or created. If the signatory has been created with minimal information through the `POST /v1/companies/{company_uuid}/signatories/invite` endpoint, then the first update must contain all attributes specified in the request body in order to start the identity verification process.
+ * Updates a signatory that has been either invited or created. If the signatory has been created with minimal information through the [Invite a signatory](ref:post-v1-companies-company_uuid-signatories-invite) endpoint, then the first update must contain all attributes specified in the request body in order to start the identity verification process.
+ *
+ * ## Related guides
+ * - [Signatory Events](doc:signatory-events)
  *
  * scope: `signatories:write`
  */

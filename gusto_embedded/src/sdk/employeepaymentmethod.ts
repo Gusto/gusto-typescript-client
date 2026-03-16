@@ -92,12 +92,10 @@ export class EmployeePaymentMethod extends ClientSDK {
   }
 
   /**
-   * Get an employee's payment method
+   * Get payment method for an employee
    *
    * @remarks
-   * Fetches an employee's payment method. An employee payment method
-   * describes how the payment should be split across the employee's associated
-   * bank accounts.
+   * Returns the payment method for an employee (e.g. Check or Direct Deposit with split configuration).
    *
    * scope: `employee_payment_methods:read`
    */
@@ -113,11 +111,10 @@ export class EmployeePaymentMethod extends ClientSDK {
   }
 
   /**
-   * Update an employee's payment method
+   * Update payment method for an employee
    *
    * @remarks
-   * Updates an employee's payment method. Note that creating an employee
-   * bank account will also update the employee's payment method.
+   * Updates the payment method for an employee. Can set to Check or Direct Deposit with split configuration.
    *
    * scope: `employee_payment_methods:write`
    */

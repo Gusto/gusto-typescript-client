@@ -7,8 +7,8 @@
 * [create](#create) - Create an employee bank account
 * [deleteBankAccount](#deletebankaccount) - Delete an employee bank account
 * [updateBankAccount](#updatebankaccount) - Update an employee bank account
-* [get](#get) - Get an employee's payment method
-* [update](#update) - Update an employee's payment method
+* [get](#get) - Get payment method for an employee
+* [update](#update) - Update payment method for an employee
 
 ## create
 
@@ -796,9 +796,7 @@ import {
 
 ## get
 
-Fetches an employee's payment method. An employee payment method
-describes how the payment should be split across the employee's associated
-bank accounts.
+Returns the payment method for an employee (e.g. Check or Direct Deposit with split configuration).
 
 scope: `employee_payment_methods:read`
 
@@ -895,14 +893,14 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## update
 
-Updates an employee's payment method. Note that creating an employee
-bank account will also update the employee's payment method.
+Updates the payment method for an employee. Can set to Check or Direct Deposit with split configuration.
 
 scope: `employee_payment_methods:write`
 
@@ -1514,5 +1512,6 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 409, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

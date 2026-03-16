@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompaniesPayrollBlockersCompanyUuidRequest } from "../models/operations/getv1companiespayrollblockerscompanyuuid.js";
+import {
+  GetV1CompaniesPayrollBlockersCompanyUuidHeaderXGustoAPIVersion,
+  GetV1CompaniesPayrollBlockersCompanyUuidRequest,
+} from "../models/operations/getv1companiespayrollblockerscompanyuuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type PayrollsGetBlockersQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -55,9 +59,7 @@ export type PayrollsGetBlockersQueryError =
  * Get all payroll blockers for a company
  *
  * @remarks
- * Returns a list of reasons that prevent the company from running payrolls. See the [payroll blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers) for a complete list of reasons.
- *
- * The list is empty if there are no payroll blockers.
+ * Returns a list of reasons that prevent the company from running payrolls. See the [Payroll Blockers guide](doc:payroll-blockers) for a complete list of reasons. The list is empty if there are no payroll blockers.
  *
  * scope: `payrolls:run`
  */
@@ -83,9 +85,7 @@ export function usePayrollsGetBlockers(
  * Get all payroll blockers for a company
  *
  * @remarks
- * Returns a list of reasons that prevent the company from running payrolls. See the [payroll blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers) for a complete list of reasons.
- *
- * The list is empty if there are no payroll blockers.
+ * Returns a list of reasons that prevent the company from running payrolls. See the [Payroll Blockers guide](doc:payroll-blockers) for a complete list of reasons. The list is empty if there are no payroll blockers.
  *
  * scope: `payrolls:run`
  */
@@ -114,7 +114,11 @@ export function setPayrollsGetBlockersData(
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompaniesPayrollBlockersCompanyUuidHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: PayrollsGetBlockersQueryData,
 ): PayrollsGetBlockersQueryData | undefined {
@@ -128,7 +132,11 @@ export function invalidatePayrollsGetBlockers(
   queryKeyBase: TupleToPrefixes<
     [
       companyUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompaniesPayrollBlockersCompanyUuidHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

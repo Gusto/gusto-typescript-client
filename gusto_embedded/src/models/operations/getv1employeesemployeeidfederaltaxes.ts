@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeFederalTax,
@@ -14,35 +15,51 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion>;
+
 export type GetV1EmployeesEmployeeIdFederalTaxesRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the employee
    */
   employeeUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1EmployeesEmployeeIdFederalTaxesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
   employeeFederalTax?: EmployeeFederalTax | undefined;
 };
 
 /** @internal */
+export const GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetV1EmployeesEmployeeIdFederalTaxesRequest$Outbound = {
-  employee_uuid: string;
   "X-Gusto-API-Version": string;
+  employee_uuid: string;
 };
 
 /** @internal */
@@ -52,12 +69,14 @@ export const GetV1EmployeesEmployeeIdFederalTaxesRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1EmployeesEmployeeIdFederalTaxesRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     employeeUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
-      employeeUuid: "employee_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      employeeUuid: "employee_uuid",
     });
   });
 

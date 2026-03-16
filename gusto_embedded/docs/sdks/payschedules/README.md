@@ -1037,11 +1037,13 @@ import {
 
 ## getPayPeriods
 
-Pay periods are the foundation of payroll. Compensation, time & attendance, taxes, and expense reports all rely on when they happened. To begin submitting information for a given payroll, we need to agree on the time period.
+Pay periods are the foundation of payroll. Compensation, time & attendance, taxes, and expense reports all rely on when they happened.
 
-By default, this endpoint returns pay periods starting from 6 months ago to the date today.  Use the `start_date` and `end_date` parameters to change the scope of the response.  End dates can be up to 3 months in the future and there is no limit on start dates.
+To begin submitting information for a given payroll, we need to agree on the time period.
 
-Starting in version '2023-04-01', the eligible_employees attribute was removed from the response.  The eligible employees for a payroll are determined by the employee_compensations returned from the payrolls#prepare endpoint.
+By default, this endpoint returns pay periods starting from 6 months ago to the date today. Use the `start_date` and `end_date` parameters to change the scope of the response. End dates can be up to 3 months in the future and there is no limit on start dates.
+
+Starting in version 2023-04-01, the `eligible_employees` attribute was removed from the response. The eligible employees for a payroll are determined by the employee_compensations returned from the [PUT /v1/companies/{company_id}/payrolls/{payroll_id}/prepare](ref:put-v1-companies-company_id-payrolls-payroll_id-prepare) endpoint.
 
 scope: `payrolls:read`
 
@@ -1050,6 +1052,7 @@ scope: `payrolls:read`
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-pay_periods" method="get" path="/v1/companies/{company_id}/pay_periods" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1058,8 +1061,8 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.paySchedules.getPayPeriods({
     companyId: "<id>",
-    startDate: "2020-01-01",
-    endDate: "2020-01-31",
+    startDate: new RFCDate("2020-01-01"),
+    endDate: new RFCDate("2020-01-31"),
   });
 
   console.log(result);
@@ -1075,6 +1078,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { paySchedulesGetPayPeriods } from "@gusto/embedded-api/funcs/paySchedulesGetPayPeriods.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1085,8 +1089,8 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await paySchedulesGetPayPeriods(gustoEmbedded, {
     companyId: "<id>",
-    startDate: "2020-01-01",
-    endDate: "2020-01-31",
+    startDate: new RFCDate("2020-01-01"),
+    endDate: new RFCDate("2020-01-31"),
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1142,9 +1146,11 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## getUnprocessedTerminationPeriods
 

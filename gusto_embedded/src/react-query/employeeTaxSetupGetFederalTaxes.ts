@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1EmployeesEmployeeIdFederalTaxesRequest } from "../models/operations/getv1employeesemployeeidfederaltaxes.js";
+import {
+  GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion,
+  GetV1EmployeesEmployeeIdFederalTaxesRequest,
+} from "../models/operations/getv1employeesemployeeidfederaltaxes.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type EmployeeTaxSetupGetFederalTaxesQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -52,12 +56,12 @@ export type EmployeeTaxSetupGetFederalTaxesQueryError =
   | SDKValidationError;
 
 /**
- * Get an employee's federal taxes
+ * Get federal taxes for an employee
  *
  * @remarks
- * Get attributes relevant for an employee's federal taxes.
+ * Returns federal tax information for an employee. The response structure varies based on the w4_data_type (pre_2020_w4 or rev_2020_w4).
  *
- *  scope: `employee_federal_taxes:read`
+ * scope: `employee_federal_taxes:read`
  */
 export function useEmployeeTaxSetupGetFederalTaxes(
   request: GetV1EmployeesEmployeeIdFederalTaxesRequest,
@@ -81,12 +85,12 @@ export function useEmployeeTaxSetupGetFederalTaxes(
 }
 
 /**
- * Get an employee's federal taxes
+ * Get federal taxes for an employee
  *
  * @remarks
- * Get attributes relevant for an employee's federal taxes.
+ * Returns federal tax information for an employee. The response structure varies based on the w4_data_type (pre_2020_w4 or rev_2020_w4).
  *
- *  scope: `employee_federal_taxes:read`
+ * scope: `employee_federal_taxes:read`
  */
 export function useEmployeeTaxSetupGetFederalTaxesSuspense(
   request: GetV1EmployeesEmployeeIdFederalTaxesRequest,
@@ -113,7 +117,11 @@ export function setEmployeeTaxSetupGetFederalTaxesData(
   client: QueryClient,
   queryKeyBase: [
     employeeUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: EmployeeTaxSetupGetFederalTaxesQueryData,
 ): EmployeeTaxSetupGetFederalTaxesQueryData | undefined {
@@ -130,7 +138,11 @@ export function invalidateEmployeeTaxSetupGetFederalTaxes(
   queryKeyBase: TupleToPrefixes<
     [
       employeeUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
