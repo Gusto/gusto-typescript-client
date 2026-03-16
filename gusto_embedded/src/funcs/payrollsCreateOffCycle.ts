@@ -196,7 +196,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, PostV1CompaniesCompanyIdPayrollsResponse$inboundSchema, {
-      key: "Payroll-Prepared",
+      key: "Payroll-Unprocessed",
     }),
     M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),

@@ -11,12 +11,14 @@ import { GustoEmbeddedCore } from "../core.js";
 import { paySchedulesGetPayPeriods } from "../funcs/paySchedulesGetPayPeriods.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdPayPeriodsRequest,
   GetV1CompaniesCompanyIdPayPeriodsResponse,
+  PayrollTypes,
 } from "../models/operations/getv1companiescompanyidpayperiods.js";
 import { unwrapAsync } from "../types/fp.js";
+import { RFCDate } from "../types/rfcdate.js";
 export type PaySchedulesGetPayPeriodsQueryData =
   GetV1CompaniesCompanyIdPayPeriodsResponse;
 
@@ -47,10 +49,10 @@ export function buildPaySchedulesGetPayPeriodsQuery(
 } {
   return {
     queryKey: queryKeyPaySchedulesGetPayPeriods(request.companyId, {
+      xGustoAPIVersion: request.xGustoAPIVersion,
       startDate: request.startDate,
       endDate: request.endDate,
       payrollTypes: request.payrollTypes,
-      xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function paySchedulesGetPayPeriodsQueryFn(
       ctx,
@@ -78,10 +80,12 @@ export function buildPaySchedulesGetPayPeriodsQuery(
 export function queryKeyPaySchedulesGetPayPeriods(
   companyId: string,
   parameters: {
-    startDate?: string | undefined;
-    endDate?: string | undefined;
-    payrollTypes?: string | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion
+      | undefined;
+    startDate?: RFCDate | undefined;
+    endDate?: RFCDate | undefined;
+    payrollTypes?: PayrollTypes | undefined;
   },
 ): QueryKey {
   return [

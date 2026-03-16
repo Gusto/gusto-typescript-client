@@ -49,6 +49,14 @@ export type PutV1CompanyBenefitsCompanyBenefitIdRequestBody = {
    */
   description?: string | undefined;
   /**
+   * Whether the employer is subject to pay employer taxes when an employee is on leave. Only applicable to short-term and long-term disability benefits (different from voluntary disability).
+   */
+  responsibleForEmployerTaxes?: boolean | undefined;
+  /**
+   * Whether the employer is subject to file W-2 forms for an employee on leave. Only applicable to short-term and long-term disability benefits (different from voluntary disability).
+   */
+  responsibleForEmployeeW2?: boolean | undefined;
+  /**
    * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0 Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
    */
   catchUpType?:
@@ -87,6 +95,8 @@ export type PutV1CompanyBenefitsCompanyBenefitIdRequestBody$Outbound = {
   version: string;
   active?: boolean | undefined;
   description?: string | undefined;
+  responsible_for_employer_taxes?: boolean | undefined;
+  responsible_for_employee_w2?: boolean | undefined;
   catch_up_type?: string | null | undefined;
 };
 
@@ -100,11 +110,15 @@ export const PutV1CompanyBenefitsCompanyBenefitIdRequestBody$outboundSchema:
     version: z.string(),
     active: z.boolean().optional(),
     description: z.string().optional(),
+    responsibleForEmployerTaxes: z.boolean().optional(),
+    responsibleForEmployeeW2: z.boolean().optional(),
     catchUpType: z.nullable(
       PutV1CompanyBenefitsCompanyBenefitIdCatchUpType$outboundSchema,
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
+      responsibleForEmployerTaxes: "responsible_for_employer_taxes",
+      responsibleForEmployeeW2: "responsible_for_employee_w2",
       catchUpType: "catch_up_type",
     });
   });

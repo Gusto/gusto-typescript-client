@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type EmployeeTaxSetupUpdateFederalTaxesMutationData =
   PutV1EmployeesEmployeeIdFederalTaxesResponse;
 
 export type EmployeeTaxSetupUpdateFederalTaxesMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -50,10 +52,10 @@ export type EmployeeTaxSetupUpdateFederalTaxesMutationError =
   | SDKValidationError;
 
 /**
- * Update an employee's federal taxes
+ * Update federal taxes for an employee
  *
  * @remarks
- * Update attributes relevant for an employee's federal taxes.
+ * Updates federal tax (W4) information for an employee. Only rev_2020_w4 format is accepted for updates.
  *
  * scope: `employee_federal_taxes:write`
  */

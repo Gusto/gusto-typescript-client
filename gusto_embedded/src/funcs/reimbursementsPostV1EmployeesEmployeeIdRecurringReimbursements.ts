@@ -187,7 +187,7 @@ async function $do(
     M.json(
       201,
       PostV1EmployeesEmployeeIdRecurringReimbursementsResponse$inboundSchema,
-      { key: "object" },
+      { key: "Recurring-Reimbursement" },
     ),
     M.jsonErr([404, 422], NotFoundErrorObject$inboundSchema),
     M.fail("4XX"),

@@ -23,7 +23,7 @@ export type FipsCodes = {
 /**
  * A required attribute when creating a garnishment for this state agency. The current values are listed as an enum; though unlikely, values could be added if state agency requirements change in the future.
  */
-export const Key = {
+export const ChildSupportDataKey = {
   CaseNumber: "case_number",
   OrderNumber: "order_number",
   RemittanceNumber: "remittance_number",
@@ -31,13 +31,13 @@ export const Key = {
 /**
  * A required attribute when creating a garnishment for this state agency. The current values are listed as an enum; though unlikely, values could be added if state agency requirements change in the future.
  */
-export type Key = ClosedEnum<typeof Key>;
+export type ChildSupportDataKey = ClosedEnum<typeof ChildSupportDataKey>;
 
 export type RequiredAttributes = {
   /**
    * A required attribute when creating a garnishment for this state agency. The current values are listed as an enum; though unlikely, values could be added if state agency requirements change in the future.
    */
-  key?: Key | undefined;
+  key?: ChildSupportDataKey | undefined;
   /**
    * A human readable name of the attribute, e.g. CSE Case Number
    */
@@ -98,7 +98,9 @@ export function fipsCodesFromJSON(
 }
 
 /** @internal */
-export const Key$inboundSchema: z.ZodNativeEnum<typeof Key> = z.nativeEnum(Key);
+export const ChildSupportDataKey$inboundSchema: z.ZodNativeEnum<
+  typeof ChildSupportDataKey
+> = z.nativeEnum(ChildSupportDataKey);
 
 /** @internal */
 export const RequiredAttributes$inboundSchema: z.ZodType<
@@ -106,7 +108,7 @@ export const RequiredAttributes$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  key: Key$inboundSchema.optional(),
+  key: ChildSupportDataKey$inboundSchema.optional(),
   label: z.string().optional(),
 });
 

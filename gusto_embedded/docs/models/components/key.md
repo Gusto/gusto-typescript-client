@@ -1,17 +1,17 @@
 # Key
 
-A required attribute when creating a garnishment for this state agency. The current values are listed as an enum; though unlikely, values could be added if state agency requirements change in the future.
+A unique identifier for the payroll blocker reason. For a complete list of blockers and their meanings, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers).
 
 ## Example Usage
 
 ```typescript
-import { Key } from "@gusto/embedded-api/models/components/childsupportdata.js";
+import { Key } from "@gusto/embedded-api/models/components/payrollblocker.js";
 
-let value: Key = "remittance_number";
+let value: Key = "needs_approval";
 ```
 
 ## Values
 
 ```typescript
-"case_number" | "order_number" | "remittance_number"
+"company_ownership_required" | "contractor_only_company" | "eftps_in_error" | "geocode_error" | "geocode_needed" | "invalid_signatory" | "missing_addresses" | "missing_bank_info" | "missing_bank_verification" | "missing_employee_setup" | "missing_federal_tax_setup" | "missing_forms" | "missing_industry_selection" | "missing_pay_schedule" | "missing_signatory" | "missing_state_tax_setup" | "needs_approval" | "needs_onboarding" | "pay_schedule_setup_not_complete" | "pending_information_request" | "pending_payroll_review" | "pending_recovery_case" | "soft_suspended" | "suspended"
 ```

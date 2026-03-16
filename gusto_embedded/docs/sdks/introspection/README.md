@@ -9,7 +9,9 @@
 
 ## getInfo
 
-Returns scope and resource information associated with the current access token.
+Returns scope and resource information associated with the current access token. Use this endpoint to verify the following for the current access token:
+* Resource (company, employee, contractor, or application) and resource owner
+* Access level
 
 ### Example Usage
 

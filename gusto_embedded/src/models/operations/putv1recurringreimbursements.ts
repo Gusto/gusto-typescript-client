@@ -11,6 +11,10 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
+import {
+  RecurringReimbursement,
+  RecurringReimbursement$inboundSchema,
+} from "../components/recurringreimbursement.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -55,25 +59,12 @@ export type PutV1RecurringReimbursementsRequest = {
   requestBody: PutV1RecurringReimbursementsRequestBody;
 };
 
-/**
- * successful
- */
-export type PutV1RecurringReimbursementsResponseBody = {
-  uuid: string;
-  employeeUuid: string;
-  description: string;
-  amount: string;
-  version: string;
-  createdAt?: string | undefined;
-  updatedAt?: string | undefined;
-};
-
 export type PutV1RecurringReimbursementsResponse = {
   httpMeta: HTTPMetadata;
   /**
    * successful
    */
-  object?: PutV1RecurringReimbursementsResponseBody | undefined;
+  recurringReimbursement?: RecurringReimbursement | undefined;
 };
 
 /** @internal */
@@ -149,54 +140,17 @@ export function putV1RecurringReimbursementsRequestToJSON(
 }
 
 /** @internal */
-export const PutV1RecurringReimbursementsResponseBody$inboundSchema: z.ZodType<
-  PutV1RecurringReimbursementsResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  uuid: z.string(),
-  employee_uuid: z.string(),
-  description: z.string(),
-  amount: z.string(),
-  version: z.string(),
-  created_at: z.string().optional(),
-  updated_at: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "employee_uuid": "employeeUuid",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
-
-export function putV1RecurringReimbursementsResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1RecurringReimbursementsResponseBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1RecurringReimbursementsResponseBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1RecurringReimbursementsResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
 export const PutV1RecurringReimbursementsResponse$inboundSchema: z.ZodType<
   PutV1RecurringReimbursementsResponse,
   z.ZodTypeDef,
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  object: z.lazy(() => PutV1RecurringReimbursementsResponseBody$inboundSchema)
-    .optional(),
+  "Recurring-Reimbursement": RecurringReimbursement$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
+    "Recurring-Reimbursement": "recurringReimbursement",
   });
 });
 

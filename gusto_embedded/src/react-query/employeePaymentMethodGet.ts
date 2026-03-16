@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1EmployeesEmployeeIdPaymentMethodRequest } from "../models/operations/getv1employeesemployeeidpaymentmethod.js";
+import {
+  GetV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion,
+  GetV1EmployeesEmployeeIdPaymentMethodRequest,
+} from "../models/operations/getv1employeesemployeeidpaymentmethod.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type EmployeePaymentMethodGetQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -52,12 +56,10 @@ export type EmployeePaymentMethodGetQueryError =
   | SDKValidationError;
 
 /**
- * Get an employee's payment method
+ * Get payment method for an employee
  *
  * @remarks
- * Fetches an employee's payment method. An employee payment method
- * describes how the payment should be split across the employee's associated
- * bank accounts.
+ * Returns the payment method for an employee (e.g. Check or Direct Deposit with split configuration).
  *
  * scope: `employee_payment_methods:read`
  */
@@ -83,12 +85,10 @@ export function useEmployeePaymentMethodGet(
 }
 
 /**
- * Get an employee's payment method
+ * Get payment method for an employee
  *
  * @remarks
- * Fetches an employee's payment method. An employee payment method
- * describes how the payment should be split across the employee's associated
- * bank accounts.
+ * Returns the payment method for an employee (e.g. Check or Direct Deposit with split configuration).
  *
  * scope: `employee_payment_methods:read`
  */
@@ -117,7 +117,11 @@ export function setEmployeePaymentMethodGetData(
   client: QueryClient,
   queryKeyBase: [
     employeeId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: EmployeePaymentMethodGetQueryData,
 ): EmployeePaymentMethodGetQueryData | undefined {
@@ -131,7 +135,11 @@ export function invalidateEmployeePaymentMethodGet(
   queryKeyBase: TupleToPrefixes<
     [
       employeeId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

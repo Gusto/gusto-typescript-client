@@ -17,13 +17,15 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const HeaderXGustoAPIVersion = {
+export const GetV1CompaniesHeaderXGustoAPIVersion = {
   TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type HeaderXGustoAPIVersion = ClosedEnum<typeof HeaderXGustoAPIVersion>;
+export type GetV1CompaniesHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1CompaniesHeaderXGustoAPIVersion
+>;
 
 export type GetV1CompaniesRequest = {
   /**
@@ -33,7 +35,7 @@ export type GetV1CompaniesRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined;
+  xGustoAPIVersion?: GetV1CompaniesHeaderXGustoAPIVersion | undefined;
 };
 
 export type GetV1CompaniesResponse = {
@@ -45,9 +47,10 @@ export type GetV1CompaniesResponse = {
 };
 
 /** @internal */
-export const HeaderXGustoAPIVersion$outboundSchema: z.ZodNativeEnum<
-  typeof HeaderXGustoAPIVersion
-> = z.nativeEnum(HeaderXGustoAPIVersion);
+export const GetV1CompaniesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1CompaniesHeaderXGustoAPIVersion> = z.nativeEnum(
+    GetV1CompaniesHeaderXGustoAPIVersion,
+  );
 
 /** @internal */
 export type GetV1CompaniesRequest$Outbound = {
@@ -62,7 +65,9 @@ export const GetV1CompaniesRequest$outboundSchema: z.ZodType<
   GetV1CompaniesRequest
 > = z.object({
   companyId: z.string(),
-  xGustoAPIVersion: HeaderXGustoAPIVersion$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: GetV1CompaniesHeaderXGustoAPIVersion$outboundSchema.default(
+    "2025-06-15",
+  ),
 }).transform((v) => {
   return remap$(v, {
     companyId: "company_id",

@@ -181,7 +181,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, PutV1RecurringReimbursementsResponse$inboundSchema, {
-      key: "object",
+      key: "Recurring-Reimbursement",
     }),
     M.jsonErr([404, 409, 422], NotFoundErrorObject$inboundSchema),
     M.fail("4XX"),

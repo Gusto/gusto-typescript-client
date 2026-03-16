@@ -80,6 +80,10 @@ export type Compensation = {
    */
   effectiveDate?: string | undefined;
   /**
+   * The job title for this compensation.
+   */
+  title?: string | undefined;
+  /**
    * Indicates if the compensation could be adjusted to minimum wage during payroll calculation.
    */
   adjustForMinimumWage?: boolean | undefined;
@@ -132,6 +136,7 @@ export const Compensation$inboundSchema: z.ZodType<
   payment_unit: PaymentUnit$inboundSchema.optional(),
   flsa_status: FlsaStatusType$inboundSchema.optional(),
   effective_date: z.string().optional(),
+  title: z.string().optional(),
   adjust_for_minimum_wage: z.boolean().optional(),
   minimum_wages: z.array(z.lazy(() => MinimumWages$inboundSchema)).optional(),
 }).transform((v) => {

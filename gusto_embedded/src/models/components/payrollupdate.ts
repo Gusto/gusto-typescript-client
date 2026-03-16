@@ -108,7 +108,7 @@ export type PayrollUpdatePaidTimeOff = {
   /**
    * The outstanding hours paid upon termination. This field is only applicable for termination payrolls.
    */
-  finalPayoutUnusedHoursInput?: string | undefined;
+  finalPayoutUnusedHoursInput?: string | null | undefined;
 };
 
 export type PayrollUpdateReimbursements = {
@@ -304,7 +304,7 @@ export type PayrollUpdatePaidTimeOff$Outbound = {
   name?: string | undefined;
   hours?: string | undefined;
   policy_uuid?: string | undefined;
-  final_payout_unused_hours_input?: string | undefined;
+  final_payout_unused_hours_input?: string | null | undefined;
 };
 
 /** @internal */
@@ -316,7 +316,7 @@ export const PayrollUpdatePaidTimeOff$outboundSchema: z.ZodType<
   name: z.string().optional(),
   hours: z.string().optional(),
   policyUuid: z.string().optional(),
-  finalPayoutUnusedHoursInput: z.string().optional(),
+  finalPayoutUnusedHoursInput: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     policyUuid: "policy_uuid",

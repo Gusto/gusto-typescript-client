@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type JobsAndCompensationsCreateCompensationMutationData =
   PostV1CompensationsCompensationIdResponse;
 
 export type JobsAndCompensationsCreateCompensationMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -55,7 +57,14 @@ export type JobsAndCompensationsCreateCompensationMutationError =
  * @remarks
  * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
  *
- * scope: `jobs:write`
+ * ### Prerequisites
+ * Before calling this endpoint:
+ * 1. A [job](ref:post-v1-jobs-job_id) must exist for the employee
+ *
+ * ### Webhooks
+ * - `employee_job_compensation.created`: Fires when a compensation is successfully created
+ *
+ * scope: `compensations:write`
  */
 export function useJobsAndCompensationsCreateCompensationMutation(
   options?: MutationHookOptions<

@@ -36,22 +36,22 @@ export type PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion =
 
 export type PostV1CompaniesCompanyIdBankAccountsRequest = {
   /**
-   * The UUID of the company
-   */
-  companyId: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the company
+   */
+  companyId: string;
   companyBankAccountRequest: CompanyBankAccountRequest;
 };
 
 export type PostV1CompaniesCompanyIdBankAccountsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * created
+   * Bank account unchanged
    */
   companyBankAccount?: CompanyBankAccount | undefined;
 };
@@ -64,8 +64,8 @@ export const PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$outbound
 
 /** @internal */
 export type PostV1CompaniesCompanyIdBankAccountsRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
+  company_id: string;
   "Company-Bank-Account-Request": CompanyBankAccountRequest$Outbound;
 };
 
@@ -76,15 +76,15 @@ export const PostV1CompaniesCompanyIdBankAccountsRequest$outboundSchema:
     z.ZodTypeDef,
     PostV1CompaniesCompanyIdBankAccountsRequest
   > = z.object({
-    companyId: z.string(),
     xGustoAPIVersion:
       PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$outboundSchema
         .default("2025-06-15"),
+    companyId: z.string(),
     companyBankAccountRequest: CompanyBankAccountRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyId: "company_id",
       companyBankAccountRequest: "Company-Bank-Account-Request",
     });
   });

@@ -35,9 +35,6 @@ export type EmployeePaymentMethodSplitBy = ClosedEnum<
   typeof EmployeePaymentMethodSplitBy
 >;
 
-/**
- * Example response
- */
 export type EmployeePaymentMethod = {
   /**
    * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
