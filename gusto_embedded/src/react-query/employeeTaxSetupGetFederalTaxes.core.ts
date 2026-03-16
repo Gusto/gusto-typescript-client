@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeTaxSetupGetFederalTaxes } from "../funcs/employeeTaxSetupGetFederalTaxes.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdFederalTaxesRequest,
   GetV1EmployeesEmployeeIdFederalTaxesResponse,
 } from "../models/operations/getv1employeesemployeeidfederaltaxes.js";
@@ -74,7 +74,11 @@ export function buildEmployeeTaxSetupGetFederalTaxesQuery(
 
 export function queryKeyEmployeeTaxSetupGetFederalTaxes(
   employeeUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

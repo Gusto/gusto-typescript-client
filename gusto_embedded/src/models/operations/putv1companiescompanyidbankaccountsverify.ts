@@ -5,95 +5,78 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanyBankAccount,
   CompanyBankAccount$inboundSchema,
 } from "../components/companybankaccount.js";
 import {
+  CompanyBankAccountVerifyRequest,
+  CompanyBankAccountVerifyRequest$Outbound,
+  CompanyBankAccountVerifyRequest$outboundSchema,
+} from "../components/companybankaccountverifyrequest.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody = {
-  /**
-   * The dollar amount of the first micro-deposit
-   */
-  deposit1: number;
-  /**
-   * The dollar amount of the second micro-deposit
-   */
-  deposit2: number;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1CompaniesCompanyIdBankAccountsVerifyHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1CompaniesCompanyIdBankAccountsVerifyHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutV1CompaniesCompanyIdBankAccountsVerifyHeaderXGustoAPIVersion
+  >;
 
 export type PutV1CompaniesCompanyIdBankAccountsVerifyRequest = {
   /**
-   * The UUID of the bank account
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  bankAccountUuid: string;
+  xGustoAPIVersion?:
+    | PutV1CompaniesCompanyIdBankAccountsVerifyHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
   companyId: string;
   /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   * The UUID of the company bank account
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody;
+  bankAccountUuid: string;
+  companyBankAccountVerifyRequest: CompanyBankAccountVerifyRequest;
 };
 
 export type PutV1CompaniesCompanyIdBankAccountsVerifyResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
   companyBankAccount?: CompanyBankAccount | undefined;
 };
 
 /** @internal */
-export type PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$Outbound = {
-  deposit_1: number;
-  deposit_2: number;
-};
-
-/** @internal */
-export const PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$outboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$Outbound,
-    z.ZodTypeDef,
-    PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody
-  > = z.object({
-    deposit1: z.number(),
-    deposit2: z.number(),
-  }).transform((v) => {
-    return remap$(v, {
-      deposit1: "deposit_1",
-      deposit2: "deposit_2",
-    });
-  });
-
-export function putV1CompaniesCompanyIdBankAccountsVerifyRequestBodyToJSON(
-  putV1CompaniesCompanyIdBankAccountsVerifyRequestBody:
-    PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$outboundSchema.parse(
-      putV1CompaniesCompanyIdBankAccountsVerifyRequestBody,
-    ),
+export const PutV1CompaniesCompanyIdBankAccountsVerifyHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1CompaniesCompanyIdBankAccountsVerifyHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PutV1CompaniesCompanyIdBankAccountsVerifyHeaderXGustoAPIVersion,
   );
-}
 
 /** @internal */
 export type PutV1CompaniesCompanyIdBankAccountsVerifyRequest$Outbound = {
-  bank_account_uuid: string;
-  company_id: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$Outbound;
+  company_id: string;
+  bank_account_uuid: string;
+  "Company-Bank-Account-Verify-Request":
+    CompanyBankAccountVerifyRequest$Outbound;
 };
 
 /** @internal */
@@ -103,18 +86,19 @@ export const PutV1CompaniesCompanyIdBankAccountsVerifyRequest$outboundSchema:
     z.ZodTypeDef,
     PutV1CompaniesCompanyIdBankAccountsVerifyRequest
   > = z.object({
-    bankAccountUuid: z.string(),
+    xGustoAPIVersion:
+      PutV1CompaniesCompanyIdBankAccountsVerifyHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$outboundSchema
-    ),
+    bankAccountUuid: z.string(),
+    companyBankAccountVerifyRequest:
+      CompanyBankAccountVerifyRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      bankAccountUuid: "bank_account_uuid",
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      companyId: "company_id",
+      bankAccountUuid: "bank_account_uuid",
+      companyBankAccountVerifyRequest: "Company-Bank-Account-Verify-Request",
     });
   });
 

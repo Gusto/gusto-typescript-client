@@ -19,9 +19,9 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
   DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse,
@@ -39,7 +39,7 @@ export type SignatoriesDeleteMutationData =
   DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse;
 
 export type SignatoriesDeleteMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -53,7 +53,10 @@ export type SignatoriesDeleteMutationError =
  * Delete a signatory
  *
  * @remarks
- * Delete a company signatory.
+ * Deletes a company signatory.
+ *
+ * ## Related guides
+ * - [Signatory Events](doc:signatory-events)
  *
  * scope: `signatories:manage`
  */

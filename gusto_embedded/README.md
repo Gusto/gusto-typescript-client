@@ -376,8 +376,8 @@ run();
 * [create](docs/sdks/employeepaymentmethod/README.md#create) - Create an employee bank account
 * [deleteBankAccount](docs/sdks/employeepaymentmethod/README.md#deletebankaccount) - Delete an employee bank account
 * [updateBankAccount](docs/sdks/employeepaymentmethod/README.md#updatebankaccount) - Update an employee bank account
-* [get](docs/sdks/employeepaymentmethod/README.md#get) - Get an employee's payment method
-* [update](docs/sdks/employeepaymentmethod/README.md#update) - Update an employee's payment method
+* [get](docs/sdks/employeepaymentmethod/README.md#get) - Get payment method for an employee
+* [update](docs/sdks/employeepaymentmethod/README.md#update) - Update payment method for an employee
 
 ### [EmployeePaymentMethods](docs/sdks/employeepaymentmethods/README.md)
 
@@ -400,8 +400,8 @@ run();
 
 ### [EmployeeTaxSetup](docs/sdks/employeetaxsetup/README.md)
 
-* [getFederalTaxes](docs/sdks/employeetaxsetup/README.md#getfederaltaxes) - Get an employee's federal taxes
-* [updateFederalTaxes](docs/sdks/employeetaxsetup/README.md#updatefederaltaxes) - Update an employee's federal taxes
+* [getFederalTaxes](docs/sdks/employeetaxsetup/README.md#getfederaltaxes) - Get federal taxes for an employee
+* [updateFederalTaxes](docs/sdks/employeetaxsetup/README.md#updatefederaltaxes) - Update federal taxes for an employee
 * [getStateTaxes](docs/sdks/employeetaxsetup/README.md#getstatetaxes) - Get an employee's state taxes
 * [updateStateTaxes](docs/sdks/employeetaxsetup/README.md#updatestatetaxes) - Update an employee's state taxes
 
@@ -587,7 +587,7 @@ run();
 ### [Signatories](docs/sdks/signatories/README.md)
 
 * [create](docs/sdks/signatories/README.md#create) - Create a signatory
-* [list](docs/sdks/signatories/README.md#list) - Get all company signatories
+* [list](docs/sdks/signatories/README.md#list) - Get the signatories for a company
 * [invite](docs/sdks/signatories/README.md#invite) - Invite a signatory
 * [update](docs/sdks/signatories/README.md#update) - Update a signatory
 * [delete](docs/sdks/signatories/README.md#delete) - Delete a signatory
@@ -770,9 +770,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`employeeFormsSign`](docs/sdks/employeeforms/README.md#sign) - Sign an employee form
 - [`employeePaymentMethodCreate`](docs/sdks/employeepaymentmethod/README.md#create) - Create an employee bank account
 - [`employeePaymentMethodDeleteBankAccount`](docs/sdks/employeepaymentmethod/README.md#deletebankaccount) - Delete an employee bank account
-- [`employeePaymentMethodGet`](docs/sdks/employeepaymentmethod/README.md#get) - Get an employee's payment method
+- [`employeePaymentMethodGet`](docs/sdks/employeepaymentmethod/README.md#get) - Get payment method for an employee
 - [`employeePaymentMethodsGetBankAccounts`](docs/sdks/employeepaymentmethods/README.md#getbankaccounts) - Get all employee bank accounts
-- [`employeePaymentMethodUpdate`](docs/sdks/employeepaymentmethod/README.md#update) - Update an employee's payment method
+- [`employeePaymentMethodUpdate`](docs/sdks/employeepaymentmethod/README.md#update) - Update payment method for an employee
 - [`employeePaymentMethodUpdateBankAccount`](docs/sdks/employeepaymentmethod/README.md#updatebankaccount) - Update an employee bank account
 - [`employeesCreate`](docs/sdks/employees/README.md#create) - Create an employee
 - [`employeesCreateHistorical`](docs/sdks/employees/README.md#createhistorical) - Create a historical employee
@@ -786,9 +786,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`employeesUpdate`](docs/sdks/employees/README.md#update) - Update an employee.
 - [`employeesUpdateOnboardingDocumentsConfig`](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update employee onboarding documents config
 - [`employeesUpdateOnboardingStatus`](docs/sdks/employees/README.md#updateonboardingstatus) - Update the employee's onboarding status
-- [`employeeTaxSetupGetFederalTaxes`](docs/sdks/employeetaxsetup/README.md#getfederaltaxes) - Get an employee's federal taxes
+- [`employeeTaxSetupGetFederalTaxes`](docs/sdks/employeetaxsetup/README.md#getfederaltaxes) - Get federal taxes for an employee
 - [`employeeTaxSetupGetStateTaxes`](docs/sdks/employeetaxsetup/README.md#getstatetaxes) - Get an employee's state taxes
-- [`employeeTaxSetupUpdateFederalTaxes`](docs/sdks/employeetaxsetup/README.md#updatefederaltaxes) - Update an employee's federal taxes
+- [`employeeTaxSetupUpdateFederalTaxes`](docs/sdks/employeetaxsetup/README.md#updatefederaltaxes) - Update federal taxes for an employee
 - [`employeeTaxSetupUpdateStateTaxes`](docs/sdks/employeetaxsetup/README.md#updatestatetaxes) - Update an employee's state taxes
 - [`eventsGet`](docs/sdks/events/README.md#get) - Get all events
 - [`externalPayrollsCalculateTaxes`](docs/sdks/externalpayrolls/README.md#calculatetaxes) - Get tax suggestions for an external payroll
@@ -900,7 +900,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`signatoriesCreate`](docs/sdks/signatories/README.md#create) - Create a signatory
 - [`signatoriesDelete`](docs/sdks/signatories/README.md#delete) - Delete a signatory
 - [`signatoriesInvite`](docs/sdks/signatories/README.md#invite) - Invite a signatory
-- [`signatoriesList`](docs/sdks/signatories/README.md#list) - Get all company signatories
+- [`signatoriesList`](docs/sdks/signatories/README.md#list) - Get the signatories for a company
 - [`signatoriesUpdate`](docs/sdks/signatories/README.md#update) - Update a signatory
 - [`taxRequirementsGet`](docs/sdks/taxrequirements/README.md#get) - Get State Tax Requirements
 - [`taxRequirementsGetAll`](docs/sdks/taxrequirements/README.md#getall) - Get All Tax Requirement States
@@ -1076,10 +1076,10 @@ To learn about this feature and how to get started, check
 - [`useEmployeeFormsSignMutation`](docs/sdks/employeeforms/README.md#sign) - Sign an employee form
 - [`useEmployeePaymentMethodCreateMutation`](docs/sdks/employeepaymentmethod/README.md#create) - Create an employee bank account
 - [`useEmployeePaymentMethodDeleteBankAccountMutation`](docs/sdks/employeepaymentmethod/README.md#deletebankaccount) - Delete an employee bank account
-- [`useEmployeePaymentMethodGet`](docs/sdks/employeepaymentmethod/README.md#get) - Get an employee's payment method
+- [`useEmployeePaymentMethodGet`](docs/sdks/employeepaymentmethod/README.md#get) - Get payment method for an employee
 - [`useEmployeePaymentMethodsGetBankAccounts`](docs/sdks/employeepaymentmethods/README.md#getbankaccounts) - Get all employee bank accounts
 - [`useEmployeePaymentMethodUpdateBankAccountMutation`](docs/sdks/employeepaymentmethod/README.md#updatebankaccount) - Update an employee bank account
-- [`useEmployeePaymentMethodUpdateMutation`](docs/sdks/employeepaymentmethod/README.md#update) - Update an employee's payment method
+- [`useEmployeePaymentMethodUpdateMutation`](docs/sdks/employeepaymentmethod/README.md#update) - Update payment method for an employee
 - [`useEmployeesCreateHistoricalMutation`](docs/sdks/employees/README.md#createhistorical) - Create a historical employee
 - [`useEmployeesCreateMutation`](docs/sdks/employees/README.md#create) - Create an employee
 - [`useEmployeesDeleteMutation`](docs/sdks/employees/README.md#delete) - Delete an onboarding employee
@@ -1092,9 +1092,9 @@ To learn about this feature and how to get started, check
 - [`useEmployeesUpdateMutation`](docs/sdks/employees/README.md#update) - Update an employee.
 - [`useEmployeesUpdateOnboardingDocumentsConfigMutation`](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update employee onboarding documents config
 - [`useEmployeesUpdateOnboardingStatusMutation`](docs/sdks/employees/README.md#updateonboardingstatus) - Update the employee's onboarding status
-- [`useEmployeeTaxSetupGetFederalTaxes`](docs/sdks/employeetaxsetup/README.md#getfederaltaxes) - Get an employee's federal taxes
+- [`useEmployeeTaxSetupGetFederalTaxes`](docs/sdks/employeetaxsetup/README.md#getfederaltaxes) - Get federal taxes for an employee
 - [`useEmployeeTaxSetupGetStateTaxes`](docs/sdks/employeetaxsetup/README.md#getstatetaxes) - Get an employee's state taxes
-- [`useEmployeeTaxSetupUpdateFederalTaxesMutation`](docs/sdks/employeetaxsetup/README.md#updatefederaltaxes) - Update an employee's federal taxes
+- [`useEmployeeTaxSetupUpdateFederalTaxesMutation`](docs/sdks/employeetaxsetup/README.md#updatefederaltaxes) - Update federal taxes for an employee
 - [`useEmployeeTaxSetupUpdateStateTaxesMutation`](docs/sdks/employeetaxsetup/README.md#updatestatetaxes) - Update an employee's state taxes
 - [`useEventsGet`](docs/sdks/events/README.md#get) - Get all events
 - [`useExternalPayrollsCalculateTaxes`](docs/sdks/externalpayrolls/README.md#calculatetaxes) - Get tax suggestions for an external payroll
@@ -1206,7 +1206,7 @@ To learn about this feature and how to get started, check
 - [`useSignatoriesCreateMutation`](docs/sdks/signatories/README.md#create) - Create a signatory
 - [`useSignatoriesDeleteMutation`](docs/sdks/signatories/README.md#delete) - Delete a signatory
 - [`useSignatoriesInviteMutation`](docs/sdks/signatories/README.md#invite) - Invite a signatory
-- [`useSignatoriesList`](docs/sdks/signatories/README.md#list) - Get all company signatories
+- [`useSignatoriesList`](docs/sdks/signatories/README.md#list) - Get the signatories for a company
 - [`useSignatoriesUpdateMutation`](docs/sdks/signatories/README.md#update) - Update a signatory
 - [`useTaxRequirementsGet`](docs/sdks/taxrequirements/README.md#get) - Get State Tax Requirements
 - [`useTaxRequirementsGetAll`](docs/sdks/taxrequirements/README.md#getall) - Get All Tax Requirement States
@@ -1417,9 +1417,9 @@ run();
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
 * [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 143 of 280 methods.*
-* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Applicable to 101 of 280 methods.*
+* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Applicable to 120 of 280 methods.*
 * [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 2 of 280 methods.*
-* [`PostV1CompaniesCompanyIdPeopleBatchesResponseBody`](./src/models/errors/postv1companiescompanyidpeoplebatchesresponsebody.ts): conflict - idempotency key already used. Status code `409`. Applicable to 1 of 280 methods.*
+* [`PeopleBatchConflictError`](./src/models/errors/peoplebatchconflicterror.ts): Error response when a people batch idempotency key conflict occurs. Status code `409`. Applicable to 1 of 280 methods.*
 * [`MigrationBlocker`](./src/models/errors/migrationblocker.ts): Migration blocker that blocks company migration. Status code `422`. Applicable to 1 of 280 methods.*
 * [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 1 of 280 methods.*
 * [`CompanySuspensionCreationErrors`](./src/models/errors/companysuspensioncreationerrors.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 280 methods.*

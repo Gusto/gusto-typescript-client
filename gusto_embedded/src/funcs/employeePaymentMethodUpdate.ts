@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -34,11 +38,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update an employee's payment method
+ * Update payment method for an employee
  *
  * @remarks
- * Updates an employee's payment method. Note that creating an employee
- * bank account will also update the employee's payment method.
+ * Updates the payment method for an employee. Can set to Check or Direct Deposit with split configuration.
  *
  * scope: `employee_payment_methods:write`
  */
@@ -49,6 +52,7 @@ export function employeePaymentMethodUpdate(
 ): APIPromise<
   Result<
     PutV1EmployeesEmployeeIdPaymentMethodResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -75,6 +79,7 @@ async function $do(
   [
     Result<
       PutV1EmployeesEmployeeIdPaymentMethodResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -159,7 +164,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    errorCodes: ["404", "409", "422", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -174,6 +179,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1EmployeesEmployeeIdPaymentMethodResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -187,8 +193,9 @@ async function $do(
     M.json(200, PutV1EmployeesEmployeeIdPaymentMethodResponse$inboundSchema, {
       key: "Employee-Payment-Method",
     }),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.jsonErr([409, 422], UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

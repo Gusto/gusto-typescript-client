@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Compensation,
@@ -14,35 +15,52 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompensationsCompensationIdHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompensationsCompensationIdHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1CompensationsCompensationIdHeaderXGustoAPIVersion
+>;
+
 export type GetV1CompensationsCompensationIdRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompensationsCompensationIdHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the compensation
    */
   compensationId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1CompensationsCompensationIdResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
   compensation?: Compensation | undefined;
 };
 
 /** @internal */
+export const GetV1CompensationsCompensationIdHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompensationsCompensationIdHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1CompensationsCompensationIdHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetV1CompensationsCompensationIdRequest$Outbound = {
-  compensation_id: string;
   "X-Gusto-API-Version": string;
+  compensation_id: string;
 };
 
 /** @internal */
@@ -51,12 +69,14 @@ export const GetV1CompensationsCompensationIdRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1CompensationsCompensationIdRequest
 > = z.object({
+  xGustoAPIVersion:
+    GetV1CompensationsCompensationIdHeaderXGustoAPIVersion$outboundSchema
+      .default("2025-06-15"),
   compensationId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
-    compensationId: "compensation_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    compensationId: "compensation_id",
   });
 });
 

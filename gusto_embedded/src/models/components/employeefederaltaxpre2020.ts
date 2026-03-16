@@ -21,6 +21,14 @@ export type EmployeeFederalTaxPre2020 = {
    */
   employeeUuid?: string | undefined;
   /**
+   * The internal ID of the employee.
+   */
+  employeeId?: number | undefined;
+  /**
+   * The internal ID of the company.
+   */
+  companyId?: number | undefined;
+  /**
    * The version of w4 form.
    */
   w4DataType: "pre_2020_w4";
@@ -53,6 +61,8 @@ export const EmployeeFederalTaxPre2020$inboundSchema: z.ZodType<
 > = z.object({
   version: z.string(),
   employee_uuid: z.string().optional(),
+  employee_id: z.number().int().optional(),
+  company_id: z.number().int().optional(),
   w4_data_type: z.literal("pre_2020_w4"),
   filing_status: z.nullable(z.string()).optional(),
   federal_withholding_allowance: z.nullable(z.number()).optional(),
@@ -60,6 +70,8 @@ export const EmployeeFederalTaxPre2020$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",
+    "employee_id": "employeeId",
+    "company_id": "companyId",
     "w4_data_type": "w4DataType",
     "filing_status": "filingStatus",
     "federal_withholding_allowance": "federalWithholdingAllowance",

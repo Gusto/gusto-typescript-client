@@ -18,12 +18,12 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import {
-  UnprocessableEntityErrorObject,
-  UnprocessableEntityErrorObject$inboundSchema,
-} from "../models/errors/unprocessableentityerrorobject.js";
 import {
   DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
   DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$outboundSchema,
@@ -37,7 +37,10 @@ import { Result } from "../types/fp.js";
  * Delete a signatory
  *
  * @remarks
- * Delete a company signatory.
+ * Deletes a company signatory.
+ *
+ * ## Related guides
+ * - [Signatory Events](doc:signatory-events)
  *
  * scope: `signatories:manage`
  */
@@ -48,7 +51,7 @@ export function signatoriesDelete(
 ): APIPromise<
   Result<
     DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse,
-    | UnprocessableEntityErrorObject
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -74,7 +77,7 @@ async function $do(
   [
     Result<
       DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse,
-      | UnprocessableEntityErrorObject
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -162,7 +165,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    errorCodes: ["404", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -177,7 +180,7 @@ async function $do(
 
   const [result] = await M.match<
     DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse,
-    | UnprocessableEntityErrorObject
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -191,8 +194,8 @@ async function $do(
       204,
       DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$inboundSchema,
     ),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

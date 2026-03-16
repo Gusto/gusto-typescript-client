@@ -4,7 +4,10 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -52,6 +55,10 @@ import {
   PayrollTotalsType,
   PayrollTotalsType$inboundSchema,
 } from "./payrolltotalstype.js";
+import {
+  PayrollUnprocessedEmployeeCompensationsType,
+  PayrollUnprocessedEmployeeCompensationsType$inboundSchema,
+} from "./payrollunprocessedemployeecompensationstype.js";
 import {
   PayrollWithholdingPayPeriodType,
   PayrollWithholdingPayPeriodType$inboundSchema,
@@ -178,9 +185,9 @@ export type Payroll = {
 };
 
 /**
- * A prepared payroll
+ * An unprocessed payroll with employee compensations.
  */
-export type PayrollPrepared = {
+export type PayrollUnprocessed = {
   /**
    * A timestamp that is the deadline for the payroll to be run in order for employees to be paid on time.  If payroll has not been run by the deadline, a prepare request will update both the check date and deadline to reflect the soonest employees can be paid and the deadline by which the payroll must be run in order for said check date to be met.
    */
@@ -250,7 +257,9 @@ export type PayrollPrepared = {
    * Information about the payroll's status and expected dates
    */
   payrollStatusMeta?: PayrollPayrollStatusMetaType | undefined;
-  employeeCompensations?: Array<PayrollEmployeeCompensationsType> | undefined;
+  employeeCompensations?:
+    | Array<PayrollUnprocessedEmployeeCompensationsType>
+    | undefined;
   /**
    * Only applicable when a payroll is moved to four day processing instead of fast ach.
    */
@@ -336,7 +345,26 @@ export type PayrollShowPaidTimeOff = {
   /**
    * The outstanding hours paid upon termination. This field is only applicable for termination payrolls.
    */
-  finalPayoutUnusedHoursInput?: string | undefined;
+  finalPayoutUnusedHoursInput?: string | null | undefined;
+};
+
+export type PayrollShowReimbursements = {
+  /**
+   * The dollar amount of the reimbursement for the pay period.
+   */
+  amount: string;
+  /**
+   * The description of the reimbursement. Null for unnamed reimbursements.
+   */
+  description: string | null;
+  /**
+   * The UUID of the reimbursement. Null for unnamed reimbursements. This field is only available for unprocessed payrolls.
+   */
+  uuid?: string | null | undefined;
+  /**
+   * Whether the reimbursement is recurring. This field is only available for unprocessed payrolls.
+   */
+  recurring?: boolean | undefined;
 };
 
 /**
@@ -370,25 +398,6 @@ export type PayrollShowDeductions = {
   uuid?: string | undefined;
 };
 
-export type PayrollShowReimbursements = {
-  /**
-   * The dollar amount of the reimbursement for the pay period.
-   */
-  amount: string;
-  /**
-   * The description of the reimbursement. Null for unnamed reimbursements.
-   */
-  description: string | null;
-  /**
-   * The UUID of the reimbursement. Null for unnamed reimbursements. This field is only available for unprocessed payrolls.
-   */
-  uuid?: string | null | undefined;
-  /**
-   * Whether the reimbursement is recurring. This field is only available for unprocessed payrolls.
-   */
-  recurring?: boolean | undefined;
-};
-
 export type PayrollShowTaxes = {
   name: string;
   employer: boolean;
@@ -411,10 +420,6 @@ export type EmployeeCompensations = {
    * This employee will be excluded (skipped) from payroll calculation and will not be paid for the payroll. Cancelling a payroll would reset all employees' excluded back to false.
    */
   excluded?: boolean | undefined;
-  /**
-   * The current version of this employee compensation. This field is only available for prepared payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
-   */
-  version?: string | undefined;
   /**
    * The first name of the employee. Requires `employees:read` scope.
    */
@@ -460,13 +465,17 @@ export type EmployeeCompensations = {
    */
   paidTimeOff?: Array<PayrollShowPaidTimeOff> | undefined;
   /**
-   * An array of employee deductions for the pay period.
-   */
-  deductions?: Array<PayrollShowDeductions> | undefined;
-  /**
    * An array of reimbursements for the employee.
    */
   reimbursements?: Array<PayrollShowReimbursements> | undefined;
+  /**
+   * The current version of this employee compensation. This field is only available for prepared payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
+   */
+  version?: any | undefined;
+  /**
+   * An array of employee deductions for the pay period. Only included when `deductions` is present in the `include` parameter.
+   */
+  deductions?: Array<PayrollShowDeductions> | undefined;
   /**
    * An array of employer and employee taxes for the pay period. Only included for processed or calculated payrolls when `taxes` is present in the `include` parameter.
    */
@@ -475,6 +484,7 @@ export type EmployeeCompensations = {
    * An array of employee benefits for the pay period. Benefits are only included for processed payroll when the include parameter is present.
    */
   benefits?: Array<PayrollShowBenefits> | undefined;
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 export type PayrollShow = {
@@ -581,6 +591,96 @@ export type PayrollShow = {
    */
   partnerOwnedDisbursement?: boolean | null | undefined;
   employeeCompensations?: Array<EmployeeCompensations> | undefined;
+};
+
+/**
+ * The response from preparing a payroll for update. Contains refreshed employee compensations, updated payroll dates, and version information needed for subsequent payroll updates.
+ */
+export type PayrollPrepared = {
+  /**
+   * A timestamp that is the deadline for the payroll to be run in order for employees to be paid on time.  If payroll has not been run by the deadline, a prepare request will update both the check date and deadline to reflect the soonest employees can be paid and the deadline by which the payroll must be run in order for said check date to be met.
+   */
+  payrollDeadline?: Date | undefined;
+  /**
+   * The date on which employees will be paid for the payroll.
+   */
+  checkDate?: string | undefined;
+  /**
+   * Whether or not the payroll has been successfully processed. Note that processed payrolls cannot be updated. Additionally, a payroll is not guaranteed to be processed just because the payroll deadline has passed. Late payrolls are not uncommon. Conversely, users may choose to run payroll before the payroll deadline.
+   */
+  processed?: boolean | undefined;
+  /**
+   * The date at which the payroll was processed. Null if the payroll isn't processed yet.
+   */
+  processedDate?: string | null | undefined;
+  /**
+   * A timestamp of the last valid payroll calculation. Null if there isn't a valid calculation.
+   */
+  calculatedAt?: Date | null | undefined;
+  /**
+   * The UUID of the payroll.
+   */
+  uuid?: string | undefined;
+  /**
+   * The UUID of the payroll.
+   */
+  payrollUuid?: string | undefined;
+  /**
+   * The UUID of the company for the payroll.
+   */
+  companyUuid?: string | undefined;
+  /**
+   * Indicates whether the payroll is an off-cycle payroll
+   */
+  offCycle?: boolean | undefined;
+  /**
+   * The off-cycle reason. Only included for off-cycle payrolls.
+   */
+  offCycleReason?: OffCycleReasonType | null | undefined;
+  /**
+   * Indicates whether the payroll is an auto pilot payroll
+   */
+  autoPilot?: boolean | undefined;
+  /**
+   * Indicates whether the payroll is an external payroll
+   */
+  external?: boolean | undefined;
+  /**
+   * Indicates whether the payroll is the final payroll for a terminated employee. Only included for off-cycle payrolls.
+   */
+  finalTerminationPayroll?: boolean | undefined;
+  /**
+   * The payment schedule tax rate the payroll is based on. Only included for off-cycle payrolls.
+   */
+  withholdingPayPeriod?: PayrollWithholdingPayPeriodType | undefined;
+  /**
+   * Block regular deductions and contributions for this payroll.  Only included for off-cycle payrolls.
+   */
+  skipRegularDeductions?: boolean | null | undefined;
+  /**
+   * Enable taxes to be withheld at the IRS's required rate of 22% for federal income taxes. State income taxes will be taxed at the state's supplemental tax rate. Otherwise, we'll sum the entirety of the employee's wages and withhold taxes on the entire amount at the rate for regular wages. Only included for off-cycle payrolls.
+   */
+  fixedWithholdingRate?: boolean | null | undefined;
+  payPeriod?: PayrollPayPeriodType | undefined;
+  /**
+   * Information about the payroll's status and expected dates
+   */
+  payrollStatusMeta?: PayrollPayrollStatusMetaType | undefined;
+  employeeCompensations?: Array<PayrollEmployeeCompensationsType> | undefined;
+  /**
+   * Only applicable when a payroll is moved to four day processing instead of fast ach.
+   */
+  paymentSpeedChanged?: PayrollPaymentSpeedChangedType | undefined;
+  /**
+   * Datetime for when the resource was created.
+   */
+  createdAt?: Date | undefined;
+  fixedCompensationTypes?: Array<PayrollFixedCompensationTypesType> | undefined;
+  processingRequest?: PayrollProcessingRequest | null | undefined;
+  /**
+   * Will money movement for the payroll be performed by the partner rather than by Gusto?
+   */
+  partnerOwnedDisbursement?: boolean | null | undefined;
 };
 
 /**
@@ -730,8 +830,8 @@ export function payrollFromJSON(
 }
 
 /** @internal */
-export const PayrollPrepared$inboundSchema: z.ZodType<
-  PayrollPrepared,
+export const PayrollUnprocessed$inboundSchema: z.ZodType<
+  PayrollUnprocessed,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -759,7 +859,7 @@ export const PayrollPrepared$inboundSchema: z.ZodType<
   pay_period: PayrollPayPeriodType$inboundSchema.optional(),
   payroll_status_meta: PayrollPayrollStatusMetaType$inboundSchema.optional(),
   employee_compensations: z.array(
-    PayrollEmployeeCompensationsType$inboundSchema,
+    PayrollUnprocessedEmployeeCompensationsType$inboundSchema,
   ).optional(),
   payment_speed_changed: PayrollPaymentSpeedChangedType$inboundSchema
     .optional(),
@@ -797,13 +897,13 @@ export const PayrollPrepared$inboundSchema: z.ZodType<
   });
 });
 
-export function payrollPreparedFromJSON(
+export function payrollUnprocessedFromJSON(
   jsonString: string,
-): SafeParseResult<PayrollPrepared, SDKValidationError> {
+): SafeParseResult<PayrollUnprocessed, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PayrollPrepared$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayrollPrepared' from JSON`,
+    (x) => PayrollUnprocessed$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollUnprocessed' from JSON`,
   );
 }
 
@@ -875,7 +975,7 @@ export const PayrollShowPaidTimeOff$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   hours: z.string().optional(),
-  final_payout_unused_hours_input: z.string().optional(),
+  final_payout_unused_hours_input: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "final_payout_unused_hours_input": "finalPayoutUnusedHoursInput",
@@ -889,6 +989,28 @@ export function payrollShowPaidTimeOffFromJSON(
     jsonString,
     (x) => PayrollShowPaidTimeOff$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PayrollShowPaidTimeOff' from JSON`,
+  );
+}
+
+/** @internal */
+export const PayrollShowReimbursements$inboundSchema: z.ZodType<
+  PayrollShowReimbursements,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  amount: z.string(),
+  description: z.nullable(z.string()),
+  uuid: z.nullable(z.string()).optional(),
+  recurring: z.boolean().optional(),
+});
+
+export function payrollShowReimbursementsFromJSON(
+  jsonString: string,
+): SafeParseResult<PayrollShowReimbursements, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PayrollShowReimbursements$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollShowReimbursements' from JSON`,
   );
 }
 
@@ -920,28 +1042,6 @@ export function payrollShowDeductionsFromJSON(
     jsonString,
     (x) => PayrollShowDeductions$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PayrollShowDeductions' from JSON`,
-  );
-}
-
-/** @internal */
-export const PayrollShowReimbursements$inboundSchema: z.ZodType<
-  PayrollShowReimbursements,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  amount: z.string(),
-  description: z.nullable(z.string()),
-  uuid: z.nullable(z.string()).optional(),
-  recurring: z.boolean().optional(),
-});
-
-export function payrollShowReimbursementsFromJSON(
-  jsonString: string,
-): SafeParseResult<PayrollShowReimbursements, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PayrollShowReimbursements$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayrollShowReimbursements' from JSON`,
   );
 }
 
@@ -998,33 +1098,40 @@ export const EmployeeCompensations$inboundSchema: z.ZodType<
   EmployeeCompensations,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  employee_uuid: z.string().optional(),
-  excluded: z.boolean().optional(),
-  version: z.string().optional(),
-  first_name: z.nullable(z.string()).optional(),
-  preferred_first_name: z.nullable(z.string()).optional(),
-  last_name: z.nullable(z.string()).optional(),
-  gross_pay: z.nullable(z.number()).optional(),
-  net_pay: z.nullable(z.number()).optional(),
-  check_amount: z.nullable(z.number()).optional(),
-  payment_method: z.nullable(PayrollShowPaymentMethod$inboundSchema).optional(),
-  memo: z.nullable(z.string()).optional(),
-  fixed_compensations: z.array(
-    z.lazy(() => PayrollShowFixedCompensations$inboundSchema),
-  ).optional(),
-  hourly_compensations: z.array(
-    z.lazy(() => PayrollShowHourlyCompensations$inboundSchema),
-  ).optional(),
-  paid_time_off: z.array(z.lazy(() => PayrollShowPaidTimeOff$inboundSchema))
-    .optional(),
-  deductions: z.array(z.lazy(() => PayrollShowDeductions$inboundSchema))
-    .optional(),
-  reimbursements: z.array(z.lazy(() => PayrollShowReimbursements$inboundSchema))
-    .optional(),
-  taxes: z.array(z.lazy(() => PayrollShowTaxes$inboundSchema)).optional(),
-  benefits: z.array(z.lazy(() => PayrollShowBenefits$inboundSchema)).optional(),
-}).transform((v) => {
+> = collectExtraKeys$(
+  z.object({
+    employee_uuid: z.string().optional(),
+    excluded: z.boolean().optional(),
+    first_name: z.nullable(z.string()).optional(),
+    preferred_first_name: z.nullable(z.string()).optional(),
+    last_name: z.nullable(z.string()).optional(),
+    gross_pay: z.nullable(z.number()).optional(),
+    net_pay: z.nullable(z.number()).optional(),
+    check_amount: z.nullable(z.number()).optional(),
+    payment_method: z.nullable(PayrollShowPaymentMethod$inboundSchema)
+      .optional(),
+    memo: z.nullable(z.string()).optional(),
+    fixed_compensations: z.array(
+      z.lazy(() => PayrollShowFixedCompensations$inboundSchema),
+    ).optional(),
+    hourly_compensations: z.array(
+      z.lazy(() => PayrollShowHourlyCompensations$inboundSchema),
+    ).optional(),
+    paid_time_off: z.array(z.lazy(() => PayrollShowPaidTimeOff$inboundSchema))
+      .optional(),
+    reimbursements: z.array(
+      z.lazy(() => PayrollShowReimbursements$inboundSchema),
+    ).optional(),
+    version: z.any().optional(),
+    deductions: z.array(z.lazy(() => PayrollShowDeductions$inboundSchema))
+      .optional(),
+    taxes: z.array(z.lazy(() => PayrollShowTaxes$inboundSchema)).optional(),
+    benefits: z.array(z.lazy(() => PayrollShowBenefits$inboundSchema))
+      .optional(),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",
     "first_name": "firstName",
@@ -1131,6 +1238,84 @@ export function payrollShowFromJSON(
     jsonString,
     (x) => PayrollShow$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PayrollShow' from JSON`,
+  );
+}
+
+/** @internal */
+export const PayrollPrepared$inboundSchema: z.ZodType<
+  PayrollPrepared,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  payroll_deadline: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
+  ).optional(),
+  check_date: z.string().optional(),
+  processed: z.boolean().optional(),
+  processed_date: z.nullable(z.string()).optional(),
+  calculated_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  uuid: z.string().optional(),
+  payroll_uuid: z.string().optional(),
+  company_uuid: z.string().optional(),
+  off_cycle: z.boolean().optional(),
+  off_cycle_reason: z.nullable(OffCycleReasonType$inboundSchema).optional(),
+  auto_pilot: z.boolean().optional(),
+  external: z.boolean().optional(),
+  final_termination_payroll: z.boolean().optional(),
+  withholding_pay_period: PayrollWithholdingPayPeriodType$inboundSchema
+    .optional(),
+  skip_regular_deductions: z.nullable(z.boolean()).optional(),
+  fixed_withholding_rate: z.nullable(z.boolean()).optional(),
+  pay_period: PayrollPayPeriodType$inboundSchema.optional(),
+  payroll_status_meta: PayrollPayrollStatusMetaType$inboundSchema.optional(),
+  employee_compensations: z.array(
+    PayrollEmployeeCompensationsType$inboundSchema,
+  ).optional(),
+  payment_speed_changed: PayrollPaymentSpeedChangedType$inboundSchema
+    .optional(),
+  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
+  fixed_compensation_types: z.array(
+    PayrollFixedCompensationTypesType$inboundSchema,
+  ).optional(),
+  processing_request: z.nullable(PayrollProcessingRequest$inboundSchema)
+    .optional(),
+  partner_owned_disbursement: z.nullable(z.boolean()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "payroll_deadline": "payrollDeadline",
+    "check_date": "checkDate",
+    "processed_date": "processedDate",
+    "calculated_at": "calculatedAt",
+    "payroll_uuid": "payrollUuid",
+    "company_uuid": "companyUuid",
+    "off_cycle": "offCycle",
+    "off_cycle_reason": "offCycleReason",
+    "auto_pilot": "autoPilot",
+    "final_termination_payroll": "finalTerminationPayroll",
+    "withholding_pay_period": "withholdingPayPeriod",
+    "skip_regular_deductions": "skipRegularDeductions",
+    "fixed_withholding_rate": "fixedWithholdingRate",
+    "pay_period": "payPeriod",
+    "payroll_status_meta": "payrollStatusMeta",
+    "employee_compensations": "employeeCompensations",
+    "payment_speed_changed": "paymentSpeedChanged",
+    "created_at": "createdAt",
+    "fixed_compensation_types": "fixedCompensationTypes",
+    "processing_request": "processingRequest",
+    "partner_owned_disbursement": "partnerOwnedDisbursement",
+  });
+});
+
+export function payrollPreparedFromJSON(
+  jsonString: string,
+): SafeParseResult<PayrollPrepared, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PayrollPrepared$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollPrepared' from JSON`,
   );
 }
 

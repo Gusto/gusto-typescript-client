@@ -1,7 +1,5 @@
 # EmployeePaymentMethod
 
-Example response
-
 ## Example Usage
 
 ```typescript

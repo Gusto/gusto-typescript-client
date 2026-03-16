@@ -13,8 +13,8 @@ import {
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  PayrollPrepared,
-  PayrollPrepared$inboundSchema,
+  PayrollUnprocessed,
+  PayrollUnprocessed$inboundSchema,
 } from "../components/payroll.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -129,7 +129,7 @@ export type PostV1CompaniesCompanyIdPayrollsResponse = {
   /**
    * Successful
    */
-  payrollPrepared?: PayrollPrepared | undefined;
+  payrollUnprocessed?: PayrollUnprocessed | undefined;
 };
 
 /** @internal */
@@ -256,11 +256,11 @@ export const PostV1CompaniesCompanyIdPayrollsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Payroll-Prepared": PayrollPrepared$inboundSchema.optional(),
+  "Payroll-Unprocessed": PayrollUnprocessed$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
-    "Payroll-Prepared": "payrollPrepared",
+    "Payroll-Unprocessed": "payrollUnprocessed",
   });
 });
 

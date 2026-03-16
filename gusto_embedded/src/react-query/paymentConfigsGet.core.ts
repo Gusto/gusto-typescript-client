@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { paymentConfigsGet } from "../funcs/paymentConfigsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompanyPaymentConfigsHeaderXGustoAPIVersion,
   GetV1CompanyPaymentConfigsRequest,
   GetV1CompanyPaymentConfigsResponse,
 } from "../models/operations/getv1companypaymentconfigs.js";
@@ -73,7 +73,11 @@ export function buildPaymentConfigsGetQuery(
 
 export function queryKeyPaymentConfigsGet(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompanyPaymentConfigsHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

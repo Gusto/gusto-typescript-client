@@ -4,22 +4,23 @@
 
 ```typescript
 import { PostV1CompanySignatoriesRequest } from "@gusto/embedded-api/models/operations/postv1companysignatories.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 let value: PostV1CompanySignatoriesRequest = {
   companyUuid: "<id>",
-  requestBody: {
-    ssn: "<value>",
+  signatoryCreateRequest: {
     firstName: "Bridget",
     lastName: "Parker",
-    email: "Flavio.Rippin42@yahoo.com",
     title: "<value>",
-    phone: "534.780.0624 x537",
-    birthday: "<value>",
+    phone: "(477) 342-4434 x6800",
+    birthday: new RFCDate("2026-01-20"),
+    email: "Hayley44@gmail.com",
+    ssn: "<value>",
     homeAddress: {
       street1: "<value>",
-      city: "Haleyport",
-      state: "Idaho",
-      zip: "25196",
+      city: "West Erynshire",
+      state: "Connecticut",
+      zip: "44594-7261",
     },
   },
 };
@@ -30,5 +31,5 @@ let value: PostV1CompanySignatoriesRequest = {
 | Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `companyUuid`                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [components.VersionHeader](../../models/components/versionheader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [operations.PostV1CompanySignatoriesRequestBody](../../models/operations/postv1companysignatoriesrequestbody.md)                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PostV1CompanySignatoriesHeaderXGustoAPIVersion](../../models/operations/postv1companysignatoriesheaderxgustoapiversion.md)                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `signatoryCreateRequest`                                                                                                                                                                                                     | [components.SignatoryCreateRequest](../../models/components/signatorycreaterequest.md)                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

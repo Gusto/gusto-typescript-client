@@ -20,13 +20,13 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const XGustoAPIVersion = {
+export const HeaderXGustoAPIVersion = {
   TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type XGustoAPIVersion = ClosedEnum<typeof XGustoAPIVersion>;
+export type HeaderXGustoAPIVersion = ClosedEnum<typeof HeaderXGustoAPIVersion>;
 
 export type SystemAccessTokenRequest = {
   /**
@@ -71,22 +71,22 @@ export type OauthAccessTokenRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: XGustoAPIVersion | undefined;
+  xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined;
   requestBody: RefreshTokenRequest | SystemAccessTokenRequest;
 };
 
 export type OauthAccessTokenResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Refresh access token
+   * Success
    */
   authentication?: Authentication | undefined;
 };
 
 /** @internal */
-export const XGustoAPIVersion$outboundSchema: z.ZodNativeEnum<
-  typeof XGustoAPIVersion
-> = z.nativeEnum(XGustoAPIVersion);
+export const HeaderXGustoAPIVersion$outboundSchema: z.ZodNativeEnum<
+  typeof HeaderXGustoAPIVersion
+> = z.nativeEnum(HeaderXGustoAPIVersion);
 
 /** @internal */
 export type SystemAccessTokenRequest$Outbound = {
@@ -195,7 +195,7 @@ export const OauthAccessTokenRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   OauthAccessTokenRequest
 > = z.object({
-  xGustoAPIVersion: XGustoAPIVersion$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: HeaderXGustoAPIVersion$outboundSchema.default("2025-06-15"),
   requestBody: z.union([
     z.lazy(() => RefreshTokenRequest$outboundSchema),
     z.lazy(() => SystemAccessTokenRequest$outboundSchema),

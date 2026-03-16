@@ -27,12 +27,12 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class EmployeeTaxSetup extends ClientSDK {
   /**
-   * Get an employee's federal taxes
+   * Get federal taxes for an employee
    *
    * @remarks
-   * Get attributes relevant for an employee's federal taxes.
+   * Returns federal tax information for an employee. The response structure varies based on the w4_data_type (pre_2020_w4 or rev_2020_w4).
    *
-   *  scope: `employee_federal_taxes:read`
+   * scope: `employee_federal_taxes:read`
    */
   async getFederalTaxes(
     request: GetV1EmployeesEmployeeIdFederalTaxesRequest,
@@ -46,10 +46,10 @@ export class EmployeeTaxSetup extends ClientSDK {
   }
 
   /**
-   * Update an employee's federal taxes
+   * Update federal taxes for an employee
    *
    * @remarks
-   * Update attributes relevant for an employee's federal taxes.
+   * Updates federal tax (W4) information for an employee. Only rev_2020_w4 format is accepted for updates.
    *
    * scope: `employee_federal_taxes:write`
    */

@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -21,7 +20,10 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1TokenInfoRequest } from "../models/operations/getv1tokeninfo.js";
+import {
+  GetV1TokenInfoRequest,
+  XGustoAPIVersion,
+} from "../models/operations/getv1tokeninfo.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -55,7 +57,9 @@ export type IntrospectionGetInfoQueryError =
  * Get info about the current access token
  *
  * @remarks
- * Returns scope and resource information associated with the current access token.
+ * Returns scope and resource information associated with the current access token. Use this endpoint to verify the following for the current access token:
+ * * Resource (company, employee, contractor, or application) and resource owner
+ * * Access level
  */
 export function useIntrospectionGetInfo(
   request: GetV1TokenInfoRequest,
@@ -82,7 +86,9 @@ export function useIntrospectionGetInfo(
  * Get info about the current access token
  *
  * @remarks
- * Returns scope and resource information associated with the current access token.
+ * Returns scope and resource information associated with the current access token. Use this endpoint to verify the following for the current access token:
+ * * Resource (company, employee, contractor, or application) and resource owner
+ * * Access level
  */
 export function useIntrospectionGetInfoSuspense(
   request: GetV1TokenInfoRequest,
@@ -107,7 +113,9 @@ export function useIntrospectionGetInfoSuspense(
 
 export function setIntrospectionGetInfoData(
   client: QueryClient,
-  queryKeyBase: [parameters: { xGustoAPIVersion?: VersionHeader | undefined }],
+  queryKeyBase: [
+    parameters: { xGustoAPIVersion?: XGustoAPIVersion | undefined },
+  ],
   data: IntrospectionGetInfoQueryData,
 ): IntrospectionGetInfoQueryData | undefined {
   const key = queryKeyIntrospectionGetInfo(...queryKeyBase);
@@ -118,7 +126,7 @@ export function setIntrospectionGetInfoData(
 export function invalidateIntrospectionGetInfo(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
-    [parameters: { xGustoAPIVersion?: VersionHeader | undefined }]
+    [parameters: { xGustoAPIVersion?: XGustoAPIVersion | undefined }]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
 ): Promise<void> {

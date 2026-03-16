@@ -5,53 +5,91 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import { PayPeriod, PayPeriod$inboundSchema } from "../components/payperiod.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion>;
+
+/**
+ * Comma-separated list of payroll types to include (regular, transition). Defaults to regular only.
+ */
+export const PayrollTypes = {
+  Regular: "regular",
+  Transition: "transition",
+  RegularTransition: "regular,transition",
+} as const;
+/**
+ * Comma-separated list of payroll types to include (regular, transition). Defaults to regular only.
+ */
+export type PayrollTypes = ClosedEnum<typeof PayrollTypes>;
+
 export type GetV1CompaniesCompanyIdPayPeriodsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
   companyId: string;
-  startDate?: string | undefined;
   /**
-   * If left empty, defaults to today's date.
+   * Start date (YYYY-MM-DD) for the pay periods range. Defaults to 6 months ago.
    */
-  endDate?: string | undefined;
+  startDate?: RFCDate | undefined;
   /**
-   * regular and/or transition. Multiple options are comma separated. The default is regular pay periods if nothing is passed in.
+   * End date (YYYY-MM-DD) for the pay periods range. Cannot be more than 3 months in the future. Defaults to today.
    */
-  payrollTypes?: string | undefined;
+  endDate?: RFCDate | undefined;
   /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   * Comma-separated list of payroll types to include (regular, transition). Defaults to regular only.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  payrollTypes?: PayrollTypes | undefined;
 };
 
 export type GetV1CompaniesCompanyIdPayPeriodsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
-  payPeriodList?: Array<PayPeriod> | undefined;
+  payPeriods?: Array<PayPeriod> | undefined;
 };
 
 /** @internal */
+export const GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion);
+
+/** @internal */
+export const PayrollTypes$outboundSchema: z.ZodNativeEnum<typeof PayrollTypes> =
+  z.nativeEnum(PayrollTypes);
+
+/** @internal */
 export type GetV1CompaniesCompanyIdPayPeriodsRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_id: string;
   start_date?: string | undefined;
   end_date?: string | undefined;
   payroll_types?: string | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -60,18 +98,20 @@ export const GetV1CompaniesCompanyIdPayPeriodsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1CompaniesCompanyIdPayPeriodsRequest
 > = z.object({
+  xGustoAPIVersion:
+    GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion$outboundSchema
+      .default("2025-06-15"),
   companyId: z.string(),
-  startDate: z.string().optional(),
-  endDate: z.string().optional(),
-  payrollTypes: z.string().optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  startDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  endDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  payrollTypes: PayrollTypes$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
+    xGustoAPIVersion: "X-Gusto-API-Version",
     companyId: "company_id",
     startDate: "start_date",
     endDate: "end_date",
     payrollTypes: "payroll_types",
-    xGustoAPIVersion: "X-Gusto-API-Version",
   });
 });
 
@@ -93,11 +133,11 @@ export const GetV1CompaniesCompanyIdPayPeriodsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Pay-Period-List": z.array(PayPeriod$inboundSchema).optional(),
+  "Pay-Periods": z.array(PayPeriod$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
-    "Pay-Period-List": "payPeriodList",
+    "Pay-Periods": "payPeriods",
   });
 });
 

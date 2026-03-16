@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -33,7 +37,10 @@ import { Result } from "../types/fp.js";
  * Get a company's payment configs
  *
  * @remarks
- * Get payment speed configurations for the company and fast payment limit (1-day is only applicable to partners that opt in).
+ * Get payment speed configurations for the company: payment speed (1-day, 2-day, or 4-day ACH), fast payment limit, partner-owned disbursement setting, and earned fast ACH blockers when applicable. 1-day is only available to partners that opt in.
+ *
+ * ### Related guides
+ * - [Payroll Processing Speeds](doc:2-day-vs-4-day)
  *
  * scope: `company_payment_configs:read`
  */
@@ -44,6 +51,7 @@ export function paymentConfigsGet(
 ): APIPromise<
   Result<
     GetV1CompanyPaymentConfigsResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -69,6 +77,7 @@ async function $do(
   [
     Result<
       GetV1CompanyPaymentConfigsResponse,
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -165,6 +174,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1CompanyPaymentConfigsResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -177,7 +187,8 @@ async function $do(
     M.json(200, GetV1CompanyPaymentConfigsResponse$inboundSchema, {
       key: "Payment-Configs",
     }),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

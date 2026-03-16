@@ -1,11 +1,11 @@
 # PaymentUnit
 
-The unit accompanying the compensation rate. If the employee is an owner, rate should be 'Paycheck'.
+The unit accompanying the compensation rate. If the employee is an owner, rate should be `Paycheck`.
 
 ## Example Usage
 
 ```typescript
-import { PaymentUnit } from "@gusto/embedded-api/models/operations/postv1compensationscompensationid.js";
+import { PaymentUnit } from "@gusto/embedded-api/models/operations/postv1companiescompanyidpeoplebatches.js";
 
 let value: PaymentUnit = "Year";
 ```

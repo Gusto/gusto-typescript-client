@@ -33,12 +33,12 @@ export const ProcessingStatuses = {
 } as const;
 export type ProcessingStatuses = ClosedEnum<typeof ProcessingStatuses>;
 
-export const PayrollTypes = {
+export const QueryParamPayrollTypes = {
   Regular: "regular",
   OffCycle: "off_cycle",
   External: "external",
 } as const;
-export type PayrollTypes = ClosedEnum<typeof PayrollTypes>;
+export type QueryParamPayrollTypes = ClosedEnum<typeof QueryParamPayrollTypes>;
 
 export const GetV1CompaniesCompanyIdPayrollsQueryParamInclude = {
   Taxes: "taxes",
@@ -92,7 +92,7 @@ export type GetV1CompaniesCompanyIdPayrollsRequest = {
   /**
    * Whether to include regular and/or off_cycle payrolls in the response, defaults to regular, for multiple attributes comma separate the values, i.e. `?payroll_types=regular,off_cycle`
    */
-  payrollTypes?: Array<PayrollTypes> | undefined;
+  payrollTypes?: Array<QueryParamPayrollTypes> | undefined;
   /**
    * Whether to return processed or unprocessed payrolls
    */
@@ -151,8 +151,9 @@ export const ProcessingStatuses$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ProcessingStatuses);
 
 /** @internal */
-export const PayrollTypes$outboundSchema: z.ZodNativeEnum<typeof PayrollTypes> =
-  z.nativeEnum(PayrollTypes);
+export const QueryParamPayrollTypes$outboundSchema: z.ZodNativeEnum<
+  typeof QueryParamPayrollTypes
+> = z.nativeEnum(QueryParamPayrollTypes);
 
 /** @internal */
 export const GetV1CompaniesCompanyIdPayrollsQueryParamInclude$outboundSchema:
@@ -195,7 +196,7 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$outboundSchema: z.ZodType<
     GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema
       .default("2025-06-15"),
   processingStatuses: z.array(ProcessingStatuses$outboundSchema).optional(),
-  payrollTypes: z.array(PayrollTypes$outboundSchema).optional(),
+  payrollTypes: z.array(QueryParamPayrollTypes$outboundSchema).optional(),
   processed: z.boolean().optional(),
   includeOffCycle: z.boolean().optional(),
   include: z.array(

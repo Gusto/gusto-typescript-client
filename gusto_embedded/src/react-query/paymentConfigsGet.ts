@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompanyPaymentConfigsRequest } from "../models/operations/getv1companypaymentconfigs.js";
+import {
+  GetV1CompanyPaymentConfigsHeaderXGustoAPIVersion,
+  GetV1CompanyPaymentConfigsRequest,
+} from "../models/operations/getv1companypaymentconfigs.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type PaymentConfigsGetQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -55,7 +59,10 @@ export type PaymentConfigsGetQueryError =
  * Get a company's payment configs
  *
  * @remarks
- * Get payment speed configurations for the company and fast payment limit (1-day is only applicable to partners that opt in).
+ * Get payment speed configurations for the company: payment speed (1-day, 2-day, or 4-day ACH), fast payment limit, partner-owned disbursement setting, and earned fast ACH blockers when applicable. 1-day is only available to partners that opt in.
+ *
+ * ### Related guides
+ * - [Payroll Processing Speeds](doc:2-day-vs-4-day)
  *
  * scope: `company_payment_configs:read`
  */
@@ -81,7 +88,10 @@ export function usePaymentConfigsGet(
  * Get a company's payment configs
  *
  * @remarks
- * Get payment speed configurations for the company and fast payment limit (1-day is only applicable to partners that opt in).
+ * Get payment speed configurations for the company: payment speed (1-day, 2-day, or 4-day ACH), fast payment limit, partner-owned disbursement setting, and earned fast ACH blockers when applicable. 1-day is only available to partners that opt in.
+ *
+ * ### Related guides
+ * - [Payroll Processing Speeds](doc:2-day-vs-4-day)
  *
  * scope: `company_payment_configs:read`
  */
@@ -110,7 +120,11 @@ export function setPaymentConfigsGetData(
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompanyPaymentConfigsHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: PaymentConfigsGetQueryData,
 ): PaymentConfigsGetQueryData | undefined {
@@ -124,7 +138,11 @@ export function invalidatePaymentConfigsGet(
   queryKeyBase: TupleToPrefixes<
     [
       companyUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompanyPaymentConfigsHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

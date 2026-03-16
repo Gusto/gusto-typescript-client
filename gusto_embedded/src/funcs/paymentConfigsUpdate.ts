@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -37,7 +41,13 @@ import { Result } from "../types/fp.js";
  * Update a company's payment configs
  *
  * @remarks
- * Update payment speed and fast payment limit for a company. At least one of `payment_speed` or `fast_payment_limit` parameters is required. 1-day option is only applicable to partners that opt in.
+ * Update payment speed, fast payment limit, and/or partner-owned disbursement for a company.
+ *
+ * At least one of `payment_speed`, `fast_payment_limit`, or `partner_owned_disbursement` is required.
+ * 1-day payment speed is only applicable to partners that opt in. 1-day is not allowed when AutoPilot is enabled.
+ *
+ * ### Related guides
+ * - [Payroll Processing Speeds](doc:2-day-vs-4-day)
  *
  * scope: `company_payment_configs:write`
  */
@@ -48,6 +58,7 @@ export function paymentConfigsUpdate(
 ): APIPromise<
   Result<
     PutV1CompanyPaymentConfigsResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -74,6 +85,7 @@ async function $do(
   [
     Result<
       PutV1CompanyPaymentConfigsResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -96,7 +108,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload["Payment-Configs-Update-Request"], {
+    explode: true,
+  });
 
   const pathParams = {
     company_uuid: encodeSimple("company_uuid", payload.company_uuid, {
@@ -172,6 +186,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1CompanyPaymentConfigsResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -185,8 +200,9 @@ async function $do(
     M.json(200, PutV1CompanyPaymentConfigsResponse$inboundSchema, {
       key: "Payment-Configs",
     }),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

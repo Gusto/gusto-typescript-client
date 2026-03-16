@@ -458,20 +458,20 @@ import {
 
 ## verify
 
-Verify a company bank account by confirming the two micro-deposits sent to the bank account. Note that the order of the two deposits specified in request parameters does not matter. There's a maximum of 5 verification attempts, after which we will automatically initiate a new set of micro-deposits and require the bank account to be verified with the new micro-deposits.
+Verify a company bank account by confirming the two micro-deposits sent to the bank account.
+
+Note that the order of the two deposits specified in request parameters does not matter.
+There's a maximum of 5 verification attempts, after which we will automatically initiate a new set of micro-deposits and require the bank account to be verified with the new micro-deposits.
 
 ### Bank account verification in demo
+In the demo environment, use the `POST /v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/send_test_deposits` endpoint to simulate the micro-deposits transfer and return the two amounts in the response. You can call this endpoint as many times as you wish to retrieve the values of the two micro-deposits.
 
-We provide the endpoint `POST '/v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/send_test_deposits'` to facilitate bank account verification in the demo environment. This endpoint simulates the micro-deposits transfer and returns them in the response. You can call this endpoint as many times as you wish to retrieve the values of the two micro deposits.
+### Webhooks
+- `company.bank_account.verified`: Fires when the company bank account is successfully verified.
 
-```
-  POST '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/bank_accounts/ade55e57-4800-4059-9ecd-fa29cfeb6dd2/send_test_deposits'
-
-  {
-    "deposit_1": 0.02,
-    "deposit_2": 0.42
-  }
-```
+### Related guides
+- [Manage company bank accounts](doc:manage-company-bank-accounts)
+- [Bank Account Events](doc:bank-account-events)
 
 scope: `company_bank_accounts:write`
 
@@ -487,9 +487,9 @@ const gustoEmbedded = new GustoEmbedded({
 
 async function run() {
   const result = await gustoEmbedded.bankAccounts.verify({
-    bankAccountUuid: "<id>",
     companyId: "<id>",
-    requestBody: {
+    bankAccountUuid: "<id>",
+    companyBankAccountVerifyRequest: {
       deposit1: 8299.3,
       deposit2: 7367.9,
     },
@@ -517,9 +517,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 
 async function run() {
   const res = await bankAccountsVerify(gustoEmbedded, {
-    bankAccountUuid: "<id>",
     companyId: "<id>",
-    requestBody: {
+    bankAccountUuid: "<id>",
+    companyBankAccountVerifyRequest: {
       deposit1: 8299.3,
       deposit2: 7367.9,
     },
@@ -563,9 +563,9 @@ const gustoEmbedded = new GustoEmbedded({
 
 async function run() {
   const result = await gustoEmbedded.bankAccounts.verify({
-    bankAccountUuid: "<id>",
     companyId: "<id>",
-    requestBody: {
+    bankAccountUuid: "<id>",
+    companyBankAccountVerifyRequest: {
       deposit1: 0.02,
       deposit2: 0.42,
     },
@@ -593,9 +593,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 
 async function run() {
   const res = await bankAccountsVerify(gustoEmbedded, {
-    bankAccountUuid: "<id>",
     companyId: "<id>",
-    requestBody: {
+    bankAccountUuid: "<id>",
+    companyBankAccountVerifyRequest: {
       deposit1: 0.02,
       deposit2: 0.42,
     },
@@ -639,9 +639,9 @@ const gustoEmbedded = new GustoEmbedded({
 
 async function run() {
   const result = await gustoEmbedded.bankAccounts.verify({
-    bankAccountUuid: "<id>",
     companyId: "<id>",
-    requestBody: {
+    bankAccountUuid: "<id>",
+    companyBankAccountVerifyRequest: {
       deposit1: 8299.3,
       deposit2: 7367.9,
     },
@@ -669,9 +669,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 
 async function run() {
   const res = await bankAccountsVerify(gustoEmbedded, {
-    bankAccountUuid: "<id>",
     companyId: "<id>",
-    requestBody: {
+    bankAccountUuid: "<id>",
+    companyBankAccountVerifyRequest: {
       deposit1: 8299.3,
       deposit2: 7367.9,
     },
@@ -715,9 +715,9 @@ const gustoEmbedded = new GustoEmbedded({
 
 async function run() {
   const result = await gustoEmbedded.bankAccounts.verify({
-    bankAccountUuid: "<id>",
     companyId: "<id>",
-    requestBody: {
+    bankAccountUuid: "<id>",
+    companyBankAccountVerifyRequest: {
       deposit1: 8299.3,
       deposit2: 7367.9,
     },
@@ -745,9 +745,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 
 async function run() {
   const res = await bankAccountsVerify(gustoEmbedded, {
-    bankAccountUuid: "<id>",
     companyId: "<id>",
-    requestBody: {
+    bankAccountUuid: "<id>",
+    companyBankAccountVerifyRequest: {
       deposit1: 8299.3,
       deposit2: 7367.9,
     },
@@ -797,6 +797,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 

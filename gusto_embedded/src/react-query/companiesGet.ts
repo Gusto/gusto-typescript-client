@@ -22,8 +22,8 @@ import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  GetV1CompaniesHeaderXGustoAPIVersion,
   GetV1CompaniesRequest,
-  HeaderXGustoAPIVersion,
 } from "../models/operations/getv1companies.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -116,7 +116,9 @@ export function setCompaniesGetData(
   client: QueryClient,
   queryKeyBase: [
     companyId: string,
-    parameters: { xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined },
+    parameters: {
+      xGustoAPIVersion?: GetV1CompaniesHeaderXGustoAPIVersion | undefined;
+    },
   ],
   data: CompaniesGetQueryData,
 ): CompaniesGetQueryData | undefined {
@@ -130,7 +132,9 @@ export function invalidateCompaniesGet(
   queryKeyBase: TupleToPrefixes<
     [
       companyId: string,
-      parameters: { xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined },
+      parameters: {
+        xGustoAPIVersion?: GetV1CompaniesHeaderXGustoAPIVersion | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

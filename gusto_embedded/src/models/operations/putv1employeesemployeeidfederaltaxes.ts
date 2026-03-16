@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeFederalTax,
@@ -14,66 +15,136 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion =
+  ClosedEnum<typeof PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion>;
+
+/**
+ * Determines which tax return form an individual will use. One of: Single, Married, Head of Household, Exempt from withholding.
+ */
+export const FilingStatus = {
+  Single: "Single",
+  Married: "Married",
+  HeadOfHousehold: "Head of Household",
+  ExemptFromWithholding: "Exempt from withholding",
+} as const;
+/**
+ * Determines which tax return form an individual will use. One of: Single, Married, Head of Household, Exempt from withholding.
+ */
+export type FilingStatus = ClosedEnum<typeof FilingStatus>;
+
+/**
+ * The version of the W4 form. Only rev_2020_w4 is accepted for updates.
+ */
+export const W4DataType = {
+  Rev2020W4: "rev_2020_w4",
+} as const;
+/**
+ * The version of the W4 form. Only rev_2020_w4 is accepted for updates.
+ */
+export type W4DataType = ClosedEnum<typeof W4DataType>;
 
 export type PutV1EmployeesEmployeeIdFederalTaxesRequestBody = {
   /**
    * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
    */
   version: string;
-  filingStatus: string;
-  extraWithholding?: string | null | undefined;
-  twoJobs?: boolean | null | undefined;
-  dependentsAmount?: string | undefined;
-  otherIncome?: string | undefined;
-  deductions?: string | undefined;
-  w4DataType: string;
   /**
-   * Only applicable when w4_data_type is 'pre_2020_w4'.
+   * Determines which tax return form an individual will use. One of: Single, Married, Head of Household, Exempt from withholding.
+   */
+  filingStatus: FilingStatus;
+  /**
+   * Additional amount to be withheld from each paycheck.
+   */
+  extraWithholding?: number | undefined;
+  /**
+   * If there are only two jobs (e.g., you and your spouse each have a job), set to true.
+   */
+  twoJobs?: boolean | undefined;
+  /**
+   * Amount for dependents; a dependent entitles the taxpayer to claim a dependency exemption.
+   */
+  dependentsAmount?: number | undefined;
+  /**
+   * Other income amount.
+   */
+  otherIncome?: number | undefined;
+  /**
+   * Deductions other than the standard deduction to reduce withholding.
+   */
+  deductions?: number | undefined;
+  /**
+   * The version of the W4 form. Only rev_2020_w4 is accepted for updates.
+   */
+  w4DataType: W4DataType;
+  /**
+   * Only applicable when w4_data_type is 'pre_2020_w4' (pre-2020 W4 forms are deprecated for updates).
    */
   federalWithholdingAllowance?: number | undefined;
   /**
-   * Only applicable when w4_data_type is 'pre_2020_w4'.
+   * Only applicable when w4_data_type is 'pre_2020_w4' (pre-2020 W4 forms are deprecated for updates).
    */
-  additionalWithholding?: string | undefined;
+  additionalWithholding?: number | undefined;
 };
 
 export type PutV1EmployeesEmployeeIdFederalTaxesRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the employee
    */
   employeeUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PutV1EmployeesEmployeeIdFederalTaxesRequestBody;
 };
 
 export type PutV1EmployeesEmployeeIdFederalTaxesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
   employeeFederalTax?: EmployeeFederalTax | undefined;
 };
 
 /** @internal */
+export const PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion
+  > = z.nativeEnum(PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion);
+
+/** @internal */
+export const FilingStatus$outboundSchema: z.ZodNativeEnum<typeof FilingStatus> =
+  z.nativeEnum(FilingStatus);
+
+/** @internal */
+export const W4DataType$outboundSchema: z.ZodNativeEnum<typeof W4DataType> = z
+  .nativeEnum(W4DataType);
+
+/** @internal */
 export type PutV1EmployeesEmployeeIdFederalTaxesRequestBody$Outbound = {
   version: string;
   filing_status: string;
-  extra_withholding?: string | null | undefined;
-  two_jobs?: boolean | null | undefined;
-  dependents_amount?: string | undefined;
-  other_income?: string | undefined;
-  deductions?: string | undefined;
+  extra_withholding?: number | undefined;
+  two_jobs?: boolean | undefined;
+  dependents_amount?: number | undefined;
+  other_income?: number | undefined;
+  deductions?: number | undefined;
   w4_data_type: string;
   federal_withholding_allowance?: number | undefined;
-  additional_withholding?: string | undefined;
+  additional_withholding?: number | undefined;
 };
 
 /** @internal */
@@ -84,15 +155,15 @@ export const PutV1EmployeesEmployeeIdFederalTaxesRequestBody$outboundSchema:
     PutV1EmployeesEmployeeIdFederalTaxesRequestBody
   > = z.object({
     version: z.string(),
-    filingStatus: z.string(),
-    extraWithholding: z.nullable(z.string()).optional(),
-    twoJobs: z.nullable(z.boolean()).optional(),
-    dependentsAmount: z.string().optional(),
-    otherIncome: z.string().optional(),
-    deductions: z.string().optional(),
-    w4DataType: z.string(),
+    filingStatus: FilingStatus$outboundSchema,
+    extraWithholding: z.number().optional(),
+    twoJobs: z.boolean().optional(),
+    dependentsAmount: z.number().optional(),
+    otherIncome: z.number().optional(),
+    deductions: z.number().optional(),
+    w4DataType: W4DataType$outboundSchema,
     federalWithholdingAllowance: z.number().int().optional(),
-    additionalWithholding: z.string().optional(),
+    additionalWithholding: z.number().optional(),
   }).transform((v) => {
     return remap$(v, {
       filingStatus: "filing_status",
@@ -119,8 +190,8 @@ export function putV1EmployeesEmployeeIdFederalTaxesRequestBodyToJSON(
 
 /** @internal */
 export type PutV1EmployeesEmployeeIdFederalTaxesRequest$Outbound = {
-  employee_uuid: string;
   "X-Gusto-API-Version": string;
+  employee_uuid: string;
   RequestBody: PutV1EmployeesEmployeeIdFederalTaxesRequestBody$Outbound;
 };
 
@@ -131,15 +202,17 @@ export const PutV1EmployeesEmployeeIdFederalTaxesRequest$outboundSchema:
     z.ZodTypeDef,
     PutV1EmployeesEmployeeIdFederalTaxesRequest
   > = z.object({
+    xGustoAPIVersion:
+      PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     employeeUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdFederalTaxesRequestBody$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      employeeUuid: "employee_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      employeeUuid: "employee_uuid",
       requestBody: "RequestBody",
     });
   });
