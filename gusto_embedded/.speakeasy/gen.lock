@@ -1,20 +1,20 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: dcc0ea012a4a1d6282002a858cf29abe
+  docChecksum: ad2e77a4fbf928c4afc33228d159a99b
   docVersion: "2025-06-15"
-  speakeasyVersion: 1.755.1
-  generationVersion: 2.865.2
-  releaseVersion: 0.12.3
-  configChecksum: 246b09515da537a388c61c894605a072
+  speakeasyVersion: 1.757.0
+  generationVersion: 2.866.0
+  releaseVersion: 0.12.4
+  configChecksum: 1504ee2d044bee416442443f6477c0d3
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://github.com/Gusto/gusto-typescript-client
   published: true
 persistentEdits:
-  generation_id: 9af395ac-3b52-4d75-ab34-0daa88d19a9a
-  pristine_commit_hash: 44bcf4683ec6eaea2d414320a401f560440a4ce1
-  pristine_tree_hash: bd97f68d955cc112b30e59088d565c85fe53250d
+  generation_id: 06073eea-8b66-457f-a320-47f72d337d29
+  pristine_commit_hash: 551b16538a0e6957f647bce112fba393f92e7c9d
+  pristine_tree_hash: ac9b64a9c2a71c591921fbdf95b15b8327c55231
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -1923,8 +1923,8 @@ trackedFiles:
     pristine_git_object: 3187fc23316b2df155f1d1fc0eb43242510ea818
   docs/models/components/signatoryupdaterequest.md:
     id: 7c5a6532f843
-    last_write_checksum: sha1:4933fb2c02ba8eb9a057666fee2b838e205794d3
-    pristine_git_object: 8dc15061fe363dd58a35ae29298a2b319c01588b
+    last_write_checksum: sha1:791aae3befebf69dee59e83677dc2ae3d63f417f
+    pristine_git_object: d3430f0bebdfe52107c7480486625f1a1effddd5
   docs/models/components/signatoryupdaterequesthomeaddress.md:
     id: 397dc426dbdb
     last_write_checksum: sha1:786d557559a8a39d0f38b6806b5a43a0a8f7d42c
@@ -6299,12 +6299,12 @@ trackedFiles:
     pristine_git_object: 49ec91383b0e63e6ed79f53f5bd1b278a8ef84eb
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:e6a369e977acad6b2f0ac2c70229ff9daacbe376
-    pristine_git_object: 5df8469f6a91f6c43e402ca97f4a4e35ecc44854
+    last_write_checksum: sha1:606f83947c30908db261f56b1a547ebbab8b44c7
+    pristine_git_object: 686c77f58e33e402710a693498416c5dea4cd5fc
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:41ab7adeb26019ccd179682aa9b87be00b47c206
-    pristine_git_object: b66d55270bbd820a445d8cfa14b7a1d45e7d9197
+    last_write_checksum: sha1:e494d5f955fdb0212ddefc76413d547c3562ee3a
+    pristine_git_object: 6bcdfc0530849ed7bb04d554e076db5b435cf63d
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:3a89ce46214a969ac38e8f08dfbe693a1a2416f7
@@ -7447,8 +7447,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:3e76e824676ae36bed94d5b9ff43b20ae96aaee2
-    pristine_git_object: 3da47ccee204e664bc49b194cfa46c3df391b5d2
+    last_write_checksum: sha1:7d04edcdab7644fb61fe24ea71bc648d16983f38
+    pristine_git_object: 012eb757f4aad36eed147d5b9de0885caa0adf26
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -8211,8 +8211,8 @@ trackedFiles:
     pristine_git_object: 8d6cdf947fc6ec5d555c879d1854048c2ec0ea14
   src/models/components/signatoryupdaterequest.ts:
     id: f9cf7ab56952
-    last_write_checksum: sha1:afc060cf5b01e41bc07f6730348974a35fc63e74
-    pristine_git_object: 517fd75733adaf9db2a2a02e9d41221938591982
+    last_write_checksum: sha1:2d63906092b22405a2a02d96766a51c4d0d680c8
+    pristine_git_object: 0ebab4535a308cbfdefba3d8a223b0428c342b40
   src/models/components/supportedbenefit.ts:
     id: 9ff2460a8d7c
     last_write_checksum: sha1:8e3a314d018eb678220fa884d9450fbeb7a32764
@@ -20442,7 +20442,7 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `gustoembedded.employeeTaxSetup.updateFederalTaxes()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed**\n  *  `error` **Changed**\n* `gustoembedded.jobsAndCompensations.updateCompensation()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.title` **Added**\n  *  `error.status[404]` **Added**\n* `gustoembedded.peopleBatches.postV1CompaniesCompanyIdPeopleBatches()`: \n  *  `request.requestBody.batch[].compensation.effectiveDate` **Removed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.httpMeta` **Removed** (Breaking ⚠️)\n* `gustoembedded.signatories.invite()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.signatories.update()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `gustoembedded.signatories.delete()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error` **Changed** (Breaking ⚠️)\n* `gustoembedded.bankAccounts.create()`:  `response.status[200]` **Added** (Breaking ⚠️)\n* `gustoembedded.bankAccounts.verify()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.paymentConfigs.get()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.paymentSpeed` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.employeePaymentMethod.update()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `gustoembedded.paySchedules.getPayPeriods()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `gustoembedded.payrolls.getBlockers()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.[]` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.payrolls.prepare()`:  `response.employeeCompensations[]` **Changed** (Breaking ⚠️)\n* `gustoembedded.payrolls.update()`: \n  *  `request.payrollUpdate.employeeCompensations[].paidTimeOff[].finalPayoutUnusedHoursInput` **Changed**\n  *  `response.employeeCompensations[]` **Changed** (Breaking ⚠️)\n* `gustoembedded.payrolls.get()`:  `response.employeeCompensations[]` **Changed** (Breaking ⚠️)\n* `gustoembedded.payrolls.createOffCycle()`:  `response.employeeCompensations[]` **Changed** (Breaking ⚠️)\n* `gustoembedded.jobsAndCompensations.createCompensation()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.title` **Added**\n  *  `error.status[404]` **Added**\n* `gustoembedded.paymentConfigs.update()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.paymentSpeed` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.signatories.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.employeePaymentMethod.get()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.jobsAndCompensations.deleteCompensation()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.jobsAndCompensations.createJob()`:  `response.compensations[].title` **Added**\n* `gustoembedded.employees.update()`:  `response.jobs[].compensations[].title` **Added**\n* `gustoembedded.jobsAndCompensations.getJob()`:  `response.compensations[].title` **Added**\n* `gustoembedded.jobsAndCompensations.update()`:  `response.compensations[].title` **Added**\n* `gustoembedded.jobsAndCompensations.getCompensations()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.[].title` **Added**\n  *  `error.status[404]` **Added**\n* `gustoembedded.jobsAndCompensations.getCompensation()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.title` **Added**\n  *  `error.status[404]` **Added**\n* `gustoembedded.employeeTaxSetup.getFederalTaxes()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.historicalEmployees.update()`:  `response.jobs[].compensations[].title` **Added**\n* `gustoembedded.jobsAndCompensations.getJobs()`:  `response.[].compensations[].title` **Added**\n* `gustoembedded.introspection.getInfo()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response` **Changed**\n* `gustoembedded.employees.get()`:  `response.jobs[].compensations[].title` **Added**\n* `gustoembedded.employees.createHistorical()`:  `response.jobs[].compensations[].title` **Added**\n* `gustoembedded.employees.create()`:  `response.jobs[].compensations[].title` **Added**\n* `gustoembedded.employees.list()`:  `response.[].jobs[].compensations[].title` **Added**\n* `gustoembedded.companyBenefits.update()`: \n  *  `request.requestBody` **Changed**\n* `gustoembedded.signatories.list()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.peopleBatches.getV1PeopleBatchesPeopleBatchUuid()`:  `response` **Changed**\n"
+releaseNotes: "## Typescript SDK Changes:\n* `gustoembedded.signatories.update()`: \n  *  `request.signatoryUpdateRequest.ssn` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
