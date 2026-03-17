@@ -28,6 +28,10 @@ export type SignatoryUpdateRequest = {
   title?: string | undefined;
   phone?: string | undefined;
   birthday?: RFCDate | undefined;
+  /**
+   * The signatory's SSN.
+   */
+  ssn?: string | undefined;
   homeAddress?: SignatoryUpdateRequestHomeAddress | undefined;
 };
 
@@ -78,6 +82,7 @@ export type SignatoryUpdateRequest$Outbound = {
   title?: string | undefined;
   phone?: string | undefined;
   birthday?: string | undefined;
+  ssn?: string | undefined;
   home_address?: SignatoryUpdateRequestHomeAddress$Outbound | undefined;
 };
 
@@ -93,6 +98,7 @@ export const SignatoryUpdateRequest$outboundSchema: z.ZodType<
   title: z.string().optional(),
   phone: z.string().optional(),
   birthday: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  ssn: z.string().optional(),
   homeAddress: z.lazy(() => SignatoryUpdateRequestHomeAddress$outboundSchema)
     .optional(),
 }).transform((v) => {
