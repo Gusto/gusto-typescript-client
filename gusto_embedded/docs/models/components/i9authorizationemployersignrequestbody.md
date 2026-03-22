@@ -1,14 +1,16 @@
-# PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody
+# I9AuthorizationEmployerSignRequestBody
+
+Request body for employer signing an employee's Form I-9.
 
 ## Example Usage
 
 ```typescript
-import { PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody } from "@gusto/embedded-api/models/operations/putv1employeesemployeeidi9authorizationemployersign.js";
+import { I9AuthorizationEmployerSignRequestBody } from "@gusto/embedded-api/models/components/i9authorizationemployersignrequestbody.js";
 
-let value: PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody = {
+let value: I9AuthorizationEmployerSignRequestBody = {
   signatureText: "<value>",
   signerTitle: "<value>",
-  agree: true,
+  agree: false,
 };
 ```
 

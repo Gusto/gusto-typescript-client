@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -33,7 +37,7 @@ import { Result } from "../types/fp.js";
  * Get a pay schedule
  *
  * @remarks
- * The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+ * Returns a single pay schedule by UUID. The pay schedule object captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
  *
  * scope: `pay_schedules:read`
  */
@@ -44,6 +48,7 @@ export function paySchedulesGet(
 ): APIPromise<
   Result<
     GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -69,6 +74,7 @@ async function $do(
   [
     Result<
       GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -104,7 +110,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/companies/{company_id}/pay_schedules/{pay_schedule_id}",
   )(pathParams);
@@ -171,6 +176,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -183,9 +189,10 @@ async function $do(
     M.json(
       200,
       GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema,
-      { key: "Pay-Schedule-Object" },
+      { key: "Pay-Schedule" },
     ),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

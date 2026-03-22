@@ -108,7 +108,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc("/v1/people_batches/{people_batch_uuid}")(pathParams);
 
   const headers = new Headers(compactMap({

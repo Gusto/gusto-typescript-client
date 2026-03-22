@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type PaySchedulesUpdateMutationData =
   PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse;
 
 export type PaySchedulesUpdateMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -53,15 +55,19 @@ export type PaySchedulesUpdateMutationError =
  * Update a pay schedule
  *
  * @remarks
- * Updates a pay schedule.
+ * Updates a pay schedule. The `version` parameter from the GET response is required for [optimistic concurrency](doc:api-fundamentals); a mismatch returns 409 Conflict.
+ *
+ * ### Pay schedules may be automatically adjusted
+ * If an onboarded company misses their first pay date, the pay schedule may be automatically adjusted.
+ *
+ * ### Webhooks
+ * - `pay_schedule.updated`: Fires when a pay schedule is successfully updated.
+ *
+ * ### Related guides
+ * - [Create a pay schedule](doc:create-a-pay-schedule)
+ * - [Manage Pay Schedules via API](doc:manage-pay-schedules-api)
  *
  * scope: `pay_schedules:write`
- *
- * > ℹ️ Pay Schedules may be automatically adjusted
- * >
- * > If an onboarded company misses their first pay date, Gusto will automatically adjust the pay schedule to the next available pay date.
- * >
- * > See [Create a pay schedule](/embedded-payroll/docs/create-a-pay-schedule) for more information.
  */
 export function usePaySchedulesUpdateMutation(
   options?: MutationHookOptions<

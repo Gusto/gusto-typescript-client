@@ -100,7 +100,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc("/v1/wire_in_requests/{wire_in_request_uuid}")(
     pathParams,
   );
