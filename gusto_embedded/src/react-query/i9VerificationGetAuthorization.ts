@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1EmployeesEmployeeIdI9AuthorizationRequest } from "../models/operations/getv1employeesemployeeidi9authorization.js";
+import {
+  GetV1EmployeesEmployeeIdI9AuthorizationHeaderXGustoAPIVersion,
+  GetV1EmployeesEmployeeIdI9AuthorizationRequest,
+} from "../models/operations/getv1employeesemployeeidi9authorization.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type I9VerificationGetAuthorizationQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -55,9 +59,12 @@ export type I9VerificationGetAuthorizationQueryError =
  * Get an employee's I-9 authorization
  *
  * @remarks
- * An employee's I-9 authorization stores information about an employee's authorization status and I-9 signatures, information required to filled out the Form I-9 for employment eligibility verification.
+ * An employee's I-9 authorization stores information about an employee's authorization status and I-9 signatures, information required to fill out the Form I-9 for employment eligibility verification.
  *
  * **NOTE:** The `form_uuid` in responses from this endpoint can be used to retrieve the PDF version of the I-9. See the "get employee form PDF" request for more details.
+ *
+ * ### Related guides
+ * - [I-9 employment verification](doc:i-9-employment-verification)
  *
  * scope: `i9_authorizations:read`
  */
@@ -86,9 +93,12 @@ export function useI9VerificationGetAuthorization(
  * Get an employee's I-9 authorization
  *
  * @remarks
- * An employee's I-9 authorization stores information about an employee's authorization status and I-9 signatures, information required to filled out the Form I-9 for employment eligibility verification.
+ * An employee's I-9 authorization stores information about an employee's authorization status and I-9 signatures, information required to fill out the Form I-9 for employment eligibility verification.
  *
  * **NOTE:** The `form_uuid` in responses from this endpoint can be used to retrieve the PDF version of the I-9. See the "get employee form PDF" request for more details.
+ *
+ * ### Related guides
+ * - [I-9 employment verification](doc:i-9-employment-verification)
  *
  * scope: `i9_authorizations:read`
  */
@@ -117,7 +127,11 @@ export function setI9VerificationGetAuthorizationData(
   client: QueryClient,
   queryKeyBase: [
     employeeId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1EmployeesEmployeeIdI9AuthorizationHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: I9VerificationGetAuthorizationQueryData,
 ): I9VerificationGetAuthorizationQueryData | undefined {
@@ -134,7 +148,11 @@ export function invalidateI9VerificationGetAuthorization(
   queryKeyBase: TupleToPrefixes<
     [
       employeeId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1EmployeesEmployeeIdI9AuthorizationHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

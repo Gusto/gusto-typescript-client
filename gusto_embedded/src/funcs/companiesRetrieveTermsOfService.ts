@@ -106,7 +106,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/partner_managed_companies/{company_uuid}/retrieve_terms_of_service",
   )(pathParams);

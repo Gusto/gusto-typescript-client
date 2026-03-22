@@ -116,7 +116,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/v1/webhook_subscriptions/{webhook_subscription_uuid}/verify",
   )(pathParams);

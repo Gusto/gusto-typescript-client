@@ -114,7 +114,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc("/v1/home_addresses/{home_address_uuid}")(pathParams);
 
   const headers = new Headers(compactMap({

@@ -11,13 +11,14 @@ import { GustoEmbeddedCore } from "../core.js";
 import { paySchedulesGetPreview } from "../funcs/paySchedulesGetPreview.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  Frequency,
+  GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
   GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
-  QueryParamFrequency,
 } from "../models/operations/getv1companiescompanyidpayschedulespreview.js";
 import { unwrapAsync } from "../types/fp.js";
+import { RFCDate } from "../types/rfcdate.js";
 export type PaySchedulesGetPreviewQueryData =
   GetV1CompaniesCompanyIdPaySchedulesPreviewResponse;
 
@@ -48,12 +49,13 @@ export function buildPaySchedulesGetPreviewQuery(
 } {
   return {
     queryKey: queryKeyPaySchedulesGetPreview(request.companyId, {
+      xGustoAPIVersion: request.xGustoAPIVersion,
       frequency: request.frequency,
       anchorPayDate: request.anchorPayDate,
       anchorEndOfPayPeriod: request.anchorEndOfPayPeriod,
       day1: request.day1,
       day2: request.day2,
-      xGustoAPIVersion: request.xGustoAPIVersion,
+      endDate: request.endDate,
     }),
     queryFn: async function paySchedulesGetPreviewQueryFn(
       ctx,
@@ -81,12 +83,15 @@ export function buildPaySchedulesGetPreviewQuery(
 export function queryKeyPaySchedulesGetPreview(
   companyId: string,
   parameters: {
-    frequency: QueryParamFrequency;
-    anchorPayDate: string;
-    anchorEndOfPayPeriod: string;
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion
+      | undefined;
+    frequency: Frequency;
+    anchorPayDate: RFCDate;
+    anchorEndOfPayPeriod: RFCDate;
     day1?: number | undefined;
     day2?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
+    endDate?: RFCDate | undefined;
   },
 ): QueryKey {
   return [

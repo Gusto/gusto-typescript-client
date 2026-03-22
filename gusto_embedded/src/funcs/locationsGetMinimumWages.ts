@@ -105,7 +105,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/locations/{location_uuid}/minimum_wages")(
     pathParams,
   );
