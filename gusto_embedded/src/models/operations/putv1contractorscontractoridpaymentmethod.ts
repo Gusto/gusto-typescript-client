@@ -123,7 +123,7 @@ export const PutV1ContractorsContractorIdPaymentMethodRequest$outboundSchema:
     PutV1ContractorsContractorIdPaymentMethodRequest
   > = z.object({
     contractorUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
     requestBody: z.lazy(() =>
       PutV1ContractorsContractorIdPaymentMethodRequestBody$outboundSchema
     ),

@@ -88,7 +88,7 @@ export const PostV1SandboxGenerate1099Request$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1SandboxGenerate1099Request
 > = z.object({
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   requestBody: z.lazy(() =>
     PostV1SandboxGenerate1099RequestBody$outboundSchema
   ),

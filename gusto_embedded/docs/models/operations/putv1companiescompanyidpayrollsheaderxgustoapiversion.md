@@ -7,11 +7,11 @@ Determines the date-based API version associated with your API call. If none is 
 ```typescript
 import { PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion } from "@gusto/embedded-api/models/operations/putv1companiescompanyidpayrolls.js";
 
-let value: PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion = "2025-06-15";
+let value: PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion = "2026-02-01";
 ```
 
 ## Values
 
 ```typescript
-"2025-06-15"
+"2026-02-01"
 ```

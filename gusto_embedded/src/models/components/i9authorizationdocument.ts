@@ -27,7 +27,7 @@ export type I9AuthorizationDocument = {
   /**
    * The document's expiration date
    */
-  expirationDate?: string | undefined;
+  expirationDate?: string | null | undefined;
   /**
    * The document's issuing authority
    */
@@ -43,7 +43,7 @@ export const I9AuthorizationDocument$inboundSchema: z.ZodType<
   uuid: z.string(),
   document_type: z.string(),
   document_title: z.string(),
-  expiration_date: z.string().optional(),
+  expiration_date: z.nullable(z.string()).optional(),
   issuing_authority: z.string(),
 }).transform((v) => {
   return remap$(v, {

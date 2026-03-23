@@ -149,7 +149,7 @@ export const PutV1CompanyBenefitsCompanyBenefitIdRequest$outboundSchema:
     PutV1CompanyBenefitsCompanyBenefitIdRequest
   > = z.object({
     companyBenefitId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
     requestBody: z.lazy(() =>
       PutV1CompanyBenefitsCompanyBenefitIdRequestBody$outboundSchema
     ),

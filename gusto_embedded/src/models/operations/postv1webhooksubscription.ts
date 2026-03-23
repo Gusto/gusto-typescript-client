@@ -140,7 +140,7 @@ export const PostV1WebhookSubscriptionRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1WebhookSubscriptionRequest
 > = z.object({
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   requestBody: z.lazy(() =>
     PostV1WebhookSubscriptionRequestBody$outboundSchema
   ),

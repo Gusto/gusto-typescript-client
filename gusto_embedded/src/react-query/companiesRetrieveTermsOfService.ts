@@ -50,7 +50,7 @@ export type CompaniesRetrieveTermsOfServiceMutationError =
   | SDKValidationError;
 
 /**
- * Retrieve terms of service status for a company user
+ * Retrieve terms of service status for an admin
  *
  * @remarks
  * Retrieve the user acceptance status of the Gusto Embedded Payroll's [Terms of Service](https://flows.gusto.com/terms).

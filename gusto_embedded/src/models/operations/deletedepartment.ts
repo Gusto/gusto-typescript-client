@@ -44,7 +44,7 @@ export const DeleteDepartmentRequest$outboundSchema: z.ZodType<
   DeleteDepartmentRequest
 > = z.object({
   departmentUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
 }).transform((v) => {
   return remap$(v, {
     departmentUuid: "department_uuid",

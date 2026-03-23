@@ -83,7 +83,7 @@ export const GetV1JobsJobIdRequest$outboundSchema: z.ZodType<
 > = z.object({
   jobId: z.string(),
   include: GetV1JobsJobIdQueryParamInclude$outboundSchema.optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
 }).transform((v) => {
   return remap$(v, {
     jobId: "job_id",

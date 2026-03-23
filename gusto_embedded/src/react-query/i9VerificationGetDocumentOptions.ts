@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest } from "../models/operations/getv1employeesemployeeidi9authorizationdocumentoptions.js";
+import {
+  GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsHeaderXGustoAPIVersion,
+  GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest,
+} from "../models/operations/getv1employeesemployeeidi9authorizationdocumentoptions.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type I9VerificationGetDocumentOptionsQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -56,6 +60,9 @@ export type I9VerificationGetDocumentOptionsQueryError =
  *
  * @remarks
  * An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States. This endpoint returns the possible document options based on the employee's authorization status. These options can then be used to create the I-9 verification documents.
+ *
+ * ### Related guides
+ * - [I-9 employment verification](doc:i-9-employment-verification)
  *
  * scope: `i9_authorizations:read`
  */
@@ -86,6 +93,9 @@ export function useI9VerificationGetDocumentOptions(
  * @remarks
  * An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States. This endpoint returns the possible document options based on the employee's authorization status. These options can then be used to create the I-9 verification documents.
  *
+ * ### Related guides
+ * - [I-9 employment verification](doc:i-9-employment-verification)
+ *
  * scope: `i9_authorizations:read`
  */
 export function useI9VerificationGetDocumentOptionsSuspense(
@@ -113,7 +123,11 @@ export function setI9VerificationGetDocumentOptionsData(
   client: QueryClient,
   queryKeyBase: [
     employeeId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: I9VerificationGetDocumentOptionsQueryData,
 ): I9VerificationGetDocumentOptionsQueryData | undefined {
@@ -130,7 +144,11 @@ export function invalidateI9VerificationGetDocumentOptions(
   queryKeyBase: TupleToPrefixes<
     [
       employeeId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

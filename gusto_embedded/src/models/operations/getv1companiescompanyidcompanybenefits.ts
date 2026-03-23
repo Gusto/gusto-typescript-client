@@ -71,7 +71,7 @@ export const GetV1CompaniesCompanyIdCompanyBenefitsRequest$outboundSchema:
     active: z.boolean().optional(),
     enrollmentCount: z.boolean().optional(),
     benefitType: z.string().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",

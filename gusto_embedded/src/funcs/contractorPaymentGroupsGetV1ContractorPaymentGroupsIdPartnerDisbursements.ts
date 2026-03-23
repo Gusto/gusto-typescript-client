@@ -106,7 +106,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/contractor_payment_groups/{id}/partner_disbursements",
   )(pathParams);

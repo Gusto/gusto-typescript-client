@@ -44,7 +44,7 @@ export const DeleteV1JobsJobIdRequest$outboundSchema: z.ZodType<
   DeleteV1JobsJobIdRequest
 > = z.object({
   jobId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
 }).transform((v) => {
   return remap$(v, {
     jobId: "job_id",

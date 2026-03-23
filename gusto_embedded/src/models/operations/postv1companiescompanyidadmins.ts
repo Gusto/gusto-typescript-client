@@ -101,7 +101,7 @@ export const PostV1CompaniesCompanyIdAdminsRequest$outboundSchema: z.ZodType<
   PostV1CompaniesCompanyIdAdminsRequest
 > = z.object({
   companyId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   requestBody: z.lazy(() =>
     PostV1CompaniesCompanyIdAdminsRequestBody$outboundSchema
   ),

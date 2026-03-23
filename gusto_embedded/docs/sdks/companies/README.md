@@ -9,8 +9,8 @@
 * [update](#update) - Update a company
 * [migrate](#migrate) - Migrate company to embedded payroll
 * [getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness](#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
-* [acceptTermsOfService](#accepttermsofservice) - Accept terms of service for a company user
-* [retrieveTermsOfService](#retrievetermsofservice) - Retrieve terms of service status for a company user
+* [acceptTermsOfService](#accepttermsofservice) - Accept terms of service for an admin
+* [retrieveTermsOfService](#retrievetermsofservice) - Retrieve terms of service status for an admin
 * [createAdmin](#createadmin) - Create an admin for the company
 * [listAdmins](#listadmins) - Get all the admins at a company
 * [getOnboardingStatus](#getonboardingstatus) - Get company onboarding status
@@ -830,83 +830,7 @@ To use this endpoint, the customer will need to connect their Gusto account to y
 
 scope: `partner_managed_companies:write`
 
-### Example Usage: Basic
-
-<!-- UsageSnippet language="typescript" operationID="put-v1-partner-managed-companies-company-uuid-migrate" method="put" path="/v1/partner_managed_companies/{company_uuid}/migrate" example="Basic" -->
-```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
-
-const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const result = await gustoEmbedded.companies.migrate({
-    companyUuid: "<id>",
-    requestBody: {
-      email: "Janice18@gmail.com",
-      ipAddress: "75.249.55.210",
-      externalUserId: "<id>",
-    },
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { companiesMigrate } from "@gusto/embedded-api/funcs/companiesMigrate.js";
-
-// Use `GustoEmbeddedCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await companiesMigrate(gustoEmbedded, {
-    companyUuid: "<id>",
-    requestBody: {
-      email: "Janice18@gmail.com",
-      ipAddress: "75.249.55.210",
-      externalUserId: "<id>",
-    },
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("companiesMigrate failed:", res.error);
-  }
-}
-
-run();
-```
-
-### React hooks and utilities
-
-This method can be used in React components through the following hooks and
-associated utilities.
-
-> Check out [this guide][hook-guide] for information about each of the utilities
-> below and how to get started using React hooks.
-
-[hook-guide]: ../../../REACT_QUERY.md
-
-```tsx
-import {
-  // Mutation hook for triggering the API call.
-  useCompaniesMigrateMutation
-} from "@gusto/embedded-api/react-query/companiesMigrate.js";
-```
-### Example Usage: Example
+### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-partner-managed-companies-company-uuid-migrate" method="put" path="/v1/partner_managed_companies/{company_uuid}/migrate" example="Example" -->
 ```typescript
@@ -919,11 +843,6 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.companies.migrate({
     companyUuid: "<id>",
-    requestBody: {
-      email: "Janice18@gmail.com",
-      ipAddress: "75.249.55.210",
-      externalUserId: "<id>",
-    },
   });
 
   console.log(result);
@@ -949,163 +868,6 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await companiesMigrate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
-      email: "Janice18@gmail.com",
-      ipAddress: "75.249.55.210",
-      externalUserId: "<id>",
-    },
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("companiesMigrate failed:", res.error);
-  }
-}
-
-run();
-```
-
-### React hooks and utilities
-
-This method can be used in React components through the following hooks and
-associated utilities.
-
-> Check out [this guide][hook-guide] for information about each of the utilities
-> below and how to get started using React hooks.
-
-[hook-guide]: ../../../REACT_QUERY.md
-
-```tsx
-import {
-  // Mutation hook for triggering the API call.
-  useCompaniesMigrateMutation
-} from "@gusto/embedded-api/react-query/companiesMigrate.js";
-```
-### Example Usage: Nested
-
-<!-- UsageSnippet language="typescript" operationID="put-v1-partner-managed-companies-company-uuid-migrate" method="put" path="/v1/partner_managed_companies/{company_uuid}/migrate" example="Nested" -->
-```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
-
-const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const result = await gustoEmbedded.companies.migrate({
-    companyUuid: "<id>",
-    requestBody: {
-      email: "Janice18@gmail.com",
-      ipAddress: "75.249.55.210",
-      externalUserId: "<id>",
-    },
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { companiesMigrate } from "@gusto/embedded-api/funcs/companiesMigrate.js";
-
-// Use `GustoEmbeddedCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await companiesMigrate(gustoEmbedded, {
-    companyUuid: "<id>",
-    requestBody: {
-      email: "Janice18@gmail.com",
-      ipAddress: "75.249.55.210",
-      externalUserId: "<id>",
-    },
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("companiesMigrate failed:", res.error);
-  }
-}
-
-run();
-```
-
-### React hooks and utilities
-
-This method can be used in React components through the following hooks and
-associated utilities.
-
-> Check out [this guide][hook-guide] for information about each of the utilities
-> below and how to get started using React hooks.
-
-[hook-guide]: ../../../REACT_QUERY.md
-
-```tsx
-import {
-  // Mutation hook for triggering the API call.
-  useCompaniesMigrateMutation
-} from "@gusto/embedded-api/react-query/companiesMigrate.js";
-```
-### Example Usage: Resource
-
-<!-- UsageSnippet language="typescript" operationID="put-v1-partner-managed-companies-company-uuid-migrate" method="put" path="/v1/partner_managed_companies/{company_uuid}/migrate" example="Resource" -->
-```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
-
-const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const result = await gustoEmbedded.companies.migrate({
-    companyUuid: "<id>",
-    requestBody: {
-      email: "Janice18@gmail.com",
-      ipAddress: "75.249.55.210",
-      externalUserId: "<id>",
-    },
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { companiesMigrate } from "@gusto/embedded-api/funcs/companiesMigrate.js";
-
-// Use `GustoEmbeddedCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await companiesMigrate(gustoEmbedded, {
-    companyUuid: "<id>",
-    requestBody: {
-      email: "Janice18@gmail.com",
-      ipAddress: "75.249.55.210",
-      externalUserId: "<id>",
-    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1262,7 +1024,7 @@ import {
 ## acceptTermsOfService
 
 Accept the Gusto Embedded Payroll's [Terms of Service](https://flows.gusto.com/terms).
-The user must have a role in the company in order to accept the Terms of Service.
+The user must be a company admin in order to accept the Terms of Service.
 
 scope: `terms_of_services:write`
 

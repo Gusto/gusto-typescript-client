@@ -26,7 +26,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
 export const PostV1CompaniesCompanyUuidTimeOffPoliciesHeaderXGustoAPIVersion = {
-  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  TwoThousandAndTwentySixMinus02Minus01: "2026-02-01",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -82,7 +82,7 @@ export const PostV1CompaniesCompanyUuidTimeOffPoliciesRequest$outboundSchema:
   > = z.object({
     xGustoAPIVersion:
       PostV1CompaniesCompanyUuidTimeOffPoliciesHeaderXGustoAPIVersion$outboundSchema
-        .default("2025-06-15"),
+        .default("2026-02-01"),
     companyUuid: z.string(),
     timeOffPolicyRequest: TimeOffPolicyRequest$outboundSchema,
   }).transform((v) => {

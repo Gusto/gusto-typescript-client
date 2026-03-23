@@ -133,7 +133,7 @@ export const PostV1SandboxGenerateW2Request$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1SandboxGenerateW2Request
 > = z.object({
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   requestBody: z.lazy(() => PostV1SandboxGenerateW2RequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

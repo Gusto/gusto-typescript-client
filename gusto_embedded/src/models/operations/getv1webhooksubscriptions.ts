@@ -78,7 +78,7 @@ export const GetV1WebhookSubscriptionsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1WebhookSubscriptionsRequest
 > = z.object({
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",

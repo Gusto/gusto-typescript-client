@@ -117,7 +117,7 @@ export const PostV1JobsJobIdRequest$outboundSchema: z.ZodType<
   PostV1JobsJobIdRequest
 > = z.object({
   employeeId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   requestBody: z.lazy(() => PostV1JobsJobIdRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

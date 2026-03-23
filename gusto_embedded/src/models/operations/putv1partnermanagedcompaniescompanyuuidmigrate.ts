@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -17,21 +16,6 @@ import {
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody = {
-  /**
-   * Email of the company signatory who is authorized to accept our [Terms of Service](https://flows.gusto.com/terms) and migration decision. You can retrieve the signatory email from the `GET /v/1/companies/{company_id}/signatories` endpoint.
-   */
-  email: string;
-  /**
-   * The IP address of the signatory who viewed and accepted the Terms of Service.
-   */
-  ipAddress: string;
-  /**
-   * The signatory's user ID on your platform.
-   */
-  externalUserId: string;
-};
-
 export type PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest = {
   /**
    * The UUID of the company
@@ -41,32 +25,68 @@ export type PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest = {
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody;
 };
 
-/**
- * The migration status. 'success' is the only valid return value.
- */
-export const MigrationStatus = {
-  Success: "success",
-} as const;
-/**
- * The migration status. 'success' is the only valid return value.
- */
-export type MigrationStatus = ClosedEnum<typeof MigrationStatus>;
+export type Metadata = {
+  /**
+   * A categorization of the migration blocker, e.g. "migrated_company"
+   */
+  key?: string | undefined;
+};
+
+export type Errors = {
+  /**
+   * Error key
+   */
+  errorKey?: string | undefined;
+  /**
+   * Error category
+   */
+  category?: string | undefined;
+  /**
+   * Blocker message
+   */
+  message?: string | undefined;
+  metadata?: Metadata | undefined;
+};
+
+export type PutV1PartnerManagedCompaniesCompanyUuidMigrateMetadata = {
+  /**
+   * A categorization of the migration warning, e.g. "marijuana_related_business"
+   */
+  key?: string | undefined;
+};
+
+export type Warnings = {
+  /**
+   * Error key
+   */
+  errorKey?: string | undefined;
+  /**
+   * Error category
+   */
+  category?: string | undefined;
+  /**
+   * Warning message
+   */
+  message?: string | undefined;
+  metadata?: PutV1PartnerManagedCompaniesCompanyUuidMigrateMetadata | undefined;
+};
 
 /**
  * Example response
  */
 export type PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody = {
   /**
+   * The migration status.
+   */
+  migrationStatus?: boolean | undefined;
+  /**
    * The company UUID
    */
   companyUuid?: string | undefined;
-  /**
-   * The migration status. 'success' is the only valid return value.
-   */
-  migrationStatus?: MigrationStatus | undefined;
+  errors?: Array<Errors> | undefined;
+  warnings?: Array<Warnings> | undefined;
 };
 
 export type PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse = {
@@ -80,46 +100,9 @@ export type PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse = {
 };
 
 /** @internal */
-export type PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$Outbound =
-  {
-    email: string;
-    ip_address: string;
-    external_user_id: string;
-  };
-
-/** @internal */
-export const PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$outboundSchema:
-  z.ZodType<
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$Outbound,
-    z.ZodTypeDef,
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody
-  > = z.object({
-    email: z.string(),
-    ipAddress: z.string(),
-    externalUserId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      ipAddress: "ip_address",
-      externalUserId: "external_user_id",
-    });
-  });
-
-export function putV1PartnerManagedCompaniesCompanyUuidMigrateRequestBodyToJSON(
-  putV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody:
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$outboundSchema
-      .parse(putV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody),
-  );
-}
-
-/** @internal */
 export type PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
-  RequestBody:
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$Outbound;
 };
 
 /** @internal */
@@ -130,15 +113,11 @@ export const PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$outboundSchem
     PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest
   > = z.object({
     companyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$outboundSchema
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
     });
   });
 
@@ -154,9 +133,99 @@ export function putV1PartnerManagedCompaniesCompanyUuidMigrateRequestToJSON(
 }
 
 /** @internal */
-export const MigrationStatus$inboundSchema: z.ZodNativeEnum<
-  typeof MigrationStatus
-> = z.nativeEnum(MigrationStatus);
+export const Metadata$inboundSchema: z.ZodType<
+  Metadata,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  key: z.string().optional(),
+});
+
+export function metadataFromJSON(
+  jsonString: string,
+): SafeParseResult<Metadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Metadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Metadata' from JSON`,
+  );
+}
+
+/** @internal */
+export const Errors$inboundSchema: z.ZodType<Errors, z.ZodTypeDef, unknown> = z
+  .object({
+    error_key: z.string().optional(),
+    category: z.string().optional(),
+    message: z.string().optional(),
+    metadata: z.lazy(() => Metadata$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "error_key": "errorKey",
+    });
+  });
+
+export function errorsFromJSON(
+  jsonString: string,
+): SafeParseResult<Errors, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Errors$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Errors' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1PartnerManagedCompaniesCompanyUuidMigrateMetadata$inboundSchema:
+  z.ZodType<
+    PutV1PartnerManagedCompaniesCompanyUuidMigrateMetadata,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    key: z.string().optional(),
+  });
+
+export function putV1PartnerManagedCompaniesCompanyUuidMigrateMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1PartnerManagedCompaniesCompanyUuidMigrateMetadata,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1PartnerManagedCompaniesCompanyUuidMigrateMetadata$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'PutV1PartnerManagedCompaniesCompanyUuidMigrateMetadata' from JSON`,
+  );
+}
+
+/** @internal */
+export const Warnings$inboundSchema: z.ZodType<
+  Warnings,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  error_key: z.string().optional(),
+  category: z.string().optional(),
+  message: z.string().optional(),
+  metadata: z.lazy(() =>
+    PutV1PartnerManagedCompaniesCompanyUuidMigrateMetadata$inboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "error_key": "errorKey",
+  });
+});
+
+export function warningsFromJSON(
+  jsonString: string,
+): SafeParseResult<Warnings, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Warnings$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Warnings' from JSON`,
+  );
+}
 
 /** @internal */
 export const PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$inboundSchema:
@@ -165,12 +234,14 @@ export const PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$inboundS
     z.ZodTypeDef,
     unknown
   > = z.object({
+    migration_status: z.boolean().optional(),
     company_uuid: z.string().optional(),
-    migration_status: MigrationStatus$inboundSchema.optional(),
+    errors: z.array(z.lazy(() => Errors$inboundSchema)).optional(),
+    warnings: z.array(z.lazy(() => Warnings$inboundSchema)).optional(),
   }).transform((v) => {
     return remap$(v, {
-      "company_uuid": "companyUuid",
       "migration_status": "migrationStatus",
+      "company_uuid": "companyUuid",
     });
   });
 

@@ -107,7 +107,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/v1/information_requests/{information_request_uuid}/submit",
   )(pathParams);

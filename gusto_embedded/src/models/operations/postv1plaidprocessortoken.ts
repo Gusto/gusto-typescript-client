@@ -118,7 +118,7 @@ export const PostV1PlaidProcessorTokenRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1PlaidProcessorTokenRequest
 > = z.object({
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   requestBody: z.lazy(() =>
     PostV1PlaidProcessorTokenRequestBody$outboundSchema
   ),

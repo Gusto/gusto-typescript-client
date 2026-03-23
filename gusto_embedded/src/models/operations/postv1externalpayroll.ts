@@ -103,7 +103,7 @@ export const PostV1ExternalPayrollRequest$outboundSchema: z.ZodType<
   PostV1ExternalPayrollRequest
 > = z.object({
   companyUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   requestBody: z.lazy(() => PostV1ExternalPayrollRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

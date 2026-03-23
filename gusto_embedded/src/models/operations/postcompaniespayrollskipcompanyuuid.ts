@@ -131,7 +131,7 @@ export const PostCompaniesPayrollSkipCompanyUuidRequest$outboundSchema:
     PostCompaniesPayrollSkipCompanyUuidRequest
   > = z.object({
     companyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
     requestBody: z.lazy(() =>
       PostCompaniesPayrollSkipCompanyUuidRequestBody$outboundSchema
     ),

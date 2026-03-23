@@ -86,7 +86,7 @@ export const PutDepartmentsRequest$outboundSchema: z.ZodType<
   PutDepartmentsRequest
 > = z.object({
   departmentUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   requestBody: z.lazy(() => PutDepartmentsRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

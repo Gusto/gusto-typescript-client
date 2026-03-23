@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -15,39 +16,34 @@ import {
   I9Authorization$inboundSchema,
 } from "../components/i9authorization.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  I9AuthorizationEmployerSignRequestBody,
+  I9AuthorizationEmployerSignRequestBody$Outbound,
+  I9AuthorizationEmployerSignRequestBody$outboundSchema,
+} from "../components/i9authorizationemployersignrequestbody.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody = {
-  /**
-   * The signature
-   */
-  signatureText: string;
-  /**
-   * The signer's job title
-   */
-  signerTitle: string;
-  /**
-   * The IP address of the signatory who signed the form. Both IPv4 AND IPv6 are supported. You must provide the IP address with either this parameter OR you can leave out this parameter and set the IP address in the request header using the `x-gusto-client-ip` header instead.
-   */
-  signedByIpAddress?: string | undefined;
-  /**
-   * Whether you agree to sign electronically
-   */
-  agree: boolean;
-  /**
-   * Any additional notes
-   */
-  additionalInfo?: string | undefined;
-  /**
-   * Whether an alternative procedure authorized by DHS to examine documents was used
-   */
-  altProcedure?: boolean | undefined;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentySixMinus02Minus01: "2026-02-01",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion
+  >;
 
 export type PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the employee
    */
@@ -56,73 +52,34 @@ export type PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest = {
    * Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
    */
   xGustoClientIp?: string | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody;
+  i9AuthorizationEmployerSignRequestBody:
+    I9AuthorizationEmployerSignRequestBody;
 };
 
 export type PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
   i9Authorization?: I9Authorization | undefined;
 };
 
 /** @internal */
-export type PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody$Outbound =
-  {
-    signature_text: string;
-    signer_title: string;
-    signed_by_ip_address?: string | undefined;
-    agree: boolean;
-    additional_info?: string | undefined;
-    alt_procedure?: boolean | undefined;
-  };
-
-/** @internal */
-export const PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody$outboundSchema:
-  z.ZodType<
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody$Outbound,
-    z.ZodTypeDef,
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody
-  > = z.object({
-    signatureText: z.string(),
-    signerTitle: z.string(),
-    signedByIpAddress: z.string().optional(),
-    agree: z.boolean(),
-    additionalInfo: z.string().optional(),
-    altProcedure: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      signatureText: "signature_text",
-      signerTitle: "signer_title",
-      signedByIpAddress: "signed_by_ip_address",
-      additionalInfo: "additional_info",
-      altProcedure: "alt_procedure",
-    });
-  });
-
-export function putV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBodyToJSON(
-  putV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody:
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody$outboundSchema
-      .parse(putV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody),
+export const PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion,
   );
-}
 
 /** @internal */
 export type PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest$Outbound =
   {
+    "X-Gusto-API-Version": string;
     employee_id: string;
     "x-gusto-client-ip"?: string | undefined;
-    "X-Gusto-API-Version": string;
-    RequestBody:
-      PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody$Outbound;
+    "I9-Authorization-Employer-Sign-Request-Body":
+      I9AuthorizationEmployerSignRequestBody$Outbound;
   };
 
 /** @internal */
@@ -132,18 +89,20 @@ export const PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest$outbound
     z.ZodTypeDef,
     PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest
   > = z.object({
+    xGustoAPIVersion:
+      PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion$outboundSchema
+        .default("2026-02-01"),
     employeeId: z.string(),
     xGustoClientIp: z.string().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody$outboundSchema
-    ),
+    i9AuthorizationEmployerSignRequestBody:
+      I9AuthorizationEmployerSignRequestBody$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       employeeId: "employee_id",
       xGustoClientIp: "x-gusto-client-ip",
-      xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      i9AuthorizationEmployerSignRequestBody:
+        "I9-Authorization-Employer-Sign-Request-Body",
     });
   });
 

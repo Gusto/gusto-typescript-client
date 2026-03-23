@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest } from "../models/operations/getv1employeesemployeeidi9authorizationdocuments.js";
+import {
+  GetV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion,
+  GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
+} from "../models/operations/getv1employeesemployeeidi9authorizationdocuments.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type I9VerificationGetDocumentsQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -56,6 +60,9 @@ export type I9VerificationGetDocumentsQueryError =
  *
  * @remarks
  * An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States.
+ *
+ * ### Related guides
+ * - [I-9 employment verification](doc:i-9-employment-verification)
  *
  * scope: `i9_authorizations:read`
  */
@@ -86,6 +93,9 @@ export function useI9VerificationGetDocuments(
  * @remarks
  * An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States.
  *
+ * ### Related guides
+ * - [I-9 employment verification](doc:i-9-employment-verification)
+ *
  * scope: `i9_authorizations:read`
  */
 export function useI9VerificationGetDocumentsSuspense(
@@ -113,7 +123,11 @@ export function setI9VerificationGetDocumentsData(
   client: QueryClient,
   queryKeyBase: [
     employeeId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: I9VerificationGetDocumentsQueryData,
 ): I9VerificationGetDocumentsQueryData | undefined {
@@ -127,7 +141,11 @@ export function invalidateI9VerificationGetDocuments(
   queryKeyBase: TupleToPrefixes<
     [
       employeeId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

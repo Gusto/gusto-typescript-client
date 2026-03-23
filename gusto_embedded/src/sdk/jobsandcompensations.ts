@@ -81,6 +81,8 @@ export class JobsAndCompensations extends ClientSDK {
    * @remarks
    * Get all of the jobs that an employee holds.
    *
+   * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. These fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are returned only when the `compensations:read` scope is included.
+   *
    * scope: `jobs:read`
    */
   async getJobs(
@@ -99,6 +101,8 @@ export class JobsAndCompensations extends ClientSDK {
    *
    * @remarks
    * Get a job.
+   *
+   * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. These fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are returned only when the `compensations:read` scope is included.
    *
    * scope: `jobs:read`
    */
@@ -155,12 +159,11 @@ export class JobsAndCompensations extends ClientSDK {
    * Get compensations for a job
    *
    * @remarks
-   * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
+   * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. By default the API returns only the current compensation - see the `include` query parameter for retrieving all compensations.
    *
-   * *Note: Currently the API does not support creating multiple compensations per job - creating a compensation with the same job_uuid as another will fail with a relevant error.*
+   * Note: Currently the API does not support creating multiple compensations per job - creating a compensation with the same `job_uuid` as another will fail with a relevant error.
    *
-   * Use `flsa_status` to determine if an employee is eligible for overtime
-   * By default the API returns only the current compensation - use the `include` parameter to return all compensations.
+   * Use `flsa_status` to determine if an employee is eligible for overtime.
    *
    * scope: `compensations:read`
    */
@@ -180,13 +183,6 @@ export class JobsAndCompensations extends ClientSDK {
    *
    * @remarks
    * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
-   *
-   * ### Prerequisites
-   * Before calling this endpoint:
-   * 1. A [job](ref:post-v1-jobs-job_id) must exist for the employee
-   *
-   * ### Webhooks
-   * - `employee_job_compensation.created`: Fires when a compensation is successfully created
    *
    * scope: `compensations:write`
    */
@@ -226,9 +222,6 @@ export class JobsAndCompensations extends ClientSDK {
    * @remarks
    * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
    *
-   * ### Webhooks
-   * - `employee_job_compensation.updated`: Fires when a compensation is successfully updated
-   *
    * scope: `compensations:write`
    */
   async updateCompensation(
@@ -247,9 +240,6 @@ export class JobsAndCompensations extends ClientSDK {
    *
    * @remarks
    * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. This endpoint deletes a compensation for a job that hasn't been processed on payroll.
-   *
-   * ### Webhooks
-   * - `employee_job_compensation.destroyed`: Fires when a compensation is successfully deleted
    *
    * scope: `compensations:write`
    */

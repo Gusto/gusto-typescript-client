@@ -139,7 +139,7 @@ export const PutV1ContractorDocumentSignRequest$outboundSchema: z.ZodType<
 > = z.object({
   documentUuid: z.string(),
   xGustoClientIp: z.string().optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   requestBody: z.lazy(() =>
     PutV1ContractorDocumentSignRequestBody$outboundSchema
   ),

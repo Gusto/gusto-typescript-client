@@ -119,7 +119,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/payrolls/{payroll_id}")(
     pathParams,
   );
@@ -172,7 +171,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    errorCodes: ["404", "409", "422", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -202,7 +201,7 @@ async function $do(
       key: "Payroll-Prepared",
     }),
     M.jsonErr(404, NotFoundErrorObject$inboundSchema),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr([409, 422], UnprocessableEntityErrorObject$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

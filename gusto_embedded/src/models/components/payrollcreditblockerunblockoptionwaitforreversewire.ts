@@ -8,16 +8,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata = {
-  /**
-   * ID of the reverse wire detail
-   */
-  reverseWireDetailId?: number | null | undefined;
-  /**
-   * Last 4 digits of the bank account number for the reverse wire
-   */
-  bankAccountLastFourDigits?: string | null | undefined;
-};
+export type PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata = {};
 
 /**
  * Unblock option to resolve a credit blocker by waiting for reverse wire
@@ -40,15 +31,7 @@ export const PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata$inbound
     PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    reverse_wire_detail_id: z.nullable(z.number().int()).optional(),
-    bank_account_last_four_digits: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "reverse_wire_detail_id": "reverseWireDetailId",
-      "bank_account_last_four_digits": "bankAccountLastFourDigits",
-    });
-  });
+  > = z.object({});
 
 export function payrollCreditBlockerUnblockOptionWaitForReverseWireMetadataFromJSON(
   jsonString: string,

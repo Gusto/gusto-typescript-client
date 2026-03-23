@@ -102,7 +102,7 @@ export const GetInvoicesInvoicePeriodRequest$outboundSchema: z.ZodType<
   page: z.number().int().optional(),
   per: z.number().int().optional(),
   companyUuids: z.string().optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
 }).transform((v) => {
   return remap$(v, {
     invoicePeriod: "invoice_period",
