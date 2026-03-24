@@ -5,7 +5,7 @@ The representation of a company in Gusto.
 ## Example Usage
 
 ```typescript
-import { Company } from "@gusto/embedded-api/models/components/company.js";
+import { Company } from "@gusto/embedded-api-v2025-06-15/models/components/company.js";
 
 let value: Company = {
   uuid: "88e5a54a-293c-41ca-8b40-c75abce54978",

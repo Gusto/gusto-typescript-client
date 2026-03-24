@@ -5,7 +5,7 @@ Pay schedule assignment first pay period information.
 ## Example Usage
 
 ```typescript
-import { PayScheduleAssignmentPayPeriod } from "@gusto/embedded-api/models/components/payscheduleassignmentpayperiod.js";
+import { PayScheduleAssignmentPayPeriod } from "@gusto/embedded-api-v2025-06-15/models/components/payscheduleassignmentpayperiod.js";
 
 let value: PayScheduleAssignmentPayPeriod = {};
 ```

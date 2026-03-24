@@ -49,7 +49,7 @@ export const GetV1CompanyFormPdfRequest$outboundSchema: z.ZodType<
   GetV1CompanyFormPdfRequest
 > = z.object({
   formId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
 }).transform((v) => {
   return remap$(v, {
     formId: "form_id",

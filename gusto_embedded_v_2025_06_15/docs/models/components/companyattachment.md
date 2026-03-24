@@ -5,7 +5,7 @@ The company attachment
 ## Example Usage
 
 ```typescript
-import { CompanyAttachment } from "@gusto/embedded-api/models/components/companyattachment.js";
+import { CompanyAttachment } from "@gusto/embedded-api-v2025-06-15/models/components/companyattachment.js";
 
 let value: CompanyAttachment = {};
 ```

@@ -5,7 +5,7 @@ How often the agency collects the withholding amount. e.g. $500 monthly -> `Mont
 ## Example Usage
 
 ```typescript
-import { PaymentPeriod } from "@gusto/embedded-api/models/components/garnishmentchildsupport.js";
+import { PaymentPeriod } from "@gusto/embedded-api-v2025-06-15/models/components/garnishmentchildsupport.js";
 
 let value: PaymentPeriod = "Monthly";
 ```

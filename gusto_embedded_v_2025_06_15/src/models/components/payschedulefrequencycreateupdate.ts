@@ -6,7 +6,14 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
- * The frequency that employees on this pay schedule are paid with Gusto.
+ * Pay frequency when creating or updating a schedule. Only weekly, bi-weekly, twice per month, and monthly are supported via the API.
+ *
+ * @remarks
+ *
+ * - `Every week`: Weekly pay.
+ * - `Every other week`: Biweekly pay.
+ * - `Twice per month`: Two pay dates per month; require day_1 and day_2 (use 31 for last day of month).
+ * - `Monthly`: One pay date per month; require day_1 (1-31).
  */
 export const PayScheduleFrequencyCreateUpdate = {
   EveryWeek: "Every week",
@@ -15,13 +22,20 @@ export const PayScheduleFrequencyCreateUpdate = {
   Monthly: "Monthly",
 } as const;
 /**
- * The frequency that employees on this pay schedule are paid with Gusto.
+ * Pay frequency when creating or updating a schedule. Only weekly, bi-weekly, twice per month, and monthly are supported via the API.
+ *
+ * @remarks
+ *
+ * - `Every week`: Weekly pay.
+ * - `Every other week`: Biweekly pay.
+ * - `Twice per month`: Two pay dates per month; require day_1 and day_2 (use 31 for last day of month).
+ * - `Monthly`: One pay date per month; require day_1 (1-31).
  */
 export type PayScheduleFrequencyCreateUpdate = ClosedEnum<
   typeof PayScheduleFrequencyCreateUpdate
 >;
 
 /** @internal */
-export const PayScheduleFrequencyCreateUpdate$inboundSchema: z.ZodNativeEnum<
+export const PayScheduleFrequencyCreateUpdate$outboundSchema: z.ZodNativeEnum<
   typeof PayScheduleFrequencyCreateUpdate
 > = z.nativeEnum(PayScheduleFrequencyCreateUpdate);

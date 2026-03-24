@@ -157,7 +157,7 @@ export function invalidateWebhooksGetV1WebhooksHealthCheck(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "Webhooks",
       "getV1WebhooksHealthCheck",
       ...queryKeyBase,
@@ -171,6 +171,10 @@ export function invalidateAllWebhooksGetV1WebhooksHealthCheck(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Webhooks", "getV1WebhooksHealthCheck"],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "Webhooks",
+      "getV1WebhooksHealthCheck",
+    ],
   });
 }

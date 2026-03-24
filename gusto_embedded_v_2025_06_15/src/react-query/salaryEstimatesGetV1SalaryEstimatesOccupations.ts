@@ -166,7 +166,7 @@ export function invalidateSalaryEstimatesGetV1SalaryEstimatesOccupations(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "Salary Estimates",
       "getV1SalaryEstimatesOccupations",
       ...queryKeyBase,
@@ -181,7 +181,7 @@ export function invalidateAllSalaryEstimatesGetV1SalaryEstimatesOccupations(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "Salary Estimates",
       "getV1SalaryEstimatesOccupations",
     ],

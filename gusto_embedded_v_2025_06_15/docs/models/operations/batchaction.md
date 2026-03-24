@@ -5,7 +5,7 @@ The action to perform on the batch
 ## Example Usage
 
 ```typescript
-import { BatchAction } from "@gusto/embedded-api/models/operations/postv1companiescompanyidpeoplebatches.js";
+import { BatchAction } from "@gusto/embedded-api-v2025-06-15/models/operations/postv1companiescompanyidpeoplebatches.js";
 
 let value: BatchAction = "create";
 ```

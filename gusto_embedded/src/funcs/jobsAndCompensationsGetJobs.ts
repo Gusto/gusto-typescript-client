@@ -35,6 +35,8 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Get all of the jobs that an employee holds.
  *
+ * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. These fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are returned only when the `compensations:read` scope is included.
+ *
  * scope: `jobs:read`
  */
 export function jobsAndCompensationsGetJobs(
@@ -98,7 +100,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/employees/{employee_id}/jobs")(pathParams);
 
   const query = encodeFormQuery({

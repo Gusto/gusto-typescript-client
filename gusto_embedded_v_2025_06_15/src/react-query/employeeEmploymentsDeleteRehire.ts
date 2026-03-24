@@ -76,7 +76,11 @@ export function useEmployeeEmploymentsDeleteRehireMutation(
 }
 
 export function mutationKeyEmployeeEmploymentsDeleteRehire(): MutationKey {
-  return ["@gusto/embedded-api", "employeeEmployments", "deleteRehire"];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "employeeEmployments",
+    "deleteRehire",
+  ];
 }
 
 export function buildEmployeeEmploymentsDeleteRehireMutation(

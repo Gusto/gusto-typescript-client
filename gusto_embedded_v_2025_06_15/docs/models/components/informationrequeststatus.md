@@ -5,7 +5,7 @@ The status of the information request
 ## Example Usage
 
 ```typescript
-import { InformationRequestStatus } from "@gusto/embedded-api/models/components/informationrequest.js";
+import { InformationRequestStatus } from "@gusto/embedded-api-v2025-06-15/models/components/informationrequest.js";
 
 let value: InformationRequestStatus = "approved";
 ```

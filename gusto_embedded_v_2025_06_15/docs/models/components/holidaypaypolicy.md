@@ -5,7 +5,7 @@ Representation of a Holiday Pay Policy
 ## Example Usage
 
 ```typescript
-import { HolidayPayPolicy } from "@gusto/embedded-api/models/components/holidaypaypolicy.js";
+import { HolidayPayPolicy } from "@gusto/embedded-api-v2025-06-15/models/components/holidaypaypolicy.js";
 
 let value: HolidayPayPolicy = {
   version: "<value>",

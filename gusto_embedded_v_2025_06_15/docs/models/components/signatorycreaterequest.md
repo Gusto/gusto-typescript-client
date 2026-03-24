@@ -5,8 +5,8 @@ Request body for creating a signatory with complete information. All listed requ
 ## Example Usage
 
 ```typescript
-import { SignatoryCreateRequest } from "@gusto/embedded-api/models/components/signatorycreaterequest.js";
-import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+import { SignatoryCreateRequest } from "@gusto/embedded-api-v2025-06-15/models/components/signatorycreaterequest.js";
+import { RFCDate } from "@gusto/embedded-api-v2025-06-15/types/rfcdate.js";
 
 let value: SignatoryCreateRequest = {
   firstName: "Corrine",

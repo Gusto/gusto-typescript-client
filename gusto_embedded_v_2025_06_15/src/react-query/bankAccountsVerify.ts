@@ -91,7 +91,7 @@ export function useBankAccountsVerifyMutation(
 }
 
 export function mutationKeyBankAccountsVerify(): MutationKey {
-  return ["@gusto/embedded-api", "bankAccounts", "verify"];
+  return ["@gusto/embedded-api-v2025-06-15", "bankAccounts", "verify"];
 }
 
 export function buildBankAccountsVerifyMutation(

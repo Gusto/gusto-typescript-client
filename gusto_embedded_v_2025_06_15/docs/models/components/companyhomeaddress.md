@@ -5,7 +5,7 @@ The company's primary signatory's home address.
 ## Example Usage
 
 ```typescript
-import { CompanyHomeAddress } from "@gusto/embedded-api/models/components/company.js";
+import { CompanyHomeAddress } from "@gusto/embedded-api-v2025-06-15/models/components/company.js";
 
 let value: CompanyHomeAddress = {};
 ```

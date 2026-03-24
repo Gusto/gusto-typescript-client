@@ -83,7 +83,7 @@ export function useReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutation(
 
 export function mutationKeyReportsPostPayrollsPayrollUuidReportsGeneralLedger(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v2025-06-15",
     "Reports",
     "postPayrollsPayrollUuidReportsGeneralLedger",
   ];

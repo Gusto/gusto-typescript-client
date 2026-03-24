@@ -76,7 +76,7 @@ export function useEmployeesCreateHistoricalMutation(
 }
 
 export function mutationKeyEmployeesCreateHistorical(): MutationKey {
-  return ["@gusto/embedded-api", "Employees", "createHistorical"];
+  return ["@gusto/embedded-api-v2025-06-15", "Employees", "createHistorical"];
 }
 
 export function buildEmployeesCreateHistoricalMutation(

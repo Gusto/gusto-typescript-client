@@ -5,7 +5,7 @@ Desired payment speed. 1-day is only applicable to partners that opt in.
 ## Example Usage
 
 ```typescript
-import { PaymentConfigsUpdateRequestPaymentSpeed } from "@gusto/embedded-api/models/components/paymentconfigsupdaterequest.js";
+import { PaymentConfigsUpdateRequestPaymentSpeed } from "@gusto/embedded-api-v2025-06-15/models/components/paymentconfigsupdaterequest.js";
 
 let value: PaymentConfigsUpdateRequestPaymentSpeed = "4-day";
 ```

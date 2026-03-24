@@ -52,7 +52,7 @@ export const GetV1ContractorDocumentPdfRequest$outboundSchema: z.ZodType<
   GetV1ContractorDocumentPdfRequest
 > = z.object({
   documentUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
 }).transform((v) => {
   return remap$(v, {
     documentUuid: "document_uuid",

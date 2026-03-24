@@ -143,7 +143,12 @@ export function invalidateLocationsRetrieve(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Locations", "retrieve", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "Locations",
+      "retrieve",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -153,6 +158,6 @@ export function invalidateAllLocationsRetrieve(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Locations", "retrieve"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "Locations", "retrieve"],
   });
 }

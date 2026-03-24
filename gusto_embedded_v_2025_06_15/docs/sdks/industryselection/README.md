@@ -17,7 +17,7 @@ scope: `companies:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-company-industry" method="get" path="/v1/companies/{company_id}/industry_selection" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -39,8 +39,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { industrySelectionGet } from "@gusto/embedded-api/funcs/industrySelectionGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { industrySelectionGet } from "@gusto/embedded-api-v2025-06-15/funcs/industrySelectionGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -88,7 +88,7 @@ import {
   // mutations and other user actions.
   invalidateIndustrySelectionGet,
   invalidateAllIndustrySelectionGet,
-} from "@gusto/embedded-api/react-query/industrySelectionGet.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/industrySelectionGet.js";
 ```
 
 ### Parameters
@@ -127,7 +127,7 @@ scope: `companies:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-company-industry" method="put" path="/v1/companies/{company_id}/industry_selection" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -152,8 +152,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { industrySelectionUpdate } from "@gusto/embedded-api/funcs/industrySelectionUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { industrySelectionUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/industrySelectionUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -193,13 +193,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useIndustrySelectionUpdateMutation
-} from "@gusto/embedded-api/react-query/industrySelectionUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/industrySelectionUpdate.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-company-industry" method="put" path="/v1/companies/{company_id}/industry_selection" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -228,8 +228,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { industrySelectionUpdate } from "@gusto/embedded-api/funcs/industrySelectionUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { industrySelectionUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/industrySelectionUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -273,13 +273,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useIndustrySelectionUpdateMutation
-} from "@gusto/embedded-api/react-query/industrySelectionUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/industrySelectionUpdate.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-company-industry" method="put" path="/v1/companies/{company_id}/industry_selection" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -304,8 +304,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { industrySelectionUpdate } from "@gusto/embedded-api/funcs/industrySelectionUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { industrySelectionUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/industrySelectionUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -345,13 +345,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useIndustrySelectionUpdateMutation
-} from "@gusto/embedded-api/react-query/industrySelectionUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/industrySelectionUpdate.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-company-industry" method="put" path="/v1/companies/{company_id}/industry_selection" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -376,8 +376,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { industrySelectionUpdate } from "@gusto/embedded-api/funcs/industrySelectionUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { industrySelectionUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/industrySelectionUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -417,7 +417,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useIndustrySelectionUpdateMutation
-} from "@gusto/embedded-api/react-query/industrySelectionUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/industrySelectionUpdate.js";
 ```
 
 ### Parameters

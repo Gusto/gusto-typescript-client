@@ -5,7 +5,7 @@ Type of the time off policy. Currently only "vacation" and "sick" are supported
 ## Example Usage
 
 ```typescript
-import { PolicyType } from "@gusto/embedded-api/models/operations/putv1timeoffpoliciestimeoffpolicyuuid.js";
+import { PolicyType } from "@gusto/embedded-api-v2025-06-15/models/operations/putv1timeoffpoliciestimeoffpolicyuuid.js";
 
 let value: PolicyType = "sick";
 ```

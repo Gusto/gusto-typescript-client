@@ -5,7 +5,7 @@ The employee's compensation payment method.
 ## Example Usage
 
 ```typescript
-import { PayrollReceiptPaymentMethod } from "@gusto/embedded-api/models/components/payrollreceipt.js";
+import { PayrollReceiptPaymentMethod } from "@gusto/embedded-api-v2025-06-15/models/components/payrollreceipt.js";
 
 let value: PayrollReceiptPaymentMethod = "Check";
 ```

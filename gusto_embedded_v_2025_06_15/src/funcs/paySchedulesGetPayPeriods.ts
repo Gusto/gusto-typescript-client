@@ -117,7 +117,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/pay_periods")(pathParams);
 
   const query = encodeFormQuery({

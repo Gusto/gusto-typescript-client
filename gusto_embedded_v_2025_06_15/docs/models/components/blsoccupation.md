@@ -5,7 +5,7 @@ A Bureau of Labor Statistics occupation code with its title and description, use
 ## Example Usage
 
 ```typescript
-import { BLSOccupation } from "@gusto/embedded-api/models/components/blsoccupation.js";
+import { BLSOccupation } from "@gusto/embedded-api-v2025-06-15/models/components/blsoccupation.js";
 
 let value: BLSOccupation = {
   code: "15-1252",

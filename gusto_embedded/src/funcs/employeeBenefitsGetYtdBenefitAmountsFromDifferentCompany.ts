@@ -103,7 +103,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/employees/{employee_id}/ytd_benefit_amounts_from_different_company",
   )(pathParams);

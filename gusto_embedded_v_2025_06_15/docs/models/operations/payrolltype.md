@@ -5,7 +5,7 @@ Payroll type
 ## Example Usage
 
 ```typescript
-import { PayrollType } from "@gusto/embedded-api/models/operations/postcompaniespayrollskipcompanyuuid.js";
+import { PayrollType } from "@gusto/embedded-api-v2025-06-15/models/operations/postcompaniespayrollskipcompanyuuid.js";
 
 let value: PayrollType = "Hired employee";
 ```

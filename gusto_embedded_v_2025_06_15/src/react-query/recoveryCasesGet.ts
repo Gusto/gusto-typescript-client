@@ -131,7 +131,12 @@ export function invalidateRecoveryCasesGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "recoveryCases", "get", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "recoveryCases",
+      "get",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -141,6 +146,6 @@ export function invalidateAllRecoveryCasesGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "recoveryCases", "get"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "recoveryCases", "get"],
   });
 }

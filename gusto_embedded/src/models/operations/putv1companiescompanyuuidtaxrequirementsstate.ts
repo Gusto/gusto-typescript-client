@@ -163,7 +163,7 @@ export const PutV1CompaniesCompanyUuidTaxRequirementsStateRequest$outboundSchema
   > = z.object({
     companyUuid: z.string(),
     state: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody$outboundSchema
     ),

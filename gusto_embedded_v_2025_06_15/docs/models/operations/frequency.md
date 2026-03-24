@@ -1,11 +1,11 @@
 # Frequency
 
-The frequency that employees on this pay schedule are paid with Gusto.
+The frequency that employees on this pay schedule are paid.
 
 ## Example Usage
 
 ```typescript
-import { Frequency } from "@gusto/embedded-api/models/operations/postv1companiescompanyidpayschedules.js";
+import { Frequency } from "@gusto/embedded-api-v2025-06-15/models/operations/getv1companiescompanyidpayschedulespreview.js";
 
 let value: Frequency = "Every other week";
 ```

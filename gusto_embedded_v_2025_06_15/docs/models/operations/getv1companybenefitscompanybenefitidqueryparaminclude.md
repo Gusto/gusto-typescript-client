@@ -6,7 +6,7 @@ Available options:
 ## Example Usage
 
 ```typescript
-import { GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude } from "@gusto/embedded-api/models/operations/getv1companybenefitscompanybenefitid.js";
+import { GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude } from "@gusto/embedded-api-v2025-06-15/models/operations/getv1companybenefitscompanybenefitid.js";
 
 let value: GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude =
   "all_benefits";

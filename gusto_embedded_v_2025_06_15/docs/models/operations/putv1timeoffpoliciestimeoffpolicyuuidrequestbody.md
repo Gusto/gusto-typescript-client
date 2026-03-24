@@ -5,7 +5,7 @@ Request body for updating a time off policy
 ## Example Usage
 
 ```typescript
-import { PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody } from "@gusto/embedded-api/models/operations/putv1timeoffpoliciestimeoffpolicyuuid.js";
+import { PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody } from "@gusto/embedded-api-v2025-06-15/models/operations/putv1timeoffpoliciestimeoffpolicyuuid.js";
 
 let value: PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody = {
   name: "Vacation Policy",

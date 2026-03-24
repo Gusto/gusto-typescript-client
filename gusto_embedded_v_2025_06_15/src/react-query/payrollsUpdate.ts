@@ -82,7 +82,7 @@ export function usePayrollsUpdateMutation(
 }
 
 export function mutationKeyPayrollsUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "Payrolls", "update"];
+  return ["@gusto/embedded-api-v2025-06-15", "Payrolls", "update"];
 }
 
 export function buildPayrollsUpdateMutation(

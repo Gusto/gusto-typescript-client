@@ -76,7 +76,11 @@ export function useExternalPayrollsFinalizeTaxLiabilitiesMutation(
 }
 
 export function mutationKeyExternalPayrollsFinalizeTaxLiabilities(): MutationKey {
-  return ["@gusto/embedded-api", "externalPayrolls", "finalizeTaxLiabilities"];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "externalPayrolls",
+    "finalizeTaxLiabilities",
+  ];
 }
 
 export function buildExternalPayrollsFinalizeTaxLiabilitiesMutation(

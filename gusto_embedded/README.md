@@ -204,8 +204,8 @@ run();
 * [update](docs/sdks/companies/README.md#update) - Update a company
 * [migrate](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
 * [getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness](docs/sdks/companies/README.md#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
-* [acceptTermsOfService](docs/sdks/companies/README.md#accepttermsofservice) - Accept terms of service for a company user
-* [retrieveTermsOfService](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for a company user
+* [acceptTermsOfService](docs/sdks/companies/README.md#accepttermsofservice) - Accept terms of service for an admin
+* [retrieveTermsOfService](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for an admin
 * [createAdmin](docs/sdks/companies/README.md#createadmin) - Create an admin for the company
 * [listAdmins](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
 * [getOnboardingStatus](docs/sdks/companies/README.md#getonboardingstatus) - Get company onboarding status
@@ -651,7 +651,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`bankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId`](docs/sdks/bankaccounts/README.md#deletev1companiescompanyidbankaccountsbankaccountid) - Delete a company bank account
 - [`bankAccountsGet`](docs/sdks/bankaccounts/README.md#get) - Get all company bank accounts
 - [`bankAccountsVerify`](docs/sdks/bankaccounts/README.md#verify) - Verify a company bank account
-- [`companiesAcceptTermsOfService`](docs/sdks/companies/README.md#accepttermsofservice) - Accept terms of service for a company user
+- [`companiesAcceptTermsOfService`](docs/sdks/companies/README.md#accepttermsofservice) - Accept terms of service for an admin
 - [`companiesCreateAdmin`](docs/sdks/companies/README.md#createadmin) - Create an admin for the company
 - [`companiesCreatePartnerManaged`](docs/sdks/companies/README.md#createpartnermanaged) - Create a partner managed company
 - [`companiesFinishOnboarding`](docs/sdks/companies/README.md#finishonboarding) - Finish company onboarding
@@ -661,7 +661,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`companiesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness`](docs/sdks/companies/README.md#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
 - [`companiesListAdmins`](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
 - [`companiesMigrate`](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
-- [`companiesRetrieveTermsOfService`](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for a company user
+- [`companiesRetrieveTermsOfService`](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for an admin
 - [`companiesSuspensionsGet`](docs/sdks/suspensions/README.md#get) - Get suspensions for this company
 - [`companiesSuspensionsSuspend`](docs/sdks/suspensions/README.md#suspend) - Suspend a company's account
 - [`companiesUpdate`](docs/sdks/companies/README.md#update) - Update a company
@@ -957,7 +957,7 @@ To learn about this feature and how to get started, check
 - [`useBankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountIdMutation`](docs/sdks/bankaccounts/README.md#deletev1companiescompanyidbankaccountsbankaccountid) - Delete a company bank account
 - [`useBankAccountsGet`](docs/sdks/bankaccounts/README.md#get) - Get all company bank accounts
 - [`useBankAccountsVerifyMutation`](docs/sdks/bankaccounts/README.md#verify) - Verify a company bank account
-- [`useCompaniesAcceptTermsOfServiceMutation`](docs/sdks/companies/README.md#accepttermsofservice) - Accept terms of service for a company user
+- [`useCompaniesAcceptTermsOfServiceMutation`](docs/sdks/companies/README.md#accepttermsofservice) - Accept terms of service for an admin
 - [`useCompaniesCreateAdminMutation`](docs/sdks/companies/README.md#createadmin) - Create an admin for the company
 - [`useCompaniesCreatePartnerManagedMutation`](docs/sdks/companies/README.md#createpartnermanaged) - Create a partner managed company
 - [`useCompaniesFinishOnboardingMutation`](docs/sdks/companies/README.md#finishonboarding) - Finish company onboarding
@@ -967,7 +967,7 @@ To learn about this feature and how to get started, check
 - [`useCompaniesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness`](docs/sdks/companies/README.md#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
 - [`useCompaniesListAdmins`](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
 - [`useCompaniesMigrateMutation`](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
-- [`useCompaniesRetrieveTermsOfServiceMutation`](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for a company user
+- [`useCompaniesRetrieveTermsOfServiceMutation`](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for an admin
 - [`useCompaniesSuspensionsGet`](docs/sdks/suspensions/README.md#get) - Get suspensions for this company
 - [`useCompaniesSuspensionsSuspendMutation`](docs/sdks/suspensions/README.md#suspend) - Suspend a company's account
 - [`useCompaniesUpdateMutation`](docs/sdks/companies/README.md#update) - Update a company
@@ -1416,8 +1416,8 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 143 of 280 methods.*
-* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Applicable to 120 of 280 methods.*
+* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 144 of 280 methods.*
+* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Applicable to 132 of 280 methods.*
 * [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 2 of 280 methods.*
 * [`PeopleBatchConflictError`](./src/models/errors/peoplebatchconflicterror.ts): Error response when a people batch idempotency key conflict occurs. Status code `409`. Applicable to 1 of 280 methods.*
 * [`MigrationBlocker`](./src/models/errors/migrationblocker.ts): Migration blocker that blocks company migration. Status code `422`. Applicable to 1 of 280 methods.*

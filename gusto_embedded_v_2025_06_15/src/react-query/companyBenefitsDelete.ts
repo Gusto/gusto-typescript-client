@@ -81,7 +81,7 @@ export function useCompanyBenefitsDeleteMutation(
 }
 
 export function mutationKeyCompanyBenefitsDelete(): MutationKey {
-  return ["@gusto/embedded-api", "companyBenefits", "delete"];
+  return ["@gusto/embedded-api-v2025-06-15", "companyBenefits", "delete"];
 }
 
 export function buildCompanyBenefitsDeleteMutation(

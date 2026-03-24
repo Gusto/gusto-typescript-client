@@ -5,7 +5,7 @@ Request body for verifying a company bank account with the two micro-deposit amo
 ## Example Usage
 
 ```typescript
-import { CompanyBankAccountVerifyRequest } from "@gusto/embedded-api/models/components/companybankaccountverifyrequest.js";
+import { CompanyBankAccountVerifyRequest } from "@gusto/embedded-api-v2025-06-15/models/components/companybankaccountverifyrequest.js";
 
 let value: CompanyBankAccountVerifyRequest = {
   deposit1: 6045.09,

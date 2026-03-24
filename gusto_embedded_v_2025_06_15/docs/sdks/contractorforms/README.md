@@ -19,7 +19,7 @@ scope: `contractor_forms:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-contractor-forms" method="get" path="/v1/contractors/{contractor_uuid}/forms" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -41,8 +41,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorFormsList } from "@gusto/embedded-api/funcs/contractorFormsList.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorFormsList } from "@gusto/embedded-api-v2025-06-15/funcs/contractorFormsList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -90,7 +90,7 @@ import {
   // mutations and other user actions.
   invalidateContractorFormsList,
   invalidateAllContractorFormsList,
-} from "@gusto/embedded-api/react-query/contractorFormsList.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorFormsList.js";
 ```
 
 ### Parameters
@@ -122,7 +122,7 @@ scope: `contractor_forms:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-contractor-form" method="get" path="/v1/contractors/{contractor_uuid}/forms/{form_id}" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -145,8 +145,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorFormsGet } from "@gusto/embedded-api/funcs/contractorFormsGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorFormsGet } from "@gusto/embedded-api-v2025-06-15/funcs/contractorFormsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -195,7 +195,7 @@ import {
   // mutations and other user actions.
   invalidateContractorFormsGet,
   invalidateAllContractorFormsGet,
-} from "@gusto/embedded-api/react-query/contractorFormsGet.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorFormsGet.js";
 ```
 
 ### Parameters
@@ -227,7 +227,7 @@ scope: `contractor_forms:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-contractor-form-pdf" method="get" path="/v1/contractors/{contractor_uuid}/forms/{form_id}/pdf" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -250,8 +250,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorFormsGetPdf } from "@gusto/embedded-api/funcs/contractorFormsGetPdf.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorFormsGetPdf } from "@gusto/embedded-api-v2025-06-15/funcs/contractorFormsGetPdf.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -300,7 +300,7 @@ import {
   // mutations and other user actions.
   invalidateContractorFormsGetPdf,
   invalidateAllContractorFormsGetPdf,
-} from "@gusto/embedded-api/react-query/contractorFormsGetPdf.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorFormsGetPdf.js";
 ```
 
 ### Parameters
@@ -336,7 +336,7 @@ scope: `contractors:write`
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-sandbox-generate_1099" method="post" path="/v1/sandbox/generate_1099" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -360,8 +360,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorFormsGenerate1099 } from "@gusto/embedded-api/funcs/contractorFormsGenerate1099.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorFormsGenerate1099 } from "@gusto/embedded-api-v2025-06-15/funcs/contractorFormsGenerate1099.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -400,13 +400,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorFormsGenerate1099Mutation
-} from "@gusto/embedded-api/react-query/contractorFormsGenerate1099.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorFormsGenerate1099.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-sandbox-generate_1099" method="post" path="/v1/sandbox/generate_1099" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -430,8 +430,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorFormsGenerate1099 } from "@gusto/embedded-api/funcs/contractorFormsGenerate1099.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorFormsGenerate1099 } from "@gusto/embedded-api-v2025-06-15/funcs/contractorFormsGenerate1099.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -470,13 +470,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorFormsGenerate1099Mutation
-} from "@gusto/embedded-api/react-query/contractorFormsGenerate1099.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorFormsGenerate1099.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-sandbox-generate_1099" method="post" path="/v1/sandbox/generate_1099" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -500,8 +500,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorFormsGenerate1099 } from "@gusto/embedded-api/funcs/contractorFormsGenerate1099.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorFormsGenerate1099 } from "@gusto/embedded-api-v2025-06-15/funcs/contractorFormsGenerate1099.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -540,13 +540,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorFormsGenerate1099Mutation
-} from "@gusto/embedded-api/react-query/contractorFormsGenerate1099.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorFormsGenerate1099.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-sandbox-generate_1099" method="post" path="/v1/sandbox/generate_1099" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -570,8 +570,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorFormsGenerate1099 } from "@gusto/embedded-api/funcs/contractorFormsGenerate1099.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorFormsGenerate1099 } from "@gusto/embedded-api-v2025-06-15/funcs/contractorFormsGenerate1099.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -610,7 +610,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorFormsGenerate1099Mutation
-} from "@gusto/embedded-api/react-query/contractorFormsGenerate1099.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorFormsGenerate1099.js";
 ```
 
 ### Parameters

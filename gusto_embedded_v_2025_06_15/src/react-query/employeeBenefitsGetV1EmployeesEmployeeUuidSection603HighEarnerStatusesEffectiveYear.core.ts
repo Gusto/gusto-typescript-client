@@ -96,7 +96,7 @@ export function queryKeyEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603High
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v2025-06-15",
     "employeeBenefits",
     "getV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear",
     employeeUuid,

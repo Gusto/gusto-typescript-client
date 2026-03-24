@@ -45,9 +45,12 @@ export class I9Verification extends ClientSDK {
    * Get an employee's I-9 authorization
    *
    * @remarks
-   * An employee's I-9 authorization stores information about an employee's authorization status and I-9 signatures, information required to filled out the Form I-9 for employment eligibility verification.
+   * An employee's I-9 authorization stores information about an employee's authorization status and I-9 signatures, information required to fill out the Form I-9 for employment eligibility verification.
    *
    * **NOTE:** The `form_uuid` in responses from this endpoint can be used to retrieve the PDF version of the I-9. See the "get employee form PDF" request for more details.
+   *
+   * ### Related guides
+   * - [I-9 employment verification](doc:i-9-employment-verification)
    *
    * scope: `i9_authorizations:read`
    */
@@ -71,7 +74,6 @@ export class I9Verification extends ClientSDK {
    * If the version is supplied and the employee I-9 authorization exists, this endpoint acts as an update. Otherwise, it will create an employee I-9 authorization.
    *
    * Validations on this endpoint are conditional:
-   *
    *   * `document_type` may be required, depending on `authorization_status`.
    *   * Valid formats for `document_number` vary, depending on `document_type`.
    *   * `country` is only allowed with `document_type: 'foreign_passport'`.
@@ -84,6 +86,9 @@ export class I9Verification extends ClientSDK {
    * > **Example:** Updating `authorization_status` from `alien` to `citizen` will cause any data in `document_type`, `document_number`, `country`, and `expiration_date` to be removed, since these fields are unused for `authorization_status:'citizen'`.
    *
    * Detailed instructions for completing Form I-9 can be found at https://www.uscis.gov/sites/default/files/document/forms/i-9instr.pdf
+   *
+   * ### Related guides
+   * - [I-9 employment verification](doc:i-9-employment-verification)
    *
    * scope: `i9_authorizations:write`
    */
@@ -104,6 +109,9 @@ export class I9Verification extends ClientSDK {
    * @remarks
    * An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States. This endpoint returns the possible document options based on the employee's authorization status. These options can then be used to create the I-9 verification documents.
    *
+   * ### Related guides
+   * - [I-9 employment verification](doc:i-9-employment-verification)
+   *
    * scope: `i9_authorizations:read`
    */
   async getDocumentOptions(
@@ -122,6 +130,9 @@ export class I9Verification extends ClientSDK {
    *
    * @remarks
    * An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States.
+   *
+   * ### Related guides
+   * - [I-9 employment verification](doc:i-9-employment-verification)
    *
    * scope: `i9_authorizations:read`
    */
@@ -142,11 +153,14 @@ export class I9Verification extends ClientSDK {
    * @remarks
    * An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States.
    *
-   * Use the document options endpoint to get the possible document types and titles, which can vary depending on the employee's authorization status.
+   * Use the [document options endpoint](ref:get-v1-employees-employee_id-i9_authorization-document_options) to get the possible document types and titles, which can vary depending on the employee's authorization status.
    *
    * > 🚧 Every request must contain the complete list of documents for the Employee.
    * >
    * > Every request to this endpoint removes any previous verification document records for the employee.
+   *
+   * ### Related guides
+   * - [I-9 employment verification](doc:i-9-employment-verification)
    *
    * scope: `i9_authorizations:manage`
    */
@@ -166,6 +180,9 @@ export class I9Verification extends ClientSDK {
    *
    * @remarks
    * An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States. This endpoint deletes a specific verification document.
+   *
+   * ### Related guides
+   * - [I-9 employment verification](doc:i-9-employment-verification)
    *
    * scope: `i9_authorizations:manage`
    */
@@ -188,6 +205,15 @@ export class I9Verification extends ClientSDK {
    *
    * @remarks
    * Sign an employee's Form I-9 as an employer. Once the form is signed, the employee's I-9 authorization is considered complete and cannot be modified.
+   *
+   * ### Prerequisites
+   * Before calling this endpoint:
+   * 1. The employee must have a completed [I-9 authorization](ref:put-v1-employees-employee_id-i9_authorization)
+   * 2. The employee must have signed the Form I-9
+   * 3. [I-9 verification documents](ref:put-v1-employees-employee_id-i9_authorization-documents) must be submitted
+   *
+   * ### Related guides
+   * - [I-9 employment verification](doc:i-9-employment-verification)
    *
    * scope: `i9_authorizations:manage`
    */

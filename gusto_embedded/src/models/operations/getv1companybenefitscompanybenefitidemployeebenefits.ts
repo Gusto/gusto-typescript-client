@@ -109,7 +109,7 @@ export const GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$outboun
     include:
       GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude$outboundSchema
         .optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   }).transform((v) => {
     return remap$(v, {
       companyBenefitId: "company_benefit_id",

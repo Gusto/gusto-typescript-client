@@ -9,7 +9,7 @@ Explanation for why the company is suspending their account.
 ## Example Usage
 
 ```typescript
-import { Reason } from "@gusto/embedded-api/models/operations/postcompaniescompanyuuidsuspensions.js";
+import { Reason } from "@gusto/embedded-api-v2025-06-15/models/operations/postcompaniescompanyuuidsuspensions.js";
 
 let value: Reason = "changing_ein_or_entity_type";
 ```

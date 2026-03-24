@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { CreateTokenAuthentication } from "@gusto/embedded-api/models/components/createtokenauthentication.js";
+import { CreateTokenAuthentication } from "@gusto/embedded-api-v2025-06-15/models/components/createtokenauthentication.js";
 
 let value: CreateTokenAuthentication = {
   accessToken: "<value>",

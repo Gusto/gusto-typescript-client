@@ -5,7 +5,7 @@ The category of a company attachment.
 ## Example Usage
 
 ```typescript
-import { Category } from "@gusto/embedded-api/models/operations/postv1companiesattachment.js";
+import { Category } from "@gusto/embedded-api-v2025-06-15/models/operations/postv1companiesattachment.js";
 
 let value: Category = "compliance";
 ```

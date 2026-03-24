@@ -78,7 +78,7 @@ export function useInformationRequestsSubmitMutation(
 }
 
 export function mutationKeyInformationRequestsSubmit(): MutationKey {
-  return ["@gusto/embedded-api", "Information Requests", "submit"];
+  return ["@gusto/embedded-api-v2025-06-15", "Information Requests", "submit"];
 }
 
 export function buildInformationRequestsSubmitMutation(

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Errors } from "@gusto/embedded-api/models/errors/notfounderrorobject.js";
+import { Errors } from "@gusto/embedded-api-v2025-06-15/models/errors/notfounderrorobject.js";
 
 let value: Errors = {
   errorKey: "<value>",

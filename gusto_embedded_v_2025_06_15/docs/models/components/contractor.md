@@ -5,7 +5,7 @@ The representation of a contractor (individual or business) in Gusto.
 ## Example Usage
 
 ```typescript
-import { Contractor } from "@gusto/embedded-api/models/components/contractor.js";
+import { Contractor } from "@gusto/embedded-api-v2025-06-15/models/components/contractor.js";
 
 let value: Contractor = {
   uuid: "f30a70ef-3547-49c9-9a96-1e512446b666",

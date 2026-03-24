@@ -5,7 +5,7 @@ Request body for creating a flow.
 ## Example Usage
 
 ```typescript
-import { CreateFlowRequest } from "@gusto/embedded-api/models/components/createflowrequest.js";
+import { CreateFlowRequest } from "@gusto/embedded-api-v2025-06-15/models/components/createflowrequest.js";
 
 let value: CreateFlowRequest = {
   flowType: "company_onboarding",

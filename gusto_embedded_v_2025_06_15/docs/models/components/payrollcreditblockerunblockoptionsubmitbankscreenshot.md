@@ -5,7 +5,7 @@ Unblock option to resolve a credit blocker by submitting a bank screenshot
 ## Example Usage
 
 ```typescript
-import { PayrollCreditBlockerUnblockOptionSubmitBankScreenshot } from "@gusto/embedded-api/models/components/payrollcreditblockerunblockoptionsubmitbankscreenshot.js";
+import { PayrollCreditBlockerUnblockOptionSubmitBankScreenshot } from "@gusto/embedded-api-v2025-06-15/models/components/payrollcreditblockerunblockoptionsubmitbankscreenshot.js";
 
 let value: PayrollCreditBlockerUnblockOptionSubmitBankScreenshot = {
   unblockType: "submit_bank_screenshot",

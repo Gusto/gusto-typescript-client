@@ -146,7 +146,7 @@ export function invalidatePayrollsGetPayStub(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "Payrolls",
       "getPayStub",
       ...queryKeyBase,
@@ -160,6 +160,6 @@ export function invalidateAllPayrollsGetPayStub(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Payrolls", "getPayStub"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "Payrolls", "getPayStub"],
   });
 }

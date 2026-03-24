@@ -75,7 +75,7 @@ export function useDepartmentsDeleteMutation(
 }
 
 export function mutationKeyDepartmentsDelete(): MutationKey {
-  return ["@gusto/embedded-api", "Departments", "delete"];
+  return ["@gusto/embedded-api-v2025-06-15", "Departments", "delete"];
 }
 
 export function buildDepartmentsDeleteMutation(

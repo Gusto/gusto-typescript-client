@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { MigrationBlockerErrors } from "@gusto/embedded-api/models/errors/migrationblocker.js";
+import { MigrationBlockerErrors } from "@gusto/embedded-api-v2025-06-15/models/errors/migrationblocker.js";
 
 let value: MigrationBlockerErrors = {};
 ```

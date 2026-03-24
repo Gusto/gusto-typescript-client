@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { EntityErrorObject } from "@gusto/embedded-api/models/components/entityerrorobject.js";
+import { EntityErrorObject } from "@gusto/embedded-api-v2025-06-15/models/components/entityerrorobject.js";
 
 let value: EntityErrorObject = {
   errorKey: "<value>",

@@ -9,7 +9,7 @@ The verification status of the bank account.
 ## Example Usage
 
 ```typescript
-import { VerificationStatus } from "@gusto/embedded-api/models/components/companybankaccount.js";
+import { VerificationStatus } from "@gusto/embedded-api-v2025-06-15/models/components/companybankaccount.js";
 
 let value: VerificationStatus = "awaiting_deposits";
 ```

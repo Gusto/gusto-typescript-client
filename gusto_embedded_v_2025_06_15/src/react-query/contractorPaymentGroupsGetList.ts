@@ -158,7 +158,7 @@ export function invalidateContractorPaymentGroupsGetList(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "contractorPaymentGroups",
       "getList",
       ...queryKeyBase,
@@ -172,6 +172,10 @@ export function invalidateAllContractorPaymentGroupsGetList(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "contractorPaymentGroups", "getList"],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "contractorPaymentGroups",
+      "getList",
+    ],
   });
 }

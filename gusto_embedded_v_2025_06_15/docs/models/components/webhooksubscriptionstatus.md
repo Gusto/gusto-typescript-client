@@ -5,7 +5,7 @@ The status of the webhook subscription.
 ## Example Usage
 
 ```typescript
-import { WebhookSubscriptionStatus } from "@gusto/embedded-api/models/components/webhooksubscription.js";
+import { WebhookSubscriptionStatus } from "@gusto/embedded-api-v2025-06-15/models/components/webhooksubscription.js";
 
 let value: WebhookSubscriptionStatus = "unreachable";
 ```

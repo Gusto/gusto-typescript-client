@@ -5,7 +5,7 @@ Request body for calculating gross up amount
 ## Example Usage
 
 ```typescript
-import { PayrollGrossUpRequest } from "@gusto/embedded-api/models/components/payrollgrossuprequest.js";
+import { PayrollGrossUpRequest } from "@gusto/embedded-api-v2025-06-15/models/components/payrollgrossuprequest.js";
 
 let value: PayrollGrossUpRequest = {
   employeeUuid: "<id>",

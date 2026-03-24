@@ -75,7 +75,7 @@ export function useDepartmentsCreateMutation(
 }
 
 export function mutationKeyDepartmentsCreate(): MutationKey {
-  return ["@gusto/embedded-api", "Departments", "create"];
+  return ["@gusto/embedded-api-v2025-06-15", "Departments", "create"];
 }
 
 export function buildDepartmentsCreateMutation(

@@ -86,7 +86,11 @@ export function useContractorsUpdateOnboardingStatusMutation(
 }
 
 export function mutationKeyContractorsUpdateOnboardingStatus(): MutationKey {
-  return ["@gusto/embedded-api", "Contractors", "updateOnboardingStatus"];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "Contractors",
+    "updateOnboardingStatus",
+  ];
 }
 
 export function buildContractorsUpdateOnboardingStatusMutation(

@@ -151,7 +151,7 @@ export function invalidateCompaniesGetOnboardingStatus(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "Companies",
       "getOnboardingStatus",
       ...queryKeyBase,
@@ -165,6 +165,10 @@ export function invalidateAllCompaniesGetOnboardingStatus(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Companies", "getOnboardingStatus"],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "Companies",
+      "getOnboardingStatus",
+    ],
   });
 }

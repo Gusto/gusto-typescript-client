@@ -5,7 +5,7 @@ Only applicable when a payroll is moved to four day processing instead of fast a
 ## Example Usage
 
 ```typescript
-import { PayrollPaymentSpeedChangedType } from "@gusto/embedded-api/models/components/payrollpaymentspeedchangedtype.js";
+import { PayrollPaymentSpeedChangedType } from "@gusto/embedded-api-v2025-06-15/models/components/payrollpaymentspeedchangedtype.js";
 
 let value: PayrollPaymentSpeedChangedType = {};
 ```

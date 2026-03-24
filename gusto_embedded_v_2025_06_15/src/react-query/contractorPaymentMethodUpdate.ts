@@ -77,7 +77,11 @@ export function useContractorPaymentMethodUpdateMutation(
 }
 
 export function mutationKeyContractorPaymentMethodUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "contractorPaymentMethod", "update"];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "contractorPaymentMethod",
+    "update",
+  ];
 }
 
 export function buildContractorPaymentMethodUpdateMutation(

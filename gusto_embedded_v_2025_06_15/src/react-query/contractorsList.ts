@@ -156,7 +156,12 @@ export function invalidateContractorsList(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Contractors", "list", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "Contractors",
+      "list",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -166,6 +171,6 @@ export function invalidateAllContractorsList(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Contractors", "list"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "Contractors", "list"],
   });
 }

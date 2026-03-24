@@ -104,7 +104,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/generated_documents/{document_type}/{request_uuid}",
   )(pathParams);

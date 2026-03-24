@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -15,127 +16,63 @@ import {
   I9AuthorizationDocument$inboundSchema,
 } from "../components/i9authorizationdocument.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  I9AuthorizationDocumentsRequestBody,
+  I9AuthorizationDocumentsRequestBody$Outbound,
+  I9AuthorizationDocumentsRequestBody$outboundSchema,
+} from "../components/i9authorizationdocumentsrequestbody.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type Documents = {
-  /**
-   * The document type
-   */
-  documentType: string;
-  /**
-   * The document title associated with the document type
-   */
-  documentTitle: string;
-  /**
-   * The document's document number
-   */
-  documentNumber?: string | undefined;
-  /**
-   * The document's expiration date
-   */
-  expirationDate?: string | undefined;
-  /**
-   * The document's issuing authority
-   */
-  issuingAuthority: string;
-};
-
-export type PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody = {
-  /**
-   * An array of I-9 verification documents
-   */
-  documents: Array<Documents>;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentySixMinus02Minus01: "2026-02-01",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion
+  >;
 
 export type PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the employee
    */
   employeeId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody;
+  i9AuthorizationDocumentsRequestBody: I9AuthorizationDocumentsRequestBody;
 };
 
 export type PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Created
    */
-  i9AuthorizationDocumentsObject?: Array<I9AuthorizationDocument> | undefined;
+  i9AuthorizationDocuments?: Array<I9AuthorizationDocument> | undefined;
 };
 
 /** @internal */
-export type Documents$Outbound = {
-  document_type: string;
-  document_title: string;
-  document_number?: string | undefined;
-  expiration_date?: string | undefined;
-  issuing_authority: string;
-};
-
-/** @internal */
-export const Documents$outboundSchema: z.ZodType<
-  Documents$Outbound,
-  z.ZodTypeDef,
-  Documents
-> = z.object({
-  documentType: z.string(),
-  documentTitle: z.string(),
-  documentNumber: z.string().optional(),
-  expirationDate: z.string().optional(),
-  issuingAuthority: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    documentType: "document_type",
-    documentTitle: "document_title",
-    documentNumber: "document_number",
-    expirationDate: "expiration_date",
-    issuingAuthority: "issuing_authority",
-  });
-});
-
-export function documentsToJSON(documents: Documents): string {
-  return JSON.stringify(Documents$outboundSchema.parse(documents));
-}
-
-/** @internal */
-export type PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody$Outbound =
-  {
-    documents: Array<Documents$Outbound>;
-  };
-
-/** @internal */
-export const PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody$outboundSchema:
-  z.ZodType<
-    PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody$Outbound,
-    z.ZodTypeDef,
-    PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody
-  > = z.object({
-    documents: z.array(z.lazy(() => Documents$outboundSchema)),
-  });
-
-export function putV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBodyToJSON(
-  putV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody:
-    PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody$outboundSchema
-      .parse(putV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody),
+export const PutV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PutV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion,
   );
-}
 
 /** @internal */
 export type PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest$Outbound = {
-  employee_id: string;
   "X-Gusto-API-Version": string;
-  RequestBody:
-    PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody$Outbound;
+  employee_id: string;
+  "I9-Authorization-Documents-Request-Body":
+    I9AuthorizationDocumentsRequestBody$Outbound;
 };
 
 /** @internal */
@@ -145,16 +82,18 @@ export const PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest$outboundSch
     z.ZodTypeDef,
     PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest
   > = z.object({
+    xGustoAPIVersion:
+      PutV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion$outboundSchema
+        .default("2026-02-01"),
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody$outboundSchema
-    ),
+    i9AuthorizationDocumentsRequestBody:
+      I9AuthorizationDocumentsRequestBody$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      employeeId: "employee_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      employeeId: "employee_id",
+      i9AuthorizationDocumentsRequestBody:
+        "I9-Authorization-Documents-Request-Body",
     });
   });
 
@@ -176,13 +115,12 @@ export const PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$inboundSch
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "I9-Authorization-Documents-Object": z.array(
-      I9AuthorizationDocument$inboundSchema,
-    ).optional(),
+    "I9-Authorization-Documents": z.array(I9AuthorizationDocument$inboundSchema)
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "I9-Authorization-Documents-Object": "i9AuthorizationDocumentsObject",
+      "I9-Authorization-Documents": "i9AuthorizationDocuments",
     });
   });
 

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { SubmitInformationRequestRequestBody } from "@gusto/embedded-api/models/operations/submitinformationrequest.js";
+import { SubmitInformationRequestRequestBody } from "@gusto/embedded-api-v2025-06-15/models/operations/submitinformationrequest.js";
 
 let value: SubmitInformationRequestRequestBody = {};
 ```

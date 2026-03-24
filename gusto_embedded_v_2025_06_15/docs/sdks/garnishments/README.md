@@ -20,7 +20,7 @@ scope: `garnishments:write`
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-garnishments" method="post" path="/v1/employees/{employee_id}/garnishments" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -46,8 +46,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { garnishmentsCreate } from "@gusto/embedded-api/funcs/garnishmentsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { garnishmentsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/garnishmentsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -88,13 +88,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useGarnishmentsCreateMutation
-} from "@gusto/embedded-api/react-query/garnishmentsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/garnishmentsCreate.js";
 ```
 ### Example Usage: Child-Support-Example
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-garnishments" method="post" path="/v1/employees/{employee_id}/garnishments" example="Child-Support-Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -130,8 +130,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { garnishmentsCreate } from "@gusto/embedded-api/funcs/garnishmentsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { garnishmentsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/garnishmentsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -182,13 +182,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useGarnishmentsCreateMutation
-} from "@gusto/embedded-api/react-query/garnishmentsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/garnishmentsCreate.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-garnishments" method="post" path="/v1/employees/{employee_id}/garnishments" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -216,8 +216,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { garnishmentsCreate } from "@gusto/embedded-api/funcs/garnishmentsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { garnishmentsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/garnishmentsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -260,13 +260,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useGarnishmentsCreateMutation
-} from "@gusto/embedded-api/react-query/garnishmentsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/garnishmentsCreate.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-garnishments" method="post" path="/v1/employees/{employee_id}/garnishments" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -292,8 +292,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { garnishmentsCreate } from "@gusto/embedded-api/funcs/garnishmentsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { garnishmentsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/garnishmentsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -334,13 +334,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useGarnishmentsCreateMutation
-} from "@gusto/embedded-api/react-query/garnishmentsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/garnishmentsCreate.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-garnishments" method="post" path="/v1/employees/{employee_id}/garnishments" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -366,8 +366,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { garnishmentsCreate } from "@gusto/embedded-api/funcs/garnishmentsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { garnishmentsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/garnishmentsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -408,7 +408,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useGarnishmentsCreateMutation
-} from "@gusto/embedded-api/react-query/garnishmentsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/garnishmentsCreate.js";
 ```
 
 ### Parameters
@@ -441,7 +441,7 @@ scope: `garnishments:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-garnishments" method="get" path="/v1/employees/{employee_id}/garnishments" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -463,8 +463,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { garnishmentsList } from "@gusto/embedded-api/funcs/garnishmentsList.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { garnishmentsList } from "@gusto/embedded-api-v2025-06-15/funcs/garnishmentsList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -512,7 +512,7 @@ import {
   // mutations and other user actions.
   invalidateGarnishmentsList,
   invalidateAllGarnishmentsList,
-} from "@gusto/embedded-api/react-query/garnishmentsList.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/garnishmentsList.js";
 ```
 
 ### Parameters
@@ -544,7 +544,7 @@ scope: `garnishments:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-garnishments-garnishment_id" method="get" path="/v1/garnishments/{garnishment_id}" example="Child-Support-Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -566,8 +566,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { garnishmentsGet } from "@gusto/embedded-api/funcs/garnishmentsGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { garnishmentsGet } from "@gusto/embedded-api-v2025-06-15/funcs/garnishmentsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -615,13 +615,13 @@ import {
   // mutations and other user actions.
   invalidateGarnishmentsGet,
   invalidateAllGarnishmentsGet,
-} from "@gusto/embedded-api/react-query/garnishmentsGet.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/garnishmentsGet.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-garnishments-garnishment_id" method="get" path="/v1/garnishments/{garnishment_id}" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -643,8 +643,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { garnishmentsGet } from "@gusto/embedded-api/funcs/garnishmentsGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { garnishmentsGet } from "@gusto/embedded-api-v2025-06-15/funcs/garnishmentsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -692,7 +692,7 @@ import {
   // mutations and other user actions.
   invalidateGarnishmentsGet,
   invalidateAllGarnishmentsGet,
-} from "@gusto/embedded-api/react-query/garnishmentsGet.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/garnishmentsGet.js";
 ```
 
 ### Parameters
@@ -724,7 +724,7 @@ scope: `garnishments:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-garnishments-garnishment_id" method="put" path="/v1/garnishments/{garnishment_id}" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -749,8 +749,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { garnishmentsUpdate } from "@gusto/embedded-api/funcs/garnishmentsUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { garnishmentsUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/garnishmentsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -790,13 +790,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useGarnishmentsUpdateMutation
-} from "@gusto/embedded-api/react-query/garnishmentsUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/garnishmentsUpdate.js";
 ```
 ### Example Usage: Child-Support-Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-garnishments-garnishment_id" method="put" path="/v1/garnishments/{garnishment_id}" example="Child-Support-Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -821,8 +821,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { garnishmentsUpdate } from "@gusto/embedded-api/funcs/garnishmentsUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { garnishmentsUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/garnishmentsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -862,13 +862,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useGarnishmentsUpdateMutation
-} from "@gusto/embedded-api/react-query/garnishmentsUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/garnishmentsUpdate.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-garnishments-garnishment_id" method="put" path="/v1/garnishments/{garnishment_id}" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -894,8 +894,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { garnishmentsUpdate } from "@gusto/embedded-api/funcs/garnishmentsUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { garnishmentsUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/garnishmentsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -936,13 +936,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useGarnishmentsUpdateMutation
-} from "@gusto/embedded-api/react-query/garnishmentsUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/garnishmentsUpdate.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-garnishments-garnishment_id" method="put" path="/v1/garnishments/{garnishment_id}" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -967,8 +967,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { garnishmentsUpdate } from "@gusto/embedded-api/funcs/garnishmentsUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { garnishmentsUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/garnishmentsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1008,13 +1008,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useGarnishmentsUpdateMutation
-} from "@gusto/embedded-api/react-query/garnishmentsUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/garnishmentsUpdate.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-garnishments-garnishment_id" method="put" path="/v1/garnishments/{garnishment_id}" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1039,8 +1039,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { garnishmentsUpdate } from "@gusto/embedded-api/funcs/garnishmentsUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { garnishmentsUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/garnishmentsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1080,7 +1080,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useGarnishmentsUpdateMutation
-} from "@gusto/embedded-api/react-query/garnishmentsUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/garnishmentsUpdate.js";
 ```
 
 ### Parameters
@@ -1113,7 +1113,7 @@ scope: `garnishments:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-garnishments-child_support" method="get" path="/v1/garnishments/child_support" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1133,8 +1133,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { garnishmentsGetChildSupportData } from "@gusto/embedded-api/funcs/garnishmentsGetChildSupportData.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { garnishmentsGetChildSupportData } from "@gusto/embedded-api-v2025-06-15/funcs/garnishmentsGetChildSupportData.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1180,7 +1180,7 @@ import {
   // mutations and other user actions.
   invalidateGarnishmentsGetChildSupportData,
   invalidateAllGarnishmentsGetChildSupportData,
-} from "@gusto/embedded-api/react-query/garnishmentsGetChildSupportData.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/garnishmentsGetChildSupportData.js";
 ```
 
 ### Parameters

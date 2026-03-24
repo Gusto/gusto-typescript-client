@@ -77,7 +77,7 @@ export function useLocationsUpdateMutation(
 }
 
 export function mutationKeyLocationsUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "Locations", "update"];
+  return ["@gusto/embedded-api-v2025-06-15", "Locations", "update"];
 }
 
 export function buildLocationsUpdateMutation(

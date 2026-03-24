@@ -92,7 +92,7 @@ export function queryKeyPayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisburse
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v2025-06-15",
     "Payrolls",
     "getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements",
     companyId,

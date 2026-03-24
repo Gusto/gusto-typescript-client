@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { RehireBody } from "@gusto/embedded-api/models/components/rehirebody.js";
+import { RehireBody } from "@gusto/embedded-api-v2025-06-15/models/components/rehirebody.js";
 
 let value: RehireBody = {
   effectiveDate: "<value>",

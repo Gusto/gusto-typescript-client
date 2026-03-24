@@ -7,7 +7,7 @@ system-level tokens or when the owner cannot be determined.
 ## Example Usage
 
 ```typescript
-import { ResourceOwner } from "@gusto/embedded-api/models/components/tokeninfo.js";
+import { ResourceOwner } from "@gusto/embedded-api-v2025-06-15/models/components/tokeninfo.js";
 
 let value: ResourceOwner = {
   type: "CompanyAdmin",

@@ -58,7 +58,7 @@ scope: `company_tax_requirements:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_uuid-tax_requirements-state" method="get" path="/v1/companies/{company_uuid}/tax_requirements/{state}" example="Example Tax Requirements for GA" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -81,8 +81,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { taxRequirementsGet } from "@gusto/embedded-api/funcs/taxRequirementsGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { taxRequirementsGet } from "@gusto/embedded-api-v2025-06-15/funcs/taxRequirementsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -131,7 +131,7 @@ import {
   // mutations and other user actions.
   invalidateTaxRequirementsGet,
   invalidateAllTaxRequirementsGet,
-} from "@gusto/embedded-api/react-query/taxRequirementsGet.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/taxRequirementsGet.js";
 ```
 
 ### Parameters
@@ -163,7 +163,7 @@ scope: `company_tax_requirements:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_uuid-tax_requirements-state" method="put" path="/v1/companies/{company_uuid}/tax_requirements/{state}" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -187,8 +187,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { taxRequirementsUpdateState } from "@gusto/embedded-api/funcs/taxRequirementsUpdateState.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { taxRequirementsUpdateState } from "@gusto/embedded-api-v2025-06-15/funcs/taxRequirementsUpdateState.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -227,13 +227,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useTaxRequirementsUpdateStateMutation
-} from "@gusto/embedded-api/react-query/taxRequirementsUpdateState.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/taxRequirementsUpdateState.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_uuid-tax_requirements-state" method="put" path="/v1/companies/{company_uuid}/tax_requirements/{state}" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -297,8 +297,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { taxRequirementsUpdateState } from "@gusto/embedded-api/funcs/taxRequirementsUpdateState.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { taxRequirementsUpdateState } from "@gusto/embedded-api-v2025-06-15/funcs/taxRequirementsUpdateState.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -377,13 +377,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useTaxRequirementsUpdateStateMutation
-} from "@gusto/embedded-api/react-query/taxRequirementsUpdateState.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/taxRequirementsUpdateState.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_uuid-tax_requirements-state" method="put" path="/v1/companies/{company_uuid}/tax_requirements/{state}" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -407,8 +407,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { taxRequirementsUpdateState } from "@gusto/embedded-api/funcs/taxRequirementsUpdateState.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { taxRequirementsUpdateState } from "@gusto/embedded-api-v2025-06-15/funcs/taxRequirementsUpdateState.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -447,13 +447,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useTaxRequirementsUpdateStateMutation
-} from "@gusto/embedded-api/react-query/taxRequirementsUpdateState.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/taxRequirementsUpdateState.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_uuid-tax_requirements-state" method="put" path="/v1/companies/{company_uuid}/tax_requirements/{state}" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -477,8 +477,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { taxRequirementsUpdateState } from "@gusto/embedded-api/funcs/taxRequirementsUpdateState.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { taxRequirementsUpdateState } from "@gusto/embedded-api-v2025-06-15/funcs/taxRequirementsUpdateState.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -517,7 +517,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useTaxRequirementsUpdateStateMutation
-} from "@gusto/embedded-api/react-query/taxRequirementsUpdateState.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/taxRequirementsUpdateState.js";
 ```
 
 ### Parameters
@@ -550,7 +550,7 @@ scope: `company_tax_requirements:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_uuid-tax_requirements" method="get" path="/v1/companies/{company_uuid}/tax_requirements" example="Company with requirements in CA and GA" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -572,8 +572,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { taxRequirementsGetAll } from "@gusto/embedded-api/funcs/taxRequirementsGetAll.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { taxRequirementsGetAll } from "@gusto/embedded-api-v2025-06-15/funcs/taxRequirementsGetAll.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -621,7 +621,7 @@ import {
   // mutations and other user actions.
   invalidateTaxRequirementsGetAll,
   invalidateAllTaxRequirementsGetAll,
-} from "@gusto/embedded-api/react-query/taxRequirementsGetAll.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/taxRequirementsGetAll.js";
 ```
 
 ### Parameters

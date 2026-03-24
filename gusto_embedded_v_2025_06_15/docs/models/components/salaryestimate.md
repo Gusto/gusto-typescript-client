@@ -5,7 +5,7 @@ A salary estimate calculation for an S-Corp owner based on occupation, experienc
 ## Example Usage
 
 ```typescript
-import { SalaryEstimate } from "@gusto/embedded-api/models/components/salaryestimate.js";
+import { SalaryEstimate } from "@gusto/embedded-api-v2025-06-15/models/components/salaryestimate.js";
 
 let value: SalaryEstimate = {
   uuid: "23ce0526-a4d7-4ff9-9c58-19f16a77c941",

@@ -78,5 +78,11 @@ export function queryKeyEmployeesGet(
     include?: Array<QueryParamInclude> | undefined;
   },
 ): QueryKey {
-  return ["@gusto/embedded-api", "Employees", "get", employeeId, parameters];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "Employees",
+    "get",
+    employeeId,
+    parameters,
+  ];
 }

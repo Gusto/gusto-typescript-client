@@ -42,9 +42,8 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it meets both criteria:
- *
- * - `processed` is `true`
- * - Current time is earlier than 4pm PT on the `payroll_deadline`
+ * - `processed` is true
+ * - Current time is earlier than 3:30pm PT on the payroll_deadline
  *
  * scope: `payrolls:run`
  */
@@ -119,7 +118,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/companies/{company_id}/payrolls/{payroll_id}/cancel",
   )(pathParams);

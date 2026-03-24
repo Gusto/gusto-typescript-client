@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { IdentityVerificationStatus } from "@gusto/embedded-api/models/components/signatory.js";
+import { IdentityVerificationStatus } from "@gusto/embedded-api-v2025-06-15/models/components/signatory.js";
 
 let value: IdentityVerificationStatus = "Pass";
 ```

@@ -83,7 +83,7 @@ export function queryKeyEmployeesGetCustomFields(
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v2025-06-15",
     "Employees",
     "getCustomFields",
     employeeId,

@@ -39,15 +39,15 @@ export type Job = {
    */
   primary?: boolean | undefined;
   /**
-   * The current compensation rate of the job.
+   * The employee's pay rate for this job (e.g., hourly wage or annual salary). This is sensitive compensation data and requires the `compensations:read` scope.
    */
   rate?: string | undefined;
   /**
-   * The payment unit of the current compensation for the job.
+   * How the employee is paid for this job (e.g., Hour, Week, Month, Year, Paycheck). This is sensitive compensation data and requires the `compensations:read` scope.
    */
   paymentUnit?: string | null | undefined;
   /**
-   * The UUID of the current compensation of the job.
+   * The UUID of the current active compensation record for this job. Requires the `compensations:read` scope.
    */
   currentCompensationUuid?: string | undefined;
   /**
@@ -62,6 +62,9 @@ export type Job = {
    * The risk class code for workers' compensation in Washington state. Please visit [Washington state's Risk Class page](https://www.lni.wa.gov/insurance/rates-risk-classes/risk-classes-for-workers-compensation/risk-class-lookup#/) to learn more.
    */
   stateWcClassCode?: string | null | undefined;
+  /**
+   * The compensation history for this job, including pay rate, payment unit, FLSA status, and effective dates. This is sensitive pay information and requires the `compensations:read` scope.
+   */
   compensations?: Array<Compensation> | undefined;
   /**
    * The uuid of the employee's work location.

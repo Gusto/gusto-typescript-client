@@ -83,7 +83,7 @@ export function queryKeyPeopleBatchesGetV1PeopleBatchesPeopleBatchUuid(
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v2025-06-15",
     "People Batches",
     "getV1PeopleBatchesPeopleBatchUuid",
     peopleBatchUuid,

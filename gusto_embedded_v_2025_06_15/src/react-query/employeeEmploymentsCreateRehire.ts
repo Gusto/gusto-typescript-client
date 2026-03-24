@@ -76,7 +76,11 @@ export function useEmployeeEmploymentsCreateRehireMutation(
 }
 
 export function mutationKeyEmployeeEmploymentsCreateRehire(): MutationKey {
-  return ["@gusto/embedded-api", "employeeEmployments", "createRehire"];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "employeeEmployments",
+    "createRehire",
+  ];
 }
 
 export function buildEmployeeEmploymentsCreateRehireMutation(

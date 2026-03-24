@@ -5,7 +5,7 @@ Represents an employee's payment method details.
 ## Example Usage
 
 ```typescript
-import { EmployeePaymentDetail } from "@gusto/embedded-api/models/components/employeepaymentdetail.js";
+import { EmployeePaymentDetail } from "@gusto/embedded-api-v2025-06-15/models/components/employeepaymentdetail.js";
 
 let value: EmployeePaymentDetail = {};
 ```

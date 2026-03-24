@@ -5,7 +5,7 @@ The kind of integration set up for the company. Required when `aggregation` is '
 ## Example Usage
 
 ```typescript
-import { IntegrationType } from "@gusto/embedded-api/models/operations/postpayrollspayrolluuidreportsgeneralledger.js";
+import { IntegrationType } from "@gusto/embedded-api-v2025-06-15/models/operations/postpayrollspayrolluuidreportsgeneralledger.js";
 
 let value: IntegrationType = "qbo";
 ```

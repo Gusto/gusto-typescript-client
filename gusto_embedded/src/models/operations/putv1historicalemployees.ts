@@ -309,7 +309,7 @@ export const PutV1HistoricalEmployeesRequest$outboundSchema: z.ZodType<
 > = z.object({
   companyUuid: z.string(),
   historicalEmployeeUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   requestBody: z.lazy(() => PutV1HistoricalEmployeesRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

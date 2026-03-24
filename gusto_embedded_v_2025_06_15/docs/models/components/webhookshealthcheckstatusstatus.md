@@ -5,7 +5,7 @@ Latest health status of the webhooks system
 ## Example Usage
 
 ```typescript
-import { WebhooksHealthCheckStatusStatus } from "@gusto/embedded-api/models/components/webhookshealthcheckstatus.js";
+import { WebhooksHealthCheckStatusStatus } from "@gusto/embedded-api-v2025-06-15/models/components/webhookshealthcheckstatus.js";
 
 let value: WebhooksHealthCheckStatusStatus = "unknown";
 ```

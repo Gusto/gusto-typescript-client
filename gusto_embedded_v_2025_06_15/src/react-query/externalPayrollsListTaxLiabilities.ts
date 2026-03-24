@@ -138,7 +138,7 @@ export function invalidateExternalPayrollsListTaxLiabilities(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "externalPayrolls",
       "listTaxLiabilities",
       ...queryKeyBase,
@@ -152,6 +152,10 @@ export function invalidateAllExternalPayrollsListTaxLiabilities(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "externalPayrolls", "listTaxLiabilities"],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "externalPayrolls",
+      "listTaxLiabilities",
+    ],
   });
 }

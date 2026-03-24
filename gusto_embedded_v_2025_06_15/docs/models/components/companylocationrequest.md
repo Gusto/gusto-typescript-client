@@ -5,7 +5,7 @@ Request body for creating a company location (company address).
 ## Example Usage
 
 ```typescript
-import { CompanyLocationRequest } from "@gusto/embedded-api/models/components/companylocationrequest.js";
+import { CompanyLocationRequest } from "@gusto/embedded-api-v2025-06-15/models/components/companylocationrequest.js";
 
 let value: CompanyLocationRequest = {
   street1: "300 3rd Street",

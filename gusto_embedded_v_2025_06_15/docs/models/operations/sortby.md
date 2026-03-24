@@ -5,7 +5,7 @@ Field to sort employee compensations by
 ## Example Usage
 
 ```typescript
-import { SortBy } from "@gusto/embedded-api/models/operations/getv1companiescompanyidpayrollspayrollid.js";
+import { SortBy } from "@gusto/embedded-api-v2025-06-15/models/operations/getv1companiescompanyidpayrollspayrollid.js";
 
 let value: SortBy = "last_name";
 ```

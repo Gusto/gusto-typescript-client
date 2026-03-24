@@ -46,7 +46,7 @@ export const GetV1BenefitsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1BenefitsRequest
 > = z.object({
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",

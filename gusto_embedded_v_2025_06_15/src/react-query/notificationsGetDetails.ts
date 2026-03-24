@@ -145,7 +145,7 @@ export function invalidateNotificationsGetDetails(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "Notifications",
       "getDetails",
       ...queryKeyBase,
@@ -159,6 +159,10 @@ export function invalidateAllNotificationsGetDetails(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Notifications", "getDetails"],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "Notifications",
+      "getDetails",
+    ],
   });
 }

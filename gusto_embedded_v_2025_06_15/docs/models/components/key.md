@@ -5,7 +5,7 @@ A unique identifier for the payroll blocker reason. For a complete list of block
 ## Example Usage
 
 ```typescript
-import { Key } from "@gusto/embedded-api/models/components/payrollblocker.js";
+import { Key } from "@gusto/embedded-api-v2025-06-15/models/components/payrollblocker.js";
 
 let value: Key = "needs_approval";
 ```

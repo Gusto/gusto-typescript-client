@@ -5,7 +5,7 @@ The contractor's type, either "Individual" or "Business".
 ## Example Usage
 
 ```typescript
-import { ContractorType } from "@gusto/embedded-api/models/components/contractor.js";
+import { ContractorType } from "@gusto/embedded-api-v2025-06-15/models/components/contractor.js";
 
 let value: ContractorType = "Business";
 ```

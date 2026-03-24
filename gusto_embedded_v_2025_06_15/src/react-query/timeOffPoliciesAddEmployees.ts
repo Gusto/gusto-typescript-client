@@ -78,7 +78,7 @@ export function useTimeOffPoliciesAddEmployeesMutation(
 }
 
 export function mutationKeyTimeOffPoliciesAddEmployees(): MutationKey {
-  return ["@gusto/embedded-api", "timeOffPolicies", "addEmployees"];
+  return ["@gusto/embedded-api-v2025-06-15", "timeOffPolicies", "addEmployees"];
 }
 
 export function buildTimeOffPoliciesAddEmployeesMutation(

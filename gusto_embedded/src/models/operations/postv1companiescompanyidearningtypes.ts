@@ -88,7 +88,7 @@ export const PostV1CompaniesCompanyIdEarningTypesRequest$outboundSchema:
     PostV1CompaniesCompanyIdEarningTypesRequest
   > = z.object({
     companyId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
     requestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdEarningTypesRequestBody$outboundSchema
     ),

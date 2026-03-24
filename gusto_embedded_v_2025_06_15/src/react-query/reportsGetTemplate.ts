@@ -134,7 +134,7 @@ export function invalidateReportsGetTemplate(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "Reports",
       "getTemplate",
       ...queryKeyBase,
@@ -148,6 +148,6 @@ export function invalidateAllReportsGetTemplate(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Reports", "getTemplate"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "Reports", "getTemplate"],
   });
 }

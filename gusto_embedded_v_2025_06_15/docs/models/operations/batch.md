@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Batch } from "@gusto/embedded-api/models/operations/postv1companiescompanyidpeoplebatches.js";
+import { Batch } from "@gusto/embedded-api-v2025-06-15/models/operations/postv1companiescompanyidpeoplebatches.js";
 
 let value: Batch = {
   entityType: "employee",

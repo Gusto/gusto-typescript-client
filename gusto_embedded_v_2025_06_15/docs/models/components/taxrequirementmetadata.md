@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { TaxRequirementMetadata } from "@gusto/embedded-api/models/components/taxrequirementmetadata.js";
+import { TaxRequirementMetadata } from "@gusto/embedded-api-v2025-06-15/models/components/taxrequirementmetadata.js";
 
 let value: TaxRequirementMetadata = {
   type: "text",

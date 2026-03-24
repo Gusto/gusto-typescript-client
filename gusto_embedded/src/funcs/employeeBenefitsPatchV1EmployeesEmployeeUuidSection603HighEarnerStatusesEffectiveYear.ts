@@ -125,7 +125,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/employees/{employee_uuid}/section603_high_earner_statuses/{effective_year}",
   )(pathParams);

@@ -5,7 +5,7 @@ The available company-wide compensation rates for the company.
 ## Example Usage
 
 ```typescript
-import { Compensations } from "@gusto/embedded-api/models/components/company.js";
+import { Compensations } from "@gusto/embedded-api-v2025-06-15/models/components/company.js";
 
 let value: Compensations = {
   hourly: [

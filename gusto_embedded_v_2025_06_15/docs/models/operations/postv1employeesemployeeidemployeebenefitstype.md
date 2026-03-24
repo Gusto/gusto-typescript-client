@@ -11,7 +11,7 @@ The company contribution scheme.
 ## Example Usage
 
 ```typescript
-import { PostV1EmployeesEmployeeIdEmployeeBenefitsType } from "@gusto/embedded-api/models/operations/postv1employeesemployeeidemployeebenefits.js";
+import { PostV1EmployeesEmployeeIdEmployeeBenefitsType } from "@gusto/embedded-api-v2025-06-15/models/operations/postv1employeesemployeeidemployeebenefits.js";
 
 let value: PostV1EmployeesEmployeeIdEmployeeBenefitsType = "tiered";
 ```

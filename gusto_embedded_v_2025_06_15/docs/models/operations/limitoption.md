@@ -10,7 +10,7 @@ their limit.
 ## Example Usage
 
 ```typescript
-import { LimitOption } from "@gusto/embedded-api/models/operations/postv1employeesemployeeidemployeebenefits.js";
+import { LimitOption } from "@gusto/embedded-api-v2025-06-15/models/operations/postv1employeesemployeeidemployeebenefits.js";
 
 let value: LimitOption = "Family";
 ```

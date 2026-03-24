@@ -5,7 +5,7 @@ The payment method for the disbursement
 ## Example Usage
 
 ```typescript
-import { PayrollPartnerDisbursementsPaymentMethod } from "@gusto/embedded-api/models/components/payrollpartnerdisbursements.js";
+import { PayrollPartnerDisbursementsPaymentMethod } from "@gusto/embedded-api-v2025-06-15/models/components/payrollpartnerdisbursements.js";
 
 let value: PayrollPartnerDisbursementsPaymentMethod = "Direct Deposit";
 ```

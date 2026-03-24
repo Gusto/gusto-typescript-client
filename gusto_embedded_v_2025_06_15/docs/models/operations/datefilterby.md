@@ -5,7 +5,7 @@ Specifies which date field to use when filtering payrolls with start_date and en
 ## Example Usage
 
 ```typescript
-import { DateFilterBy } from "@gusto/embedded-api/models/operations/getv1companiescompanyidpayrolls.js";
+import { DateFilterBy } from "@gusto/embedded-api-v2025-06-15/models/operations/getv1companiescompanyidpayrolls.js";
 
 let value: DateFilterBy = "check_date";
 ```

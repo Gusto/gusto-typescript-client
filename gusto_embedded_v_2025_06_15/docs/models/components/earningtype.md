@@ -5,7 +5,7 @@ Example response
 ## Example Usage
 
 ```typescript
-import { EarningType } from "@gusto/embedded-api/models/components/earningtype.js";
+import { EarningType } from "@gusto/embedded-api-v2025-06-15/models/components/earningtype.js";
 
 let value: EarningType = {
   uuid: "76993122-fd26-4865-9717-4a06f49382ef",

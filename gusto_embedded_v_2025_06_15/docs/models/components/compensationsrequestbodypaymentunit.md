@@ -5,7 +5,7 @@ The unit accompanying the compensation rate. If the employee is an owner, rate s
 ## Example Usage
 
 ```typescript
-import { CompensationsRequestBodyPaymentUnit } from "@gusto/embedded-api/models/components/compensationsrequestbody.js";
+import { CompensationsRequestBodyPaymentUnit } from "@gusto/embedded-api-v2025-06-15/models/components/compensationsrequestbody.js";
 
 let value: CompensationsRequestBodyPaymentUnit = "Year";
 ```

@@ -5,7 +5,7 @@ The updated onboarding status for the contractor
 ## Example Usage
 
 ```typescript
-import { PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus } from "@gusto/embedded-api/models/operations/putv1contractorscontractoruuidonboardingstatus.js";
+import { PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus } from "@gusto/embedded-api-v2025-06-15/models/operations/putv1contractorscontractoruuidonboardingstatus.js";
 
 let value: PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus =
   "self_onboarding_review";

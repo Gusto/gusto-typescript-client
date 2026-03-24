@@ -25,7 +25,7 @@ scope: `contractors:manage`
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_uuid-contractors" method="post" path="/v1/companies/{company_uuid}/contractors" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -52,8 +52,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsCreate } from "@gusto/embedded-api/funcs/contractorsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -95,13 +95,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsCreateMutation
-} from "@gusto/embedded-api/react-query/contractorsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsCreate.js";
 ```
 ### Example Usage: Business Contractor
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_uuid-contractors" method="post" path="/v1/companies/{company_uuid}/contractors" example="Business Contractor" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -128,8 +128,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsCreate } from "@gusto/embedded-api/funcs/contractorsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -171,13 +171,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsCreateMutation
-} from "@gusto/embedded-api/react-query/contractorsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsCreate.js";
 ```
 ### Example Usage: Create a Business contractor
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_uuid-contractors" method="post" path="/v1/companies/{company_uuid}/contractors" example="Create a Business contractor" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -205,8 +205,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsCreate } from "@gusto/embedded-api/funcs/contractorsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -249,13 +249,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsCreateMutation
-} from "@gusto/embedded-api/react-query/contractorsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsCreate.js";
 ```
 ### Example Usage: Create an Individual contractor
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_uuid-contractors" method="post" path="/v1/companies/{company_uuid}/contractors" example="Create an Individual contractor" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -286,8 +286,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsCreate } from "@gusto/embedded-api/funcs/contractorsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -333,13 +333,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsCreateMutation
-} from "@gusto/embedded-api/react-query/contractorsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsCreate.js";
 ```
 ### Example Usage: Individual Contractor
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_uuid-contractors" method="post" path="/v1/companies/{company_uuid}/contractors" example="Individual Contractor" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -366,8 +366,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsCreate } from "@gusto/embedded-api/funcs/contractorsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -409,13 +409,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsCreateMutation
-} from "@gusto/embedded-api/react-query/contractorsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsCreate.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_uuid-contractors" method="post" path="/v1/companies/{company_uuid}/contractors" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -442,8 +442,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsCreate } from "@gusto/embedded-api/funcs/contractorsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -485,13 +485,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsCreateMutation
-} from "@gusto/embedded-api/react-query/contractorsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsCreate.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_uuid-contractors" method="post" path="/v1/companies/{company_uuid}/contractors" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -518,8 +518,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsCreate } from "@gusto/embedded-api/funcs/contractorsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -561,7 +561,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsCreateMutation
-} from "@gusto/embedded-api/react-query/contractorsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsCreate.js";
 ```
 
 ### Parameters
@@ -595,7 +595,7 @@ scope: `contractors:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_uuid-contractors" method="get" path="/v1/companies/{company_uuid}/contractors" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -617,8 +617,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsList } from "@gusto/embedded-api/funcs/contractorsList.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsList } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -666,7 +666,7 @@ import {
   // mutations and other user actions.
   invalidateContractorsList,
   invalidateAllContractorsList,
-} from "@gusto/embedded-api/react-query/contractorsList.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsList.js";
 ```
 
 ### Parameters
@@ -699,7 +699,7 @@ scope: `contractors:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-contractors-contractor_uuid" method="get" path="/v1/contractors/{contractor_uuid}" example="Business Contractor" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -721,8 +721,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsGet } from "@gusto/embedded-api/funcs/contractorsGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsGet } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -770,13 +770,13 @@ import {
   // mutations and other user actions.
   invalidateContractorsGet,
   invalidateAllContractorsGet,
-} from "@gusto/embedded-api/react-query/contractorsGet.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsGet.js";
 ```
 ### Example Usage: Individual Contractor
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-contractors-contractor_uuid" method="get" path="/v1/contractors/{contractor_uuid}" example="Individual Contractor" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -798,8 +798,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsGet } from "@gusto/embedded-api/funcs/contractorsGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsGet } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -847,7 +847,7 @@ import {
   // mutations and other user actions.
   invalidateContractorsGet,
   invalidateAllContractorsGet,
-} from "@gusto/embedded-api/react-query/contractorsGet.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsGet.js";
 ```
 
 ### Parameters
@@ -884,7 +884,7 @@ scope: `contractors:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_uuid" method="put" path="/v1/contractors/{contractor_uuid}" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -911,8 +911,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsUpdate } from "@gusto/embedded-api/funcs/contractorsUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -954,13 +954,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsUpdateMutation
-} from "@gusto/embedded-api/react-query/contractorsUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsUpdate.js";
 ```
 ### Example Usage: Business Contractor
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_uuid" method="put" path="/v1/contractors/{contractor_uuid}" example="Business Contractor" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -987,8 +987,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsUpdate } from "@gusto/embedded-api/funcs/contractorsUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1030,13 +1030,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsUpdateMutation
-} from "@gusto/embedded-api/react-query/contractorsUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsUpdate.js";
 ```
 ### Example Usage: Individual Contractor
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_uuid" method="put" path="/v1/contractors/{contractor_uuid}" example="Individual Contractor" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1063,8 +1063,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsUpdate } from "@gusto/embedded-api/funcs/contractorsUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1106,13 +1106,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsUpdateMutation
-} from "@gusto/embedded-api/react-query/contractorsUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsUpdate.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_uuid" method="put" path="/v1/contractors/{contractor_uuid}" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1139,8 +1139,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsUpdate } from "@gusto/embedded-api/funcs/contractorsUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1182,13 +1182,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsUpdateMutation
-} from "@gusto/embedded-api/react-query/contractorsUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsUpdate.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_uuid" method="put" path="/v1/contractors/{contractor_uuid}" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1215,8 +1215,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsUpdate } from "@gusto/embedded-api/funcs/contractorsUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1258,13 +1258,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsUpdateMutation
-} from "@gusto/embedded-api/react-query/contractorsUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsUpdate.js";
 ```
 ### Example Usage: Update a Business Contractor
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_uuid" method="put" path="/v1/contractors/{contractor_uuid}" example="Update a Business Contractor" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1294,8 +1294,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsUpdate } from "@gusto/embedded-api/funcs/contractorsUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1340,13 +1340,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsUpdateMutation
-} from "@gusto/embedded-api/react-query/contractorsUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsUpdate.js";
 ```
 ### Example Usage: Update an Individual Contractor
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_uuid" method="put" path="/v1/contractors/{contractor_uuid}" example="Update an Individual Contractor" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1378,8 +1378,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsUpdate } from "@gusto/embedded-api/funcs/contractorsUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1426,7 +1426,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsUpdateMutation
-} from "@gusto/embedded-api/react-query/contractorsUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsUpdate.js";
 ```
 
 ### Parameters
@@ -1460,7 +1460,7 @@ scope: `contractors:manage`
 
 <!-- UsageSnippet language="typescript" operationID="delete-v1-contractors-contractor_uuid" method="delete" path="/v1/contractors/{contractor_uuid}" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1482,8 +1482,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsDelete } from "@gusto/embedded-api/funcs/contractorsDelete.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsDelete } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsDelete.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1520,7 +1520,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsDeleteMutation
-} from "@gusto/embedded-api/react-query/contractorsDelete.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsDelete.js";
 ```
 
 ### Parameters
@@ -1585,7 +1585,7 @@ scope: `contractors:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-contractors-contractor_uuid-onboarding_status" method="get" path="/v1/contractors/{contractor_uuid}/onboarding_status" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1607,8 +1607,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsGetOnboardingStatus } from "@gusto/embedded-api/funcs/contractorsGetOnboardingStatus.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsGetOnboardingStatus } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsGetOnboardingStatus.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1656,7 +1656,7 @@ import {
   // mutations and other user actions.
   invalidateContractorsGetOnboardingStatus,
   invalidateAllContractorsGetOnboardingStatus,
-} from "@gusto/embedded-api/react-query/contractorsGetOnboardingStatus.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsGetOnboardingStatus.js";
 ```
 
 ### Parameters
@@ -1698,7 +1698,7 @@ Below is a list of valid onboarding status changes depending on the intended act
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_uuid-onboarding_status" method="put" path="/v1/contractors/{contractor_uuid}/onboarding_status" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1721,8 +1721,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsUpdateOnboardingStatus } from "@gusto/embedded-api/funcs/contractorsUpdateOnboardingStatus.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsUpdateOnboardingStatus } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsUpdateOnboardingStatus.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1760,13 +1760,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsUpdateOnboardingStatusMutation
-} from "@gusto/embedded-api/react-query/contractorsUpdateOnboardingStatus.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsUpdateOnboardingStatus.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_uuid-onboarding_status" method="put" path="/v1/contractors/{contractor_uuid}/onboarding_status" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1789,8 +1789,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsUpdateOnboardingStatus } from "@gusto/embedded-api/funcs/contractorsUpdateOnboardingStatus.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsUpdateOnboardingStatus } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsUpdateOnboardingStatus.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1828,13 +1828,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsUpdateOnboardingStatusMutation
-} from "@gusto/embedded-api/react-query/contractorsUpdateOnboardingStatus.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsUpdateOnboardingStatus.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_uuid-onboarding_status" method="put" path="/v1/contractors/{contractor_uuid}/onboarding_status" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1857,8 +1857,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsUpdateOnboardingStatus } from "@gusto/embedded-api/funcs/contractorsUpdateOnboardingStatus.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsUpdateOnboardingStatus } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsUpdateOnboardingStatus.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1896,13 +1896,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsUpdateOnboardingStatusMutation
-} from "@gusto/embedded-api/react-query/contractorsUpdateOnboardingStatus.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsUpdateOnboardingStatus.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_uuid-onboarding_status" method="put" path="/v1/contractors/{contractor_uuid}/onboarding_status" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1925,8 +1925,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsUpdateOnboardingStatus } from "@gusto/embedded-api/funcs/contractorsUpdateOnboardingStatus.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsUpdateOnboardingStatus } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsUpdateOnboardingStatus.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1964,7 +1964,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsUpdateOnboardingStatusMutation
-} from "@gusto/embedded-api/react-query/contractorsUpdateOnboardingStatus.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsUpdateOnboardingStatus.js";
 ```
 
 ### Parameters
@@ -1997,7 +1997,7 @@ scope: `contractors:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-contractors-contractor_uuid-address" method="get" path="/v1/contractors/{contractor_uuid}/address" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -2019,8 +2019,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsGetAddress } from "@gusto/embedded-api/funcs/contractorsGetAddress.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsGetAddress } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsGetAddress.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -2068,7 +2068,7 @@ import {
   // mutations and other user actions.
   invalidateContractorsGetAddress,
   invalidateAllContractorsGetAddress,
-} from "@gusto/embedded-api/react-query/contractorsGetAddress.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsGetAddress.js";
 ```
 
 ### Parameters
@@ -2104,7 +2104,7 @@ scope: `contractors:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_uuid-address" method="put" path="/v1/contractors/{contractor_uuid}/address" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -2129,8 +2129,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsUpdateAddress } from "@gusto/embedded-api/funcs/contractorsUpdateAddress.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsUpdateAddress } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsUpdateAddress.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -2170,13 +2170,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsUpdateAddressMutation
-} from "@gusto/embedded-api/react-query/contractorsUpdateAddress.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsUpdateAddress.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_uuid-address" method="put" path="/v1/contractors/{contractor_uuid}/address" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -2206,8 +2206,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsUpdateAddress } from "@gusto/embedded-api/funcs/contractorsUpdateAddress.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsUpdateAddress } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsUpdateAddress.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -2252,13 +2252,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsUpdateAddressMutation
-} from "@gusto/embedded-api/react-query/contractorsUpdateAddress.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsUpdateAddress.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_uuid-address" method="put" path="/v1/contractors/{contractor_uuid}/address" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -2283,8 +2283,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsUpdateAddress } from "@gusto/embedded-api/funcs/contractorsUpdateAddress.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsUpdateAddress } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsUpdateAddress.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -2324,13 +2324,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsUpdateAddressMutation
-} from "@gusto/embedded-api/react-query/contractorsUpdateAddress.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsUpdateAddress.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_uuid-address" method="put" path="/v1/contractors/{contractor_uuid}/address" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -2355,8 +2355,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsUpdateAddress } from "@gusto/embedded-api/funcs/contractorsUpdateAddress.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsUpdateAddress } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsUpdateAddress.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -2396,7 +2396,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorsUpdateAddressMutation
-} from "@gusto/embedded-api/react-query/contractorsUpdateAddress.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsUpdateAddress.js";
 ```
 
 ### Parameters
@@ -2453,7 +2453,7 @@ scope: `contractor_payment_methods:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-contractors-payment_details" method="get" path="/v1/companies/{company_id}/contractors/payment_details" example="test_example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -2475,8 +2475,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails } from "@gusto/embedded-api/funcs/contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails } from "@gusto/embedded-api-v2025-06-15/funcs/contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -2524,7 +2524,7 @@ import {
   // mutations and other user actions.
   invalidateContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails,
   invalidateAllContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails,
-} from "@gusto/embedded-api/react-query/contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails.js";
 ```
 
 ### Parameters

@@ -5,13 +5,13 @@
 import dotenv from "dotenv";
 dotenv.config();
 /**
- * Example usage of the @gusto/embedded-api SDK
+ * Example usage of the @gusto/embedded-api-v2025-06-15 SDK
  *
  * To run this example from the examples directory:
  * npm run build && npx tsx introspectionGetInfo.example.ts
  */
 
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",

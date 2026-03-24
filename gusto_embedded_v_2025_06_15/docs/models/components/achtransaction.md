@@ -5,7 +5,7 @@ Representation of an ACH transaction
 ## Example Usage
 
 ```typescript
-import { AchTransaction } from "@gusto/embedded-api/models/components/achtransaction.js";
+import { AchTransaction } from "@gusto/embedded-api-v2025-06-15/models/components/achtransaction.js";
 
 let value: AchTransaction = {
   uuid: "566e71a8-bc3c-4b27-8a9a-b5b7af02bb64",

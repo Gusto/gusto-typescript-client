@@ -73,7 +73,7 @@ export function useDepartmentsAddPeopleMutation(
 }
 
 export function mutationKeyDepartmentsAddPeople(): MutationKey {
-  return ["@gusto/embedded-api", "Departments", "addPeople"];
+  return ["@gusto/embedded-api-v2025-06-15", "Departments", "addPeople"];
 }
 
 export function buildDepartmentsAddPeopleMutation(

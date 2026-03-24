@@ -5,7 +5,7 @@ Request body for updating an employee's Section 603 high earner status
 ## Example Usage
 
 ```typescript
-import { EmployeeSection603HighEarnerStatusUpdateRequest } from "@gusto/embedded-api/models/components/employeesection603highearnerstatusupdaterequest.js";
+import { EmployeeSection603HighEarnerStatusUpdateRequest } from "@gusto/embedded-api-v2025-06-15/models/components/employeesection603highearnerstatusupdaterequest.js";
 
 let value: EmployeeSection603HighEarnerStatusUpdateRequest = {
   isHighEarner: true,

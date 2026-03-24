@@ -5,7 +5,7 @@ Record representing the suspension of a company's Gusto account.
 ## Example Usage
 
 ```typescript
-import { CompanySuspension } from "@gusto/embedded-api/models/components/companysuspension.js";
+import { CompanySuspension } from "@gusto/embedded-api-v2025-06-15/models/components/companysuspension.js";
 
 let value: CompanySuspension = {};
 ```

@@ -1,6 +1,6 @@
 # PayrollUpdateFixedCompensations
 
-An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements.
+An array of fixed compensations for the employee. Fixed compensations include tips and bonuses.
 
 ## Example Usage
 

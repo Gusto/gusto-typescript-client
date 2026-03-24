@@ -150,7 +150,12 @@ export function invalidateEventsGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Events", "get", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "Events",
+      "get",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -160,6 +165,6 @@ export function invalidateAllEventsGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Events", "get"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "Events", "get"],
   });
 }

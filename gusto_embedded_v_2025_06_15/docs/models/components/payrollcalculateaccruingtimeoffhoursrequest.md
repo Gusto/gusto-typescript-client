@@ -5,7 +5,7 @@ Request body for calculating accruing time off hours
 ## Example Usage
 
 ```typescript
-import { PayrollCalculateAccruingTimeOffHoursRequest } from "@gusto/embedded-api/models/components/payrollcalculateaccruingtimeoffhoursrequest.js";
+import { PayrollCalculateAccruingTimeOffHoursRequest } from "@gusto/embedded-api-v2025-06-15/models/components/payrollcalculateaccruingtimeoffhoursrequest.js";
 
 let value: PayrollCalculateAccruingTimeOffHoursRequest = {};
 ```

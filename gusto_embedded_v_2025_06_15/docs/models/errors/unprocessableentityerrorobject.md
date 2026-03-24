@@ -8,7 +8,7 @@ This may happen when the body of your request contains errors such as `invalid_a
 ## Example Usage
 
 ```typescript
-import { UnprocessableEntityErrorObject } from "@gusto/embedded-api/models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityErrorObject } from "@gusto/embedded-api-v2025-06-15/models/errors/unprocessableentityerrorobject.js";
 
 // No examples available for this model
 ```

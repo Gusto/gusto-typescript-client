@@ -154,7 +154,7 @@ export function invalidateEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompa
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "employeeBenefits",
       "getYtdBenefitAmountsFromDifferentCompany",
       ...queryKeyBase,
@@ -169,7 +169,7 @@ export function invalidateAllEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCo
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "employeeBenefits",
       "getYtdBenefitAmountsFromDifferentCompany",
     ],

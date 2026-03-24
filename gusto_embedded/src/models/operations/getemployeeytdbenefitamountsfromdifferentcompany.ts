@@ -61,7 +61,7 @@ export const GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$outboundSch
   > = z.object({
     employeeId: z.string(),
     taxYear: z.number().int().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   }).transform((v) => {
     return remap$(v, {
       employeeId: "employee_id",

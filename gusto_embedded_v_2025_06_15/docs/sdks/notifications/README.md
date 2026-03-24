@@ -21,7 +21,7 @@ scope: `notifications:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-notifications-notification_uuid" method="get" path="/v1/notifications/{notification_uuid}" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -43,8 +43,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { notificationsGetDetails } from "@gusto/embedded-api/funcs/notificationsGetDetails.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { notificationsGetDetails } from "@gusto/embedded-api-v2025-06-15/funcs/notificationsGetDetails.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -92,7 +92,7 @@ import {
   // mutations and other user actions.
   invalidateNotificationsGetDetails,
   invalidateAllNotificationsGetDetails,
-} from "@gusto/embedded-api/react-query/notificationsGetDetails.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/notificationsGetDetails.js";
 ```
 
 ### Parameters
@@ -125,7 +125,7 @@ scope: `notifications:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-company-notifications" method="get" path="/v1/companies/{company_uuid}/notifications" example="test_example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -147,8 +147,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { notificationsGetCompanyNotifications } from "@gusto/embedded-api/funcs/notificationsGetCompanyNotifications.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { notificationsGetCompanyNotifications } from "@gusto/embedded-api-v2025-06-15/funcs/notificationsGetCompanyNotifications.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -196,7 +196,7 @@ import {
   // mutations and other user actions.
   invalidateNotificationsGetCompanyNotifications,
   invalidateAllNotificationsGetCompanyNotifications,
-} from "@gusto/embedded-api/react-query/notificationsGetCompanyNotifications.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/notificationsGetCompanyNotifications.js";
 ```
 
 ### Parameters

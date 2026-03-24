@@ -18,7 +18,7 @@ scope: `company_attachments:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-attachment" method="get" path="/v1/companies/{company_id}/attachments/{company_attachment_uuid}" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -41,8 +41,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { companyAttachmentsGetDetails } from "@gusto/embedded-api/funcs/companyAttachmentsGetDetails.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { companyAttachmentsGetDetails } from "@gusto/embedded-api-v2025-06-15/funcs/companyAttachmentsGetDetails.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -91,7 +91,7 @@ import {
   // mutations and other user actions.
   invalidateCompanyAttachmentsGetDetails,
   invalidateAllCompanyAttachmentsGetDetails,
-} from "@gusto/embedded-api/react-query/companyAttachmentsGetDetails.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/companyAttachmentsGetDetails.js";
 ```
 
 ### Parameters
@@ -123,7 +123,7 @@ scope: `company_attachments:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-attachments" method="get" path="/v1/companies/{company_id}/attachments" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -145,8 +145,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { companyAttachmentsGetList } from "@gusto/embedded-api/funcs/companyAttachmentsGetList.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { companyAttachmentsGetList } from "@gusto/embedded-api-v2025-06-15/funcs/companyAttachmentsGetList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -194,7 +194,7 @@ import {
   // mutations and other user actions.
   invalidateCompanyAttachmentsGetList,
   invalidateAllCompanyAttachmentsGetList,
-} from "@gusto/embedded-api/react-query/companyAttachmentsGetList.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/companyAttachmentsGetList.js";
 ```
 
 ### Parameters
@@ -228,7 +228,7 @@ scope: `company_attachments:write`
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-attachment" method="post" path="/v1/companies/{company_id}/attachments" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 import { openAsBlob } from "node:fs";
 
 const gustoEmbedded = new GustoEmbedded({
@@ -255,8 +255,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { companyAttachmentsCreate } from "@gusto/embedded-api/funcs/companyAttachmentsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { companyAttachmentsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/companyAttachmentsCreate.js";
 import { openAsBlob } from "node:fs";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
@@ -298,13 +298,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useCompanyAttachmentsCreateMutation
-} from "@gusto/embedded-api/react-query/companyAttachmentsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/companyAttachmentsCreate.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-attachment" method="post" path="/v1/companies/{company_id}/attachments" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 import { openAsBlob } from "node:fs";
 
 const gustoEmbedded = new GustoEmbedded({
@@ -331,8 +331,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { companyAttachmentsCreate } from "@gusto/embedded-api/funcs/companyAttachmentsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { companyAttachmentsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/companyAttachmentsCreate.js";
 import { openAsBlob } from "node:fs";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
@@ -374,13 +374,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useCompanyAttachmentsCreateMutation
-} from "@gusto/embedded-api/react-query/companyAttachmentsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/companyAttachmentsCreate.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-attachment" method="post" path="/v1/companies/{company_id}/attachments" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 import { openAsBlob } from "node:fs";
 
 const gustoEmbedded = new GustoEmbedded({
@@ -407,8 +407,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { companyAttachmentsCreate } from "@gusto/embedded-api/funcs/companyAttachmentsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { companyAttachmentsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/companyAttachmentsCreate.js";
 import { openAsBlob } from "node:fs";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
@@ -450,13 +450,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useCompanyAttachmentsCreateMutation
-} from "@gusto/embedded-api/react-query/companyAttachmentsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/companyAttachmentsCreate.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-attachment" method="post" path="/v1/companies/{company_id}/attachments" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 import { openAsBlob } from "node:fs";
 
 const gustoEmbedded = new GustoEmbedded({
@@ -483,8 +483,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { companyAttachmentsCreate } from "@gusto/embedded-api/funcs/companyAttachmentsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { companyAttachmentsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/companyAttachmentsCreate.js";
 import { openAsBlob } from "node:fs";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
@@ -526,7 +526,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useCompanyAttachmentsCreateMutation
-} from "@gusto/embedded-api/react-query/companyAttachmentsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/companyAttachmentsCreate.js";
 ```
 
 ### Parameters

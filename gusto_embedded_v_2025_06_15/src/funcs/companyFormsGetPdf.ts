@@ -98,7 +98,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/forms/{form_id}/pdf")(pathParams);
 
   const headers = new Headers(compactMap({

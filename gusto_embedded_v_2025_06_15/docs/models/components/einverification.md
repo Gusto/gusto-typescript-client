@@ -5,7 +5,7 @@ Information about the status of verifying the company's Employer Identification 
 ## Example Usage
 
 ```typescript
-import { EinVerification } from "@gusto/embedded-api/models/components/federaltaxdetails.js";
+import { EinVerification } from "@gusto/embedded-api-v2025-06-15/models/components/federaltaxdetails.js";
 
 let value: EinVerification = {};
 ```

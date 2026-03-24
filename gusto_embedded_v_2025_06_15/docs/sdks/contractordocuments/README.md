@@ -19,7 +19,7 @@ scope: `contractor_documents:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-contractor-documents" method="get" path="/v1/contractors/{contractor_uuid}/documents" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -41,8 +41,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorDocumentsGetAll } from "@gusto/embedded-api/funcs/contractorDocumentsGetAll.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorDocumentsGetAll } from "@gusto/embedded-api-v2025-06-15/funcs/contractorDocumentsGetAll.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -90,7 +90,7 @@ import {
   // mutations and other user actions.
   invalidateContractorDocumentsGetAll,
   invalidateAllContractorDocumentsGetAll,
-} from "@gusto/embedded-api/react-query/contractorDocumentsGetAll.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorDocumentsGetAll.js";
 ```
 
 ### Parameters
@@ -122,7 +122,7 @@ scope: `contractor_documents:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-contractor-document" method="get" path="/v1/documents/{document_uuid}" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -144,8 +144,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorDocumentsGet } from "@gusto/embedded-api/funcs/contractorDocumentsGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorDocumentsGet } from "@gusto/embedded-api-v2025-06-15/funcs/contractorDocumentsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -193,7 +193,7 @@ import {
   // mutations and other user actions.
   invalidateContractorDocumentsGet,
   invalidateAllContractorDocumentsGet,
-} from "@gusto/embedded-api/react-query/contractorDocumentsGet.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorDocumentsGet.js";
 ```
 
 ### Parameters
@@ -225,7 +225,7 @@ scope: `contractor_documents:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-contractor-document-pdf" method="get" path="/v1/documents/{document_uuid}/pdf" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -247,8 +247,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorDocumentsGetPdf } from "@gusto/embedded-api/funcs/contractorDocumentsGetPdf.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorDocumentsGetPdf } from "@gusto/embedded-api-v2025-06-15/funcs/contractorDocumentsGetPdf.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -296,7 +296,7 @@ import {
   // mutations and other user actions.
   invalidateContractorDocumentsGetPdf,
   invalidateAllContractorDocumentsGetPdf,
-} from "@gusto/embedded-api/react-query/contractorDocumentsGetPdf.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorDocumentsGetPdf.js";
 ```
 
 ### Parameters
@@ -328,7 +328,7 @@ scope: `contractor_documents:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractor-document-sign" method="put" path="/v1/documents/{document_uuid}/sign" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -354,8 +354,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorDocumentsSign } from "@gusto/embedded-api/funcs/contractorDocumentsSign.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorDocumentsSign } from "@gusto/embedded-api-v2025-06-15/funcs/contractorDocumentsSign.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -396,13 +396,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorDocumentsSignMutation
-} from "@gusto/embedded-api/react-query/contractorDocumentsSign.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorDocumentsSign.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractor-document-sign" method="put" path="/v1/documents/{document_uuid}/sign" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -428,8 +428,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorDocumentsSign } from "@gusto/embedded-api/funcs/contractorDocumentsSign.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorDocumentsSign } from "@gusto/embedded-api-v2025-06-15/funcs/contractorDocumentsSign.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -470,13 +470,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorDocumentsSignMutation
-} from "@gusto/embedded-api/react-query/contractorDocumentsSign.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorDocumentsSign.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractor-document-sign" method="put" path="/v1/documents/{document_uuid}/sign" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -502,8 +502,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorDocumentsSign } from "@gusto/embedded-api/funcs/contractorDocumentsSign.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorDocumentsSign } from "@gusto/embedded-api-v2025-06-15/funcs/contractorDocumentsSign.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -544,13 +544,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorDocumentsSignMutation
-} from "@gusto/embedded-api/react-query/contractorDocumentsSign.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorDocumentsSign.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractor-document-sign" method="put" path="/v1/documents/{document_uuid}/sign" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -576,8 +576,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorDocumentsSign } from "@gusto/embedded-api/funcs/contractorDocumentsSign.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { contractorDocumentsSign } from "@gusto/embedded-api-v2025-06-15/funcs/contractorDocumentsSign.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -618,7 +618,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useContractorDocumentsSignMutation
-} from "@gusto/embedded-api/react-query/contractorDocumentsSign.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/contractorDocumentsSign.js";
 ```
 
 ### Parameters

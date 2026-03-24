@@ -5,7 +5,7 @@ Request body for creating or updating a holiday pay policy
 ## Example Usage
 
 ```typescript
-import { HolidayPayPolicyRequest } from "@gusto/embedded-api/models/components/holidaypaypolicyrequest.js";
+import { HolidayPayPolicyRequest } from "@gusto/embedded-api-v2025-06-15/models/components/holidaypaypolicyrequest.js";
 
 let value: HolidayPayPolicyRequest = {};
 ```

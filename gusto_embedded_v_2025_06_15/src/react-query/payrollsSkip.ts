@@ -78,7 +78,7 @@ export function usePayrollsSkipMutation(
 }
 
 export function mutationKeyPayrollsSkip(): MutationKey {
-  return ["@gusto/embedded-api", "Payrolls", "skip"];
+  return ["@gusto/embedded-api-v2025-06-15", "Payrolls", "skip"];
 }
 
 export function buildPayrollsSkipMutation(

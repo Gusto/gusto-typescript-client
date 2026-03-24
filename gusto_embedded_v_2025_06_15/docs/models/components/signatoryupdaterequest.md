@@ -5,7 +5,7 @@ Request body for updating a signatory. Email cannot be updated.
 ## Example Usage
 
 ```typescript
-import { SignatoryUpdateRequest } from "@gusto/embedded-api/models/components/signatoryupdaterequest.js";
+import { SignatoryUpdateRequest } from "@gusto/embedded-api-v2025-06-15/models/components/signatoryupdaterequest.js";
 
 let value: SignatoryUpdateRequest = {
   version: "<value>",

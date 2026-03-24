@@ -78,7 +78,7 @@ export function useCompanyAttachmentsCreateMutation(
 }
 
 export function mutationKeyCompanyAttachmentsCreate(): MutationKey {
-  return ["@gusto/embedded-api", "companyAttachments", "create"];
+  return ["@gusto/embedded-api-v2025-06-15", "companyAttachments", "create"];
 }
 
 export function buildCompanyAttachmentsCreateMutation(

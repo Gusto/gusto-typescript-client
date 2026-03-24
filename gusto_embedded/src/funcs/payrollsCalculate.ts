@@ -46,8 +46,6 @@ import { Result } from "../types/fp.js";
  * This calculation is asynchronous and a successful request responds with a 202 HTTP status. To view the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id} endpoint with *include=taxes,benefits,deductions* params.
  *
  * If the company is blocked from running payroll due to issues like incomplete setup, missing information or other compliance issues, the response will be 422 Unprocessable Entity with a categorization of the blockers as described in the error responses.
- *
- * scope: `payrolls:run`
  */
 export function payrollsCalculate(
   client: GustoEmbeddedCore,
@@ -120,7 +118,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/companies/{company_id}/payrolls/{payroll_id}/calculate",
   )(pathParams);

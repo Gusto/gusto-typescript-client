@@ -113,7 +113,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/salary_estimates/{uuid}/accept")(pathParams);
 
   const headers = new Headers(compactMap({

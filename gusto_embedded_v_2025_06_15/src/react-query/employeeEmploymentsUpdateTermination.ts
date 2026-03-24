@@ -78,7 +78,11 @@ export function useEmployeeEmploymentsUpdateTerminationMutation(
 }
 
 export function mutationKeyEmployeeEmploymentsUpdateTermination(): MutationKey {
-  return ["@gusto/embedded-api", "employeeEmployments", "updateTermination"];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "employeeEmployments",
+    "updateTermination",
+  ];
 }
 
 export function buildEmployeeEmploymentsUpdateTerminationMutation(

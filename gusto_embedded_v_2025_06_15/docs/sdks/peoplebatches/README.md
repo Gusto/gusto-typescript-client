@@ -19,7 +19,7 @@ scope: `people_batches:write`
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-people_batches" method="post" path="/v1/companies/{company_id}/people_batches" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -46,8 +46,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { peopleBatchesPostV1CompaniesCompanyIdPeopleBatches } from "@gusto/embedded-api/funcs/peopleBatchesPostV1CompaniesCompanyIdPeopleBatches.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { peopleBatchesPostV1CompaniesCompanyIdPeopleBatches } from "@gusto/embedded-api-v2025-06-15/funcs/peopleBatchesPostV1CompaniesCompanyIdPeopleBatches.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -89,7 +89,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   usePeopleBatchesPostV1CompaniesCompanyIdPeopleBatchesMutation
-} from "@gusto/embedded-api/react-query/peopleBatchesPostV1CompaniesCompanyIdPeopleBatches.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/peopleBatchesPostV1CompaniesCompanyIdPeopleBatches.js";
 ```
 
 ### Parameters
@@ -126,7 +126,7 @@ scope: `people_batches:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-people_batches-people_batch_uuid" method="get" path="/v1/people_batches/{people_batch_uuid}" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -148,8 +148,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { peopleBatchesGetV1PeopleBatchesPeopleBatchUuid } from "@gusto/embedded-api/funcs/peopleBatchesGetV1PeopleBatchesPeopleBatchUuid.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { peopleBatchesGetV1PeopleBatchesPeopleBatchUuid } from "@gusto/embedded-api-v2025-06-15/funcs/peopleBatchesGetV1PeopleBatchesPeopleBatchUuid.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -197,7 +197,7 @@ import {
   // mutations and other user actions.
   invalidatePeopleBatchesGetV1PeopleBatchesPeopleBatchUuid,
   invalidateAllPeopleBatchesGetV1PeopleBatchesPeopleBatchUuid,
-} from "@gusto/embedded-api/react-query/peopleBatchesGetV1PeopleBatchesPeopleBatchUuid.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/peopleBatchesGetV1PeopleBatchesPeopleBatchUuid.js";
 ```
 
 ### Parameters

@@ -145,7 +145,7 @@ export function invalidateIndustrySelectionGet(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "industrySelection",
       "get",
       ...queryKeyBase,
@@ -159,6 +159,6 @@ export function invalidateAllIndustrySelectionGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "industrySelection", "get"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "industrySelection", "get"],
   });
 }

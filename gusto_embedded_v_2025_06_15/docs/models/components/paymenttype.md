@@ -5,7 +5,7 @@ Type of payment for the wire in
 ## Example Usage
 
 ```typescript
-import { PaymentType } from "@gusto/embedded-api/models/components/wireinrequest.js";
+import { PaymentType } from "@gusto/embedded-api-v2025-06-15/models/components/wireinrequest.js";
 
 let value: PaymentType = "Payroll";
 ```

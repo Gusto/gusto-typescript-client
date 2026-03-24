@@ -78,7 +78,7 @@ export function useTimeOffPoliciesDeactivateMutation(
 }
 
 export function mutationKeyTimeOffPoliciesDeactivate(): MutationKey {
-  return ["@gusto/embedded-api", "timeOffPolicies", "deactivate"];
+  return ["@gusto/embedded-api-v2025-06-15", "timeOffPolicies", "deactivate"];
 }
 
 export function buildTimeOffPoliciesDeactivateMutation(

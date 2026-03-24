@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PayrollBlockersErrorMetadata } from "@gusto/embedded-api/models/errors/payrollblockerserror.js";
+import { PayrollBlockersErrorMetadata } from "@gusto/embedded-api-v2025-06-15/models/errors/payrollblockerserror.js";
 
 let value: PayrollBlockersErrorMetadata = {};
 ```

@@ -5,7 +5,7 @@ The type of catch-up contribution for this benefit, as required by Section 603 o
 ## Example Usage
 
 ```typescript
-import { CompanyBenefitWithEmployeeBenefitsCatchUpType } from "@gusto/embedded-api/models/components/companybenefitwithemployeebenefits.js";
+import { CompanyBenefitWithEmployeeBenefitsCatchUpType } from "@gusto/embedded-api-v2025-06-15/models/components/companybenefitwithemployeebenefits.js";
 
 let value: CompanyBenefitWithEmployeeBenefitsCatchUpType = "elective";
 ```

@@ -162,7 +162,7 @@ export function invalidateEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603Hi
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "employeeBenefits",
       "getV1EmployeesEmployeeUuidSection603HighEarnerStatuses",
       ...queryKeyBase,
@@ -177,7 +177,7 @@ export function invalidateAllEmployeeBenefitsGetV1EmployeesEmployeeUuidSection60
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "employeeBenefits",
       "getV1EmployeesEmployeeUuidSection603HighEarnerStatuses",
     ],

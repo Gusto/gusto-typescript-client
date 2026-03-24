@@ -1,4 +1,3 @@
----
 configVersion: 2.0.0
 generation:
   devContainers:
@@ -25,7 +24,7 @@ generation:
     hoistGlobalSecurity: true
   schemas:
     allOfMergeStrategy: shallowMerge
-  requestBodyFieldName: ''
+  requestBodyFieldName: ""
   versioningStrategy: automatic
   persistentEdits: {}
   tests:
@@ -33,7 +32,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.12.4
+  version: 0.12.5
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
@@ -58,7 +57,7 @@ typescript:
   flatteningOrder: parameters-first
   formStringArrayEncodeMode: encoded-string
   forwardCompatibleEnumsByDefault: false
-  forwardCompatibleUnionsByDefault: 'false'
+  forwardCompatibleUnionsByDefault: "false"
   generateExamples: true
   imports:
     option: openapi
@@ -79,7 +78,7 @@ typescript:
   moduleFormat: esm
   multipartArrayFormat: legacy
   outputModelSuffix: output
-  packageName: "@gusto/embedded-api-v2025-06-15"
+  packageName: '@gusto/embedded-api-v2025-06-15'
   preApplyUnionDiscriminators: true
   preserveModelFieldNames: false
   responseFormat: envelope-http

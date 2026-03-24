@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PostV1PlaidProcessorTokenResponse } from "@gusto/embedded-api/models/operations/postv1plaidprocessortoken.js";
+import { PostV1PlaidProcessorTokenResponse } from "@gusto/embedded-api-v2025-06-15/models/operations/postv1plaidprocessortoken.js";
 
 let value: PostV1PlaidProcessorTokenResponse = {};
 ```

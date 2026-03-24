@@ -129,7 +129,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/payrolls/{payroll_id}/employees/{employee_id}/calculate_accruing_time_off_hours",
   )(pathParams);

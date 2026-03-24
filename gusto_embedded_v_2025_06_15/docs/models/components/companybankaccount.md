@@ -5,7 +5,7 @@ The company bank account
 ## Example Usage
 
 ```typescript
-import { CompanyBankAccount } from "@gusto/embedded-api/models/components/companybankaccount.js";
+import { CompanyBankAccount } from "@gusto/embedded-api-v2025-06-15/models/components/companybankaccount.js";
 
 let value: CompanyBankAccount = {
   uuid: "49eeb856-7e39-4c68-b685-77cbaf326faa",

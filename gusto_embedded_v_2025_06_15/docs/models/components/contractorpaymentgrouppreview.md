@@ -5,7 +5,7 @@ Preview of a contractor payment group
 ## Example Usage
 
 ```typescript
-import { ContractorPaymentGroupPreview } from "@gusto/embedded-api/models/components/contractorpaymentgrouppreview.js";
+import { ContractorPaymentGroupPreview } from "@gusto/embedded-api-v2025-06-15/models/components/contractorpaymentgrouppreview.js";
 
 let value: ContractorPaymentGroupPreview = {};
 ```

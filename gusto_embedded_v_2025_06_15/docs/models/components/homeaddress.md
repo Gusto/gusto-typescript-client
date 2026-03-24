@@ -5,7 +5,7 @@ The signatory's home address.
 ## Example Usage
 
 ```typescript
-import { HomeAddress } from "@gusto/embedded-api/models/components/signatorycreaterequest.js";
+import { HomeAddress } from "@gusto/embedded-api-v2025-06-15/models/components/signatorycreaterequest.js";
 
 let value: HomeAddress = {
   street1: "<value>",

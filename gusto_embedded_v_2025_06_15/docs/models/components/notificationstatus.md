@@ -5,7 +5,7 @@ Represents the notification's status as managed by our system. It is updated bas
 ## Example Usage
 
 ```typescript
-import { NotificationStatus } from "@gusto/embedded-api/models/components/notification.js";
+import { NotificationStatus } from "@gusto/embedded-api-v2025-06-15/models/components/notification.js";
 
 let value: NotificationStatus = "expired";
 ```

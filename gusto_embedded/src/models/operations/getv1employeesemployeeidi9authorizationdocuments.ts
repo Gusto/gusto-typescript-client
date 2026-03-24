@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -14,35 +15,56 @@ import {
   I9AuthorizationDocument,
   I9AuthorizationDocument$inboundSchema,
 } from "../components/i9authorizationdocument.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentySixMinus02Minus01: "2026-02-01",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion
+  >;
+
 export type GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the employee
    */
   employeeId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
-  i9AuthorizationDocumentsObject?: Array<I9AuthorizationDocument> | undefined;
+  i9AuthorizationDocuments?: Array<I9AuthorizationDocument> | undefined;
 };
 
 /** @internal */
+export const GetV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    GetV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export type GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest$Outbound = {
-  employee_id: string;
   "X-Gusto-API-Version": string;
+  employee_id: string;
 };
 
 /** @internal */
@@ -52,12 +74,14 @@ export const GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest$outboundSch
     z.ZodTypeDef,
     GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion$outboundSchema
+        .default("2026-02-01"),
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
-      employeeId: "employee_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      employeeId: "employee_id",
     });
   });
 
@@ -79,13 +103,12 @@ export const GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$inboundSch
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "I9-Authorization-Documents-Object": z.array(
-      I9AuthorizationDocument$inboundSchema,
-    ).optional(),
+    "I9-Authorization-Documents": z.array(I9AuthorizationDocument$inboundSchema)
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "I9-Authorization-Documents-Object": "i9AuthorizationDocumentsObject",
+      "I9-Authorization-Documents": "i9AuthorizationDocuments",
     });
   });
 

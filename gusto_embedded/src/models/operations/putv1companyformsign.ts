@@ -105,7 +105,7 @@ export const PutV1CompanyFormSignRequest$outboundSchema: z.ZodType<
 > = z.object({
   formId: z.string(),
   xGustoClientIp: z.string().optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   requestBody: z.lazy(() => PutV1CompanyFormSignRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

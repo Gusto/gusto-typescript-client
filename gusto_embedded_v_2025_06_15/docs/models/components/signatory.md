@@ -5,7 +5,7 @@ The representation of a company's signatory
 ## Example Usage
 
 ```typescript
-import { Signatory } from "@gusto/embedded-api/models/components/signatory.js";
+import { Signatory } from "@gusto/embedded-api-v2025-06-15/models/components/signatory.js";
 
 let value: Signatory = {
   uuid: "c1882bca-2dc2-4688-9ff7-bc3cb31942c2",

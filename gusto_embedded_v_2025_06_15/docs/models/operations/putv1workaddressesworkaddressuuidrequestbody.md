@@ -3,8 +3,8 @@
 ## Example Usage
 
 ```typescript
-import { PutV1WorkAddressesWorkAddressUuidRequestBody } from "@gusto/embedded-api/models/operations/putv1workaddressesworkaddressuuid.js";
-import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+import { PutV1WorkAddressesWorkAddressUuidRequestBody } from "@gusto/embedded-api-v2025-06-15/models/operations/putv1workaddressesworkaddressuuid.js";
+import { RFCDate } from "@gusto/embedded-api-v2025-06-15/types/rfcdate.js";
 
 let value: PutV1WorkAddressesWorkAddressUuidRequestBody = {
   version: "56d00c178bc7393b2a206ed6a86afcb4",

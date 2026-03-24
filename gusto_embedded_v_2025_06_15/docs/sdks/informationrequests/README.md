@@ -17,7 +17,7 @@ scope: `information_requests:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-information-requests" method="get" path="/v1/companies/{company_uuid}/information_requests" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -39,8 +39,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { informationRequestsGetInformationRequests } from "@gusto/embedded-api/funcs/informationRequestsGetInformationRequests.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { informationRequestsGetInformationRequests } from "@gusto/embedded-api-v2025-06-15/funcs/informationRequestsGetInformationRequests.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -88,7 +88,7 @@ import {
   // mutations and other user actions.
   invalidateInformationRequestsGetInformationRequests,
   invalidateAllInformationRequestsGetInformationRequests,
-} from "@gusto/embedded-api/react-query/informationRequestsGetInformationRequests.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/informationRequestsGetInformationRequests.js";
 ```
 
 ### Parameters
@@ -122,7 +122,7 @@ scope: `information_requests:write`
 
 <!-- UsageSnippet language="typescript" operationID="submit-information-request" method="put" path="/v1/information_requests/{information_request_uuid}/submit" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -145,8 +145,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { informationRequestsSubmit } from "@gusto/embedded-api/funcs/informationRequestsSubmit.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { informationRequestsSubmit } from "@gusto/embedded-api-v2025-06-15/funcs/informationRequestsSubmit.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -184,13 +184,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useInformationRequestsSubmitMutation
-} from "@gusto/embedded-api/react-query/informationRequestsSubmit.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/informationRequestsSubmit.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="submit-information-request" method="put" path="/v1/information_requests/{information_request_uuid}/submit" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -213,8 +213,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { informationRequestsSubmit } from "@gusto/embedded-api/funcs/informationRequestsSubmit.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { informationRequestsSubmit } from "@gusto/embedded-api-v2025-06-15/funcs/informationRequestsSubmit.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -252,13 +252,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useInformationRequestsSubmitMutation
-} from "@gusto/embedded-api/react-query/informationRequestsSubmit.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/informationRequestsSubmit.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="submit-information-request" method="put" path="/v1/information_requests/{information_request_uuid}/submit" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -281,8 +281,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { informationRequestsSubmit } from "@gusto/embedded-api/funcs/informationRequestsSubmit.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { informationRequestsSubmit } from "@gusto/embedded-api-v2025-06-15/funcs/informationRequestsSubmit.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -320,7 +320,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useInformationRequestsSubmitMutation
-} from "@gusto/embedded-api/react-query/informationRequestsSubmit.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/informationRequestsSubmit.js";
 ```
 
 ### Parameters

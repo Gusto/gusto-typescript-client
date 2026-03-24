@@ -86,7 +86,7 @@ export function useEmployeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarn
 
 export function mutationKeyEmployeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatuses(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v2025-06-15",
     "employeeBenefits",
     "postV1EmployeesEmployeeUuidSection603HighEarnerStatuses",
   ];

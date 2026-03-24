@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1EmployeesEmployeeIdI9AuthorizationResponse } from "@gusto/embedded-api/models/operations/getv1employeesemployeeidi9authorization.js";
+import { GetV1EmployeesEmployeeIdI9AuthorizationResponse } from "@gusto/embedded-api-v2025-06-15/models/operations/getv1employeesemployeeidi9authorization.js";
 
 let value: GetV1EmployeesEmployeeIdI9AuthorizationResponse = {};
 ```
@@ -13,4 +13,4 @@ let value: GetV1EmployeesEmployeeIdI9AuthorizationResponse = {};
 | Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              |
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
 | `httpMeta`                                                               | [components.HTTPMetadata](../../models/components/httpmetadata.md)       | :heavy_check_mark:                                                       | N/A                                                                      |
-| `i9Authorization`                                                        | [components.I9Authorization](../../models/components/i9authorization.md) | :heavy_minus_sign:                                                       | Example response                                                         |
+| `i9Authorization`                                                        | [components.I9Authorization](../../models/components/i9authorization.md) | :heavy_minus_sign:                                                       | Success                                                                  |

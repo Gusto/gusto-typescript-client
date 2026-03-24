@@ -5,7 +5,7 @@ Request body for creating a compensation.
 ## Example Usage
 
 ```typescript
-import { CompensationsRequestBody } from "@gusto/embedded-api/models/components/compensationsrequestbody.js";
+import { CompensationsRequestBody } from "@gusto/embedded-api-v2025-06-15/models/components/compensationsrequestbody.js";
 
 let value: CompensationsRequestBody = {
   rate: "70000.00",

@@ -4,7 +4,6 @@
 
 ```typescript
 import { EmployeeHomeAddress } from "@gusto/embedded-api/models/components/employeehomeaddress.js";
-import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 let value: EmployeeHomeAddress = {
   street1: "412 Kiera Stravenue",
@@ -13,10 +12,6 @@ let value: EmployeeHomeAddress = {
   state: "CA",
   zip: "94107",
   active: true,
-  id: 3,
-  effectiveFrom: new RFCDate("2024-01-01"),
-  effectiveTo: new RFCDate("2025-01-01"),
-  effectiveDate: new RFCDate("2024-01-01"),
 };
 ```
 
@@ -32,7 +27,3 @@ let value: EmployeeHomeAddress = {
 | `country`                                                                                                                  | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | N/A                                                                                                                        |
 | `active`                                                                                                                   | *boolean*                                                                                                                  | :heavy_minus_sign:                                                                                                         | The status of the location. Inactive locations have been deleted, but may still have historical data associated with them. |
 | `uuid`                                                                                                                     | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | Unique identifier for this address.                                                                                        |
-| `id`                                                                                                                       | *number*                                                                                                                   | :heavy_minus_sign:                                                                                                         | The internal ID of the address.                                                                                            |
-| `effectiveFrom`                                                                                                            | [RFCDate](../../types/rfcdate.md)                                                                                          | :heavy_minus_sign:                                                                                                         | The date the address became effective.                                                                                     |
-| `effectiveTo`                                                                                                              | [RFCDate](../../types/rfcdate.md)                                                                                          | :heavy_minus_sign:                                                                                                         | The date the address became inactive.                                                                                      |
-| `effectiveDate`                                                                                                            | [RFCDate](../../types/rfcdate.md)                                                                                          | :heavy_minus_sign:                                                                                                         | The date the address became effective.                                                                                     |

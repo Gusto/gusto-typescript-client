@@ -34,7 +34,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve terms of service status for a company user
+ * Retrieve terms of service status for an admin
  *
  * @remarks
  * Retrieve the user acceptance status of the Gusto Embedded Payroll's [Terms of Service](https://flows.gusto.com/terms).
@@ -106,7 +106,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/partner_managed_companies/{company_uuid}/retrieve_terms_of_service",
   )(pathParams);

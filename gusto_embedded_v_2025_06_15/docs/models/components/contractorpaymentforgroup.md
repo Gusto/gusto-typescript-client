@@ -5,7 +5,7 @@ The representation of a single contractor payment.
 ## Example Usage
 
 ```typescript
-import { ContractorPaymentForGroup } from "@gusto/embedded-api/models/components/contractorpaymentforgroup.js";
+import { ContractorPaymentForGroup } from "@gusto/embedded-api-v2025-06-15/models/components/contractorpaymentforgroup.js";
 
 let value: ContractorPaymentForGroup = {};
 ```

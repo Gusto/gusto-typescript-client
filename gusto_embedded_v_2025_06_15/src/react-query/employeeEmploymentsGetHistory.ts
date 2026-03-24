@@ -147,7 +147,7 @@ export function invalidateEmployeeEmploymentsGetHistory(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "employeeEmployments",
       "getHistory",
       ...queryKeyBase,
@@ -161,6 +161,10 @@ export function invalidateAllEmployeeEmploymentsGetHistory(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "employeeEmployments", "getHistory"],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "employeeEmployments",
+      "getHistory",
+    ],
   });
 }

@@ -18,7 +18,7 @@ scope: `payrolls:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-wire_in_requests-wire_in_request_uuid" method="get" path="/v1/wire_in_requests/{wire_in_request_uuid}" example="example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -40,8 +40,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { wireInRequestsGet } from "@gusto/embedded-api/funcs/wireInRequestsGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { wireInRequestsGet } from "@gusto/embedded-api-v2025-06-15/funcs/wireInRequestsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -89,7 +89,7 @@ import {
   // mutations and other user actions.
   invalidateWireInRequestsGet,
   invalidateAllWireInRequestsGet,
-} from "@gusto/embedded-api/react-query/wireInRequestsGet.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/wireInRequestsGet.js";
 ```
 
 ### Parameters
@@ -121,7 +121,7 @@ scope: `payrolls:run`
 
 <!-- UsageSnippet language="typescript" operationID="put-wire_in_requests-wire_in_request_uuid" method="put" path="/v1/wire_in_requests/{wire_in_request_uuid}" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -148,8 +148,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { wireInRequestsSubmit } from "@gusto/embedded-api/funcs/wireInRequestsSubmit.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { wireInRequestsSubmit } from "@gusto/embedded-api-v2025-06-15/funcs/wireInRequestsSubmit.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -191,13 +191,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useWireInRequestsSubmitMutation
-} from "@gusto/embedded-api/react-query/wireInRequestsSubmit.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/wireInRequestsSubmit.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="put-wire_in_requests-wire_in_request_uuid" method="put" path="/v1/wire_in_requests/{wire_in_request_uuid}" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -225,8 +225,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { wireInRequestsSubmit } from "@gusto/embedded-api/funcs/wireInRequestsSubmit.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { wireInRequestsSubmit } from "@gusto/embedded-api-v2025-06-15/funcs/wireInRequestsSubmit.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -269,13 +269,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useWireInRequestsSubmitMutation
-} from "@gusto/embedded-api/react-query/wireInRequestsSubmit.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/wireInRequestsSubmit.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-wire_in_requests-wire_in_request_uuid" method="put" path="/v1/wire_in_requests/{wire_in_request_uuid}" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -302,8 +302,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { wireInRequestsSubmit } from "@gusto/embedded-api/funcs/wireInRequestsSubmit.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { wireInRequestsSubmit } from "@gusto/embedded-api-v2025-06-15/funcs/wireInRequestsSubmit.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -345,13 +345,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useWireInRequestsSubmitMutation
-} from "@gusto/embedded-api/react-query/wireInRequestsSubmit.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/wireInRequestsSubmit.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-wire_in_requests-wire_in_request_uuid" method="put" path="/v1/wire_in_requests/{wire_in_request_uuid}" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -378,8 +378,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { wireInRequestsSubmit } from "@gusto/embedded-api/funcs/wireInRequestsSubmit.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { wireInRequestsSubmit } from "@gusto/embedded-api-v2025-06-15/funcs/wireInRequestsSubmit.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -421,13 +421,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useWireInRequestsSubmitMutation
-} from "@gusto/embedded-api/react-query/wireInRequestsSubmit.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/wireInRequestsSubmit.js";
 ```
 ### Example Usage: example
 
 <!-- UsageSnippet language="typescript" operationID="put-wire_in_requests-wire_in_request_uuid" method="put" path="/v1/wire_in_requests/{wire_in_request_uuid}" example="example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -454,8 +454,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { wireInRequestsSubmit } from "@gusto/embedded-api/funcs/wireInRequestsSubmit.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { wireInRequestsSubmit } from "@gusto/embedded-api-v2025-06-15/funcs/wireInRequestsSubmit.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -497,7 +497,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useWireInRequestsSubmitMutation
-} from "@gusto/embedded-api/react-query/wireInRequestsSubmit.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/wireInRequestsSubmit.js";
 ```
 
 ### Parameters
@@ -530,7 +530,7 @@ scope: `payrolls:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-companies-company_uuid-wire_in_request_uuid" method="get" path="/v1/companies/{company_uuid}/wire_in_requests" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -552,8 +552,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { wireInRequestsList } from "@gusto/embedded-api/funcs/wireInRequestsList.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { wireInRequestsList } from "@gusto/embedded-api-v2025-06-15/funcs/wireInRequestsList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -601,7 +601,7 @@ import {
   // mutations and other user actions.
   invalidateWireInRequestsList,
   invalidateAllWireInRequestsList,
-} from "@gusto/embedded-api/react-query/wireInRequestsList.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/wireInRequestsList.js";
 ```
 
 ### Parameters

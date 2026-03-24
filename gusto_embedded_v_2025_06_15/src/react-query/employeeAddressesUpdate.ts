@@ -80,7 +80,7 @@ export function useEmployeeAddressesUpdateMutation(
 }
 
 export function mutationKeyEmployeeAddressesUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "employeeAddresses", "update"];
+  return ["@gusto/embedded-api-v2025-06-15", "employeeAddresses", "update"];
 }
 
 export function buildEmployeeAddressesUpdateMutation(

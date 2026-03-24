@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Industry } from "@gusto/embedded-api/models/components/industry.js";
+import { Industry } from "@gusto/embedded-api-v2025-06-15/models/components/industry.js";
 
 let value: Industry = {
   naicsCode: "611420",

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PeopleBatchConflictErrorMetadata } from "@gusto/embedded-api/models/errors/peoplebatchconflicterror.js";
+import { PeopleBatchConflictErrorMetadata } from "@gusto/embedded-api-v2025-06-15/models/errors/peoplebatchconflicterror.js";
 
 let value: PeopleBatchConflictErrorMetadata = {};
 ```

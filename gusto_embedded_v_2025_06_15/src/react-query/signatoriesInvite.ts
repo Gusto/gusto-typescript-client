@@ -81,7 +81,7 @@ export function useSignatoriesInviteMutation(
 }
 
 export function mutationKeySignatoriesInvite(): MutationKey {
-  return ["@gusto/embedded-api", "Signatories", "invite"];
+  return ["@gusto/embedded-api-v2025-06-15", "Signatories", "invite"];
 }
 
 export function buildSignatoriesInviteMutation(

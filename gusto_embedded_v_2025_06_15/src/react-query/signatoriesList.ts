@@ -146,7 +146,12 @@ export function invalidateSignatoriesList(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Signatories", "list", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "Signatories",
+      "list",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -156,6 +161,6 @@ export function invalidateAllSignatoriesList(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Signatories", "list"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "Signatories", "list"],
   });
 }

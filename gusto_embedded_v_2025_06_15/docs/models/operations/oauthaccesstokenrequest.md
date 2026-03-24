@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { OauthAccessTokenRequest } from "@gusto/embedded-api/models/operations/oauthaccesstoken.js";
+import { OauthAccessTokenRequest } from "@gusto/embedded-api-v2025-06-15/models/operations/oauthaccesstoken.js";
 
 let value: OauthAccessTokenRequest = {
   requestBody: {

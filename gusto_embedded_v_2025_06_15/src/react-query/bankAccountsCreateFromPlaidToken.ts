@@ -83,7 +83,11 @@ export function useBankAccountsCreateFromPlaidTokenMutation(
 }
 
 export function mutationKeyBankAccountsCreateFromPlaidToken(): MutationKey {
-  return ["@gusto/embedded-api", "bankAccounts", "createFromPlaidToken"];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "bankAccounts",
+    "createFromPlaidToken",
+  ];
 }
 
 export function buildBankAccountsCreateFromPlaidTokenMutation(

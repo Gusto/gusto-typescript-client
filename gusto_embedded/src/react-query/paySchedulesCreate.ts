@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type PaySchedulesCreateMutationData =
   PostV1CompaniesCompanyIdPaySchedulesResponse;
 
 export type PaySchedulesCreateMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -53,19 +55,21 @@ export type PaySchedulesCreateMutationError =
  * Create a new pay schedule
  *
  * @remarks
- * If a company does not have any pay schedules, this endpoint will create a single pay schedule and assign it to all employees. This is a common use case during company onboarding.
+ * If a company does not have any pay schedules, this endpoint creates a single pay schedule and assigns it to all employees (common during company onboarding).
  *
- * If a company has an existing active pay schedule and want to support multiple pay schedules, this endpoint will create a pay schedule that is not assigned to any employee.
+ * If a company already has an active pay schedule and wants multiple pay schedules, this endpoint creates a pay schedule that is not assigned to any employee.
  *
- * Be sure to **[check state laws](https://www.dol.gov/agencies/whd/state/payday)** to know what schedule is right for your customers.
+ * Be sure to [check state laws](https://www.dol.gov/agencies/whd/state/payday) to know what schedule is right for your customers. If an onboarded company misses their first pay date, the pay schedule may be automatically adjusted.
+ *
+ * ### Webhooks
+ * - `pay_schedule.created`: Fires when a pay schedule is successfully created.
+ *
+ * ### Related guides
+ * - [Create a pay schedule](doc:create-a-pay-schedule)
+ * - [Pay Schedules](doc:pay-schedule-info)
+ * - [Manage Pay Schedules via API](doc:manage-pay-schedules-api)
  *
  * scope: `pay_schedules:write`
- *
- * > ℹ️ Pay Schedules may be automatically adjusted
- * >
- * > If an onboarded company misses their first pay date, Gusto will automatically adjust the pay schedule to the next available pay date.
- * >
- * > See [Create a pay schedule](/embedded-payroll/docs/create-a-pay-schedule) for more information.
  */
 export function usePaySchedulesCreateMutation(
   options?: MutationHookOptions<

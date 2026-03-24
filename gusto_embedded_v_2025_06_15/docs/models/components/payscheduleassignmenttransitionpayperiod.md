@@ -5,7 +5,7 @@ Pay schedule assignment transition pay period information.
 ## Example Usage
 
 ```typescript
-import { PayScheduleAssignmentTransitionPayPeriod } from "@gusto/embedded-api/models/components/payscheduleassignmenttransitionpayperiod.js";
+import { PayScheduleAssignmentTransitionPayPeriod } from "@gusto/embedded-api-v2025-06-15/models/components/payscheduleassignmenttransitionpayperiod.js";
 
 let value: PayScheduleAssignmentTransitionPayPeriod = {};
 ```

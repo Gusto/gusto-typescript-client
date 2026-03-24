@@ -108,7 +108,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/payrolls/{payroll_uuid}/generated_documents/printable_payroll_checks",
   )(pathParams);

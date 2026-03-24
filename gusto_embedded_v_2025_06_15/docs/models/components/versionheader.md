@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { VersionHeader } from "@gusto/embedded-api/models/components/versionheader.js";
+import { VersionHeader } from "@gusto/embedded-api-v2025-06-15/models/components/versionheader.js";
 
 let value: VersionHeader = "2025-06-15";
 ```

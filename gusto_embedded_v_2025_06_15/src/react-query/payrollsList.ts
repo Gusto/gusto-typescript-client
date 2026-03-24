@@ -180,7 +180,12 @@ export function invalidatePayrollsList(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Payrolls", "list", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "Payrolls",
+      "list",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -190,6 +195,6 @@ export function invalidateAllPayrollsList(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Payrolls", "list"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "Payrolls", "list"],
   });
 }

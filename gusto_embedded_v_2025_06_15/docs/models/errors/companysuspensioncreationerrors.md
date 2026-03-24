@@ -8,7 +8,7 @@ This may happen when the body of your request contains errors such as `invalid_a
 ## Example Usage
 
 ```typescript
-import { CompanySuspensionCreationErrors } from "@gusto/embedded-api/models/errors/companysuspensioncreationerrors.js";
+import { CompanySuspensionCreationErrors } from "@gusto/embedded-api-v2025-06-15/models/errors/companysuspensioncreationerrors.js";
 
 // No examples available for this model
 ```

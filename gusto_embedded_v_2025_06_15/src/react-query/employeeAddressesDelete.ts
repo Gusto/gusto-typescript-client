@@ -78,7 +78,7 @@ export function useEmployeeAddressesDeleteMutation(
 }
 
 export function mutationKeyEmployeeAddressesDelete(): MutationKey {
-  return ["@gusto/embedded-api", "employeeAddresses", "delete"];
+  return ["@gusto/embedded-api-v2025-06-15", "employeeAddresses", "delete"];
 }
 
 export function buildEmployeeAddressesDeleteMutation(

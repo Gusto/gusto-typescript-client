@@ -22,7 +22,7 @@ scope: `employee_payment_methods:write`
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-bank_accounts" method="post" path="/v1/employees/{employee_id}/bank_accounts" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -50,8 +50,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeePaymentMethodCreate } from "@gusto/embedded-api/funcs/employeePaymentMethodCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeePaymentMethodCreate } from "@gusto/embedded-api-v2025-06-15/funcs/employeePaymentMethodCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -94,13 +94,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeePaymentMethodCreateMutation
-} from "@gusto/embedded-api/react-query/employeePaymentMethodCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeePaymentMethodCreate.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-bank_accounts" method="post" path="/v1/employees/{employee_id}/bank_accounts" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -128,8 +128,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeePaymentMethodCreate } from "@gusto/embedded-api/funcs/employeePaymentMethodCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeePaymentMethodCreate } from "@gusto/embedded-api-v2025-06-15/funcs/employeePaymentMethodCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -172,13 +172,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeePaymentMethodCreateMutation
-} from "@gusto/embedded-api/react-query/employeePaymentMethodCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeePaymentMethodCreate.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-bank_accounts" method="post" path="/v1/employees/{employee_id}/bank_accounts" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -206,8 +206,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeePaymentMethodCreate } from "@gusto/embedded-api/funcs/employeePaymentMethodCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeePaymentMethodCreate } from "@gusto/embedded-api-v2025-06-15/funcs/employeePaymentMethodCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -250,13 +250,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeePaymentMethodCreateMutation
-} from "@gusto/embedded-api/react-query/employeePaymentMethodCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeePaymentMethodCreate.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-bank_accounts" method="post" path="/v1/employees/{employee_id}/bank_accounts" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -284,8 +284,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeePaymentMethodCreate } from "@gusto/embedded-api/funcs/employeePaymentMethodCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeePaymentMethodCreate } from "@gusto/embedded-api-v2025-06-15/funcs/employeePaymentMethodCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -328,7 +328,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeePaymentMethodCreateMutation
-} from "@gusto/embedded-api/react-query/employeePaymentMethodCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeePaymentMethodCreate.js";
 ```
 
 ### Parameters
@@ -362,7 +362,7 @@ scope: `employee_payment_methods:write`
 
 <!-- UsageSnippet language="typescript" operationID="delete-v1-employees-employee_id-bank_accounts-bank_account_id" method="delete" path="/v1/employees/{employee_id}/bank_accounts/{bank_account_uuid}" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -385,8 +385,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeePaymentMethodDeleteBankAccount } from "@gusto/embedded-api/funcs/employeePaymentMethodDeleteBankAccount.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeePaymentMethodDeleteBankAccount } from "@gusto/embedded-api-v2025-06-15/funcs/employeePaymentMethodDeleteBankAccount.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -424,7 +424,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeePaymentMethodDeleteBankAccountMutation
-} from "@gusto/embedded-api/react-query/employeePaymentMethodDeleteBankAccount.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeePaymentMethodDeleteBankAccount.js";
 ```
 
 ### Parameters
@@ -457,7 +457,7 @@ scope: `employee_payment_methods:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-bank_accounts" method="put" path="/v1/employees/{employee_id}/bank_accounts/{bank_account_uuid}" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -486,8 +486,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeePaymentMethodUpdateBankAccount } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdateBankAccount.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeePaymentMethodUpdateBankAccount } from "@gusto/embedded-api-v2025-06-15/funcs/employeePaymentMethodUpdateBankAccount.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -531,13 +531,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeePaymentMethodUpdateBankAccountMutation
-} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdateBankAccount.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeePaymentMethodUpdateBankAccount.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-bank_accounts" method="put" path="/v1/employees/{employee_id}/bank_accounts/{bank_account_uuid}" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -566,8 +566,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeePaymentMethodUpdateBankAccount } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdateBankAccount.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeePaymentMethodUpdateBankAccount } from "@gusto/embedded-api-v2025-06-15/funcs/employeePaymentMethodUpdateBankAccount.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -611,13 +611,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeePaymentMethodUpdateBankAccountMutation
-} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdateBankAccount.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeePaymentMethodUpdateBankAccount.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-bank_accounts" method="put" path="/v1/employees/{employee_id}/bank_accounts/{bank_account_uuid}" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -646,8 +646,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeePaymentMethodUpdateBankAccount } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdateBankAccount.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeePaymentMethodUpdateBankAccount } from "@gusto/embedded-api-v2025-06-15/funcs/employeePaymentMethodUpdateBankAccount.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -691,13 +691,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeePaymentMethodUpdateBankAccountMutation
-} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdateBankAccount.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeePaymentMethodUpdateBankAccount.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-bank_accounts" method="put" path="/v1/employees/{employee_id}/bank_accounts/{bank_account_uuid}" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -726,8 +726,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeePaymentMethodUpdateBankAccount } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdateBankAccount.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeePaymentMethodUpdateBankAccount } from "@gusto/embedded-api-v2025-06-15/funcs/employeePaymentMethodUpdateBankAccount.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -771,7 +771,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeePaymentMethodUpdateBankAccountMutation
-} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdateBankAccount.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeePaymentMethodUpdateBankAccount.js";
 ```
 
 ### Parameters
@@ -804,7 +804,7 @@ scope: `employee_payment_methods:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-payment_method" method="get" path="/v1/employees/{employee_id}/payment_method" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -826,8 +826,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeePaymentMethodGet } from "@gusto/embedded-api/funcs/employeePaymentMethodGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeePaymentMethodGet } from "@gusto/embedded-api-v2025-06-15/funcs/employeePaymentMethodGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -875,7 +875,7 @@ import {
   // mutations and other user actions.
   invalidateEmployeePaymentMethodGet,
   invalidateAllEmployeePaymentMethodGet,
-} from "@gusto/embedded-api/react-query/employeePaymentMethodGet.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeePaymentMethodGet.js";
 ```
 
 ### Parameters
@@ -908,7 +908,7 @@ scope: `employee_payment_methods:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-payment_method" method="put" path="/v1/employees/{employee_id}/payment_method" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -934,8 +934,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeePaymentMethodUpdate } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeePaymentMethodUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/employeePaymentMethodUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -976,13 +976,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeePaymentMethodUpdateMutation
-} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeePaymentMethodUpdate.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-payment_method" method="put" path="/v1/employees/{employee_id}/payment_method" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1008,8 +1008,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeePaymentMethodUpdate } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeePaymentMethodUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/employeePaymentMethodUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1050,13 +1050,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeePaymentMethodUpdateMutation
-} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeePaymentMethodUpdate.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-payment_method" method="put" path="/v1/employees/{employee_id}/payment_method" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1082,8 +1082,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeePaymentMethodUpdate } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeePaymentMethodUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/employeePaymentMethodUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1124,13 +1124,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeePaymentMethodUpdateMutation
-} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeePaymentMethodUpdate.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-payment_method" method="put" path="/v1/employees/{employee_id}/payment_method" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1156,8 +1156,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeePaymentMethodUpdate } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeePaymentMethodUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/employeePaymentMethodUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1198,13 +1198,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeePaymentMethodUpdateMutation
-} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeePaymentMethodUpdate.js";
 ```
 ### Example Usage: example-1
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-payment_method" method="put" path="/v1/employees/{employee_id}/payment_method" example="example-1" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1251,8 +1251,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeePaymentMethodUpdate } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeePaymentMethodUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/employeePaymentMethodUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1314,13 +1314,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeePaymentMethodUpdateMutation
-} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeePaymentMethodUpdate.js";
 ```
 ### Example Usage: example-2
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-payment_method" method="put" path="/v1/employees/{employee_id}/payment_method" example="example-2" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1361,8 +1361,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeePaymentMethodUpdate } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeePaymentMethodUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/employeePaymentMethodUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1418,13 +1418,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeePaymentMethodUpdateMutation
-} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeePaymentMethodUpdate.js";
 ```
 ### Example Usage: example-3
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-payment_method" method="put" path="/v1/employees/{employee_id}/payment_method" example="example-3" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1450,8 +1450,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeePaymentMethodUpdate } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeePaymentMethodUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/employeePaymentMethodUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1492,7 +1492,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeePaymentMethodUpdateMutation
-} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeePaymentMethodUpdate.js";
 ```
 
 ### Parameters

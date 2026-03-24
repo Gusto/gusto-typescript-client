@@ -154,7 +154,12 @@ export function invalidateCompaniesSuspensionsGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "suspensions", "get", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "suspensions",
+      "get",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -164,6 +169,6 @@ export function invalidateAllCompaniesSuspensionsGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "suspensions", "get"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "suspensions", "get"],
   });
 }

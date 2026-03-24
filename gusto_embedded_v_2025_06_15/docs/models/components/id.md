@@ -5,7 +5,7 @@ The string identifier for each onboarding step
 ## Example Usage
 
 ```typescript
-import { Id } from "@gusto/embedded-api/models/components/companyonboardingstatus.js";
+import { Id } from "@gusto/embedded-api-v2025-06-15/models/components/companyonboardingstatus.js";
 
 let value: Id = "sign_all_forms";
 ```

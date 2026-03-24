@@ -5,7 +5,7 @@ The representation of an admin user in Gusto.
 ## Example Usage
 
 ```typescript
-import { Admin } from "@gusto/embedded-api/models/components/admin.js";
+import { Admin } from "@gusto/embedded-api-v2025-06-15/models/components/admin.js";
 
 let value: Admin = {
   uuid: "d64f9b7f-e849-41cf-9dd7-fcc067bd9495",

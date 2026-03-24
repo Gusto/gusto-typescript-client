@@ -155,7 +155,7 @@ export function invalidatePeopleBatchesGetV1PeopleBatchesPeopleBatchUuid(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "People Batches",
       "getV1PeopleBatchesPeopleBatchUuid",
       ...queryKeyBase,
@@ -170,7 +170,7 @@ export function invalidateAllPeopleBatchesGetV1PeopleBatchesPeopleBatchUuid(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "People Batches",
       "getV1PeopleBatchesPeopleBatchUuid",
     ],

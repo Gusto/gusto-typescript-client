@@ -5,7 +5,7 @@ An employee's I-9 authorization
 ## Example Usage
 
 ```typescript
-import { I9Authorization } from "@gusto/embedded-api/models/components/i9authorization.js";
+import { I9Authorization } from "@gusto/embedded-api-v2025-06-15/models/components/i9authorization.js";
 
 let value: I9Authorization = {
   uuid: "782c4202-f4bf-48c5-ba12-9559cb98989d",

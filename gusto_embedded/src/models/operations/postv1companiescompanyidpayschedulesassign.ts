@@ -52,7 +52,7 @@ export const PostV1CompaniesCompanyIdPaySchedulesAssignRequest$outboundSchema:
     PostV1CompaniesCompanyIdPaySchedulesAssignRequest
   > = z.object({
     companyId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
     payScheduleAssignmentBody: PayScheduleAssignmentBody$outboundSchema,
   }).transform((v) => {
     return remap$(v, {

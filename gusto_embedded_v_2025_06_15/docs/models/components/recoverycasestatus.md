@@ -5,7 +5,7 @@ Status of the recovery case
 ## Example Usage
 
 ```typescript
-import { RecoveryCaseStatus } from "@gusto/embedded-api/models/components/recoverycase.js";
+import { RecoveryCaseStatus } from "@gusto/embedded-api-v2025-06-15/models/components/recoverycase.js";
 
 let value: RecoveryCaseStatus = "wire_initiated";
 ```

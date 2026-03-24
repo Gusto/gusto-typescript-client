@@ -17,7 +17,7 @@ scope: `recovery_cases:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-recovery-cases" method="get" path="/v1/companies/{company_uuid}/recovery_cases" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -39,8 +39,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { recoveryCasesGet } from "@gusto/embedded-api/funcs/recoveryCasesGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { recoveryCasesGet } from "@gusto/embedded-api-v2025-06-15/funcs/recoveryCasesGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -88,7 +88,7 @@ import {
   // mutations and other user actions.
   invalidateRecoveryCasesGet,
   invalidateAllRecoveryCasesGet,
-} from "@gusto/embedded-api/react-query/recoveryCasesGet.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/recoveryCasesGet.js";
 ```
 
 ### Parameters
@@ -124,7 +124,7 @@ scope: `recovery_cases:write`
 
 <!-- UsageSnippet language="typescript" operationID="redebit-recovery-case" method="put" path="/v1/recovery_cases/{recovery_case_uuid}/redebit" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -146,8 +146,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { recoveryCasesRedebit } from "@gusto/embedded-api/funcs/recoveryCasesRedebit.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { recoveryCasesRedebit } from "@gusto/embedded-api-v2025-06-15/funcs/recoveryCasesRedebit.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -184,7 +184,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useRecoveryCasesRedebitMutation
-} from "@gusto/embedded-api/react-query/recoveryCasesRedebit.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/recoveryCasesRedebit.js";
 ```
 
 ### Parameters

@@ -5,7 +5,7 @@ Successful response for general ledger report generation
 ## Example Usage
 
 ```typescript
-import { GeneralLedgerReport } from "@gusto/embedded-api/models/components/generalledgerreport.js";
+import { GeneralLedgerReport } from "@gusto/embedded-api-v2025-06-15/models/components/generalledgerreport.js";
 
 let value: GeneralLedgerReport = {};
 ```

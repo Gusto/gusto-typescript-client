@@ -5,7 +5,7 @@ The amount type of the deduction for the pay period. Only present for calculated
 ## Example Usage
 
 ```typescript
-import { PayrollShowAmountType } from "@gusto/embedded-api/models/components/payroll.js";
+import { PayrollShowAmountType } from "@gusto/embedded-api-v2025-06-15/models/components/payroll.js";
 
 let value: PayrollShowAmountType = "percent";
 ```

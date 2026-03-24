@@ -5,7 +5,7 @@ A string indicating whether to sort resulting events in ascending (asc) or desce
 ## Example Usage
 
 ```typescript
-import { QueryParamSortOrder } from "@gusto/embedded-api/models/operations/getevents.js";
+import { QueryParamSortOrder } from "@gusto/embedded-api-v2025-06-15/models/operations/getevents.js";
 
 let value: QueryParamSortOrder = "desc";
 ```

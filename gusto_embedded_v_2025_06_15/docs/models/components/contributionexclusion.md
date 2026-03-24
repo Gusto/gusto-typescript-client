@@ -5,7 +5,7 @@ The representation of a contribution exclusion for a company benefit.
 ## Example Usage
 
 ```typescript
-import { ContributionExclusion } from "@gusto/embedded-api/models/components/contributionexclusion.js";
+import { ContributionExclusion } from "@gusto/embedded-api-v2025-06-15/models/components/contributionexclusion.js";
 
 let value: ContributionExclusion = {
   contributionUuid: "<id>",

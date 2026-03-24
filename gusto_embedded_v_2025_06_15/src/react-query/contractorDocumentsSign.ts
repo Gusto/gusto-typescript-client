@@ -76,7 +76,7 @@ export function useContractorDocumentsSignMutation(
 }
 
 export function mutationKeyContractorDocumentsSign(): MutationKey {
-  return ["@gusto/embedded-api", "contractorDocuments", "sign"];
+  return ["@gusto/embedded-api-v2025-06-15", "contractorDocuments", "sign"];
 }
 
 export function buildContractorDocumentsSignMutation(

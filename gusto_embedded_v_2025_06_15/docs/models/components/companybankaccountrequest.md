@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { CompanyBankAccountRequest } from "@gusto/embedded-api/models/components/companybankaccountrequest.js";
+import { CompanyBankAccountRequest } from "@gusto/embedded-api-v2025-06-15/models/components/companybankaccountrequest.js";
 
 let value: CompanyBankAccountRequest = {
   routingNumber: "<value>",

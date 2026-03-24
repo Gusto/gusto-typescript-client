@@ -135,7 +135,7 @@ export function invalidatePaySchedulesGetAssignments(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "paySchedules",
       "getAssignments",
       ...queryKeyBase,
@@ -149,6 +149,10 @@ export function invalidateAllPaySchedulesGetAssignments(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "paySchedules", "getAssignments"],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "paySchedules",
+      "getAssignments",
+    ],
   });
 }

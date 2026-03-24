@@ -74,7 +74,7 @@ export function queryKeyGarnishmentsGet(
   parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v2025-06-15",
     "Garnishments",
     "get",
     garnishmentId,

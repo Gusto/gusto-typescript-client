@@ -79,7 +79,7 @@ export function queryKeySalaryEstimatesGetV1SalaryEstimatesId(
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v2025-06-15",
     "Salary Estimates",
     "getV1SalaryEstimatesId",
     uuid,

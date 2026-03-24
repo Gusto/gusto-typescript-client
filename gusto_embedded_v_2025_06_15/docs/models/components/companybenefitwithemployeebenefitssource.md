@@ -5,7 +5,7 @@ The source of the company benefit. This can be "internal", "external", or "partn
 ## Example Usage
 
 ```typescript
-import { CompanyBenefitWithEmployeeBenefitsSource } from "@gusto/embedded-api/models/components/companybenefitwithemployeebenefits.js";
+import { CompanyBenefitWithEmployeeBenefitsSource } from "@gusto/embedded-api-v2025-06-15/models/components/companybenefitwithemployeebenefits.js";
 
 let value: CompanyBenefitWithEmployeeBenefitsSource = "internal";
 ```

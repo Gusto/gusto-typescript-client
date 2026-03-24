@@ -5,7 +5,7 @@ A custom field on a company
 ## Example Usage
 
 ```typescript
-import { CompanyCustomField } from "@gusto/embedded-api/models/components/companycustomfield.js";
+import { CompanyCustomField } from "@gusto/embedded-api-v2025-06-15/models/components/companycustomfield.js";
 
 let value: CompanyCustomField = {
   uuid: "73769bbc-a26a-439e-a167-9eb29246330c",

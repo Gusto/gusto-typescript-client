@@ -5,7 +5,7 @@ One of the "onboarding_status" enum values.
 ## Example Usage
 
 ```typescript
-import { ContractorOnboardingStatus1 } from "@gusto/embedded-api/models/components/contractor.js";
+import { ContractorOnboardingStatus1 } from "@gusto/embedded-api-v2025-06-15/models/components/contractor.js";
 
 let value: ContractorOnboardingStatus1 = "self_onboarding_not_invited";
 ```

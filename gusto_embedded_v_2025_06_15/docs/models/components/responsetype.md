@@ -5,7 +5,7 @@ The type of response to the question
 ## Example Usage
 
 ```typescript
-import { ResponseType } from "@gusto/embedded-api/models/components/informationrequest.js";
+import { ResponseType } from "@gusto/embedded-api-v2025-06-15/models/components/informationrequest.js";
 
 let value: ResponseType = "radio_button";
 ```

@@ -5,7 +5,7 @@ Request body for updating an employee's onboarding documents configuration.
 ## Example Usage
 
 ```typescript
-import { EmployeeOnboardingDocumentsConfigRequest } from "@gusto/embedded-api/models/components/employeeonboardingdocumentsconfigrequest.js";
+import { EmployeeOnboardingDocumentsConfigRequest } from "@gusto/embedded-api-v2025-06-15/models/components/employeeonboardingdocumentsconfigrequest.js";
 
 let value: EmployeeOnboardingDocumentsConfigRequest = {};
 ```

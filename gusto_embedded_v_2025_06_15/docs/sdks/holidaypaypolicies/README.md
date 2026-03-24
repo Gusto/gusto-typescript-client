@@ -21,7 +21,7 @@ scope: `holiday_pay_policies:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_uuid-holiday_pay_policy" method="get" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -43,8 +43,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { holidayPayPoliciesGet } from "@gusto/embedded-api/funcs/holidayPayPoliciesGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { holidayPayPoliciesGet } from "@gusto/embedded-api-v2025-06-15/funcs/holidayPayPoliciesGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -92,7 +92,7 @@ import {
   // mutations and other user actions.
   invalidateHolidayPayPoliciesGet,
   invalidateAllHolidayPayPoliciesGet,
-} from "@gusto/embedded-api/react-query/holidayPayPoliciesGet.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/holidayPayPoliciesGet.js";
 ```
 
 ### Parameters
@@ -125,7 +125,7 @@ scope: `holiday_pay_policies:write`
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_uuid-holiday_pay_policy" method="post" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -147,8 +147,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { holidayPayPoliciesCreate } from "@gusto/embedded-api/funcs/holidayPayPoliciesCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { holidayPayPoliciesCreate } from "@gusto/embedded-api-v2025-06-15/funcs/holidayPayPoliciesCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -185,7 +185,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useHolidayPayPoliciesCreateMutation
-} from "@gusto/embedded-api/react-query/holidayPayPoliciesCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/holidayPayPoliciesCreate.js";
 ```
 
 ### Parameters
@@ -219,7 +219,7 @@ scope: `holiday_pay_policies:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_uuid-holiday_pay_policy" method="put" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -244,8 +244,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { holidayPayPoliciesUpdate } from "@gusto/embedded-api/funcs/holidayPayPoliciesUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { holidayPayPoliciesUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/holidayPayPoliciesUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -285,7 +285,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useHolidayPayPoliciesUpdateMutation
-} from "@gusto/embedded-api/react-query/holidayPayPoliciesUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/holidayPayPoliciesUpdate.js";
 ```
 
 ### Parameters
@@ -319,7 +319,7 @@ scope: `holiday_pay_policies:write`
 
 <!-- UsageSnippet language="typescript" operationID="delete-v1-companies-company_uuid-holiday_pay_policy" method="delete" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -341,8 +341,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { holidayPayPoliciesDelete } from "@gusto/embedded-api/funcs/holidayPayPoliciesDelete.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { holidayPayPoliciesDelete } from "@gusto/embedded-api-v2025-06-15/funcs/holidayPayPoliciesDelete.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -379,7 +379,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useHolidayPayPoliciesDeleteMutation
-} from "@gusto/embedded-api/react-query/holidayPayPoliciesDelete.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/holidayPayPoliciesDelete.js";
 ```
 
 ### Parameters
@@ -413,7 +413,7 @@ scope: `holiday_pay_policies:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_uuid-holiday_pay_policy-add" method="put" path="/v1/companies/{company_uuid}/holiday_pay_policy/add" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -439,8 +439,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { holidayPayPoliciesAddEmployees } from "@gusto/embedded-api/funcs/holidayPayPoliciesAddEmployees.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { holidayPayPoliciesAddEmployees } from "@gusto/embedded-api-v2025-06-15/funcs/holidayPayPoliciesAddEmployees.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -481,7 +481,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useHolidayPayPoliciesAddEmployeesMutation
-} from "@gusto/embedded-api/react-query/holidayPayPoliciesAddEmployees.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/holidayPayPoliciesAddEmployees.js";
 ```
 
 ### Parameters
@@ -515,7 +515,7 @@ scope: `holiday_pay_policies:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_uuid-holiday_pay_policy-remove" method="put" path="/v1/companies/{company_uuid}/holiday_pay_policy/remove" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -543,8 +543,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { holidayPayPoliciesRemoveEmployees } from "@gusto/embedded-api/funcs/holidayPayPoliciesRemoveEmployees.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { holidayPayPoliciesRemoveEmployees } from "@gusto/embedded-api-v2025-06-15/funcs/holidayPayPoliciesRemoveEmployees.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -587,7 +587,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useHolidayPayPoliciesRemoveEmployeesMutation
-} from "@gusto/embedded-api/react-query/holidayPayPoliciesRemoveEmployees.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/holidayPayPoliciesRemoveEmployees.js";
 ```
 
 ### Parameters

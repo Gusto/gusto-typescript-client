@@ -5,7 +5,7 @@ The subtotals for the contractor payment.
 ## Example Usage
 
 ```typescript
-import { ContractorPaymentReceiptTotals } from "@gusto/embedded-api/models/components/contractorpaymentreceipt.js";
+import { ContractorPaymentReceiptTotals } from "@gusto/embedded-api-v2025-06-15/models/components/contractorpaymentreceipt.js";
 
 let value: ContractorPaymentReceiptTotals = {};
 ```

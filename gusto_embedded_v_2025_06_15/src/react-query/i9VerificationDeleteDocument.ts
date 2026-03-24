@@ -19,8 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest,
   DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse,
@@ -38,6 +40,8 @@ export type I9VerificationDeleteDocumentMutationData =
   DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse;
 
 export type I9VerificationDeleteDocumentMutationError =
+  | NotFoundErrorObject
+  | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -52,6 +56,9 @@ export type I9VerificationDeleteDocumentMutationError =
  *
  * @remarks
  * An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States. This endpoint deletes a specific verification document.
+ *
+ * ### Related guides
+ * - [I-9 employment verification](doc:i-9-employment-verification)
  *
  * scope: `i9_authorizations:manage`
  */
@@ -74,7 +81,11 @@ export function useI9VerificationDeleteDocumentMutation(
 }
 
 export function mutationKeyI9VerificationDeleteDocument(): MutationKey {
-  return ["@gusto/embedded-api", "i9Verification", "deleteDocument"];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "i9Verification",
+    "deleteDocument",
+  ];
 }
 
 export function buildI9VerificationDeleteDocumentMutation(

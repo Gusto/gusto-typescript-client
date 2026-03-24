@@ -78,7 +78,11 @@ export function useEmployeeTaxSetupUpdateFederalTaxesMutation(
 }
 
 export function mutationKeyEmployeeTaxSetupUpdateFederalTaxes(): MutationKey {
-  return ["@gusto/embedded-api", "employeeTaxSetup", "updateFederalTaxes"];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "employeeTaxSetup",
+    "updateFederalTaxes",
+  ];
 }
 
 export function buildEmployeeTaxSetupUpdateFederalTaxesMutation(

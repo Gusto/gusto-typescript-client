@@ -5,7 +5,7 @@ Information about the payroll's status and expected dates
 ## Example Usage
 
 ```typescript
-import { PayrollPayrollStatusMetaType } from "@gusto/embedded-api/models/components/payrollpayrollstatusmetatype.js";
+import { PayrollPayrollStatusMetaType } from "@gusto/embedded-api-v2025-06-15/models/components/payrollpayrollstatusmetatype.js";
 
 let value: PayrollPayrollStatusMetaType = {};
 ```

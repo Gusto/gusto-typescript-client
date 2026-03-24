@@ -5,7 +5,7 @@ The current status of the member portal invitation.
 ## Example Usage
 
 ```typescript
-import { ShowEmployeesStatus } from "@gusto/embedded-api/models/components/showemployees.js";
+import { ShowEmployeesStatus } from "@gusto/embedded-api-v2025-06-15/models/components/showemployees.js";
 
 let value: ShowEmployeesStatus = "verified";
 ```

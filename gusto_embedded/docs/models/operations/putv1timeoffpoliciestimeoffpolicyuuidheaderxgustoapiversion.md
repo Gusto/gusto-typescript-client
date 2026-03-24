@@ -8,11 +8,11 @@ Determines the date-based API version associated with your API call. If none is 
 import { PutV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion } from "@gusto/embedded-api/models/operations/putv1timeoffpoliciestimeoffpolicyuuid.js";
 
 let value: PutV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion =
-  "2025-06-15";
+  "2026-02-01";
 ```
 
 ## Values
 
 ```typescript
-"2025-06-15"
+"2026-02-01"
 ```

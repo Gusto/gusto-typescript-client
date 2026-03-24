@@ -5,7 +5,7 @@ An object representing the type and value of the company contribution.
 ## Example Usage
 
 ```typescript
-import { CompanyBenefitWithEmployeeBenefitsContribution } from "@gusto/embedded-api/models/components/companybenefitwithemployeebenefits.js";
+import { CompanyBenefitWithEmployeeBenefitsContribution } from "@gusto/embedded-api-v2025-06-15/models/components/companybenefitwithemployeebenefits.js";
 
 let value: CompanyBenefitWithEmployeeBenefitsContribution = {};
 ```

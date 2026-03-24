@@ -80,7 +80,7 @@ export function useWebhooksDeleteSubscriptionMutation(
 }
 
 export function mutationKeyWebhooksDeleteSubscription(): MutationKey {
-  return ["@gusto/embedded-api", "Webhooks", "deleteSubscription"];
+  return ["@gusto/embedded-api-v2025-06-15", "Webhooks", "deleteSubscription"];
 }
 
 export function buildWebhooksDeleteSubscriptionMutation(

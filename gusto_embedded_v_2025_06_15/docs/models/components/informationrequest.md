@@ -5,7 +5,7 @@ Representation of an information request
 ## Example Usage
 
 ```typescript
-import { InformationRequest } from "@gusto/embedded-api/models/components/informationrequest.js";
+import { InformationRequest } from "@gusto/embedded-api-v2025-06-15/models/components/informationrequest.js";
 
 let value: InformationRequest = {};
 ```

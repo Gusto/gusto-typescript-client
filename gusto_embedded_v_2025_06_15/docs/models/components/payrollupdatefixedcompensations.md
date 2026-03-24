@@ -5,7 +5,7 @@ An array of fixed compensations for the employee. Fixed compensations include ti
 ## Example Usage
 
 ```typescript
-import { PayrollUpdateFixedCompensations } from "@gusto/embedded-api/models/components/payrollupdate.js";
+import { PayrollUpdateFixedCompensations } from "@gusto/embedded-api-v2025-06-15/models/components/payrollupdate.js";
 
 let value: PayrollUpdateFixedCompensations = {};
 ```
