@@ -1,0 +1,24 @@
+# PostV1CompaniesCompanyUuidSignatoriesInviteRequest
+
+## Example Usage
+
+```typescript
+import { PostV1CompaniesCompanyUuidSignatoriesInviteRequest } from "@gusto/embedded-api/models/operations/postv1companiescompanyuuidsignatoriesinvite.js";
+
+let value: PostV1CompaniesCompanyUuidSignatoriesInviteRequest = {
+  companyUuid: "<id>",
+  signatoryInviteRequest: {
+    firstName: "Maxwell",
+    lastName: "Bruen",
+    email: "Juliet71@gmail.com",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `companyUuid`                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion](../../models/operations/postv1companiescompanyuuidsignatoriesinviteheaderxgustoapiversion.md)                                                 | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `signatoryInviteRequest`                                                                                                                                                                                                     | [components.SignatoryInviteRequest](../../models/components/signatoryinviterequest.md)                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
