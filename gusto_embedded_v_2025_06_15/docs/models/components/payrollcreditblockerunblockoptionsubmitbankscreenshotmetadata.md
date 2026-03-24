@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata } from "@gusto/embedded-api/models/components/payrollcreditblockerunblockoptionsubmitbankscreenshot.js";
+import { PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata } from "@gusto/embedded-api-v2025-06-15/models/components/payrollcreditblockerunblockoptionsubmitbankscreenshot.js";
 
 let value: PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata = {
   informationRequestUuid: "<id>",

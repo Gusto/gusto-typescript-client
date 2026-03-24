@@ -84,7 +84,7 @@ export function useWebhooksVerifyMutation(
 }
 
 export function mutationKeyWebhooksVerify(): MutationKey {
-  return ["@gusto/embedded-api", "Webhooks", "verify"];
+  return ["@gusto/embedded-api-v2025-06-15", "Webhooks", "verify"];
 }
 
 export function buildWebhooksVerifyMutation(

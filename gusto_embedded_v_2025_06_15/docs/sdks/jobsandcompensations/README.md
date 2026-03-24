@@ -25,7 +25,7 @@ scope: `jobs:write`
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-jobs-job_id" method="post" path="/v1/employees/{employee_id}/jobs" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -51,8 +51,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsCreateJob } from "@gusto/embedded-api/funcs/jobsAndCompensationsCreateJob.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsCreateJob } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsCreateJob.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -93,13 +93,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsCreateJobMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsCreateJob.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsCreateJob.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-jobs-job_id" method="post" path="/v1/employees/{employee_id}/jobs" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -125,8 +125,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsCreateJob } from "@gusto/embedded-api/funcs/jobsAndCompensationsCreateJob.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsCreateJob } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsCreateJob.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -167,13 +167,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsCreateJobMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsCreateJob.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsCreateJob.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-jobs-job_id" method="post" path="/v1/employees/{employee_id}/jobs" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -199,8 +199,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsCreateJob } from "@gusto/embedded-api/funcs/jobsAndCompensationsCreateJob.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsCreateJob } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsCreateJob.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -241,13 +241,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsCreateJobMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsCreateJob.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsCreateJob.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-jobs-job_id" method="post" path="/v1/employees/{employee_id}/jobs" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -273,8 +273,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsCreateJob } from "@gusto/embedded-api/funcs/jobsAndCompensationsCreateJob.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsCreateJob } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsCreateJob.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -315,7 +315,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsCreateJobMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsCreateJob.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsCreateJob.js";
 ```
 
 ### Parameters
@@ -348,7 +348,7 @@ scope: `jobs:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-jobs" method="get" path="/v1/employees/{employee_id}/jobs" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -370,8 +370,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsGetJobs } from "@gusto/embedded-api/funcs/jobsAndCompensationsGetJobs.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsGetJobs } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsGetJobs.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -419,7 +419,7 @@ import {
   // mutations and other user actions.
   invalidateJobsAndCompensationsGetJobs,
   invalidateAllJobsAndCompensationsGetJobs,
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsGetJobs.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsGetJobs.js";
 ```
 
 ### Parameters
@@ -451,7 +451,7 @@ scope: `jobs:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-jobs-job_id" method="get" path="/v1/jobs/{job_id}" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -473,8 +473,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsGetJob } from "@gusto/embedded-api/funcs/jobsAndCompensationsGetJob.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsGetJob } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsGetJob.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -522,7 +522,7 @@ import {
   // mutations and other user actions.
   invalidateJobsAndCompensationsGetJob,
   invalidateAllJobsAndCompensationsGetJob,
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsGetJob.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsGetJob.js";
 ```
 
 ### Parameters
@@ -554,7 +554,7 @@ scope: `jobs:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-jobs-job_id" method="put" path="/v1/jobs/{job_id}" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -579,8 +579,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsUpdate } from "@gusto/embedded-api/funcs/jobsAndCompensationsUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -620,13 +620,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsUpdateMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsUpdate.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-jobs-job_id" method="put" path="/v1/jobs/{job_id}" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -653,8 +653,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsUpdate } from "@gusto/embedded-api/funcs/jobsAndCompensationsUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -696,13 +696,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsUpdateMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsUpdate.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-jobs-job_id" method="put" path="/v1/jobs/{job_id}" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -727,8 +727,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsUpdate } from "@gusto/embedded-api/funcs/jobsAndCompensationsUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -768,13 +768,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsUpdateMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsUpdate.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-jobs-job_id" method="put" path="/v1/jobs/{job_id}" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -799,8 +799,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsUpdate } from "@gusto/embedded-api/funcs/jobsAndCompensationsUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -840,7 +840,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsUpdateMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsUpdate.js";
 ```
 
 ### Parameters
@@ -873,7 +873,7 @@ scope: `jobs:write`
 
 <!-- UsageSnippet language="typescript" operationID="delete-v1-jobs-job_id" method="delete" path="/v1/jobs/{job_id}" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -895,8 +895,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsDelete } from "@gusto/embedded-api/funcs/jobsAndCompensationsDelete.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsDelete } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsDelete.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -933,7 +933,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsDeleteMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsDelete.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsDelete.js";
 ```
 
 ### Parameters
@@ -971,7 +971,7 @@ scope: `compensations:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-jobs-job_id-compensations" method="get" path="/v1/jobs/{job_id}/compensations" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -993,8 +993,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsGetCompensations } from "@gusto/embedded-api/funcs/jobsAndCompensationsGetCompensations.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsGetCompensations } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsGetCompensations.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1042,7 +1042,7 @@ import {
   // mutations and other user actions.
   invalidateJobsAndCompensationsGetCompensations,
   invalidateAllJobsAndCompensationsGetCompensations,
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsGetCompensations.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsGetCompensations.js";
 ```
 
 ### Parameters
@@ -1082,7 +1082,7 @@ scope: `compensations:write`
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-compensations-compensation_id" method="post" path="/v1/jobs/{job_id}/compensations" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1109,8 +1109,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsCreateCompensation } from "@gusto/embedded-api/funcs/jobsAndCompensationsCreateCompensation.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsCreateCompensation } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsCreateCompensation.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1152,13 +1152,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsCreateCompensationMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsCreateCompensation.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsCreateCompensation.js";
 ```
 ### Example Usage: Exempt
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-compensations-compensation_id" method="post" path="/v1/jobs/{job_id}/compensations" example="Exempt" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1185,8 +1185,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsCreateCompensation } from "@gusto/embedded-api/funcs/jobsAndCompensationsCreateCompensation.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsCreateCompensation } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsCreateCompensation.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1228,13 +1228,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsCreateCompensationMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsCreateCompensation.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsCreateCompensation.js";
 ```
 ### Example Usage: Minimum Wage Adjusted
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-compensations-compensation_id" method="post" path="/v1/jobs/{job_id}/compensations" example="Minimum Wage Adjusted" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1268,8 +1268,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsCreateCompensation } from "@gusto/embedded-api/funcs/jobsAndCompensationsCreateCompensation.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsCreateCompensation } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsCreateCompensation.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1318,13 +1318,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsCreateCompensationMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsCreateCompensation.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsCreateCompensation.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-compensations-compensation_id" method="post" path="/v1/jobs/{job_id}/compensations" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1351,8 +1351,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsCreateCompensation } from "@gusto/embedded-api/funcs/jobsAndCompensationsCreateCompensation.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsCreateCompensation } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsCreateCompensation.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1394,13 +1394,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsCreateCompensationMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsCreateCompensation.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsCreateCompensation.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-compensations-compensation_id" method="post" path="/v1/jobs/{job_id}/compensations" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1427,8 +1427,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsCreateCompensation } from "@gusto/embedded-api/funcs/jobsAndCompensationsCreateCompensation.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsCreateCompensation } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsCreateCompensation.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1470,7 +1470,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsCreateCompensationMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsCreateCompensation.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsCreateCompensation.js";
 ```
 
 ### Parameters
@@ -1504,7 +1504,7 @@ scope: `compensations:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-compensations-compensation_id" method="get" path="/v1/compensations/{compensation_id}" example="Exempt" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1526,8 +1526,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsGetCompensation } from "@gusto/embedded-api/funcs/jobsAndCompensationsGetCompensation.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsGetCompensation } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsGetCompensation.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1575,13 +1575,13 @@ import {
   // mutations and other user actions.
   invalidateJobsAndCompensationsGetCompensation,
   invalidateAllJobsAndCompensationsGetCompensation,
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsGetCompensation.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsGetCompensation.js";
 ```
 ### Example Usage: Minimum Wage Adjusted
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-compensations-compensation_id" method="get" path="/v1/compensations/{compensation_id}" example="Minimum Wage Adjusted" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1603,8 +1603,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsGetCompensation } from "@gusto/embedded-api/funcs/jobsAndCompensationsGetCompensation.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsGetCompensation } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsGetCompensation.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1652,7 +1652,7 @@ import {
   // mutations and other user actions.
   invalidateJobsAndCompensationsGetCompensation,
   invalidateAllJobsAndCompensationsGetCompensation,
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsGetCompensation.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsGetCompensation.js";
 ```
 
 ### Parameters
@@ -1688,7 +1688,7 @@ scope: `compensations:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-compensations-compensation_id" method="put" path="/v1/compensations/{compensation_id}" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1713,8 +1713,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsUpdateCompensation } from "@gusto/embedded-api/funcs/jobsAndCompensationsUpdateCompensation.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsUpdateCompensation } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsUpdateCompensation.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1754,13 +1754,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsUpdateCompensationMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsUpdateCompensation.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsUpdateCompensation.js";
 ```
 ### Example Usage: Exempt
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-compensations-compensation_id" method="put" path="/v1/compensations/{compensation_id}" example="Exempt" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1788,8 +1788,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsUpdateCompensation } from "@gusto/embedded-api/funcs/jobsAndCompensationsUpdateCompensation.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsUpdateCompensation } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsUpdateCompensation.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1832,13 +1832,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsUpdateCompensationMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsUpdateCompensation.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsUpdateCompensation.js";
 ```
 ### Example Usage: Minimum Wage Adjusted
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-compensations-compensation_id" method="put" path="/v1/compensations/{compensation_id}" example="Minimum Wage Adjusted" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1872,8 +1872,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsUpdateCompensation } from "@gusto/embedded-api/funcs/jobsAndCompensationsUpdateCompensation.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsUpdateCompensation } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsUpdateCompensation.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1922,13 +1922,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsUpdateCompensationMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsUpdateCompensation.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsUpdateCompensation.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-compensations-compensation_id" method="put" path="/v1/compensations/{compensation_id}" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1953,8 +1953,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsUpdateCompensation } from "@gusto/embedded-api/funcs/jobsAndCompensationsUpdateCompensation.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsUpdateCompensation } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsUpdateCompensation.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1994,13 +1994,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsUpdateCompensationMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsUpdateCompensation.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsUpdateCompensation.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-compensations-compensation_id" method="put" path="/v1/compensations/{compensation_id}" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -2025,8 +2025,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsUpdateCompensation } from "@gusto/embedded-api/funcs/jobsAndCompensationsUpdateCompensation.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsUpdateCompensation } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsUpdateCompensation.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -2066,7 +2066,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsUpdateCompensationMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsUpdateCompensation.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsUpdateCompensation.js";
 ```
 
 ### Parameters
@@ -2103,7 +2103,7 @@ scope: `compensations:write`
 
 <!-- UsageSnippet language="typescript" operationID="delete-v1-compensations-compensation_id" method="delete" path="/v1/compensations/{compensation_id}" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -2125,8 +2125,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsDeleteCompensation } from "@gusto/embedded-api/funcs/jobsAndCompensationsDeleteCompensation.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { jobsAndCompensationsDeleteCompensation } from "@gusto/embedded-api-v2025-06-15/funcs/jobsAndCompensationsDeleteCompensation.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -2163,7 +2163,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useJobsAndCompensationsDeleteCompensationMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsDeleteCompensation.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/jobsAndCompensationsDeleteCompensation.js";
 ```
 
 ### Parameters

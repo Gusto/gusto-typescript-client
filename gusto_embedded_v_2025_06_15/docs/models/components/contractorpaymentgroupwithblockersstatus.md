@@ -5,7 +5,7 @@ The status of the contractor payment group.  Will be `Funded` if all payments th
 ## Example Usage
 
 ```typescript
-import { ContractorPaymentGroupWithBlockersStatus } from "@gusto/embedded-api/models/components/contractorpaymentgroupwithblockers.js";
+import { ContractorPaymentGroupWithBlockersStatus } from "@gusto/embedded-api-v2025-06-15/models/components/contractorpaymentgroupwithblockers.js";
 
 let value: ContractorPaymentGroupWithBlockersStatus = "Unfunded";
 ```

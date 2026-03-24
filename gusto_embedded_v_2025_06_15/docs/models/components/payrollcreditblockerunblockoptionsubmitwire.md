@@ -5,7 +5,7 @@ Unblock option to resolve a credit blocker by submitting a wire transfer
 ## Example Usage
 
 ```typescript
-import { PayrollCreditBlockerUnblockOptionSubmitWire } from "@gusto/embedded-api/models/components/payrollcreditblockerunblockoptionsubmitwire.js";
+import { PayrollCreditBlockerUnblockOptionSubmitWire } from "@gusto/embedded-api-v2025-06-15/models/components/payrollcreditblockerunblockoptionsubmitwire.js";
 
 let value: PayrollCreditBlockerUnblockOptionSubmitWire = {
   unblockType: "submit_wire",

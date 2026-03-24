@@ -80,7 +80,7 @@ export function useContractorPaymentsFundMutation(
 }
 
 export function mutationKeyContractorPaymentsFund(): MutationKey {
-  return ["@gusto/embedded-api", "contractorPayments", "fund"];
+  return ["@gusto/embedded-api-v2025-06-15", "contractorPayments", "fund"];
 }
 
 export function buildContractorPaymentsFundMutation(

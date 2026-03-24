@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type I9VerificationUpdateMutationData =
   PutV1EmployeesEmployeeIdI9AuthorizationResponse;
 
 export type I9VerificationUpdateMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -58,7 +60,6 @@ export type I9VerificationUpdateMutationError =
  * If the version is supplied and the employee I-9 authorization exists, this endpoint acts as an update. Otherwise, it will create an employee I-9 authorization.
  *
  * Validations on this endpoint are conditional:
- *
  *   * `document_type` may be required, depending on `authorization_status`.
  *   * Valid formats for `document_number` vary, depending on `document_type`.
  *   * `country` is only allowed with `document_type: 'foreign_passport'`.
@@ -71,6 +72,9 @@ export type I9VerificationUpdateMutationError =
  * > **Example:** Updating `authorization_status` from `alien` to `citizen` will cause any data in `document_type`, `document_number`, `country`, and `expiration_date` to be removed, since these fields are unused for `authorization_status:'citizen'`.
  *
  * Detailed instructions for completing Form I-9 can be found at https://www.uscis.gov/sites/default/files/document/forms/i-9instr.pdf
+ *
+ * ### Related guides
+ * - [I-9 employment verification](doc:i-9-employment-verification)
  *
  * scope: `i9_authorizations:write`
  */
@@ -93,7 +97,7 @@ export function useI9VerificationUpdateMutation(
 }
 
 export function mutationKeyI9VerificationUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "i9Verification", "update"];
+  return ["@gusto/embedded-api-v2025-06-15", "i9Verification", "update"];
 }
 
 export function buildI9VerificationUpdateMutation(

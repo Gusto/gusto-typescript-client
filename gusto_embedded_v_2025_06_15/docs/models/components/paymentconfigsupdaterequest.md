@@ -5,7 +5,7 @@ Request body for updating company payment configs. At least one of payment_speed
 ## Example Usage
 
 ```typescript
-import { PaymentConfigsUpdateRequest } from "@gusto/embedded-api/models/components/paymentconfigsupdaterequest.js";
+import { PaymentConfigsUpdateRequest } from "@gusto/embedded-api-v2025-06-15/models/components/paymentconfigsupdaterequest.js";
 
 let value: PaymentConfigsUpdateRequest = {};
 ```

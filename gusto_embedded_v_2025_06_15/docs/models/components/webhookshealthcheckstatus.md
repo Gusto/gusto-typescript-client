@@ -5,7 +5,7 @@ The representation of a webhooks health check response
 ## Example Usage
 
 ```typescript
-import { WebhooksHealthCheckStatus } from "@gusto/embedded-api/models/components/webhookshealthcheckstatus.js";
+import { WebhooksHealthCheckStatus } from "@gusto/embedded-api-v2025-06-15/models/components/webhookshealthcheckstatus.js";
 
 let value: WebhooksHealthCheckStatus = {};
 ```

@@ -9,7 +9,7 @@ The type of resource owner:
 ## Example Usage
 
 ```typescript
-import { TokenInfoType } from "@gusto/embedded-api/models/components/tokeninfo.js";
+import { TokenInfoType } from "@gusto/embedded-api-v2025-06-15/models/components/tokeninfo.js";
 
 let value: TokenInfoType = "CompanyAdmin";
 ```

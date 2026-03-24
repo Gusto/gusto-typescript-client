@@ -149,7 +149,12 @@ export function invalidatePaymentConfigsGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "paymentConfigs", "get", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "paymentConfigs",
+      "get",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -159,6 +164,6 @@ export function invalidateAllPaymentConfigsGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "paymentConfigs", "get"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "paymentConfigs", "get"],
   });
 }

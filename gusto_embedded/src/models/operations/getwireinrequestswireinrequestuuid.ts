@@ -53,7 +53,7 @@ export const GetWireInRequestsWireInRequestUuidRequest$outboundSchema:
     GetWireInRequestsWireInRequestUuidRequest
   > = z.object({
     wireInRequestUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   }).transform((v) => {
     return remap$(v, {
       wireInRequestUuid: "wire_in_request_uuid",

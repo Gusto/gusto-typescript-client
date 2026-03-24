@@ -5,7 +5,7 @@ A batch for bulk people creation.
 ## Example Usage
 
 ```typescript
-import { PeopleBatch } from "@gusto/embedded-api/models/components/peoplebatch.js";
+import { PeopleBatch } from "@gusto/embedded-api-v2025-06-15/models/components/peoplebatch.js";
 
 let value: PeopleBatch = {
   uuid: "47d41b97-c52d-4bc4-b151-773dfbb7bc66",

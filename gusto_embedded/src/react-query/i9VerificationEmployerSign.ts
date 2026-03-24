@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type I9VerificationEmployerSignMutationData =
   PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse;
 
 export type I9VerificationEmployerSignMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -54,6 +56,15 @@ export type I9VerificationEmployerSignMutationError =
  *
  * @remarks
  * Sign an employee's Form I-9 as an employer. Once the form is signed, the employee's I-9 authorization is considered complete and cannot be modified.
+ *
+ * ### Prerequisites
+ * Before calling this endpoint:
+ * 1. The employee must have a completed [I-9 authorization](ref:put-v1-employees-employee_id-i9_authorization)
+ * 2. The employee must have signed the Form I-9
+ * 3. [I-9 verification documents](ref:put-v1-employees-employee_id-i9_authorization-documents) must be submitted
+ *
+ * ### Related guides
+ * - [I-9 employment verification](doc:i-9-employment-verification)
  *
  * scope: `i9_authorizations:manage`
  */

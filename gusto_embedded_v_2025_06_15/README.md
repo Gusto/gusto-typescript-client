@@ -51,7 +51,7 @@ The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https
 ### NPM
 
 ```bash
-npm add @gusto/embedded-api
+npm add @gusto/embedded-api-v2025-06-15
 # Install optional peer dependencies if you plan to use React hooks
 npm add @tanstack/react-query react react-dom
 ```
@@ -59,7 +59,7 @@ npm add @tanstack/react-query react react-dom
 ### PNPM
 
 ```bash
-pnpm add @gusto/embedded-api
+pnpm add @gusto/embedded-api-v2025-06-15
 # Install optional peer dependencies if you plan to use React hooks
 pnpm add @tanstack/react-query react react-dom
 ```
@@ -67,7 +67,7 @@ pnpm add @tanstack/react-query react react-dom
 ### Bun
 
 ```bash
-bun add @gusto/embedded-api
+bun add @gusto/embedded-api-v2025-06-15
 # Install optional peer dependencies if you plan to use React hooks
 bun add @tanstack/react-query react react-dom
 ```
@@ -75,14 +75,14 @@ bun add @tanstack/react-query react react-dom
 ### Yarn
 
 ```bash
-yarn add @gusto/embedded-api
+yarn add @gusto/embedded-api-v2025-06-15
 # Install optional peer dependencies if you plan to use React hooks
 yarn add @tanstack/react-query react react-dom
 ```
 
 > [!NOTE]
 > This package is published as an ES Module (ESM) only. For applications using
-> CommonJS, use `await import("@gusto/embedded-api")` to import and use this package.
+> CommonJS, use `await import("@gusto/embedded-api-v2025-06-15")` to import and use this package.
 <!-- End SDK Installation [installation] -->
 
 <!-- Start Requirements [requirements] -->
@@ -97,7 +97,7 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 ### Example
 
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -127,7 +127,7 @@ This SDK supports the following security scheme globally:
 
 To authenticate with the API the `companyAccessAuth` parameter must be set when initializing the SDK client instance. For example:
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -147,7 +147,7 @@ run();
 
 Some operations in this SDK require the security scheme to be specified at the request level. For example:
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -1250,7 +1250,7 @@ Certain SDK methods accept files as part of a multi-part request. It is possible
 > - **Node.js v18:** A file stream can be created using the `fileFrom` helper from [`fetch-blob/from.js`](https://www.npmjs.com/package/fetch-blob).
 
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 import { openAsBlob } from "node:fs";
 
 const gustoEmbedded = new GustoEmbedded({
@@ -1281,7 +1281,7 @@ Some of the endpoints in this SDK support retries.  If you use the SDK without a
 
 To change the default retry strategy for a single API call, simply provide a retryConfig object to the call:
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1310,7 +1310,7 @@ run();
 
 If you'd like to override the default retry strategy for all operations that support retries, you can provide a retryConfig at SDK initialization:
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   retryConfig: {
@@ -1351,9 +1351,9 @@ run();
 
 ### Example
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
-import { GustoEmbeddedError } from "@gusto/embedded-api/models/errors/gustoembeddederror.js.js";
-import { UnprocessableEntityErrorObject } from "@gusto/embedded-api/models/errors/unprocessableentityerrorobject.js";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
+import { GustoEmbeddedError } from "@gusto/embedded-api-v2025-06-15/models/errors/gustoembeddederror.js.js";
+import { UnprocessableEntityErrorObject } from "@gusto/embedded-api-v2025-06-15/models/errors/unprocessableentityerrorobject.js";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -1416,8 +1416,8 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 143 of 280 methods.*
-* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Applicable to 120 of 280 methods.*
+* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 144 of 280 methods.*
+* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Applicable to 132 of 280 methods.*
 * [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 2 of 280 methods.*
 * [`PeopleBatchConflictError`](./src/models/errors/peoplebatchconflicterror.ts): Error response when a people batch idempotency key conflict occurs. Status code `409`. Applicable to 1 of 280 methods.*
 * [`MigrationBlocker`](./src/models/errors/migrationblocker.ts): Migration blocker that blocks company migration. Status code `422`. Applicable to 1 of 280 methods.*
@@ -1445,7 +1445,7 @@ You can override the default server globally by passing a server name to the `se
 #### Example
 
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   server: "demo",
@@ -1466,7 +1466,7 @@ run();
 
 The default server can also be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   serverURL: "https://api.gusto-demo.com",
@@ -1503,9 +1503,9 @@ The following example shows how to:
 - use the `"requestError"` hook to log errors
 
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 import { ProxyAgent } from "undici";
-import { HTTPClient } from "@gusto/embedded-api/lib/http";
+import { HTTPClient } from "@gusto/embedded-api-v2025-06-15/lib/http";
 
 const dispatcher = new ProxyAgent("http://proxy.example.com:8080");
 
@@ -1548,7 +1548,7 @@ You can pass a logger that matches `console`'s interface as an SDK option.
 > Beware that debug logging will reveal secrets, like API tokens in headers, in log messages printed to a console or files. It's recommended to use this feature only during local development and not in production.
 
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const sdk = new GustoEmbedded({ debugLogger: console });
 ```

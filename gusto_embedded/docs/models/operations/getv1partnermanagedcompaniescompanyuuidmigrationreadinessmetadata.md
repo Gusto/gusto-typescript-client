@@ -11,6 +11,6 @@ let value: GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessMetadata =
 
 ## Fields
 
-| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `key`                                                                        | *string*                                                                     | :heavy_minus_sign:                                                           | A categorization of the migration warning, e.g. "marijuana_related_business" |
+| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `key`                                                              | *string*                                                           | :heavy_minus_sign:                                                 | A categorization of the migration blocker, e.g. "migrated_company" |

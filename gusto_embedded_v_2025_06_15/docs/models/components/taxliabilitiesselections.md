@@ -5,7 +5,7 @@ The representation of tax liabilities selections.
 ## Example Usage
 
 ```typescript
-import { TaxLiabilitiesSelections } from "@gusto/embedded-api/models/components/taxliabilitiesselections.js";
+import { TaxLiabilitiesSelections } from "@gusto/embedded-api-v2025-06-15/models/components/taxliabilitiesselections.js";
 
 let value: TaxLiabilitiesSelections = {};
 ```

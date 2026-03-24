@@ -74,5 +74,10 @@ export function buildIntrospectionGetInfoQuery(
 export function queryKeyIntrospectionGetInfo(
   parameters: { xGustoAPIVersion?: XGustoAPIVersion | undefined },
 ): QueryKey {
-  return ["@gusto/embedded-api", "Introspection", "getInfo", parameters];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "Introspection",
+    "getInfo",
+    parameters,
+  ];
 }

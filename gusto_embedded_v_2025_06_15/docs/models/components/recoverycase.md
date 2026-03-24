@@ -5,7 +5,7 @@ Representation of a recovery case
 ## Example Usage
 
 ```typescript
-import { RecoveryCase } from "@gusto/embedded-api/models/components/recoverycase.js";
+import { RecoveryCase } from "@gusto/embedded-api-v2025-06-15/models/components/recoverycase.js";
 
 let value: RecoveryCase = {
   uuid: "ddc7da4a-f5a8-49a1-a79b-4d6202b66776",

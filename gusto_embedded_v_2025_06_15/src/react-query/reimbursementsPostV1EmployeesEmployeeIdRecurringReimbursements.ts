@@ -81,7 +81,7 @@ export function useReimbursementsPostV1EmployeesEmployeeIdRecurringReimbursement
 
 export function mutationKeyReimbursementsPostV1EmployeesEmployeeIdRecurringReimbursements(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v2025-06-15",
     "Reimbursements",
     "postV1EmployeesEmployeeIdRecurringReimbursements",
   ];

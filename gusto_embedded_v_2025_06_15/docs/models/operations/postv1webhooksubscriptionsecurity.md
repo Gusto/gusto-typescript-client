@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PostV1WebhookSubscriptionSecurity } from "@gusto/embedded-api/models/operations/postv1webhooksubscription.js";
+import { PostV1WebhookSubscriptionSecurity } from "@gusto/embedded-api-v2025-06-15/models/operations/postv1webhooksubscription.js";
 
 let value: PostV1WebhookSubscriptionSecurity = {
   systemAccessAuth: "<value>",

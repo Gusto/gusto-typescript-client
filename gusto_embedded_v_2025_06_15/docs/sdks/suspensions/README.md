@@ -21,7 +21,7 @@ scope: `company_suspensions:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-companies-company_uuid-suspensions" method="get" path="/v1/companies/{company_uuid}/suspensions" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -43,8 +43,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { companiesSuspensionsGet } from "@gusto/embedded-api/funcs/companiesSuspensionsGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { companiesSuspensionsGet } from "@gusto/embedded-api-v2025-06-15/funcs/companiesSuspensionsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -92,7 +92,7 @@ import {
   // mutations and other user actions.
   invalidateCompaniesSuspensionsGet,
   invalidateAllCompaniesSuspensionsGet,
-} from "@gusto/embedded-api/react-query/companiesSuspensionsGet.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/companiesSuspensionsGet.js";
 ```
 
 ### Parameters
@@ -125,7 +125,7 @@ scope: `company_suspensions:write`
 
 <!-- UsageSnippet language="typescript" operationID="post-companies-company_uuid-suspensions" method="post" path="/v1/companies/{company_uuid}/suspensions" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -153,8 +153,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { companiesSuspensionsSuspend } from "@gusto/embedded-api/funcs/companiesSuspensionsSuspend.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { companiesSuspensionsSuspend } from "@gusto/embedded-api-v2025-06-15/funcs/companiesSuspensionsSuspend.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -197,13 +197,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useCompaniesSuspensionsSuspendMutation
-} from "@gusto/embedded-api/react-query/companiesSuspensionsSuspend.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/companiesSuspensionsSuspend.js";
 ```
 ### Example Usage: Company is shutting down
 
 <!-- UsageSnippet language="typescript" operationID="post-companies-company_uuid-suspensions" method="post" path="/v1/companies/{company_uuid}/suspensions" example="Company is shutting down" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -231,8 +231,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { companiesSuspensionsSuspend } from "@gusto/embedded-api/funcs/companiesSuspensionsSuspend.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { companiesSuspensionsSuspend } from "@gusto/embedded-api-v2025-06-15/funcs/companiesSuspensionsSuspend.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -275,13 +275,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useCompaniesSuspensionsSuspendMutation
-} from "@gusto/embedded-api/react-query/companiesSuspensionsSuspend.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/companiesSuspensionsSuspend.js";
 ```
 ### Example Usage: Leaving to join another payroll provider
 
 <!-- UsageSnippet language="typescript" operationID="post-companies-company_uuid-suspensions" method="post" path="/v1/companies/{company_uuid}/suspensions" example="Leaving to join another payroll provider" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -310,8 +310,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { companiesSuspensionsSuspend } from "@gusto/embedded-api/funcs/companiesSuspensionsSuspend.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { companiesSuspensionsSuspend } from "@gusto/embedded-api-v2025-06-15/funcs/companiesSuspensionsSuspend.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -355,13 +355,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useCompaniesSuspensionsSuspendMutation
-} from "@gusto/embedded-api/react-query/companiesSuspensionsSuspend.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/companiesSuspensionsSuspend.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="post-companies-company_uuid-suspensions" method="post" path="/v1/companies/{company_uuid}/suspensions" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -389,8 +389,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { companiesSuspensionsSuspend } from "@gusto/embedded-api/funcs/companiesSuspensionsSuspend.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { companiesSuspensionsSuspend } from "@gusto/embedded-api-v2025-06-15/funcs/companiesSuspensionsSuspend.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -433,13 +433,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useCompaniesSuspensionsSuspendMutation
-} from "@gusto/embedded-api/react-query/companiesSuspensionsSuspend.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/companiesSuspensionsSuspend.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="post-companies-company_uuid-suspensions" method="post" path="/v1/companies/{company_uuid}/suspensions" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -467,8 +467,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { companiesSuspensionsSuspend } from "@gusto/embedded-api/funcs/companiesSuspensionsSuspend.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { companiesSuspensionsSuspend } from "@gusto/embedded-api-v2025-06-15/funcs/companiesSuspensionsSuspend.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -511,7 +511,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useCompaniesSuspensionsSuspendMutation
-} from "@gusto/embedded-api/react-query/companiesSuspensionsSuspend.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/companiesSuspensionsSuspend.js";
 ```
 
 ### Parameters

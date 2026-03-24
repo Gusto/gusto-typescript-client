@@ -10,7 +10,7 @@ mkdir samples
 npm install --ignore-scripts
 npm install -g ts-node --ignore-scripts
 npm link
-npm link @gusto/embedded-api
+npm link @gusto/embedded-api-v2025-06-15
 TS_CONFIG_CONTENT=$(cat <<EOL
 {
   "compilerOptions": {

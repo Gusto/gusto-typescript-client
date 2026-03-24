@@ -5,7 +5,7 @@ Describes the type of tax_rate validation rule
 ## Example Usage
 
 ```typescript
-import { TaxRequirementMetadataValidationType } from "@gusto/embedded-api/models/components/taxrequirementmetadata.js";
+import { TaxRequirementMetadataValidationType } from "@gusto/embedded-api-v2025-06-15/models/components/taxrequirementmetadata.js";
 
 let value: TaxRequirementMetadataValidationType = "one_of";
 ```

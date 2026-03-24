@@ -5,7 +5,7 @@ Specify the company work location for the employee
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesCompanyIdPeopleBatchesWorkAddress } from "@gusto/embedded-api/models/operations/postv1companiescompanyidpeoplebatches.js";
+import { PostV1CompaniesCompanyIdPeopleBatchesWorkAddress } from "@gusto/embedded-api-v2025-06-15/models/operations/postv1companiescompanyidpeoplebatches.js";
 
 let value: PostV1CompaniesCompanyIdPeopleBatchesWorkAddress = {
   locationUuid: "45b2eeec-98d1-45bb-a01c-9fb6a2b7a261",

@@ -79,7 +79,11 @@ export function useContractorPaymentGroupsPreviewMutation(
 }
 
 export function mutationKeyContractorPaymentGroupsPreview(): MutationKey {
-  return ["@gusto/embedded-api", "contractorPaymentGroups", "preview"];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "contractorPaymentGroups",
+    "preview",
+  ];
 }
 
 export function buildContractorPaymentGroupsPreviewMutation(

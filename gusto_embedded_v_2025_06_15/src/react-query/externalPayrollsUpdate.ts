@@ -75,7 +75,7 @@ export function useExternalPayrollsUpdateMutation(
 }
 
 export function mutationKeyExternalPayrollsUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "externalPayrolls", "update"];
+  return ["@gusto/embedded-api-v2025-06-15", "externalPayrolls", "update"];
 }
 
 export function buildExternalPayrollsUpdateMutation(

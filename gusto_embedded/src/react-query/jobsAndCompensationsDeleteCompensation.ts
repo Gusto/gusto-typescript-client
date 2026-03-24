@@ -57,9 +57,6 @@ export type JobsAndCompensationsDeleteCompensationMutationError =
  * @remarks
  * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. This endpoint deletes a compensation for a job that hasn't been processed on payroll.
  *
- * ### Webhooks
- * - `employee_job_compensation.destroyed`: Fires when a compensation is successfully deleted
- *
  * scope: `compensations:write`
  */
 export function useJobsAndCompensationsDeleteCompensationMutation(

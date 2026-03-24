@@ -81,7 +81,7 @@ export function usePayrollsCancelMutation(
 }
 
 export function mutationKeyPayrollsCancel(): MutationKey {
-  return ["@gusto/embedded-api", "Payrolls", "cancel"];
+  return ["@gusto/embedded-api-v2025-06-15", "Payrolls", "cancel"];
 }
 
 export function buildPayrollsCancelMutation(

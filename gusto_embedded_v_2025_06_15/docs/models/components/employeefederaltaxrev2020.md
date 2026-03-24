@@ -5,7 +5,7 @@ Federal tax information for employees using the revised 2020 W4 form.
 ## Example Usage
 
 ```typescript
-import { EmployeeFederalTaxRev2020 } from "@gusto/embedded-api/models/components/employeefederaltaxrev2020.js";
+import { EmployeeFederalTaxRev2020 } from "@gusto/embedded-api-v2025-06-15/models/components/employeefederaltaxrev2020.js";
 
 let value: EmployeeFederalTaxRev2020 = {
   version: "<value>",

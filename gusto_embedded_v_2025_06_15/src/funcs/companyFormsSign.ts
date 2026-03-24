@@ -104,7 +104,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/forms/{form_id}/sign")(pathParams);
 
   const headers = new Headers(compactMap({

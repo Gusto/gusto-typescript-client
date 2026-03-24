@@ -80,7 +80,7 @@ export function useContractorFormsGenerate1099Mutation(
 }
 
 export function mutationKeyContractorFormsGenerate1099(): MutationKey {
-  return ["@gusto/embedded-api", "contractorForms", "generate1099"];
+  return ["@gusto/embedded-api-v2025-06-15", "contractorForms", "generate1099"];
 }
 
 export function buildContractorFormsGenerate1099Mutation(

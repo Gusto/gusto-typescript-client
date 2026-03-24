@@ -96,7 +96,7 @@ export const PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$outboundS
   > = z.object({
     companyId: z.string(),
     earningTypeUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$outboundSchema
     ),

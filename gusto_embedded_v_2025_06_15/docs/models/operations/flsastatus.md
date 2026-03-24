@@ -5,7 +5,7 @@ The FLSA status for this compensation. Salaried ('Exempt') employees are paid a 
 ## Example Usage
 
 ```typescript
-import { FlsaStatus } from "@gusto/embedded-api/models/operations/postv1companiescompanyidpeoplebatches.js";
+import { FlsaStatus } from "@gusto/embedded-api-v2025-06-15/models/operations/postv1companiescompanyidpeoplebatches.js";
 
 let value: FlsaStatus = "Owner";
 ```

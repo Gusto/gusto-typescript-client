@@ -5,7 +5,7 @@ Representation of a Time Off Policy
 ## Example Usage
 
 ```typescript
-import { TimeOffPolicy } from "@gusto/embedded-api/models/components/timeoffpolicy.js";
+import { TimeOffPolicy } from "@gusto/embedded-api-v2025-06-15/models/components/timeoffpolicy.js";
 
 let value: TimeOffPolicy = {
   uuid: "4113a34d-db95-4abc-9227-f45d462a5258",

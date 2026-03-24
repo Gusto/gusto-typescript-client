@@ -5,7 +5,7 @@ Compensation details for the employee (requires job to be provided)
 ## Example Usage
 
 ```typescript
-import { Compensation } from "@gusto/embedded-api/models/operations/postv1companiescompanyidpeoplebatches.js";
+import { Compensation } from "@gusto/embedded-api-v2025-06-15/models/operations/postv1companiescompanyidpeoplebatches.js";
 
 let value: Compensation = {
   rate: "<value>",

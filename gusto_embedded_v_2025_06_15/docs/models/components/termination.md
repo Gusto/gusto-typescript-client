@@ -5,7 +5,7 @@ The representation of a termination in Gusto.
 ## Example Usage
 
 ```typescript
-import { Termination } from "@gusto/embedded-api/models/components/termination.js";
+import { Termination } from "@gusto/embedded-api-v2025-06-15/models/components/termination.js";
 
 let value: Termination = {
   uuid: "ef44e5c0-5362-474f-9bfe-67c6cd20cff4",

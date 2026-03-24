@@ -11,11 +11,11 @@ import {
 
 let value:
   GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion =
-    "2025-06-15";
+    "2026-02-01";
 ```
 
 ## Values
 
 ```typescript
-"2025-06-15"
+"2026-02-01"
 ```

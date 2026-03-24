@@ -143,7 +143,7 @@ export function invalidateEmployeesGetCustomFields(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "Employees",
       "getCustomFields",
       ...queryKeyBase,
@@ -157,6 +157,10 @@ export function invalidateAllEmployeesGetCustomFields(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Employees", "getCustomFields"],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "Employees",
+      "getCustomFields",
+    ],
   });
 }

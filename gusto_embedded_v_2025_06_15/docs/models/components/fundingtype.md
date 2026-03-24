@@ -5,7 +5,7 @@ Company's default funding type
 ## Example Usage
 
 ```typescript
-import { FundingType } from "@gusto/embedded-api/models/components/company.js";
+import { FundingType } from "@gusto/embedded-api-v2025-06-15/models/components/company.js";
 
 let value: FundingType = "brex";
 ```

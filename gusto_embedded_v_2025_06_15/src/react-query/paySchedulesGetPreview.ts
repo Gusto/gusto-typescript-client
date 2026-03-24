@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,13 +18,16 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
+  Frequency,
+  GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
-  QueryParamFrequency,
 } from "../models/operations/getv1companiescompanyidpayschedulespreview.js";
+import { RFCDate } from "../types/rfcdate.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -46,6 +48,7 @@ export {
 };
 
 export type PaySchedulesGetPreviewQueryError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -60,7 +63,11 @@ export type PaySchedulesGetPreviewQueryError =
  * Preview pay schedule dates
  *
  * @remarks
- * Provides a preview of a pay schedule with the specified parameters for the next 18 months.
+ * Returns a preview of pay period dates and holidays for the given parameters (e.g. frequency, anchor pay date) for the next 18 months. Use this before creating or updating a pay schedule to show expected check dates and payroll deadlines.
+ *
+ * ### Related guides
+ * - [Create a pay schedule](doc:create-a-pay-schedule)
+ * - [Manage Pay Schedules via API](doc:manage-pay-schedules-api)
  *
  * scope: `pay_schedules:write`
  */
@@ -89,7 +96,11 @@ export function usePaySchedulesGetPreview(
  * Preview pay schedule dates
  *
  * @remarks
- * Provides a preview of a pay schedule with the specified parameters for the next 18 months.
+ * Returns a preview of pay period dates and holidays for the given parameters (e.g. frequency, anchor pay date) for the next 18 months. Use this before creating or updating a pay schedule to show expected check dates and payroll deadlines.
+ *
+ * ### Related guides
+ * - [Create a pay schedule](doc:create-a-pay-schedule)
+ * - [Manage Pay Schedules via API](doc:manage-pay-schedules-api)
  *
  * scope: `pay_schedules:write`
  */
@@ -119,12 +130,15 @@ export function setPaySchedulesGetPreviewData(
   queryKeyBase: [
     companyId: string,
     parameters: {
-      frequency: QueryParamFrequency;
-      anchorPayDate: string;
-      anchorEndOfPayPeriod: string;
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion
+        | undefined;
+      frequency: Frequency;
+      anchorPayDate: RFCDate;
+      anchorEndOfPayPeriod: RFCDate;
       day1?: number | undefined;
       day2?: number | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
+      endDate?: RFCDate | undefined;
     },
   ],
   data: PaySchedulesGetPreviewQueryData,
@@ -140,12 +154,15 @@ export function invalidatePaySchedulesGetPreview(
     [
       companyId: string,
       parameters: {
-        frequency: QueryParamFrequency;
-        anchorPayDate: string;
-        anchorEndOfPayPeriod: string;
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion
+          | undefined;
+        frequency: Frequency;
+        anchorPayDate: RFCDate;
+        anchorEndOfPayPeriod: RFCDate;
         day1?: number | undefined;
         day2?: number | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
+        endDate?: RFCDate | undefined;
       },
     ]
   >,
@@ -154,7 +171,7 @@ export function invalidatePaySchedulesGetPreview(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "paySchedules",
       "getPreview",
       ...queryKeyBase,
@@ -168,6 +185,6 @@ export function invalidateAllPaySchedulesGetPreview(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "paySchedules", "getPreview"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "paySchedules", "getPreview"],
   });
 }

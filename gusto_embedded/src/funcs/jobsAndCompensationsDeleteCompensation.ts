@@ -43,9 +43,6 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. This endpoint deletes a compensation for a job that hasn't been processed on payroll.
  *
- * ### Webhooks
- * - `employee_job_compensation.destroyed`: Fires when a compensation is successfully deleted
- *
  * scope: `compensations:write`
  */
 export function jobsAndCompensationsDeleteCompensation(
@@ -114,7 +111,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/compensations/{compensation_id}")(pathParams);
 
   const headers = new Headers(compactMap({

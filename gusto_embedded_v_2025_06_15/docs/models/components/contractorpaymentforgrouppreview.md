@@ -5,7 +5,7 @@ Preview representation of a single contractor payment with nullable uuid.
 ## Example Usage
 
 ```typescript
-import { ContractorPaymentForGroupPreview } from "@gusto/embedded-api/models/components/contractorpaymentforgrouppreview.js";
+import { ContractorPaymentForGroupPreview } from "@gusto/embedded-api-v2025-06-15/models/components/contractorpaymentforgrouppreview.js";
 
 let value: ContractorPaymentForGroupPreview = {};
 ```

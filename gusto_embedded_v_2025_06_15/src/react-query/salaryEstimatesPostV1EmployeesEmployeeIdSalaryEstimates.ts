@@ -90,7 +90,7 @@ export function useSalaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimatesMutati
 
 export function mutationKeySalaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimates(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v2025-06-15",
     "Salary Estimates",
     "postV1EmployeesEmployeeIdSalaryEstimates",
   ];

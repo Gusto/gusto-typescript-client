@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse } from "@gusto/embedded-api/models/operations/getv1employeesemployeeidi9authorizationdocuments.js";
+import { GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse } from "@gusto/embedded-api-v2025-06-15/models/operations/getv1employeesemployeeidi9authorizationdocuments.js";
 
 let value: GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse = {};
 ```
@@ -13,4 +13,4 @@ let value: GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse = {};
 | Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
 | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
 | `httpMeta`                                                                                 | [components.HTTPMetadata](../../models/components/httpmetadata.md)                         | :heavy_check_mark:                                                                         | N/A                                                                                        |
-| `i9AuthorizationDocumentsObject`                                                           | [components.I9AuthorizationDocument](../../models/components/i9authorizationdocument.md)[] | :heavy_minus_sign:                                                                         | Example response                                                                           |
+| `i9AuthorizationDocuments`                                                                 | [components.I9AuthorizationDocument](../../models/components/i9authorizationdocument.md)[] | :heavy_minus_sign:                                                                         | Success                                                                                    |

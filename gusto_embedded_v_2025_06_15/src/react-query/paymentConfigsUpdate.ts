@@ -84,7 +84,7 @@ export function usePaymentConfigsUpdateMutation(
 }
 
 export function mutationKeyPaymentConfigsUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "paymentConfigs", "update"];
+  return ["@gusto/embedded-api-v2025-06-15", "paymentConfigs", "update"];
 }
 
 export function buildPaymentConfigsUpdateMutation(

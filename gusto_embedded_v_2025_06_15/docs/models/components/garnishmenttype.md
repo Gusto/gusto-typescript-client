@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GarnishmentType } from "@gusto/embedded-api/models/components/garnishment.js";
+import { GarnishmentType } from "@gusto/embedded-api-v2025-06-15/models/components/garnishment.js";
 
 let value: GarnishmentType = "creditor_garnishment";
 ```

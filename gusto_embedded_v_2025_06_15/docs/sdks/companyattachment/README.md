@@ -17,7 +17,7 @@ scope: `company_attachments:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-attachment-url" method="get" path="/v1/companies/{company_id}/attachments/{company_attachment_uuid}/download_url" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -40,8 +40,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { companyAttachmentGetDownloadUrl } from "@gusto/embedded-api/funcs/companyAttachmentGetDownloadUrl.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { companyAttachmentGetDownloadUrl } from "@gusto/embedded-api-v2025-06-15/funcs/companyAttachmentGetDownloadUrl.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -90,7 +90,7 @@ import {
   // mutations and other user actions.
   invalidateCompanyAttachmentGetDownloadUrl,
   invalidateAllCompanyAttachmentGetDownloadUrl,
-} from "@gusto/embedded-api/react-query/companyAttachmentGetDownloadUrl.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/companyAttachmentGetDownloadUrl.js";
 ```
 
 ### Parameters

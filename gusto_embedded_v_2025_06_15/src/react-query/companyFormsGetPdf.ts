@@ -132,7 +132,7 @@ export function invalidateCompanyFormsGetPdf(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "companyForms",
       "getPdf",
       ...queryKeyBase,
@@ -146,6 +146,6 @@ export function invalidateAllCompanyFormsGetPdf(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "companyForms", "getPdf"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "companyForms", "getPdf"],
   });
 }

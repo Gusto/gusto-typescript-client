@@ -5,7 +5,7 @@ The representation of an contractor's onboarding status.
 ## Example Usage
 
 ```typescript
-import { ContractorOnboardingStatus } from "@gusto/embedded-api/models/components/contractoronboardingstatus.js";
+import { ContractorOnboardingStatus } from "@gusto/embedded-api-v2025-06-15/models/components/contractoronboardingstatus.js";
 
 let value: ContractorOnboardingStatus = {
   uuid: "c5a3a886-653d-4d81-926b-6770362e613c",

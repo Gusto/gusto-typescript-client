@@ -5,7 +5,7 @@ Migration blocker that blocks company migration
 ## Example Usage
 
 ```typescript
-import { MigrationBlocker } from "@gusto/embedded-api/models/errors/migrationblocker.js";
+import { MigrationBlocker } from "@gusto/embedded-api-v2025-06-15/models/errors/migrationblocker.js";
 
 // No examples available for this model
 ```

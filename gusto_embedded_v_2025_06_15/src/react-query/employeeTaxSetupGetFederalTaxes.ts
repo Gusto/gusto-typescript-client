@@ -150,7 +150,7 @@ export function invalidateEmployeeTaxSetupGetFederalTaxes(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "employeeTaxSetup",
       "getFederalTaxes",
       ...queryKeyBase,
@@ -164,6 +164,10 @@ export function invalidateAllEmployeeTaxSetupGetFederalTaxes(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "employeeTaxSetup", "getFederalTaxes"],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "employeeTaxSetup",
+      "getFederalTaxes",
+    ],
   });
 }

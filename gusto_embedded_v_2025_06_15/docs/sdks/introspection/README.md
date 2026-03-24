@@ -17,7 +17,7 @@ Returns scope and resource information associated with the current access token.
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-token-info" method="get" path="/v1/token_info" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -37,8 +37,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { introspectionGetInfo } from "@gusto/embedded-api/funcs/introspectionGetInfo.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { introspectionGetInfo } from "@gusto/embedded-api-v2025-06-15/funcs/introspectionGetInfo.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -84,7 +84,7 @@ import {
   // mutations and other user actions.
   invalidateIntrospectionGetInfo,
   invalidateAllIntrospectionGetInfo,
-} from "@gusto/embedded-api/react-query/introspectionGetInfo.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/introspectionGetInfo.js";
 ```
 
 ### Parameters
@@ -114,7 +114,7 @@ Creates a system access token or refreshes an oauth access token
 
 <!-- UsageSnippet language="typescript" operationID="oauth-access-token" method="post" path="/oauth/token" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -138,8 +138,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { introspectionOauthAccessToken } from "@gusto/embedded-api/funcs/introspectionOauthAccessToken.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { introspectionOauthAccessToken } from "@gusto/embedded-api-v2025-06-15/funcs/introspectionOauthAccessToken.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -178,7 +178,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useIntrospectionOauthAccessTokenMutation
-} from "@gusto/embedded-api/react-query/introspectionOauthAccessToken.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/introspectionOauthAccessToken.js";
 ```
 
 ### Parameters

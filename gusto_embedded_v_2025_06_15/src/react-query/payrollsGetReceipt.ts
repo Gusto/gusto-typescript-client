@@ -154,7 +154,7 @@ export function invalidatePayrollsGetReceipt(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "Payrolls",
       "getReceipt",
       ...queryKeyBase,
@@ -168,6 +168,6 @@ export function invalidateAllPayrollsGetReceipt(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Payrolls", "getReceipt"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "Payrolls", "getReceipt"],
   });
 }

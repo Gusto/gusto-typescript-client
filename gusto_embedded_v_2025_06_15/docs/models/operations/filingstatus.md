@@ -5,7 +5,7 @@ Determines which tax return form an individual will use. One of: Single, Married
 ## Example Usage
 
 ```typescript
-import { FilingStatus } from "@gusto/embedded-api/models/operations/putv1employeesemployeeidfederaltaxes.js";
+import { FilingStatus } from "@gusto/embedded-api-v2025-06-15/models/operations/putv1employeesemployeeidfederaltaxes.js";
 
 let value: FilingStatus = "Single";
 ```

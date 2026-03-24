@@ -5,7 +5,7 @@ The payment schedule tax rate the payroll is based on. Only relevant for off-cyc
 ## Example Usage
 
 ```typescript
-import { WithholdingPayPeriod } from "@gusto/embedded-api/models/components/payrollupdate.js";
+import { WithholdingPayPeriod } from "@gusto/embedded-api-v2025-06-15/models/components/payrollupdate.js";
 
 let value: WithholdingPayPeriod = "Semiannually";
 ```

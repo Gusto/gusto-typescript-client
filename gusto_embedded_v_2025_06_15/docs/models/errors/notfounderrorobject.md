@@ -7,7 +7,7 @@ The requested resource does not exist. Make sure the provided ID/UUID is valid.
 ## Example Usage
 
 ```typescript
-import { NotFoundErrorObject } from "@gusto/embedded-api/models/errors/notfounderrorobject.js";
+import { NotFoundErrorObject } from "@gusto/embedded-api-v2025-06-15/models/errors/notfounderrorobject.js";
 
 // No examples available for this model
 ```

@@ -167,7 +167,7 @@ export function invalidateJobsAndCompensationsGetCompensations(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "jobsAndCompensations",
       "getCompensations",
       ...queryKeyBase,
@@ -182,7 +182,7 @@ export function invalidateAllJobsAndCompensationsGetCompensations(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "jobsAndCompensations",
       "getCompensations",
     ],

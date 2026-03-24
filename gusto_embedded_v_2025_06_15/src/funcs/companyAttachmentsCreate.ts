@@ -5,6 +5,7 @@
 import { GustoEmbeddedCore } from "../core.js";
 import { appendForm, encodeSimple } from "../lib/encodings.js";
 import {
+  bytesToBlob,
   getContentTypeFromFileName,
   readableStreamToArrayBuffer,
 } from "../lib/files.js";
@@ -116,18 +117,10 @@ async function $do(
     const contentType =
       getContentTypeFromFileName(payload.RequestBody.document.fileName)
       || "application/octet-stream";
-    const blob = new Blob([buffer], { type: contentType });
-    appendForm(body, "document", blob, payload.RequestBody.document.fileName);
-  } else if (payload.RequestBody.document.content instanceof Uint8Array) {
-    const contentType =
-      getContentTypeFromFileName(payload.RequestBody.document.fileName)
-      || "application/octet-stream";
     appendForm(
       body,
       "document",
-      new Blob([new Uint8Array(payload.RequestBody.document.content).buffer], {
-        type: contentType,
-      }),
+      bytesToBlob(buffer, contentType),
       payload.RequestBody.document.fileName,
     );
   } else {
@@ -137,7 +130,7 @@ async function $do(
     appendForm(
       body,
       "document",
-      new Blob([payload.RequestBody.document.content], { type: contentType }),
+      bytesToBlob(payload.RequestBody.document.content, contentType),
       payload.RequestBody.document.fileName,
     );
   }
@@ -148,7 +141,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/attachments")(pathParams);
 
   const headers = new Headers(compactMap({

@@ -5,7 +5,7 @@ The representation of paid time off in Gusto.
 ## Example Usage
 
 ```typescript
-import { PaidTimeOff } from "@gusto/embedded-api/models/components/paidtimeoff.js";
+import { PaidTimeOff } from "@gusto/embedded-api-v2025-06-15/models/components/paidtimeoff.js";
 
 let value: PaidTimeOff = {
   accrualUnit: "Hour",

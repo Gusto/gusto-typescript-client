@@ -5,7 +5,7 @@ Request body for creating a contractor.
 ## Example Usage
 
 ```typescript
-import { ContractorCreateRequestBody } from "@gusto/embedded-api/models/components/contractorcreaterequestbody.js";
+import { ContractorCreateRequestBody } from "@gusto/embedded-api-v2025-06-15/models/components/contractorcreaterequestbody.js";
 
 let value: ContractorCreateRequestBody = {
   wageType: "Fixed",

@@ -5,7 +5,7 @@ The type of target entity applicable to the flow. This field is optional for com
 ## Example Usage
 
 ```typescript
-import { CreateFlowRequestEntityType } from "@gusto/embedded-api/models/components/createflowrequest.js";
+import { CreateFlowRequestEntityType } from "@gusto/embedded-api-v2025-06-15/models/components/createflowrequest.js";
 
 let value: CreateFlowRequestEntityType = "Payroll";
 ```

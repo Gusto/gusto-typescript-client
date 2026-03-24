@@ -103,7 +103,7 @@ export const GetV1EmployeesEmployeeIdEmployeeBenefitsRequest$outboundSchema:
     include:
       GetV1EmployeesEmployeeIdEmployeeBenefitsQueryParamInclude$outboundSchema
         .optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   }).transform((v) => {
     return remap$(v, {
       employeeId: "employee_id",

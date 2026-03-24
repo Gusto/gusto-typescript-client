@@ -86,7 +86,7 @@ export function queryKeyEmployeePaymentMethodsGetBankAccounts(
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v2025-06-15",
     "employeePaymentMethods",
     "getBankAccounts",
     employeeId,

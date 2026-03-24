@@ -142,7 +142,7 @@ export function invalidateEmployeeEmploymentsGetTerminations(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "employeeEmployments",
       "getTerminations",
       ...queryKeyBase,
@@ -156,6 +156,10 @@ export function invalidateAllEmployeeEmploymentsGetTerminations(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "employeeEmployments", "getTerminations"],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "employeeEmployments",
+      "getTerminations",
+    ],
   });
 }

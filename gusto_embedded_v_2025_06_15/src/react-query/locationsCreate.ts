@@ -82,7 +82,7 @@ export function useLocationsCreateMutation(
 }
 
 export function mutationKeyLocationsCreate(): MutationKey {
-  return ["@gusto/embedded-api", "Locations", "create"];
+  return ["@gusto/embedded-api-v2025-06-15", "Locations", "create"];
 }
 
 export function buildLocationsCreateMutation(

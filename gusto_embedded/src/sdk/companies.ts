@@ -190,11 +190,11 @@ export class Companies extends ClientSDK {
   }
 
   /**
-   * Accept terms of service for a company user
+   * Accept terms of service for an admin
    *
    * @remarks
    * Accept the Gusto Embedded Payroll's [Terms of Service](https://flows.gusto.com/terms).
-   * The user must have a role in the company in order to accept the Terms of Service.
+   * The user must be a company admin in order to accept the Terms of Service.
    *
    * scope: `terms_of_services:write`
    */
@@ -212,7 +212,7 @@ export class Companies extends ClientSDK {
   }
 
   /**
-   * Retrieve terms of service status for a company user
+   * Retrieve terms of service status for an admin
    *
    * @remarks
    * Retrieve the user acceptance status of the Gusto Embedded Payroll's [Terms of Service](https://flows.gusto.com/terms).

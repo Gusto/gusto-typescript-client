@@ -131,7 +131,12 @@ export function invalidateWireInRequestsGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "wireInRequests", "get", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "wireInRequests",
+      "get",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -141,6 +146,6 @@ export function invalidateAllWireInRequestsGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "wireInRequests", "get"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "wireInRequests", "get"],
   });
 }

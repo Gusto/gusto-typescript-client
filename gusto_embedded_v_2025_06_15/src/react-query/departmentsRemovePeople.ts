@@ -74,7 +74,7 @@ export function useDepartmentsRemovePeopleMutation(
 }
 
 export function mutationKeyDepartmentsRemovePeople(): MutationKey {
-  return ["@gusto/embedded-api", "Departments", "removePeople"];
+  return ["@gusto/embedded-api-v2025-06-15", "Departments", "removePeople"];
 }
 
 export function buildDepartmentsRemovePeopleMutation(

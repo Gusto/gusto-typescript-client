@@ -5,7 +5,7 @@ Configuration for which onboarding documents (e.g. Form I-9) are required for an
 ## Example Usage
 
 ```typescript
-import { EmployeeOnboardingDocument } from "@gusto/embedded-api/models/components/employeeonboardingdocument.js";
+import { EmployeeOnboardingDocument } from "@gusto/embedded-api-v2025-06-15/models/components/employeeonboardingdocument.js";
 
 let value: EmployeeOnboardingDocument = {};
 ```

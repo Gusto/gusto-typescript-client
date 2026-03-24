@@ -144,7 +144,7 @@ export const PutV1EmployeesEmployeeIdRehireRequest$outboundSchema: z.ZodType<
   PutV1EmployeesEmployeeIdRehireRequest
 > = z.object({
   employeeId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   requestBody: z.lazy(() =>
     PutV1EmployeesEmployeeIdRehireRequestBody$outboundSchema
   ),

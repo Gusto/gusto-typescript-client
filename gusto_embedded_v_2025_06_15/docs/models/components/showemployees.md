@@ -5,8 +5,8 @@ The representation of an employee in Gusto.
 ## Example Usage
 
 ```typescript
-import { ShowEmployees } from "@gusto/embedded-api/models/components/showemployees.js";
-import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+import { ShowEmployees } from "@gusto/embedded-api-v2025-06-15/models/components/showemployees.js";
+import { RFCDate } from "@gusto/embedded-api-v2025-06-15/types/rfcdate.js";
 
 let value: ShowEmployees = {
   uuid: "6cb68c04-1b94-4d92-844c-aea162aa3227",

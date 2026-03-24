@@ -5,7 +5,7 @@ How Gusto will handle taxes already collected.
 ## Example Usage
 
 ```typescript
-import { ReconcileTaxMethod } from "@gusto/embedded-api/models/operations/postcompaniescompanyuuidsuspensions.js";
+import { ReconcileTaxMethod } from "@gusto/embedded-api-v2025-06-15/models/operations/postcompaniescompanyuuidsuspensions.js";
 
 let value: ReconcileTaxMethod = "pay_taxes";
 ```

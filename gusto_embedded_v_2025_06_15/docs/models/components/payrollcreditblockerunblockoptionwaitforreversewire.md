@@ -5,7 +5,7 @@ Unblock option to resolve a credit blocker by waiting for reverse wire
 ## Example Usage
 
 ```typescript
-import { PayrollCreditBlockerUnblockOptionWaitForReverseWire } from "@gusto/embedded-api/models/components/payrollcreditblockerunblockoptionwaitforreversewire.js";
+import { PayrollCreditBlockerUnblockOptionWaitForReverseWire } from "@gusto/embedded-api-v2025-06-15/models/components/payrollcreditblockerunblockoptionwaitforreversewire.js";
 
 let value: PayrollCreditBlockerUnblockOptionWaitForReverseWire = {
   unblockType: "wait_for_reverse_wire",

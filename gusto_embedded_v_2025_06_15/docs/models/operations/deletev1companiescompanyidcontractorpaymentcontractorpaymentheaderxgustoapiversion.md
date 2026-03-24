@@ -7,7 +7,7 @@ Determines the date-based API version associated with your API call. If none is 
 ```typescript
 import {
   DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAPIVersion,
-} from "@gusto/embedded-api/models/operations/deletev1companiescompanyidcontractorpaymentcontractorpayment.js";
+} from "@gusto/embedded-api-v2025-06-15/models/operations/deletev1companiescompanyidcontractorpaymentcontractorpayment.js";
 
 let value:
   DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAPIVersion =

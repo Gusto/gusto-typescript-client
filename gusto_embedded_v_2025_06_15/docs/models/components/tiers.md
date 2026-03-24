@@ -5,7 +5,7 @@ A single tier of a tiered matching scheme.
 ## Example Usage
 
 ```typescript
-import { Tiers } from "@gusto/embedded-api/models/components/employeebenefit.js";
+import { Tiers } from "@gusto/embedded-api-v2025-06-15/models/components/employeebenefit.js";
 
 let value: Tiers = {};
 ```

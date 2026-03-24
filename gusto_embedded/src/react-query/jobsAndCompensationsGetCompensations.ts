@@ -60,12 +60,11 @@ export type JobsAndCompensationsGetCompensationsQueryError =
  * Get compensations for a job
  *
  * @remarks
- * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
+ * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. By default the API returns only the current compensation - see the `include` query parameter for retrieving all compensations.
  *
- * *Note: Currently the API does not support creating multiple compensations per job - creating a compensation with the same job_uuid as another will fail with a relevant error.*
+ * Note: Currently the API does not support creating multiple compensations per job - creating a compensation with the same `job_uuid` as another will fail with a relevant error.
  *
- * Use `flsa_status` to determine if an employee is eligible for overtime
- * By default the API returns only the current compensation - use the `include` parameter to return all compensations.
+ * Use `flsa_status` to determine if an employee is eligible for overtime.
  *
  * scope: `compensations:read`
  */
@@ -94,12 +93,11 @@ export function useJobsAndCompensationsGetCompensations(
  * Get compensations for a job
  *
  * @remarks
- * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
+ * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. By default the API returns only the current compensation - see the `include` query parameter for retrieving all compensations.
  *
- * *Note: Currently the API does not support creating multiple compensations per job - creating a compensation with the same job_uuid as another will fail with a relevant error.*
+ * Note: Currently the API does not support creating multiple compensations per job - creating a compensation with the same `job_uuid` as another will fail with a relevant error.
  *
- * Use `flsa_status` to determine if an employee is eligible for overtime
- * By default the API returns only the current compensation - use the `include` parameter to return all compensations.
+ * Use `flsa_status` to determine if an employee is eligible for overtime.
  *
  * scope: `compensations:read`
  */

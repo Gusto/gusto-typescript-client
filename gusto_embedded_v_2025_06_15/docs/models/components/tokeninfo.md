@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { TokenInfo } from "@gusto/embedded-api/models/components/tokeninfo.js";
+import { TokenInfo } from "@gusto/embedded-api-v2025-06-15/models/components/tokeninfo.js";
 
 let value: TokenInfo = {
   scope: "companies:read public",

@@ -85,7 +85,7 @@ export function useBankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccount
 
 export function mutationKeyBankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v2025-06-15",
     "bankAccounts",
     "deleteV1CompaniesCompanyIdBankAccountsBankAccountId",
   ];

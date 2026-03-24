@@ -5,7 +5,7 @@ Request body for updating a contractor.
 ## Example Usage
 
 ```typescript
-import { ContractorUpdateRequestBody } from "@gusto/embedded-api/models/components/contractorupdaterequestbody.js";
+import { ContractorUpdateRequestBody } from "@gusto/embedded-api-v2025-06-15/models/components/contractorupdaterequestbody.js";
 
 let value: ContractorUpdateRequestBody = {
   version: "56d00c178bc7393b2a206ed6a86afcb4",

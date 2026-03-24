@@ -5,7 +5,7 @@ Department details for the employee
 ## Example Usage
 
 ```typescript
-import { Department } from "@gusto/embedded-api/models/operations/postv1companiescompanyidpeoplebatches.js";
+import { Department } from "@gusto/embedded-api-v2025-06-15/models/operations/postv1companiescompanyidpeoplebatches.js";
 
 let value: Department = {
   departmentUuid: "57636ac3-f326-42f3-9c19-09e59eb7ab02",

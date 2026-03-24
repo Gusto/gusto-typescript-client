@@ -5,7 +5,7 @@ multiple entities
 ## Example Usage
 
 ```typescript
-import { MetadataWithMultipleEntities } from "@gusto/embedded-api/models/components/metadatawithmultipleentities.js";
+import { MetadataWithMultipleEntities } from "@gusto/embedded-api-v2025-06-15/models/components/metadatawithmultipleentities.js";
 
 let value: MetadataWithMultipleEntities = {
   entities: [],

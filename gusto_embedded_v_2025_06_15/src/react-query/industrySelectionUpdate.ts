@@ -83,7 +83,7 @@ export function useIndustrySelectionUpdateMutation(
 }
 
 export function mutationKeyIndustrySelectionUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "industrySelection", "update"];
+  return ["@gusto/embedded-api-v2025-06-15", "industrySelection", "update"];
 }
 
 export function buildIndustrySelectionUpdateMutation(

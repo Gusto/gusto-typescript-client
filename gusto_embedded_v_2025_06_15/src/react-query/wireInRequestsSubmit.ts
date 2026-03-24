@@ -76,7 +76,7 @@ export function useWireInRequestsSubmitMutation(
 }
 
 export function mutationKeyWireInRequestsSubmit(): MutationKey {
-  return ["@gusto/embedded-api", "wireInRequests", "submit"];
+  return ["@gusto/embedded-api-v2025-06-15", "wireInRequests", "submit"];
 }
 
 export function buildWireInRequestsSubmitMutation(

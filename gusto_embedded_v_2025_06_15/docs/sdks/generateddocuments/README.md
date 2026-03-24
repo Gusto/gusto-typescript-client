@@ -16,7 +16,7 @@ scope: `generated_documents:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-generated_documents-document_type-request_uuid" method="get" path="/v1/generated_documents/{document_type}/{request_uuid}" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -39,8 +39,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { generatedDocumentsGet } from "@gusto/embedded-api/funcs/generatedDocumentsGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { generatedDocumentsGet } from "@gusto/embedded-api-v2025-06-15/funcs/generatedDocumentsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -89,7 +89,7 @@ import {
   // mutations and other user actions.
   invalidateGeneratedDocumentsGet,
   invalidateAllGeneratedDocumentsGet,
-} from "@gusto/embedded-api/react-query/generatedDocumentsGet.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/generatedDocumentsGet.js";
 ```
 
 ### Parameters

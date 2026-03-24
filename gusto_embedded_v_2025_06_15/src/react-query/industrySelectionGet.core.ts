@@ -78,7 +78,7 @@ export function queryKeyIndustrySelectionGet(
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v2025-06-15",
     "industrySelection",
     "get",
     companyId,

@@ -75,5 +75,11 @@ export function queryKeyCompaniesGet(
     xGustoAPIVersion?: GetV1CompaniesHeaderXGustoAPIVersion | undefined;
   },
 ): QueryKey {
-  return ["@gusto/embedded-api", "Companies", "get", companyId, parameters];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "Companies",
+    "get",
+    companyId,
+    parameters,
+  ];
 }

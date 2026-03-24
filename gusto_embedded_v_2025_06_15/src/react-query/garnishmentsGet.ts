@@ -128,7 +128,12 @@ export function invalidateGarnishmentsGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Garnishments", "get", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "Garnishments",
+      "get",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -138,6 +143,6 @@ export function invalidateAllGarnishmentsGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Garnishments", "get"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "Garnishments", "get"],
   });
 }

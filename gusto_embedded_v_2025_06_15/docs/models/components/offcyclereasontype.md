@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { OffCycleReasonType } from "@gusto/embedded-api/models/components/payroll.js";
+import { OffCycleReasonType } from "@gusto/embedded-api-v2025-06-15/models/components/payroll.js";
 
 let value: OffCycleReasonType = "Transition from old pay schedule";
 ```

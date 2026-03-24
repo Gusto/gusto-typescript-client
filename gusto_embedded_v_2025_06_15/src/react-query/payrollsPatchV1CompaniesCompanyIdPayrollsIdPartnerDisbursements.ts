@@ -83,7 +83,7 @@ export function usePayrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursemen
 
 export function mutationKeyPayrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v2025-06-15",
     "Payrolls",
     "patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements",
   ];

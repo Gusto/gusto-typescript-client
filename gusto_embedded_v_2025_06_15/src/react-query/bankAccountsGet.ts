@@ -140,7 +140,12 @@ export function invalidateBankAccountsGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "bankAccounts", "get", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "bankAccounts",
+      "get",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -150,6 +155,6 @@ export function invalidateAllBankAccountsGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "bankAccounts", "get"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "bankAccounts", "get"],
   });
 }

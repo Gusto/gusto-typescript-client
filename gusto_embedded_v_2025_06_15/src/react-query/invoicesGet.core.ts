@@ -86,5 +86,11 @@ export function queryKeyInvoicesGet(
     xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
-  return ["@gusto/embedded-api", "Invoices", "get", invoicePeriod, parameters];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "Invoices",
+    "get",
+    invoicePeriod,
+    parameters,
+  ];
 }

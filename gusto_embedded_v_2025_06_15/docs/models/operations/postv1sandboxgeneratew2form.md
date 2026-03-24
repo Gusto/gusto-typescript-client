@@ -5,7 +5,7 @@ OK
 ## Example Usage
 
 ```typescript
-import { PostV1SandboxGenerateW2Form } from "@gusto/embedded-api/models/operations/postv1sandboxgeneratew2.js";
+import { PostV1SandboxGenerateW2Form } from "@gusto/embedded-api-v2025-06-15/models/operations/postv1sandboxgeneratew2.js";
 
 let value: PostV1SandboxGenerateW2Form = {
   uuid: "74e729ba-c0ea-4661-a372-5b616b085603",

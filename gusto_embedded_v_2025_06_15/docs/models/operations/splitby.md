@@ -5,7 +5,7 @@ How the payment will be split. If Percentage, split amounts must add up to exact
 ## Example Usage
 
 ```typescript
-import { SplitBy } from "@gusto/embedded-api/models/operations/putv1employeesemployeeidpaymentmethod.js";
+import { SplitBy } from "@gusto/embedded-api-v2025-06-15/models/operations/putv1employeesemployeeidpaymentmethod.js";
 
 let value: SplitBy = "Percentage";
 ```

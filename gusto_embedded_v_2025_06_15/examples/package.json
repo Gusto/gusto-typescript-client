@@ -1,5 +1,5 @@
 {
-  "name": "@gusto/embedded-api-examples",
+  "name": "@gusto/embedded-api-v2025-06-15-examples",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -13,6 +13,6 @@
     "tsx": "^4.19.2"
   },
   "dependencies": {
-    "@gusto/embedded-api": "file:.."
+    "@gusto/embedded-api-v2025-06-15": "file:.."
   }
 }

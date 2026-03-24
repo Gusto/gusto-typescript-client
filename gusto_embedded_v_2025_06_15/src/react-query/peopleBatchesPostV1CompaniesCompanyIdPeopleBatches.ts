@@ -87,7 +87,7 @@ export function usePeopleBatchesPostV1CompaniesCompanyIdPeopleBatchesMutation(
 
 export function mutationKeyPeopleBatchesPostV1CompaniesCompanyIdPeopleBatches(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v2025-06-15",
     "People Batches",
     "postV1CompaniesCompanyIdPeopleBatches",
   ];

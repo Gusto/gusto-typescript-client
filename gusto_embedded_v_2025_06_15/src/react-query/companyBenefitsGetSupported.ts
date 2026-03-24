@@ -139,7 +139,7 @@ export function invalidateCompanyBenefitsGetSupported(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "companyBenefits",
       "getSupported",
       ...queryKeyBase,
@@ -153,6 +153,10 @@ export function invalidateAllCompanyBenefitsGetSupported(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "companyBenefits", "getSupported"],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "companyBenefits",
+      "getSupported",
+    ],
   });
 }

@@ -80,5 +80,10 @@ export function buildWebhooksListSubscriptionsQuery(
 export function queryKeyWebhooksListSubscriptions(
   parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
-  return ["@gusto/embedded-api", "Webhooks", "listSubscriptions", parameters];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "Webhooks",
+    "listSubscriptions",
+    parameters,
+  ];
 }

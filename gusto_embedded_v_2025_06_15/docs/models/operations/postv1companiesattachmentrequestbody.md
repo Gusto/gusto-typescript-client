@@ -5,7 +5,7 @@ The binary payload of the file and the company attachment category.
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesAttachmentRequestBody } from "@gusto/embedded-api/models/operations/postv1companiesattachment.js";
+import { PostV1CompaniesAttachmentRequestBody } from "@gusto/embedded-api-v2025-06-15/models/operations/postv1companiesattachment.js";
 
 // No examples available for this model
 ```

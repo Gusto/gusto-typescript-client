@@ -5,7 +5,7 @@ Configuration for an employee onboarding documents during onboarding
 ## Example Usage
 
 ```typescript
-import { OnboardingDocumentsConfig } from "@gusto/embedded-api/models/components/showemployees.js";
+import { OnboardingDocumentsConfig } from "@gusto/embedded-api-v2025-06-15/models/components/showemployees.js";
 
 let value: OnboardingDocumentsConfig = {};
 ```

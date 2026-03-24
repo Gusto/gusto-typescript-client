@@ -5,7 +5,7 @@ A custom field of an employee
 ## Example Usage
 
 ```typescript
-import { EmployeeCustomField } from "@gusto/embedded-api/models/components/employeecustomfield.js";
+import { EmployeeCustomField } from "@gusto/embedded-api-v2025-06-15/models/components/employeecustomfield.js";
 
 let value: EmployeeCustomField = {
   id: "<id>",

@@ -5,7 +5,7 @@ The representation of an employee in Gusto.
 ## Example Usage
 
 ```typescript
-import { Employee } from "@gusto/embedded-api/models/components/employee.js";
+import { Employee } from "@gusto/embedded-api-v2025-06-15/models/components/employee.js";
 
 let value: Employee = {
   uuid: "989af930-e925-49d9-9e5b-689070ee0d8b",

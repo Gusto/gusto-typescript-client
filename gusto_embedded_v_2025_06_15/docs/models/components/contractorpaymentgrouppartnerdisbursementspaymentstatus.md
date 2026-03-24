@@ -5,7 +5,7 @@ The status of the payment
 ## Example Usage
 
 ```typescript
-import { ContractorPaymentGroupPartnerDisbursementsPaymentStatus } from "@gusto/embedded-api/models/components/contractorpaymentgrouppartnerdisbursements.js";
+import { ContractorPaymentGroupPartnerDisbursementsPaymentStatus } from "@gusto/embedded-api-v2025-06-15/models/components/contractorpaymentgrouppartnerdisbursements.js";
 
 let value: ContractorPaymentGroupPartnerDisbursementsPaymentStatus = "Paid";
 ```

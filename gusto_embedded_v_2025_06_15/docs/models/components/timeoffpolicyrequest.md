@@ -5,7 +5,7 @@ Request body for creating a time off policy
 ## Example Usage
 
 ```typescript
-import { TimeOffPolicyRequest } from "@gusto/embedded-api/models/components/timeoffpolicyrequest.js";
+import { TimeOffPolicyRequest } from "@gusto/embedded-api-v2025-06-15/models/components/timeoffpolicyrequest.js";
 
 let value: TimeOffPolicyRequest = {
   name: "Vacation Policy",

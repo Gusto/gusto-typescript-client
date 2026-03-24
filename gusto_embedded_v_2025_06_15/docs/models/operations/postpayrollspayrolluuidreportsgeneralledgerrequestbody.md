@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody } from "@gusto/embedded-api/models/operations/postpayrollspayrolluuidreportsgeneralledger.js";
+import { PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody } from "@gusto/embedded-api-v2025-06-15/models/operations/postpayrollspayrolluuidreportsgeneralledger.js";
 
 let value: PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody = {
   aggregation: "job",

@@ -9,7 +9,7 @@ Payment speed. READ-ONLY.
 ## Example Usage
 
 ```typescript
-import { PaymentSpeed } from "@gusto/embedded-api/models/components/paymentconfigs.js";
+import { PaymentSpeed } from "@gusto/embedded-api-v2025-06-15/models/components/paymentconfigs.js";
 
 let value: PaymentSpeed = "2-day";
 ```

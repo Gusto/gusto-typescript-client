@@ -105,7 +105,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/employees/{employee_id}/pay_stubs")(pathParams);
 
   const query = encodeFormQuery({

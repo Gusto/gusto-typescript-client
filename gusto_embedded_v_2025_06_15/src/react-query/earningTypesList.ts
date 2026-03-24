@@ -143,7 +143,12 @@ export function invalidateEarningTypesList(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "earningTypes", "list", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "earningTypes",
+      "list",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -153,6 +158,6 @@ export function invalidateAllEarningTypesList(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "earningTypes", "list"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "earningTypes", "list"],
   });
 }

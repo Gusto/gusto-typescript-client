@@ -5,7 +5,7 @@ List of the eleven supported federal holidays and their details
 ## Example Usage
 
 ```typescript
-import { FederalHolidays } from "@gusto/embedded-api/models/components/holidaypaypolicy.js";
+import { FederalHolidays } from "@gusto/embedded-api-v2025-06-15/models/components/holidaypaypolicy.js";
 
 let value: FederalHolidays = {};
 ```

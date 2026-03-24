@@ -78,7 +78,7 @@ export function useHolidayPayPoliciesDeleteMutation(
 }
 
 export function mutationKeyHolidayPayPoliciesDelete(): MutationKey {
-  return ["@gusto/embedded-api", "holidayPayPolicies", "delete"];
+  return ["@gusto/embedded-api-v2025-06-15", "holidayPayPolicies", "delete"];
 }
 
 export function buildHolidayPayPoliciesDeleteMutation(

@@ -5,7 +5,7 @@ Response containing the calculated gross up amount
 ## Example Usage
 
 ```typescript
-import { PayrollGrossUpResponse } from "@gusto/embedded-api/models/components/payrollgrossupresponse.js";
+import { PayrollGrossUpResponse } from "@gusto/embedded-api-v2025-06-15/models/components/payrollgrossupresponse.js";
 
 let value: PayrollGrossUpResponse = {};
 ```

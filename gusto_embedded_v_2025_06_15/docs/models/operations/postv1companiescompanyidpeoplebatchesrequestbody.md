@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesCompanyIdPeopleBatchesRequestBody } from "@gusto/embedded-api/models/operations/postv1companiescompanyidpeoplebatches.js";
+import { PostV1CompaniesCompanyIdPeopleBatchesRequestBody } from "@gusto/embedded-api-v2025-06-15/models/operations/postv1companiescompanyidpeoplebatches.js";
 
 let value: PostV1CompaniesCompanyIdPeopleBatchesRequestBody = {
   idempotencyKey: "550e8400-e29b-41d4-a716-446655440000",

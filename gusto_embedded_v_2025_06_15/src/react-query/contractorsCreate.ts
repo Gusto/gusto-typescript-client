@@ -78,7 +78,7 @@ export function useContractorsCreateMutation(
 }
 
 export function mutationKeyContractorsCreate(): MutationKey {
-  return ["@gusto/embedded-api", "Contractors", "create"];
+  return ["@gusto/embedded-api-v2025-06-15", "Contractors", "create"];
 }
 
 export function buildContractorsCreateMutation(

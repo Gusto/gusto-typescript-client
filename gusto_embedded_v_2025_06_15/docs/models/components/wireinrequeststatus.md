@@ -5,7 +5,7 @@ Status of the wire in
 ## Example Usage
 
 ```typescript
-import { WireInRequestStatus } from "@gusto/embedded-api/models/components/wireinrequest.js";
+import { WireInRequestStatus } from "@gusto/embedded-api-v2025-06-15/models/components/wireinrequest.js";
 
 let value: WireInRequestStatus = "awaiting_funds";
 ```

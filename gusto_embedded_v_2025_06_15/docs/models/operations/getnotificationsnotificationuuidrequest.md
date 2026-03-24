@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetNotificationsNotificationUuidRequest } from "@gusto/embedded-api/models/operations/getnotificationsnotificationuuid.js";
+import { GetNotificationsNotificationUuidRequest } from "@gusto/embedded-api-v2025-06-15/models/operations/getnotificationsnotificationuuid.js";
 
 let value: GetNotificationsNotificationUuidRequest = {
   notificationUuid: "<id>",

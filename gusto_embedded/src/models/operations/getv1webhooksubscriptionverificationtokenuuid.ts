@@ -79,7 +79,7 @@ export const GetV1WebhookSubscriptionVerificationTokenUuidRequest$outboundSchema
     GetV1WebhookSubscriptionVerificationTokenUuidRequest
   > = z.object({
     webhookSubscriptionUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   }).transform((v) => {
     return remap$(v, {
       webhookSubscriptionUuid: "webhook_subscription_uuid",

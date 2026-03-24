@@ -151,7 +151,7 @@ export function invalidateReimbursementsGetV1RecurringReimbursements(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "Reimbursements",
       "getV1RecurringReimbursements",
       ...queryKeyBase,
@@ -166,7 +166,7 @@ export function invalidateAllReimbursementsGetV1RecurringReimbursements(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "Reimbursements",
       "getV1RecurringReimbursements",
     ],

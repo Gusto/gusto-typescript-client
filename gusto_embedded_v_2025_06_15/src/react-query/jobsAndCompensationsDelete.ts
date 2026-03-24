@@ -75,7 +75,7 @@ export function useJobsAndCompensationsDeleteMutation(
 }
 
 export function mutationKeyJobsAndCompensationsDelete(): MutationKey {
-  return ["@gusto/embedded-api", "jobsAndCompensations", "delete"];
+  return ["@gusto/embedded-api-v2025-06-15", "jobsAndCompensations", "delete"];
 }
 
 export function buildJobsAndCompensationsDeleteMutation(

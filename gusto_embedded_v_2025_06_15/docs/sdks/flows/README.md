@@ -32,7 +32,7 @@ scope: `flows:write`
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-company-flows" method="post" path="/v1/companies/{company_uuid}/flows" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -57,8 +57,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { flowsCreate } from "@gusto/embedded-api/funcs/flowsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { flowsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/flowsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -98,13 +98,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useFlowsCreateMutation
-} from "@gusto/embedded-api/react-query/flowsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/flowsCreate.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-company-flows" method="post" path="/v1/companies/{company_uuid}/flows" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -129,8 +129,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { flowsCreate } from "@gusto/embedded-api/funcs/flowsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { flowsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/flowsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -170,13 +170,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useFlowsCreateMutation
-} from "@gusto/embedded-api/react-query/flowsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/flowsCreate.js";
 ```
 ### Example Usage: Example with options
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-company-flows" method="post" path="/v1/companies/{company_uuid}/flows" example="Example with options" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -205,8 +205,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { flowsCreate } from "@gusto/embedded-api/funcs/flowsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { flowsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/flowsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -250,13 +250,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useFlowsCreateMutation
-} from "@gusto/embedded-api/react-query/flowsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/flowsCreate.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-company-flows" method="post" path="/v1/companies/{company_uuid}/flows" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -281,8 +281,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { flowsCreate } from "@gusto/embedded-api/funcs/flowsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { flowsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/flowsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -322,13 +322,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useFlowsCreateMutation
-} from "@gusto/embedded-api/react-query/flowsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/flowsCreate.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-company-flows" method="post" path="/v1/companies/{company_uuid}/flows" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -353,8 +353,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { flowsCreate } from "@gusto/embedded-api/funcs/flowsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { flowsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/flowsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -394,7 +394,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useFlowsCreateMutation
-} from "@gusto/embedded-api/react-query/flowsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/flowsCreate.js";
 ```
 
 ### Parameters

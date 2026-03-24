@@ -167,7 +167,7 @@ export const PutV1GarnishmentsGarnishmentIdRequest$outboundSchema: z.ZodType<
   PutV1GarnishmentsGarnishmentIdRequest
 > = z.object({
   garnishmentId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
   requestBody: z.lazy(() =>
     PutV1GarnishmentsGarnishmentIdRequestBody$outboundSchema
   ),

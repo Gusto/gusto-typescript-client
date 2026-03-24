@@ -5,7 +5,7 @@ Member portal invitation status information. Only included when the include para
 ## Example Usage
 
 ```typescript
-import { MemberPortalInvitationStatus } from "@gusto/embedded-api/models/components/showemployees.js";
+import { MemberPortalInvitationStatus } from "@gusto/embedded-api-v2025-06-15/models/components/showemployees.js";
 
 let value: MemberPortalInvitationStatus = {};
 ```

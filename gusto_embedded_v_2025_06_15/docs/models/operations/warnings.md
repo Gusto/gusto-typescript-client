@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Warnings } from "@gusto/embedded-api/models/operations/getv1partnermanagedcompaniescompanyuuidmigrationreadiness.js";
+import { Warnings } from "@gusto/embedded-api-v2025-06-15/models/operations/getv1partnermanagedcompaniescompanyuuidmigrationreadiness.js";
 
 let value: Warnings = {};
 ```

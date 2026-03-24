@@ -5,7 +5,7 @@ Comma-separated list of payroll types to include (regular, transition). Defaults
 ## Example Usage
 
 ```typescript
-import { PayrollTypes } from "@gusto/embedded-api/models/operations/getv1companiescompanyidpayperiods.js";
+import { PayrollTypes } from "@gusto/embedded-api-v2025-06-15/models/operations/getv1companiescompanyidpayperiods.js";
 
 let value: PayrollTypes = "regular,transition";
 ```

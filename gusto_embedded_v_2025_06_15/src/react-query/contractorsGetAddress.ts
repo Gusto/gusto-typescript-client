@@ -135,7 +135,7 @@ export function invalidateContractorsGetAddress(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "Contractors",
       "getAddress",
       ...queryKeyBase,
@@ -149,6 +149,6 @@ export function invalidateAllContractorsGetAddress(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Contractors", "getAddress"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "Contractors", "getAddress"],
   });
 }

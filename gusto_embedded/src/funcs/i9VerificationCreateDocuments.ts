@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -39,11 +43,14 @@ import { Result } from "../types/fp.js";
  * @remarks
  * An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States.
  *
- * Use the document options endpoint to get the possible document types and titles, which can vary depending on the employee's authorization status.
+ * Use the [document options endpoint](ref:get-v1-employees-employee_id-i9_authorization-document_options) to get the possible document types and titles, which can vary depending on the employee's authorization status.
  *
  * > 🚧 Every request must contain the complete list of documents for the Employee.
  * >
  * > Every request to this endpoint removes any previous verification document records for the employee.
+ *
+ * ### Related guides
+ * - [I-9 employment verification](doc:i-9-employment-verification)
  *
  * scope: `i9_authorizations:manage`
  */
@@ -54,6 +61,7 @@ export function i9VerificationCreateDocuments(
 ): APIPromise<
   Result<
     PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -80,6 +88,7 @@ async function $do(
   [
     Result<
       PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -104,7 +113,11 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON(
+    "body",
+    payload["I9-Authorization-Documents-Request-Body"],
+    { explode: true },
+  );
 
   const pathParams = {
     employee_id: encodeSimple("employee_id", payload.employee_id, {
@@ -112,7 +125,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/employees/{employee_id}/i9_authorization/documents",
   )(pathParams);
@@ -180,6 +192,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -191,12 +204,13 @@ async function $do(
     | SDKValidationError
   >(
     M.json(
-      200,
+      201,
       PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$inboundSchema,
-      { key: "I9-Authorization-Documents-Object" },
+      { key: "I9-Authorization-Documents" },
     ),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

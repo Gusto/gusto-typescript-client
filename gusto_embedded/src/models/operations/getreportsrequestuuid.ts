@@ -49,7 +49,7 @@ export const GetReportsRequestUuidRequest$outboundSchema: z.ZodType<
   GetReportsRequestUuidRequest
 > = z.object({
   requestUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
 }).transform((v) => {
   return remap$(v, {
     requestUuid: "request_uuid",

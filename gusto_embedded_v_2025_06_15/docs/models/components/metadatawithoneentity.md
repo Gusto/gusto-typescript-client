@@ -5,7 +5,7 @@ single entity
 ## Example Usage
 
 ```typescript
-import { MetadataWithOneEntity } from "@gusto/embedded-api/models/components/metadatawithoneentity.js";
+import { MetadataWithOneEntity } from "@gusto/embedded-api-v2025-06-15/models/components/metadatawithoneentity.js";
 
 let value: MetadataWithOneEntity = {};
 ```

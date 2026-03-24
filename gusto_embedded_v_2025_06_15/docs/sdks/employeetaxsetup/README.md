@@ -19,7 +19,7 @@ scope: `employee_federal_taxes:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-federal_taxes" method="get" path="/v1/employees/{employee_uuid}/federal_taxes" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -41,8 +41,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeeTaxSetupGetFederalTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupGetFederalTaxes.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeeTaxSetupGetFederalTaxes } from "@gusto/embedded-api-v2025-06-15/funcs/employeeTaxSetupGetFederalTaxes.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -90,7 +90,7 @@ import {
   // mutations and other user actions.
   invalidateEmployeeTaxSetupGetFederalTaxes,
   invalidateAllEmployeeTaxSetupGetFederalTaxes,
-} from "@gusto/embedded-api/react-query/employeeTaxSetupGetFederalTaxes.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeeTaxSetupGetFederalTaxes.js";
 ```
 
 ### Parameters
@@ -123,7 +123,7 @@ scope: `employee_federal_taxes:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-federal_taxes" method="put" path="/v1/employees/{employee_uuid}/federal_taxes" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -148,8 +148,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeeTaxSetupUpdateFederalTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupUpdateFederalTaxes.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeeTaxSetupUpdateFederalTaxes } from "@gusto/embedded-api-v2025-06-15/funcs/employeeTaxSetupUpdateFederalTaxes.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -189,13 +189,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeeTaxSetupUpdateFederalTaxesMutation
-} from "@gusto/embedded-api/react-query/employeeTaxSetupUpdateFederalTaxes.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeeTaxSetupUpdateFederalTaxes.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-federal_taxes" method="put" path="/v1/employees/{employee_uuid}/federal_taxes" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -227,8 +227,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeeTaxSetupUpdateFederalTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupUpdateFederalTaxes.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeeTaxSetupUpdateFederalTaxes } from "@gusto/embedded-api-v2025-06-15/funcs/employeeTaxSetupUpdateFederalTaxes.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -275,13 +275,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeeTaxSetupUpdateFederalTaxesMutation
-} from "@gusto/embedded-api/react-query/employeeTaxSetupUpdateFederalTaxes.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeeTaxSetupUpdateFederalTaxes.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-federal_taxes" method="put" path="/v1/employees/{employee_uuid}/federal_taxes" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -306,8 +306,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeeTaxSetupUpdateFederalTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupUpdateFederalTaxes.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeeTaxSetupUpdateFederalTaxes } from "@gusto/embedded-api-v2025-06-15/funcs/employeeTaxSetupUpdateFederalTaxes.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -347,13 +347,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeeTaxSetupUpdateFederalTaxesMutation
-} from "@gusto/embedded-api/react-query/employeeTaxSetupUpdateFederalTaxes.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeeTaxSetupUpdateFederalTaxes.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-federal_taxes" method="put" path="/v1/employees/{employee_uuid}/federal_taxes" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -378,8 +378,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeeTaxSetupUpdateFederalTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupUpdateFederalTaxes.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeeTaxSetupUpdateFederalTaxes } from "@gusto/embedded-api-v2025-06-15/funcs/employeeTaxSetupUpdateFederalTaxes.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -419,7 +419,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeeTaxSetupUpdateFederalTaxesMutation
-} from "@gusto/embedded-api/react-query/employeeTaxSetupUpdateFederalTaxes.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeeTaxSetupUpdateFederalTaxes.js";
 ```
 
 ### Parameters
@@ -464,7 +464,7 @@ scope: `employee_state_taxes:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-state_taxes" method="get" path="/v1/employees/{employee_uuid}/state_taxes" example="Employee-State-Taxes-List-Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -486,8 +486,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeeTaxSetupGetStateTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupGetStateTaxes.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeeTaxSetupGetStateTaxes } from "@gusto/embedded-api-v2025-06-15/funcs/employeeTaxSetupGetStateTaxes.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -535,13 +535,13 @@ import {
   // mutations and other user actions.
   invalidateEmployeeTaxSetupGetStateTaxes,
   invalidateAllEmployeeTaxSetupGetStateTaxes,
-} from "@gusto/embedded-api/react-query/employeeTaxSetupGetStateTaxes.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeeTaxSetupGetStateTaxes.js";
 ```
 ### Example Usage: test_example
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-state_taxes" method="get" path="/v1/employees/{employee_uuid}/state_taxes" example="test_example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -563,8 +563,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeeTaxSetupGetStateTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupGetStateTaxes.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeeTaxSetupGetStateTaxes } from "@gusto/embedded-api-v2025-06-15/funcs/employeeTaxSetupGetStateTaxes.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -612,7 +612,7 @@ import {
   // mutations and other user actions.
   invalidateEmployeeTaxSetupGetStateTaxes,
   invalidateAllEmployeeTaxSetupGetStateTaxes,
-} from "@gusto/embedded-api/react-query/employeeTaxSetupGetStateTaxes.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeeTaxSetupGetStateTaxes.js";
 ```
 
 ### Parameters
@@ -647,7 +647,7 @@ scope: `employee_state_taxes:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-state_taxes" method="put" path="/v1/employees/{employee_uuid}/state_taxes" example="Employee-State-Taxes-Error-Response" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -682,8 +682,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeeTaxSetupUpdateStateTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupUpdateStateTaxes.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeeTaxSetupUpdateStateTaxes } from "@gusto/embedded-api-v2025-06-15/funcs/employeeTaxSetupUpdateStateTaxes.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -733,13 +733,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeeTaxSetupUpdateStateTaxesMutation
-} from "@gusto/embedded-api/react-query/employeeTaxSetupUpdateStateTaxes.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeeTaxSetupUpdateStateTaxes.js";
 ```
 ### Example Usage: Employee-State-Taxes-List-Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-state_taxes" method="put" path="/v1/employees/{employee_uuid}/state_taxes" example="Employee-State-Taxes-List-Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -774,8 +774,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeeTaxSetupUpdateStateTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupUpdateStateTaxes.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeeTaxSetupUpdateStateTaxes } from "@gusto/embedded-api-v2025-06-15/funcs/employeeTaxSetupUpdateStateTaxes.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -825,13 +825,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeeTaxSetupUpdateStateTaxesMutation
-} from "@gusto/embedded-api/react-query/employeeTaxSetupUpdateStateTaxes.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeeTaxSetupUpdateStateTaxes.js";
 ```
 ### Example Usage: Employee-State-Taxes-Update-Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-state_taxes" method="put" path="/v1/employees/{employee_uuid}/state_taxes" example="Employee-State-Taxes-Update-Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -902,8 +902,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeeTaxSetupUpdateStateTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupUpdateStateTaxes.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeeTaxSetupUpdateStateTaxes } from "@gusto/embedded-api-v2025-06-15/funcs/employeeTaxSetupUpdateStateTaxes.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -989,13 +989,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeeTaxSetupUpdateStateTaxesMutation
-} from "@gusto/embedded-api/react-query/employeeTaxSetupUpdateStateTaxes.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeeTaxSetupUpdateStateTaxes.js";
 ```
 ### Example Usage: request_example_1
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-state_taxes" method="put" path="/v1/employees/{employee_uuid}/state_taxes" example="request_example_1" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1036,8 +1036,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeeTaxSetupUpdateStateTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupUpdateStateTaxes.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeeTaxSetupUpdateStateTaxes } from "@gusto/embedded-api-v2025-06-15/funcs/employeeTaxSetupUpdateStateTaxes.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1093,13 +1093,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeeTaxSetupUpdateStateTaxesMutation
-} from "@gusto/embedded-api/react-query/employeeTaxSetupUpdateStateTaxes.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeeTaxSetupUpdateStateTaxes.js";
 ```
 ### Example Usage: test_example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-state_taxes" method="put" path="/v1/employees/{employee_uuid}/state_taxes" example="test_example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1124,8 +1124,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeeTaxSetupUpdateStateTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupUpdateStateTaxes.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { employeeTaxSetupUpdateStateTaxes } from "@gusto/embedded-api-v2025-06-15/funcs/employeeTaxSetupUpdateStateTaxes.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1165,7 +1165,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useEmployeeTaxSetupUpdateStateTaxesMutation
-} from "@gusto/embedded-api/react-query/employeeTaxSetupUpdateStateTaxes.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/employeeTaxSetupUpdateStateTaxes.js";
 ```
 
 ### Parameters

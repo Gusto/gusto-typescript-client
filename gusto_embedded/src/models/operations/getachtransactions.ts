@@ -88,7 +88,7 @@ export const GetAchTransactionsRequest$outboundSchema: z.ZodType<
   paymentDirection: z.string().optional(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",

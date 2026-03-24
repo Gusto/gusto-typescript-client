@@ -27,7 +27,7 @@ scope: `webhook_subscriptions:write`
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-webhook-subscription" method="post" path="/v1/webhook_subscriptions" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -55,8 +55,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksCreateSubscription } from "@gusto/embedded-api/funcs/webhooksCreateSubscription.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { webhooksCreateSubscription } from "@gusto/embedded-api-v2025-06-15/funcs/webhooksCreateSubscription.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -99,13 +99,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useWebhooksCreateSubscriptionMutation
-} from "@gusto/embedded-api/react-query/webhooksCreateSubscription.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/webhooksCreateSubscription.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-webhook-subscription" method="post" path="/v1/webhook_subscriptions" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -133,8 +133,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksCreateSubscription } from "@gusto/embedded-api/funcs/webhooksCreateSubscription.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { webhooksCreateSubscription } from "@gusto/embedded-api-v2025-06-15/funcs/webhooksCreateSubscription.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -177,13 +177,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useWebhooksCreateSubscriptionMutation
-} from "@gusto/embedded-api/react-query/webhooksCreateSubscription.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/webhooksCreateSubscription.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-webhook-subscription" method="post" path="/v1/webhook_subscriptions" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -211,8 +211,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksCreateSubscription } from "@gusto/embedded-api/funcs/webhooksCreateSubscription.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { webhooksCreateSubscription } from "@gusto/embedded-api-v2025-06-15/funcs/webhooksCreateSubscription.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -255,13 +255,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useWebhooksCreateSubscriptionMutation
-} from "@gusto/embedded-api/react-query/webhooksCreateSubscription.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/webhooksCreateSubscription.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-webhook-subscription" method="post" path="/v1/webhook_subscriptions" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -289,8 +289,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksCreateSubscription } from "@gusto/embedded-api/funcs/webhooksCreateSubscription.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { webhooksCreateSubscription } from "@gusto/embedded-api-v2025-06-15/funcs/webhooksCreateSubscription.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -333,7 +333,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useWebhooksCreateSubscriptionMutation
-} from "@gusto/embedded-api/react-query/webhooksCreateSubscription.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/webhooksCreateSubscription.js";
 ```
 
 ### Parameters
@@ -371,7 +371,7 @@ scope: `webhook_subscriptions:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-webhook-subscriptions" method="get" path="/v1/webhook_subscriptions" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -391,8 +391,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksListSubscriptions } from "@gusto/embedded-api/funcs/webhooksListSubscriptions.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { webhooksListSubscriptions } from "@gusto/embedded-api-v2025-06-15/funcs/webhooksListSubscriptions.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -438,7 +438,7 @@ import {
   // mutations and other user actions.
   invalidateWebhooksListSubscriptions,
   invalidateAllWebhooksListSubscriptions,
-} from "@gusto/embedded-api/react-query/webhooksListSubscriptions.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/webhooksListSubscriptions.js";
 ```
 
 ### Parameters
@@ -476,7 +476,7 @@ scope: `webhook_subscriptions:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -504,8 +504,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksUpdateSubscription } from "@gusto/embedded-api/funcs/webhooksUpdateSubscription.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { webhooksUpdateSubscription } from "@gusto/embedded-api-v2025-06-15/funcs/webhooksUpdateSubscription.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -548,13 +548,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useWebhooksUpdateSubscriptionMutation
-} from "@gusto/embedded-api/react-query/webhooksUpdateSubscription.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/webhooksUpdateSubscription.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -582,8 +582,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksUpdateSubscription } from "@gusto/embedded-api/funcs/webhooksUpdateSubscription.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { webhooksUpdateSubscription } from "@gusto/embedded-api-v2025-06-15/funcs/webhooksUpdateSubscription.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -626,13 +626,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useWebhooksUpdateSubscriptionMutation
-} from "@gusto/embedded-api/react-query/webhooksUpdateSubscription.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/webhooksUpdateSubscription.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -660,8 +660,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksUpdateSubscription } from "@gusto/embedded-api/funcs/webhooksUpdateSubscription.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { webhooksUpdateSubscription } from "@gusto/embedded-api-v2025-06-15/funcs/webhooksUpdateSubscription.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -704,13 +704,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useWebhooksUpdateSubscriptionMutation
-} from "@gusto/embedded-api/react-query/webhooksUpdateSubscription.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/webhooksUpdateSubscription.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -738,8 +738,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksUpdateSubscription } from "@gusto/embedded-api/funcs/webhooksUpdateSubscription.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { webhooksUpdateSubscription } from "@gusto/embedded-api-v2025-06-15/funcs/webhooksUpdateSubscription.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -782,7 +782,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useWebhooksUpdateSubscriptionMutation
-} from "@gusto/embedded-api/react-query/webhooksUpdateSubscription.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/webhooksUpdateSubscription.js";
 ```
 
 ### Parameters
@@ -821,7 +821,7 @@ scope: `webhook_subscriptions:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-webhook-subscription-uuid" method="get" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -843,8 +843,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksGetSubscription } from "@gusto/embedded-api/funcs/webhooksGetSubscription.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { webhooksGetSubscription } from "@gusto/embedded-api-v2025-06-15/funcs/webhooksGetSubscription.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -892,7 +892,7 @@ import {
   // mutations and other user actions.
   invalidateWebhooksGetSubscription,
   invalidateAllWebhooksGetSubscription,
-} from "@gusto/embedded-api/react-query/webhooksGetSubscription.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/webhooksGetSubscription.js";
 ```
 
 ### Parameters
@@ -930,7 +930,7 @@ scope: `webhook_subscriptions:write`
 
 <!-- UsageSnippet language="typescript" operationID="delete-v1-webhook-subscription-uuid" method="delete" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -952,8 +952,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksDeleteSubscription } from "@gusto/embedded-api/funcs/webhooksDeleteSubscription.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { webhooksDeleteSubscription } from "@gusto/embedded-api-v2025-06-15/funcs/webhooksDeleteSubscription.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -990,7 +990,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useWebhooksDeleteSubscriptionMutation
-} from "@gusto/embedded-api/react-query/webhooksDeleteSubscription.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/webhooksDeleteSubscription.js";
 ```
 
 ### Parameters
@@ -1030,7 +1030,7 @@ scope: `webhook_subscriptions:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-verify-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}/verify" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -1055,8 +1055,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksVerify } from "@gusto/embedded-api/funcs/webhooksVerify.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { webhooksVerify } from "@gusto/embedded-api-v2025-06-15/funcs/webhooksVerify.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1096,13 +1096,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useWebhooksVerifyMutation
-} from "@gusto/embedded-api/react-query/webhooksVerify.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/webhooksVerify.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-verify-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}/verify" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -1127,8 +1127,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksVerify } from "@gusto/embedded-api/funcs/webhooksVerify.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { webhooksVerify } from "@gusto/embedded-api-v2025-06-15/funcs/webhooksVerify.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1168,13 +1168,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useWebhooksVerifyMutation
-} from "@gusto/embedded-api/react-query/webhooksVerify.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/webhooksVerify.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-verify-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}/verify" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -1199,8 +1199,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksVerify } from "@gusto/embedded-api/funcs/webhooksVerify.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { webhooksVerify } from "@gusto/embedded-api-v2025-06-15/funcs/webhooksVerify.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1240,13 +1240,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useWebhooksVerifyMutation
-} from "@gusto/embedded-api/react-query/webhooksVerify.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/webhooksVerify.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-verify-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}/verify" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -1271,8 +1271,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksVerify } from "@gusto/embedded-api/funcs/webhooksVerify.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { webhooksVerify } from "@gusto/embedded-api-v2025-06-15/funcs/webhooksVerify.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1312,7 +1312,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useWebhooksVerifyMutation
-} from "@gusto/embedded-api/react-query/webhooksVerify.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/webhooksVerify.js";
 ```
 
 ### Parameters
@@ -1351,7 +1351,7 @@ scope: `webhook_subscriptions:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-webhook-subscription-verification-token-uuid" method="get" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}/request_verification_token" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -1373,8 +1373,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksRequestVerificationToken } from "@gusto/embedded-api/funcs/webhooksRequestVerificationToken.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { webhooksRequestVerificationToken } from "@gusto/embedded-api-v2025-06-15/funcs/webhooksRequestVerificationToken.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1422,7 +1422,7 @@ import {
   // mutations and other user actions.
   invalidateWebhooksRequestVerificationToken,
   invalidateAllWebhooksRequestVerificationToken,
-} from "@gusto/embedded-api/react-query/webhooksRequestVerificationToken.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/webhooksRequestVerificationToken.js";
 ```
 
 ### Parameters
@@ -1459,7 +1459,7 @@ scope: `webhook_subscriptions:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-webhooks-health_check" method="get" path="/v1/webhooks/health_check" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -1479,8 +1479,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksGetV1WebhooksHealthCheck } from "@gusto/embedded-api/funcs/webhooksGetV1WebhooksHealthCheck.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { webhooksGetV1WebhooksHealthCheck } from "@gusto/embedded-api-v2025-06-15/funcs/webhooksGetV1WebhooksHealthCheck.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1526,7 +1526,7 @@ import {
   // mutations and other user actions.
   invalidateWebhooksGetV1WebhooksHealthCheck,
   invalidateAllWebhooksGetV1WebhooksHealthCheck,
-} from "@gusto/embedded-api/react-query/webhooksGetV1WebhooksHealthCheck.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/webhooksGetV1WebhooksHealthCheck.js";
 ```
 
 ### Parameters

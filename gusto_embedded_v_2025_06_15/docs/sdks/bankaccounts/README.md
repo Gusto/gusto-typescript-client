@@ -20,7 +20,7 @@ scope: `company_bank_accounts:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-bank-accounts" method="get" path="/v1/companies/{company_id}/bank_accounts" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -42,8 +42,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { bankAccountsGet } from "@gusto/embedded-api/funcs/bankAccountsGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { bankAccountsGet } from "@gusto/embedded-api-v2025-06-15/funcs/bankAccountsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -91,7 +91,7 @@ import {
   // mutations and other user actions.
   invalidateBankAccountsGet,
   invalidateAllBankAccountsGet,
-} from "@gusto/embedded-api/react-query/bankAccountsGet.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/bankAccountsGet.js";
 ```
 
 ### Parameters
@@ -134,7 +134,7 @@ scope: `company_bank_accounts:write`
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-bank-accounts" method="post" path="/v1/companies/{company_id}/bank_accounts" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -161,8 +161,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { bankAccountsCreate } from "@gusto/embedded-api/funcs/bankAccountsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { bankAccountsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/bankAccountsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -204,13 +204,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useBankAccountsCreateMutation
-} from "@gusto/embedded-api/react-query/bankAccountsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/bankAccountsCreate.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-bank-accounts" method="post" path="/v1/companies/{company_id}/bank_accounts" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -237,8 +237,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { bankAccountsCreate } from "@gusto/embedded-api/funcs/bankAccountsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { bankAccountsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/bankAccountsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -280,13 +280,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useBankAccountsCreateMutation
-} from "@gusto/embedded-api/react-query/bankAccountsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/bankAccountsCreate.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-bank-accounts" method="post" path="/v1/companies/{company_id}/bank_accounts" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -313,8 +313,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { bankAccountsCreate } from "@gusto/embedded-api/funcs/bankAccountsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { bankAccountsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/bankAccountsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -356,13 +356,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useBankAccountsCreateMutation
-} from "@gusto/embedded-api/react-query/bankAccountsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/bankAccountsCreate.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-bank-accounts" method="post" path="/v1/companies/{company_id}/bank_accounts" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -389,8 +389,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { bankAccountsCreate } from "@gusto/embedded-api/funcs/bankAccountsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { bankAccountsCreate } from "@gusto/embedded-api-v2025-06-15/funcs/bankAccountsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -432,7 +432,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useBankAccountsCreateMutation
-} from "@gusto/embedded-api/react-query/bankAccountsCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/bankAccountsCreate.js";
 ```
 
 ### Parameters
@@ -479,7 +479,7 @@ scope: `company_bank_accounts:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_id-bank-accounts-verify" method="put" path="/v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/verify" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -506,8 +506,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { bankAccountsVerify } from "@gusto/embedded-api/funcs/bankAccountsVerify.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { bankAccountsVerify } from "@gusto/embedded-api-v2025-06-15/funcs/bankAccountsVerify.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -549,13 +549,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useBankAccountsVerifyMutation
-} from "@gusto/embedded-api/react-query/bankAccountsVerify.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/bankAccountsVerify.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_id-bank-accounts-verify" method="put" path="/v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/verify" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -582,8 +582,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { bankAccountsVerify } from "@gusto/embedded-api/funcs/bankAccountsVerify.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { bankAccountsVerify } from "@gusto/embedded-api-v2025-06-15/funcs/bankAccountsVerify.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -625,13 +625,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useBankAccountsVerifyMutation
-} from "@gusto/embedded-api/react-query/bankAccountsVerify.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/bankAccountsVerify.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_id-bank-accounts-verify" method="put" path="/v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/verify" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -658,8 +658,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { bankAccountsVerify } from "@gusto/embedded-api/funcs/bankAccountsVerify.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { bankAccountsVerify } from "@gusto/embedded-api-v2025-06-15/funcs/bankAccountsVerify.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -701,13 +701,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useBankAccountsVerifyMutation
-} from "@gusto/embedded-api/react-query/bankAccountsVerify.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/bankAccountsVerify.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_id-bank-accounts-verify" method="put" path="/v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/verify" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -734,8 +734,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { bankAccountsVerify } from "@gusto/embedded-api/funcs/bankAccountsVerify.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { bankAccountsVerify } from "@gusto/embedded-api-v2025-06-15/funcs/bankAccountsVerify.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -777,7 +777,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useBankAccountsVerifyMutation
-} from "@gusto/embedded-api/react-query/bankAccountsVerify.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/bankAccountsVerify.js";
 ```
 
 ### Parameters
@@ -818,7 +818,7 @@ scope: `plaid_processor:write`
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-plaid-processor_token" method="post" path="/v1/plaid/processor_token" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -844,8 +844,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { bankAccountsCreateFromPlaidToken } from "@gusto/embedded-api/funcs/bankAccountsCreateFromPlaidToken.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { bankAccountsCreateFromPlaidToken } from "@gusto/embedded-api-v2025-06-15/funcs/bankAccountsCreateFromPlaidToken.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -886,13 +886,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useBankAccountsCreateFromPlaidTokenMutation
-} from "@gusto/embedded-api/react-query/bankAccountsCreateFromPlaidToken.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/bankAccountsCreateFromPlaidToken.js";
 ```
 ### Example Usage: Create a company bank account
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-plaid-processor_token" method="post" path="/v1/plaid/processor_token" example="Create a company bank account" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -918,8 +918,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { bankAccountsCreateFromPlaidToken } from "@gusto/embedded-api/funcs/bankAccountsCreateFromPlaidToken.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { bankAccountsCreateFromPlaidToken } from "@gusto/embedded-api-v2025-06-15/funcs/bankAccountsCreateFromPlaidToken.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -960,13 +960,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useBankAccountsCreateFromPlaidTokenMutation
-} from "@gusto/embedded-api/react-query/bankAccountsCreateFromPlaidToken.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/bankAccountsCreateFromPlaidToken.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-plaid-processor_token" method="post" path="/v1/plaid/processor_token" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -992,8 +992,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { bankAccountsCreateFromPlaidToken } from "@gusto/embedded-api/funcs/bankAccountsCreateFromPlaidToken.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { bankAccountsCreateFromPlaidToken } from "@gusto/embedded-api-v2025-06-15/funcs/bankAccountsCreateFromPlaidToken.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1034,13 +1034,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useBankAccountsCreateFromPlaidTokenMutation
-} from "@gusto/embedded-api/react-query/bankAccountsCreateFromPlaidToken.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/bankAccountsCreateFromPlaidToken.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-plaid-processor_token" method="post" path="/v1/plaid/processor_token" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1066,8 +1066,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { bankAccountsCreateFromPlaidToken } from "@gusto/embedded-api/funcs/bankAccountsCreateFromPlaidToken.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { bankAccountsCreateFromPlaidToken } from "@gusto/embedded-api-v2025-06-15/funcs/bankAccountsCreateFromPlaidToken.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1108,13 +1108,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useBankAccountsCreateFromPlaidTokenMutation
-} from "@gusto/embedded-api/react-query/bankAccountsCreateFromPlaidToken.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/bankAccountsCreateFromPlaidToken.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-plaid-processor_token" method="post" path="/v1/plaid/processor_token" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1140,8 +1140,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { bankAccountsCreateFromPlaidToken } from "@gusto/embedded-api/funcs/bankAccountsCreateFromPlaidToken.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { bankAccountsCreateFromPlaidToken } from "@gusto/embedded-api-v2025-06-15/funcs/bankAccountsCreateFromPlaidToken.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1182,7 +1182,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useBankAccountsCreateFromPlaidTokenMutation
-} from "@gusto/embedded-api/react-query/bankAccountsCreateFromPlaidToken.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/bankAccountsCreateFromPlaidToken.js";
 ```
 
 ### Parameters
@@ -1217,7 +1217,7 @@ scope: `company_bank_accounts:write`
 
 <!-- UsageSnippet language="typescript" operationID="delete-v1-companies-company_id-bank-accounts-bank_account_id" method="delete" path="/v1/companies/{company_id}/bank_accounts/{bank_account_id}" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1240,8 +1240,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { bankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId } from "@gusto/embedded-api/funcs/bankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { bankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId } from "@gusto/embedded-api-v2025-06-15/funcs/bankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1279,7 +1279,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useBankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountIdMutation
-} from "@gusto/embedded-api/react-query/bankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/bankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId.js";
 ```
 
 ### Parameters

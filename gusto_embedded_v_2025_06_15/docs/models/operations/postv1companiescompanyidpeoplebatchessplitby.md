@@ -5,7 +5,7 @@ How to split deposits, must be the same for all bank accounts. If split_by is `P
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesCompanyIdPeopleBatchesSplitBy } from "@gusto/embedded-api/models/operations/postv1companiescompanyidpeoplebatches.js";
+import { PostV1CompaniesCompanyIdPeopleBatchesSplitBy } from "@gusto/embedded-api-v2025-06-15/models/operations/postv1companiescompanyidpeoplebatches.js";
 
 let value: PostV1CompaniesCompanyIdPeopleBatchesSplitBy = "Amount";
 ```

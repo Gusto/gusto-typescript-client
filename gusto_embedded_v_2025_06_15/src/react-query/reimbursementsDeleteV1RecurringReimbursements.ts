@@ -80,7 +80,7 @@ export function useReimbursementsDeleteV1RecurringReimbursementsMutation(
 
 export function mutationKeyReimbursementsDeleteV1RecurringReimbursements(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v2025-06-15",
     "Reimbursements",
     "deleteV1RecurringReimbursements",
   ];

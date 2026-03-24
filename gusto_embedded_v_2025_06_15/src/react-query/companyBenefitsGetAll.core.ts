@@ -74,5 +74,10 @@ export function buildCompanyBenefitsGetAllQuery(
 export function queryKeyCompanyBenefitsGetAll(
   parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
-  return ["@gusto/embedded-api", "companyBenefits", "getAll", parameters];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "companyBenefits",
+    "getAll",
+    parameters,
+  ];
 }

@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -35,6 +39,9 @@ import { Result } from "../types/fp.js";
  * @remarks
  * An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States.
  *
+ * ### Related guides
+ * - [I-9 employment verification](doc:i-9-employment-verification)
+ *
  * scope: `i9_authorizations:read`
  */
 export function i9VerificationGetDocuments(
@@ -44,6 +51,7 @@ export function i9VerificationGetDocuments(
 ): APIPromise<
   Result<
     GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -69,6 +77,7 @@ async function $do(
   [
     Result<
       GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -100,7 +109,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/employees/{employee_id}/i9_authorization/documents",
   )(pathParams);
@@ -167,6 +175,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -179,9 +188,10 @@ async function $do(
     M.json(
       200,
       GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$inboundSchema,
-      { key: "I9-Authorization-Documents-Object" },
+      { key: "I9-Authorization-Documents" },
     ),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

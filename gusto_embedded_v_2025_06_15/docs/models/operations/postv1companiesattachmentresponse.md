@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesAttachmentResponse } from "@gusto/embedded-api/models/operations/postv1companiesattachment.js";
+import { PostV1CompaniesAttachmentResponse } from "@gusto/embedded-api-v2025-06-15/models/operations/postv1companiesattachment.js";
 
 let value: PostV1CompaniesAttachmentResponse = {};
 ```

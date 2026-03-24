@@ -5,7 +5,7 @@ Determines the date-based API version associated with your API call. If none is 
 ## Example Usage
 
 ```typescript
-import { PatchV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion } from "@gusto/embedded-api/models/operations/patchv1contractorpaymentgroupsidpartnerdisbursements.js";
+import { PatchV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion } from "@gusto/embedded-api-v2025-06-15/models/operations/patchv1contractorpaymentgroupsidpartnerdisbursements.js";
 
 let value:
   PatchV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion =

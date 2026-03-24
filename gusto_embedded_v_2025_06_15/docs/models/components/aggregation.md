@@ -5,7 +5,7 @@ The breakdown level used for the report
 ## Example Usage
 
 ```typescript
-import { Aggregation } from "@gusto/embedded-api/models/components/generalledgerreport.js";
+import { Aggregation } from "@gusto/embedded-api-v2025-06-15/models/components/generalledgerreport.js";
 
 let value: Aggregation = "department";
 ```

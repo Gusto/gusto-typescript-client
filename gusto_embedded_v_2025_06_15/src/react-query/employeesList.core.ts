@@ -102,5 +102,11 @@ export function queryKeyEmployeesList(
     per?: number | undefined;
   },
 ): QueryKey {
-  return ["@gusto/embedded-api", "Employees", "list", companyId, parameters];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "Employees",
+    "list",
+    companyId,
+    parameters,
+  ];
 }

@@ -144,7 +144,7 @@ export function invalidateWebhooksListSubscriptions(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "Webhooks",
       "listSubscriptions",
       ...queryKeyBase,
@@ -158,6 +158,10 @@ export function invalidateAllWebhooksListSubscriptions(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Webhooks", "listSubscriptions"],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "Webhooks",
+      "listSubscriptions",
+    ],
   });
 }

@@ -147,7 +147,7 @@ export function invalidateTimeOffPoliciesGetAll(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "timeOffPolicies",
       "getAll",
       ...queryKeyBase,
@@ -161,6 +161,6 @@ export function invalidateAllTimeOffPoliciesGetAll(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "timeOffPolicies", "getAll"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "timeOffPolicies", "getAll"],
   });
 }

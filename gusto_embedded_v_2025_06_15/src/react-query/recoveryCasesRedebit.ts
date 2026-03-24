@@ -79,7 +79,7 @@ export function useRecoveryCasesRedebitMutation(
 }
 
 export function mutationKeyRecoveryCasesRedebit(): MutationKey {
-  return ["@gusto/embedded-api", "recoveryCases", "redebit"];
+  return ["@gusto/embedded-api-v2025-06-15", "recoveryCases", "redebit"];
 }
 
 export function buildRecoveryCasesRedebitMutation(

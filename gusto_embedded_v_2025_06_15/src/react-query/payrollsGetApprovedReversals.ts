@@ -143,7 +143,7 @@ export function invalidatePayrollsGetApprovedReversals(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "Payrolls",
       "getApprovedReversals",
       ...queryKeyBase,
@@ -157,6 +157,10 @@ export function invalidateAllPayrollsGetApprovedReversals(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Payrolls", "getApprovedReversals"],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "Payrolls",
+      "getApprovedReversals",
+    ],
   });
 }

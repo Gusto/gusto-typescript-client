@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest } from "@gusto/embedded-api/models/operations/postpartnermanagedcompaniescompanyuuidaccepttermsofservice.js";
+import { PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest } from "@gusto/embedded-api-v2025-06-15/models/operations/postpartnermanagedcompaniescompanyuuidaccepttermsofservice.js";
 
 let value: PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest = {
   companyUuid: "<id>",

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { RefreshTokenRequest } from "@gusto/embedded-api/models/operations/oauthaccesstoken.js";
+import { RefreshTokenRequest } from "@gusto/embedded-api-v2025-06-15/models/operations/oauthaccesstoken.js";
 
 let value: RefreshTokenRequest = {
   clientId: "qr6L_9FRkbMVL_GdwvrMW6Ef8tcU6NUxjWpOfqXqOG8",

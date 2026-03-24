@@ -5,7 +5,7 @@ The type of entity being described.
 ## Example Usage
 
 ```typescript
-import { NotificationEntityType } from "@gusto/embedded-api/models/components/notification.js";
+import { NotificationEntityType } from "@gusto/embedded-api-v2025-06-15/models/components/notification.js";
 
 let value: NotificationEntityType = "ContractorPayment";
 ```

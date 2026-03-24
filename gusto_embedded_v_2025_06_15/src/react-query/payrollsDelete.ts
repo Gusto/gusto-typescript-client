@@ -78,7 +78,7 @@ export function usePayrollsDeleteMutation(
 }
 
 export function mutationKeyPayrollsDelete(): MutationKey {
-  return ["@gusto/embedded-api", "Payrolls", "delete"];
+  return ["@gusto/embedded-api-v2025-06-15", "Payrolls", "delete"];
 }
 
 export function buildPayrollsDeleteMutation(

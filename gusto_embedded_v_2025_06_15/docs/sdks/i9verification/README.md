@@ -14,9 +14,12 @@
 
 ## getAuthorization
 
-An employee's I-9 authorization stores information about an employee's authorization status and I-9 signatures, information required to filled out the Form I-9 for employment eligibility verification.
+An employee's I-9 authorization stores information about an employee's authorization status and I-9 signatures, information required to fill out the Form I-9 for employment eligibility verification.
 
 **NOTE:** The `form_uuid` in responses from this endpoint can be used to retrieve the PDF version of the I-9. See the "get employee form PDF" request for more details.
+
+### Related guides
+- [I-9 employment verification](doc:i-9-employment-verification)
 
 scope: `i9_authorizations:read`
 
@@ -24,7 +27,7 @@ scope: `i9_authorizations:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-i9_authorization" method="get" path="/v1/employees/{employee_id}/i9_authorization" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -46,8 +49,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { i9VerificationGetAuthorization } from "@gusto/embedded-api/funcs/i9VerificationGetAuthorization.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { i9VerificationGetAuthorization } from "@gusto/embedded-api-v2025-06-15/funcs/i9VerificationGetAuthorization.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -95,7 +98,7 @@ import {
   // mutations and other user actions.
   invalidateI9VerificationGetAuthorization,
   invalidateAllI9VerificationGetAuthorization,
-} from "@gusto/embedded-api/react-query/i9VerificationGetAuthorization.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/i9VerificationGetAuthorization.js";
 ```
 
 ### Parameters
@@ -113,9 +116,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## update
 
@@ -124,7 +128,6 @@ An employee's I-9 authorization stores information about an employee's authoriza
 If the version is supplied and the employee I-9 authorization exists, this endpoint acts as an update. Otherwise, it will create an employee I-9 authorization.
 
 Validations on this endpoint are conditional:
-
   * `document_type` may be required, depending on `authorization_status`.
   * Valid formats for `document_number` vary, depending on `document_type`.
   * `country` is only allowed with `document_type: 'foreign_passport'`.
@@ -138,14 +141,16 @@ Validations on this endpoint are conditional:
 
 Detailed instructions for completing Form I-9 can be found at https://www.uscis.gov/sites/default/files/document/forms/i-9instr.pdf
 
-scope: `i9_authorizations:write`
+### Related guides
+- [I-9 employment verification](doc:i-9-employment-verification)
 
+scope: `i9_authorizations:write`
 
 ### Example Usage: Basic
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-i9_authorization" method="put" path="/v1/employees/{employee_id}/i9_authorization" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -154,7 +159,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.i9Verification.update({
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationRequestBody: {
       authorizationStatus: "citizen",
     },
   });
@@ -170,8 +175,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { i9VerificationUpdate } from "@gusto/embedded-api/funcs/i9VerificationUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { i9VerificationUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/i9VerificationUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -182,7 +187,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await i9VerificationUpdate(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationRequestBody: {
       authorizationStatus: "citizen",
     },
   });
@@ -211,13 +216,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useI9VerificationUpdateMutation
-} from "@gusto/embedded-api/react-query/i9VerificationUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/i9VerificationUpdate.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-i9_authorization" method="put" path="/v1/employees/{employee_id}/i9_authorization" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -226,9 +231,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.i9Verification.update({
     employeeId: "<id>",
-    requestBody: {
-      authorizationStatus: "citizen",
+    i9AuthorizationRequestBody: {
       version: "52b7c567242cb7452e89ba2bc02cb476",
+      authorizationStatus: "citizen",
     },
   });
 
@@ -243,8 +248,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { i9VerificationUpdate } from "@gusto/embedded-api/funcs/i9VerificationUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { i9VerificationUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/i9VerificationUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -255,9 +260,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await i9VerificationUpdate(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
-      authorizationStatus: "citizen",
+    i9AuthorizationRequestBody: {
       version: "52b7c567242cb7452e89ba2bc02cb476",
+      authorizationStatus: "citizen",
     },
   });
   if (res.ok) {
@@ -285,13 +290,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useI9VerificationUpdateMutation
-} from "@gusto/embedded-api/react-query/i9VerificationUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/i9VerificationUpdate.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-i9_authorization" method="put" path="/v1/employees/{employee_id}/i9_authorization" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -300,7 +305,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.i9Verification.update({
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationRequestBody: {
       authorizationStatus: "citizen",
     },
   });
@@ -316,8 +321,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { i9VerificationUpdate } from "@gusto/embedded-api/funcs/i9VerificationUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { i9VerificationUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/i9VerificationUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -328,7 +333,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await i9VerificationUpdate(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationRequestBody: {
       authorizationStatus: "citizen",
     },
   });
@@ -357,13 +362,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useI9VerificationUpdateMutation
-} from "@gusto/embedded-api/react-query/i9VerificationUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/i9VerificationUpdate.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-i9_authorization" method="put" path="/v1/employees/{employee_id}/i9_authorization" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -372,7 +377,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.i9Verification.update({
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationRequestBody: {
       authorizationStatus: "citizen",
     },
   });
@@ -388,8 +393,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { i9VerificationUpdate } from "@gusto/embedded-api/funcs/i9VerificationUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { i9VerificationUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/i9VerificationUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -400,7 +405,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await i9VerificationUpdate(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationRequestBody: {
       authorizationStatus: "citizen",
     },
   });
@@ -429,7 +434,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useI9VerificationUpdateMutation
-} from "@gusto/embedded-api/react-query/i9VerificationUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/i9VerificationUpdate.js";
 ```
 
 ### Parameters
@@ -449,6 +454,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
@@ -456,13 +462,16 @@ import {
 
 An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States. This endpoint returns the possible document options based on the employee's authorization status. These options can then be used to create the I-9 verification documents.
 
+### Related guides
+- [I-9 employment verification](doc:i-9-employment-verification)
+
 scope: `i9_authorizations:read`
 
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-i9_authorization-document_options" method="get" path="/v1/employees/{employee_id}/i9_authorization/document_options" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -484,8 +493,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { i9VerificationGetDocumentOptions } from "@gusto/embedded-api/funcs/i9VerificationGetDocumentOptions.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { i9VerificationGetDocumentOptions } from "@gusto/embedded-api-v2025-06-15/funcs/i9VerificationGetDocumentOptions.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -533,7 +542,7 @@ import {
   // mutations and other user actions.
   invalidateI9VerificationGetDocumentOptions,
   invalidateAllI9VerificationGetDocumentOptions,
-} from "@gusto/embedded-api/react-query/i9VerificationGetDocumentOptions.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/i9VerificationGetDocumentOptions.js";
 ```
 
 ### Parameters
@@ -551,13 +560,17 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## getDocuments
 
 An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States.
+
+### Related guides
+- [I-9 employment verification](doc:i-9-employment-verification)
 
 scope: `i9_authorizations:read`
 
@@ -565,7 +578,7 @@ scope: `i9_authorizations:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-i9_authorization-documents" method="get" path="/v1/employees/{employee_id}/i9_authorization/documents" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -587,8 +600,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { i9VerificationGetDocuments } from "@gusto/embedded-api/funcs/i9VerificationGetDocuments.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { i9VerificationGetDocuments } from "@gusto/embedded-api-v2025-06-15/funcs/i9VerificationGetDocuments.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -636,7 +649,7 @@ import {
   // mutations and other user actions.
   invalidateI9VerificationGetDocuments,
   invalidateAllI9VerificationGetDocuments,
-} from "@gusto/embedded-api/react-query/i9VerificationGetDocuments.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/i9VerificationGetDocuments.js";
 ```
 
 ### Parameters
@@ -654,28 +667,31 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## createDocuments
 
 An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States.
 
-Use the document options endpoint to get the possible document types and titles, which can vary depending on the employee's authorization status.
+Use the [document options endpoint](ref:get-v1-employees-employee_id-i9_authorization-document_options) to get the possible document types and titles, which can vary depending on the employee's authorization status.
 
 > 🚧 Every request must contain the complete list of documents for the Employee.
 >
 > Every request to this endpoint removes any previous verification document records for the employee.
 
-scope: `i9_authorizations:manage`
+### Related guides
+- [I-9 employment verification](doc:i-9-employment-verification)
 
+scope: `i9_authorizations:manage`
 
 ### Example Usage: Basic
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-i9_authorization-documents" method="put" path="/v1/employees/{employee_id}/i9_authorization/documents" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -684,7 +700,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.i9Verification.createDocuments({
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationDocumentsRequestBody: {
       documents: [
         {
           documentType: "<value>",
@@ -706,8 +722,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { i9VerificationCreateDocuments } from "@gusto/embedded-api/funcs/i9VerificationCreateDocuments.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { i9VerificationCreateDocuments } from "@gusto/embedded-api-v2025-06-15/funcs/i9VerificationCreateDocuments.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -718,7 +734,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await i9VerificationCreateDocuments(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationDocumentsRequestBody: {
       documents: [
         {
           documentType: "<value>",
@@ -753,13 +769,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useI9VerificationCreateDocumentsMutation
-} from "@gusto/embedded-api/react-query/i9VerificationCreateDocuments.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/i9VerificationCreateDocuments.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-i9_authorization-documents" method="put" path="/v1/employees/{employee_id}/i9_authorization/documents" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -768,7 +784,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.i9Verification.createDocuments({
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationDocumentsRequestBody: {
       documents: [
         {
           documentType: "us_passport",
@@ -792,8 +808,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { i9VerificationCreateDocuments } from "@gusto/embedded-api/funcs/i9VerificationCreateDocuments.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { i9VerificationCreateDocuments } from "@gusto/embedded-api-v2025-06-15/funcs/i9VerificationCreateDocuments.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -804,7 +820,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await i9VerificationCreateDocuments(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationDocumentsRequestBody: {
       documents: [
         {
           documentType: "us_passport",
@@ -841,13 +857,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useI9VerificationCreateDocumentsMutation
-} from "@gusto/embedded-api/react-query/i9VerificationCreateDocuments.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/i9VerificationCreateDocuments.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-i9_authorization-documents" method="put" path="/v1/employees/{employee_id}/i9_authorization/documents" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -856,7 +872,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.i9Verification.createDocuments({
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationDocumentsRequestBody: {
       documents: [
         {
           documentType: "<value>",
@@ -878,8 +894,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { i9VerificationCreateDocuments } from "@gusto/embedded-api/funcs/i9VerificationCreateDocuments.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { i9VerificationCreateDocuments } from "@gusto/embedded-api-v2025-06-15/funcs/i9VerificationCreateDocuments.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -890,7 +906,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await i9VerificationCreateDocuments(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationDocumentsRequestBody: {
       documents: [
         {
           documentType: "<value>",
@@ -925,13 +941,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useI9VerificationCreateDocumentsMutation
-} from "@gusto/embedded-api/react-query/i9VerificationCreateDocuments.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/i9VerificationCreateDocuments.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-i9_authorization-documents" method="put" path="/v1/employees/{employee_id}/i9_authorization/documents" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -940,7 +956,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.i9Verification.createDocuments({
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationDocumentsRequestBody: {
       documents: [
         {
           documentType: "<value>",
@@ -962,8 +978,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { i9VerificationCreateDocuments } from "@gusto/embedded-api/funcs/i9VerificationCreateDocuments.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { i9VerificationCreateDocuments } from "@gusto/embedded-api-v2025-06-15/funcs/i9VerificationCreateDocuments.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -974,7 +990,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await i9VerificationCreateDocuments(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationDocumentsRequestBody: {
       documents: [
         {
           documentType: "<value>",
@@ -1009,7 +1025,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useI9VerificationCreateDocumentsMutation
-} from "@gusto/embedded-api/react-query/i9VerificationCreateDocuments.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/i9VerificationCreateDocuments.js";
 ```
 
 ### Parameters
@@ -1029,6 +1045,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
@@ -1036,13 +1053,16 @@ import {
 
 An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States. This endpoint deletes a specific verification document.
 
+### Related guides
+- [I-9 employment verification](doc:i-9-employment-verification)
+
 scope: `i9_authorizations:manage`
 
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="delete-v1-employees-employee_id-i9_authorization-documents-document_id" method="delete" path="/v1/employees/{employee_id}/i9_authorization/documents/{document_id}" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1065,8 +1085,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { i9VerificationDeleteDocument } from "@gusto/embedded-api/funcs/i9VerificationDeleteDocument.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { i9VerificationDeleteDocument } from "@gusto/embedded-api-v2025-06-15/funcs/i9VerificationDeleteDocument.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1104,7 +1124,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useI9VerificationDeleteDocumentMutation
-} from "@gusto/embedded-api/react-query/i9VerificationDeleteDocument.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/i9VerificationDeleteDocument.js";
 ```
 
 ### Parameters
@@ -1122,13 +1142,24 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## employerSign
 
 Sign an employee's Form I-9 as an employer. Once the form is signed, the employee's I-9 authorization is considered complete and cannot be modified.
+
+### Prerequisites
+Before calling this endpoint:
+1. The employee must have a completed [I-9 authorization](ref:put-v1-employees-employee_id-i9_authorization)
+2. The employee must have signed the Form I-9
+3. [I-9 verification documents](ref:put-v1-employees-employee_id-i9_authorization-documents) must be submitted
+
+### Related guides
+- [I-9 employment verification](doc:i-9-employment-verification)
 
 scope: `i9_authorizations:manage`
 
@@ -1136,7 +1167,7 @@ scope: `i9_authorizations:manage`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-i9_authorization-employer_sign" method="put" path="/v1/employees/{employee_id}/i9_authorization/employer_sign" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1145,7 +1176,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.i9Verification.employerSign({
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationEmployerSignRequestBody: {
       signatureText: "<value>",
       signerTitle: "<value>",
       agree: false,
@@ -1163,8 +1194,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { i9VerificationEmployerSign } from "@gusto/embedded-api/funcs/i9VerificationEmployerSign.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { i9VerificationEmployerSign } from "@gusto/embedded-api-v2025-06-15/funcs/i9VerificationEmployerSign.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1175,7 +1206,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await i9VerificationEmployerSign(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationEmployerSignRequestBody: {
       signatureText: "<value>",
       signerTitle: "<value>",
       agree: false,
@@ -1206,13 +1237,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useI9VerificationEmployerSignMutation
-} from "@gusto/embedded-api/react-query/i9VerificationEmployerSign.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/i9VerificationEmployerSign.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-i9_authorization-employer_sign" method="put" path="/v1/employees/{employee_id}/i9_authorization/employer_sign" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1221,7 +1252,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.i9Verification.employerSign({
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationEmployerSignRequestBody: {
       signatureText: "<value>",
       signerTitle: "<value>",
       agree: false,
@@ -1239,8 +1270,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { i9VerificationEmployerSign } from "@gusto/embedded-api/funcs/i9VerificationEmployerSign.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { i9VerificationEmployerSign } from "@gusto/embedded-api-v2025-06-15/funcs/i9VerificationEmployerSign.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1251,7 +1282,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await i9VerificationEmployerSign(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationEmployerSignRequestBody: {
       signatureText: "<value>",
       signerTitle: "<value>",
       agree: false,
@@ -1282,13 +1313,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useI9VerificationEmployerSignMutation
-} from "@gusto/embedded-api/react-query/i9VerificationEmployerSign.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/i9VerificationEmployerSign.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-i9_authorization-employer_sign" method="put" path="/v1/employees/{employee_id}/i9_authorization/employer_sign" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1297,7 +1328,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.i9Verification.employerSign({
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationEmployerSignRequestBody: {
       signatureText: "<value>",
       signerTitle: "<value>",
       agree: false,
@@ -1315,8 +1346,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { i9VerificationEmployerSign } from "@gusto/embedded-api/funcs/i9VerificationEmployerSign.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { i9VerificationEmployerSign } from "@gusto/embedded-api-v2025-06-15/funcs/i9VerificationEmployerSign.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1327,7 +1358,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await i9VerificationEmployerSign(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationEmployerSignRequestBody: {
       signatureText: "<value>",
       signerTitle: "<value>",
       agree: false,
@@ -1358,13 +1389,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useI9VerificationEmployerSignMutation
-} from "@gusto/embedded-api/react-query/i9VerificationEmployerSign.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/i9VerificationEmployerSign.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-i9_authorization-employer_sign" method="put" path="/v1/employees/{employee_id}/i9_authorization/employer_sign" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1373,7 +1404,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.i9Verification.employerSign({
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationEmployerSignRequestBody: {
       signatureText: "<value>",
       signerTitle: "<value>",
       agree: false,
@@ -1391,8 +1422,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { i9VerificationEmployerSign } from "@gusto/embedded-api/funcs/i9VerificationEmployerSign.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { i9VerificationEmployerSign } from "@gusto/embedded-api-v2025-06-15/funcs/i9VerificationEmployerSign.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1403,7 +1434,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await i9VerificationEmployerSign(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    i9AuthorizationEmployerSignRequestBody: {
       signatureText: "<value>",
       signerTitle: "<value>",
       agree: false,
@@ -1434,7 +1465,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useI9VerificationEmployerSignMutation
-} from "@gusto/embedded-api/react-query/i9VerificationEmployerSign.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/i9VerificationEmployerSign.js";
 ```
 
 ### Parameters
@@ -1454,5 +1485,6 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

@@ -141,7 +141,12 @@ export function invalidateCompaniesGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Companies", "get", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "Companies",
+      "get",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -151,6 +156,6 @@ export function invalidateAllCompaniesGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Companies", "get"],
+    queryKey: ["@gusto/embedded-api-v2025-06-15", "Companies", "get"],
   });
 }

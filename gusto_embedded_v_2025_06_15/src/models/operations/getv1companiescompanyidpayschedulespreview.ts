@@ -7,116 +7,121 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  PaySchedulePreview,
+  PaySchedulePreview$inboundSchema,
+} from "../components/payschedulepreview.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The frequency that employees on this pay schedule are paid with Gusto.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const QueryParamFrequency = {
+export const GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion
+  >;
+
+/**
+ * The frequency that employees on this pay schedule are paid.
+ */
+export const Frequency = {
   EveryWeek: "Every week",
   EveryOtherWeek: "Every other week",
   TwicePerMonth: "Twice per month",
   Monthly: "Monthly",
 } as const;
 /**
- * The frequency that employees on this pay schedule are paid with Gusto.
+ * The frequency that employees on this pay schedule are paid.
  */
-export type QueryParamFrequency = ClosedEnum<typeof QueryParamFrequency>;
+export type Frequency = ClosedEnum<typeof Frequency>;
 
 export type GetV1CompaniesCompanyIdPaySchedulesPreviewRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
   companyId: string;
   /**
-   * The frequency that employees on this pay schedule are paid with Gusto.
+   * The frequency that employees on this pay schedule are paid.
    */
-  frequency: QueryParamFrequency;
+  frequency: Frequency;
   /**
-   * The first date that employees on this pay schedule are paid with Gusto.
+   * The first date that employees on this pay schedule are paid.
    */
-  anchorPayDate: string;
+  anchorPayDate: RFCDate;
   /**
    * The last date of the first pay period. This can be the same date as the anchor pay date.
    */
-  anchorEndOfPayPeriod: string;
+  anchorEndOfPayPeriod: RFCDate;
   /**
-   * An integer between 1 and 31 indicating the first day of the month that employees are paid. This field is only relevant for pay schedules with the “Twice per month” and “Monthly” frequencies. It will be null for pay schedules with other frequencies.
+   * First pay day of the month (1-31).
+   *
+   * @remarks
+   * - **Twice per month, Monthly:** required.
+   * - **Every week, Every other week:** omit or null.
    */
   day1?: number | undefined;
   /**
-   * An integer between 1 and 31 indicating the second day of the month that employees are paid. This field is the second pay date for pay schedules with the "Twice per month" frequency. For semi-monthly pay schedules, set this field to 31. For months shorter than 31 days, we will set the second pay date to the last day of the month. It will be null for pay schedules with other frequencies.
+   * Second pay day of the month (1-31); only for **Twice per month**.
+   *
+   * @remarks
+   * - Use 31 for last day of month (shorter months use the actual last day).
+   * - **Other frequencies:** omit or null.
    */
   day2?: number | undefined;
   /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   * End date for the preview range. When unspecified, defaults to 18 months from today.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-};
-
-export type PayPeriods = {
-  /**
-   * The payment date, "Check date", for the pay period
-   */
-  checkDate?: string | undefined;
-  /**
-   * The deadline to run payroll for direct deposit on the check date
-   */
-  runPayrollBy?: string | undefined;
-  /**
-   * The first day of the pay period
-   */
-  startDate?: string | undefined;
-  /**
-   * The last day of the pay period.
-   */
-  endDate?: string | undefined;
-};
-
-/**
- * Pay schedule preview
- */
-export type GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody = {
-  /**
-   * A list of pay periods for the previewed pay schedule
-   */
-  payPeriods?: Array<PayPeriods> | undefined;
-  /**
-   * A list of dates for bank closures
-   */
-  holidays?: Array<string> | undefined;
+  endDate?: RFCDate | undefined;
 };
 
 export type GetV1CompaniesCompanyIdPaySchedulesPreviewResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * OK
+   * Successful
    */
-  object?: GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody | undefined;
+  paySchedulePreview?: PaySchedulePreview | undefined;
 };
 
 /** @internal */
-export const QueryParamFrequency$outboundSchema: z.ZodNativeEnum<
-  typeof QueryParamFrequency
-> = z.nativeEnum(QueryParamFrequency);
+export const GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
+export const Frequency$outboundSchema: z.ZodNativeEnum<typeof Frequency> = z
+  .nativeEnum(Frequency);
 
 /** @internal */
 export type GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_id: string;
   frequency: string;
   anchor_pay_date: string;
   anchor_end_of_pay_period: string;
   day_1?: number | undefined;
   day_2?: number | undefined;
-  "X-Gusto-API-Version": string;
+  end_date?: string | undefined;
 };
 
 /** @internal */
@@ -126,21 +131,25 @@ export const GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1CompaniesCompanyIdPaySchedulesPreviewRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyId: z.string(),
-    frequency: QueryParamFrequency$outboundSchema,
-    anchorPayDate: z.string(),
-    anchorEndOfPayPeriod: z.string(),
+    frequency: Frequency$outboundSchema,
+    anchorPayDate: z.instanceof(RFCDate).transform(v => v.toString()),
+    anchorEndOfPayPeriod: z.instanceof(RFCDate).transform(v => v.toString()),
     day1: z.number().int().optional(),
     day2: z.number().int().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    endDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       companyId: "company_id",
       anchorPayDate: "anchor_pay_date",
       anchorEndOfPayPeriod: "anchor_end_of_pay_period",
       day1: "day_1",
       day2: "day_2",
-      xGustoAPIVersion: "X-Gusto-API-Version",
+      endDate: "end_date",
     });
   });
 
@@ -156,65 +165,6 @@ export function getV1CompaniesCompanyIdPaySchedulesPreviewRequestToJSON(
 }
 
 /** @internal */
-export const PayPeriods$inboundSchema: z.ZodType<
-  PayPeriods,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  check_date: z.string().optional(),
-  run_payroll_by: z.string().optional(),
-  start_date: z.string().optional(),
-  end_date: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "check_date": "checkDate",
-    "run_payroll_by": "runPayrollBy",
-    "start_date": "startDate",
-    "end_date": "endDate",
-  });
-});
-
-export function payPeriodsFromJSON(
-  jsonString: string,
-): SafeParseResult<PayPeriods, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PayPeriods$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayPeriods' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$inboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    pay_periods: z.array(z.lazy(() => PayPeriods$inboundSchema)).optional(),
-    holidays: z.array(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "pay_periods": "payPeriods",
-    });
-  });
-
-export function getV1CompaniesCompanyIdPaySchedulesPreviewResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
 export const GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$inboundSchema:
   z.ZodType<
     GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
@@ -222,12 +172,11 @@ export const GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    object: z.lazy(() =>
-      GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$inboundSchema
-    ).optional(),
+    "Pay-Schedule-Preview": PaySchedulePreview$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
+      "Pay-Schedule-Preview": "paySchedulePreview",
     });
   });
 

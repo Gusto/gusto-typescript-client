@@ -80,5 +80,11 @@ export function queryKeyCompaniesSuspensionsGet(
       | undefined;
   },
 ): QueryKey {
-  return ["@gusto/embedded-api", "suspensions", "get", companyUuid, parameters];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "suspensions",
+    "get",
+    companyUuid,
+    parameters,
+  ];
 }

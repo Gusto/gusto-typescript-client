@@ -5,7 +5,7 @@ The temporary url to download a Company Attachment File
 ## Example Usage
 
 ```typescript
-import { GetV1CompaniesAttachmentUrlResponseBody } from "@gusto/embedded-api/models/operations/getv1companiesattachmenturl.js";
+import { GetV1CompaniesAttachmentUrlResponseBody } from "@gusto/embedded-api-v2025-06-15/models/operations/getv1companiesattachmenturl.js";
 
 let value: GetV1CompaniesAttachmentUrlResponseBody = {
   url: "https://gripping-pilot.com/",

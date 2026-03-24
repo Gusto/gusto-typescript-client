@@ -29163,6 +29163,9 @@ components:
         birthday:
           type: string
           format: date
+        ssn:
+          type: string
+          description: The signatory's SSN.
         home_address:
           type: object
           properties:

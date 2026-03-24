@@ -39,6 +39,7 @@ export const SubscriptionTypes = {
   Location: "Location",
   Notification: "Notification",
   Payroll: "Payroll",
+  PayrollSync: "PayrollSync",
   PaySchedule: "PaySchedule",
   Signatory: "Signatory",
 } as const;

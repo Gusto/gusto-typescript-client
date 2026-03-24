@@ -5,7 +5,7 @@ Unblock option to resolve a credit blocker by responding to high risk fraud RFI
 ## Example Usage
 
 ```typescript
-import { PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi } from "@gusto/embedded-api/models/components/payrollcreditblockerunblockoptionrespondtohighriskfraudrfi.js";
+import { PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi } from "@gusto/embedded-api-v2025-06-15/models/components/payrollcreditblockerunblockoptionrespondtohighriskfraudrfi.js";
 
 let value: PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi = {
   unblockType: "respond_to_high_risk_fraud_rfi",

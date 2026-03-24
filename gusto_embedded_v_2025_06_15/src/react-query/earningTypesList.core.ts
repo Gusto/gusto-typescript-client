@@ -76,5 +76,11 @@ export function queryKeyEarningTypesList(
   companyId: string,
   parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
-  return ["@gusto/embedded-api", "earningTypes", "list", companyId, parameters];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "earningTypes",
+    "list",
+    companyId,
+    parameters,
+  ];
 }

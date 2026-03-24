@@ -148,7 +148,7 @@ export function invalidateCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdCon
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "companyBenefits",
       "getV1CompanyBenefitsCompanyBenefitIdContributionExclusions",
       ...queryKeyBase,
@@ -163,7 +163,7 @@ export function invalidateAllCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitId
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "companyBenefits",
       "getV1CompanyBenefitsCompanyBenefitIdContributionExclusions",
     ],

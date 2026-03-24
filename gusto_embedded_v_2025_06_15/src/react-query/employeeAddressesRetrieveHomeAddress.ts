@@ -154,7 +154,7 @@ export function invalidateEmployeeAddressesRetrieveHomeAddress(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "employeeAddresses",
       "retrieveHomeAddress",
       ...queryKeyBase,
@@ -169,7 +169,7 @@ export function invalidateAllEmployeeAddressesRetrieveHomeAddress(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "employeeAddresses",
       "retrieveHomeAddress",
     ],

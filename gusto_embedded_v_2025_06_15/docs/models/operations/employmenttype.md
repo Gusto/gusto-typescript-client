@@ -5,7 +5,7 @@ Employee employment type to filter by
 ## Example Usage
 
 ```typescript
-import { EmploymentType } from "@gusto/embedded-api/models/operations/postcompaniescompanyuuidreports.js";
+import { EmploymentType } from "@gusto/embedded-api-v2025-06-15/models/operations/postcompaniescompanyuuidreports.js";
 
 let value: EmploymentType = "salaried_nonexempt";
 ```

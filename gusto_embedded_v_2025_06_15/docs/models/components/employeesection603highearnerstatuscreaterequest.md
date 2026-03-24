@@ -5,7 +5,7 @@ Request body for creating an employee's Section 603 high earner status
 ## Example Usage
 
 ```typescript
-import { EmployeeSection603HighEarnerStatusCreateRequest } from "@gusto/embedded-api/models/components/employeesection603highearnerstatuscreaterequest.js";
+import { EmployeeSection603HighEarnerStatusCreateRequest } from "@gusto/embedded-api-v2025-06-15/models/components/employeesection603highearnerstatuscreaterequest.js";
 
 let value: EmployeeSection603HighEarnerStatusCreateRequest = {
   effectiveYear: 2026,

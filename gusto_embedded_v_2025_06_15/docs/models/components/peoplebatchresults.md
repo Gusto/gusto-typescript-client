@@ -5,7 +5,7 @@ A people batch with processing results.
 ## Example Usage
 
 ```typescript
-import { PeopleBatchResults } from "@gusto/embedded-api/models/components/peoplebatchresults.js";
+import { PeopleBatchResults } from "@gusto/embedded-api-v2025-06-15/models/components/peoplebatchresults.js";
 
 let value: PeopleBatchResults = {
   uuid: "2485be08-f6ed-4b95-82d1-2c98db92754c",

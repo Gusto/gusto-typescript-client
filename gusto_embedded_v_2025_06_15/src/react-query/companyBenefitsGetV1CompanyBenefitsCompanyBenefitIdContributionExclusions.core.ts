@@ -86,7 +86,7 @@ export function queryKeyCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContr
   parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v2025-06-15",
     "companyBenefits",
     "getV1CompanyBenefitsCompanyBenefitIdContributionExclusions",
     companyBenefitId,

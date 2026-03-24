@@ -153,7 +153,7 @@ export function invalidateWebhooksRequestVerificationToken(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "Webhooks",
       "requestVerificationToken",
       ...queryKeyBase,
@@ -167,6 +167,10 @@ export function invalidateAllWebhooksRequestVerificationToken(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Webhooks", "requestVerificationToken"],
+    queryKey: [
+      "@gusto/embedded-api-v2025-06-15",
+      "Webhooks",
+      "requestVerificationToken",
+    ],
   });
 }

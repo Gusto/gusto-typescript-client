@@ -5,7 +5,7 @@ The wage and reimbursement totals for all contractor payments within a given tim
 ## Example Usage
 
 ```typescript
-import { ContractorPaymentSummaryByDatesTotal } from "@gusto/embedded-api/models/components/contractorpaymentsummarybydates.js";
+import { ContractorPaymentSummaryByDatesTotal } from "@gusto/embedded-api-v2025-06-15/models/components/contractorpaymentsummarybydates.js";
 
 let value: ContractorPaymentSummaryByDatesTotal = {};
 ```

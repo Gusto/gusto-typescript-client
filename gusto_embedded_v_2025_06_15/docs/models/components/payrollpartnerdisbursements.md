@@ -5,7 +5,7 @@ Partner disbursements for a payroll
 ## Example Usage
 
 ```typescript
-import { PayrollPartnerDisbursements } from "@gusto/embedded-api/models/components/payrollpartnerdisbursements.js";
+import { PayrollPartnerDisbursements } from "@gusto/embedded-api-v2025-06-15/models/components/payrollpartnerdisbursements.js";
 
 let value: PayrollPartnerDisbursements = {};
 ```

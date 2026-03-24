@@ -19,7 +19,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody =
   {
     /**
-     * The user's email address on Gusto. You can retrieve the user's email via company's `/admins`, `/employees`, `/signatories`, and `/contractors` endpoints.
+     * The user's email address on Gusto. You can retrieve the user's email via company's `/admins`.
      */
     email: string;
   };
@@ -105,7 +105,7 @@ export const PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest
     PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest
   > = z.object({
     companyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
     requestBody: z.lazy(() =>
       PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody$outboundSchema
     ),

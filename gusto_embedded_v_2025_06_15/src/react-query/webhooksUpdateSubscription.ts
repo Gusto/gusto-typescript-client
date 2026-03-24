@@ -82,7 +82,7 @@ export function useWebhooksUpdateSubscriptionMutation(
 }
 
 export function mutationKeyWebhooksUpdateSubscription(): MutationKey {
-  return ["@gusto/embedded-api", "Webhooks", "updateSubscription"];
+  return ["@gusto/embedded-api-v2025-06-15", "Webhooks", "updateSubscription"];
 }
 
 export function buildWebhooksUpdateSubscriptionMutation(

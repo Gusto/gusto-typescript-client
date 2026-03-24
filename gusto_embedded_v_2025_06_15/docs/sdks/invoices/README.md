@@ -20,7 +20,7 @@ scope: `invoices:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-invoices-invoice-period" method="get" path="/v1/invoices/{invoice_period}" example="example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -42,8 +42,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { invoicesGet } from "@gusto/embedded-api/funcs/invoicesGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { invoicesGet } from "@gusto/embedded-api-v2025-06-15/funcs/invoicesGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -91,7 +91,7 @@ import {
   // mutations and other user actions.
   invalidateInvoicesGet,
   invalidateAllInvoicesGet,
-} from "@gusto/embedded-api/react-query/invoicesGet.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/invoicesGet.js";
 ```
 
 ### Parameters

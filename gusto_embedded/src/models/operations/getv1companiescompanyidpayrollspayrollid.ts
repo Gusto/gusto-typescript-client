@@ -21,7 +21,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
 export const GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion = {
-  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  TwoThousandAndTwentySixMinus02Minus01: "2026-02-01",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -94,7 +94,7 @@ export type GetV1CompaniesCompanyIdPayrollsPayrollIdRequest = {
 export type GetV1CompaniesCompanyIdPayrollsPayrollIdResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * successful with wait_for_reverse_wire credit blocker
+   * successful
    */
   payrollShow?: PayrollShow | undefined;
 };
@@ -139,7 +139,7 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdRequest$outboundSchema:
     payrollId: z.string(),
     xGustoAPIVersion:
       GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion$outboundSchema
-        .default("2025-06-15"),
+        .default("2026-02-01"),
     include: z.array(
       GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude$outboundSchema,
     ).optional(),

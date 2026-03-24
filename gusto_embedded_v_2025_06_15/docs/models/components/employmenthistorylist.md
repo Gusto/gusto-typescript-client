@@ -5,7 +5,7 @@ The representation of an employee's individual employements.
 ## Example Usage
 
 ```typescript
-import { EmploymentHistoryList } from "@gusto/embedded-api/models/components/employmenthistorylist.js";
+import { EmploymentHistoryList } from "@gusto/embedded-api-v2025-06-15/models/components/employmenthistorylist.js";
 
 let value: EmploymentHistoryList = {};
 ```

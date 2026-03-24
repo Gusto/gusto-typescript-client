@@ -20,7 +20,7 @@ scope: `reimbursements:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-recurring_reimbursements" method="get" path="/v1/employees/{employee_id}/recurring_reimbursements" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -42,8 +42,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { reimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements } from "@gusto/embedded-api/funcs/reimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { reimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements } from "@gusto/embedded-api-v2025-06-15/funcs/reimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -91,7 +91,7 @@ import {
   // mutations and other user actions.
   invalidateReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements,
   invalidateAllReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements,
-} from "@gusto/embedded-api/react-query/reimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/reimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements.js";
 ```
 
 ### Parameters
@@ -124,7 +124,7 @@ scope: `reimbursements:write`
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-recurring_reimbursements" method="post" path="/v1/employees/{employee_id}/recurring_reimbursements" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -150,8 +150,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { reimbursementsPostV1EmployeesEmployeeIdRecurringReimbursements } from "@gusto/embedded-api/funcs/reimbursementsPostV1EmployeesEmployeeIdRecurringReimbursements.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { reimbursementsPostV1EmployeesEmployeeIdRecurringReimbursements } from "@gusto/embedded-api-v2025-06-15/funcs/reimbursementsPostV1EmployeesEmployeeIdRecurringReimbursements.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -192,7 +192,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useReimbursementsPostV1EmployeesEmployeeIdRecurringReimbursementsMutation
-} from "@gusto/embedded-api/react-query/reimbursementsPostV1EmployeesEmployeeIdRecurringReimbursements.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/reimbursementsPostV1EmployeesEmployeeIdRecurringReimbursements.js";
 ```
 
 ### Parameters
@@ -225,7 +225,7 @@ scope: `reimbursements:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-recurring_reimbursements" method="get" path="/v1/recurring_reimbursements/{id}" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -247,8 +247,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { reimbursementsGetV1RecurringReimbursements } from "@gusto/embedded-api/funcs/reimbursementsGetV1RecurringReimbursements.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { reimbursementsGetV1RecurringReimbursements } from "@gusto/embedded-api-v2025-06-15/funcs/reimbursementsGetV1RecurringReimbursements.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -296,7 +296,7 @@ import {
   // mutations and other user actions.
   invalidateReimbursementsGetV1RecurringReimbursements,
   invalidateAllReimbursementsGetV1RecurringReimbursements,
-} from "@gusto/embedded-api/react-query/reimbursementsGetV1RecurringReimbursements.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/reimbursementsGetV1RecurringReimbursements.js";
 ```
 
 ### Parameters
@@ -329,7 +329,7 @@ scope: `reimbursements:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-recurring_reimbursements" method="put" path="/v1/recurring_reimbursements/{id}" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -354,8 +354,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { reimbursementsPutV1RecurringReimbursements } from "@gusto/embedded-api/funcs/reimbursementsPutV1RecurringReimbursements.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { reimbursementsPutV1RecurringReimbursements } from "@gusto/embedded-api-v2025-06-15/funcs/reimbursementsPutV1RecurringReimbursements.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -395,7 +395,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useReimbursementsPutV1RecurringReimbursementsMutation
-} from "@gusto/embedded-api/react-query/reimbursementsPutV1RecurringReimbursements.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/reimbursementsPutV1RecurringReimbursements.js";
 ```
 
 ### Parameters
@@ -428,7 +428,7 @@ scope: `reimbursements:write`
 
 <!-- UsageSnippet language="typescript" operationID="delete-v1-recurring_reimbursements" method="delete" path="/v1/recurring_reimbursements/{id}" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -450,8 +450,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { reimbursementsDeleteV1RecurringReimbursements } from "@gusto/embedded-api/funcs/reimbursementsDeleteV1RecurringReimbursements.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { reimbursementsDeleteV1RecurringReimbursements } from "@gusto/embedded-api-v2025-06-15/funcs/reimbursementsDeleteV1RecurringReimbursements.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -488,7 +488,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useReimbursementsDeleteV1RecurringReimbursementsMutation
-} from "@gusto/embedded-api/react-query/reimbursementsDeleteV1RecurringReimbursements.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/reimbursementsDeleteV1RecurringReimbursements.js";
 ```
 
 ### Parameters

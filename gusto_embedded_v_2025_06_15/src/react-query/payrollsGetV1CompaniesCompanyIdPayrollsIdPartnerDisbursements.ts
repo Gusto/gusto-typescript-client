@@ -157,7 +157,7 @@ export function invalidatePayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbur
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "Payrolls",
       "getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements",
       ...queryKeyBase,
@@ -172,7 +172,7 @@ export function invalidateAllPayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDis
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v2025-06-15",
       "Payrolls",
       "getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements",
     ],

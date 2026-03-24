@@ -5,7 +5,7 @@ Contractor payment group with submission and credit blockers, but without indivi
 ## Example Usage
 
 ```typescript
-import { ContractorPaymentGroupWithBlockers } from "@gusto/embedded-api/models/components/contractorpaymentgroupwithblockers.js";
+import { ContractorPaymentGroupWithBlockers } from "@gusto/embedded-api-v2025-06-15/models/components/contractorpaymentgroupwithblockers.js";
 
 let value: ContractorPaymentGroupWithBlockers = {};
 ```

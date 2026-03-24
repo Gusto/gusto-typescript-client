@@ -93,7 +93,7 @@ export function useFlowsCreateMutation(
 }
 
 export function mutationKeyFlowsCreate(): MutationKey {
-  return ["@gusto/embedded-api", "Flows", "create"];
+  return ["@gusto/embedded-api-v2025-06-15", "Flows", "create"];
 }
 
 export function buildFlowsCreateMutation(

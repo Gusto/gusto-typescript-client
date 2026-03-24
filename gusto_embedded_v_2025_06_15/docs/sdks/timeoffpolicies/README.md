@@ -33,7 +33,7 @@ scope: `payrolls:read`
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-payrolls-payroll_id-calculate_accruing_time_off_hours" method="post" path="/v1/payrolls/{payroll_id}/employees/{employee_id}/calculate_accruing_time_off_hours" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -57,8 +57,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { timeOffPoliciesCalculateAccruingTimeOffHours } from "@gusto/embedded-api/funcs/timeOffPoliciesCalculateAccruingTimeOffHours.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { timeOffPoliciesCalculateAccruingTimeOffHours } from "@gusto/embedded-api-v2025-06-15/funcs/timeOffPoliciesCalculateAccruingTimeOffHours.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -97,13 +97,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useTimeOffPoliciesCalculateAccruingTimeOffHoursMutation
-} from "@gusto/embedded-api/react-query/timeOffPoliciesCalculateAccruingTimeOffHours.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/timeOffPoliciesCalculateAccruingTimeOffHours.js";
 ```
 ### Example Usage: Example
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-payrolls-payroll_id-calculate_accruing_time_off_hours" method="post" path="/v1/payrolls/{payroll_id}/employees/{employee_id}/calculate_accruing_time_off_hours" example="Example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -133,8 +133,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { timeOffPoliciesCalculateAccruingTimeOffHours } from "@gusto/embedded-api/funcs/timeOffPoliciesCalculateAccruingTimeOffHours.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { timeOffPoliciesCalculateAccruingTimeOffHours } from "@gusto/embedded-api-v2025-06-15/funcs/timeOffPoliciesCalculateAccruingTimeOffHours.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -179,13 +179,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useTimeOffPoliciesCalculateAccruingTimeOffHoursMutation
-} from "@gusto/embedded-api/react-query/timeOffPoliciesCalculateAccruingTimeOffHours.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/timeOffPoliciesCalculateAccruingTimeOffHours.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-payrolls-payroll_id-calculate_accruing_time_off_hours" method="post" path="/v1/payrolls/{payroll_id}/employees/{employee_id}/calculate_accruing_time_off_hours" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -209,8 +209,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { timeOffPoliciesCalculateAccruingTimeOffHours } from "@gusto/embedded-api/funcs/timeOffPoliciesCalculateAccruingTimeOffHours.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { timeOffPoliciesCalculateAccruingTimeOffHours } from "@gusto/embedded-api-v2025-06-15/funcs/timeOffPoliciesCalculateAccruingTimeOffHours.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -249,13 +249,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useTimeOffPoliciesCalculateAccruingTimeOffHoursMutation
-} from "@gusto/embedded-api/react-query/timeOffPoliciesCalculateAccruingTimeOffHours.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/timeOffPoliciesCalculateAccruingTimeOffHours.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-payrolls-payroll_id-calculate_accruing_time_off_hours" method="post" path="/v1/payrolls/{payroll_id}/employees/{employee_id}/calculate_accruing_time_off_hours" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -279,8 +279,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { timeOffPoliciesCalculateAccruingTimeOffHours } from "@gusto/embedded-api/funcs/timeOffPoliciesCalculateAccruingTimeOffHours.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { timeOffPoliciesCalculateAccruingTimeOffHours } from "@gusto/embedded-api-v2025-06-15/funcs/timeOffPoliciesCalculateAccruingTimeOffHours.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -319,7 +319,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useTimeOffPoliciesCalculateAccruingTimeOffHoursMutation
-} from "@gusto/embedded-api/react-query/timeOffPoliciesCalculateAccruingTimeOffHours.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/timeOffPoliciesCalculateAccruingTimeOffHours.js";
 ```
 
 ### Parameters
@@ -353,7 +353,7 @@ scope: `time_off_policies:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-time_off_policies-time_off_policy_uuid" method="get" path="/v1/time_off_policies/{time_off_policy_uuid}" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -375,8 +375,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { timeOffPoliciesGet } from "@gusto/embedded-api/funcs/timeOffPoliciesGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { timeOffPoliciesGet } from "@gusto/embedded-api-v2025-06-15/funcs/timeOffPoliciesGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -424,7 +424,7 @@ import {
   // mutations and other user actions.
   invalidateTimeOffPoliciesGet,
   invalidateAllTimeOffPoliciesGet,
-} from "@gusto/embedded-api/react-query/timeOffPoliciesGet.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/timeOffPoliciesGet.js";
 ```
 
 ### Parameters
@@ -457,7 +457,7 @@ scope: `time_off_policies:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -483,8 +483,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { timeOffPoliciesUpdate } from "@gusto/embedded-api/funcs/timeOffPoliciesUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { timeOffPoliciesUpdate } from "@gusto/embedded-api-v2025-06-15/funcs/timeOffPoliciesUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -525,7 +525,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useTimeOffPoliciesUpdateMutation
-} from "@gusto/embedded-api/react-query/timeOffPoliciesUpdate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/timeOffPoliciesUpdate.js";
 ```
 
 ### Parameters
@@ -559,7 +559,7 @@ scope: `time_off_policies:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_uuid-time_off_policies" method="get" path="/v1/companies/{company_uuid}/time_off_policies" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -581,8 +581,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { timeOffPoliciesGetAll } from "@gusto/embedded-api/funcs/timeOffPoliciesGetAll.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { timeOffPoliciesGetAll } from "@gusto/embedded-api-v2025-06-15/funcs/timeOffPoliciesGetAll.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -630,7 +630,7 @@ import {
   // mutations and other user actions.
   invalidateTimeOffPoliciesGetAll,
   invalidateAllTimeOffPoliciesGetAll,
-} from "@gusto/embedded-api/react-query/timeOffPoliciesGetAll.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/timeOffPoliciesGetAll.js";
 ```
 
 ### Parameters
@@ -663,7 +663,7 @@ scope: `time_off_policies:write`
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_uuid-time_off_policies" method="post" path="/v1/companies/{company_uuid}/time_off_policies" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -690,8 +690,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { timeOffPoliciesCreate } from "@gusto/embedded-api/funcs/timeOffPoliciesCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { timeOffPoliciesCreate } from "@gusto/embedded-api-v2025-06-15/funcs/timeOffPoliciesCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -733,7 +733,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useTimeOffPoliciesCreateMutation
-} from "@gusto/embedded-api/react-query/timeOffPoliciesCreate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/timeOffPoliciesCreate.js";
 ```
 
 ### Parameters
@@ -767,7 +767,7 @@ scope: `time_off_policies:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-add_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/add_employees" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -792,8 +792,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { timeOffPoliciesAddEmployees } from "@gusto/embedded-api/funcs/timeOffPoliciesAddEmployees.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { timeOffPoliciesAddEmployees } from "@gusto/embedded-api-v2025-06-15/funcs/timeOffPoliciesAddEmployees.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -833,7 +833,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useTimeOffPoliciesAddEmployeesMutation
-} from "@gusto/embedded-api/react-query/timeOffPoliciesAddEmployees.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/timeOffPoliciesAddEmployees.js";
 ```
 
 ### Parameters
@@ -867,7 +867,7 @@ scope: `time_off_policies:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-remove_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/remove_employees" example="Basic" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -892,8 +892,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { timeOffPoliciesRemoveEmployees } from "@gusto/embedded-api/funcs/timeOffPoliciesRemoveEmployees.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { timeOffPoliciesRemoveEmployees } from "@gusto/embedded-api-v2025-06-15/funcs/timeOffPoliciesRemoveEmployees.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -937,13 +937,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useTimeOffPoliciesRemoveEmployeesMutation
-} from "@gusto/embedded-api/react-query/timeOffPoliciesRemoveEmployees.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/timeOffPoliciesRemoveEmployees.js";
 ```
 ### Example Usage: Nested
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-remove_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/remove_employees" example="Nested" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -972,8 +972,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { timeOffPoliciesRemoveEmployees } from "@gusto/embedded-api/funcs/timeOffPoliciesRemoveEmployees.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { timeOffPoliciesRemoveEmployees } from "@gusto/embedded-api-v2025-06-15/funcs/timeOffPoliciesRemoveEmployees.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1017,13 +1017,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useTimeOffPoliciesRemoveEmployeesMutation
-} from "@gusto/embedded-api/react-query/timeOffPoliciesRemoveEmployees.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/timeOffPoliciesRemoveEmployees.js";
 ```
 ### Example Usage: Resource
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-remove_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/remove_employees" example="Resource" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1048,8 +1048,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { timeOffPoliciesRemoveEmployees } from "@gusto/embedded-api/funcs/timeOffPoliciesRemoveEmployees.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { timeOffPoliciesRemoveEmployees } from "@gusto/embedded-api-v2025-06-15/funcs/timeOffPoliciesRemoveEmployees.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1093,13 +1093,13 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useTimeOffPoliciesRemoveEmployeesMutation
-} from "@gusto/embedded-api/react-query/timeOffPoliciesRemoveEmployees.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/timeOffPoliciesRemoveEmployees.js";
 ```
 ### Example Usage: example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-remove_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/remove_employees" example="example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1124,8 +1124,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { timeOffPoliciesRemoveEmployees } from "@gusto/embedded-api/funcs/timeOffPoliciesRemoveEmployees.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { timeOffPoliciesRemoveEmployees } from "@gusto/embedded-api-v2025-06-15/funcs/timeOffPoliciesRemoveEmployees.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1169,7 +1169,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useTimeOffPoliciesRemoveEmployeesMutation
-} from "@gusto/embedded-api/react-query/timeOffPoliciesRemoveEmployees.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/timeOffPoliciesRemoveEmployees.js";
 ```
 
 ### Parameters
@@ -1203,7 +1203,7 @@ scope: `time_off_policies:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-balance" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/balance" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1228,8 +1228,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { timeOffPoliciesUpdateBalance } from "@gusto/embedded-api/funcs/timeOffPoliciesUpdateBalance.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { timeOffPoliciesUpdateBalance } from "@gusto/embedded-api-v2025-06-15/funcs/timeOffPoliciesUpdateBalance.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1269,7 +1269,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useTimeOffPoliciesUpdateBalanceMutation
-} from "@gusto/embedded-api/react-query/timeOffPoliciesUpdateBalance.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/timeOffPoliciesUpdateBalance.js";
 ```
 
 ### Parameters
@@ -1303,7 +1303,7 @@ scope: `time_off_policies:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-deactivate" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/deactivate" example="example" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1325,8 +1325,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { timeOffPoliciesDeactivate } from "@gusto/embedded-api/funcs/timeOffPoliciesDeactivate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { timeOffPoliciesDeactivate } from "@gusto/embedded-api-v2025-06-15/funcs/timeOffPoliciesDeactivate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1363,7 +1363,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useTimeOffPoliciesDeactivateMutation
-} from "@gusto/embedded-api/react-query/timeOffPoliciesDeactivate.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/timeOffPoliciesDeactivate.js";
 ```
 
 ### Parameters

@@ -27,7 +27,7 @@ scope: `salary_estimates:write`
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-salary_estimates" method="post" path="/v1/employees/{employee_id}/salary_estimates" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -54,8 +54,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { salaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimates } from "@gusto/embedded-api/funcs/salaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimates.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { salaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimates } from "@gusto/embedded-api-v2025-06-15/funcs/salaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimates.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -97,7 +97,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useSalaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimatesMutation
-} from "@gusto/embedded-api/react-query/salaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimates.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/salaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimates.js";
 ```
 
 ### Parameters
@@ -131,7 +131,7 @@ scope: `salary_estimates:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-salary_estimates-id" method="get" path="/v1/salary_estimates/{uuid}" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -153,8 +153,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { salaryEstimatesGetV1SalaryEstimatesId } from "@gusto/embedded-api/funcs/salaryEstimatesGetV1SalaryEstimatesId.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { salaryEstimatesGetV1SalaryEstimatesId } from "@gusto/embedded-api-v2025-06-15/funcs/salaryEstimatesGetV1SalaryEstimatesId.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -202,7 +202,7 @@ import {
   // mutations and other user actions.
   invalidateSalaryEstimatesGetV1SalaryEstimatesId,
   invalidateAllSalaryEstimatesGetV1SalaryEstimatesId,
-} from "@gusto/embedded-api/react-query/salaryEstimatesGetV1SalaryEstimatesId.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/salaryEstimatesGetV1SalaryEstimatesId.js";
 ```
 
 ### Parameters
@@ -237,7 +237,7 @@ scope: `salary_estimates:write`
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-salary_estimates-id" method="put" path="/v1/salary_estimates/{uuid}" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -271,8 +271,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { salaryEstimatesPutV1SalaryEstimatesId } from "@gusto/embedded-api/funcs/salaryEstimatesPutV1SalaryEstimatesId.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { salaryEstimatesPutV1SalaryEstimatesId } from "@gusto/embedded-api-v2025-06-15/funcs/salaryEstimatesPutV1SalaryEstimatesId.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -321,7 +321,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useSalaryEstimatesPutV1SalaryEstimatesIdMutation
-} from "@gusto/embedded-api/react-query/salaryEstimatesPutV1SalaryEstimatesId.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/salaryEstimatesPutV1SalaryEstimatesId.js";
 ```
 
 ### Parameters
@@ -357,7 +357,7 @@ scope: `salary_estimates:write`
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-salary_estimates-uuid-accept" method="post" path="/v1/salary_estimates/{uuid}/accept" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -382,8 +382,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { salaryEstimatesPostV1SalaryEstimatesUuidAccept } from "@gusto/embedded-api/funcs/salaryEstimatesPostV1SalaryEstimatesUuidAccept.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { salaryEstimatesPostV1SalaryEstimatesUuidAccept } from "@gusto/embedded-api-v2025-06-15/funcs/salaryEstimatesPostV1SalaryEstimatesUuidAccept.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -423,7 +423,7 @@ associated utilities.
 import {
   // Mutation hook for triggering the API call.
   useSalaryEstimatesPostV1SalaryEstimatesUuidAcceptMutation
-} from "@gusto/embedded-api/react-query/salaryEstimatesPostV1SalaryEstimatesUuidAccept.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/salaryEstimatesPostV1SalaryEstimatesUuidAccept.js";
 ```
 
 ### Parameters
@@ -463,7 +463,7 @@ scope: `salary_estimates:read`
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-salary_estimates-occupations" method="get" path="/v1/salary_estimates/occupations" -->
 ```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
+import { GustoEmbedded } from "@gusto/embedded-api-v2025-06-15";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -485,8 +485,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { salaryEstimatesGetV1SalaryEstimatesOccupations } from "@gusto/embedded-api/funcs/salaryEstimatesGetV1SalaryEstimatesOccupations.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v2025-06-15/core.js";
+import { salaryEstimatesGetV1SalaryEstimatesOccupations } from "@gusto/embedded-api-v2025-06-15/funcs/salaryEstimatesGetV1SalaryEstimatesOccupations.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -534,7 +534,7 @@ import {
   // mutations and other user actions.
   invalidateSalaryEstimatesGetV1SalaryEstimatesOccupations,
   invalidateAllSalaryEstimatesGetV1SalaryEstimatesOccupations,
-} from "@gusto/embedded-api/react-query/salaryEstimatesGetV1SalaryEstimatesOccupations.js";
+} from "@gusto/embedded-api-v2025-06-15/react-query/salaryEstimatesGetV1SalaryEstimatesOccupations.js";
 ```
 
 ### Parameters

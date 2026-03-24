@@ -78,7 +78,7 @@ export function useEmployeePaymentMethodUpdateMutation(
 }
 
 export function mutationKeyEmployeePaymentMethodUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "employeePaymentMethod", "update"];
+  return ["@gusto/embedded-api-v2025-06-15", "employeePaymentMethod", "update"];
 }
 
 export function buildEmployeePaymentMethodUpdateMutation(

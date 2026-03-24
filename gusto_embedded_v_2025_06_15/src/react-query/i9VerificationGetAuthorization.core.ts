@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { i9VerificationGetAuthorization } from "../funcs/i9VerificationGetAuthorization.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1EmployeesEmployeeIdI9AuthorizationHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdI9AuthorizationRequest,
   GetV1EmployeesEmployeeIdI9AuthorizationResponse,
 } from "../models/operations/getv1employeesemployeeidi9authorization.js";
@@ -74,10 +74,14 @@ export function buildI9VerificationGetAuthorizationQuery(
 
 export function queryKeyI9VerificationGetAuthorization(
   employeeId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1EmployeesEmployeeIdI9AuthorizationHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v2025-06-15",
     "i9Verification",
     "getAuthorization",
     employeeId,

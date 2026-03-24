@@ -76,7 +76,11 @@ export function useEmployeeEmploymentsDeleteTerminationMutation(
 }
 
 export function mutationKeyEmployeeEmploymentsDeleteTermination(): MutationKey {
-  return ["@gusto/embedded-api", "employeeEmployments", "deleteTermination"];
+  return [
+    "@gusto/embedded-api-v2025-06-15",
+    "employeeEmployments",
+    "deleteTermination",
+  ];
 }
 
 export function buildEmployeeEmploymentsDeleteTerminationMutation(

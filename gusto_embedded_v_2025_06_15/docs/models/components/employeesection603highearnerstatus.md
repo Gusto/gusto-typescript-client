@@ -5,7 +5,7 @@ The representation of an employee's Section 603 high earner status for a specifi
 ## Example Usage
 
 ```typescript
-import { EmployeeSection603HighEarnerStatus } from "@gusto/embedded-api/models/components/employeesection603highearnerstatus.js";
+import { EmployeeSection603HighEarnerStatus } from "@gusto/embedded-api-v2025-06-15/models/components/employeesection603highearnerstatus.js";
 
 let value: EmployeeSection603HighEarnerStatus = {
   id: "<id>",

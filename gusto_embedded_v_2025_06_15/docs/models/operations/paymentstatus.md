@@ -5,7 +5,7 @@ Status of the payment disbursement
 ## Example Usage
 
 ```typescript
-import { PaymentStatus } from "@gusto/embedded-api/models/operations/patchv1contractorpaymentgroupsidpartnerdisbursements.js";
+import { PaymentStatus } from "@gusto/embedded-api-v2025-06-15/models/operations/patchv1contractorpaymentgroupsidpartnerdisbursements.js";
 
 let value: PaymentStatus = "Not partner managed";
 ```

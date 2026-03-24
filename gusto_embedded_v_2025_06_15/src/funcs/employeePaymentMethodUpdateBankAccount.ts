@@ -110,7 +110,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/employees/{employee_id}/bank_accounts/{bank_account_uuid}",
   )(pathParams);

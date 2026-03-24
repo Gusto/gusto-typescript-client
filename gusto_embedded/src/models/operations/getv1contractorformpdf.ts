@@ -55,7 +55,7 @@ export const GetV1ContractorFormPdfRequest$outboundSchema: z.ZodType<
 > = z.object({
   contractorUuid: z.string(),
   formId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2026-02-01"),
 }).transform((v) => {
   return remap$(v, {
     contractorUuid: "contractor_uuid",

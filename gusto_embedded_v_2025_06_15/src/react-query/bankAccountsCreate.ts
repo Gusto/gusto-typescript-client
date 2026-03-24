@@ -87,7 +87,7 @@ export function useBankAccountsCreateMutation(
 }
 
 export function mutationKeyBankAccountsCreate(): MutationKey {
-  return ["@gusto/embedded-api", "bankAccounts", "create"];
+  return ["@gusto/embedded-api-v2025-06-15", "bankAccounts", "create"];
 }
 
 export function buildBankAccountsCreateMutation(

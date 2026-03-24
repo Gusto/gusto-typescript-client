@@ -1,6 +1,6 @@
-# @gusto/embedded-api Examples
+# @gusto/embedded-api-v2025-06-15 Examples
 
-This directory contains example scripts demonstrating how to use the @gusto/embedded-api SDK.
+This directory contains example scripts demonstrating how to use the @gusto/embedded-api-v2025-06-15 SDK.
 
 ## Prerequisites
 

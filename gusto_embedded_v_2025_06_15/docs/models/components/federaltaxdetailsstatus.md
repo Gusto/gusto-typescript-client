@@ -8,7 +8,7 @@ The status of EIN verification:
 ## Example Usage
 
 ```typescript
-import { FederalTaxDetailsStatus } from "@gusto/embedded-api/models/components/federaltaxdetails.js";
+import { FederalTaxDetailsStatus } from "@gusto/embedded-api-v2025-06-15/models/components/federaltaxdetails.js";
 
 let value: FederalTaxDetailsStatus = "pending";
 ```
