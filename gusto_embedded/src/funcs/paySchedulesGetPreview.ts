@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -37,7 +41,11 @@ import { Result } from "../types/fp.js";
  * Preview pay schedule dates
  *
  * @remarks
- * Provides a preview of a pay schedule with the specified parameters for the next 18 months.
+ * Returns a preview of pay period dates and holidays for the given parameters (e.g. frequency, anchor pay date) for the next 18 months. Use this before creating or updating a pay schedule to show expected check dates and payroll deadlines.
+ *
+ * ### Related guides
+ * - [Create a pay schedule](doc:create-a-pay-schedule)
+ * - [Manage Pay Schedules via API](doc:manage-pay-schedules-api)
  *
  * scope: `pay_schedules:write`
  */
@@ -48,6 +56,7 @@ export function paySchedulesGetPreview(
 ): APIPromise<
   Result<
     GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -74,6 +83,7 @@ async function $do(
   [
     Result<
       GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -107,7 +117,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/pay_schedules/preview")(
     pathParams,
   );
@@ -117,6 +126,7 @@ async function $do(
     "anchor_pay_date": payload.anchor_pay_date,
     "day_1": payload.day_1,
     "day_2": payload.day_2,
+    "end_date": payload.end_date,
     "frequency": payload.frequency,
   });
 
@@ -168,7 +178,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["422", "4XX", "5XX"],
+    errorCodes: ["404", "422", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -183,6 +193,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -196,8 +207,9 @@ async function $do(
     M.json(
       200,
       GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$inboundSchema,
-      { key: "object" },
+      { key: "Pay-Schedule-Preview" },
     ),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

@@ -763,103 +763,127 @@ paths:
       x-speakeasy-name-override: create
   "/v1/companies/{company_id}/federal_tax_details":
     get:
-      x-gusto-integration-type:
-        - embedded
-      summary: Get Federal Tax Details
-      responses:
-        '200':
-          "$ref": "#/components/responses/Federal-Tax-Details-Object"
-        '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
-      operationId: get-v1-companies-company_id-federal_tax_details
+      summary: Get a company's federal tax details
+      security:
+        - CompanyAccessAuth: []
       description: |-
-        Fetches attributes relevant for a company's federal taxes.
+        Retrieves a company's federal tax details including EIN verification status, tax payer type, filing form, and other federal tax configuration.
 
         scope: `company_federal_taxes:read`
+      x-gusto-integration-type:
+        - embedded
+      x-gusto-rswag: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Federal-Tax-Details"
+        '404':
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+      operationId: get-v1-companies-company_id-federal_tax_details
       parameters:
-        - "$ref": "#/components/parameters/company_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: company_id
+          in: path
+          description: The UUID of the company
+          example: 7b1d0df1-6403-4a06-8768-c1dd7d24d27a
+          required: true
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       tags:
         - Federal Tax Details
       x-speakeasy-group: federalTaxDetails
       x-speakeasy-name-override: get
     put:
+      summary: Update a company's federal tax details
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Updates a company's federal tax details including EIN, legal name, tax payer type, filing form, and S-Corp
+        taxation status. This information is required to onboard a company for use with Gusto Embedded Payroll.
+
+        ### Prerequisites
+        Before calling this endpoint, retrieve the current federal tax details and `version` via [GET /v1/companies/{company_id}/federal_tax_details](ref:get-v1-companies-company_id-federal_tax_details)
+
+        ### Webhooks
+        - `company.updated`: Fires when federal tax details for a company are successfully updated
+
+        **Setup:** [POST /v1/webhook_subscriptions](ref:post-v1-webhook-subscription) with `subscription_types`: `["Company"]`
+
+        scope: `company_federal_taxes:write`
       x-gusto-integration-type:
         - embedded
-      summary: Update Federal Tax Details
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Federal-Tax-Details-Object"
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Federal-Tax-Details"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
       operationId: put-v1-companies-company_id-federal_tax_details
       parameters:
-        - "$ref": "#/components/parameters/company_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: company_id
+          in: path
+          description: The UUID of the company
+          example: 7b1d0df1-6403-4a06-8768-c1dd7d24d27a
+          required: true
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                legal_name:
-                  type: string
-                  description: The legal name of the company
-                ein:
-                  type: string
-                  description: The EIN of of the company
-                tax_payer_type:
-                  type: string
-                  description: What type of tax entity the company is
-                  enum:
-                    - C-Corporation
-                    - S-Corporation
-                    - Sole proprietor
-                    - LLC
-                    - LLP
-                    - Limited partnership
-                    - Co-ownership
-                    - Association
-                    - Trusteeship
-                    - General partnership
-                    - Joint venture
-                    - Non-Profit
-                filing_form:
-                  type: string
-                  description: |-
-                    The form used by the company for federal tax filing. One of:
-                    - 941 (Quarterly federal tax return)
-                    - 944 (Annual federal tax return)
-                  enum:
-                    - '941'
-                    - '944'
-                taxable_as_scorp:
-                  type: boolean
-                  description: Whether this company should be taxed as an S-Corporation
-                version:
-                  type: string
-                  description: The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
-              required:
-                - version
-            examples:
-              Example:
-                value:
-                  version: 6cb95e00540706ca48d4577b3c839fbe
-                  tax_payer_type: LLP
-                  taxable_as_scorp: false
-                  filing_form: '944'
-                  has_ein: true
-                  ein_verified: false
-                  legal_name: Acme Corp.
-        description: 'Attributes related to federal tax details that can be updated via this endpoint include:'
-      description: |-
-        Updates attributes relevant for a company's federal taxes.
-        This information is required is to onboard a company for use with Gusto Embedded Payroll.
-
-        scope: `company_federal_taxes:write`
+              "$ref": "#/components/schemas/Federal-Tax-Details-Update"
       tags:
         - Federal Tax Details
       x-speakeasy-group: federalTaxDetails
@@ -2579,34 +2603,69 @@ paths:
       x-speakeasy-name-override: update
   "/v1/companies/{company_id}/pay_schedules":
     post:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        If a company does not have any pay schedules, this endpoint creates a single pay schedule and assigns it to all employees (common during company onboarding).
+
+        If a company already has an active pay schedule and wants multiple pay schedules, this endpoint creates a pay schedule that is not assigned to any employee.
+
+        Be sure to [check state laws](https://www.dol.gov/agencies/whd/state/payday) to know what schedule is right for your customers. If an onboarded company misses their first pay date, the pay schedule may be automatically adjusted.
+
+        ### Webhooks
+        - `pay_schedule.created`: Fires when a pay schedule is successfully created.
+
+        ### Related guides
+        - [Create a pay schedule](doc:create-a-pay-schedule)
+        - [Pay Schedules](doc:pay-schedule-info)
+        - [Manage Pay Schedules via API](doc:manage-pay-schedules-api)
+
+        scope: `pay_schedules:write`
       x-gusto-integration-type:
         - embedded
       summary: Create a new pay schedule
+      x-gusto-rswag: true
       responses:
         '201':
-          "$ref": "#/components/responses/Pay-Schedule-Create-Update-Object"
+          description: Created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Pay-Schedule"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: post-v1-companies-company_id-pay_schedules
-      description: |-
-        If a company does not have any pay schedules, this endpoint will create a single pay schedule and assign it to all employees. This is a common use case during company onboarding.
-
-        If a company has an existing active pay schedule and want to support multiple pay schedules, this endpoint will create a pay schedule that is not assigned to any employee.
-
-        Be sure to **[check state laws](https://www.dol.gov/agencies/whd/state/payday)** to know what schedule is right for your customers.
-
-        scope: `pay_schedules:write`
-
-        > ℹ️ Pay Schedules may be automatically adjusted
-        >
-        > If an onboarded company misses their first pay date, Gusto will automatically adjust the pay schedule to the next available pay date.
-        >
-        > See [Create a pay schedule](/embedded-payroll/docs/create-a-pay-schedule) for more information.
       parameters:
-        - "$ref": "#/components/parameters/company_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_id
+          in: path
+          description: The UUID of the company
+          required: true
+          schema:
+            type: string
       tags:
         - Pay Schedules
       requestBody:
@@ -2614,89 +2673,104 @@ paths:
         content:
           application/json:
             schema:
-              description: ''
-              type: object
-              properties:
-                frequency:
-                  type: string
-                  description: The frequency that employees on this pay schedule are paid with Gusto.
-                  enum:
-                    - Every week
-                    - Every other week
-                    - Twice per month
-                    - Monthly
-                anchor_pay_date:
-                  type: string
-                  description: The first date that employees on this pay schedule are paid with Gusto.
-                  example: '2020-05-15'
-                anchor_end_of_pay_period:
-                  type: string
-                  description: The last date of the first pay period. This can be the same date as the anchor pay date.
-                  example: '2020-05-08'
-                day_1:
-                  type:
-                    - integer
-                    - 'null'
-                  description: An integer between 1 and 31 indicating the first day of the month that employees are paid. This field is only relevant for pay schedules with the “Twice per month” and “Monthly” frequencies. It will be null for pay schedules with other frequencies.
-                day_2:
-                  description: An integer between 1 and 31 indicating the second day of the month that employees are paid. This field is the second pay date for pay schedules with the "Twice per month" frequency. For semi-monthly pay schedules, set this field to 31. For months shorter than 31 days, we will set the second pay date to the last day of the month. It will be null for pay schedules with other frequencies.
-                  type:
-                    - integer
-                    - 'null'
-                custom_name:
-                  type: string
-                  description: A custom pay schedule name, defaults to the pay frequency description.
-              required:
-                - frequency
-                - anchor_pay_date
-                - anchor_end_of_pay_period
-            examples:
-              Example:
-                value:
-                  frequency: Twice per month
-                  anchor_pay_date: '2021-10-15'
-                  anchor_end_of_pay_period: '2021-10-15'
-                  day_1: 15
-                  day_2: 31
-                  custom_name: demo pay schedule
-                  auto_pilot: false
-                  version: 68934a3e9455fa72420237eb05902327
+              "$ref": "#/components/schemas/Pay-Schedule-Create-Request"
       x-speakeasy-group: paySchedules
       x-speakeasy-name-override: create
     get:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Returns all pay schedules for a company. The pay schedule object captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+
+        scope: `pay_schedules:read`
       x-gusto-integration-type:
         - embedded
         - app-integrations
       summary: Get the pay schedules for a company
       parameters:
-        - "$ref": "#/components/parameters/company_id"
-        - "$ref": "#/components/parameters/pageParam"
-        - "$ref": "#/components/parameters/perParam"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_id
+          in: path
+          description: The UUID of the company
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          description: The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+          schema:
+            type: integer
+        - name: per
+          in: query
+          required: false
+          description: Number of objects per page. For majority of endpoints will default to 25
+          schema:
+            type: integer
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Pay-Schedule-List"
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Pay-Schedule"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
-      operationId: get-v1-companies-company_id-pay_schedules
-      description: |-
-        The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+          description: |
+            Not Found
 
-        scope: `pay_schedules:read`
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+      operationId: get-v1-companies-company_id-pay_schedules
       tags:
         - Pay Schedules
       x-speakeasy-group: paySchedules
       x-speakeasy-name-override: getAll
   "/v1/companies/{company_id}/pay_schedules/preview":
     get:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Returns a preview of pay period dates and holidays for the given parameters (e.g. frequency, anchor pay date) for the next 18 months. Use this before creating or updating a pay schedule to show expected check dates and payroll deadlines.
+
+        ### Related guides
+        - [Create a pay schedule](doc:create-a-pay-schedule)
+        - [Manage Pay Schedules via API](doc:manage-pay-schedules-api)
+
+        scope: `pay_schedules:write`
       x-gusto-integration-type:
         - embedded
       summary: Preview pay schedule dates
       parameters:
-        - "$ref": "#/components/parameters/company_id"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_id
+          in: path
+          description: The UUID of the company
+          required: true
+          schema:
+            type: string
         - name: frequency
           in: query
-          description: The frequency that employees on this pay schedule are paid with Gusto.
+          description: The frequency that employees on this pay schedule are paid.
           schema:
             type: string
             enum:
@@ -2707,182 +2781,214 @@ paths:
           required: true
         - name: anchor_pay_date
           in: query
-          description: The first date that employees on this pay schedule are paid with Gusto.
+          description: The first date that employees on this pay schedule are paid.
           schema:
+            format: date
             type: string
-            example: '2020-05-15'
           required: true
         - name: anchor_end_of_pay_period
           in: query
           description: The last date of the first pay period. This can be the same date as the anchor pay date.
           schema:
             type: string
-            example: '2020-05-08'
+            format: date
           required: true
         - name: day_1
           in: query
-          description: An integer between 1 and 31 indicating the first day of the month that employees are paid. This field is only relevant for pay schedules with the “Twice per month” and “Monthly” frequencies. It will be null for pay schedules with other frequencies.
+          description: |-
+            First pay day of the month (1-31).
+            - **Twice per month, Monthly:** required.
+            - **Every week, Every other week:** omit or null.
           schema:
             type: integer
           required: false
         - name: day_2
           in: query
-          description: An integer between 1 and 31 indicating the second day of the month that employees are paid. This field is the second pay date for pay schedules with the "Twice per month" frequency. For semi-monthly pay schedules, set this field to 31. For months shorter than 31 days, we will set the second pay date to the last day of the month. It will be null for pay schedules with other frequencies.
+          description: |-
+            Second pay day of the month (1-31); only for **Twice per month**.
+            - Use 31 for last day of month (shorter months use the actual last day).
+            - **Other frequencies:** omit or null.
           schema:
             type: integer
           required: false
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: end_date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+          description: End date for the preview range. If given, this date must be in the future. When unspecified, defaults to 18 months from today.
+      x-gusto-rswag: true
       responses:
         '200':
-          description: OK
+          description: Successful
           content:
             application/json:
               schema:
-                description: Pay schedule preview
-                type: object
-                properties:
-                  pay_periods:
-                    type: array
-                    description: A list of pay periods for the previewed pay schedule
-                    items:
-                      type: object
-                      properties:
-                        check_date:
-                          type: string
-                          description: The payment date, "Check date", for the pay period
-                        run_payroll_by:
-                          type: string
-                          description: The deadline to run payroll for direct deposit on the check date
-                        start_date:
-                          type: string
-                          description: The first day of the pay period
-                        end_date:
-                          type: string
-                          description: The last day of the pay period.
-                  holidays:
-                    type: array
-                    description: A list of dates for bank closures
-                    items:
-                      type: string
-        '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
-      operationId: get-v1-companies-company_id-pay_schedules-preview
-      description: |-
-        Provides a preview of a pay schedule with the specified parameters for the next 18 months.
+                "$ref": "#/components/schemas/Pay-Schedule-Preview"
+        '404':
+          description: |
+            Not Found
 
-        scope: `pay_schedules:write`
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+        '422':
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
+      operationId: get-v1-companies-company_id-pay_schedules-preview
       tags:
         - Pay Schedules
       x-speakeasy-group: paySchedules
       x-speakeasy-name-override: getPreview
   "/v1/companies/{company_id}/pay_schedules/{pay_schedule_id}":
     get:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Returns a single pay schedule by UUID. The pay schedule object captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+
+        scope: `pay_schedules:read`
       x-gusto-integration-type:
         - embedded
         - app-integrations
       summary: Get a pay schedule
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Pay-Schedule-Object"
+          description: Successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Pay-Schedule"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
-      operationId: get-v1-companies-company_id-pay_schedules-pay_schedule_id
-      description: |-
-        The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+          description: |
+            Not Found
 
-        scope: `pay_schedules:read`
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+      operationId: get-v1-companies-company_id-pay_schedules-pay_schedule_id
       parameters:
-        - "$ref": "#/components/parameters/company_id"
-        - "$ref": "#/components/parameters/pay_schedule_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_id
+          in: path
+          description: The UUID of the company
+          required: true
+          schema:
+            type: string
+        - name: pay_schedule_id
+          in: path
+          description: The UUID of the pay schedule
+          required: true
+          schema:
+            type: string
       tags:
         - Pay Schedules
       x-speakeasy-name-override: get
       x-speakeasy-group: paySchedules
     put:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Updates a pay schedule. The `version` parameter from the GET response is required for [optimistic concurrency](doc:api-fundamentals); a mismatch returns 409 Conflict.
+
+        ### Effect on payrolls
+        Updating a pay schedule will delete any unprocessed regular payrolls whose pay period end date is today or in the future. Already-processed payrolls are not affected.
+
+        ### Pay schedules may be automatically adjusted
+        If an onboarded company misses their first pay date, the pay schedule may be automatically adjusted.
+
+        ### Webhooks
+        - `pay_schedule.updated`: Fires when a pay schedule is successfully updated.
+
+        ### Related guides
+        - [Create a pay schedule](doc:create-a-pay-schedule)
+        - [Manage Pay Schedules via API](doc:manage-pay-schedules-api)
+
+        scope: `pay_schedules:write`
       x-gusto-integration-type:
         - embedded
       summary: Update a pay schedule
       tags:
         - Pay Schedules
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Pay-Schedule-Create-Update-Object"
+          description: Successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Pay-Schedule"
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: put-v1-companies-company_id-pay_schedules-pay_schedule_id
-      description: |-
-        Updates a pay schedule.
-
-        scope: `pay_schedules:write`
-
-        > ℹ️ Pay Schedules may be automatically adjusted
-        >
-        > If an onboarded company misses their first pay date, Gusto will automatically adjust the pay schedule to the next available pay date.
-        >
-        > See [Create a pay schedule](/embedded-payroll/docs/create-a-pay-schedule) for more information.
       parameters:
-        - "$ref": "#/components/parameters/company_id"
-        - "$ref": "#/components/parameters/pay_schedule_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_id
+          in: path
+          description: The UUID of the company
+          required: true
+          schema:
+            type: string
+        - name: pay_schedule_id
+          in: path
+          description: The UUID of the pay schedule
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              description: ''
-              type: object
-              properties:
-                version:
-                  type: string
-                  description: The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
-                frequency:
-                  type: string
-                  description: The frequency that employees on this pay schedule are paid with Gusto.
-                  enum:
-                    - Every week
-                    - Every other week
-                    - Twice per month
-                    - Monthly
-                anchor_pay_date:
-                  type: string
-                  description: The first date that employees on this pay schedule are paid with Gusto.
-                  example: '2020-05-15'
-                anchor_end_of_pay_period:
-                  type: string
-                  description: The last date of the first pay period. This can be the same date as the anchor pay date.
-                  example: '2020-05-08'
-                day_1:
-                  type:
-                    - integer
-                    - 'null'
-                  description: An integer between 1 and 31 indicating the first day of the month that employees are paid. This field is only relevant for pay schedules with the “Twice per month” and “Monthly” frequencies. It will be null for pay schedules with other frequencies.
-                day_2:
-                  description: An integer between 1 and 31 indicating the second day of the month that employees are paid. This field is the second pay date for pay schedules with the "Twice per month" frequency. For semi-monthly pay schedules, set this field to 31. For months shorter than 31 days, we will set the second pay date to the last day of the month. It will be null for pay schedules with other frequencies.
-                  type:
-                    - integer
-                    - 'null'
-                custom_name:
-                  type: string
-                  description: A custom pay schedule name.
-                auto_pilot:
-                  type: boolean
-                  description: With Autopilot® enabled, payroll will run automatically one day before your payroll deadlines.
-              required:
-                - version
-            examples:
-              Example:
-                value:
-                  frequency: Twice per month
-                  anchor_pay_date: '2021-10-15'
-                  anchor_end_of_pay_period: '2021-10-15'
-                  day_1: 15
-                  day_2: 31
-                  custom_name: demo pay schedule
-                  version: 68934a3e9455fa72420237eb05902327
-                  auto_pilot: true
+              "$ref": "#/components/schemas/Pay-Schedule-Update-Request"
       x-speakeasy-group: paySchedules
       x-speakeasy-name-override: update
   "/v1/companies/{company_id}/pay_periods":
@@ -5710,94 +5816,137 @@ paths:
       x-speakeasy-name-override: update
   "/v1/employees/{employee_id}/jobs":
     post:
+      operationId: post-v1-employees-employee_id-jobs
+      security:
+        - CompanyAccessAuth: []
       x-gusto-integration-type:
         - embedded
-        - app-integrations
       summary: Create a job
+      x-gusto-rswag: true
       responses:
         '201':
-          "$ref": "#/components/responses/Job-Object"
+          description: created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Job"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
-      operationId: post-v1-jobs-job_id
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       description: |-
         Create a job.
 
         scope: `jobs:write`
       parameters:
-        - "$ref": "#/components/parameters/employee_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: employee_id
+          in: path
+          description: The UUID of the employee
+          required: true
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              description: ''
-              type: object
-              properties:
-                title:
-                  type: string
-                  description: The job title
-                hire_date:
-                  type: string
-                  description: The date when the employee was hired or rehired for the job.
-                two_percent_shareholder:
-                  type: boolean
-                  description: Whether the employee owns at least 2% of the company.
-                state_wc_covered:
-                  type:
-                    - boolean
-                    - 'null'
-                  description: Whether this job is eligible for workers' compensation coverage in the state of Washington (WA).
-                state_wc_class_code:
-                  type:
-                    - string
-                    - 'null'
-                  description: The risk class code for workers' compensation in Washington state. Please visit [Washington state's Risk Class page](https://www.lni.wa.gov/insurance/rates-risk-classes/risk-classes-for-workers-compensation/risk-class-lookup#/) to learn more.
-              required:
-                - title
-                - hire_date
-            examples:
-              Example:
-                value:
-                  title: Regional Manager
-                  hire_date: '2020-12-21'
-        description: Create a job.
+              "$ref": "#/components/schemas/Jobs-Create-Request-Body"
       tags:
         - Jobs and Compensations
       x-speakeasy-group: jobsAndCompensations
       x-speakeasy-name-override: createJob
     get:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Get all of the jobs that an employee holds.
+        Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
+
+        Compensation data in the response requires the `compensations:read` scope.
+
+        scope: `jobs:read`
       x-gusto-integration-type:
         - embedded
-        - app-integrations
       summary: Get jobs for an employee
       parameters:
-        - "$ref": "#/components/parameters/employee_id"
-        - "$ref": "#/components/parameters/pageParam"
-        - "$ref": "#/components/parameters/perParam"
+        - name: employee_id
+          in: path
+          description: The UUID of the employee
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          description: The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+          schema:
+            type: integer
+        - name: per
+          in: query
+          required: false
+          description: Number of objects per page. For majority of endpoints will default to 25
+          schema:
+            type: integer
         - in: query
           name: include
+          required: false
           schema:
             type: string
             enum:
               - all_compensations
-          description: |-
+          description: |
             Available options:
             - all_compensations: Include all effective dated compensations for each job instead of only the current compensation
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Job-List"
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Job"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
-      operationId: get-v1-employees-employee_id-jobs
-      description: |-
-        Get all of the jobs that an employee holds.
+          description: |
+            Not Found
 
-        scope: `jobs:read`
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+      operationId: get-v1-employees-employee_id-jobs
       tags:
         - Jobs and Compensations
       x-speakeasy-name-override: getJobs
@@ -5827,121 +5976,178 @@ paths:
       x-speakeasy-name-override: getTimeOffActivities
   "/v1/jobs/{job_id}":
     get:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Get a job.
+
+        Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
+
+        Compensation data in the response requires the `compensations:read` scope.
+
+        scope: `jobs:read`
       x-gusto-integration-type:
         - embedded
-        - app-integrations
       summary: Get a job
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Job-Object"
+          description: Successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Job"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: get-v1-jobs-job_id
       parameters:
-        - "$ref": "#/components/parameters/job_id"
+        - name: job_id
+          in: path
+          description: The UUID of the job
+          required: true
+          schema:
+            type: string
         - in: query
           name: include
+          required: false
           schema:
             type: string
             enum:
               - all_compensations
-          description: |-
+          description: |
             Available options:
-            - all_compensations: Include all effective dated compensations for the job instead of only the current compensation
-        - "$ref": "#/components/parameters/VersionHeader"
-      description: |-
-        Get a job.
-
-        scope: `jobs:read`
+            - all_compensations: Include all effective dated compensations for each job instead of only the current compensation
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       tags:
         - Jobs and Compensations
       x-speakeasy-group: jobsAndCompensations
       x-speakeasy-name-override: getJob
     put:
+      security:
+        - CompanyAccessAuth: []
       x-gusto-integration-type:
         - embedded
-        - app-integrations
       summary: Update a job
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Job-Object"
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Job"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: put-v1-jobs-job_id
       description: |-
         Update a job.
 
         scope: `jobs:write`
       parameters:
-        - "$ref": "#/components/parameters/job_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: job_id
+          in: path
+          description: The UUID of the job
+          required: true
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              description: ''
-              type: object
-              properties:
-                version:
-                  type: string
-                  description: The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
-                title:
-                  type: string
-                  description: The job title
-                hire_date:
-                  type: string
-                  description: The date when the employee was hired or rehired for the job.
-                two_percent_shareholder:
-                  type: boolean
-                  description: Whether the employee owns at least 2% of the company.
-                state_wc_covered:
-                  type:
-                    - boolean
-                    - 'null'
-                  description: Whether this job is eligible for workers' compensation coverage in the state of Washington (WA).
-                state_wc_class_code:
-                  type:
-                    - string
-                    - 'null'
-                  description: The risk class code for workers' compensation in Washington state. Please visit [Washington state's Risk Class page](https://www.lni.wa.gov/insurance/rates-risk-classes/risk-classes-for-workers-compensation/risk-class-lookup#/) to learn more.
-              required:
-                - version
-            examples:
-              Example:
-                value:
-                  version: gr78930htutrz444kuytr3s5hgxykuveb523fwl8sir
-                  title: Regional Manager
-                  hire_date: '2020-12-21'
-        description: Update a job.
+              "$ref": "#/components/schemas/Jobs-Update-Request-Body"
       tags:
         - Jobs and Compensations
       x-speakeasy-name-override: update
       x-speakeasy-group: jobsAndCompensations
     delete:
+      security:
+        - CompanyAccessAuth: []
       x-gusto-integration-type:
         - embedded
-        - app-integrations
       summary: Delete an individual job
       tags:
         - Jobs and Compensations
+      x-gusto-rswag: true
       responses:
         '204':
-          description: No Content
+          description: successful
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
       operationId: delete-v1-jobs-job_id
       description: |-
         Deletes a specific job that an employee holds.
 
         scope: `jobs:write`
       parameters:
-        - "$ref": "#/components/parameters/job_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: job_id
+          in: path
+          description: The UUID of the job
+          required: true
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-speakeasy-group: jobsAndCompensations
       x-speakeasy-name-override: delete
   "/v1/jobs/{job_id}/compensations":
@@ -11610,49 +11816,66 @@ paths:
       x-speakeasy-name-override: getChildSupportData
   "/v1/employees/{employee_id}/i9_authorization":
     get:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        An employee's I-9 authorization stores information about an employee's authorization status and I-9 signatures, information required to fill out the Form I-9 for employment eligibility verification.
+
+        **NOTE:** The `form_uuid` in responses from this endpoint can be used to retrieve the PDF version of the I-9. See the "get employee form PDF" request for more details.
+
+        ### Related guides
+        - [I-9 employment verification](doc:i-9-employment-verification)
+
+        scope: `i9_authorizations:read`
       x-gusto-integration-type:
         - embedded
       summary: Get an employee's I-9 authorization
       tags:
         - I-9 Verification
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/I9-Authorization-Object"
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/I9-Authorization"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: get-v1-employees-employee_id-i9_authorization
-      description: |-
-        An employee's I-9 authorization stores information about an employee's authorization status and I-9 signatures, information required to filled out the Form I-9 for employment eligibility verification.
-
-        **NOTE:** The `form_uuid` in responses from this endpoint can be used to retrieve the PDF version of the I-9. See the "get employee form PDF" request for more details.
-
-        scope: `i9_authorizations:read`
       parameters:
-        - "$ref": "#/components/parameters/employee_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: employee_id
+          in: path
+          description: The UUID of the employee
+          required: true
+          schema:
+            type: string
       x-speakeasy-group: i9Verification
       x-speakeasy-name-override: getAuthorization
     put:
-      x-gusto-integration-type:
-        - embedded
-      summary: Create or update an employee's I-9 authorization
-      tags:
-        - I-9 Verification
-      responses:
-        '200':
-          "$ref": "#/components/responses/I9-Authorization-Object"
-        '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
-        '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
-      operationId: put-v1-employees-employee_id-i9_authorization
-      description: |
+      security:
+        - CompanyAccessAuth: []
+      description: |-
         An employee's I-9 authorization stores information about an employee's authorization status, as well as signatures and other information required to complete the Form I-9 for employment eligibility verification.
 
         If the version is supplied and the employee I-9 authorization exists, this endpoint acts as an update. Otherwise, it will create an employee I-9 authorization.
 
         Validations on this endpoint are conditional:
-
           * `document_type` may be required, depending on `authorization_status`.
           * Valid formats for `document_number` vary, depending on `document_type`.
           * `country` is only allowed with `document_type: 'foreign_passport'`.
@@ -11666,266 +11889,370 @@ paths:
 
         Detailed instructions for completing Form I-9 can be found at https://www.uscis.gov/sites/default/files/document/forms/i-9instr.pdf
 
+        ### Related guides
+        - [I-9 employment verification](doc:i-9-employment-verification)
+
         scope: `i9_authorizations:write`
+      x-gusto-integration-type:
+        - embedded
+      summary: Create or update an employee's I-9 authorization
+      tags:
+        - I-9 Verification
+      x-gusto-rswag: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/I9-Authorization"
+        '422':
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
+        '404':
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+      operationId: put-v1-employees-employee_id-i9_authorization
       parameters:
-        - "$ref": "#/components/parameters/employee_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: employee_id
+          in: path
+          description: The UUID of the employee
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                authorization_status:
-                  type: string
-                  description: |
-                    The employee's authorization status
-
-                      * `citizen`: A citizen is someone who was born in the United States or is a naturalized citizen living in the United States.
-                      * `noncitizen`: A noncitizen national is someone born in American Samoa, certain former citizens of the former Trust Territory of the Pacific Islands, and certain children of noncitizen nationals born abroad.
-                      * `permanent_resident`: A lawful permanent resident is someone who is not a US citizen and who resides under legally recognized and lawfully recorded permanent residence as an immigrant.
-                      * `alien`: Also referred to as a "noncitizen authorized to work". This includes anyone who is authorized to work in the United States but is not a US citizen, US national or lawful permanent resident.
-                  enum:
-                    - citizen
-                    - noncitizen
-                    - permanent_resident
-                    - alien
-                document_type:
-                  type: string
-                  description: |
-                    The type of document an employee holds, based on their authorization status.
-
-                      * This is unused for authorization status `citizen` or `noncitizen`.
-                      * If the authorization status is `permanent_resident`, this must be `uscis_alien_registration_number`.
-                      * If the authorization status is `alien`, this is required and may be any of the valid values.
-                  enum:
-                    - uscis_alien_registration_number
-                    - form_i94
-                    - foreign_passport
-                document_number:
-                  type: string
-                  description: |
-                    The document number. Formatting depends on the employee's document type.
-
-                      * For `document_type:'uscis_alien_registration_number'`, this must be a USCIS Number/A-Number, which is 7 to 9 digits.
-                      * For `document_type:'form_i94'`, this must be a Form I-94 Admission Number, which is 11 digits.
-                      * For `document_type:'foreign_passport'`, this must be the passport number.
-
-                    This is required when the document type is present.
-                country:
-                  type: string
-                  description: |
-                    The document's country of issuance.
-
-                    This is required when the document type is `foreign_passport`.
-                expiration_date:
-                  type: string
-                  description: |
-                    The document's expiration date.
-
-                    This may only be used when the authorization status is `alien`.
-                version:
-                  type: string
-                  description: The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field. If supplied, this endpoint will update the existing I-9 authorization if it exists.
-              required:
-                - authorization_status
-            examples:
-              Example:
-                value:
-                  version: 52b7c567242cb7452e89ba2bc02cb476
-                  authorization_status: citizen
+              "$ref": "#/components/schemas/I9-Authorization-Request-Body"
       x-speakeasy-name-override: update
       x-speakeasy-group: i9Verification
   "/v1/employees/{employee_id}/i9_authorization/document_options":
     get:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States. This endpoint returns the possible document options based on the employee's authorization status. These options can then be used to create the I-9 verification documents.
+
+        ### Related guides
+        - [I-9 employment verification](doc:i-9-employment-verification)
+
+        scope: `i9_authorizations:read`
       x-gusto-integration-type:
         - embedded
       summary: Get an employee's I-9 verification document options
       tags:
         - I-9 Verification
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/I9-Authorization-Document-Options-Object"
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/I9-Authorization-Document-Option"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
-      operationId: get-v1-employees-employee_id-i9_authorization-document_options
-      description: |-
-        An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States. This endpoint returns the possible document options based on the employee's authorization status. These options can then be used to create the I-9 verification documents.
+          description: |
+            Not Found
 
-        scope: `i9_authorizations:read`
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+      operationId: get-v1-employees-employee_id-i9_authorization-document_options
       parameters:
-        - "$ref": "#/components/parameters/employee_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: employee_id
+          in: path
+          description: The UUID of the employee
+          required: true
+          schema:
+            type: string
       x-speakeasy-group: i9Verification
       x-speakeasy-name-override: getDocumentOptions
   "/v1/employees/{employee_id}/i9_authorization/documents":
     get:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States.
+
+        ### Related guides
+        - [I-9 employment verification](doc:i-9-employment-verification)
+
+        scope: `i9_authorizations:read`
       x-gusto-integration-type:
         - embedded
       summary: Get an employee's I-9 verification documents
       tags:
         - I-9 Verification
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/I9-Authorization-Documents-Object"
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/I9-Authorization-Document"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
-      operationId: get-v1-employees-employee_id-i9_authorization-documents
-      description: |-
-        An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States.
+          description: |
+            Not Found
 
-        scope: `i9_authorizations:read`
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+      operationId: get-v1-employees-employee_id-i9_authorization-documents
       parameters:
-        - "$ref": "#/components/parameters/employee_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: employee_id
+          in: path
+          description: The UUID of the employee
+          required: true
+          schema:
+            type: string
       x-speakeasy-group: i9Verification
       x-speakeasy-name-override: getDocuments
     put:
+      security:
+        - CompanyAccessAuth: []
+      description: "An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States.\n\nUse the [document options endpoint](ref:get-v1-employees-employee_id-i9_authorization-document_options) to get the possible document types and titles, which can vary depending on the employee's authorization status.\n\n> \U0001F6A7 Every request must contain the complete list of documents for the Employee.\n>\n> Every request to this endpoint removes any previous verification document records for the employee.\n\n### Related guides\n- [I-9 employment verification](doc:i-9-employment-verification)\n\nscope: `i9_authorizations:manage`"
       x-gusto-integration-type:
         - embedded
       summary: Create an employee's I-9 authorization verification documents
       tags:
         - I-9 Verification
+      x-gusto-rswag: true
       responses:
-        '200':
-          "$ref": "#/components/responses/I9-Authorization-Documents-Object"
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/I9-Authorization-Document"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: put-v1-employees-employee_id-i9_authorization-documents
-      description: "An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States.\n\nUse the document options endpoint to get the possible document types and titles, which can vary depending on the employee's authorization status.\n\n> \U0001F6A7 Every request must contain the complete list of documents for the Employee.\n>\n> Every request to this endpoint removes any previous verification document records for the employee.\n\nscope: `i9_authorizations:manage`\n"
       parameters:
-        - "$ref": "#/components/parameters/employee_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: employee_id
+          in: path
+          description: The UUID of the employee
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                documents:
-                  type: array
-                  description: An array of I-9 verification documents
-                  items:
-                    type: object
-                    properties:
-                      document_type:
-                        type: string
-                        description: The document type
-                      document_title:
-                        type: string
-                        description: The document title associated with the document type
-                      document_number:
-                        type: string
-                        description: The document's document number
-                      expiration_date:
-                        type: string
-                        description: The document's expiration date
-                      issuing_authority:
-                        type: string
-                        description: The document's issuing authority
-                    required:
-                      - document_type
-                      - document_title
-                      - issuing_authority
-              required:
-                - documents
-            examples:
-              Example:
-                value:
-                  documents:
-                    - document_type: us_passport
-                      document_title: US Passport
-                      document_number: F12345678
-                      expiration_date: '2026-01-01'
-                      issuing_authority: USA
+              "$ref": "#/components/schemas/I9-Authorization-Documents-Request-Body"
       x-speakeasy-group: i9Verification
       x-speakeasy-name-override: createDocuments
   "/v1/employees/{employee_id}/i9_authorization/documents/{document_id}":
     delete:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States. This endpoint deletes a specific verification document.
+
+        ### Related guides
+        - [I-9 employment verification](doc:i-9-employment-verification)
+
+        scope: `i9_authorizations:manage`
       x-gusto-integration-type:
         - embedded
       summary: Delete an employee's I-9 verification document
       tags:
         - I-9 Verification
+      x-gusto-rswag: true
       responses:
         '204':
           description: No Content
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
-      operationId: delete-v1-employees-employee_id-i9_authorization-documents-document_id
-      description: |-
-        An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States. This endpoint deletes a specific verification document.
+          description: |
+            Not Found
 
-        scope: `i9_authorizations:manage`
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+        '422':
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
+      operationId: delete-v1-employees-employee_id-i9_authorization-documents-document_id
       parameters:
-        - "$ref": "#/components/parameters/employee_id"
-        - "$ref": "#/components/parameters/document_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: employee_id
+          in: path
+          description: The UUID of the employee
+          required: true
+          schema:
+            type: string
+        - name: document_id
+          in: path
+          description: The UUID of the document
+          required: true
+          schema:
+            type: string
       x-speakeasy-group: i9Verification
       x-speakeasy-name-override: deleteDocument
   "/v1/employees/{employee_id}/i9_authorization/employer_sign":
     put:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Sign an employee's Form I-9 as an employer. Once the form is signed, the employee's I-9 authorization is considered complete and cannot be modified.
+
+        ### Prerequisites
+        Before calling this endpoint:
+        1. The employee must have a completed [I-9 authorization](ref:put-v1-employees-employee_id-i9_authorization)
+        2. The employee must have signed the Form I-9
+        3. [I-9 verification documents](ref:put-v1-employees-employee_id-i9_authorization-documents) must be submitted
+
+        ### Related guides
+        - [I-9 employment verification](doc:i-9-employment-verification)
+
+        scope: `i9_authorizations:manage`
       x-gusto-integration-type:
         - embedded
       summary: Employer sign an employee's Form I-9
       tags:
         - I-9 Verification
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/I9-Authorization-Object"
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/I9-Authorization"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
-        '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
-      operationId: put-v1-employees-employee_id-i9_authorization-employer_sign
-      description: |-
-        Sign an employee's Form I-9 as an employer. Once the form is signed, the employee's I-9 authorization is considered complete and cannot be modified.
+          description: |
+            Unprocessable Entity
 
-        scope: `i9_authorizations:manage`
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
+        '404':
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+      operationId: put-v1-employees-employee_id-i9_authorization-employer_sign
       parameters:
-        - "$ref": "#/components/parameters/employee_id"
-        - "$ref": "#/components/parameters/IpAddressHeader"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: employee_id
+          in: path
+          description: The UUID of the employee
+          required: true
+          schema:
+            type: string
+        - name: x-gusto-client-ip
+          in: header
+          required: false
+          schema:
+            type: string
+          description: Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                signature_text:
-                  type: string
-                  description: The signature
-                signer_title:
-                  type: string
-                  description: The signer's job title
-                signed_by_ip_address:
-                  type: string
-                  description: The IP address of the signatory who signed the form. Both IPv4 AND IPv6 are supported. You must provide the IP address with either this parameter OR you can leave out this parameter and set the IP address in the request header using the `x-gusto-client-ip` header instead.
-                agree:
-                  type: boolean
-                  description: Whether you agree to sign electronically
-                additional_info:
-                  type: string
-                  description: Any additional notes
-                alt_procedure:
-                  type: boolean
-                  description: Whether an alternative procedure authorized by DHS to examine documents was used
-              required:
-                - signature_text
-                - signer_title
-                - agree
-            examples:
-              Example:
-                value:
-                  - signature_text: Jane Doe
-                    signer_title: Admin
-                    signed_by_ip_address: 192.168.0.1
-                    agree: true
+              "$ref": "#/components/schemas/I9-Authorization-Employer-Sign-Request-Body"
       x-speakeasy-group: i9Verification
       x-speakeasy-name-override: employerSign
   "/v1/plaid/processor_token":
@@ -11983,228 +12310,189 @@ paths:
       x-speakeasy-name-override: createFromPlaidToken
   "/v1/companies/{company_uuid}/tax_requirements/{state}":
     get:
-      x-gusto-integration-type:
-        - embedded
-      summary: Get State Tax Requirements
-      description: |
-        Get all tax requirements for a given state.
+      summary: Get tax requirements for a state
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Retrieves the detailed tax requirements for a specific state. The response includes requirement sets grouped by
+        category (e.g., registrations, tax rates, deposit schedules), each containing individual requirements with their
+        current values, labels, and metadata describing the expected input format.
 
-        ### Metadata Examples
-
-        ```json select
-        {
-          "type": "select",
-          "options": [
-            { "label": "Semiweekly",  value: "Semi-weekly" },
-            { "label": "Monthly",  value: "Monthly" },
-            { "label": "Quarterly",  value: "Quarterly" },
-          ]
-        }
-        ```
-        ```json radio
-        {
-          "type": "radio",
-          "options": [
-            { "label": "No, we cannot reimburse",  value: false, short_label: "Not Reimbursable" },
-            { "label": "Yes, we can reimburse",  value: true, short_label: "Reimbursable" },
-          ]
-        }
-        ```
-        ```json account_number
-        {
-          "type": "account_number",
-          "mask": "######-##',
-          "prefix": null
-        }
-        ```
-        ```json tax_rate
-        {
-          "type": "tax_rate",
-          "validation": {
-            "type": "min_max",
-            "min": "0.0004",
-            "max": "0.081"
-          }
-        }
-        ```
+        Use this to build dynamic UIs for tax setup or to read the current tax configuration for a state.
 
         scope: `company_tax_requirements:read`
+      x-gusto-integration-type:
+        - embedded
       parameters:
-        - "$ref": "#/components/parameters/company_uuid"
-        - schema:
+        - name: company_uuid
+          description: The UUID of the company
+          schema:
             type: string
-          name: state
           in: path
           required: true
-          description: 2-letter US state abbreviation
-        - schema:
+        - name: state
+          in: path
+          required: true
+          description: The two-letter state abbreviation
+          example: CA
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - required: false
+          schema:
             type: boolean
           in: query
           name: scheduling
-          description: When true, return "new" requirement sets with valid `effective_from` dates that are available to save new effective dated values.
-        - "$ref": "#/components/parameters/VersionHeader"
+          description: When true, return "new" requirement sets with valid `effective_from` dates that are available to save new effective-dated values.
       tags:
         - Tax Requirements
+      x-gusto-rswag: true
       responses:
         '200':
-          description: OK
+          description: Success
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Tax-Requirements-State"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: get-v1-companies-company_uuid-tax_requirements-state
       x-speakeasy-group: taxRequirements
       x-speakeasy-name-override: get
     put:
-      x-gusto-integration-type:
-        - embedded
-      summary: Update State Tax Requirements
+      summary: Update tax requirements for a state
+      security:
+        - CompanyAccessAuth: []
       description: |-
-        Update State Tax Requirements
+        Updates the tax requirement answers for a specific state. Submit answers to the requirement questions returned
+        by [GET /v1/companies/{company_uuid}/tax_requirements/{state}](ref:get-v1-companies-company_uuid-tax_requirements-state).
+
+        ### Prerequisites
+
+        1. Retrieve current requirements via [GET /v1/companies/{company_uuid}/tax_requirements/{state}](ref:get-v1-companies-company_uuid-tax_requirements-state)
+        2. Ensure that each requirement set that you're updating includes the correct `key`, `state`, and `effective_from` values from the GET response
 
         scope: `company_tax_requirements:write`
+      x-gusto-integration-type:
+        - embedded
       parameters:
-        - "$ref": "#/components/parameters/company_uuid"
-        - schema:
+        - name: company_uuid
+          description: The UUID of the company
+          schema:
             type: string
-          name: state
           in: path
           required: true
-          description: 2-letter US state abbreviation
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: state
+          in: path
+          required: true
+          description: The two-letter state abbreviation
+          example: CA
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       tags:
         - Tax Requirements
       operationId: put-v1-companies-company_uuid-tax_requirements-state
+      x-gusto-rswag: true
       responses:
         '200':
-          description: OK
+          description: Success
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
-              x-examples:
-                example-1:
-                  requirement_sets:
-                    - key: registrations
-                      effective_from:
-                      state: GA
-                      requirements:
-                        - key: 71653ec0-00b5-4c66-a58b-22ecf21704c5
-                          value: 1233214-AB
-                        - key: 6c0911ab-5860-412e-bdef-6437cd881df5
-                          value: 474747-22
-                    - key: taxrates
-                      effective_from: '2022-01-01'
-                      state: GA
-                      requirements:
-                        - key: e0ac2284-8d30-4100-ae23-f85f9574868b
-                          value: '0.05'
-                    - key: depositschedules
-                      effective_from: '2022-01-01'
-                      state: GA
-                      requirements:
-                        - key: 6ddfcbeb-94d3-4003-bfc2-8c6e1ca9f70c
-                          value: Semi-weekly
               properties:
                 requirement_sets:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      key:
-                        "$ref": "#/components/schemas/Tax-Requirement-Set-Key"
-                      effective_from:
-                        "$ref": "#/components/schemas/Tax-Requirement-Effective-From"
-                      state:
-                        "$ref": "#/components/schemas/State"
-                      requirements:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            key:
-                              "$ref": "#/components/schemas/Tax-Requirement-Key"
-                            value:
-                              type:
-                                - string
-                                - 'null'
-            examples:
-              Example:
-                value:
-                  requirement_sets:
-                    - key: registrations
-                      effective_from:
-                      state: GA
-                      requirements:
-                        - key: 71653ec0-00b5-4c66-a58b-22ecf21704c5
-                          value: 1233214-AB
-                        - key: 6c0911ab-5860-412e-bdef-6437cd881df5
-                          value: 474747-22
-                    - key: taxrates
-                      effective_from: '2022-01-01'
-                      state: GA
-                      requirements:
-                        - key: e0ac2284-8d30-4100-ae23-f85f9574868b
-                          value: '0.05'
-                    - key: depositschedules
-                      effective_from: '2022-01-01'
-                      state: GA
-                      requirements:
-                        - key: 6ddfcbeb-94d3-4003-bfc2-8c6e1ca9f70c
-                          value: Semi-weekly
+                  "$ref": "#/components/schemas/Tax-Requirement-Set-Update"
       x-speakeasy-group: taxRequirements
       x-speakeasy-name-override: updateState
   "/v1/companies/{company_uuid}/tax_requirements":
     get:
-      x-gusto-integration-type:
-        - embedded
-      summary: Get All Tax Requirement States
+      summary: Get all tax requirements for a company
+      security:
+        - CompanyAccessAuth: []
       description: |-
-        Returns objects describing the states that have tax requirements for the company
+        Retrieves all states for which a company has tax requirements, along with a boolean indicating whether tax setup
+        is complete for each state. Use this to determine which states still need tax setup during company onboarding.
 
         scope: `company_tax_requirements:read`
+      x-gusto-integration-type:
+        - embedded
       parameters:
-        - "$ref": "#/components/parameters/company_uuid"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: company_uuid
+          in: path
+          required: true
+          description: The UUID of the company
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       tags:
         - Tax Requirements
+      x-gusto-rswag: true
       responses:
         '200':
-          description: OK
+          description: Success
           content:
             application/json:
               schema:
-                type: array
-                x-examples:
-                  example-1:
-                    - state: CA
-                      setup_complete: true
-                    - state: GA
-                      setup_complete: false
-                items:
-                  type: object
-                  properties:
-                    state:
-                      "$ref": "#/components/schemas/State"
-                    setup_complete:
-                      type: boolean
-                      description: |-
-                        If all requirements for the state have been satisfied such that the company can complete
-                        onboarding, the company is `setup_complete` in the state. A company must be `setup_complete` in
-                        all relevant states to complete the `state_setup` company onboarding step.
-                  required:
-                    - state
-                    - setup_complete
+                "$ref": "#/components/schemas/Tax-Requirement-States-List"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: get-v1-companies-company_uuid-tax_requirements
       x-speakeasy-group: taxRequirements
       x-speakeasy-name-override: getAll
@@ -17158,14 +17446,14 @@ components:
             - permanent_resident
             - alien
         document_type:
-          type:
-            - string
-            - 'null'
+          oneOf:
+            - type: string
+              enum:
+                - uscis_alien_registration_number
+                - form_i94
+                - foreign_passport
+            - type: 'null'
           description: The document's document type
-          enum:
-            - uscis_alien_registration_number
-            - form_i94
-            - foreign_passport
         has_document_number:
           type:
             - boolean
@@ -17207,6 +17495,46 @@ components:
         - employee_signed
       x-tags:
         - I-9 Verification
+      x-examples:
+        alien_with_foreign_passport:
+          uuid: 7f2337f9-9b78-44b9-aeed-be4777b833a8
+          version: 6ae7ff720107b356bf13b1606f60b24f
+          form_uuid: c54046f7-1be4-4c54-8194-f4842c30c86d
+          authorization_status: alien
+          document_type: foreign_passport
+          has_document_number: true
+          expiration_date: '2028-01-01'
+          country: Canada
+          employer_signed: false
+          employee_signed: false
+          additional_info:
+          alt_procedure:
+        citizen_authorization:
+          uuid: a12bc345-6789-4def-abcd-ef0123456789
+          version: 52b7c567242cb7393b2a206ed6a86afcb
+          form_uuid:
+          authorization_status: citizen
+          document_type:
+          has_document_number: false
+          expiration_date:
+          country:
+          employer_signed: false
+          employee_signed: false
+          additional_info:
+          alt_procedure:
+        employer_signed_authorization:
+          uuid: 7f2337f9-9b78-44b9-aeed-be4777b833a8
+          version: 8bc7393b2a206ed6a86afcb4d00c1785
+          form_uuid: c54046f7-1be4-4c54-8194-f4842c30c86d
+          authorization_status: citizen
+          document_type:
+          has_document_number: false
+          expiration_date:
+          country:
+          employer_signed: true
+          employee_signed: true
+          additional_info: Additional info
+          alt_procedure: false
     I9-Authorization-Document:
       type: object
       description: An employee's I-9 verification document
@@ -17222,7 +17550,9 @@ components:
           type: string
           description: The document's document title
         expiration_date:
-          type: string
+          type:
+            - string
+            - 'null'
           description: The document's expiration date
         issuing_authority:
           type: string
@@ -17234,6 +17564,18 @@ components:
         - issuing_authority
       x-tags:
         - I-9 Verification
+      x-examples:
+        driver_license:
+          uuid: 7f2337f9-9b78-44b9-aeed-be4777b833a8
+          document_type: driver_license
+          issuing_authority: USA
+          expiration_date: '2027-01-01'
+          document_title: Driver's license
+        ssn_card:
+          uuid: 9p2337f9-9b78-44b9-aeed-be4777b833a8
+          document_type: ssn_card
+          issuing_authority: USA
+          document_title: Social Security card
     I9-Authorization-Document-Option:
       type: object
       description: An employee's I-9 verification document option based on the authorization status
@@ -17275,6 +17617,29 @@ components:
         - common_choice
       x-tags:
         - I-9 Verification
+      x-examples:
+        example_a:
+          section: A
+          description: Foreign passport
+          document_type: foreign_passport_w_i94
+          document_title:
+            - Foreign passport
+          common_choice: true
+        example_b:
+          section: B
+          description: Driver's license or state-issued ID card
+          document_type: driver_license
+          document_title:
+            - Driver's license
+            - State ID card
+          common_choice: true
+        example_c:
+          section: C
+          description: Social Security card
+          document_type: ssn_card
+          document_title:
+            - Social Security card
+          common_choice: true
     Termination:
       type: object
       description: The representation of a termination in Gusto.
@@ -18092,6 +18457,55 @@ components:
       description: The representation of a job in Gusto.
       required:
         - uuid
+      x-examples:
+        example:
+          uuid: d6d1035e-8a21-4e1d-89d5-fa894f9aff97
+          version: gr78930htutrz444kuytr3s5hgxykuveb523fwl8sir
+          employee_uuid: 948daac8-4355-4ece-9e2a-229898accb22
+          hire_date: '2020-01-20'
+          title: Account Director
+          primary: true
+          rate: '78000.00'
+          payment_unit: Year
+          current_compensation_uuid: ea8b0b90-1112-4f9d-bb93-bf029bc8537a
+          two_percent_shareholder: false
+          state_wc_covered:
+          state_wc_class_code:
+          compensations:
+            - uuid: ea8b0b90-1112-4f9d-bb93-bf029bc8537a
+              version: 98jr3289h3298hr9329gf9egskt3tjaj
+              job_uuid: d6d1035e-8a21-4e1d-89d5-fa894f9aff97
+              employee_uuid: 948daac8-4355-4ece-9e2a-229898accb22
+              rate: '78000.00'
+              payment_unit: Year
+              flsa_status: Exempt
+              effective_date: '2020-01-20'
+              adjust_for_minimum_wage: false
+              minimum_wages: []
+        secondary_job:
+          uuid: a1b2c3d4-5678-9012-abcd-ef1234567890
+          version: hj29fh3298hf9832hf98h32f89h32f89h32f9832
+          employee_uuid: 948daac8-4355-4ece-9e2a-229898accb22
+          hire_date: '2020-01-20'
+          title: Senior Consultant
+          primary: false
+          rate: '25.00'
+          payment_unit: Hour
+          current_compensation_uuid: b2c3d4e5-6789-0123-bcde-f12345678901
+          two_percent_shareholder: false
+          state_wc_covered:
+          state_wc_class_code:
+          compensations:
+            - uuid: b2c3d4e5-6789-0123-bcde-f12345678901
+              version: 93jr2398h23r9832rg9832rg98ewrg98e
+              job_uuid: a1b2c3d4-5678-9012-abcd-ef1234567890
+              employee_uuid: 948daac8-4355-4ece-9e2a-229898accb22
+              rate: '25.00'
+              payment_unit: Hour
+              flsa_status: Nonexempt
+              effective_date: '2020-01-20'
+              adjust_for_minimum_wage: false
+              minimum_wages: []
     External-Payroll:
       description: The representation of an external payroll.
       type: object
@@ -18337,6 +18751,7 @@ components:
               - Location
               - Notification
               - Payroll
+              - PayrollSync
               - PaySchedule
               - Signatory
       x-examples:
@@ -18358,6 +18773,7 @@ components:
             - Location
             - Notification
             - Payroll
+            - PayrollSync
             - PaySchedule
             - Signatory
       required:
@@ -18659,6 +19075,12 @@ components:
               items:
                 type: object
                 properties:
+                  uuid:
+                    type:
+                      - string
+                      - 'null'
+                    description: The UUID of the hourly compensation rate.
+                    readOnly: true
                   name:
                     type: string
                     description: The name of the hourly compensation rate.
@@ -18678,6 +19100,12 @@ components:
               items:
                 type: object
                 properties:
+                  uuid:
+                    type:
+                      - string
+                      - 'null'
+                    description: The UUID of the fixed compensation.
+                    readOnly: true
                   name:
                     type: string
                     description: The name of the fixed compensation.
@@ -18691,6 +19119,12 @@ components:
               items:
                 type: object
                 properties:
+                  uuid:
+                    type:
+                      - string
+                      - 'null'
+                    description: The UUID of the paid time off type.
+                    readOnly: true
                   name:
                     type: string
                     example: Vacation Hours
@@ -18814,37 +19248,54 @@ components:
           contractor_only: false
           compensations:
             hourly:
-              - name: Overtime
+              - uuid: 7da6b57d-22f9-11f1-ad28-0242ac100003
+                name: Overtime
                 multiple: 1.5
-              - name: Double overtime
+              - uuid: 7da6b5ec-22f9-11f1-ad28-0242ac100003
+                name: Double overtime
                 multiple: 2
-              - name: Regular
+              - uuid: 7da6b22f-22f9-11f1-ad28-0242ac100003
+                name: Regular
                 multiple: 1
-              - name: Outstanding vacation
+              - uuid: 7da6b3ac-22f9-11f1-ad28-0242ac100003
+                name: Outstanding vacation
                 multiple: 1
-              - name: Holiday
+              - uuid: 7da6b532-22f9-11f1-ad28-0242ac100003
+                name: Holiday
                 multiple: 1
-              - name: Emergency sick - self care
+              - uuid: 7da6b44e-22f9-11f1-ad28-0242ac100003
+                name: Emergency sick - self care
                 multiple: 1
-              - name: Emergency sick - caring for others
+              - uuid: 7da6b49d-22f9-11f1-ad28-0242ac100003
+                name: Emergency sick - caring for others
                 multiple: 1
-              - name: FMLA Public Health Emergency Leave
-                multiple: 1
-              - name: Regular Hours
+              - uuid: 7da6b4e6-22f9-11f1-ad28-0242ac100003
+                name: FMLA Public Health Emergency Leave
                 multiple: 1
             fixed:
-              - name: Bonus
-              - name: Commission
-              - name: Paycheck Tips
-              - name: Cash Tips
-              - name: Correction Payment
-              - name: Severance
-              - name: Minimum Wage Adjustment
-              - name: Reimbursement
+              - uuid: 7da68d82-22f9-11f1-ad28-0242ac100003
+                name: Bonus
+              - uuid: 7da69024-22f9-11f1-ad28-0242ac100003
+                name: Commission
+              - uuid: 7da69104-22f9-11f1-ad28-0242ac100003
+                name: Paycheck Tips
+              - uuid: 7da6918f-22f9-11f1-ad28-0242ac100003
+                name: Cash Tips
+              - uuid: 7da69216-22f9-11f1-ad28-0242ac100003
+                name: Correction Payment
+              - uuid: 7da692a6-22f9-11f1-ad28-0242ac100003
+                name: Severance
+              - uuid: 7da69356-22f9-11f1-ad28-0242ac100003
+                name: Minimum Wage Adjustment
+              - uuid:
+                name: Reimbursement
             paid_time_off:
-              - name: Vacation Hours
-              - name: Sick Hours
-              - name: Holiday Hours
+              - uuid: 7dcdcb77-22f9-11f1-ad28-0242ac100003
+                name: Vacation Hours
+              - uuid: 7dcdcc8b-22f9-11f1-ad28-0242ac100003
+                name: Sick Hours
+              - uuid:
+                name: Holiday Hours
           primary_signatory:
             uuid: 2d7cd96f-e2fb-4db7-8c04-99ef531b4527
             first_name: Alda
@@ -18898,9 +19349,7 @@ components:
               completed: true
               completed_at: '2025-02-18T10:00:00Z'
               skippable: false
-              requirements:
-                - add_addresses
-                - add_employees
+              requirements: []
             - title: Add Your Bank Account
               id: add_bank_info
               required: true
@@ -20149,6 +20598,21 @@ components:
             - error_key: base
               category: invalid_attribute_value
               message: Can not adjust balances for unlimited policies.
+        payroll_sync_invalid_pay_schedule:
+          errors:
+            - error_key: pay_schedule_uuid
+              category: invalid_attribute_value
+              message: Pay schedule uuid could not be found.
+        payroll_sync_no_employees:
+          errors:
+            - error_key: base
+              category: invalid_operation
+              message: There are no employees to run payroll for in the selected pay period.
+        payroll_sync_empty_export:
+          errors:
+            - error_key: base
+              category: invalid_operation
+              message: There are no hours to sync to payroll for the selected pay period.
         holiday_pay_policy_already_exists:
           errors:
             - error_key: base
@@ -20174,6 +20638,84 @@ components:
             - error_key: base
               category: invalid_operation
               message: There is an error in the request body.
+        pay_schedule_missing_anchor_dates:
+          errors:
+            - error_key: anchor_pay_date
+              category: invalid_attribute_value
+              message: can't be blank
+            - error_key: anchor_end_of_pay_period
+              category: invalid_attribute_value
+              message: can't be blank
+        pay_schedule_invalid_frequency:
+          errors:
+            - error_key: frequency
+              category: invalid_attribute_value
+              message: is not included in the list
+        pay_schedule_malformed_dates:
+          errors:
+            - error_key: anchor_pay_date
+              category: invalid_attribute_value
+              message: is invalid
+            - error_key: anchor_end_of_pay_period
+              category: invalid_attribute_value
+              message: is invalid
+        tax_requirements_invalid_requirement_key:
+          errors:
+            - error_key: requirement_sets
+              category: nested_errors
+              message:
+              metadata:
+                key: misc
+                effective_from:
+                state: NY
+              errors:
+                - error_key: requirements
+                  category: nested_errors
+                  message:
+                  metadata:
+                    key: 1-2-3-4
+                  errors:
+                    - error_key: key
+                      category: invalid_attribute_value
+                      message: Key is required
+        tax_requirements_invalid_value_type:
+          errors:
+            - error_key: requirement_sets
+              category: nested_errors
+              message:
+              metadata:
+                key: misc
+                effective_from:
+                state: NY
+              errors:
+                - error_key: requirements
+                  category: nested_errors
+                  message:
+                  metadata:
+                    key: 71653ec0-00b5-4c66-a58b-22ecf21704c5
+                  errors:
+                    - error_key: value
+                      category: invalid_attribute_value
+                      message: Expected a value of type boolean, but got string
+        tax_requirements_domain_validation_failure:
+          errors:
+            - error_key: requirement_sets
+              category: nested_errors
+              message:
+              metadata:
+                key: taxrates
+                effective_from: '2026-01-01'
+                state: NY
+              errors:
+                - error_key: requirements
+                  category: nested_errors
+                  message:
+                  metadata:
+                    key: e0ac2284-8d30-4100-ae23-f85f9574868b
+                  errors:
+                    - error_key: value
+                      category: invalid_attribute_value
+                      message: SUI Tax Rate must be between 0.00% and 9.825%
         company_cannot_enable_contractor_only:
           errors:
             - error_key: contractor_only
@@ -20339,6 +20881,21 @@ components:
             - error_key: base
               category: invalid_operation
               message: Company is not ready to exit onboarding.
+        federal_tax_invalid_ein:
+          errors:
+            - error_key: ein
+              category: invalid_attribute_value
+              message: EIN must be 9 digits
+        federal_tax_ein_cannot_change:
+          errors:
+            - error_key: ein
+              category: invalid_attribute_value
+              message: EIN cannot be updated after company has been onboarded. Please contact support to update the EIN.
+        federal_tax_legal_name_cannot_change:
+          errors:
+            - error_key: legal_name
+              category: invalid_attribute_value
+              message: Legal name cannot be updated after company has been onboarded. Please contact support to update the legal name.
         company_location_validation:
           errors:
             - error_key: street_1
@@ -20447,6 +21004,96 @@ components:
             - error_key: base
               category: invalid_operation
               message: Compensation has already been processed on payroll.
+        job_title_required:
+          errors:
+            - error_key: title
+              category: invalid_attribute_value
+              message: Title is required
+        job_primary_cannot_delete:
+          errors:
+            - error_key: base
+              category: invalid_operation
+              message: Employee's primary job cannot be set to inactive.
+        job_exempt_multiple_jobs:
+          errors:
+            - error_key: base
+              category: invalid_operation
+              message: Only hourly employees can have multiple jobs.
+        job_invalid_hire_date:
+          errors:
+            - error_key: hire_date
+              category: invalid_attribute_value
+              message: Hire date is invalid
+        job_duplicate_title:
+          errors:
+            - error_key: title
+              category: invalid_attribute_value
+              message: Employee cannot have two jobs with the same title.
+        i9_authorization_unneeded_document_params:
+          errors:
+            - error_key: expiration_date
+              category: invalid_attribute_value
+              message: For the submitted authorization status, expiration date is not allowed
+            - error_key: document_type
+              category: invalid_attribute_value
+              message: For the submitted authorization status, document type is not allowed
+        i9_authorization_not_self_onboarding:
+          errors:
+            - error_key: base
+              category: invalid_operation
+              message: Employee is not self-onboarding.
+        i9_authorization_employee_already_signed:
+          errors:
+            - error_key: base
+              category: invalid_operation
+              message: Employee has already signed the form.
+        i9_employer_sign_invalid_params:
+          errors:
+            - error_key: signed_by_ip_address
+              category: invalid_attribute_value
+              message: Signed by IP address is invalid
+            - error_key: signer_title
+              category: invalid_attribute_value
+              message: Signer title is required
+            - error_key: agree
+              category: invalid_attribute_value
+              message: You must agree to sign electronically
+            - error_key: signature_text
+              category: invalid_attribute_value
+              message: Signature text is required
+        i9_employer_sign_employee_not_signed:
+          errors:
+            - error_key: base
+              category: invalid_operation
+              message: Employee has not signed I-9
+        i9_employer_sign_already_signed:
+          errors:
+            - error_key: base
+              category: invalid_operation
+              message: I-9 has already been signed by the employer
+        i9_documents_already_signed:
+          errors:
+            - error_key: base
+              category: invalid_operation
+              message: I-9 cannot be updated as it has already been signed by the employer
+        i9_documents_invalid_params:
+          errors:
+            - error_key: documents
+              category: nested_errors
+              metadata:
+                document_type: invalid_type
+              errors:
+                - error_key: document_type
+                  category: invalid_attribute_value
+                  message: Document type's value is not included in the list
+                - error_key: document_title
+                  category: invalid_attribute_value
+                  message: Document title's value is not included in the list
+        i9_documents_not_array:
+          errors:
+            - error_key: base
+              category: invalid_operation
+              message: Parameter `documents` must be an array
     Entity-Error-Object:
       type: object
       required:
@@ -20619,10 +21266,30 @@ components:
           name: Engineering
           auto_pilot: false
           custom_name: A new monthly pay schedule
-      description: The representation of a pay schedule.
+        success_status:
+          uuid: f2a69c38-e2f9-4e31-b5c5-4754fc60a052
+          version: 68934a3e9455fa72420237eb05902327
+          frequency: Twice per month
+          anchor_pay_date: '2022-09-01'
+          anchor_end_of_pay_period: '2022-08-18'
+          day_1: 1
+          day_2: 15
+          name:
+          custom_name: every 1st and 15th of the month
+          auto_payroll: true
+          active: true
+          auto_payroll_enablement_blockers:
+      description: |
+        The pay schedule object captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+
+        Response includes frequency, anchor dates, optional day_1/day_2 for monthly/semi-monthly, auto_pilot (or auto_payroll for API version 2025-11-15 and later), and auto_payroll_enablement_blockers when Autopayroll is disabled.
+
+        **Webhooks:** Subscribe to [Pay Schedule Events](https://docs.gusto.com/embedded-payroll/docs/pay-schedule-events) to receive `pay_schedule.created` and `pay_schedule.updated` when pay schedules are created or updated.
       properties:
         uuid:
           "$ref": "#/components/schemas/Pay-Schedule-Uuid"
+        version:
+          "$ref": "#/components/schemas/Pay-Schedule-Version"
         frequency:
           "$ref": "#/components/schemas/Pay-Schedule-Frequency"
         anchor_pay_date:
@@ -20639,8 +21306,12 @@ components:
           "$ref": "#/components/schemas/Pay-Schedule-Custom-Name"
         auto_pilot:
           "$ref": "#/components/schemas/Pay-Schedule-Auto-Pilot"
+        auto_payroll:
+          "$ref": "#/components/schemas/Pay-Schedule-Auto-Payroll"
         active:
           "$ref": "#/components/schemas/Pay-Schedule-Active"
+        auto_payroll_enablement_blockers:
+          "$ref": "#/components/schemas/Pay-Schedule-Auto-Payroll-Enablement-Blockers"
       x-tags:
         - Pay Schedules
       required:
@@ -20687,11 +21358,19 @@ components:
         - uuid
     Pay-Schedule-Uuid:
       type: string
-      description: The unique identifier of the pay schedule in Gusto.
+      description: The unique identifier of the pay schedule.
       readOnly: true
     Pay-Schedule-Frequency:
       type: string
-      description: The frequency that employees on this pay schedule are paid with Gusto.
+      description: |
+        Pay frequency for this schedule. READ-ONLY.
+
+        - `Every week`: Employees are paid weekly.
+        - `Every other week`: Employees are paid bi-weekly (every two weeks).
+        - `Twice per month`: Employees are paid on two fixed days each month (e.g. 1st and 15th); use day_1 and day_2.
+        - `Monthly`: Employees are paid once per month; use day_1 for the pay day.
+        - `Quarterly`: Employees are paid every three months.
+        - `Annually`: Employees are paid once per year.
       enum:
         - Every week
         - Every other week
@@ -20702,32 +21381,45 @@ components:
       readOnly: true
     Pay-Schedule-Frequency-Create-Update:
       type: string
-      description: The frequency that employees on this pay schedule are paid with Gusto.
+      description: |
+        Pay frequency when creating or updating a schedule. Only weekly, bi-weekly, twice per month, and monthly are supported via the API.
+
+        - `Every week`: Weekly pay.
+        - `Every other week`: Biweekly pay.
+        - `Twice per month`: Two pay dates per month; require day_1 and day_2 (use 31 for last day of month).
+        - `Monthly`: One pay date per month; require day_1 (1-31).
       enum:
         - Every week
         - Every other week
         - Twice per month
         - Monthly
-      readOnly: true
     Pay-Schedule-Anchor-Pay-Date:
       type: string
-      description: The first date that employees on this pay schedule are paid with Gusto.
+      format: date
+      description: The first date that employees on this pay schedule are paid (ISO 8601 YYYY-MM-DD).
       readOnly: true
     Pay-Schedule-Anchor-End-Of-Pay-Period:
       type: string
-      description: The last date of the first pay period. This can be the same date as the anchor pay date.
+      format: date
+      description: The last date of the first pay period. This can be the same date as the anchor pay date (ISO 8601 YYYY-MM-DD).
       readOnly: true
     Pay-Schedule-Day-1:
       type:
         - integer
         - 'null'
-      description: An integer between 1 and 31 indicating the first day of the month that employees are paid. This field is only relevant for pay schedules with the “Twice per month” and “Monthly” frequencies. It will be null for pay schedules with other frequencies.
+      description: |
+        First pay day of the month (1-31).
+        - **Twice per month, Monthly:** present (required on create/update).
+        - **Every week, Every other week:** null.
       readOnly: true
     Pay-Schedule-Day-2:
       type:
         - integer
         - 'null'
-      description: An integer between 1 and 31 indicating the second day of the month that employees are paid. This field is the second pay date for pay schedules with the "Twice per month" frequency. For semi-monthly pay schedules, this field should be set to 31. For months shorter than 31 days, we will set the second pay date to the last day of the month. It will be null for pay schedules with other frequencies.
+      description: |
+        Second pay day of the month (1-31); only for **Twice per month**.
+        - Use 31 for last day of month (shorter months use the actual last day).
+        - **Other frequencies:** null.
       readOnly: true
     Pay-Schedule-Name:
       type:
@@ -20737,11 +21429,15 @@ components:
       readOnly: true
     Pay-Schedule-Custom-Name:
       type: string
-      description: A custom name for a pay schedule, defaults to the pay frequency description.
+      description: 'Display name for the pay schedule. When the partner never set a custom name (or cleared it), this field contains the auto-generated description derived from frequency and pay days (e.g. "every 1st and 15th of the month", "every Friday"). When the partner set a custom name on create or update, this field contains that value.
+
+'
       readOnly: true
     Pay-Schedule-Auto-Pilot:
       type: boolean
-      description: With Autopilot® enabled, payroll will run automatically one day before your payroll deadlines.
+      description: |
+        When true, autopilot is enabled and payroll runs automatically one day before payroll deadlines. When false, payroll does not run automatically.
+        For API version 2025-11-15 and later the response uses auto_payroll (Autopayroll) instead.
     Pay-Schedule-Active:
       type: boolean
       description: Whether this pay schedule is associated with any employees. A pay schedule is inactive when it's unassigned.
@@ -23676,17 +24372,18 @@ components:
               - Semiweekly
               - Monthly
       x-examples:
-        Example:
-          value:
-            version: string
-            tax_payer_type: string
-            taxable_as_scorp: false
-            filing_form: string
-            has_ein: true
-            ein_verified: true
-            legal_name: string
-            effective_date: string
-            deposit_schedule: string
+        Success:
+          version: 68934a3e9455fa72420237eb
+          tax_payer_type: S-Corporation
+          taxable_as_scorp: true
+          filing_form: '941'
+          has_ein: true
+          ein_verified: true
+          ein_verification:
+            status: verified
+          legal_name: Acme Corp
+          effective_date: '2024-01-01'
+          deposit_schedule: Semiweekly
       x-tags:
         - Federal Tax Details
     Employee-Bank-Account:
@@ -23943,6 +24640,7 @@ components:
           label: Withholding Number
           description: If you have run payroll in the past in GA, find your withholding number on notices received from the Georgia Department of Revenue, or call the agency at (877) 423-6711. If you don’t have a number yet, you should <a target='_blank' data-bypass href='https://gtc.dor.ga.gov/_/#1'>register the business online</a>. The last two characters of your ID must be upper case letters.
           value: 1233214-AB
+          editable: true
           metadata:
             type: account_number
             mask: "#######-^^"
@@ -23974,14 +24672,12 @@ components:
             - 'null'
           description: A more detailed customer facing description of the requirement
         value:
-          oneOf:
-            - type: boolean
-            - type: string
-            - type: number
-            - type: 'null'
-          description: The "answer"
+          "$ref": "#/components/schemas/Tax-Requirements-Value"
         metadata:
           "$ref": "#/components/schemas/Tax-Requirement-Metadata"
+        editable:
+          type: boolean
+          description: Whether the value of this requirement can be updated
     Tax-Requirement-Metadata:
       type: object
       x-examples:
@@ -24187,6 +24883,7 @@ components:
                   label: Withholding Number
                   description: If you have run payroll in the past in GA, find your withholding number on notices received from the Georgia Department of Revenue, or call the agency at (877) 423-6711. If you don’t have a number yet, you should <a target='_blank' data-bypass href='https://gtc.dor.ga.gov/_/#1'>register the business online</a>. The last two characters of your ID must be upper case letters.
                   value: 1233214-AB
+                  editable: true
                   metadata:
                     type: account_number
                     mask: "#######-^^"
@@ -24196,6 +24893,7 @@ components:
                   label: DOL Account Number
                   description: If you have run payroll in the past in GA, find your DOL account number on notices received from the Georgia Department of Labor, or call the agency at (404) 232-3300. If you don’t have an account number yet, please <a target='_blank' data-bypass href='https://support.gusto.com/hc/en-us/articles/210139038#registerdol'>follow the instructions here</a> to register your business with the Georgia Dept. of Labor.
                   value: 474747-88
+                  editable: true
                   metadata:
                     type: account_number
                     mask: "######-##"
@@ -24210,6 +24908,7 @@ components:
                   label: SUI Reimburser
                   description: Instead of paying state unemployment insurance (SUI) taxes quarterly, some businesses (like non-profits or government organizations) may be allowed to reimburse the state if one of their employees collects unemployment benefits.
                   value: false
+                  editable: true
                   metadata:
                     type: radio
                     options:
@@ -24226,6 +24925,7 @@ components:
                   label: Total Tax Rate
                   description: Haven't received your assigned rate yet? <a target='_blank' data-bypass href='https://support.gusto.com/article/106622236100000/State-unemployment-insurance-(SUI)-tax'>Find the new employer rate</a> and enter it here.
                   value: '0.05'
+                  editable: true
                   metadata:
                     type: tax_rate
                     validation:
@@ -24242,6 +24942,7 @@ components:
                   label: Deposit Schedule
                   description: Georgia rejects payments made on the wrong schedule. GA employers receive their schedule on a registration verification letter after registering with the Georgia Dept. of Revenue. If you are unsure, call the agency at (877) 423-6711. If you did not register your business yet, please <a target='_blank' data-bypass href='https://gtc.dor.ga.gov/_/#2'>register the business with the Georgia Dept. of Revenue</a>.
                   value: Monthly
+                  editable: true
                   metadata:
                     type: select
                     options:
@@ -24261,6 +24962,7 @@ components:
                   label: Deposit Schedule
                   description: Georgia rejects payments made on the wrong schedule. GA employers receive their schedule on a registration verification letter after registering with the Georgia Dept. of Revenue. If you are unsure, call the agency at (877) 423-6711. If you did not register your business yet, please <a target='_blank' data-bypass href='https://gtc.dor.ga.gov/_/#2'>register the business with the Georgia Dept. of Revenue</a>.
                   value: Monthly
+                  editable: true
                   metadata:
                     type: select
                     options:
@@ -24270,6 +24972,96 @@ components:
                         value: Monthly
                       - label: Quarterly
                         value: Quarterly
+        tax-requirements-metadata-select:
+          company_uuid: 6c14eac3-0da2-474d-bda1-786b3602d381
+          state: GA
+          requirement_sets:
+            - state: GA
+              key: depositschedules
+              label: Deposit Schedules
+              effective_from: '2022-01-01'
+              requirements:
+                - key: 6ddfcbeb-94d3-4003-bfc2-8c6e1ca9f70c
+                  applicable_if: []
+                  label: Deposit Schedule
+                  description: The deposit schedule assigned by the state agency.
+                  value: Monthly
+                  editable: true
+                  metadata:
+                    type: select
+                    options:
+                      - label: Semiweekly
+                        value: Semi-weekly
+                      - label: Monthly
+                        value: Monthly
+                      - label: Quarterly
+                        value: Quarterly
+        tax-requirements-metadata-radio:
+          company_uuid: 6c14eac3-0da2-474d-bda1-786b3602d381
+          state: GA
+          requirement_sets:
+            - state: GA
+              key: taxrates
+              label: Tax Rates
+              effective_from: '2022-01-01'
+              requirements:
+                - key: suireimbursable
+                  applicable_if: []
+                  label: SUI Reimburser
+                  description: Instead of paying state unemployment insurance (SUI) taxes quarterly, some businesses may be allowed to reimburse the state if one of their employees collects unemployment benefits.
+                  value: false
+                  editable: true
+                  metadata:
+                    type: radio
+                    options:
+                      - label: No, we cannot reimburse the state—we have to pay SUI taxes quarterly
+                        short_label: Not Reimbursable
+                        value: false
+                      - label: Yes, we can reimburse the state if an employee collects SUI benefits—we don't have to pay SUI taxes quarterly
+                        short_label: Reimbursable
+                        value: true
+        tax-requirements-metadata-account-number:
+          company_uuid: 6c14eac3-0da2-474d-bda1-786b3602d381
+          state: GA
+          requirement_sets:
+            - state: GA
+              key: registrations
+              label: Registrations
+              effective_from:
+              requirements:
+                - key: 71653ec0-00b5-4c66-a58b-22ecf21704c5
+                  applicable_if: []
+                  label: Withholding Number
+                  description: Your state withholding account number.
+                  value: 1233214-AB
+                  editable: true
+                  metadata:
+                    type: account_number
+                    mask: "#######-^^"
+                    prefix:
+        tax-requirements-metadata-tax-rate:
+          company_uuid: 6c14eac3-0da2-474d-bda1-786b3602d381
+          state: GA
+          requirement_sets:
+            - state: GA
+              key: taxrates
+              label: Tax Rates
+              effective_from: '2022-01-01'
+              requirements:
+                - key: e0ac2284-8d30-4100-ae23-f85f9574868b
+                  applicable_if:
+                    - key: suireimbursable
+                      value: false
+                  label: Total Tax Rate
+                  description: The assigned SUI tax rate for this state.
+                  value: '0.05'
+                  editable: true
+                  metadata:
+                    type: tax_rate
+                    validation:
+                      type: min_max
+                      min: '0.0004'
+                      max: '0.081'
       description: ''
       properties:
         company_uuid:
@@ -24465,7 +25257,9 @@ components:
       description: Representation of a Time Off Activity
       properties:
         policy_uuid:
-          type: string
+          type:
+            - string
+            - 'null'
           description: unique identifier of a time off policy
         time_off_type:
           type: string
@@ -24474,23 +25268,33 @@ components:
             - vacation
             - sick
         policy_name:
-          type: string
+          type:
+            - string
+            - 'null'
           description: The name of the time off policy for this activity
         event_type:
           type: string
           description: The type of the time off event/activity
         event_description:
-          type: string
+          type:
+            - string
+            - 'null'
           description: A description for the time off event/activity
         effective_time:
-          type: string
+          type:
+            - string
+            - 'null'
           description: The datetime of the time off activity
         balance:
-          type: string
+          type:
+            - string
+            - 'null'
           format: float
           description: The time off balance at the time of the activity
         balance_change:
-          type: string
+          type:
+            - string
+            - 'null'
           format: float
           description: The amount the time off balance changed as a result of the activity
     Holiday-Pay-Policy:
@@ -29230,6 +30034,633 @@ components:
           type: number
           format: float
           description: The second micro-deposit amount (order does not matter).
+    I9-Authorization-Request-Body:
+      description: Request body for creating or updating an employee's I-9 authorization.
+      type: object
+      properties:
+        version:
+          type: string
+          description: The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field. If supplied, this endpoint will update the existing I-9 authorization if it exists.
+        authorization_status:
+          type: string
+          description: |
+            The employee's authorization status.
+            - `citizen`: A citizen is someone who was born in the United States or is a naturalized citizen living in the United States.
+            - `noncitizen`: A noncitizen national is someone born in American Samoa, certain former citizens of the former Trust Territory of the Pacific Islands, and certain children of noncitizen nationals born abroad.
+            - `permanent_resident`: A lawful permanent resident is someone who is not a US citizen and who resides under legally recognized and lawfully recorded permanent residence as an immigrant.
+            - `alien`: Also referred to as a "noncitizen authorized to work". This includes anyone who is authorized to work in the United States but is not a US citizen, US national or lawful permanent resident.
+          enum:
+            - citizen
+            - noncitizen
+            - permanent_resident
+            - alien
+        document_type:
+          type: string
+          description: |
+            The type of document an employee holds, based on their authorization status.
+            - This is unused for authorization status `citizen` or `noncitizen`.
+            - If the authorization status is `permanent_resident`, this must be `uscis_alien_registration_number`.
+            - If the authorization status is `alien`, this is required and may be any of the valid values.
+          enum:
+            - uscis_alien_registration_number
+            - form_i94
+            - foreign_passport
+        document_number:
+          type: string
+          description: |
+            The document number. Formatting depends on the employee's document type.
+            - For `document_type:'uscis_alien_registration_number'`, this must be a USCIS Number/A-Number, which is 7 to 9 digits.
+            - For `document_type:'form_i94'`, this must be a Form I-94 Admission Number, which is 11 digits.
+            - For `document_type:'foreign_passport'`, this must be the passport number.
+
+            This is required when the document type is present.
+        country:
+          type: string
+          description: |
+            The document's country of issuance.
+
+            This is required when the document type is `foreign_passport`.
+        expiration_date:
+          type: string
+          description: |
+            The document's expiration date.
+
+            This may only be used when the authorization status is `alien`.
+      required:
+        - authorization_status
+      x-examples:
+        create_citizen:
+          authorization_status: citizen
+        update_alien_with_foreign_passport:
+          version: 52b7c567242cb7393b2a206ed6a86afcb
+          authorization_status: alien
+          document_type: foreign_passport
+          document_number: '01234567'
+          country: Canada
+          expiration_date: '2028-01-01'
+    I9-Authorization-Employer-Sign-Request-Body:
+      description: Request body for employer signing an employee's Form I-9.
+      type: object
+      properties:
+        signature_text:
+          type: string
+          description: The signature
+        signer_title:
+          type: string
+          description: The signer's job title
+        signed_by_ip_address:
+          type: string
+          description: The IP address of the signatory who signed the form. Both IPv4 AND IPv6 are supported. You must provide the IP address with either this parameter OR you can leave out this parameter and set the IP address in the request header using the `x-gusto-client-ip` header instead.
+        agree:
+          type: boolean
+          description: Whether you agree to sign electronically
+        additional_info:
+          type: string
+          description: Any additional notes
+        alt_procedure:
+          type: boolean
+          description: Whether an alternative procedure authorized by DHS to examine documents was used
+      required:
+        - signature_text
+        - signer_title
+        - agree
+      x-examples:
+        employer_sign:
+          signature_text: Jane Doe
+          signer_title: Admin
+          signed_by_ip_address: 192.168.0.1
+          agree: true
+    I9-Authorization-Documents-Request-Body:
+      description: Request body for creating an employee's I-9 authorization verification documents.
+      type: object
+      properties:
+        documents:
+          type: array
+          description: An array of I-9 verification documents. Every request must contain the complete list of documents for the employee, as previous records are replaced.
+          items:
+            type: object
+            properties:
+              document_type:
+                type: string
+                description: The document type. Use the document options endpoint to get the possible values.
+                example: us_passport
+              document_title:
+                type: string
+                description: The document title associated with the document type
+                example: US Passport
+              document_number:
+                type: string
+                description: The document's document number
+                example: F12345678
+              expiration_date:
+                type: string
+                description: The document's expiration date
+                example: '2026-01-01'
+              issuing_authority:
+                type: string
+                description: The document's issuing authority
+                example: USA
+            required:
+              - document_type
+              - document_title
+              - issuing_authority
+      required:
+        - documents
+      x-examples:
+        create_documents:
+          documents:
+            - document_type: us_passport
+              document_title: US passport
+              document_number: F12345678
+              expiration_date: '2035-04-01'
+              issuing_authority: US Department of State
+    Pay-Schedule-Version:
+      type: string
+      description: The current version of the pay schedule. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/api-fundamentals#optimistic-version-control) for information on how to use this field for optimistic concurrency.
+      readOnly: true
+    Pay-Schedule-Auto-Payroll:
+      type: boolean
+      description: |
+        When true, Autopayroll is enabled and payroll runs automatically one day before payroll deadlines. When false, payroll does not run automatically.
+        Returned for API version 2025-11-15 and later; for earlier versions the response uses auto_pilot instead.
+    Pay-Schedule-Auto-Payroll-Enablement-Blockers:
+      type:
+        - array
+        - 'null'
+      description: When auto_payroll is false, lists blockers that prevent enabling Autopayroll. When auto_payroll is true, this field is null.
+      items:
+        "$ref": "#/components/schemas/Pay-Schedule-Auto-Payroll-Enablement-Blocker"
+    Pay-Schedule-Auto-Payroll-Enablement-Blocker:
+      type: object
+      description: A single blocker preventing Autopayroll enablement.
+      properties:
+        key:
+          type: string
+          description: The blocker type (e.g. employees_not_on_direct_deposit, missing_funding_method, missing_state_tax_requirements, one_day_ach_speed_not_supported, company_suspended).
+        metadata:
+          type: object
+          description: Blocker-specific metadata (e.g. employee_uuids, states).
+    Pay-Schedule-List:
+      type: array
+      description: List of pay schedules for a company. The pay schedule object captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+      items:
+        "$ref": "#/components/schemas/Pay-Schedule"
+      x-examples:
+        success_status:
+          - uuid: f2a69c38-e2f9-4e31-b5c5-4754fc60a052
+            version: 68934a3e9455fa72420237eb05902327
+            frequency: Monthly
+            anchor_pay_date: '2022-12-11'
+            anchor_end_of_pay_period: '2022-11-13'
+            day_1: 11
+            day_2:
+            name:
+            custom_name: every 11th of the month
+            auto_payroll: true
+            active: true
+    Pay-Schedule-Preview-Pay-Period:
+      type: object
+      description: A single pay period in a pay schedule preview, with check date, period boundaries, and payroll deadline.
+      required:
+        - check_date
+        - start_date
+        - run_payroll_by
+        - end_date
+      properties:
+        check_date:
+          type: string
+          format: date
+          description: The date employees will be paid (check date).
+        start_date:
+          type: string
+          format: date
+          description: The first day of the pay period.
+        run_payroll_by:
+          type: string
+          format: date
+          description: The deadline by which payroll must be run for this period to be paid on check_date.
+        end_date:
+          type: string
+          format: date
+          description: The last day of the pay period.
+    Pay-Schedule-Preview:
+      type: object
+      description: |
+        Preview of pay schedule dates for the next 18 months. Use this to show partners expected pay dates, pay period boundaries, and payroll deadlines before they create or change a pay schedule. See [Preview pay schedule dates](https://docs.gusto.com/embedded-payroll/reference/get-v1-companies-company_id-pay_schedules-preview) for usage.
+
+        - **pay_periods**: One entry per pay period in the range; each includes check_date, start_date, end_date, and run_payroll_by.
+        - **holidays**: Observed bank holidays (ISO date strings) that may affect payroll timing.
+      x-examples:
+        success_status:
+          pay_periods:
+            - check_date: '2022-01-15'
+              start_date: '2022-01-01'
+              run_payroll_by: '2022-01-14'
+              end_date: '2022-01-15'
+            - check_date: '2022-01-31'
+              start_date: '2022-01-16'
+              run_payroll_by: '2022-01-30'
+              end_date: '2022-01-31'
+          holidays:
+            - '2022-01-01'
+            - '2022-01-17'
+      properties:
+        pay_periods:
+          type: array
+          description: Pay periods in the preview range (default 18 months from today, or up to end_date if provided).
+          items:
+            "$ref": "#/components/schemas/Pay-Schedule-Preview-Pay-Period"
+        holidays:
+          type: array
+          description: Observed bank holidays (ISO date strings) in the preview range; may affect payroll processing.
+          items:
+            type: string
+            format: date
+    Pay-Schedule-Date-Input:
+      type: string
+      format: date
+      description: ISO 8601 date (YYYY-MM-DD). Required for anchor and period dates in create, update, and preview requests.
+    Pay-Schedule-Create-Request:
+      type: object
+      description: |
+        Request body for creating a pay schedule. Required when a company has no pay schedules (onboarding) or when adding an additional schedule. Be sure to [check state laws](https://www.dol.gov/agencies/whd/state/payday) to know what schedule is right for your customers.
+
+        - **anchor_pay_date**: The first date that employees on this pay schedule will be paid (first company payday).
+        - **anchor_end_of_pay_period**: The last date of the first pay period; can be the same as anchor_pay_date.
+      properties:
+        frequency:
+          "$ref": "#/components/schemas/Pay-Schedule-Frequency-Create-Update"
+        anchor_pay_date:
+          "$ref": "#/components/schemas/Pay-Schedule-Date-Input"
+        anchor_end_of_pay_period:
+          "$ref": "#/components/schemas/Pay-Schedule-Date-Input"
+        day_1:
+          type:
+            - integer
+            - 'null'
+          description: |
+            First pay day of the month (1-31).
+            - **Twice per month, Monthly:** required.
+            - **Every week, Every other week:** omit or null.
+        day_2:
+          type:
+            - integer
+            - 'null'
+          description: |
+            Second pay day of the month (1-31); only for **Twice per month**.
+            - Use 31 for last day of month (shorter months use the actual last day).
+            - **Other frequencies:** omit or null.
+        custom_name:
+          type:
+            - string
+            - 'null'
+          description: |
+            Optional display name for the pay schedule.
+
+            When null or omitted, the system generates a description from the pay frequency and pay days (e.g. "every 1st and 15th of the month" for twice-monthly, "every 11th of the month" for monthly, "every Friday" for weekly). The response returns this generated value in `custom_name` when no custom name was set. When provided, the value you set is stored and returned.
+      required:
+        - frequency
+        - anchor_pay_date
+        - anchor_end_of_pay_period
+    Pay-Schedule-Update-Request:
+      type: object
+      description: Request body for updating a pay schedule. Sent in the pay_schedule_update root key. Version is required for optimistic concurrency. Pay schedules may be automatically adjusted if an onboarded company misses their first pay date; see [Create a pay schedule](https://docs.gusto.com/embedded-payroll/docs/create-a-pay-schedule).
+      properties:
+        version:
+          type: string
+          description: Current version of the pay schedule from the GET response; required for optimistic concurrency. Mismatch returns 409 Conflict.
+        auto_payroll:
+          type: boolean
+          description: |
+            When true, Autopayroll is enabled and payroll runs automatically one day before payroll deadlines. When false, payroll does not run automatically and must be run manually.
+            For API versions before 2025-11-15 the request field is auto_pilot.
+        frequency:
+          "$ref": "#/components/schemas/Pay-Schedule-Frequency-Create-Update"
+        anchor_pay_date:
+          "$ref": "#/components/schemas/Pay-Schedule-Date-Input"
+        anchor_end_of_pay_period:
+          "$ref": "#/components/schemas/Pay-Schedule-Date-Input"
+        day_1:
+          type:
+            - integer
+            - 'null'
+          description: 'First pay day of the month (1–31). Required for Twice per month and Monthly; null for Every week and Every other week.
+
+'
+        day_2:
+          type:
+            - integer
+            - 'null'
+          description: 'Second pay day of the month (1–31); only for Twice per month. Use 31 for last day of month. Null for other frequencies.
+
+'
+        custom_name:
+          type:
+            - string
+            - 'null'
+          description: Custom name for the pay schedule; null clears it.
+      required:
+        - version
+    Payroll-Sync:
+      type: object
+      description: Record representing the sync of time sheet data to payroll.
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: Unique identifier of the payroll sync.
+          example: 123e4567-e89b-12d3-a456-426655440000
+        company_uuid:
+          type: string
+          format: uuid
+          description: Unique identifier of the company to which the payroll sync belongs.
+          example: 123e4567-e89b-12d3-a456-426655440001
+        status:
+          type: string
+          readOnly: true
+          enum:
+            - pending
+            - in_progress
+            - success
+            - failure
+            - partial_success
+          description: |
+            The current status of the payroll sync. READ-ONLY.
+
+            ## State Transitions
+            ```
+            pending ──────► in_progress ──────► success
+                                        ├─────► failure
+                                        └─────► partial_success
+            ```
+
+            ### Valid Transitions
+            - `pending` → `in_progress`: Automatic when processing begins
+            - `in_progress` → `success`: All time sheet data synced successfully
+            - `in_progress` → `failure`: Sync failed entirely
+            - `in_progress` → `partial_success`: Some members failed to sync
+          example: pending
+        kind:
+          type: string
+          enum:
+            - regular
+          description: |
+            The kind of payroll sync.
+            - `regular`: A regular payroll sync
+          example: regular
+        pay_schedule_uuid:
+          type: string
+          format: uuid
+          description: Unique identifier of the pay schedule associated with this sync.
+          example: 123e4567-e89b-12d3-a456-426655440002
+        pay_period_start_date:
+          type: string
+          format: date
+          description: The start date of the pay period per ISO 8601 format.
+          example: '2025-01-01'
+        pay_period_end_date:
+          type: string
+          format: date
+          description: The end date of the pay period per ISO 8601 format.
+          example: '2025-01-15'
+        submitted_at:
+          type: string
+          format: date-time
+          description: Datetime for when the payroll sync was submitted.
+          example: '2025-01-16T12:00:00Z'
+        completed_at:
+          type:
+            - string
+            - 'null'
+          format: date-time
+          description: Datetime for when the payroll sync completed. Null if the sync is still in progress.
+          example: '2025-01-16T13:00:00Z'
+        errors:
+          type: array
+          description: Errors encountered during the sync, if any. Each error follows the standard entity error format.
+          items:
+            "$ref": "#/components/schemas/Entity-Error-Object"
+        warnings:
+          type: array
+          description: Warnings encountered during the sync, if any.
+          items:
+            type: string
+      x-examples:
+        pending_sync:
+          uuid: 123e4567-e89b-12d3-a456-426655440000
+          company_uuid: 123e4567-e89b-12d3-a456-426655440001
+          status: pending
+          kind: regular
+          pay_schedule_uuid: 123e4567-e89b-12d3-a456-426655440002
+          pay_period_start_date: '2025-01-01'
+          pay_period_end_date: '2025-01-15'
+          submitted_at: '2025-01-16T12:00:00Z'
+          completed_at:
+        completed_sync:
+          uuid: 123e4567-e89b-12d3-a456-426655440000
+          company_uuid: 123e4567-e89b-12d3-a456-426655440001
+          status: success
+          kind: regular
+          pay_schedule_uuid: 123e4567-e89b-12d3-a456-426655440002
+          pay_period_start_date: '2025-01-01'
+          pay_period_end_date: '2025-01-15'
+          submitted_at: '2025-01-16T12:00:00Z'
+          completed_at: '2025-01-16T13:00:00Z'
+    Payroll-Sync-Create-Request-Body:
+      type: object
+      required:
+        - kind
+        - pay_schedule_uuid
+        - pay_period_start_date
+        - pay_period_end_date
+      properties:
+        kind:
+          type: string
+          enum:
+            - regular
+          description: |
+            The kind of payroll sync.
+            - `regular`: A regular payroll sync
+          example: regular
+        pay_schedule_uuid:
+          type: string
+          format: uuid
+          description: Unique identifier of the pay schedule to sync time sheets for.
+          example: 123e4567-e89b-12d3-a456-426614174000
+        pay_period_start_date:
+          type: string
+          format: date
+          description: The start date of the pay period per ISO 8601 format.
+          example: '2025-01-01'
+        pay_period_end_date:
+          type: string
+          format: date
+          description: The end date of the pay period per ISO 8601 format.
+          example: '2025-01-15'
+    Jobs-Body:
+      type: object
+      properties:
+        title:
+          type:
+            - string
+            - 'null'
+          description: The job title.
+          example: Regional Manager
+        hire_date:
+          type: string
+          description: The date when the employee was hired or rehired for the job.
+          example: '2020-12-21'
+        two_percent_shareholder:
+          type: boolean
+          description: Whether the employee owns at least 2% of the company.
+        state_wc_covered:
+          type:
+            - boolean
+            - 'null'
+          description: Whether this job is eligible for workers' compensation coverage in the state of Washington (WA).
+        state_wc_class_code:
+          type:
+            - string
+            - 'null'
+          description: The risk class code for workers' compensation in Washington state. Please visit [Washington state's Risk Class page](https://www.lni.wa.gov/insurance/rates-risk-classes/risk-classes-for-workers-compensation/risk-class-lookup#/) to learn more.
+    Jobs-Create-Request-Body:
+      description: Request body for creating a job.
+      type: object
+      required:
+        - title
+        - hire_date
+      allOf:
+        - "$ref": "#/components/schemas/Jobs-Body"
+      x-examples:
+        create_job:
+          title: Regional Manager
+          hire_date: '2020-12-21'
+          two_percent_shareholder: false
+    Jobs-Update-Request-Body:
+      description: Request body for updating a job.
+      type: object
+      allOf:
+        - "$ref": "#/components/schemas/Versionable-Required"
+        - "$ref": "#/components/schemas/Jobs-Body"
+      x-examples:
+        update_job:
+          version: gr78930htutrz444kuytr3s5hgxykuveb523fwl8sir
+          title: Regional Manager
+          hire_date: '2020-12-21'
+    Federal-Tax-Details-Update:
+      title: Federal-Tax-Details-Update
+      type: object
+      required:
+        - version
+      properties:
+        version:
+          type: string
+          description: The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
+        legal_name:
+          type: string
+          description: The legal name of the company
+        ein:
+          type: string
+          description: The company's Employer Identification Number (EIN). Must be 9 digits. Dashes are optional (e.g., '12-3456789' or '123456789').
+        tax_payer_type:
+          type: string
+          description: |-
+            What type of tax entity the company is. One of:
+            - C-Corporation
+            - S-Corporation
+            - Sole proprietor
+            - LLC
+            - LLP
+            - Limited partnership
+            - Co-ownership
+            - Association
+            - Trusteeship
+            - General partnership
+            - Joint venture
+            - Non-Profit
+        filing_form:
+          type: string
+          description: |-
+            The form used by the company for federal tax filing. One of:
+            - 941 (Quarterly federal tax return form)
+            - 944 (Annual federal tax return form)
+        taxable_as_scorp:
+          type: boolean
+          description: Whether the company is taxed as an S-Corporation
+      x-tags:
+        - Federal Tax Details
+    Tax-Requirement-States-List:
+      type: array
+      x-examples:
+        success_status:
+          - state: GA
+            setup_complete: false
+            setup_status: not_started
+            default_rates_applied: false
+            ready_to_run_payroll: false
+          - state: CA
+            setup_complete: true
+            setup_status: complete
+            default_rates_applied: false
+            ready_to_run_payroll: true
+      items:
+        type: object
+        properties:
+          state:
+            "$ref": "#/components/schemas/State"
+          setup_complete:
+            type: boolean
+            description: Whether all requirements for the state have been satisfied such that the company can complete onboarding. A company must be `setup_complete` in all relevant states to complete the `state_setup` company onboarding step.
+          setup_status:
+            type: string
+            enum:
+              - not_started
+              - in_progress
+              - complete
+            description: |
+              The current status of the state tax setup.
+              - `not_started`: No requirements have been filled
+              - `in_progress`: Some requirements have been filled, or default rates are applied
+              - `complete`: All requirements have been filled without default rates
+          default_rates_applied:
+            type: boolean
+            description: Whether the state is using system-assigned default SUI rates rather than employer-specific rates.
+          ready_to_run_payroll:
+            type: boolean
+            description: Whether the state tax setup is sufficiently complete for the company to run payroll. This will be `true` when `setup_complete` is `true`.
+    Tax-Requirement-Set-Update:
+      type: array
+      description: Array of requirement sets to update. Each set corresponds to a category of requirements for the state.
+      items:
+        type: object
+        required:
+          - key
+          - state
+        properties:
+          key:
+            "$ref": "#/components/schemas/Tax-Requirement-Set-Key"
+          state:
+            "$ref": "#/components/schemas/State"
+          effective_from:
+            "$ref": "#/components/schemas/Tax-Requirement-Effective-From"
+          requirements:
+            type: array
+            items:
+              type: object
+              required:
+                - key
+              properties:
+                key:
+                  "$ref": "#/components/schemas/Tax-Requirement-Key"
+                value:
+                  "$ref": "#/components/schemas/Tax-Requirements-Value"
+    Tax-Requirements-Value:
+      description: The value or "answer" for a tax requirement. Type depends on the requirement metadata type (e.g. string for text/account_number, boolean for radio/checkbox, number for percent/currency/tax_rate). Null when the requirement has not been answered.
+      oneOf:
+        - type: boolean
+        - type: string
+        - type: number
+        - type: 'null'
   securitySchemes:
     CompanyAccessAuth:
       type: http
@@ -30117,6 +31548,7 @@ components:
                   - Location
                   - Notification
                   - Payroll
+                  - PayrollSync
                   - PaySchedule
                   - Signatory
     Webhook-Subscriptions-List:
@@ -30147,6 +31579,7 @@ components:
                     - Location
                     - Notification
                     - Payroll
+                    - PayrollSync
                     - PaySchedule
                     - Signatory
     Company-Object:

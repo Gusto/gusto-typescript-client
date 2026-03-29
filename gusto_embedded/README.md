@@ -423,8 +423,8 @@ run();
 
 ### [FederalTaxDetails](docs/sdks/federaltaxdetails/README.md)
 
-* [get](docs/sdks/federaltaxdetails/README.md#get) - Get Federal Tax Details
-* [update](docs/sdks/federaltaxdetails/README.md#update) - Update Federal Tax Details
+* [get](docs/sdks/federaltaxdetails/README.md#get) - Get a company's federal tax details
+* [update](docs/sdks/federaltaxdetails/README.md#update) - Update a company's federal tax details
 
 ### [Flows](docs/sdks/flows/README.md)
 
@@ -594,9 +594,9 @@ run();
 
 ### [TaxRequirements](docs/sdks/taxrequirements/README.md)
 
-* [get](docs/sdks/taxrequirements/README.md#get) - Get State Tax Requirements
-* [updateState](docs/sdks/taxrequirements/README.md#updatestate) - Update State Tax Requirements
-* [getAll](docs/sdks/taxrequirements/README.md#getall) - Get All Tax Requirement States
+* [get](docs/sdks/taxrequirements/README.md#get) - Get tax requirements for a state
+* [updateState](docs/sdks/taxrequirements/README.md#updatestate) - Update tax requirements for a state
+* [getAll](docs/sdks/taxrequirements/README.md#getall) - Get all tax requirements for a company
 
 ### [TimeOffPolicies](docs/sdks/timeoffpolicies/README.md)
 
@@ -800,8 +800,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`externalPayrollsRetrieve`](docs/sdks/externalpayrolls/README.md#retrieve) - Get an external payroll
 - [`externalPayrollsUpdate`](docs/sdks/externalpayrolls/README.md#update) - Update an external payroll
 - [`externalPayrollsUpdateTaxLiabilities`](docs/sdks/externalpayrolls/README.md#updatetaxliabilities) - Update tax liabilities
-- [`federalTaxDetailsGet`](docs/sdks/federaltaxdetails/README.md#get) - Get Federal Tax Details
-- [`federalTaxDetailsUpdate`](docs/sdks/federaltaxdetails/README.md#update) - Update Federal Tax Details
+- [`federalTaxDetailsGet`](docs/sdks/federaltaxdetails/README.md#get) - Get a company's federal tax details
+- [`federalTaxDetailsUpdate`](docs/sdks/federaltaxdetails/README.md#update) - Update a company's federal tax details
 - [`flowsCreate`](docs/sdks/flows/README.md#create) - Create a flow
 - [`garnishmentsCreate`](docs/sdks/garnishments/README.md#create) - Create a garnishment
 - [`garnishmentsGet`](docs/sdks/garnishments/README.md#get) - Get a garnishment
@@ -902,9 +902,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`signatoriesInvite`](docs/sdks/signatories/README.md#invite) - Invite a signatory
 - [`signatoriesList`](docs/sdks/signatories/README.md#list) - Get the signatories for a company
 - [`signatoriesUpdate`](docs/sdks/signatories/README.md#update) - Update a signatory
-- [`taxRequirementsGet`](docs/sdks/taxrequirements/README.md#get) - Get State Tax Requirements
-- [`taxRequirementsGetAll`](docs/sdks/taxrequirements/README.md#getall) - Get All Tax Requirement States
-- [`taxRequirementsUpdateState`](docs/sdks/taxrequirements/README.md#updatestate) - Update State Tax Requirements
+- [`taxRequirementsGet`](docs/sdks/taxrequirements/README.md#get) - Get tax requirements for a state
+- [`taxRequirementsGetAll`](docs/sdks/taxrequirements/README.md#getall) - Get all tax requirements for a company
+- [`taxRequirementsUpdateState`](docs/sdks/taxrequirements/README.md#updatestate) - Update tax requirements for a state
 - [`timeOffPoliciesAddEmployees`](docs/sdks/timeoffpolicies/README.md#addemployees) - Add employees to a time off policy
 - [`timeOffPoliciesCalculateAccruingTimeOffHours`](docs/sdks/timeoffpolicies/README.md#calculateaccruingtimeoffhours) - Calculate accruing time off hours
 - [`timeOffPoliciesCreate`](docs/sdks/timeoffpolicies/README.md#create) - Create a time off policy
@@ -1106,8 +1106,8 @@ To learn about this feature and how to get started, check
 - [`useExternalPayrollsRetrieve`](docs/sdks/externalpayrolls/README.md#retrieve) - Get an external payroll
 - [`useExternalPayrollsUpdateMutation`](docs/sdks/externalpayrolls/README.md#update) - Update an external payroll
 - [`useExternalPayrollsUpdateTaxLiabilitiesMutation`](docs/sdks/externalpayrolls/README.md#updatetaxliabilities) - Update tax liabilities
-- [`useFederalTaxDetailsGet`](docs/sdks/federaltaxdetails/README.md#get) - Get Federal Tax Details
-- [`useFederalTaxDetailsUpdateMutation`](docs/sdks/federaltaxdetails/README.md#update) - Update Federal Tax Details
+- [`useFederalTaxDetailsGet`](docs/sdks/federaltaxdetails/README.md#get) - Get a company's federal tax details
+- [`useFederalTaxDetailsUpdateMutation`](docs/sdks/federaltaxdetails/README.md#update) - Update a company's federal tax details
 - [`useFlowsCreateMutation`](docs/sdks/flows/README.md#create) - Create a flow
 - [`useGarnishmentsCreateMutation`](docs/sdks/garnishments/README.md#create) - Create a garnishment
 - [`useGarnishmentsGet`](docs/sdks/garnishments/README.md#get) - Get a garnishment
@@ -1208,9 +1208,9 @@ To learn about this feature and how to get started, check
 - [`useSignatoriesInviteMutation`](docs/sdks/signatories/README.md#invite) - Invite a signatory
 - [`useSignatoriesList`](docs/sdks/signatories/README.md#list) - Get the signatories for a company
 - [`useSignatoriesUpdateMutation`](docs/sdks/signatories/README.md#update) - Update a signatory
-- [`useTaxRequirementsGet`](docs/sdks/taxrequirements/README.md#get) - Get State Tax Requirements
-- [`useTaxRequirementsGetAll`](docs/sdks/taxrequirements/README.md#getall) - Get All Tax Requirement States
-- [`useTaxRequirementsUpdateStateMutation`](docs/sdks/taxrequirements/README.md#updatestate) - Update State Tax Requirements
+- [`useTaxRequirementsGet`](docs/sdks/taxrequirements/README.md#get) - Get tax requirements for a state
+- [`useTaxRequirementsGetAll`](docs/sdks/taxrequirements/README.md#getall) - Get all tax requirements for a company
+- [`useTaxRequirementsUpdateStateMutation`](docs/sdks/taxrequirements/README.md#updatestate) - Update tax requirements for a state
 - [`useTimeOffPoliciesAddEmployeesMutation`](docs/sdks/timeoffpolicies/README.md#addemployees) - Add employees to a time off policy
 - [`useTimeOffPoliciesCalculateAccruingTimeOffHoursMutation`](docs/sdks/timeoffpolicies/README.md#calculateaccruingtimeoffhours) - Calculate accruing time off hours
 - [`useTimeOffPoliciesCreateMutation`](docs/sdks/timeoffpolicies/README.md#create) - Create a time off policy
@@ -1416,8 +1416,8 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 143 of 280 methods.*
-* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Applicable to 120 of 280 methods.*
+* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 144 of 280 methods.*
+* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Applicable to 142 of 280 methods.*
 * [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 2 of 280 methods.*
 * [`PeopleBatchConflictError`](./src/models/errors/peoplebatchconflicterror.ts): Error response when a people batch idempotency key conflict occurs. Status code `409`. Applicable to 1 of 280 methods.*
 * [`MigrationBlocker`](./src/models/errors/migrationblocker.ts): Migration blocker that blocks company migration. Status code `422`. Applicable to 1 of 280 methods.*

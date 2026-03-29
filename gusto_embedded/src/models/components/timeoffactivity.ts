@@ -28,7 +28,7 @@ export type TimeOffActivity = {
   /**
    * unique identifier of a time off policy
    */
-  policyUuid?: string | undefined;
+  policyUuid?: string | null | undefined;
   /**
    * Type of the time off activity
    */
@@ -36,7 +36,7 @@ export type TimeOffActivity = {
   /**
    * The name of the time off policy for this activity
    */
-  policyName?: string | undefined;
+  policyName?: string | null | undefined;
   /**
    * The type of the time off event/activity
    */
@@ -44,19 +44,19 @@ export type TimeOffActivity = {
   /**
    * A description for the time off event/activity
    */
-  eventDescription?: string | undefined;
+  eventDescription?: string | null | undefined;
   /**
    * The datetime of the time off activity
    */
-  effectiveTime?: string | undefined;
+  effectiveTime?: string | null | undefined;
   /**
    * The time off balance at the time of the activity
    */
-  balance?: string | undefined;
+  balance?: string | null | undefined;
   /**
    * The amount the time off balance changed as a result of the activity
    */
-  balanceChange?: string | undefined;
+  balanceChange?: string | null | undefined;
 };
 
 /** @internal */
@@ -69,14 +69,14 @@ export const TimeOffActivity$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  policy_uuid: z.string().optional(),
+  policy_uuid: z.nullable(z.string()).optional(),
   time_off_type: TimeOffType$inboundSchema.optional(),
-  policy_name: z.string().optional(),
+  policy_name: z.nullable(z.string()).optional(),
   event_type: z.string().optional(),
-  event_description: z.string().optional(),
-  effective_time: z.string().optional(),
-  balance: z.string().optional(),
-  balance_change: z.string().optional(),
+  event_description: z.nullable(z.string()).optional(),
+  effective_time: z.nullable(z.string()).optional(),
+  balance: z.nullable(z.string()).optional(),
+  balance_change: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "policy_uuid": "policyUuid",

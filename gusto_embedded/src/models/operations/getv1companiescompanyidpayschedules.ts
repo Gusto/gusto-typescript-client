@@ -5,22 +5,37 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  PayScheduleList,
-  PayScheduleList$inboundSchema,
-} from "../components/payschedulelist.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  PaySchedule,
+  PaySchedule$inboundSchema,
+} from "../components/payschedule.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion>;
+
 export type GetV1CompaniesCompanyIdPaySchedulesRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
@@ -33,26 +48,28 @@ export type GetV1CompaniesCompanyIdPaySchedulesRequest = {
    * Number of objects per page. For majority of endpoints will default to 25
    */
   per?: number | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1CompaniesCompanyIdPaySchedulesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
-  payScheduleList?: Array<PayScheduleList> | undefined;
+  paySchedules?: Array<PaySchedule> | undefined;
 };
 
 /** @internal */
+export const GetV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetV1CompaniesCompanyIdPaySchedulesRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_id: string;
   page?: number | undefined;
   per?: number | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -62,14 +79,16 @@ export const GetV1CompaniesCompanyIdPaySchedulesRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1CompaniesCompanyIdPaySchedulesRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyId: z.string(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyId: "company_id",
     });
   });
 
@@ -92,11 +111,11 @@ export const GetV1CompaniesCompanyIdPaySchedulesResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Pay-Schedule-List": z.array(PayScheduleList$inboundSchema).optional(),
+    "Pay-Schedules": z.array(PaySchedule$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Pay-Schedule-List": "payScheduleList",
+      "Pay-Schedules": "paySchedules",
     });
   });
 

@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -14,11 +15,22 @@ import {
   TaxRequirementsState,
   TaxRequirementsState$inboundSchema,
 } from "../components/taxrequirementsstate.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion
+  >;
 
 export type GetV1CompaniesCompanyUuidTaxRequirementsStateRequest = {
   /**
@@ -26,33 +38,43 @@ export type GetV1CompaniesCompanyUuidTaxRequirementsStateRequest = {
    */
   companyUuid: string;
   /**
-   * 2-letter US state abbreviation
+   * The two-letter state abbreviation
    */
   state: string;
   /**
-   * When true, return "new" requirement sets with valid `effective_from` dates that are available to save new effective dated values.
-   */
-  scheduling?: boolean | undefined;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion
+    | undefined;
+  /**
+   * When true, return "new" requirement sets with valid `effective_from` dates that are available to save new effective-dated values.
+   */
+  scheduling?: boolean | undefined;
 };
 
 export type GetV1CompaniesCompanyUuidTaxRequirementsStateResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * OK
+   * Success
    */
   taxRequirementsState?: TaxRequirementsState | undefined;
 };
 
 /** @internal */
+export const GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export type GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$Outbound = {
   company_uuid: string;
   state: string;
-  scheduling?: boolean | undefined;
   "X-Gusto-API-Version": string;
+  scheduling?: boolean | undefined;
 };
 
 /** @internal */
@@ -64,8 +86,10 @@ export const GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$outboundSchema
   > = z.object({
     companyUuid: z.string(),
     state: z.string(),
+    xGustoAPIVersion:
+      GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     scheduling: z.boolean().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",

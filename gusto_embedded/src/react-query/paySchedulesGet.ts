@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest } from "../models/operations/getv1companiescompanyidpayschedulespayscheduleid.js";
+import {
+  GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdHeaderXGustoAPIVersion,
+  GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
+} from "../models/operations/getv1companiescompanyidpayschedulespayscheduleid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type PaySchedulesGetQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -55,7 +59,7 @@ export type PaySchedulesGetQueryError =
  * Get a pay schedule
  *
  * @remarks
- * The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+ * Returns a single pay schedule by UUID. The pay schedule object captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
  *
  * scope: `pay_schedules:read`
  */
@@ -81,7 +85,7 @@ export function usePaySchedulesGet(
  * Get a pay schedule
  *
  * @remarks
- * The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+ * Returns a single pay schedule by UUID. The pay schedule object captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
  *
  * scope: `pay_schedules:read`
  */
@@ -108,7 +112,11 @@ export function setPaySchedulesGetData(
   queryKeyBase: [
     companyId: string,
     payScheduleId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: PaySchedulesGetQueryData,
 ): PaySchedulesGetQueryData | undefined {
@@ -123,7 +131,11 @@ export function invalidatePaySchedulesGet(
     [
       companyId: string,
       payScheduleId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

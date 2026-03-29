@@ -19,25 +19,28 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
-  PostV1JobsJobIdRequest,
-  PostV1JobsJobIdResponse,
-} from "../models/operations/postv1jobsjobid.js";
+  PostV1EmployeesEmployeeIdJobsRequest,
+  PostV1EmployeesEmployeeIdJobsResponse,
+} from "../models/operations/postv1employeesemployeeidjobs.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type JobsAndCompensationsCreateJobMutationVariables = {
-  request: PostV1JobsJobIdRequest;
+  request: PostV1EmployeesEmployeeIdJobsRequest;
   options?: RequestOptions;
 };
 
-export type JobsAndCompensationsCreateJobMutationData = PostV1JobsJobIdResponse;
+export type JobsAndCompensationsCreateJobMutationData =
+  PostV1EmployeesEmployeeIdJobsResponse;
 
 export type JobsAndCompensationsCreateJobMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError

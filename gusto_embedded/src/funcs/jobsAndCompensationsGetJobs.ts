@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -34,6 +38,9 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Get all of the jobs that an employee holds.
+ * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
+ *
+ * Compensation data in the response requires the `compensations:read` scope.
  *
  * scope: `jobs:read`
  */
@@ -44,6 +51,7 @@ export function jobsAndCompensationsGetJobs(
 ): APIPromise<
   Result<
     GetV1EmployeesEmployeeIdJobsResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -69,6 +77,7 @@ async function $do(
   [
     Result<
       GetV1EmployeesEmployeeIdJobsResponse,
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -98,7 +107,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/employees/{employee_id}/jobs")(pathParams);
 
   const query = encodeFormQuery({
@@ -170,6 +178,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1EmployeesEmployeeIdJobsResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -180,9 +189,10 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, GetV1EmployeesEmployeeIdJobsResponse$inboundSchema, {
-      key: "Job-List",
+      key: "Jobs",
     }),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

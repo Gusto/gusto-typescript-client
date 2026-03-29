@@ -29,7 +29,7 @@ export const Id = {
  */
 export type Id = ClosedEnum<typeof Id>;
 
-export const Requirements = {
+export const CompanyOnboardingStatusRequirements = {
   AddAddresses: "add_addresses",
   FederalTaxSetup: "federal_tax_setup",
   SelectIndustry: "select_industry",
@@ -41,7 +41,9 @@ export const Requirements = {
   VerifyBankInfo: "verify_bank_info",
   ExternalPayroll: "external_payroll",
 } as const;
-export type Requirements = ClosedEnum<typeof Requirements>;
+export type CompanyOnboardingStatusRequirements = ClosedEnum<
+  typeof CompanyOnboardingStatusRequirements
+>;
 
 export type OnboardingStep = {
   /**
@@ -71,7 +73,7 @@ export type OnboardingStep = {
   /**
    * A list of onboarding steps that are required to be completed in order to proceed with the current onboarding step.
    */
-  requirements?: Array<Requirements> | undefined;
+  requirements?: Array<CompanyOnboardingStatusRequirements> | undefined;
 };
 
 /**
@@ -96,8 +98,9 @@ export type CompanyOnboardingStatus = {
 export const Id$inboundSchema: z.ZodNativeEnum<typeof Id> = z.nativeEnum(Id);
 
 /** @internal */
-export const Requirements$inboundSchema: z.ZodNativeEnum<typeof Requirements> =
-  z.nativeEnum(Requirements);
+export const CompanyOnboardingStatusRequirements$inboundSchema: z.ZodNativeEnum<
+  typeof CompanyOnboardingStatusRequirements
+> = z.nativeEnum(CompanyOnboardingStatusRequirements);
 
 /** @internal */
 export const OnboardingStep$inboundSchema: z.ZodType<
@@ -111,7 +114,8 @@ export const OnboardingStep$inboundSchema: z.ZodType<
   completed: z.boolean().optional(),
   completed_at: z.nullable(z.string()).optional(),
   skippable: z.boolean().optional(),
-  requirements: z.array(Requirements$inboundSchema).optional(),
+  requirements: z.array(CompanyOnboardingStatusRequirements$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "completed_at": "completedAt",

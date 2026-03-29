@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -30,10 +34,11 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get All Tax Requirement States
+ * Get all tax requirements for a company
  *
  * @remarks
- * Returns objects describing the states that have tax requirements for the company
+ * Retrieves all states for which a company has tax requirements, along with a boolean indicating whether tax setup
+ * is complete for each state. Use this to determine which states still need tax setup during company onboarding.
  *
  * scope: `company_tax_requirements:read`
  */
@@ -44,6 +49,7 @@ export function taxRequirementsGetAll(
 ): APIPromise<
   Result<
     GetV1CompaniesCompanyUuidTaxRequirementsResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -69,6 +75,7 @@ async function $do(
   [
     Result<
       GetV1CompaniesCompanyUuidTaxRequirementsResponse,
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -101,7 +108,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_uuid}/tax_requirements")(
     pathParams,
   );
@@ -168,6 +174,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1CompaniesCompanyUuidTaxRequirementsResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -180,9 +187,10 @@ async function $do(
     M.json(
       200,
       GetV1CompaniesCompanyUuidTaxRequirementsResponse$inboundSchema,
-      { key: "responseBodies" },
+      { key: "Tax-Requirement-States-List" },
     ),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

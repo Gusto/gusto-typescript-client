@@ -114,7 +114,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/v1/time_off_policies/{time_off_policy_uuid}/balance",
   )(pathParams);

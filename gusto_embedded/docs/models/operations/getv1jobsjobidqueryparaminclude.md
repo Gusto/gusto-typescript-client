@@ -1,7 +1,8 @@
 # GetV1JobsJobIdQueryParamInclude
 
 Available options:
-- all_compensations: Include all effective dated compensations for the job instead of only the current compensation
+- all_compensations: Include all effective dated compensations for each job instead of only the current compensation
+
 
 ## Example Usage
 
