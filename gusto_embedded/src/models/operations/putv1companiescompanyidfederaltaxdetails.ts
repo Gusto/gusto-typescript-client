@@ -12,90 +12,29 @@ import {
   FederalTaxDetails$inboundSchema,
 } from "../components/federaltaxdetails.js";
 import {
+  FederalTaxDetailsUpdate,
+  FederalTaxDetailsUpdate$Outbound,
+  FederalTaxDetailsUpdate$outboundSchema,
+} from "../components/federaltaxdetailsupdate.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * What type of tax entity the company is
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const TaxPayerType = {
-  CCorporation: "C-Corporation",
-  SCorporation: "S-Corporation",
-  SoleProprietor: "Sole proprietor",
-  Llc: "LLC",
-  Llp: "LLP",
-  LimitedPartnership: "Limited partnership",
-  CoOwnership: "Co-ownership",
-  Association: "Association",
-  Trusteeship: "Trusteeship",
-  GeneralPartnership: "General partnership",
-  JointVenture: "Joint venture",
-  NonProfit: "Non-Profit",
+export const PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
- * What type of tax entity the company is
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type TaxPayerType = ClosedEnum<typeof TaxPayerType>;
-
-/**
- * The form used by the company for federal tax filing. One of:
- *
- * @remarks
- * - 941 (Quarterly federal tax return)
- * - 944 (Annual federal tax return)
- */
-export const FilingForm = {
-  NineHundredAndFortyOne: "941",
-  NineHundredAndFortyFour: "944",
-} as const;
-/**
- * The form used by the company for federal tax filing. One of:
- *
- * @remarks
- * - 941 (Quarterly federal tax return)
- * - 944 (Annual federal tax return)
- */
-export type FilingForm = ClosedEnum<typeof FilingForm>;
-
-/**
- * Attributes related to federal tax details that can be updated via this endpoint include:
- */
-export type PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody = {
-  /**
-   * The legal name of the company
-   */
-  legalName?: string | undefined;
-  /**
-   * The EIN of of the company
-   */
-  ein?: string | undefined;
-  /**
-   * What type of tax entity the company is
-   */
-  taxPayerType?: TaxPayerType | undefined;
-  /**
-   * The form used by the company for federal tax filing. One of:
-   *
-   * @remarks
-   * - 941 (Quarterly federal tax return)
-   * - 944 (Annual federal tax return)
-   */
-  filingForm?: FilingForm | undefined;
-  /**
-   * Whether this company should be taxed as an S-Corporation
-   */
-  taxableAsScorp?: boolean | undefined;
-  /**
-   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
-   */
-  version: string;
-};
+export type PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion
+  >;
 
 export type PutV1CompaniesCompanyIdFederalTaxDetailsRequest = {
   /**
@@ -105,77 +44,33 @@ export type PutV1CompaniesCompanyIdFederalTaxDetailsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  /**
-   * Attributes related to federal tax details that can be updated via this endpoint include:
-   */
-  requestBody: PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody;
+  xGustoAPIVersion?:
+    | PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion
+    | undefined;
+  federalTaxDetailsUpdate: FederalTaxDetailsUpdate;
 };
 
 export type PutV1CompaniesCompanyIdFederalTaxDetailsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
   federalTaxDetails?: FederalTaxDetails | undefined;
 };
 
 /** @internal */
-export const TaxPayerType$outboundSchema: z.ZodNativeEnum<typeof TaxPayerType> =
-  z.nativeEnum(TaxPayerType);
-
-/** @internal */
-export const FilingForm$outboundSchema: z.ZodNativeEnum<typeof FilingForm> = z
-  .nativeEnum(FilingForm);
-
-/** @internal */
-export type PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$Outbound = {
-  legal_name?: string | undefined;
-  ein?: string | undefined;
-  tax_payer_type?: string | undefined;
-  filing_form?: string | undefined;
-  taxable_as_scorp?: boolean | undefined;
-  version: string;
-};
-
-/** @internal */
-export const PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$outboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$Outbound,
-    z.ZodTypeDef,
-    PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody
-  > = z.object({
-    legalName: z.string().optional(),
-    ein: z.string().optional(),
-    taxPayerType: TaxPayerType$outboundSchema.optional(),
-    filingForm: FilingForm$outboundSchema.optional(),
-    taxableAsScorp: z.boolean().optional(),
-    version: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      legalName: "legal_name",
-      taxPayerType: "tax_payer_type",
-      filingForm: "filing_form",
-      taxableAsScorp: "taxable_as_scorp",
-    });
-  });
-
-export function putV1CompaniesCompanyIdFederalTaxDetailsRequestBodyToJSON(
-  putV1CompaniesCompanyIdFederalTaxDetailsRequestBody:
-    PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$outboundSchema.parse(
-      putV1CompaniesCompanyIdFederalTaxDetailsRequestBody,
-    ),
+export const PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion,
   );
-}
 
 /** @internal */
 export type PutV1CompaniesCompanyIdFederalTaxDetailsRequest$Outbound = {
   company_id: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$Outbound;
+  "Federal-Tax-Details-Update": FederalTaxDetailsUpdate$Outbound;
 };
 
 /** @internal */
@@ -186,15 +81,15 @@ export const PutV1CompaniesCompanyIdFederalTaxDetailsRequest$outboundSchema:
     PutV1CompaniesCompanyIdFederalTaxDetailsRequest
   > = z.object({
     companyId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$outboundSchema
-    ),
+    xGustoAPIVersion:
+      PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
+    federalTaxDetailsUpdate: FederalTaxDetailsUpdate$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      federalTaxDetailsUpdate: "Federal-Tax-Details-Update",
     });
   });
 

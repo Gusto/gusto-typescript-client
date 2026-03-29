@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type TaxRequirementsUpdateStateMutationData =
   PutV1CompaniesCompanyUuidTaxRequirementsStateResponse;
 
 export type TaxRequirementsUpdateStateMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -50,10 +52,16 @@ export type TaxRequirementsUpdateStateMutationError =
   | SDKValidationError;
 
 /**
- * Update State Tax Requirements
+ * Update tax requirements for a state
  *
  * @remarks
- * Update State Tax Requirements
+ * Updates the tax requirement answers for a specific state. Submit answers to the requirement questions returned
+ * by [GET /v1/companies/{company_uuid}/tax_requirements/{state}](ref:get-v1-companies-company_uuid-tax_requirements-state).
+ *
+ * ### Prerequisites
+ *
+ * 1. Retrieve current requirements via [GET /v1/companies/{company_uuid}/tax_requirements/{state}](ref:get-v1-companies-company_uuid-tax_requirements-state)
+ * 2. Ensure that each requirement set that you're updating includes the correct `key`, `state`, and `effective_from` values from the GET response
  *
  * scope: `company_tax_requirements:write`
  */

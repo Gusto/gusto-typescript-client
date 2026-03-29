@@ -17,10 +17,10 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class FederalTaxDetails extends ClientSDK {
   /**
-   * Get Federal Tax Details
+   * Get a company's federal tax details
    *
    * @remarks
-   * Fetches attributes relevant for a company's federal taxes.
+   * Retrieves a company's federal tax details including EIN verification status, tax payer type, filing form, and other federal tax configuration.
    *
    * scope: `company_federal_taxes:read`
    */
@@ -36,11 +36,19 @@ export class FederalTaxDetails extends ClientSDK {
   }
 
   /**
-   * Update Federal Tax Details
+   * Update a company's federal tax details
    *
    * @remarks
-   * Updates attributes relevant for a company's federal taxes.
-   * This information is required is to onboard a company for use with Gusto Embedded Payroll.
+   * Updates a company's federal tax details including EIN, legal name, tax payer type, filing form, and S-Corp
+   * taxation status. This information is required to onboard a company for use with Gusto Embedded Payroll.
+   *
+   * ### Prerequisites
+   * Before calling this endpoint, retrieve the current federal tax details and `version` via [GET /v1/companies/{company_id}/federal_tax_details](ref:get-v1-companies-company_id-federal_tax_details)
+   *
+   * ### Webhooks
+   * - `company.updated`: Fires when federal tax details for a company are successfully updated
+   *
+   * **Setup:** [POST /v1/webhook_subscriptions](ref:post-v1-webhook-subscription) with `subscription_types`: `["Company"]`
    *
    * scope: `company_federal_taxes:write`
    */

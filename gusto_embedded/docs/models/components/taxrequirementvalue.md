@@ -1,6 +1,6 @@
 # TaxRequirementValue
 
-The "answer"
+The required value of the requirement identified by `key`
 
 
 ## Supported Types

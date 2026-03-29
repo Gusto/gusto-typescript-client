@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { jobsAndCompensationsGetJob } from "../funcs/jobsAndCompensationsGetJob.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1JobsJobIdHeaderXGustoAPIVersion,
   GetV1JobsJobIdQueryParamInclude,
   GetV1JobsJobIdRequest,
   GetV1JobsJobIdResponse,
@@ -77,7 +77,7 @@ export function queryKeyJobsAndCompensationsGetJob(
   jobId: string,
   parameters: {
     include?: GetV1JobsJobIdQueryParamInclude | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
+    xGustoAPIVersion?: GetV1JobsJobIdHeaderXGustoAPIVersion | undefined;
   },
 ): QueryKey {
   return [

@@ -49,9 +49,6 @@ export type EinVerification = {
   status?: FederalTaxDetailsStatus | undefined;
 };
 
-/**
- * Example response
- */
 export type FederalTaxDetails = {
   /**
    * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.

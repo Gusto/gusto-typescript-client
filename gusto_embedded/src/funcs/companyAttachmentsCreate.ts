@@ -5,6 +5,7 @@
 import { GustoEmbeddedCore } from "../core.js";
 import { appendForm, encodeSimple } from "../lib/encodings.js";
 import {
+  bytesToBlob,
   getContentTypeFromFileName,
   readableStreamToArrayBuffer,
 } from "../lib/files.js";
@@ -108,7 +109,9 @@ async function $do(
 
   appendForm(body, "category", payload.RequestBody.category);
   if (isBlobLike(payload.RequestBody.document)) {
-    appendForm(body, "document", payload.RequestBody.document);
+    const blob = payload.RequestBody.document;
+    const name = "name" in blob ? (blob.name as string) : undefined;
+    appendForm(body, "document", blob, name);
   } else if (isReadableStream(payload.RequestBody.document.content)) {
     const buffer = await readableStreamToArrayBuffer(
       payload.RequestBody.document.content,
@@ -116,18 +119,10 @@ async function $do(
     const contentType =
       getContentTypeFromFileName(payload.RequestBody.document.fileName)
       || "application/octet-stream";
-    const blob = new Blob([buffer], { type: contentType });
-    appendForm(body, "document", blob, payload.RequestBody.document.fileName);
-  } else if (payload.RequestBody.document.content instanceof Uint8Array) {
-    const contentType =
-      getContentTypeFromFileName(payload.RequestBody.document.fileName)
-      || "application/octet-stream";
     appendForm(
       body,
       "document",
-      new Blob([new Uint8Array(payload.RequestBody.document.content).buffer], {
-        type: contentType,
-      }),
+      bytesToBlob(buffer, contentType),
       payload.RequestBody.document.fileName,
     );
   } else {
@@ -137,7 +132,7 @@ async function $do(
     appendForm(
       body,
       "document",
-      new Blob([payload.RequestBody.document.content], { type: contentType }),
+      bytesToBlob(payload.RequestBody.document.content, contentType),
       payload.RequestBody.document.fileName,
     );
   }
@@ -148,7 +143,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/attachments")(pathParams);
 
   const headers = new Headers(compactMap({

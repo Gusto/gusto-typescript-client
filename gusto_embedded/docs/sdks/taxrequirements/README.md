@@ -4,55 +4,19 @@
 
 ### Available Operations
 
-* [get](#get) - Get State Tax Requirements
-* [updateState](#updatestate) - Update State Tax Requirements
-* [getAll](#getall) - Get All Tax Requirement States
+* [get](#get) - Get tax requirements for a state
+* [updateState](#updatestate) - Update tax requirements for a state
+* [getAll](#getall) - Get all tax requirements for a company
 
 ## get
 
-Get all tax requirements for a given state.
+Retrieves the detailed tax requirements for a specific state. The response includes requirement sets grouped by
+category (e.g., registrations, tax rates, deposit schedules), each containing individual requirements with their
+current values, labels, and metadata describing the expected input format.
 
-### Metadata Examples
-
-```json select
-{
-  "type": "select",
-  "options": [
-    { "label": "Semiweekly",  value: "Semi-weekly" },
-    { "label": "Monthly",  value: "Monthly" },
-    { "label": "Quarterly",  value: "Quarterly" },
-  ]
-}
-```
-```json radio
-{
-  "type": "radio",
-  "options": [
-    { "label": "No, we cannot reimburse",  value: false, short_label: "Not Reimbursable" },
-    { "label": "Yes, we can reimburse",  value: true, short_label: "Reimbursable" },
-  ]
-}
-```
-```json account_number
-{
-  "type": "account_number",
-  "mask": "######-##',
-  "prefix": null
-}
-```
-```json tax_rate
-{
-  "type": "tax_rate",
-  "validation": {
-    "type": "min_max",
-    "min": "0.0004",
-    "max": "0.081"
-  }
-}
-```
+Use this to build dynamic UIs for tax setup or to read the current tax configuration for a state.
 
 scope: `company_tax_requirements:read`
-
 
 ### Example Usage
 
@@ -149,13 +113,20 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## updateState
 
-Update State Tax Requirements
+Updates the tax requirement answers for a specific state. Submit answers to the requirement questions returned
+by [GET /v1/companies/{company_uuid}/tax_requirements/{state}](ref:get-v1-companies-company_uuid-tax_requirements-state).
+
+### Prerequisites
+
+1. Retrieve current requirements via [GET /v1/companies/{company_uuid}/tax_requirements/{state}](ref:get-v1-companies-company_uuid-tax_requirements-state)
+2. Ensure that each requirement set that you're updating includes the correct `key`, `state`, and `effective_from` values from the GET response
 
 scope: `company_tax_requirements:write`
 
@@ -247,8 +218,8 @@ async function run() {
       requirementSets: [
         {
           key: "registrations",
-          effectiveFrom: null,
           state: "GA",
+          effectiveFrom: null,
           requirements: [
             {
               key: "71653ec0-00b5-4c66-a58b-22ecf21704c5",
@@ -262,8 +233,8 @@ async function run() {
         },
         {
           key: "taxrates",
-          effectiveFrom: "2022-01-01",
           state: "GA",
+          effectiveFrom: "2022-01-01",
           requirements: [
             {
               key: "e0ac2284-8d30-4100-ae23-f85f9574868b",
@@ -273,8 +244,8 @@ async function run() {
         },
         {
           key: "depositschedules",
-          effectiveFrom: "2022-01-01",
           state: "GA",
+          effectiveFrom: "2022-01-01",
           requirements: [
             {
               key: "6ddfcbeb-94d3-4003-bfc2-8c6e1ca9f70c",
@@ -314,8 +285,8 @@ async function run() {
       requirementSets: [
         {
           key: "registrations",
-          effectiveFrom: null,
           state: "GA",
+          effectiveFrom: null,
           requirements: [
             {
               key: "71653ec0-00b5-4c66-a58b-22ecf21704c5",
@@ -329,8 +300,8 @@ async function run() {
         },
         {
           key: "taxrates",
-          effectiveFrom: "2022-01-01",
           state: "GA",
+          effectiveFrom: "2022-01-01",
           requirements: [
             {
               key: "e0ac2284-8d30-4100-ae23-f85f9574868b",
@@ -340,8 +311,8 @@ async function run() {
         },
         {
           key: "depositschedules",
-          effectiveFrom: "2022-01-01",
           state: "GA",
+          effectiveFrom: "2022-01-01",
           requirements: [
             {
               key: "6ddfcbeb-94d3-4003-bfc2-8c6e1ca9f70c",
@@ -537,12 +508,14 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## getAll
 
-Returns objects describing the states that have tax requirements for the company
+Retrieves all states for which a company has tax requirements, along with a boolean indicating whether tax setup
+is complete for each state. Use this to determine which states still need tax setup during company onboarding.
 
 scope: `company_tax_requirements:read`
 
@@ -639,6 +612,7 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |

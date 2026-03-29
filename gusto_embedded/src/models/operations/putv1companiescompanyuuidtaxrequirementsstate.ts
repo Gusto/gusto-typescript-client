@@ -5,43 +5,39 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  TaxRequirementSetUpdate,
+  TaxRequirementSetUpdate$Outbound,
+  TaxRequirementSetUpdate$outboundSchema,
+} from "../components/taxrequirementsetupdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type Requirements = {
-  /**
-   * An identifier for an individual requirement. Uniqueness is guaranteed within a requirement set.
-   */
-  key?: string | undefined;
-  value?: string | null | undefined;
-};
-
-export type RequirementSets = {
-  /**
-   * An identifier for a set of requirements. A list of requirement sets can contain multiple sets with the same `key` and different `effective_from` values.
-   */
-  key?: string | undefined;
-  /**
-   * An ISO 8601 formatted date representing the date values became effective. Some requirement sets are effective dated, while others are not. Multiple requirement sets for the same state/key can/will exist with unique effective dates. If a requirement set is has an `effective_from` value, all requirement sets with the same key will also have an `effective_from` value.
-   */
-  effectiveFrom?: string | null | undefined;
-  /**
-   * One of the two-letter state abbreviations for the fifty United States and the District of Columbia (DC)
-   */
-  state?: string | undefined;
-  requirements?: Array<Requirements> | undefined;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion
+  >;
 
 export type PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody = {
-  requirementSets?: Array<RequirementSets> | undefined;
+  /**
+   * Array of requirement sets to update. Each set corresponds to a category of requirements for the state.
+   */
+  requirementSets?: Array<TaxRequirementSetUpdate> | undefined;
 };
 
 export type PutV1CompaniesCompanyUuidTaxRequirementsStateRequest = {
@@ -50,13 +46,15 @@ export type PutV1CompaniesCompanyUuidTaxRequirementsStateRequest = {
    */
   companyUuid: string;
   /**
-   * 2-letter US state abbreviation
+   * The two-letter state abbreviation
    */
   state: string;
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion
+    | undefined;
   requestBody: PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody;
 };
 
@@ -65,59 +63,17 @@ export type PutV1CompaniesCompanyUuidTaxRequirementsStateResponse = {
 };
 
 /** @internal */
-export type Requirements$Outbound = {
-  key?: string | undefined;
-  value?: string | null | undefined;
-};
-
-/** @internal */
-export const Requirements$outboundSchema: z.ZodType<
-  Requirements$Outbound,
-  z.ZodTypeDef,
-  Requirements
-> = z.object({
-  key: z.string().optional(),
-  value: z.nullable(z.string()).optional(),
-});
-
-export function requirementsToJSON(requirements: Requirements): string {
-  return JSON.stringify(Requirements$outboundSchema.parse(requirements));
-}
-
-/** @internal */
-export type RequirementSets$Outbound = {
-  key?: string | undefined;
-  effective_from?: string | null | undefined;
-  state?: string | undefined;
-  requirements?: Array<Requirements$Outbound> | undefined;
-};
-
-/** @internal */
-export const RequirementSets$outboundSchema: z.ZodType<
-  RequirementSets$Outbound,
-  z.ZodTypeDef,
-  RequirementSets
-> = z.object({
-  key: z.string().optional(),
-  effectiveFrom: z.nullable(z.string()).optional(),
-  state: z.string().optional(),
-  requirements: z.array(z.lazy(() => Requirements$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    effectiveFrom: "effective_from",
-  });
-});
-
-export function requirementSetsToJSON(
-  requirementSets: RequirementSets,
-): string {
-  return JSON.stringify(RequirementSets$outboundSchema.parse(requirementSets));
-}
+export const PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion,
+  );
 
 /** @internal */
 export type PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody$Outbound =
   {
-    requirement_sets?: Array<RequirementSets$Outbound> | undefined;
+    requirement_sets?: Array<TaxRequirementSetUpdate$Outbound> | undefined;
   };
 
 /** @internal */
@@ -127,8 +83,7 @@ export const PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody$outboundSc
     z.ZodTypeDef,
     PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody
   > = z.object({
-    requirementSets: z.array(z.lazy(() => RequirementSets$outboundSchema))
-      .optional(),
+    requirementSets: z.array(TaxRequirementSetUpdate$outboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       requirementSets: "requirement_sets",
@@ -163,7 +118,9 @@ export const PutV1CompaniesCompanyUuidTaxRequirementsStateRequest$outboundSchema
   > = z.object({
     companyUuid: z.string(),
     state: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion:
+      PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody$outboundSchema
     ),

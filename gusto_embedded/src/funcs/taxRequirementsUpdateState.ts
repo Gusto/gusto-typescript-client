@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -34,10 +38,16 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update State Tax Requirements
+ * Update tax requirements for a state
  *
  * @remarks
- * Update State Tax Requirements
+ * Updates the tax requirement answers for a specific state. Submit answers to the requirement questions returned
+ * by [GET /v1/companies/{company_uuid}/tax_requirements/{state}](ref:get-v1-companies-company_uuid-tax_requirements-state).
+ *
+ * ### Prerequisites
+ *
+ * 1. Retrieve current requirements via [GET /v1/companies/{company_uuid}/tax_requirements/{state}](ref:get-v1-companies-company_uuid-tax_requirements-state)
+ * 2. Ensure that each requirement set that you're updating includes the correct `key`, `state`, and `effective_from` values from the GET response
  *
  * scope: `company_tax_requirements:write`
  */
@@ -48,6 +58,7 @@ export function taxRequirementsUpdateState(
 ): APIPromise<
   Result<
     PutV1CompaniesCompanyUuidTaxRequirementsStateResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -74,6 +85,7 @@ async function $do(
   [
     Result<
       PutV1CompaniesCompanyUuidTaxRequirementsStateResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -111,7 +123,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/companies/{company_uuid}/tax_requirements/{state}",
   )(pathParams);
@@ -179,6 +190,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1CompaniesCompanyUuidTaxRequirementsStateResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -193,8 +205,9 @@ async function $do(
       200,
       PutV1CompaniesCompanyUuidTaxRequirementsStateResponse$inboundSchema,
     ),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {
