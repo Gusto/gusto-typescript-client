@@ -4,7 +4,10 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
@@ -145,7 +148,7 @@ export type EmployeeBenefit = {
   /**
    * Identifier for a 401(k) loan assigned by the 401(k) provider
    */
-  retirementLoanIdentifier?: string | undefined;
+  retirementLoanIdentifier?: string | null | undefined;
   /**
    * The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.
    */
@@ -190,6 +193,7 @@ export type EmployeeBenefit = {
    * The UUID of the employee benefit.
    */
   uuid: string;
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -277,32 +281,36 @@ export const EmployeeBenefit$inboundSchema: z.ZodType<
   EmployeeBenefit,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  version: z.string().optional(),
-  active: z.boolean().default(true),
-  employee_deduction: z.string().default("0.00"),
-  deduct_as_percentage: z.boolean().default(false),
-  employee_deduction_annual_maximum: z.nullable(z.string()).optional(),
-  contribution: z.lazy(() => Contribution$inboundSchema).optional(),
-  elective: z.boolean().default(false),
-  company_contribution_annual_maximum: z.nullable(z.string()).optional(),
-  limit_option: z.nullable(z.string()).optional(),
-  catch_up: z.nullable(z.boolean().default(false)),
-  retirement_loan_identifier: z.string().optional(),
-  coverage_amount: z.nullable(z.string()).optional(),
-  deduction_reduces_taxable_income: z.nullable(
-    DeductionReducesTaxableIncome$inboundSchema.default("unset"),
-  ),
-  coverage_salary_multiplier: z.nullable(z.string().default("0.00")),
-  company_contribution: z.string().default("0.00"),
-  contribute_as_percentage: z.boolean().default(false),
-  effective_date: z.string().transform(v => new RFCDate(v)).optional(),
-  expiration_date: z.nullable(z.string().transform(v => new RFCDate(v)))
-    .optional(),
-  employee_uuid: z.string().optional(),
-  company_benefit_uuid: z.string().optional(),
-  uuid: z.string(),
-}).transform((v) => {
+> = collectExtraKeys$(
+  z.object({
+    version: z.string().optional(),
+    active: z.boolean().default(true),
+    employee_deduction: z.string().default("0.00"),
+    deduct_as_percentage: z.boolean().default(false),
+    employee_deduction_annual_maximum: z.nullable(z.string()).optional(),
+    contribution: z.lazy(() => Contribution$inboundSchema).optional(),
+    elective: z.boolean().default(false),
+    company_contribution_annual_maximum: z.nullable(z.string()).optional(),
+    limit_option: z.nullable(z.string()).optional(),
+    catch_up: z.nullable(z.boolean().default(false)),
+    retirement_loan_identifier: z.nullable(z.string()).optional(),
+    coverage_amount: z.nullable(z.string()).optional(),
+    deduction_reduces_taxable_income: z.nullable(
+      DeductionReducesTaxableIncome$inboundSchema.default("unset"),
+    ),
+    coverage_salary_multiplier: z.nullable(z.string().default("0.00")),
+    company_contribution: z.string().default("0.00"),
+    contribute_as_percentage: z.boolean().default(false),
+    effective_date: z.string().transform(v => new RFCDate(v)).optional(),
+    expiration_date: z.nullable(z.string().transform(v => new RFCDate(v)))
+      .optional(),
+    employee_uuid: z.string().optional(),
+    company_benefit_uuid: z.string().optional(),
+    uuid: z.string(),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+).transform((v) => {
   return remap$(v, {
     "employee_deduction": "employeeDeduction",
     "deduct_as_percentage": "deductAsPercentage",

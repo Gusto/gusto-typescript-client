@@ -46,6 +46,8 @@ import { Result } from "../types/fp.js";
  * The salary estimate must not be finalized (accepted). Once accepted, salary estimates become read-only for record-keeping purposes.
  *
  * scope: `salary_estimates:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function salaryEstimatesPutV1SalaryEstimatesId(
   client: GustoEmbeddedCore,
@@ -112,7 +114,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/salary_estimates/{uuid}")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -129,7 +130,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

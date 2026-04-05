@@ -3,7 +3,7 @@
  */
 
 import { GustoEmbeddedCore } from "../core.js";
-import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple, queryJoin } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -40,6 +40,8 @@ import { Result } from "../types/fp.js";
  * Get all contractors, active and inactive, individual and business, for a company.
  *
  * scope: `contractors:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function contractorsList(
   client: GustoEmbeddedCore,
@@ -105,21 +107,25 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_uuid}/contractors")(
     pathParams,
   );
 
-  const query = encodeFormQuery({
-    "onboarded": payload.onboarded,
-    "onboarded_active": payload.onboarded_active,
-    "page": payload.page,
-    "per": payload.per,
-    "search_term": payload.search_term,
-    "sort_by": payload.sort_by,
-    "terminated": payload.terminated,
-    "terminated_today": payload.terminated_today,
-  });
+  const query = queryJoin(
+    encodeFormQuery({
+      "include": payload.include,
+    }, { explode: false }),
+    encodeFormQuery({
+      "onboarded": payload.onboarded,
+      "onboarded_active": payload.onboarded_active,
+      "page": payload.page,
+      "per": payload.per,
+      "search_term": payload.search_term,
+      "sort_by": payload.sort_by,
+      "terminated": payload.terminated,
+      "terminated_today": payload.terminated_today,
+    }),
+  );
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -134,7 +140,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

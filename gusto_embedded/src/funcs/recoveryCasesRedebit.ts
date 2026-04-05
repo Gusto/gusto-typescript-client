@@ -109,7 +109,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc("/v1/recovery_cases/{recovery_case_uuid}/redebit")(
     pathParams,
   );

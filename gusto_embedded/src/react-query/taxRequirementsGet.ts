@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompaniesCompanyUuidTaxRequirementsStateRequest } from "../models/operations/getv1companiescompanyuuidtaxrequirementsstate.js";
+import {
+  GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion,
+  GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
+} from "../models/operations/getv1companiescompanyuuidtaxrequirementsstate.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type TaxRequirementsGetQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -52,49 +56,14 @@ export type TaxRequirementsGetQueryError =
   | SDKValidationError;
 
 /**
- * Get State Tax Requirements
+ * Get tax requirements for a state
  *
  * @remarks
- * Get all tax requirements for a given state.
+ * Retrieves the detailed tax requirements for a specific state. The response includes requirement sets grouped by
+ * category (e.g., registrations, tax rates, deposit schedules), each containing individual requirements with their
+ * current values, labels, and metadata describing the expected input format.
  *
- * ### Metadata Examples
- *
- * ```json select
- * {
- *   "type": "select",
- *   "options": [
- *     { "label": "Semiweekly",  value: "Semi-weekly" },
- *     { "label": "Monthly",  value: "Monthly" },
- *     { "label": "Quarterly",  value: "Quarterly" },
- *   ]
- * }
- * ```
- * ```json radio
- * {
- *   "type": "radio",
- *   "options": [
- *     { "label": "No, we cannot reimburse",  value: false, short_label: "Not Reimbursable" },
- *     { "label": "Yes, we can reimburse",  value: true, short_label: "Reimbursable" },
- *   ]
- * }
- * ```
- * ```json account_number
- * {
- *   "type": "account_number",
- *   "mask": "######-##',
- *   "prefix": null
- * }
- * ```
- * ```json tax_rate
- * {
- *   "type": "tax_rate",
- *   "validation": {
- *     "type": "min_max",
- *     "min": "0.0004",
- *     "max": "0.081"
- *   }
- * }
- * ```
+ * Use this to build dynamic UIs for tax setup or to read the current tax configuration for a state.
  *
  * scope: `company_tax_requirements:read`
  */
@@ -117,49 +86,14 @@ export function useTaxRequirementsGet(
 }
 
 /**
- * Get State Tax Requirements
+ * Get tax requirements for a state
  *
  * @remarks
- * Get all tax requirements for a given state.
+ * Retrieves the detailed tax requirements for a specific state. The response includes requirement sets grouped by
+ * category (e.g., registrations, tax rates, deposit schedules), each containing individual requirements with their
+ * current values, labels, and metadata describing the expected input format.
  *
- * ### Metadata Examples
- *
- * ```json select
- * {
- *   "type": "select",
- *   "options": [
- *     { "label": "Semiweekly",  value: "Semi-weekly" },
- *     { "label": "Monthly",  value: "Monthly" },
- *     { "label": "Quarterly",  value: "Quarterly" },
- *   ]
- * }
- * ```
- * ```json radio
- * {
- *   "type": "radio",
- *   "options": [
- *     { "label": "No, we cannot reimburse",  value: false, short_label: "Not Reimbursable" },
- *     { "label": "Yes, we can reimburse",  value: true, short_label: "Reimbursable" },
- *   ]
- * }
- * ```
- * ```json account_number
- * {
- *   "type": "account_number",
- *   "mask": "######-##',
- *   "prefix": null
- * }
- * ```
- * ```json tax_rate
- * {
- *   "type": "tax_rate",
- *   "validation": {
- *     "type": "min_max",
- *     "min": "0.0004",
- *     "max": "0.081"
- *   }
- * }
- * ```
+ * Use this to build dynamic UIs for tax setup or to read the current tax configuration for a state.
  *
  * scope: `company_tax_requirements:read`
  */
@@ -190,8 +124,10 @@ export function setTaxRequirementsGetData(
     companyUuid: string,
     state: string,
     parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion
+        | undefined;
       scheduling?: boolean | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: TaxRequirementsGetQueryData,
@@ -208,8 +144,10 @@ export function invalidateTaxRequirementsGet(
       companyUuid: string,
       state: string,
       parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion
+          | undefined;
         scheduling?: boolean | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,

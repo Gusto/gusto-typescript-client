@@ -44,6 +44,8 @@ import { Result } from "../types/fp.js";
  * The signatories:read scope is required to return primary_signatory.
  *
  * scope: `companies:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function companiesGet(
   client: GustoEmbeddedCore,
@@ -108,7 +110,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -124,7 +125,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

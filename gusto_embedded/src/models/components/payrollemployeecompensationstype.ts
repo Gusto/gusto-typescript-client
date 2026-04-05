@@ -101,14 +101,14 @@ export type PayrollEmployeeCompensationsTypeReimbursements = {
 };
 
 /**
- * The amount type of the deduction for the pay period. Only present for calculated or processed payrolls.
+ * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
  */
 export const AmountType = {
   Fixed: "fixed",
   Percent: "percent",
 } as const;
 /**
- * The amount type of the deduction for the pay period. Only present for calculated or processed payrolls.
+ * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
  */
 export type AmountType = ClosedEnum<typeof AmountType>;
 
@@ -122,11 +122,11 @@ export type Deductions = {
    */
   amount?: number | undefined;
   /**
-   * The amount type of the deduction for the pay period. Only present for calculated or processed payrolls.
+   * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
    */
   amountType?: AmountType | undefined;
   /**
-   * The UUID of the deduction. Only present for calculated or processed payrolls.
+   * The UUID of the deduction. Only present for unprocessed payrolls.
    */
   uuid?: string | undefined;
 };

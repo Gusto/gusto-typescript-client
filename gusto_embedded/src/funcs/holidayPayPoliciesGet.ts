@@ -40,6 +40,8 @@ import { Result } from "../types/fp.js";
  * Get a company's holiday pay policy
  *
  * scope: `holiday_pay_policies:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function holidayPayPoliciesGet(
   client: GustoEmbeddedCore,
@@ -107,7 +109,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_uuid}/holiday_pay_policy")(
     pathParams,
   );
@@ -125,7 +126,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

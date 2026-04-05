@@ -98,7 +98,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/departments/{department_uuid}/remove")(
     pathParams,
   );

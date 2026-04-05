@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type CompanyAttachmentsCreateMutationData =
   PostV1CompaniesAttachmentResponse;
 
 export type CompanyAttachmentsCreateMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -53,9 +55,10 @@ export type CompanyAttachmentsCreateMutationError =
  * Create Company Attachment and Upload File
  *
  * @remarks
- * Upload a file and create a company attachment. We recommend uploading
- * PDF files for optimal compatibility. However, the following file types are
- * allowed: .qbb, .qbm, .gif, .jpg, .png, .pdf, .xls, .xlsx, .doc and .docx.
+ * Upload a file and create a company attachment. We recommend uploading PDF files for optimal compatibility. However, the following file types are allowed: .qbb, .qbm, .gif, .jpg, .png, .pdf, .xls, .xlsx, .doc and .docx.
+ *
+ * ### Related guides
+ * - [Manage company attachments](doc:manage-company-attachments)
  *
  * scope: `company_attachments:write`
  */

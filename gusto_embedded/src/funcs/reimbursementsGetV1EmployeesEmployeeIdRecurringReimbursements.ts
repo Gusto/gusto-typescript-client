@@ -40,6 +40,8 @@ import { Result } from "../types/fp.js";
  * Get all active recurring reimbursements for an employee.
  *
  * scope: `reimbursements:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function reimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements(
   client: GustoEmbeddedCore,
@@ -106,7 +108,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/employees/{employee_id}/recurring_reimbursements",
   )(pathParams);
@@ -129,7 +130,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

@@ -5,93 +5,65 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { Admin, Admin$inboundSchema } from "../components/admin.js";
+import {
+  AdminCreateRequest,
+  AdminCreateRequest$Outbound,
+  AdminCreateRequest$outboundSchema,
+} from "../components/admincreaterequest.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PostV1CompaniesCompanyIdAdminsRequestBody = {
-  /**
-   * The first name of the admin.
-   */
-  firstName: string;
-  /**
-   * The last name of the admin.
-   */
-  lastName: string;
-  /**
-   * The email of the admin for Gusto's system. If the email matches an existing user, this will create an admin account for them.
-   */
-  email: string;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion
+>;
 
 export type PostV1CompaniesCompanyIdAdminsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
   companyId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostV1CompaniesCompanyIdAdminsRequestBody;
+  adminCreateRequest: AdminCreateRequest;
 };
 
 export type PostV1CompaniesCompanyIdAdminsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
   admin?: Admin | undefined;
 };
 
 /** @internal */
-export type PostV1CompaniesCompanyIdAdminsRequestBody$Outbound = {
-  first_name: string;
-  last_name: string;
-  email: string;
-};
-
-/** @internal */
-export const PostV1CompaniesCompanyIdAdminsRequestBody$outboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdAdminsRequestBody$Outbound,
-    z.ZodTypeDef,
-    PostV1CompaniesCompanyIdAdminsRequestBody
-  > = z.object({
-    firstName: z.string(),
-    lastName: z.string(),
-    email: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      firstName: "first_name",
-      lastName: "last_name",
-    });
-  });
-
-export function postV1CompaniesCompanyIdAdminsRequestBodyToJSON(
-  postV1CompaniesCompanyIdAdminsRequestBody:
-    PostV1CompaniesCompanyIdAdminsRequestBody,
-): string {
-  return JSON.stringify(
-    PostV1CompaniesCompanyIdAdminsRequestBody$outboundSchema.parse(
-      postV1CompaniesCompanyIdAdminsRequestBody,
-    ),
-  );
-}
+export const PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> =
+    z.nativeEnum(PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PostV1CompaniesCompanyIdAdminsRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostV1CompaniesCompanyIdAdminsRequestBody$Outbound;
+  company_id: string;
+  "Admin-Create-Request": AdminCreateRequest$Outbound;
 };
 
 /** @internal */
@@ -100,16 +72,17 @@ export const PostV1CompaniesCompanyIdAdminsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1CompaniesCompanyIdAdminsRequest
 > = z.object({
+  xGustoAPIVersion:
+    PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
   companyId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.lazy(() =>
-    PostV1CompaniesCompanyIdAdminsRequestBody$outboundSchema
-  ),
+  adminCreateRequest: AdminCreateRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    companyId: "company_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    companyId: "company_id",
+    adminCreateRequest: "Admin-Create-Request",
   });
 });
 

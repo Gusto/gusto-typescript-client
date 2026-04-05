@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -34,13 +38,23 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update Federal Tax Details
+ * Update a company's federal tax details
  *
  * @remarks
- * Updates attributes relevant for a company's federal taxes.
- * This information is required is to onboard a company for use with Gusto Embedded Payroll.
+ * Updates a company's federal tax details including EIN, legal name, tax payer type, filing form, and S-Corp
+ * taxation status. This information is required to onboard a company for use with Gusto Embedded Payroll.
+ *
+ * ### Prerequisites
+ * Before calling this endpoint, retrieve the current federal tax details and `version` via [GET /v1/companies/{company_id}/federal_tax_details](ref:get-v1-companies-company_id-federal_tax_details)
+ *
+ * ### Webhooks
+ * - `company.updated`: Fires when federal tax details for a company are successfully updated
+ *
+ * **Setup:** [POST /v1/webhook_subscriptions](ref:post-v1-webhook-subscription) with `subscription_types`: `["Company"]`
  *
  * scope: `company_federal_taxes:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function federalTaxDetailsUpdate(
   client: GustoEmbeddedCore,
@@ -49,6 +63,7 @@ export function federalTaxDetailsUpdate(
 ): APIPromise<
   Result<
     PutV1CompaniesCompanyIdFederalTaxDetailsResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -75,6 +90,7 @@ async function $do(
   [
     Result<
       PutV1CompaniesCompanyIdFederalTaxDetailsResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -100,7 +116,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload["Federal-Tax-Details-Update"], {
+    explode: true,
+  });
 
   const pathParams = {
     company_id: encodeSimple("company_id", payload.company_id, {
@@ -108,7 +126,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/federal_tax_details")(
     pathParams,
   );
@@ -127,7 +144,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -161,7 +178,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    errorCodes: ["404", "409", "422", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -176,6 +193,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1CompaniesCompanyIdFederalTaxDetailsResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -191,8 +209,9 @@ async function $do(
       PutV1CompaniesCompanyIdFederalTaxDetailsResponse$inboundSchema,
       { key: "Federal-Tax-Details" },
     ),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.jsonErr([409, 422], UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

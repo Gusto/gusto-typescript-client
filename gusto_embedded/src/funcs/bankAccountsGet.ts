@@ -40,6 +40,8 @@ import { Result } from "../types/fp.js";
  * Returns company bank accounts. Currently, we only support a single default bank account per company.
  *
  * scope: `company_bank_accounts:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function bankAccountsGet(
   client: GustoEmbeddedCore,
@@ -105,7 +107,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/bank_accounts")(
     pathParams,
   );
@@ -123,7 +124,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

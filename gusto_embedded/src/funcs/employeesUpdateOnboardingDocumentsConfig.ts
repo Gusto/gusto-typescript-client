@@ -44,6 +44,8 @@ import { Result } from "../types/fp.js";
  * - [Employee onboarding](doc:employee-onboarding)
  *
  * scope: `employees:manage`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function employeesUpdateOnboardingDocumentsConfig(
   client: GustoEmbeddedCore,
@@ -114,7 +116,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/employees/{employee_id}/onboarding_documents_config",
   )(pathParams);
@@ -133,7 +134,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

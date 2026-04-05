@@ -21,7 +21,6 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   DeleteV1CompanyBenefitsCompanyBenefitIdRequest,
   DeleteV1CompanyBenefitsCompanyBenefitIdResponse,
@@ -39,7 +38,6 @@ export type CompanyBenefitsDeleteMutationData =
   DeleteV1CompanyBenefitsCompanyBenefitIdResponse;
 
 export type CompanyBenefitsDeleteMutationError =
-  | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -54,6 +52,7 @@ export type CompanyBenefitsDeleteMutationError =
  *
  * @remarks
  * The following must be true in order to delete a company benefit
+ *
  *   - There are no employee benefits associated with the company benefit
  *   - There are no payroll items associated with the company benefit
  *   - The benefit is not managed by a Partner or by Gusto (type must be 'External')

@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyBenefitsGetEmployeeBenefits } from "../funcs/companyBenefitsGetEmployeeBenefits.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion,
   GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude,
   GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
   GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse,
@@ -50,10 +50,10 @@ export function buildCompanyBenefitsGetEmployeeBenefitsQuery(
     queryKey: queryKeyCompanyBenefitsGetEmployeeBenefits(
       request.companyBenefitId,
       {
+        xGustoAPIVersion: request.xGustoAPIVersion,
         page: request.page,
         per: request.per,
         include: request.include,
-        xGustoAPIVersion: request.xGustoAPIVersion,
       },
     ),
     queryFn: async function companyBenefitsGetEmployeeBenefitsQueryFn(
@@ -82,12 +82,14 @@ export function buildCompanyBenefitsGetEmployeeBenefitsQuery(
 export function queryKeyCompanyBenefitsGetEmployeeBenefits(
   companyBenefitId: string,
   parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion
+      | undefined;
     page?: number | undefined;
     per?: number | undefined;
     include?:
       | GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude
       | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

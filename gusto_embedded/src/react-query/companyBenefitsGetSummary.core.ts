@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyBenefitsGetSummary } from "../funcs/companyBenefitsGetSummary.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1BenefitsCompanyBenefitIdSummaryHeaderXGustoAPIVersion,
   GetV1BenefitsCompanyBenefitIdSummaryRequest,
   GetV1BenefitsCompanyBenefitIdSummaryResponse,
 } from "../models/operations/getv1benefitscompanybenefitidsummary.js";
@@ -47,10 +47,10 @@ export function buildCompanyBenefitsGetSummaryQuery(
 } {
   return {
     queryKey: queryKeyCompanyBenefitsGetSummary(request.companyBenefitId, {
+      xGustoAPIVersion: request.xGustoAPIVersion,
       startDate: request.startDate,
       endDate: request.endDate,
       detailed: request.detailed,
-      xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function companyBenefitsGetSummaryQueryFn(
       ctx,
@@ -78,10 +78,12 @@ export function buildCompanyBenefitsGetSummaryQuery(
 export function queryKeyCompanyBenefitsGetSummary(
   companyBenefitId: string,
   parameters: {
+    xGustoAPIVersion?:
+      | GetV1BenefitsCompanyBenefitIdSummaryHeaderXGustoAPIVersion
+      | undefined;
     startDate?: string | undefined;
     endDate?: string | undefined;
     detailed?: boolean | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

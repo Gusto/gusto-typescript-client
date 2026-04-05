@@ -48,6 +48,8 @@ import { Result } from "../types/fp.js";
  * The report is generated asynchronously. After making this request, you will receive a `request_uuid` which can be used to poll the [Get a report](ref:get-v1-reports-request_uuid) endpoint to check the status and retrieve the report when complete.
  *
  * scope: `company_reports:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function reportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(
   client: GustoEmbeddedCore,
@@ -116,7 +118,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/companies/{company_id}/reports/employees_annual_fica_wage",
   )(pathParams);
@@ -135,7 +136,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

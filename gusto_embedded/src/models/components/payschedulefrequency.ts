@@ -6,7 +6,16 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
- * The frequency that employees on this pay schedule are paid with Gusto.
+ * Pay frequency for this schedule. READ-ONLY.
+ *
+ * @remarks
+ *
+ * - `Every week`: Employees are paid weekly.
+ * - `Every other week`: Employees are paid bi-weekly (every two weeks).
+ * - `Twice per month`: Employees are paid on two fixed days each month (e.g. 1st and 15th); use day_1 and day_2.
+ * - `Monthly`: Employees are paid once per month; use day_1 for the pay day.
+ * - `Quarterly`: Employees are paid every three months.
+ * - `Annually`: Employees are paid once per year.
  */
 export const PayScheduleFrequency = {
   EveryWeek: "Every week",
@@ -17,7 +26,16 @@ export const PayScheduleFrequency = {
   Annually: "Annually",
 } as const;
 /**
- * The frequency that employees on this pay schedule are paid with Gusto.
+ * Pay frequency for this schedule. READ-ONLY.
+ *
+ * @remarks
+ *
+ * - `Every week`: Employees are paid weekly.
+ * - `Every other week`: Employees are paid bi-weekly (every two weeks).
+ * - `Twice per month`: Employees are paid on two fixed days each month (e.g. 1st and 15th); use day_1 and day_2.
+ * - `Monthly`: Employees are paid once per month; use day_1 for the pay day.
+ * - `Quarterly`: Employees are paid every three months.
+ * - `Annually`: Employees are paid once per year.
  */
 export type PayScheduleFrequency = ClosedEnum<typeof PayScheduleFrequency>;
 

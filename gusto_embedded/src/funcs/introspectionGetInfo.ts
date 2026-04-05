@@ -36,6 +36,8 @@ import { Result } from "../types/fp.js";
  * Returns scope and resource information associated with the current access token. Use this endpoint to verify the following for the current access token:
  * * Resource (company, employee, contractor, or application) and resource owner
  * * Access level
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function introspectionGetInfo(
   client: GustoEmbeddedCore,
@@ -107,7 +109,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

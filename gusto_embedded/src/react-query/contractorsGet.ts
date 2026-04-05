@@ -23,6 +23,7 @@ import { ResponseValidationError } from "../models/errors/responsevalidationerro
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   GetV1ContractorsContractorUuidHeaderXGustoAPIVersion,
+  GetV1ContractorsContractorUuidQueryParamInclude,
   GetV1ContractorsContractorUuidRequest,
 } from "../models/operations/getv1contractorscontractoruuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -112,6 +113,9 @@ export function setContractorsGetData(
       xGustoAPIVersion?:
         | GetV1ContractorsContractorUuidHeaderXGustoAPIVersion
         | undefined;
+      include?:
+        | Array<GetV1ContractorsContractorUuidQueryParamInclude>
+        | undefined;
     },
   ],
   data: ContractorsGetQueryData,
@@ -129,6 +133,9 @@ export function invalidateContractorsGet(
       parameters: {
         xGustoAPIVersion?:
           | GetV1ContractorsContractorUuidHeaderXGustoAPIVersion
+          | undefined;
+        include?:
+          | Array<GetV1ContractorsContractorUuidQueryParamInclude>
           | undefined;
       },
     ]

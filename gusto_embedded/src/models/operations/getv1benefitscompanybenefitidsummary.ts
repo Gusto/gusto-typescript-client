@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   BenefitSummary,
@@ -14,13 +15,27 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1BenefitsCompanyBenefitIdSummaryHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1BenefitsCompanyBenefitIdSummaryHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetV1BenefitsCompanyBenefitIdSummaryHeaderXGustoAPIVersion>;
+
 export type GetV1BenefitsCompanyBenefitIdSummaryRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1BenefitsCompanyBenefitIdSummaryHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company benefit
    */
@@ -37,10 +52,6 @@ export type GetV1BenefitsCompanyBenefitIdSummaryRequest = {
    * Display employee payroll item summary
    */
   detailed?: boolean | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1BenefitsCompanyBenefitIdSummaryResponse = {
@@ -52,12 +63,18 @@ export type GetV1BenefitsCompanyBenefitIdSummaryResponse = {
 };
 
 /** @internal */
+export const GetV1BenefitsCompanyBenefitIdSummaryHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1BenefitsCompanyBenefitIdSummaryHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1BenefitsCompanyBenefitIdSummaryHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetV1BenefitsCompanyBenefitIdSummaryRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_benefit_id: string;
   start_date?: string | undefined;
   end_date?: string | undefined;
   detailed?: boolean | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -67,17 +84,19 @@ export const GetV1BenefitsCompanyBenefitIdSummaryRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1BenefitsCompanyBenefitIdSummaryRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1BenefitsCompanyBenefitIdSummaryHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyBenefitId: z.string(),
     startDate: z.string().optional(),
     endDate: z.string().optional(),
     detailed: z.boolean().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       companyBenefitId: "company_benefit_id",
       startDate: "start_date",
       endDate: "end_date",
-      xGustoAPIVersion: "X-Gusto-API-Version",
     });
   });
 

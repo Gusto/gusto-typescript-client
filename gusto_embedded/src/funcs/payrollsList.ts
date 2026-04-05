@@ -46,6 +46,8 @@ import { Result } from "../types/fp.js";
  * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1 year apart.
  *
  * scope: `payrolls:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function payrollsList(
   client: GustoEmbeddedCore,
@@ -111,7 +113,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/payrolls")(pathParams);
 
   const query = queryJoin(
@@ -145,7 +146,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

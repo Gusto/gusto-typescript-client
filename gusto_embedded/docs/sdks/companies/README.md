@@ -1926,7 +1926,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.companies.createAdmin({
     companyId: "<id>",
-    requestBody: {
+    adminCreateRequest: {
       firstName: "Hilbert",
       lastName: "Hilll",
       email: "Dejah.Pagac14@gmail.com",
@@ -1956,7 +1956,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await companiesCreateAdmin(gustoEmbedded, {
     companyId: "<id>",
-    requestBody: {
+    adminCreateRequest: {
       firstName: "Hilbert",
       lastName: "Hilll",
       email: "Dejah.Pagac14@gmail.com",
@@ -2002,7 +2002,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.companies.createAdmin({
     companyId: "<id>",
-    requestBody: {
+    adminCreateRequest: {
       firstName: "John",
       lastName: "Smith",
       email: "jsmith99@gmail.com",
@@ -2032,7 +2032,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await companiesCreateAdmin(gustoEmbedded, {
     companyId: "<id>",
-    requestBody: {
+    adminCreateRequest: {
       firstName: "John",
       lastName: "Smith",
       email: "jsmith99@gmail.com",
@@ -2078,7 +2078,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.companies.createAdmin({
     companyId: "<id>",
-    requestBody: {
+    adminCreateRequest: {
       firstName: "Hilbert",
       lastName: "Hilll",
       email: "Dejah.Pagac14@gmail.com",
@@ -2108,7 +2108,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await companiesCreateAdmin(gustoEmbedded, {
     companyId: "<id>",
-    requestBody: {
+    adminCreateRequest: {
       firstName: "Hilbert",
       lastName: "Hilll",
       email: "Dejah.Pagac14@gmail.com",
@@ -2154,7 +2154,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.companies.createAdmin({
     companyId: "<id>",
-    requestBody: {
+    adminCreateRequest: {
       firstName: "Hilbert",
       lastName: "Hilll",
       email: "Dejah.Pagac14@gmail.com",
@@ -2184,7 +2184,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await companiesCreateAdmin(gustoEmbedded, {
     companyId: "<id>",
-    requestBody: {
+    adminCreateRequest: {
       firstName: "Hilbert",
       lastName: "Hilll",
       email: "Dejah.Pagac14@gmail.com",
@@ -2235,6 +2235,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
@@ -2337,9 +2338,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## getOnboardingStatus
 

@@ -23,6 +23,7 @@ import { ResponseValidationError } from "../models/errors/responsevalidationerro
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion,
+  GetV1CompaniesCompanyUuidContractorsQueryParamInclude,
   GetV1CompaniesCompanyUuidContractorsRequest,
 } from "../models/operations/getv1companiescompanyuuidcontractors.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -121,6 +122,9 @@ export function setContractorsListData(
       onboardedActive?: boolean | undefined;
       terminated?: boolean | undefined;
       terminatedToday?: boolean | undefined;
+      include?:
+        | Array<GetV1CompaniesCompanyUuidContractorsQueryParamInclude>
+        | undefined;
       page?: number | undefined;
       per?: number | undefined;
     },
@@ -147,6 +151,9 @@ export function invalidateContractorsList(
         onboardedActive?: boolean | undefined;
         terminated?: boolean | undefined;
         terminatedToday?: boolean | undefined;
+        include?:
+          | Array<GetV1CompaniesCompanyUuidContractorsQueryParamInclude>
+          | undefined;
         page?: number | undefined;
         per?: number | undefined;
       },

@@ -10,7 +10,12 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The category of the company attachment
+ * The category of the company attachment.
+ *
+ * @remarks
+ * - `gep_notice`: A tax notice attachment
+ * - `compliance`: A compliance attachment
+ * - `other`: Any other attachment type
  */
 export const Category = {
   GepNotice: "gep_notice",
@@ -18,7 +23,12 @@ export const Category = {
   Other: "other",
 } as const;
 /**
- * The category of the company attachment
+ * The category of the company attachment.
+ *
+ * @remarks
+ * - `gep_notice`: A tax notice attachment
+ * - `compliance`: A compliance attachment
+ * - `other`: Any other attachment type
  */
 export type Category = ClosedEnum<typeof Category>;
 
@@ -29,19 +39,24 @@ export type CompanyAttachment = {
   /**
    * UUID of the company attachment
    */
-  uuid?: string | undefined;
+  uuid: string;
   /**
    * name of the file uploaded
    */
-  name?: string | undefined;
+  name: string;
   /**
-   * The category of the company attachment
+   * The category of the company attachment.
+   *
+   * @remarks
+   * - `gep_notice`: A tax notice attachment
+   * - `compliance`: A compliance attachment
+   * - `other`: Any other attachment type
    */
-  category?: Category | undefined;
+  category: Category;
   /**
    * The ISO 8601 timestamp of when an attachment was uploaded
    */
-  uploadTime?: string | undefined;
+  uploadTime: string;
 };
 
 /** @internal */
@@ -54,10 +69,10 @@ export const CompanyAttachment$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string().optional(),
-  name: z.string().optional(),
-  category: Category$inboundSchema.optional(),
-  upload_time: z.string().optional(),
+  uuid: z.string(),
+  name: z.string(),
+  category: Category$inboundSchema,
+  upload_time: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "upload_time": "uploadTime",

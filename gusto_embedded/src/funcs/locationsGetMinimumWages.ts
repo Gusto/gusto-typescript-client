@@ -40,6 +40,8 @@ import { Result } from "../types/fp.js";
  * Get minimum wages for a location
  *
  * scope: `companies:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function locationsGetMinimumWages(
   client: GustoEmbeddedCore,
@@ -105,7 +107,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/locations/{location_uuid}/minimum_wages")(
     pathParams,
   );
@@ -127,7 +128,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
