@@ -44,6 +44,8 @@ import { Result } from "../types/fp.js";
  * Add employees to a time off policy. Employees are required to have at least one job to be added to a time off policy. Accepts starting balances for non-unlimited policies
  *
  * scope: `time_off_policies:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function timeOffPoliciesAddEmployees(
   client: GustoEmbeddedCore,
@@ -113,7 +115,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/v1/time_off_policies/{time_off_policy_uuid}/add_employees",
   )(pathParams);
@@ -132,7 +133,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

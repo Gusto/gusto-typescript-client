@@ -59,10 +59,6 @@ import {
   PayrollUnprocessedEmployeeCompensationsType,
   PayrollUnprocessedEmployeeCompensationsType$inboundSchema,
 } from "./payrollunprocessedemployeecompensationstype.js";
-import {
-  PayrollWithholdingPayPeriodType,
-  PayrollWithholdingPayPeriodType$inboundSchema,
-} from "./payrollwithholdingpayperiodtype.js";
 
 export const OffCycleReasonType = {
   Adhoc: "Adhoc",
@@ -78,6 +74,19 @@ export const OffCycleReasonType = {
   TransitionFromOldPaySchedule: "Transition from old pay schedule",
 } as const;
 export type OffCycleReasonType = ClosedEnum<typeof OffCycleReasonType>;
+
+export const PayrollWithholdingPayPeriodType = {
+  EveryWeek: "Every week",
+  EveryOtherWeek: "Every other week",
+  TwicePerMonth: "Twice per month",
+  Monthly: "Monthly",
+  Quarterly: "Quarterly",
+  Semiannually: "Semiannually",
+  Annually: "Annually",
+} as const;
+export type PayrollWithholdingPayPeriodType = ClosedEnum<
+  typeof PayrollWithholdingPayPeriodType
+>;
 
 export type Payroll = {
   /**
@@ -135,7 +144,7 @@ export type Payroll = {
   /**
    * The payment schedule tax rate the payroll is based on. Only included for off-cycle payrolls.
    */
-  withholdingPayPeriod?: PayrollWithholdingPayPeriodType | undefined;
+  withholdingPayPeriod?: PayrollWithholdingPayPeriodType | null | undefined;
   /**
    * Block regular deductions and contributions for this payroll.  Only included for off-cycle payrolls.
    */
@@ -243,7 +252,7 @@ export type PayrollUnprocessed = {
   /**
    * The payment schedule tax rate the payroll is based on. Only included for off-cycle payrolls.
    */
-  withholdingPayPeriod?: PayrollWithholdingPayPeriodType | undefined;
+  withholdingPayPeriod?: PayrollWithholdingPayPeriodType | null | undefined;
   /**
    * Block regular deductions and contributions for this payroll.  Only included for off-cycle payrolls.
    */
@@ -368,14 +377,14 @@ export type PayrollShowReimbursements = {
 };
 
 /**
- * The amount type of the deduction for the pay period. Only present for calculated or processed payrolls.
+ * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
  */
 export const PayrollShowAmountType = {
   Fixed: "fixed",
   Percent: "percent",
 } as const;
 /**
- * The amount type of the deduction for the pay period. Only present for calculated or processed payrolls.
+ * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
  */
 export type PayrollShowAmountType = ClosedEnum<typeof PayrollShowAmountType>;
 
@@ -389,11 +398,11 @@ export type PayrollShowDeductions = {
    */
   amount?: number | undefined;
   /**
-   * The amount type of the deduction for the pay period. Only present for calculated or processed payrolls.
+   * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
    */
   amountType?: PayrollShowAmountType | undefined;
   /**
-   * The UUID of the deduction. Only present for calculated or processed payrolls.
+   * The UUID of the deduction. Only present for unprocessed payrolls.
    */
   uuid?: string | undefined;
 };
@@ -543,7 +552,7 @@ export type PayrollShow = {
   /**
    * The payment schedule tax rate the payroll is based on. Only included for off-cycle payrolls.
    */
-  withholdingPayPeriod?: PayrollWithholdingPayPeriodType | undefined;
+  withholdingPayPeriod?: PayrollWithholdingPayPeriodType | null | undefined;
   /**
    * Block regular deductions and contributions for this payroll.  Only included for off-cycle payrolls.
    */
@@ -652,7 +661,7 @@ export type PayrollPrepared = {
   /**
    * The payment schedule tax rate the payroll is based on. Only included for off-cycle payrolls.
    */
-  withholdingPayPeriod?: PayrollWithholdingPayPeriodType | undefined;
+  withholdingPayPeriod?: PayrollWithholdingPayPeriodType | null | undefined;
   /**
    * Block regular deductions and contributions for this payroll.  Only included for off-cycle payrolls.
    */
@@ -752,6 +761,11 @@ export const OffCycleReasonType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(OffCycleReasonType);
 
 /** @internal */
+export const PayrollWithholdingPayPeriodType$inboundSchema: z.ZodNativeEnum<
+  typeof PayrollWithholdingPayPeriodType
+> = z.nativeEnum(PayrollWithholdingPayPeriodType);
+
+/** @internal */
 export const Payroll$inboundSchema: z.ZodType<Payroll, z.ZodTypeDef, unknown> =
   z.object({
     payroll_deadline: z.string().datetime({ offset: true }).transform(v =>
@@ -771,8 +785,9 @@ export const Payroll$inboundSchema: z.ZodType<Payroll, z.ZodTypeDef, unknown> =
     auto_pilot: z.boolean().optional(),
     external: z.boolean().optional(),
     final_termination_payroll: z.boolean().optional(),
-    withholding_pay_period: PayrollWithholdingPayPeriodType$inboundSchema
-      .optional(),
+    withholding_pay_period: z.nullable(
+      PayrollWithholdingPayPeriodType$inboundSchema,
+    ).optional(),
     skip_regular_deductions: z.nullable(z.boolean()).optional(),
     fixed_withholding_rate: z.nullable(z.boolean()).optional(),
     pay_period: PayrollPayPeriodType$inboundSchema.optional(),
@@ -852,8 +867,9 @@ export const PayrollUnprocessed$inboundSchema: z.ZodType<
   auto_pilot: z.boolean().optional(),
   external: z.boolean().optional(),
   final_termination_payroll: z.boolean().optional(),
-  withholding_pay_period: PayrollWithholdingPayPeriodType$inboundSchema
-    .optional(),
+  withholding_pay_period: z.nullable(
+    PayrollWithholdingPayPeriodType$inboundSchema,
+  ).optional(),
   skip_regular_deductions: z.nullable(z.boolean()).optional(),
   fixed_withholding_rate: z.nullable(z.boolean()).optional(),
   pay_period: PayrollPayPeriodType$inboundSchema.optional(),
@@ -1180,8 +1196,9 @@ export const PayrollShow$inboundSchema: z.ZodType<
   auto_pilot: z.boolean().optional(),
   external: z.boolean().optional(),
   final_termination_payroll: z.boolean().optional(),
-  withholding_pay_period: PayrollWithholdingPayPeriodType$inboundSchema
-    .optional(),
+  withholding_pay_period: z.nullable(
+    PayrollWithholdingPayPeriodType$inboundSchema,
+  ).optional(),
   skip_regular_deductions: z.nullable(z.boolean()).optional(),
   fixed_withholding_rate: z.nullable(z.boolean()).optional(),
   pay_period: PayrollPayPeriodType$inboundSchema.optional(),
@@ -1264,8 +1281,9 @@ export const PayrollPrepared$inboundSchema: z.ZodType<
   auto_pilot: z.boolean().optional(),
   external: z.boolean().optional(),
   final_termination_payroll: z.boolean().optional(),
-  withholding_pay_period: PayrollWithholdingPayPeriodType$inboundSchema
-    .optional(),
+  withholding_pay_period: z.nullable(
+    PayrollWithholdingPayPeriodType$inboundSchema,
+  ).optional(),
   skip_regular_deductions: z.nullable(z.boolean()).optional(),
   fixed_withholding_rate: z.nullable(z.boolean()).optional(),
   pay_period: PayrollPayPeriodType$inboundSchema.optional(),

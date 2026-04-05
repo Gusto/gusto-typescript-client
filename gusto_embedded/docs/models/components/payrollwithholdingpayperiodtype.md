@@ -1,11 +1,9 @@
 # PayrollWithholdingPayPeriodType
 
-The payment schedule tax rate the payroll is based on. Only included for off-cycle payrolls.
-
 ## Example Usage
 
 ```typescript
-import { PayrollWithholdingPayPeriodType } from "@gusto/embedded-api/models/components/payrollwithholdingpayperiodtype.js";
+import { PayrollWithholdingPayPeriodType } from "@gusto/embedded-api/models/components/payroll.js";
 
 let value: PayrollWithholdingPayPeriodType = "Quarterly";
 ```

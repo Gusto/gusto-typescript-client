@@ -29,6 +29,14 @@ export const GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion = {
 export type GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion =
   ClosedEnum<typeof GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion>;
 
+export const GetV1CompaniesCompanyUuidContractorsQueryParamInclude = {
+  CompanyName: "company_name",
+  PortalInvitations: "portal_invitations",
+} as const;
+export type GetV1CompaniesCompanyUuidContractorsQueryParamInclude = ClosedEnum<
+  typeof GetV1CompaniesCompanyUuidContractorsQueryParamInclude
+>;
+
 export type GetV1CompaniesCompanyUuidContractorsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -65,6 +73,12 @@ export type GetV1CompaniesCompanyUuidContractorsRequest = {
    */
   terminatedToday?: boolean | undefined;
   /**
+   * Include the requested attribute(s) in each contractor response. Multiple options are comma separated.
+   */
+  include?:
+    | Array<GetV1CompaniesCompanyUuidContractorsQueryParamInclude>
+    | undefined;
+  /**
    * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
    */
   page?: number | undefined;
@@ -89,6 +103,12 @@ export const GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion$outbound
   > = z.nativeEnum(GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion);
 
 /** @internal */
+export const GetV1CompaniesCompanyUuidContractorsQueryParamInclude$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesCompanyUuidContractorsQueryParamInclude
+  > = z.nativeEnum(GetV1CompaniesCompanyUuidContractorsQueryParamInclude);
+
+/** @internal */
 export type GetV1CompaniesCompanyUuidContractorsRequest$Outbound = {
   "X-Gusto-API-Version": string;
   company_uuid: string;
@@ -98,6 +118,7 @@ export type GetV1CompaniesCompanyUuidContractorsRequest$Outbound = {
   onboarded_active?: boolean | undefined;
   terminated?: boolean | undefined;
   terminated_today?: boolean | undefined;
+  include?: Array<string> | undefined;
   page?: number | undefined;
   per?: number | undefined;
 };
@@ -119,6 +140,9 @@ export const GetV1CompaniesCompanyUuidContractorsRequest$outboundSchema:
     onboardedActive: z.boolean().optional(),
     terminated: z.boolean().optional(),
     terminatedToday: z.boolean().optional(),
+    include: z.array(
+      GetV1CompaniesCompanyUuidContractorsQueryParamInclude$outboundSchema,
+    ).optional(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
   }).transform((v) => {

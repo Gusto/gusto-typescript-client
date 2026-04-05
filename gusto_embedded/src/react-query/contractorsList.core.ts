@@ -13,6 +13,7 @@ import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion,
+  GetV1CompaniesCompanyUuidContractorsQueryParamInclude,
   GetV1CompaniesCompanyUuidContractorsRequest,
   GetV1CompaniesCompanyUuidContractorsResponse,
 } from "../models/operations/getv1companiescompanyuuidcontractors.js";
@@ -52,6 +53,7 @@ export function buildContractorsListQuery(
       onboardedActive: request.onboardedActive,
       terminated: request.terminated,
       terminatedToday: request.terminatedToday,
+      include: request.include,
       page: request.page,
       per: request.per,
     }),
@@ -90,6 +92,9 @@ export function queryKeyContractorsList(
     onboardedActive?: boolean | undefined;
     terminated?: boolean | undefined;
     terminatedToday?: boolean | undefined;
+    include?:
+      | Array<GetV1CompaniesCompanyUuidContractorsQueryParamInclude>
+      | undefined;
     page?: number | undefined;
     per?: number | undefined;
   },

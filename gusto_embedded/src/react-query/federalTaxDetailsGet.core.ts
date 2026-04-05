@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { federalTaxDetailsGet } from "../funcs/federalTaxDetailsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
   GetV1CompaniesCompanyIdFederalTaxDetailsResponse,
 } from "../models/operations/getv1companiescompanyidfederaltaxdetails.js";
@@ -74,7 +74,11 @@ export function buildFederalTaxDetailsGetQuery(
 
 export function queryKeyFederalTaxDetailsGet(
   companyId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

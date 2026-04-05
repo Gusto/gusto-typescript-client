@@ -46,6 +46,8 @@ import { Result } from "../types/fp.js";
  * As described for the GET endpoint, the answers must be supplied in the effective-dated format, but currently only a single answer will be accepted - `valid_from` and `valid_up_to` must be `"2010-01-01"` and `null` respectively.
  *
  * scope: `employee_state_taxes:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function employeeTaxSetupUpdateStateTaxes(
   client: GustoEmbeddedCore,
@@ -115,7 +117,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/employees/{employee_uuid}/state_taxes")(
     pathParams,
   );
@@ -134,7 +135,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompaniesCompanyIdFederalTaxDetailsRequest } from "../models/operations/getv1companiescompanyidfederaltaxdetails.js";
+import {
+  GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion,
+  GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
+} from "../models/operations/getv1companiescompanyidfederaltaxdetails.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type FederalTaxDetailsGetQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -52,10 +56,10 @@ export type FederalTaxDetailsGetQueryError =
   | SDKValidationError;
 
 /**
- * Get Federal Tax Details
+ * Get a company's federal tax details
  *
  * @remarks
- * Fetches attributes relevant for a company's federal taxes.
+ * Retrieves a company's federal tax details including EIN verification status, tax payer type, filing form, and other federal tax configuration.
  *
  * scope: `company_federal_taxes:read`
  */
@@ -81,10 +85,10 @@ export function useFederalTaxDetailsGet(
 }
 
 /**
- * Get Federal Tax Details
+ * Get a company's federal tax details
  *
  * @remarks
- * Fetches attributes relevant for a company's federal taxes.
+ * Retrieves a company's federal tax details including EIN verification status, tax payer type, filing form, and other federal tax configuration.
  *
  * scope: `company_federal_taxes:read`
  */
@@ -113,7 +117,11 @@ export function setFederalTaxDetailsGetData(
   client: QueryClient,
   queryKeyBase: [
     companyId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: FederalTaxDetailsGetQueryData,
 ): FederalTaxDetailsGetQueryData | undefined {
@@ -127,7 +135,11 @@ export function invalidateFederalTaxDetailsGet(
   queryKeyBase: TupleToPrefixes<
     [
       companyId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

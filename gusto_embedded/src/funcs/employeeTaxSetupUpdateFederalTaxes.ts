@@ -44,6 +44,8 @@ import { Result } from "../types/fp.js";
  * Updates federal tax (W4) information for an employee. Only rev_2020_w4 format is accepted for updates.
  *
  * scope: `employee_federal_taxes:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function employeeTaxSetupUpdateFederalTaxes(
   client: GustoEmbeddedCore,
@@ -111,7 +113,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/employees/{employee_uuid}/federal_taxes")(
     pathParams,
   );
@@ -130,7 +131,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

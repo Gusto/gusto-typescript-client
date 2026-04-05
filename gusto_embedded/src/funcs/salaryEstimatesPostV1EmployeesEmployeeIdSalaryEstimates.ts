@@ -51,6 +51,8 @@ import { Result } from "../types/fp.js";
  * Only one in-progress salary estimate can exist per employee at a time. If an in-progress estimate already exists, you must either accept it or use the update endpoint.
  *
  * scope: `salary_estimates:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function salaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimates(
   client: GustoEmbeddedCore,
@@ -120,7 +122,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/employees/{employee_id}/salary_estimates")(
     pathParams,
   );
@@ -139,7 +140,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

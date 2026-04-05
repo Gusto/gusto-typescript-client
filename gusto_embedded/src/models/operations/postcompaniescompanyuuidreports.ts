@@ -161,7 +161,7 @@ export type EmploymentType = ClosedEnum<typeof EmploymentType>;
 /**
  * Employee employment status to filter by
  */
-export const PostCompaniesCompanyUuidReportsEmploymentStatus = {
+export const EmploymentStatus = {
   ActiveFullTime: "active_full_time",
   ActivePartTime: "active_part_time",
   ActivePartTimeEligible: "active_part_time_eligible",
@@ -173,9 +173,7 @@ export const PostCompaniesCompanyUuidReportsEmploymentStatus = {
 /**
  * Employee employment status to filter by
  */
-export type PostCompaniesCompanyUuidReportsEmploymentStatus = ClosedEnum<
-  typeof PostCompaniesCompanyUuidReportsEmploymentStatus
->;
+export type EmploymentStatus = ClosedEnum<typeof EmploymentStatus>;
 
 export type PostCompaniesCompanyUuidReportsRequestBody = {
   /**
@@ -225,9 +223,7 @@ export type PostCompaniesCompanyUuidReportsRequestBody = {
   /**
    * Employee employment status to filter by
    */
-  employmentStatus?:
-    | PostCompaniesCompanyUuidReportsEmploymentStatus
-    | undefined;
+  employmentStatus?: EmploymentStatus | undefined;
   /**
    * Employees to filter by
    */
@@ -285,9 +281,9 @@ export const EmploymentType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(EmploymentType);
 
 /** @internal */
-export const PostCompaniesCompanyUuidReportsEmploymentStatus$outboundSchema:
-  z.ZodNativeEnum<typeof PostCompaniesCompanyUuidReportsEmploymentStatus> = z
-    .nativeEnum(PostCompaniesCompanyUuidReportsEmploymentStatus);
+export const EmploymentStatus$outboundSchema: z.ZodNativeEnum<
+  typeof EmploymentStatus
+> = z.nativeEnum(EmploymentStatus);
 
 /** @internal */
 export type PostCompaniesCompanyUuidReportsRequestBody$Outbound = {
@@ -329,8 +325,7 @@ export const PostCompaniesCompanyUuidReportsRequestBody$outboundSchema:
     paymentMethod: PostCompaniesCompanyUuidReportsPaymentMethod$outboundSchema
       .optional(),
     employmentType: EmploymentType$outboundSchema.optional(),
-    employmentStatus:
-      PostCompaniesCompanyUuidReportsEmploymentStatus$outboundSchema.optional(),
+    employmentStatus: EmploymentStatus$outboundSchema.optional(),
     employeeUuids: z.nullable(z.array(z.string())).optional(),
     departmentUuids: z.array(z.string()).optional(),
     workAddressUuids: z.array(z.string()).optional(),

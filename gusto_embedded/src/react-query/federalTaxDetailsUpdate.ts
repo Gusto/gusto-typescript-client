@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type FederalTaxDetailsUpdateMutationData =
   PutV1CompaniesCompanyIdFederalTaxDetailsResponse;
 
 export type FederalTaxDetailsUpdateMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -50,11 +52,19 @@ export type FederalTaxDetailsUpdateMutationError =
   | SDKValidationError;
 
 /**
- * Update Federal Tax Details
+ * Update a company's federal tax details
  *
  * @remarks
- * Updates attributes relevant for a company's federal taxes.
- * This information is required is to onboard a company for use with Gusto Embedded Payroll.
+ * Updates a company's federal tax details including EIN, legal name, tax payer type, filing form, and S-Corp
+ * taxation status. This information is required to onboard a company for use with Gusto Embedded Payroll.
+ *
+ * ### Prerequisites
+ * Before calling this endpoint, retrieve the current federal tax details and `version` via [GET /v1/companies/{company_id}/federal_tax_details](ref:get-v1-companies-company_id-federal_tax_details)
+ *
+ * ### Webhooks
+ * - `company.updated`: Fires when federal tax details for a company are successfully updated
+ *
+ * **Setup:** [POST /v1/webhook_subscriptions](ref:post-v1-webhook-subscription) with `subscription_types`: `["Company"]`
  *
  * scope: `company_federal_taxes:write`
  */

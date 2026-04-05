@@ -42,6 +42,8 @@ import { Result } from "../types/fp.js";
  * By default the payroll and associated data is deleted synchronously. To request an asynchronous delete, use the `async=true` query parameter. In both cases validation of ability to delete will be performed and an Unprocessable Entity error will be returned if the payroll is not able to be deleted. A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for asynchronous deletion, `202/Accepted` will be returned.
  *
  * scope: `payrolls:run`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function payrollsDelete(
   client: GustoEmbeddedCore,
@@ -111,7 +113,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/payrolls/{payroll_id}")(
     pathParams,
   );
@@ -133,7 +134,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

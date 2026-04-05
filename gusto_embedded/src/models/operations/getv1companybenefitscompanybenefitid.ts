@@ -15,11 +15,19 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion>;
 
 /**
  * Available options:
@@ -42,6 +50,12 @@ export type GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude = ClosedEnum<
 
 export type GetV1CompanyBenefitsCompanyBenefitIdRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the company benefit
    */
   companyBenefitId: string;
@@ -56,21 +70,23 @@ export type GetV1CompanyBenefitsCompanyBenefitIdRequest = {
    * - all_benefits: If with_employee_benefits=true, include all effective dated benefits for each employee instead of only the current benefits.
    */
   include?: GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1CompanyBenefitsCompanyBenefitIdResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
   companyBenefitWithEmployeeBenefits?:
     | CompanyBenefitWithEmployeeBenefits
     | undefined;
 };
+
+/** @internal */
+export const GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion);
 
 /** @internal */
 export const GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude$outboundSchema:
@@ -80,10 +96,10 @@ export const GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude$outboundSchem
 
 /** @internal */
 export type GetV1CompanyBenefitsCompanyBenefitIdRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_benefit_id: string;
   with_employee_benefits?: boolean | undefined;
   include?: string | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -93,17 +109,19 @@ export const GetV1CompanyBenefitsCompanyBenefitIdRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1CompanyBenefitsCompanyBenefitIdRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyBenefitId: z.string(),
     withEmployeeBenefits: z.boolean().optional(),
     include:
       GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude$outboundSchema
         .optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       companyBenefitId: "company_benefit_id",
       withEmployeeBenefits: "with_employee_benefits",
-      xGustoAPIVersion: "X-Gusto-API-Version",
     });
   });
 

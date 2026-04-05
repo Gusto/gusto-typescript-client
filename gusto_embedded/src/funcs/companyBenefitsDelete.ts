@@ -21,10 +21,6 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  UnprocessableEntityErrorObject,
-  UnprocessableEntityErrorObject$inboundSchema,
-} from "../models/errors/unprocessableentityerrorobject.js";
-import {
   DeleteV1CompanyBenefitsCompanyBenefitIdRequest,
   DeleteV1CompanyBenefitsCompanyBenefitIdRequest$outboundSchema,
   DeleteV1CompanyBenefitsCompanyBenefitIdResponse,
@@ -38,6 +34,7 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * The following must be true in order to delete a company benefit
+ *
  *   - There are no employee benefits associated with the company benefit
  *   - There are no payroll items associated with the company benefit
  *   - The benefit is not managed by a Partner or by Gusto (type must be 'External')
@@ -45,6 +42,8 @@ import { Result } from "../types/fp.js";
  * When the application has the `company_benefits:write:benefit_type_limited` data scope, the application can only delete company benefits for benefit types that are permitted for the application.
  *
  * scope: `company_benefits:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function companyBenefitsDelete(
   client: GustoEmbeddedCore,
@@ -53,7 +52,6 @@ export function companyBenefitsDelete(
 ): APIPromise<
   Result<
     DeleteV1CompanyBenefitsCompanyBenefitIdResponse,
-    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -79,7 +77,6 @@ async function $do(
   [
     Result<
       DeleteV1CompanyBenefitsCompanyBenefitIdResponse,
-      | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -113,13 +110,12 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc("/v1/company_benefits/{company_benefit_id}")(
     pathParams,
   );
 
   const headers = new Headers(compactMap({
-    Accept: "application/json",
+    Accept: "*/*",
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
       payload["X-Gusto-API-Version"],
@@ -131,7 +127,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -180,7 +176,6 @@ async function $do(
 
   const [result] = await M.match<
     DeleteV1CompanyBenefitsCompanyBenefitIdResponse,
-    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -191,8 +186,7 @@ async function $do(
     | SDKValidationError
   >(
     M.nil(204, DeleteV1CompanyBenefitsCompanyBenefitIdResponse$inboundSchema),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail([404, 422, "4XX"]),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

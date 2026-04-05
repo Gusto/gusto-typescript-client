@@ -90,6 +90,10 @@ export type FundingType = ClosedEnum<typeof FundingType>;
 
 export type Hourly = {
   /**
+   * The UUID of the hourly compensation rate.
+   */
+  uuid?: string | null | undefined;
+  /**
    * The name of the hourly compensation rate.
    */
   name?: string | undefined;
@@ -101,12 +105,20 @@ export type Hourly = {
 
 export type Fixed = {
   /**
+   * The UUID of the fixed compensation.
+   */
+  uuid?: string | null | undefined;
+  /**
    * The name of the fixed compensation.
    */
   name?: string | undefined;
 };
 
 export type CompanyPaidTimeOff = {
+  /**
+   * The UUID of the paid time off type.
+   */
+  uuid?: string | null | undefined;
   /**
    * The name of the paid time off type.
    */
@@ -311,6 +323,7 @@ export const FundingType$inboundSchema: z.ZodNativeEnum<typeof FundingType> = z
 /** @internal */
 export const Hourly$inboundSchema: z.ZodType<Hourly, z.ZodTypeDef, unknown> = z
   .object({
+    uuid: z.nullable(z.string()).optional(),
     name: z.string().optional(),
     multiple: z.number().optional(),
   });
@@ -328,6 +341,7 @@ export function hourlyFromJSON(
 /** @internal */
 export const Fixed$inboundSchema: z.ZodType<Fixed, z.ZodTypeDef, unknown> = z
   .object({
+    uuid: z.nullable(z.string()).optional(),
     name: z.string().optional(),
   });
 
@@ -347,6 +361,7 @@ export const CompanyPaidTimeOff$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  uuid: z.nullable(z.string()).optional(),
   name: z.string().optional(),
 });
 

@@ -12,17 +12,13 @@ import {
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import { Job, Job$inboundSchema } from "../components/job.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Available options:
  *
  * @remarks
- * - all_compensations: Include all effective dated compensations for the job instead of only the current compensation
+ * - all_compensations: Include all effective dated compensations for each job instead of only the current compensation
  */
 export const GetV1JobsJobIdQueryParamInclude = {
   AllCompensations: "all_compensations",
@@ -31,10 +27,23 @@ export const GetV1JobsJobIdQueryParamInclude = {
  * Available options:
  *
  * @remarks
- * - all_compensations: Include all effective dated compensations for the job instead of only the current compensation
+ * - all_compensations: Include all effective dated compensations for each job instead of only the current compensation
  */
 export type GetV1JobsJobIdQueryParamInclude = ClosedEnum<
   typeof GetV1JobsJobIdQueryParamInclude
+>;
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1JobsJobIdHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1JobsJobIdHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1JobsJobIdHeaderXGustoAPIVersion
 >;
 
 export type GetV1JobsJobIdRequest = {
@@ -46,19 +55,19 @@ export type GetV1JobsJobIdRequest = {
    * Available options:
    *
    * @remarks
-   * - all_compensations: Include all effective dated compensations for the job instead of only the current compensation
+   * - all_compensations: Include all effective dated compensations for each job instead of only the current compensation
    */
   include?: GetV1JobsJobIdQueryParamInclude | undefined;
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?: GetV1JobsJobIdHeaderXGustoAPIVersion | undefined;
 };
 
 export type GetV1JobsJobIdResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
   job?: Job | undefined;
 };
@@ -67,6 +76,12 @@ export type GetV1JobsJobIdResponse = {
 export const GetV1JobsJobIdQueryParamInclude$outboundSchema: z.ZodNativeEnum<
   typeof GetV1JobsJobIdQueryParamInclude
 > = z.nativeEnum(GetV1JobsJobIdQueryParamInclude);
+
+/** @internal */
+export const GetV1JobsJobIdHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1JobsJobIdHeaderXGustoAPIVersion> = z.nativeEnum(
+    GetV1JobsJobIdHeaderXGustoAPIVersion,
+  );
 
 /** @internal */
 export type GetV1JobsJobIdRequest$Outbound = {
@@ -83,7 +98,9 @@ export const GetV1JobsJobIdRequest$outboundSchema: z.ZodType<
 > = z.object({
   jobId: z.string(),
   include: GetV1JobsJobIdQueryParamInclude$outboundSchema.optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: GetV1JobsJobIdHeaderXGustoAPIVersion$outboundSchema.default(
+    "2025-06-15",
+  ),
 }).transform((v) => {
   return remap$(v, {
     jobId: "job_id",

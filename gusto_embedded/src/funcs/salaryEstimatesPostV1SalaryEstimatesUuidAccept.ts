@@ -46,6 +46,8 @@ import { Result } from "../types/fp.js";
  * Once accepted, the salary estimate becomes read-only for record-keeping purposes. The accepted salary can then be used to set up compensation for the employee.
  *
  * scope: `salary_estimates:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function salaryEstimatesPostV1SalaryEstimatesUuidAccept(
   client: GustoEmbeddedCore,
@@ -113,7 +115,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/salary_estimates/{uuid}/accept")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -130,7 +131,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

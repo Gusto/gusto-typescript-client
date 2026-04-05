@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompaniesCompanyUuidTaxRequirementsRequest } from "../models/operations/getv1companiescompanyuuidtaxrequirements.js";
+import {
+  GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion,
+  GetV1CompaniesCompanyUuidTaxRequirementsRequest,
+} from "../models/operations/getv1companiescompanyuuidtaxrequirements.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type TaxRequirementsGetAllQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -52,10 +56,11 @@ export type TaxRequirementsGetAllQueryError =
   | SDKValidationError;
 
 /**
- * Get All Tax Requirement States
+ * Get all tax requirements for a company
  *
  * @remarks
- * Returns objects describing the states that have tax requirements for the company
+ * Retrieves all states for which a company has tax requirements, along with a boolean indicating whether tax setup
+ * is complete for each state. Use this to determine which states still need tax setup during company onboarding.
  *
  * scope: `company_tax_requirements:read`
  */
@@ -81,10 +86,11 @@ export function useTaxRequirementsGetAll(
 }
 
 /**
- * Get All Tax Requirement States
+ * Get all tax requirements for a company
  *
  * @remarks
- * Returns objects describing the states that have tax requirements for the company
+ * Retrieves all states for which a company has tax requirements, along with a boolean indicating whether tax setup
+ * is complete for each state. Use this to determine which states still need tax setup during company onboarding.
  *
  * scope: `company_tax_requirements:read`
  */
@@ -113,7 +119,11 @@ export function setTaxRequirementsGetAllData(
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: TaxRequirementsGetAllQueryData,
 ): TaxRequirementsGetAllQueryData | undefined {
@@ -127,7 +137,11 @@ export function invalidateTaxRequirementsGetAll(
   queryKeyBase: TupleToPrefixes<
     [
       companyUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

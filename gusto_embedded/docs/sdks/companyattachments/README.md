@@ -12,6 +12,9 @@
 
 Retrieve the detail of an attachment uploaded by the company.
 
+### Related guides
+- [Manage company attachments](doc:manage-company-attachments)
+
 scope: `company_attachments:read`
 
 ### Example Usage
@@ -109,13 +112,17 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## getList
 
 Retrieve a list of all the attachments uploaded by the company.
+
+### Related guides
+- [Manage company attachments](doc:manage-company-attachments)
 
 scope: `company_attachments:read`
 
@@ -212,15 +219,17 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## create
 
-Upload a file and create a company attachment. We recommend uploading
-PDF files for optimal compatibility. However, the following file types are
-allowed: .qbb, .qbm, .gif, .jpg, .png, .pdf, .xls, .xlsx, .doc and .docx. 
+Upload a file and create a company attachment. We recommend uploading PDF files for optimal compatibility. However, the following file types are allowed: .qbb, .qbm, .gif, .jpg, .png, .pdf, .xls, .xlsx, .doc and .docx.
+
+### Related guides
+- [Manage company attachments](doc:manage-company-attachments)
 
 scope: `company_attachments:write`
 
@@ -238,7 +247,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.companyAttachments.create({
     companyId: "<id>",
-    requestBody: {
+    companyAttachmentCreateRequestBody: {
       document: await openAsBlob("example.file"),
       category: "gep_notice",
     },
@@ -268,7 +277,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await companyAttachmentsCreate(gustoEmbedded, {
     companyId: "<id>",
-    requestBody: {
+    companyAttachmentCreateRequestBody: {
       document: await openAsBlob("example.file"),
       category: "gep_notice",
     },
@@ -314,7 +323,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.companyAttachments.create({
     companyId: "<id>",
-    requestBody: {
+    companyAttachmentCreateRequestBody: {
       document: await openAsBlob("example.file"),
       category: "gep_notice",
     },
@@ -344,7 +353,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await companyAttachmentsCreate(gustoEmbedded, {
     companyId: "<id>",
-    requestBody: {
+    companyAttachmentCreateRequestBody: {
       document: await openAsBlob("example.file"),
       category: "gep_notice",
     },
@@ -390,7 +399,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.companyAttachments.create({
     companyId: "<id>",
-    requestBody: {
+    companyAttachmentCreateRequestBody: {
       document: await openAsBlob("example.file"),
       category: "gep_notice",
     },
@@ -420,7 +429,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await companyAttachmentsCreate(gustoEmbedded, {
     companyId: "<id>",
-    requestBody: {
+    companyAttachmentCreateRequestBody: {
       document: await openAsBlob("example.file"),
       category: "gep_notice",
     },
@@ -466,7 +475,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.companyAttachments.create({
     companyId: "<id>",
-    requestBody: {
+    companyAttachmentCreateRequestBody: {
       document: await openAsBlob("example.file"),
       category: "gep_notice",
     },
@@ -496,7 +505,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await companyAttachmentsCreate(gustoEmbedded, {
     companyId: "<id>",
-    requestBody: {
+    companyAttachmentCreateRequestBody: {
       document: await openAsBlob("example.file"),
       category: "gep_notice",
     },
@@ -546,5 +555,6 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

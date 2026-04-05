@@ -18,12 +18,12 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import {
-  UnprocessableEntityErrorObject,
-  UnprocessableEntityErrorObject$inboundSchema,
-} from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1EmployeesEmployeeIdRehireRequest,
   GetV1EmployeesEmployeeIdRehireRequest$outboundSchema,
@@ -40,6 +40,8 @@ import { Result } from "../types/fp.js";
  * Retrieve an employee's rehire, which contains information on when the employee returns to work.
  *
  * scope: `employments:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function employeeEmploymentsGetRehire(
   client: GustoEmbeddedCore,
@@ -48,7 +50,7 @@ export function employeeEmploymentsGetRehire(
 ): APIPromise<
   Result<
     GetV1EmployeesEmployeeIdRehireResponse,
-    | UnprocessableEntityErrorObject
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -74,7 +76,7 @@ async function $do(
   [
     Result<
       GetV1EmployeesEmployeeIdRehireResponse,
-      | UnprocessableEntityErrorObject
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -105,7 +107,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/employees/{employee_id}/rehire")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -121,7 +122,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -170,7 +171,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1EmployeesEmployeeIdRehireResponse,
-    | UnprocessableEntityErrorObject
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -184,7 +185,7 @@ async function $do(
       key: "Rehire",
     }),
     M.nil(204, GetV1EmployeesEmployeeIdRehireResponse$inboundSchema),
-    M.jsonErr(404, UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

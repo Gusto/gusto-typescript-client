@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -40,6 +44,8 @@ import { Result } from "../types/fp.js";
  * Update a job.
  *
  * scope: `jobs:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function jobsAndCompensationsUpdate(
   client: GustoEmbeddedCore,
@@ -48,6 +54,7 @@ export function jobsAndCompensationsUpdate(
 ): APIPromise<
   Result<
     PutV1JobsJobIdResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -74,6 +81,7 @@ async function $do(
   [
     Result<
       PutV1JobsJobIdResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -96,7 +104,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload["Jobs-Update-Request-Body"], {
+    explode: true,
+  });
 
   const pathParams = {
     job_id: encodeSimple("job_id", payload.job_id, {
@@ -104,7 +114,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/jobs/{job_id}")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -121,7 +130,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -170,6 +179,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1JobsJobIdResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -181,8 +191,9 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, PutV1JobsJobIdResponse$inboundSchema, { key: "Job" }),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

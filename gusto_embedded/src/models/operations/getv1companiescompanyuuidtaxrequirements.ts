@@ -5,16 +5,31 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  TaxRequirementStatesList,
+  TaxRequirementStatesList$inboundSchema,
+} from "../components/taxrequirementstateslist.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion
+  >;
 
 export type GetV1CompaniesCompanyUuidTaxRequirementsRequest = {
   /**
@@ -24,31 +39,26 @@ export type GetV1CompaniesCompanyUuidTaxRequirementsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-};
-
-export type ResponseBody = {
-  /**
-   * One of the two-letter state abbreviations for the fifty United States and the District of Columbia (DC)
-   */
-  state: string;
-  /**
-   * If all requirements for the state have been satisfied such that the company can complete
-   *
-   * @remarks
-   * onboarding, the company is `setup_complete` in the state. A company must be `setup_complete` in
-   * all relevant states to complete the `state_setup` company onboarding step.
-   */
-  setupComplete: boolean;
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type GetV1CompaniesCompanyUuidTaxRequirementsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * OK
+   * Success
    */
-  responseBodies?: Array<ResponseBody> | undefined;
+  taxRequirementStatesList?: Array<TaxRequirementStatesList> | undefined;
 };
+
+/** @internal */
+export const GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion,
+  );
 
 /** @internal */
 export type GetV1CompaniesCompanyUuidTaxRequirementsRequest$Outbound = {
@@ -64,7 +74,9 @@ export const GetV1CompaniesCompanyUuidTaxRequirementsRequest$outboundSchema:
     GetV1CompaniesCompanyUuidTaxRequirementsRequest
   > = z.object({
     companyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion:
+      GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",
@@ -84,30 +96,6 @@ export function getV1CompaniesCompanyUuidTaxRequirementsRequestToJSON(
 }
 
 /** @internal */
-export const ResponseBody$inboundSchema: z.ZodType<
-  ResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  state: z.string(),
-  setup_complete: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "setup_complete": "setupComplete",
-  });
-});
-
-export function responseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
 export const GetV1CompaniesCompanyUuidTaxRequirementsResponse$inboundSchema:
   z.ZodType<
     GetV1CompaniesCompanyUuidTaxRequirementsResponse,
@@ -115,11 +103,13 @@ export const GetV1CompaniesCompanyUuidTaxRequirementsResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    responseBodies: z.array(z.lazy(() => ResponseBody$inboundSchema))
-      .optional(),
+    "Tax-Requirement-States-List": z.array(
+      TaxRequirementStatesList$inboundSchema,
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
+      "Tax-Requirement-States-List": "taxRequirementStatesList",
     });
   });
 

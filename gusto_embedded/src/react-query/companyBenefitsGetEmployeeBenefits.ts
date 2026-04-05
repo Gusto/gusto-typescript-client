@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,11 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion,
   GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude,
   GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
 } from "../models/operations/getv1companybenefitscompanybenefitidemployeebenefits.js";
@@ -45,6 +46,7 @@ export {
 };
 
 export type CompanyBenefitsGetEmployeeBenefitsQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -58,7 +60,7 @@ export type CompanyBenefitsGetEmployeeBenefitsQueryError =
  * Get all employee benefits for a company benefit
  *
  * @remarks
- * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+ * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee's enrollment.
  *
  * Returns an array of all employee benefits enrolled for this company benefit.
  *
@@ -91,7 +93,7 @@ export function useCompanyBenefitsGetEmployeeBenefits(
  * Get all employee benefits for a company benefit
  *
  * @remarks
- * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+ * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee's enrollment.
  *
  * Returns an array of all employee benefits enrolled for this company benefit.
  *
@@ -125,12 +127,14 @@ export function setCompanyBenefitsGetEmployeeBenefitsData(
   queryKeyBase: [
     companyBenefitId: string,
     parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion
+        | undefined;
       page?: number | undefined;
       per?: number | undefined;
       include?:
         | GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude
         | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: CompanyBenefitsGetEmployeeBenefitsQueryData,
@@ -149,12 +153,14 @@ export function invalidateCompanyBenefitsGetEmployeeBenefits(
     [
       companyBenefitId: string,
       parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion
+          | undefined;
         page?: number | undefined;
         per?: number | undefined;
         include?:
           | GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude
           | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,

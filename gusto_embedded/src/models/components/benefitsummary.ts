@@ -77,12 +77,9 @@ export type BenefitSummaryEmployees = {
    * Total imputed pay for this employee given the period of time (not scoped to a benefit type).
    */
   imputedPay?: string | undefined;
-  payrollBenefits?: PayrollBenefits | undefined;
+  payrollBenefits?: Array<PayrollBenefits> | undefined;
 };
 
-/**
- * Benefit summary response
- */
 export type BenefitSummary = {
   /**
    * The start date of benefit summary.
@@ -104,7 +101,7 @@ export type BenefitSummary = {
    * The aggregate of company contribution for all employees given the period of time and the specific company benefit.
    */
   companyBenefitContribution?: string | undefined;
-  employees?: BenefitSummaryEmployees | undefined;
+  employees?: Array<BenefitSummaryEmployees> | undefined;
 };
 
 /** @internal */
@@ -182,7 +179,8 @@ export const BenefitSummaryEmployees$inboundSchema: z.ZodType<
   benefit_contribution: z.string().optional(),
   gross_pay: z.string().optional(),
   imputed_pay: z.string().optional(),
-  payroll_benefits: z.lazy(() => PayrollBenefits$inboundSchema).optional(),
+  payroll_benefits: z.array(z.lazy(() => PayrollBenefits$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_benefit_deduction": "companyBenefitDeduction",
@@ -216,7 +214,8 @@ export const BenefitSummary$inboundSchema: z.ZodType<
   description: z.string().optional(),
   company_benefit_deduction: z.string().optional(),
   company_benefit_contribution: z.string().optional(),
-  employees: z.lazy(() => BenefitSummaryEmployees$inboundSchema).optional(),
+  employees: z.array(z.lazy(() => BenefitSummaryEmployees$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "start_date": "startDate",

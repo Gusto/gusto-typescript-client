@@ -27,6 +27,9 @@ export class CompanyAttachments extends ClientSDK {
    * @remarks
    * Retrieve the detail of an attachment uploaded by the company.
    *
+   * ### Related guides
+   * - [Manage company attachments](doc:manage-company-attachments)
+   *
    * scope: `company_attachments:read`
    */
   async getDetails(
@@ -46,6 +49,9 @@ export class CompanyAttachments extends ClientSDK {
    * @remarks
    * Retrieve a list of all the attachments uploaded by the company.
    *
+   * ### Related guides
+   * - [Manage company attachments](doc:manage-company-attachments)
+   *
    * scope: `company_attachments:read`
    */
   async getList(
@@ -63,9 +69,10 @@ export class CompanyAttachments extends ClientSDK {
    * Create Company Attachment and Upload File
    *
    * @remarks
-   * Upload a file and create a company attachment. We recommend uploading
-   * PDF files for optimal compatibility. However, the following file types are
-   * allowed: .qbb, .qbm, .gif, .jpg, .png, .pdf, .xls, .xlsx, .doc and .docx.
+   * Upload a file and create a company attachment. We recommend uploading PDF files for optimal compatibility. However, the following file types are allowed: .qbb, .qbm, .gif, .jpg, .png, .pdf, .xls, .xlsx, .doc and .docx.
+   *
+   * ### Related guides
+   * - [Manage company attachments](doc:manage-company-attachments)
    *
    * scope: `company_attachments:write`
    */

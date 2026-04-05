@@ -50,6 +50,8 @@ import { Result } from "../types/fp.js";
  * Starting in version 2023-04-01, the `eligible_employees` attribute was removed from the response. The eligible employees for a payroll are determined by the employee_compensations returned from the [PUT /v1/companies/{company_id}/payrolls/{payroll_id}/prepare](ref:put-v1-companies-company_id-payrolls-payroll_id-prepare) endpoint.
  *
  * scope: `payrolls:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function paySchedulesGetPayPeriods(
   client: GustoEmbeddedCore,
@@ -117,7 +119,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/pay_periods")(pathParams);
 
   const query = encodeFormQuery({
@@ -139,7 +140,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

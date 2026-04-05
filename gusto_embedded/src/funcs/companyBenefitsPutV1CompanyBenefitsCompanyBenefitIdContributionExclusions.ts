@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -42,6 +46,8 @@ import { Result } from "../types/fp.js";
  * Currently this endpoint only works for 401-k and Roth 401-k benefit types.
  *
  * scope: `company_benefits:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions(
   client: GustoEmbeddedCore,
@@ -50,6 +56,7 @@ export function companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionE
 ): APIPromise<
   Result<
     PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -76,6 +83,7 @@ async function $do(
   [
     Result<
       PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -100,7 +108,11 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON(
+    "body",
+    payload["Contribution-Exclusion-Update-Request"],
+    { explode: true },
+  );
 
   const pathParams = {
     company_benefit_id: encodeSimple(
@@ -109,7 +121,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/v1/company_benefits/{company_benefit_id}/contribution_exclusions",
   )(pathParams);
@@ -128,7 +139,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -178,6 +189,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -191,10 +203,11 @@ async function $do(
     M.json(
       200,
       PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$inboundSchema,
-      { key: "Contribution-Exclusion-List" },
+      { key: "Contribution-Exclusions" },
     ),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

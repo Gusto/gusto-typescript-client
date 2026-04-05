@@ -30,6 +30,14 @@ export type GetV1ContractorsContractorUuidHeaderXGustoAPIVersion = ClosedEnum<
   typeof GetV1ContractorsContractorUuidHeaderXGustoAPIVersion
 >;
 
+export const GetV1ContractorsContractorUuidQueryParamInclude = {
+  CompanyName: "company_name",
+  PortalInvitations: "portal_invitations",
+} as const;
+export type GetV1ContractorsContractorUuidQueryParamInclude = ClosedEnum<
+  typeof GetV1ContractorsContractorUuidQueryParamInclude
+>;
+
 export type GetV1ContractorsContractorUuidRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -41,6 +49,10 @@ export type GetV1ContractorsContractorUuidRequest = {
    * The UUID of the contractor
    */
   contractorUuid: string;
+  /**
+   * Include the requested attribute(s) in each contractor response. Multiple options are comma separated.
+   */
+  include?: Array<GetV1ContractorsContractorUuidQueryParamInclude> | undefined;
 };
 
 export type GetV1ContractorsContractorUuidResponse = {
@@ -57,9 +69,15 @@ export const GetV1ContractorsContractorUuidHeaderXGustoAPIVersion$outboundSchema
     z.nativeEnum(GetV1ContractorsContractorUuidHeaderXGustoAPIVersion);
 
 /** @internal */
+export const GetV1ContractorsContractorUuidQueryParamInclude$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1ContractorsContractorUuidQueryParamInclude> = z
+    .nativeEnum(GetV1ContractorsContractorUuidQueryParamInclude);
+
+/** @internal */
 export type GetV1ContractorsContractorUuidRequest$Outbound = {
   "X-Gusto-API-Version": string;
   contractor_uuid: string;
+  include?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -73,6 +91,9 @@ export const GetV1ContractorsContractorUuidRequest$outboundSchema: z.ZodType<
       "2025-06-15",
     ),
   contractorUuid: z.string(),
+  include: z.array(
+    GetV1ContractorsContractorUuidQueryParamInclude$outboundSchema,
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",

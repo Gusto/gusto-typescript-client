@@ -49,6 +49,8 @@ import { Result } from "../types/fp.js";
  *  * Will return the version param used for updating the payroll
  *
  * scope: `payrolls:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function payrollsPrepare(
   client: GustoEmbeddedCore,
@@ -121,7 +123,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/companies/{company_id}/payrolls/{payroll_id}/prepare",
   )(pathParams);
@@ -146,7 +147,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

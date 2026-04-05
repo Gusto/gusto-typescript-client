@@ -40,6 +40,8 @@ import { Result } from "../types/fp.js";
  * Returns a single contractor payment.
  *
  * scope: `payrolls:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function contractorPaymentsGet(
   client: GustoEmbeddedCore,
@@ -111,7 +113,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/v1/companies/{company_id}/contractor_payments/{contractor_payment_id}",
   )(pathParams);
@@ -129,7 +130,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

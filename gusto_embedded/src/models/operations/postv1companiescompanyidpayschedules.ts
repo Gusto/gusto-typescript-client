@@ -12,129 +12,61 @@ import {
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  PayScheduleCreateUpdate,
-  PayScheduleCreateUpdate$inboundSchema,
-} from "../components/payschedulecreateupdate.js";
+  PaySchedule,
+  PaySchedule$inboundSchema,
+} from "../components/payschedule.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  PayScheduleCreateRequest,
+  PayScheduleCreateRequest$Outbound,
+  PayScheduleCreateRequest$outboundSchema,
+} from "../components/payschedulecreaterequest.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The frequency that employees on this pay schedule are paid with Gusto.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const Frequency = {
-  EveryWeek: "Every week",
-  EveryOtherWeek: "Every other week",
-  TwicePerMonth: "Twice per month",
-  Monthly: "Monthly",
+export const PostV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
- * The frequency that employees on this pay schedule are paid with Gusto.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type Frequency = ClosedEnum<typeof Frequency>;
-
-export type PostV1CompaniesCompanyIdPaySchedulesRequestBody = {
-  /**
-   * The frequency that employees on this pay schedule are paid with Gusto.
-   */
-  frequency: Frequency;
-  /**
-   * The first date that employees on this pay schedule are paid with Gusto.
-   */
-  anchorPayDate: string;
-  /**
-   * The last date of the first pay period. This can be the same date as the anchor pay date.
-   */
-  anchorEndOfPayPeriod: string;
-  /**
-   * An integer between 1 and 31 indicating the first day of the month that employees are paid. This field is only relevant for pay schedules with the “Twice per month” and “Monthly” frequencies. It will be null for pay schedules with other frequencies.
-   */
-  day1?: number | null | undefined;
-  /**
-   * An integer between 1 and 31 indicating the second day of the month that employees are paid. This field is the second pay date for pay schedules with the "Twice per month" frequency. For semi-monthly pay schedules, set this field to 31. For months shorter than 31 days, we will set the second pay date to the last day of the month. It will be null for pay schedules with other frequencies.
-   */
-  day2?: number | null | undefined;
-  /**
-   * A custom pay schedule name, defaults to the pay frequency description.
-   */
-  customName?: string | undefined;
-};
+export type PostV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion =
+  ClosedEnum<typeof PostV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion>;
 
 export type PostV1CompaniesCompanyIdPaySchedulesRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
   companyId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostV1CompaniesCompanyIdPaySchedulesRequestBody;
+  payScheduleCreateRequest: PayScheduleCreateRequest;
 };
 
 export type PostV1CompaniesCompanyIdPaySchedulesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Created
    */
-  payScheduleCreateUpdate?: PayScheduleCreateUpdate | undefined;
+  paySchedule?: PaySchedule | undefined;
 };
 
 /** @internal */
-export const Frequency$outboundSchema: z.ZodNativeEnum<typeof Frequency> = z
-  .nativeEnum(Frequency);
-
-/** @internal */
-export type PostV1CompaniesCompanyIdPaySchedulesRequestBody$Outbound = {
-  frequency: string;
-  anchor_pay_date: string;
-  anchor_end_of_pay_period: string;
-  day_1?: number | null | undefined;
-  day_2?: number | null | undefined;
-  custom_name?: string | undefined;
-};
-
-/** @internal */
-export const PostV1CompaniesCompanyIdPaySchedulesRequestBody$outboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdPaySchedulesRequestBody$Outbound,
-    z.ZodTypeDef,
-    PostV1CompaniesCompanyIdPaySchedulesRequestBody
-  > = z.object({
-    frequency: Frequency$outboundSchema,
-    anchorPayDate: z.string(),
-    anchorEndOfPayPeriod: z.string(),
-    day1: z.nullable(z.number().int()).optional(),
-    day2: z.nullable(z.number().int()).optional(),
-    customName: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      anchorPayDate: "anchor_pay_date",
-      anchorEndOfPayPeriod: "anchor_end_of_pay_period",
-      day1: "day_1",
-      day2: "day_2",
-      customName: "custom_name",
-    });
-  });
-
-export function postV1CompaniesCompanyIdPaySchedulesRequestBodyToJSON(
-  postV1CompaniesCompanyIdPaySchedulesRequestBody:
-    PostV1CompaniesCompanyIdPaySchedulesRequestBody,
-): string {
-  return JSON.stringify(
-    PostV1CompaniesCompanyIdPaySchedulesRequestBody$outboundSchema.parse(
-      postV1CompaniesCompanyIdPaySchedulesRequestBody,
-    ),
-  );
-}
+export const PostV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion
+  > = z.nativeEnum(PostV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PostV1CompaniesCompanyIdPaySchedulesRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostV1CompaniesCompanyIdPaySchedulesRequestBody$Outbound;
+  company_id: string;
+  "Pay-Schedule-Create-Request": PayScheduleCreateRequest$Outbound;
 };
 
 /** @internal */
@@ -144,16 +76,16 @@ export const PostV1CompaniesCompanyIdPaySchedulesRequest$outboundSchema:
     z.ZodTypeDef,
     PostV1CompaniesCompanyIdPaySchedulesRequest
   > = z.object({
+    xGustoAPIVersion:
+      PostV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PostV1CompaniesCompanyIdPaySchedulesRequestBody$outboundSchema
-    ),
+    payScheduleCreateRequest: PayScheduleCreateRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      companyId: "company_id",
+      payScheduleCreateRequest: "Pay-Schedule-Create-Request",
     });
   });
 
@@ -176,12 +108,11 @@ export const PostV1CompaniesCompanyIdPaySchedulesResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Pay-Schedule-Create-Update": PayScheduleCreateUpdate$inboundSchema
-      .optional(),
+    "Pay-Schedule": PaySchedule$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Pay-Schedule-Create-Update": "payScheduleCreateUpdate",
+      "Pay-Schedule": "paySchedule",
     });
   });
 

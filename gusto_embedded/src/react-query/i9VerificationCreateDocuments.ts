@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type I9VerificationCreateDocumentsMutationData =
   PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse;
 
 export type I9VerificationCreateDocumentsMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -55,11 +57,14 @@ export type I9VerificationCreateDocumentsMutationError =
  * @remarks
  * An employee's I-9 verification documents are the documents an employee has provided the employer to verify their identity and authorization to work in the United States.
  *
- * Use the document options endpoint to get the possible document types and titles, which can vary depending on the employee's authorization status.
+ * Use the [document options endpoint](ref:get-v1-employees-employee_id-i9_authorization-document_options) to get the possible document types and titles, which can vary depending on the employee's authorization status.
  *
  * > 🚧 Every request must contain the complete list of documents for the Employee.
  * >
  * > Every request to this endpoint removes any previous verification document records for the employee.
+ *
+ * ### Related guides
+ * - [I-9 employment verification](doc:i-9-employment-verification)
  *
  * scope: `i9_authorizations:manage`
  */

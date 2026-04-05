@@ -1,7 +1,5 @@
 # FederalTaxDetails
 
-Example response
-
 ## Example Usage
 
 ```typescript

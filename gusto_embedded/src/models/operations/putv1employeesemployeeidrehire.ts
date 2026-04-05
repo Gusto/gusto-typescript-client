@@ -13,128 +13,57 @@ import {
 } from "../components/httpmetadata.js";
 import { Rehire, Rehire$inboundSchema } from "../components/rehire.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  RehireUpdateRequestBody,
+  RehireUpdateRequestBody$Outbound,
+  RehireUpdateRequestBody$outboundSchema,
+} from "../components/rehireupdaterequestbody.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const EmploymentStatus = {
-  PartTime: "part_time",
-  FullTime: "full_time",
-  PartTimeEligible: "part_time_eligible",
-  Variable: "variable",
-  Seasonal: "seasonal",
-  NotSet: "not_set",
+export const PutV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
- * The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type EmploymentStatus = ClosedEnum<typeof EmploymentStatus>;
-
-export type PutV1EmployeesEmployeeIdRehireRequestBody = {
-  /**
-   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
-   */
-  version: string;
-  /**
-   * The day when the employee returns to work.
-   */
-  effectiveDate: string;
-  /**
-   * The boolean flag indicating whether Gusto will file a new hire report for the employee.
-   */
-  fileNewHireReport: boolean;
-  /**
-   * The uuid of the employee's work location.
-   */
-  workLocationUuid: string;
-  /**
-   * The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
-   */
-  employmentStatus?: EmploymentStatus | undefined;
-  /**
-   * Whether the employee is a two percent shareholder of the company. This field only applies to companies with an S-Corp entity type.
-   */
-  twoPercentShareholder?: boolean | undefined;
-};
+export type PutV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PutV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion
+>;
 
 export type PutV1EmployeesEmployeeIdRehireRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the employee
    */
   employeeId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutV1EmployeesEmployeeIdRehireRequestBody;
+  rehireUpdateRequestBody: RehireUpdateRequestBody;
 };
 
 export type PutV1EmployeesEmployeeIdRehireResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
   rehire?: Rehire | undefined;
 };
 
 /** @internal */
-export const EmploymentStatus$outboundSchema: z.ZodNativeEnum<
-  typeof EmploymentStatus
-> = z.nativeEnum(EmploymentStatus);
-
-/** @internal */
-export type PutV1EmployeesEmployeeIdRehireRequestBody$Outbound = {
-  version: string;
-  effective_date: string;
-  file_new_hire_report: boolean;
-  work_location_uuid: string;
-  employment_status?: string | undefined;
-  two_percent_shareholder?: boolean | undefined;
-};
-
-/** @internal */
-export const PutV1EmployeesEmployeeIdRehireRequestBody$outboundSchema:
-  z.ZodType<
-    PutV1EmployeesEmployeeIdRehireRequestBody$Outbound,
-    z.ZodTypeDef,
-    PutV1EmployeesEmployeeIdRehireRequestBody
-  > = z.object({
-    version: z.string(),
-    effectiveDate: z.string(),
-    fileNewHireReport: z.boolean(),
-    workLocationUuid: z.string(),
-    employmentStatus: EmploymentStatus$outboundSchema.optional(),
-    twoPercentShareholder: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      effectiveDate: "effective_date",
-      fileNewHireReport: "file_new_hire_report",
-      workLocationUuid: "work_location_uuid",
-      employmentStatus: "employment_status",
-      twoPercentShareholder: "two_percent_shareholder",
-    });
-  });
-
-export function putV1EmployeesEmployeeIdRehireRequestBodyToJSON(
-  putV1EmployeesEmployeeIdRehireRequestBody:
-    PutV1EmployeesEmployeeIdRehireRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1EmployeesEmployeeIdRehireRequestBody$outboundSchema.parse(
-      putV1EmployeesEmployeeIdRehireRequestBody,
-    ),
-  );
-}
+export const PutV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion> =
+    z.nativeEnum(PutV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PutV1EmployeesEmployeeIdRehireRequest$Outbound = {
-  employee_id: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PutV1EmployeesEmployeeIdRehireRequestBody$Outbound;
+  employee_id: string;
+  "Rehire-Update-Request-Body": RehireUpdateRequestBody$Outbound;
 };
 
 /** @internal */
@@ -143,16 +72,17 @@ export const PutV1EmployeesEmployeeIdRehireRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1EmployeesEmployeeIdRehireRequest
 > = z.object({
+  xGustoAPIVersion:
+    PutV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
   employeeId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.lazy(() =>
-    PutV1EmployeesEmployeeIdRehireRequestBody$outboundSchema
-  ),
+  rehireUpdateRequestBody: RehireUpdateRequestBody$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    employeeId: "employee_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    employeeId: "employee_id",
+    rehireUpdateRequestBody: "Rehire-Update-Request-Body",
   });
 });
 

@@ -50,6 +50,8 @@ import { Result } from "../types/fp.js";
  * The batch is processed asynchronously. Use the returned batch UUID to poll for status and results.
  *
  * scope: `people_batches:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function peopleBatchesPostV1CompaniesCompanyIdPeopleBatches(
   client: GustoEmbeddedCore,
@@ -119,7 +121,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/people_batches")(
     pathParams,
   );
@@ -138,7 +139,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

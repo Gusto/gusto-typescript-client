@@ -76,6 +76,8 @@ import { Result } from "../types/fp.js";
  * | `admin_review` | Admin reviews & confirms employee details (only required for Employee self-onboarding) |
  *
  * scope: `employees:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function employeesGetOnboardingStatus(
   client: GustoEmbeddedCore,
@@ -143,7 +145,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/employees/{employee_id}/onboarding_status")(
     pathParams,
   );
@@ -161,7 +162,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

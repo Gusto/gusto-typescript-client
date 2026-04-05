@@ -3,13 +3,16 @@
 ## Example Usage
 
 ```typescript
-import { Requirements } from "@gusto/embedded-api/models/components/companyonboardingstatus.js";
+import { Requirements } from "@gusto/embedded-api/models/components/taxrequirementsetupdate.js";
 
-let value: Requirements = "state_setup";
+let value: Requirements = {
+  key: "<key>",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"add_addresses" | "federal_tax_setup" | "select_industry" | "add_bank_info" | "add_employees" | "state_setup" | "payroll_schedule" | "sign_all_forms" | "verify_bank_info" | "external_payroll"
-```
+| Field                                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                                 | Required                                                                                                                                                                                                                                             | Description                                                                                                                                                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `key`                                                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                                                   | An identifier for an individual requirement. Uniqueness is guaranteed within a requirement set.                                                                                                                                                      |
+| `value`                                                                                                                                                                                                                                              | *components.TaxRequirementsValue*                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                   | The value or "answer" for a tax requirement. Type depends on the requirement metadata type (e.g. string for text/account_number, boolean for radio/checkbox, number for percent/currency/tax_rate). Null when the requirement has not been answered. |

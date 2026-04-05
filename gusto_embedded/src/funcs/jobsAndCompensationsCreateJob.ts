@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -25,11 +29,11 @@ import {
   UnprocessableEntityErrorObject$inboundSchema,
 } from "../models/errors/unprocessableentityerrorobject.js";
 import {
-  PostV1JobsJobIdRequest,
-  PostV1JobsJobIdRequest$outboundSchema,
-  PostV1JobsJobIdResponse,
-  PostV1JobsJobIdResponse$inboundSchema,
-} from "../models/operations/postv1jobsjobid.js";
+  PostV1EmployeesEmployeeIdJobsRequest,
+  PostV1EmployeesEmployeeIdJobsRequest$outboundSchema,
+  PostV1EmployeesEmployeeIdJobsResponse,
+  PostV1EmployeesEmployeeIdJobsResponse$inboundSchema,
+} from "../models/operations/postv1employeesemployeeidjobs.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -40,14 +44,17 @@ import { Result } from "../types/fp.js";
  * Create a job.
  *
  * scope: `jobs:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function jobsAndCompensationsCreateJob(
   client: GustoEmbeddedCore,
-  request: PostV1JobsJobIdRequest,
+  request: PostV1EmployeesEmployeeIdJobsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    PostV1JobsJobIdResponse,
+    PostV1EmployeesEmployeeIdJobsResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -68,12 +75,13 @@ export function jobsAndCompensationsCreateJob(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: PostV1JobsJobIdRequest,
+  request: PostV1EmployeesEmployeeIdJobsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      PostV1JobsJobIdResponse,
+      PostV1EmployeesEmployeeIdJobsResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -89,14 +97,16 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => PostV1JobsJobIdRequest$outboundSchema.parse(value),
+    (value) => PostV1EmployeesEmployeeIdJobsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload["Jobs-Create-Request-Body"], {
+    explode: true,
+  });
 
   const pathParams = {
     employee_id: encodeSimple("employee_id", payload.employee_id, {
@@ -104,7 +114,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/employees/{employee_id}/jobs")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -121,12 +130,12 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "post-v1-jobs-job_id",
+    operationID: "post-v1-employees-employee_id-jobs",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -169,7 +178,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    PostV1JobsJobIdResponse,
+    PostV1EmployeesEmployeeIdJobsResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -180,9 +190,12 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, PostV1JobsJobIdResponse$inboundSchema, { key: "Job" }),
+    M.json(201, PostV1EmployeesEmployeeIdJobsResponse$inboundSchema, {
+      key: "Job",
+    }),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

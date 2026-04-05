@@ -13,6 +13,7 @@ import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1ContractorsContractorUuidHeaderXGustoAPIVersion,
+  GetV1ContractorsContractorUuidQueryParamInclude,
   GetV1ContractorsContractorUuidRequest,
   GetV1ContractorsContractorUuidResponse,
 } from "../models/operations/getv1contractorscontractoruuid.js";
@@ -45,6 +46,7 @@ export function buildContractorsGetQuery(
   return {
     queryKey: queryKeyContractorsGet(request.contractorUuid, {
       xGustoAPIVersion: request.xGustoAPIVersion,
+      include: request.include,
     }),
     queryFn: async function contractorsGetQueryFn(
       ctx,
@@ -74,6 +76,9 @@ export function queryKeyContractorsGet(
   parameters: {
     xGustoAPIVersion?:
       | GetV1ContractorsContractorUuidHeaderXGustoAPIVersion
+      | undefined;
+    include?:
+      | Array<GetV1ContractorsContractorUuidQueryParamInclude>
       | undefined;
   },
 ): QueryKey {

@@ -51,6 +51,8 @@ import { Result } from "../types/fp.js";
  * These elections can be overridden with the `skip_regular_deductions` boolean.
  *
  * scope: `payrolls:run`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function payrollsCreateOffCycle(
   client: GustoEmbeddedCore,
@@ -118,7 +120,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/payrolls")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -135,7 +136,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

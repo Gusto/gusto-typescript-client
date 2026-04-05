@@ -5,6 +5,7 @@
 import { GustoEmbeddedCore } from "../core.js";
 import { appendForm, encodeSimple } from "../lib/encodings.js";
 import {
+  bytesToBlob,
   getContentTypeFromFileName,
   readableStreamToArrayBuffer,
 } from "../lib/files.js";
@@ -22,6 +23,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -43,11 +48,14 @@ import { isReadableStream } from "../types/streams.js";
  * Create Company Attachment and Upload File
  *
  * @remarks
- * Upload a file and create a company attachment. We recommend uploading
- * PDF files for optimal compatibility. However, the following file types are
- * allowed: .qbb, .qbm, .gif, .jpg, .png, .pdf, .xls, .xlsx, .doc and .docx.
+ * Upload a file and create a company attachment. We recommend uploading PDF files for optimal compatibility. However, the following file types are allowed: .qbb, .qbm, .gif, .jpg, .png, .pdf, .xls, .xlsx, .doc and .docx.
+ *
+ * ### Related guides
+ * - [Manage company attachments](doc:manage-company-attachments)
  *
  * scope: `company_attachments:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function companyAttachmentsCreate(
   client: GustoEmbeddedCore,
@@ -56,6 +64,7 @@ export function companyAttachmentsCreate(
 ): APIPromise<
   Result<
     PostV1CompaniesAttachmentResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -82,6 +91,7 @@ async function $do(
   [
     Result<
       PostV1CompaniesAttachmentResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -106,39 +116,46 @@ async function $do(
   const payload = parsed.value;
   const body = new FormData();
 
-  appendForm(body, "category", payload.RequestBody.category);
-  if (isBlobLike(payload.RequestBody.document)) {
-    appendForm(body, "document", payload.RequestBody.document);
-  } else if (isReadableStream(payload.RequestBody.document.content)) {
+  appendForm(
+    body,
+    "category",
+    payload["Company-Attachment-Create-Request-Body"].category,
+  );
+  if (isBlobLike(payload["Company-Attachment-Create-Request-Body"].document)) {
+    const blob = payload["Company-Attachment-Create-Request-Body"].document;
+    const name = "name" in blob ? (blob.name as string) : undefined;
+    appendForm(body, "document", blob, name);
+  } else if (
+    isReadableStream(
+      payload["Company-Attachment-Create-Request-Body"].document.content,
+    )
+  ) {
     const buffer = await readableStreamToArrayBuffer(
-      payload.RequestBody.document.content,
+      payload["Company-Attachment-Create-Request-Body"].document.content,
     );
     const contentType =
-      getContentTypeFromFileName(payload.RequestBody.document.fileName)
-      || "application/octet-stream";
-    const blob = new Blob([buffer], { type: contentType });
-    appendForm(body, "document", blob, payload.RequestBody.document.fileName);
-  } else if (payload.RequestBody.document.content instanceof Uint8Array) {
-    const contentType =
-      getContentTypeFromFileName(payload.RequestBody.document.fileName)
-      || "application/octet-stream";
+      getContentTypeFromFileName(
+        payload["Company-Attachment-Create-Request-Body"].document.fileName,
+      ) || "application/octet-stream";
     appendForm(
       body,
       "document",
-      new Blob([new Uint8Array(payload.RequestBody.document.content).buffer], {
-        type: contentType,
-      }),
-      payload.RequestBody.document.fileName,
+      bytesToBlob(buffer, contentType),
+      payload["Company-Attachment-Create-Request-Body"].document.fileName,
     );
   } else {
     const contentType =
-      getContentTypeFromFileName(payload.RequestBody.document.fileName)
-      || "application/octet-stream";
+      getContentTypeFromFileName(
+        payload["Company-Attachment-Create-Request-Body"].document.fileName,
+      ) || "application/octet-stream";
     appendForm(
       body,
       "document",
-      new Blob([payload.RequestBody.document.content], { type: contentType }),
-      payload.RequestBody.document.fileName,
+      bytesToBlob(
+        payload["Company-Attachment-Create-Request-Body"].document.content,
+        contentType,
+      ),
+      payload["Company-Attachment-Create-Request-Body"].document.fileName,
     );
   }
 
@@ -148,7 +165,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/attachments")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -164,7 +180,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -213,6 +229,7 @@ async function $do(
 
   const [result] = await M.match<
     PostV1CompaniesAttachmentResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -226,8 +243,9 @@ async function $do(
     M.json(201, PostV1CompaniesAttachmentResponse$inboundSchema, {
       key: "Company-Attachment",
     }),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

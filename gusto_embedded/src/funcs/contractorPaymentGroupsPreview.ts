@@ -45,6 +45,8 @@ import { Result } from "../types/fp.js";
  * The returned creation_token is a required parameter in order to create the contractor payment group.
  *
  * scope: `payrolls:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function contractorPaymentGroupsPreview(
   client: GustoEmbeddedCore,
@@ -113,7 +115,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/companies/{company_id}/contractor_payment_groups/preview",
   )(pathParams);
@@ -132,7 +133,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

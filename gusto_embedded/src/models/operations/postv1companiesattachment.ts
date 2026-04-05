@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { blobLikeSchema } from "../../types/blobs.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
@@ -13,126 +12,62 @@ import {
   CompanyAttachment$inboundSchema,
 } from "../components/companyattachment.js";
 import {
+  CompanyAttachmentCreateRequestBody,
+  CompanyAttachmentCreateRequestBody$Outbound,
+  CompanyAttachmentCreateRequestBody$outboundSchema,
+} from "../components/companyattachmentcreaterequestbody.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type Document = {
-  fileName: string;
-  content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
-};
-
 /**
- * The category of a company attachment.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const Category = {
-  GepNotice: "gep_notice",
-  Compliance: "compliance",
+export const PostV1CompaniesAttachmentHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
- * The category of a company attachment.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type Category = ClosedEnum<typeof Category>;
-
-/**
- * The binary payload of the file and the company attachment category.
- */
-export type PostV1CompaniesAttachmentRequestBody = {
-  /**
-   * The binary payload of the file to be uploaded.
-   */
-  document: Document | Blob;
-  /**
-   * The category of a company attachment.
-   */
-  category: Category;
-};
+export type PostV1CompaniesAttachmentHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PostV1CompaniesAttachmentHeaderXGustoAPIVersion
+>;
 
 export type PostV1CompaniesAttachmentRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostV1CompaniesAttachmentHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
   companyId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostV1CompaniesAttachmentRequestBody;
+  companyAttachmentCreateRequestBody: CompanyAttachmentCreateRequestBody;
 };
 
 export type PostV1CompaniesAttachmentResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Created
    */
   companyAttachment?: CompanyAttachment | undefined;
 };
 
 /** @internal */
-export type Document$Outbound = {
-  fileName: string;
-  content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
-};
-
-/** @internal */
-export const Document$outboundSchema: z.ZodType<
-  Document$Outbound,
-  z.ZodTypeDef,
-  Document
-> = z.object({
-  fileName: z.string(),
-  content: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]),
-});
-
-export function documentToJSON(document: Document): string {
-  return JSON.stringify(Document$outboundSchema.parse(document));
-}
-
-/** @internal */
-export const Category$outboundSchema: z.ZodNativeEnum<typeof Category> = z
-  .nativeEnum(Category);
-
-/** @internal */
-export type PostV1CompaniesAttachmentRequestBody$Outbound = {
-  document: Document$Outbound | Blob;
-  category: string;
-};
-
-/** @internal */
-export const PostV1CompaniesAttachmentRequestBody$outboundSchema: z.ZodType<
-  PostV1CompaniesAttachmentRequestBody$Outbound,
-  z.ZodTypeDef,
-  PostV1CompaniesAttachmentRequestBody
-> = z.object({
-  document: z.lazy(() => Document$outboundSchema).or(blobLikeSchema),
-  category: Category$outboundSchema,
-});
-
-export function postV1CompaniesAttachmentRequestBodyToJSON(
-  postV1CompaniesAttachmentRequestBody: PostV1CompaniesAttachmentRequestBody,
-): string {
-  return JSON.stringify(
-    PostV1CompaniesAttachmentRequestBody$outboundSchema.parse(
-      postV1CompaniesAttachmentRequestBody,
-    ),
-  );
-}
+export const PostV1CompaniesAttachmentHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PostV1CompaniesAttachmentHeaderXGustoAPIVersion> = z
+    .nativeEnum(PostV1CompaniesAttachmentHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PostV1CompaniesAttachmentRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostV1CompaniesAttachmentRequestBody$Outbound;
+  company_id: string;
+  "Company-Attachment-Create-Request-Body":
+    CompanyAttachmentCreateRequestBody$Outbound;
 };
 
 /** @internal */
@@ -141,16 +76,19 @@ export const PostV1CompaniesAttachmentRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1CompaniesAttachmentRequest
 > = z.object({
+  xGustoAPIVersion:
+    PostV1CompaniesAttachmentHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
   companyId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.lazy(() =>
-    PostV1CompaniesAttachmentRequestBody$outboundSchema
-  ),
+  companyAttachmentCreateRequestBody:
+    CompanyAttachmentCreateRequestBody$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    companyId: "company_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    companyId: "company_id",
+    companyAttachmentCreateRequestBody:
+      "Company-Attachment-Create-Request-Body",
   });
 });
 

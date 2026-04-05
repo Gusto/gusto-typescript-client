@@ -1,7 +1,5 @@
 # Rehire
 
-Example response
-
 ## Example Usage
 
 ```typescript

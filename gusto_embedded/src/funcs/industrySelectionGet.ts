@@ -40,6 +40,8 @@ import { Result } from "../types/fp.js";
  * Returns the industry classification for a company, including NAICS code, SIC codes, and industry title.
  *
  * scope: `companies:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function industrySelectionGet(
   client: GustoEmbeddedCore,
@@ -104,7 +106,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/industry_selection")(
     pathParams,
   );
@@ -122,7 +123,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

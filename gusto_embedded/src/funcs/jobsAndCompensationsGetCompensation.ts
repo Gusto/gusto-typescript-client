@@ -40,6 +40,8 @@ import { Result } from "../types/fp.js";
  * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
  *
  * scope: `compensations:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function jobsAndCompensationsGetCompensation(
   client: GustoEmbeddedCore,
@@ -105,7 +107,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/compensations/{compensation_id}")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -121,7 +122,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

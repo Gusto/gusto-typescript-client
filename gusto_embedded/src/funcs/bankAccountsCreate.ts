@@ -53,6 +53,8 @@ import { Result } from "../types/fp.js";
  * > If a default bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
  *
  * scope: `company_bank_accounts:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function bankAccountsCreate(
   client: GustoEmbeddedCore,
@@ -122,7 +124,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/bank_accounts")(
     pathParams,
   );
@@ -141,7 +142,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -39,7 +43,18 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Sign an employee's Form I-9 as an employer. Once the form is signed, the employee's I-9 authorization is considered complete and cannot be modified.
  *
+ * ### Prerequisites
+ * Before calling this endpoint:
+ * 1. The employee must have a completed [I-9 authorization](ref:put-v1-employees-employee_id-i9_authorization)
+ * 2. The employee must have signed the Form I-9
+ * 3. [I-9 verification documents](ref:put-v1-employees-employee_id-i9_authorization-documents) must be submitted
+ *
+ * ### Related guides
+ * - [I-9 employment verification](doc:i-9-employment-verification)
+ *
  * scope: `i9_authorizations:manage`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function i9VerificationEmployerSign(
   client: GustoEmbeddedCore,
@@ -48,6 +63,7 @@ export function i9VerificationEmployerSign(
 ): APIPromise<
   Result<
     PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -74,6 +90,7 @@ async function $do(
   [
     Result<
       PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -98,7 +115,11 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON(
+    "body",
+    payload["I9-Authorization-Employer-Sign-Request-Body"],
+    { explode: true },
+  );
 
   const pathParams = {
     employee_id: encodeSimple("employee_id", payload.employee_id, {
@@ -106,7 +127,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/employees/{employee_id}/i9_authorization/employer_sign",
   )(pathParams);
@@ -130,7 +150,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -179,6 +199,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -194,8 +215,9 @@ async function $do(
       PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse$inboundSchema,
       { key: "I9-Authorization" },
     ),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesListAdmins } from "../funcs/companiesListAdmins.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdAdminsRequest,
   GetV1CompaniesCompanyIdAdminsResponse,
 } from "../models/operations/getv1companiescompanyidadmins.js";
@@ -47,9 +47,9 @@ export function buildCompaniesListAdminsQuery(
 } {
   return {
     queryKey: queryKeyCompaniesListAdmins(request.companyId, {
+      xGustoAPIVersion: request.xGustoAPIVersion,
       page: request.page,
       per: request.per,
-      xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function companiesListAdminsQueryFn(
       ctx,
@@ -77,9 +77,11 @@ export function buildCompaniesListAdminsQuery(
 export function queryKeyCompaniesListAdmins(
   companyId: string,
   parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion
+      | undefined;
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

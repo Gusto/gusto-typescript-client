@@ -46,6 +46,8 @@ import { Result } from "../types/fp.js";
  * A bank account cannot be disabled if it is used for any unprocessed payments.
  *
  * scope: `company_bank_accounts:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function bankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId(
   client: GustoEmbeddedCore,
@@ -118,7 +120,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/companies/{company_id}/bank_accounts/{bank_account_id}",
   )(pathParams);
@@ -136,7 +137,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
