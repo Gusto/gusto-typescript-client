@@ -1,0 +1,24 @@
+# PostV1CompaniesCompanyUuidTimeOffPoliciesRequest
+
+## Example Usage
+
+```typescript
+import { PostV1CompaniesCompanyUuidTimeOffPoliciesRequest } from "@gusto/embedded-api/models/operations/postv1companiescompanyuuidtimeoffpolicies.js";
+
+let value: PostV1CompaniesCompanyUuidTimeOffPoliciesRequest = {
+  companyUuid: "<id>",
+  timeOffPolicyRequest: {
+    name: "Vacation Policy",
+    policyType: "sick",
+    accrualMethod: "per_anniversary_year",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PostV1CompaniesCompanyUuidTimeOffPoliciesHeaderXGustoAPIVersion](../../models/operations/postv1companiescompanyuuidtimeoffpoliciesheaderxgustoapiversion.md)                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyUuid`                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `timeOffPolicyRequest`                                                                                                                                                                                                       | [components.TimeOffPolicyRequest](../../models/components/timeoffpolicyrequest.md)                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
