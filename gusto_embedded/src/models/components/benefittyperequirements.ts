@@ -19,7 +19,7 @@ export type DefaultValue = {
 export type EmployeeDeduction = {
   required?: boolean | undefined;
   editable?: boolean | undefined;
-  defaultValue?: DefaultValue | undefined;
+  defaultValue?: DefaultValue | null | undefined;
   choices?: Array<string> | null | undefined;
 };
 
@@ -34,8 +34,8 @@ export type BenefitTypeRequirementsDefaultValue = {
 export type BenefitTypeRequirementsContribution = {
   required?: boolean | undefined;
   editable?: boolean | undefined;
-  defaultValue?: BenefitTypeRequirementsDefaultValue | undefined;
-  choices?: Array<string> | undefined;
+  defaultValue?: BenefitTypeRequirementsDefaultValue | null | undefined;
+  choices?: Array<string> | null | undefined;
 };
 
 export type BenefitTypeRequirementsDeductAsPercentageDefaultValue = {
@@ -51,8 +51,9 @@ export type DeductAsPercentage = {
   editable?: boolean | undefined;
   defaultValue?:
     | BenefitTypeRequirementsDeductAsPercentageDefaultValue
+    | null
     | undefined;
-  choices?: Array<string> | undefined;
+  choices?: Array<string> | null | undefined;
 };
 
 export type BenefitTypeRequirementsCatchUpDefaultValue = {
@@ -66,8 +67,8 @@ export type BenefitTypeRequirementsCatchUpDefaultValue = {
 export type CatchUp = {
   required?: boolean | undefined;
   editable?: boolean | undefined;
-  defaultValue?: BenefitTypeRequirementsCatchUpDefaultValue | undefined;
-  choices?: Array<string> | undefined;
+  defaultValue?: BenefitTypeRequirementsCatchUpDefaultValue | null | undefined;
+  choices?: Array<string> | null | undefined;
 };
 
 export type BenefitTypeRequirementsLimitOptionDefaultValue = {
@@ -81,8 +82,11 @@ export type BenefitTypeRequirementsLimitOptionDefaultValue = {
 export type LimitOption = {
   required?: boolean | undefined;
   editable?: boolean | undefined;
-  defaultValue?: BenefitTypeRequirementsLimitOptionDefaultValue | undefined;
-  choices?: Array<string> | undefined;
+  defaultValue?:
+    | BenefitTypeRequirementsLimitOptionDefaultValue
+    | null
+    | undefined;
+  choices?: Array<string> | null | undefined;
 };
 
 export type BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue =
@@ -99,8 +103,9 @@ export type CompanyContributionAnnualMaximum = {
   editable?: boolean | undefined;
   defaultValue?:
     | BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue
+    | null
     | undefined;
-  choices?: Array<string> | undefined;
+  choices?: Array<string> | null | undefined;
 };
 
 export type BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue = {
@@ -116,8 +121,9 @@ export type CoverageSalaryMultiplier = {
   editable?: boolean | undefined;
   defaultValue?:
     | BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue
+    | null
     | undefined;
-  choices?: Array<string> | undefined;
+  choices?: Array<string> | null | undefined;
 };
 
 export type BenefitTypeRequirementsCoverageAmountDefaultValue = {
@@ -131,13 +137,13 @@ export type BenefitTypeRequirementsCoverageAmountDefaultValue = {
 export type CoverageAmount = {
   required?: boolean | undefined;
   editable?: boolean | undefined;
-  defaultValue?: BenefitTypeRequirementsCoverageAmountDefaultValue | undefined;
-  choices?: Array<string> | undefined;
+  defaultValue?:
+    | BenefitTypeRequirementsCoverageAmountDefaultValue
+    | null
+    | undefined;
+  choices?: Array<string> | null | undefined;
 };
 
-/**
- * Benefit type requirements response
- */
 export type BenefitTypeRequirements = {
   /**
    * The amount to be deducted, per pay period, from the employee's pay.
@@ -203,7 +209,8 @@ export const EmployeeDeduction$inboundSchema: z.ZodType<
 > = z.object({
   required: z.boolean().optional(),
   editable: z.boolean().optional(),
-  default_value: z.lazy(() => DefaultValue$inboundSchema).optional(),
+  default_value: z.nullable(z.lazy(() => DefaultValue$inboundSchema))
+    .optional(),
   choices: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -250,9 +257,10 @@ export const BenefitTypeRequirementsContribution$inboundSchema: z.ZodType<
 > = z.object({
   required: z.boolean().optional(),
   editable: z.boolean().optional(),
-  default_value: z.lazy(() => BenefitTypeRequirementsDefaultValue$inboundSchema)
-    .optional(),
-  choices: z.array(z.string()).optional(),
+  default_value: z.nullable(
+    z.lazy(() => BenefitTypeRequirementsDefaultValue$inboundSchema),
+  ).optional(),
+  choices: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "default_value": "defaultValue",
@@ -305,10 +313,12 @@ export const DeductAsPercentage$inboundSchema: z.ZodType<
 > = z.object({
   required: z.boolean().optional(),
   editable: z.boolean().optional(),
-  default_value: z.lazy(() =>
-    BenefitTypeRequirementsDeductAsPercentageDefaultValue$inboundSchema
+  default_value: z.nullable(
+    z.lazy(() =>
+      BenefitTypeRequirementsDeductAsPercentageDefaultValue$inboundSchema
+    ),
   ).optional(),
-  choices: z.array(z.string()).optional(),
+  choices: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "default_value": "defaultValue",
@@ -354,10 +364,10 @@ export const CatchUp$inboundSchema: z.ZodType<CatchUp, z.ZodTypeDef, unknown> =
   z.object({
     required: z.boolean().optional(),
     editable: z.boolean().optional(),
-    default_value: z.lazy(() =>
-      BenefitTypeRequirementsCatchUpDefaultValue$inboundSchema
+    default_value: z.nullable(
+      z.lazy(() => BenefitTypeRequirementsCatchUpDefaultValue$inboundSchema),
     ).optional(),
-    choices: z.array(z.string()).optional(),
+    choices: z.nullable(z.array(z.string())).optional(),
   }).transform((v) => {
     return remap$(v, {
       "default_value": "defaultValue",
@@ -409,10 +419,10 @@ export const LimitOption$inboundSchema: z.ZodType<
 > = z.object({
   required: z.boolean().optional(),
   editable: z.boolean().optional(),
-  default_value: z.lazy(() =>
-    BenefitTypeRequirementsLimitOptionDefaultValue$inboundSchema
+  default_value: z.nullable(
+    z.lazy(() => BenefitTypeRequirementsLimitOptionDefaultValue$inboundSchema),
   ).optional(),
-  choices: z.array(z.string()).optional(),
+  choices: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "default_value": "defaultValue",
@@ -463,10 +473,12 @@ export const CompanyContributionAnnualMaximum$inboundSchema: z.ZodType<
 > = z.object({
   required: z.boolean().optional(),
   editable: z.boolean().optional(),
-  default_value: z.lazy(() =>
-    BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue$inboundSchema
+  default_value: z.nullable(
+    z.lazy(() =>
+      BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue$inboundSchema
+    ),
   ).optional(),
-  choices: z.array(z.string()).optional(),
+  choices: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "default_value": "defaultValue",
@@ -517,10 +529,12 @@ export const CoverageSalaryMultiplier$inboundSchema: z.ZodType<
 > = z.object({
   required: z.boolean().optional(),
   editable: z.boolean().optional(),
-  default_value: z.lazy(() =>
-    BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue$inboundSchema
+  default_value: z.nullable(
+    z.lazy(() =>
+      BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue$inboundSchema
+    ),
   ).optional(),
-  choices: z.array(z.string()).optional(),
+  choices: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "default_value": "defaultValue",
@@ -572,10 +586,12 @@ export const CoverageAmount$inboundSchema: z.ZodType<
 > = z.object({
   required: z.boolean().optional(),
   editable: z.boolean().optional(),
-  default_value: z.lazy(() =>
-    BenefitTypeRequirementsCoverageAmountDefaultValue$inboundSchema
+  default_value: z.nullable(
+    z.lazy(() =>
+      BenefitTypeRequirementsCoverageAmountDefaultValue$inboundSchema
+    ),
   ).optional(),
-  choices: z.array(z.string()).optional(),
+  choices: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "default_value": "defaultValue",

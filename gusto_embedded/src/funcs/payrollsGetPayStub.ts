@@ -40,6 +40,8 @@ import { Result } from "../types/fp.js";
  * Get an employee's pay stub for the specified payroll. By default, an application/pdf response will be returned. No other content types are currently supported, but may be supported in the future.
  *
  * scope: `pay_stubs:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function payrollsGetPayStub(
   client: GustoEmbeddedCore,
@@ -110,7 +112,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/payrolls/{payroll_id}/employees/{employee_id}/pay_stub",
   )(pathParams);
@@ -128,7 +129,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

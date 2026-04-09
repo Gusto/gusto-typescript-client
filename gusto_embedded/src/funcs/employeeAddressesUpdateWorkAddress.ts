@@ -44,6 +44,8 @@ import { Result } from "../types/fp.js";
  * The work address of an employee is used for payroll tax purposes.
  *
  * scope: `employees:manage`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function employeeAddressesUpdateWorkAddress(
   client: GustoEmbeddedCore,
@@ -112,7 +114,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc("/v1/work_addresses/{work_address_uuid}")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -129,7 +130,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

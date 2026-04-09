@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyAttachmentsGetList } from "../funcs/companyAttachmentsGetList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesAttachmentsHeaderXGustoAPIVersion,
   GetV1CompaniesAttachmentsRequest,
   GetV1CompaniesAttachmentsResponse,
 } from "../models/operations/getv1companiesattachments.js";
@@ -74,7 +74,11 @@ export function buildCompanyAttachmentsGetListQuery(
 
 export function queryKeyCompanyAttachmentsGetList(
   companyId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompaniesAttachmentsHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

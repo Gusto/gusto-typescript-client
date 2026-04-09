@@ -26,6 +26,7 @@ export type SignatoryInviteRequest = {
    * The signatory's first name.
    */
   firstName: string;
+  middleInitial?: string | undefined;
   /**
    * The signatory's last name.
    */
@@ -98,6 +99,7 @@ export function signatoryInviteRequestHomeAddressToJSON(
 /** @internal */
 export type SignatoryInviteRequest$Outbound = {
   first_name: string;
+  middle_initial?: string | undefined;
   last_name: string;
   title?: string | undefined;
   phone?: string | undefined;
@@ -114,6 +116,7 @@ export const SignatoryInviteRequest$outboundSchema: z.ZodType<
   SignatoryInviteRequest
 > = z.object({
   firstName: z.string(),
+  middleInitial: z.string().optional(),
   lastName: z.string(),
   title: z.string().optional(),
   phone: z.string().optional(),
@@ -125,6 +128,7 @@ export const SignatoryInviteRequest$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     firstName: "first_name",
+    middleInitial: "middle_initial",
     lastName: "last_name",
     homeAddress: "home_address",
   });

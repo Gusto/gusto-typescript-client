@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   BenefitTypeRequirements,
@@ -14,35 +15,51 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1BenefitsBenefitsIdRequirementsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1BenefitsBenefitsIdRequirementsHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetV1BenefitsBenefitsIdRequirementsHeaderXGustoAPIVersion>;
+
 export type GetV1BenefitsBenefitsIdRequirementsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1BenefitsBenefitsIdRequirementsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The benefit type in Gusto.
    */
   benefitId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1BenefitsBenefitsIdRequirementsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Benefit type requirements response
+   * Successful
    */
   benefitTypeRequirements?: BenefitTypeRequirements | undefined;
 };
 
 /** @internal */
+export const GetV1BenefitsBenefitsIdRequirementsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1BenefitsBenefitsIdRequirementsHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1BenefitsBenefitsIdRequirementsHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetV1BenefitsBenefitsIdRequirementsRequest$Outbound = {
-  benefit_id: string;
   "X-Gusto-API-Version": string;
+  benefit_id: string;
 };
 
 /** @internal */
@@ -52,12 +69,14 @@ export const GetV1BenefitsBenefitsIdRequirementsRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1BenefitsBenefitsIdRequirementsRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1BenefitsBenefitsIdRequirementsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     benefitId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
-      benefitId: "benefit_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      benefitId: "benefit_id",
     });
   });
 

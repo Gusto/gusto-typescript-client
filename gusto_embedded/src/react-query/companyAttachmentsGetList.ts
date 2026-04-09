@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompaniesAttachmentsRequest } from "../models/operations/getv1companiesattachments.js";
+import {
+  GetV1CompaniesAttachmentsHeaderXGustoAPIVersion,
+  GetV1CompaniesAttachmentsRequest,
+} from "../models/operations/getv1companiesattachments.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type CompanyAttachmentsGetListQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -56,6 +60,9 @@ export type CompanyAttachmentsGetListQueryError =
  *
  * @remarks
  * Retrieve a list of all the attachments uploaded by the company.
+ *
+ * ### Related guides
+ * - [Manage company attachments](doc:manage-company-attachments)
  *
  * scope: `company_attachments:read`
  */
@@ -86,6 +93,9 @@ export function useCompanyAttachmentsGetList(
  * @remarks
  * Retrieve a list of all the attachments uploaded by the company.
  *
+ * ### Related guides
+ * - [Manage company attachments](doc:manage-company-attachments)
+ *
  * scope: `company_attachments:read`
  */
 export function useCompanyAttachmentsGetListSuspense(
@@ -113,7 +123,11 @@ export function setCompanyAttachmentsGetListData(
   client: QueryClient,
   queryKeyBase: [
     companyId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompaniesAttachmentsHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: CompanyAttachmentsGetListQueryData,
 ): CompanyAttachmentsGetListQueryData | undefined {
@@ -127,7 +141,11 @@ export function invalidateCompanyAttachmentsGetList(
   queryKeyBase: TupleToPrefixes<
     [
       companyId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompaniesAttachmentsHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

@@ -8,8 +8,10 @@
 
 ## getDownloadUrl
 
-Retrieve a temporary url to download a attachment file uploaded
-by the company.
+Retrieve a temporary url to download an attachment file uploaded by the company.
+
+### Related guides
+- [Manage company attachments](doc:manage-company-attachments)
 
 scope: `company_attachments:read`
 
@@ -108,6 +110,7 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |

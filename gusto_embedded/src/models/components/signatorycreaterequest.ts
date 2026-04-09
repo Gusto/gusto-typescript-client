@@ -26,6 +26,7 @@ export type SignatoryCreateRequest = {
    * The signatory's first name.
    */
   firstName: string;
+  middleInitial?: string | undefined;
   /**
    * The signatory's last name.
    */
@@ -92,6 +93,7 @@ export function homeAddressToJSON(homeAddress: HomeAddress): string {
 /** @internal */
 export type SignatoryCreateRequest$Outbound = {
   first_name: string;
+  middle_initial?: string | undefined;
   last_name: string;
   title: string;
   phone: string;
@@ -108,6 +110,7 @@ export const SignatoryCreateRequest$outboundSchema: z.ZodType<
   SignatoryCreateRequest
 > = z.object({
   firstName: z.string(),
+  middleInitial: z.string().optional(),
   lastName: z.string(),
   title: z.string(),
   phone: z.string(),
@@ -118,6 +121,7 @@ export const SignatoryCreateRequest$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     firstName: "first_name",
+    middleInitial: "middle_initial",
     lastName: "last_name",
     homeAddress: "home_address",
   });

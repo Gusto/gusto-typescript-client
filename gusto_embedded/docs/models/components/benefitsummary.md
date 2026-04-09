@@ -1,7 +1,5 @@
 # BenefitSummary
 
-Benefit summary response
-
 ## Example Usage
 
 ```typescript
@@ -19,4 +17,4 @@ let value: BenefitSummary = {};
 | `description`                                                                                                      | *string*                                                                                                           | :heavy_minus_sign:                                                                                                 | Description of the benefit.                                                                                        |
 | `companyBenefitDeduction`                                                                                          | *string*                                                                                                           | :heavy_minus_sign:                                                                                                 | The aggregate of employee deduction for all employees given the period of time and the specific company benefit.   |
 | `companyBenefitContribution`                                                                                       | *string*                                                                                                           | :heavy_minus_sign:                                                                                                 | The aggregate of company contribution for all employees given the period of time and the specific company benefit. |
-| `employees`                                                                                                        | [components.BenefitSummaryEmployees](../../models/components/benefitsummaryemployees.md)                           | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |
+| `employees`                                                                                                        | [components.BenefitSummaryEmployees](../../models/components/benefitsummaryemployees.md)[]                         | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |

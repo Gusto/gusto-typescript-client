@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -14,26 +15,41 @@ import {
   SupportedBenefit,
   SupportedBenefit$inboundSchema,
 } from "../components/supportedbenefit.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1BenefitsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1BenefitsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1BenefitsHeaderXGustoAPIVersion
+>;
 
 export type GetV1BenefitsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?: GetV1BenefitsHeaderXGustoAPIVersion | undefined;
 };
 
 export type GetV1BenefitsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
-  supportedBenefitList?: Array<SupportedBenefit> | undefined;
+  supportedBenefits?: Array<SupportedBenefit> | undefined;
 };
+
+/** @internal */
+export const GetV1BenefitsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1BenefitsHeaderXGustoAPIVersion> = z.nativeEnum(
+    GetV1BenefitsHeaderXGustoAPIVersion,
+  );
 
 /** @internal */
 export type GetV1BenefitsRequest$Outbound = {
@@ -46,7 +62,9 @@ export const GetV1BenefitsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1BenefitsRequest
 > = z.object({
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: GetV1BenefitsHeaderXGustoAPIVersion$outboundSchema.default(
+    "2025-06-15",
+  ),
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",
@@ -68,11 +86,11 @@ export const GetV1BenefitsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Supported-Benefit-List": z.array(SupportedBenefit$inboundSchema).optional(),
+  "Supported-Benefits": z.array(SupportedBenefit$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
-    "Supported-Benefit-List": "supportedBenefitList",
+    "Supported-Benefits": "supportedBenefits",
   });
 });
 

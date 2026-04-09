@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1BenefitsCompanyBenefitIdSummaryRequest } from "../models/operations/getv1benefitscompanybenefitidsummary.js";
+import {
+  GetV1BenefitsCompanyBenefitIdSummaryHeaderXGustoAPIVersion,
+  GetV1BenefitsCompanyBenefitIdSummaryRequest,
+} from "../models/operations/getv1benefitscompanybenefitidsummary.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type CompanyBenefitsGetSummaryQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -118,10 +122,12 @@ export function setCompanyBenefitsGetSummaryData(
   queryKeyBase: [
     companyBenefitId: string,
     parameters: {
+      xGustoAPIVersion?:
+        | GetV1BenefitsCompanyBenefitIdSummaryHeaderXGustoAPIVersion
+        | undefined;
       startDate?: string | undefined;
       endDate?: string | undefined;
       detailed?: boolean | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: CompanyBenefitsGetSummaryQueryData,
@@ -137,10 +143,12 @@ export function invalidateCompanyBenefitsGetSummary(
     [
       companyBenefitId: string,
       parameters: {
+        xGustoAPIVersion?:
+          | GetV1BenefitsCompanyBenefitIdSummaryHeaderXGustoAPIVersion
+          | undefined;
         startDate?: string | undefined;
         endDate?: string | undefined;
         detailed?: boolean | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,

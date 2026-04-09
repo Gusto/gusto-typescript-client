@@ -12,10 +12,6 @@ import {
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import { Job, Job$inboundSchema } from "../components/job.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -35,6 +31,19 @@ export const GetV1EmployeesEmployeeIdJobsQueryParamInclude = {
  */
 export type GetV1EmployeesEmployeeIdJobsQueryParamInclude = ClosedEnum<
   typeof GetV1EmployeesEmployeeIdJobsQueryParamInclude
+>;
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion
 >;
 
 export type GetV1EmployeesEmployeeIdJobsRequest = {
@@ -60,21 +69,28 @@ export type GetV1EmployeesEmployeeIdJobsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type GetV1EmployeesEmployeeIdJobsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
-  jobList?: Array<Job> | undefined;
+  jobs?: Array<Job> | undefined;
 };
 
 /** @internal */
 export const GetV1EmployeesEmployeeIdJobsQueryParamInclude$outboundSchema:
   z.ZodNativeEnum<typeof GetV1EmployeesEmployeeIdJobsQueryParamInclude> = z
     .nativeEnum(GetV1EmployeesEmployeeIdJobsQueryParamInclude);
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion> = z
+    .nativeEnum(GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion);
 
 /** @internal */
 export type GetV1EmployeesEmployeeIdJobsRequest$Outbound = {
@@ -96,7 +112,10 @@ export const GetV1EmployeesEmployeeIdJobsRequest$outboundSchema: z.ZodType<
   per: z.number().int().optional(),
   include: GetV1EmployeesEmployeeIdJobsQueryParamInclude$outboundSchema
     .optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion:
+    GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
 }).transform((v) => {
   return remap$(v, {
     employeeId: "employee_id",
@@ -121,11 +140,11 @@ export const GetV1EmployeesEmployeeIdJobsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Job-List": z.array(Job$inboundSchema).optional(),
+  Jobs: z.array(Job$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
-    "Job-List": "jobList",
+    "Jobs": "jobs",
   });
 });
 

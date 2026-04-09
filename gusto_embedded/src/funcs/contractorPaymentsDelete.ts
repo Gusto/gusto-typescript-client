@@ -44,6 +44,8 @@ import { Result } from "../types/fp.js";
  * Cancels and deletes a contractor payment. If the contractor payment has already started processing ("may_cancel": true), the payment cannot be cancelled.
  *
  * scope: `payrolls:run`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function contractorPaymentsDelete(
   client: GustoEmbeddedCore,
@@ -117,7 +119,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/v1/companies/{company_id}/contractor_payments/{contractor_payment_id}",
   )(pathParams);
@@ -135,7 +136,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

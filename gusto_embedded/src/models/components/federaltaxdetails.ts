@@ -9,6 +9,42 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export const TaxPayerType = {
+  CCorporation: "C-Corporation",
+  SCorporation: "S-Corporation",
+  SoleProprietor: "Sole proprietor",
+  Llc: "LLC",
+  Llp: "LLP",
+  LimitedPartnership: "Limited partnership",
+  CoOwnership: "Co-ownership",
+  Association: "Association",
+  Trusteeship: "Trusteeship",
+  GeneralPartnership: "General partnership",
+  JointVenture: "Joint venture",
+  NonProfit: "Non-Profit",
+} as const;
+export type TaxPayerType = ClosedEnum<typeof TaxPayerType>;
+
+/**
+ * The form used by the company for federal tax filing. One of:
+ *
+ * @remarks
+ * - 941 (Quarterly federal tax return form)
+ * - 944 (Annual federal tax return form)
+ */
+export const FilingForm = {
+  NineHundredAndFortyOne: "941",
+  NineHundredAndFortyFour: "944",
+} as const;
+/**
+ * The form used by the company for federal tax filing. One of:
+ *
+ * @remarks
+ * - 941 (Quarterly federal tax return form)
+ * - 944 (Annual federal tax return form)
+ */
+export type FilingForm = ClosedEnum<typeof FilingForm>;
+
 /**
  * The status of EIN verification:
  *
@@ -49,9 +85,6 @@ export type EinVerification = {
   status?: FederalTaxDetailsStatus | undefined;
 };
 
-/**
- * Example response
- */
 export type FederalTaxDetails = {
   /**
    * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
@@ -74,7 +107,7 @@ export type FederalTaxDetails = {
    * - Joint venture
    * - Non-Profit
    */
-  taxPayerType?: string | null | undefined;
+  taxPayerType?: TaxPayerType | null | undefined;
   /**
    * Whether the company is taxed as an S-Corporation. Tax payer types that may be taxed as an S-Corporation include:
    *
@@ -91,7 +124,7 @@ export type FederalTaxDetails = {
    * - 941 (Quarterly federal tax return form)
    * - 944 (Annual federal tax return form)
    */
-  filingForm?: string | undefined;
+  filingForm?: FilingForm | undefined;
   /**
    * Whether company's Employer Identification Number (EIN) is present
    */
@@ -121,6 +154,14 @@ export type FederalTaxDetails = {
    */
   depositSchedule?: string | undefined;
 };
+
+/** @internal */
+export const TaxPayerType$inboundSchema: z.ZodNativeEnum<typeof TaxPayerType> =
+  z.nativeEnum(TaxPayerType);
+
+/** @internal */
+export const FilingForm$inboundSchema: z.ZodNativeEnum<typeof FilingForm> = z
+  .nativeEnum(FilingForm);
 
 /** @internal */
 export const FederalTaxDetailsStatus$inboundSchema: z.ZodNativeEnum<
@@ -153,9 +194,9 @@ export const FederalTaxDetails$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   version: z.string().optional(),
-  tax_payer_type: z.nullable(z.string()).optional(),
+  tax_payer_type: z.nullable(TaxPayerType$inboundSchema).optional(),
   taxable_as_scorp: z.boolean().optional(),
-  filing_form: z.string().optional(),
+  filing_form: FilingForm$inboundSchema.optional(),
   has_ein: z.boolean().optional(),
   ein_verified: z.boolean().optional(),
   ein_verification: z.lazy(() => EinVerification$inboundSchema).optional(),

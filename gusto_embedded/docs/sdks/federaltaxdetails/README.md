@@ -4,12 +4,12 @@
 
 ### Available Operations
 
-* [get](#get) - Get Federal Tax Details
-* [update](#update) - Update Federal Tax Details
+* [get](#get) - Get a company's federal tax details
+* [update](#update) - Update a company's federal tax details
 
 ## get
 
-Fetches attributes relevant for a company's federal taxes.
+Retrieves a company's federal tax details including EIN verification status, tax payer type, filing form, and other federal tax configuration.
 
 scope: `company_federal_taxes:read`
 
@@ -106,14 +106,23 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## update
 
-Updates attributes relevant for a company's federal taxes.
-This information is required is to onboard a company for use with Gusto Embedded Payroll.
+Updates a company's federal tax details including EIN, legal name, tax payer type, filing form, and S-Corp
+taxation status. This information is required to onboard a company for use with Gusto Embedded Payroll.
+
+### Prerequisites
+Before calling this endpoint, retrieve the current federal tax details and `version` via [GET /v1/companies/{company_id}/federal_tax_details](ref:get-v1-companies-company_id-federal_tax_details)
+
+### Webhooks
+- `company.updated`: Fires when federal tax details for a company are successfully updated
+
+**Setup:** [POST /v1/webhook_subscriptions](ref:post-v1-webhook-subscription) with `subscription_types`: `["Company"]`
 
 scope: `company_federal_taxes:write`
 
@@ -130,7 +139,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.federalTaxDetails.update({
     companyId: "<id>",
-    requestBody: {
+    federalTaxDetailsUpdate: {
       version: "<value>",
     },
   });
@@ -158,7 +167,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await federalTaxDetailsUpdate(gustoEmbedded, {
     companyId: "<id>",
-    requestBody: {
+    federalTaxDetailsUpdate: {
       version: "<value>",
     },
   });
@@ -202,12 +211,12 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.federalTaxDetails.update({
     companyId: "<id>",
-    requestBody: {
+    federalTaxDetailsUpdate: {
+      version: "6cb95e00540706ca48d4577b3c839fbe",
       legalName: "Acme Corp.",
       taxPayerType: "LLP",
       filingForm: "944",
       taxableAsScorp: false,
-      version: "6cb95e00540706ca48d4577b3c839fbe",
     },
   });
 
@@ -234,12 +243,12 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await federalTaxDetailsUpdate(gustoEmbedded, {
     companyId: "<id>",
-    requestBody: {
+    federalTaxDetailsUpdate: {
+      version: "6cb95e00540706ca48d4577b3c839fbe",
       legalName: "Acme Corp.",
       taxPayerType: "LLP",
       filingForm: "944",
       taxableAsScorp: false,
-      version: "6cb95e00540706ca48d4577b3c839fbe",
     },
   });
   if (res.ok) {
@@ -282,7 +291,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.federalTaxDetails.update({
     companyId: "<id>",
-    requestBody: {
+    federalTaxDetailsUpdate: {
       version: "<value>",
     },
   });
@@ -310,7 +319,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await federalTaxDetailsUpdate(gustoEmbedded, {
     companyId: "<id>",
-    requestBody: {
+    federalTaxDetailsUpdate: {
       version: "<value>",
     },
   });
@@ -354,7 +363,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.federalTaxDetails.update({
     companyId: "<id>",
-    requestBody: {
+    federalTaxDetailsUpdate: {
       version: "<value>",
     },
   });
@@ -382,7 +391,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await federalTaxDetailsUpdate(gustoEmbedded, {
     companyId: "<id>",
-    requestBody: {
+    federalTaxDetailsUpdate: {
       version: "<value>",
     },
   });
@@ -431,5 +440,6 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 409, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

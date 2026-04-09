@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyBenefitsGetAll } from "../funcs/companyBenefitsGetAll.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1BenefitsHeaderXGustoAPIVersion,
   GetV1BenefitsRequest,
   GetV1BenefitsResponse,
 } from "../models/operations/getv1benefits.js";
@@ -72,7 +72,9 @@ export function buildCompanyBenefitsGetAllQuery(
 }
 
 export function queryKeyCompanyBenefitsGetAll(
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?: GetV1BenefitsHeaderXGustoAPIVersion | undefined;
+  },
 ): QueryKey {
   return ["@gusto/embedded-api", "companyBenefits", "getAll", parameters];
 }

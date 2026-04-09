@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,11 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion,
   GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude,
   GetV1CompanyBenefitsCompanyBenefitIdRequest,
 } from "../models/operations/getv1companybenefitscompanybenefitid.js";
@@ -45,6 +46,7 @@ export {
 };
 
 export type CompanyBenefitsGetQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -122,11 +124,13 @@ export function setCompanyBenefitsGetData(
   queryKeyBase: [
     companyBenefitId: string,
     parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion
+        | undefined;
       withEmployeeBenefits?: boolean | undefined;
       include?:
         | GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude
         | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: CompanyBenefitsGetQueryData,
@@ -142,11 +146,13 @@ export function invalidateCompanyBenefitsGet(
     [
       companyBenefitId: string,
       parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion
+          | undefined;
         withEmployeeBenefits?: boolean | undefined;
         include?:
           | GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude
           | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,

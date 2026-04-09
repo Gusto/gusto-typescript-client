@@ -51,6 +51,8 @@ import { Result } from "../types/fp.js";
  * - that employee's work state requires filing a new hire report
  *
  * scope: `employee_state_taxes:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function employeeTaxSetupGetStateTaxes(
   client: GustoEmbeddedCore,
@@ -116,7 +118,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/employees/{employee_uuid}/state_taxes")(
     pathParams,
   );
@@ -134,7 +135,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

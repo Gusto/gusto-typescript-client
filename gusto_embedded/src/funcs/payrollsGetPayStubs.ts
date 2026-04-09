@@ -40,6 +40,8 @@ import { Result } from "../types/fp.js";
  * Get an employee's pay stubs
  *
  * scope: `pay_stubs:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function payrollsGetPayStubs(
   client: GustoEmbeddedCore,
@@ -105,7 +107,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/employees/{employee_id}/pay_stubs")(pathParams);
 
   const query = encodeFormQuery({
@@ -126,7 +127,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

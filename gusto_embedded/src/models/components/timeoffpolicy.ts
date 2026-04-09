@@ -10,14 +10,23 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Type of the time off policy
+ * Type of the time off policy. Only "vacation" and "sick" can be created through the API, but other types may be present if the company was previously a Gusto.com customer.
  */
 export const PolicyType = {
   Vacation: "vacation",
   Sick: "sick",
+  Bereavement: "bereavement",
+  Custom: "custom",
+  FloatingHoliday: "floating_holiday",
+  JuryDuty: "jury_duty",
+  LearningAndDevelopment: "learning_and_development",
+  ParentalLeave: "parental_leave",
+  PersonalDay: "personal_day",
+  Volunteer: "volunteer",
+  Weather: "weather",
 } as const;
 /**
- * Type of the time off policy
+ * Type of the time off policy. Only "vacation" and "sick" can be created through the API, but other types may be present if the company was previously a Gusto.com customer.
  */
 export type PolicyType = ClosedEnum<typeof PolicyType>;
 
@@ -46,7 +55,7 @@ export type TimeOffPolicy = {
    */
   name: string;
   /**
-   * Type of the time off policy
+   * Type of the time off policy. Only "vacation" and "sick" can be created through the API, but other types may be present if the company was previously a Gusto.com customer.
    */
   policyType: PolicyType;
   /**

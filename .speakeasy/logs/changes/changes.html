@@ -98,10 +98,757 @@
 <body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
 
 <ul>
+<li><code>gustoembedded.payrolls.createOffCycle()</code>:  <code>response.withholdingPayPeriod</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.companyBenefits.getEmployeeBenefits()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>response.[]</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>additionalProperties</code> <strong>Added</strong></li>
+<li><code>retirementLoanIdentifier</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.companies.createAdmin()</code>:
+
+<ul>
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>adminCreateRequest</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>requestBody</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>xGustoApiVersion</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>response.phone</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.companies.listAdmins()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>response.[].phone</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.taxRequirements.updateState()</code>:
+
+<ul>
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>requestBody.requirementSets[].key</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>requestBody.requirementSets[].requirements[].key</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>requestBody.requirementSets[].requirements[].value</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>requestBody.requirementSets[].state</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>xGustoApiVersion</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.i9Verification.employerSign()</code>:
+
+<ul>
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>i9AuthorizationEmployerSignRequestBody</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>requestBody</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>xGustoApiVersion</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.companyAttachments.create()</code>:
+
+<ul>
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>companyAttachmentCreateRequestBody</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>requestBody</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>xGustoApiVersion</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>response</code> <strong>Changed</strong>
+
+<ul>
+<li><code>category</code> <strong>Changed</strong></li>
+<li><code>name</code> <strong>Changed</strong></li>
+<li><code>uploadTime</code> <strong>Changed</strong></li>
+<li><code>uuid</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.i9Verification.createDocuments()</code>:
+
+<ul>
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>i9AuthorizationDocumentsRequestBody</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>requestBody</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>xGustoApiVersion</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>response</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>status[200]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>status[201]</code> <strong>Added</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.federalTaxDetails.get()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>response</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>filingForm</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>taxPayerType</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.federalTaxDetails.update()</code>:
+
+<ul>
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>federalTaxDetailsUpdate</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>requestBody</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>xGustoApiVersion</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>response</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>filingForm</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>taxPayerType</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>error</code> <strong>Changed</strong>
+
+<ul>
+<li>&rdquo; <strong>Added</strong></li>
+<li><code>status[409]</code> <strong>Added</strong></li>
+</ul></li>
+</ul></li>
+<li><code>gustoembedded.i9Verification.getDocuments()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>response.[].expirationDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.i9Verification.update()</code>:
+
+<ul>
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>i9AuthorizationRequestBody</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>requestBody</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>xGustoApiVersion</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.employeeBenefits.update()</code>: <code>response</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>additionalProperties</code> <strong>Added</strong></li>
+<li><code>retirementLoanIdentifier</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.paySchedules.create()</code>:
+
+<ul>
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>payScheduleCreateRequest</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>requestBody</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>xGustoApiVersion</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>response</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>anchorEndOfPayPeriod</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>anchorPayDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>autoPayrollEnablementBlockers</code> <strong>Added</strong></li>
+<li><code>autoPayroll</code> <strong>Added</strong></li>
+<li><code>frequency.enum(annually)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>frequency.enum(quarterly)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>version</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.paySchedules.getAll()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>response.[]</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>anchorEndOfPayPeriod</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>anchorPayDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>autoPayrollEnablementBlockers</code> <strong>Added</strong></li>
+<li><code>autoPayroll</code> <strong>Added</strong></li>
+<li><code>version</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.paySchedules.getPreview()</code>:
+
+<ul>
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>anchorEndOfPayPeriod</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>anchorPayDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>endDate</code> <strong>Added</strong></li>
+<li><code>xGustoApiVersion</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>response</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>holidays[]</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>payPeriods[].checkDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>payPeriods[].endDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>payPeriods[].runPayrollBy</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>payPeriods[].startDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.paySchedules.get()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>response</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>anchorEndOfPayPeriod</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>anchorPayDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>autoPayrollEnablementBlockers</code> <strong>Added</strong></li>
+<li><code>autoPayroll</code> <strong>Added</strong></li>
+<li><code>version</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.paySchedules.update()</code>:
+
+<ul>
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>payScheduleUpdateRequest</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>requestBody</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>xGustoApiVersion</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>response</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>anchorEndOfPayPeriod</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>anchorPayDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>autoPayrollEnablementBlockers</code> <strong>Added</strong></li>
+<li><code>autoPayroll</code> <strong>Added</strong></li>
+<li><code>frequency.enum(annually)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>frequency.enum(quarterly)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>version</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>error</code> <strong>Changed</strong>
+
+<ul>
+<li>&rdquo; <strong>Added</strong></li>
+<li><code>status[409]</code> <strong>Added</strong></li>
+</ul></li>
+</ul></li>
+<li><code>gustoembedded.employees.getTimeOffActivities()</code>: <code>response</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>balanceChange</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>balance</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>effectiveTime</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>eventDescription</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>policyName</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>policyUuid</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.employeeBenefits.retrieve()</code>: <code>response</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>additionalProperties</code> <strong>Added</strong></li>
+<li><code>retirementLoanIdentifier</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.employeeEmployments.rehire()</code>:
+
+<ul>
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>rehireUpdateRequestBody</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>requestBody</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>xGustoApiVersion</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>errors[]</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>errors</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>metadata</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+</ul></li>
+</ul></li>
+<li><code>gustoembedded.employeeEmployments.getRehire()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>errors[]</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>errors</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>metadata</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+</ul></li>
+</ul></li>
+<li><code>gustoembedded.employeeEmployments.deleteRehire()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>errors[]</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>errors</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>metadata</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+</ul></li>
+</ul></li>
+<li><code>gustoembedded.jobsAndCompensations.createJob()</code>:
+
+<ul>
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>jobsCreateRequestBody</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>requestBody</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>xGustoApiVersion</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.employeeBenefits.get()</code>: <code>response.[]</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>additionalProperties</code> <strong>Added</strong></li>
+<li><code>retirementLoanIdentifier</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.employeeBenefits.create()</code>: <code>response</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>additionalProperties</code> <strong>Added</strong></li>
+<li><code>retirementLoanIdentifier</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.jobsAndCompensations.update()</code>:
+
+<ul>
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>jobsUpdateRequestBody</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>requestBody</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>xGustoApiVersion</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.companyBenefits.putV1CompanyBenefitsCompanyBenefitIdContributionExclusions()</code>:
+
+<ul>
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>contributionExclusionUpdateRequest</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>requestBody</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>xGustoApiVersion</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.companyBenefits.getRequirements()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>response</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>catchUp.choices</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>catchUp.defaultValue</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>companyContributionAnnualMaximum.choices</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>companyContributionAnnualMaximum.defaultValue</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>contribution.choices</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>contribution.defaultValue</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>coverageAmount.choices</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>coverageAmount.defaultValue</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>coverageSalaryMultiplier.choices</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>coverageSalaryMultiplier.defaultValue</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>deductAsPercentage.choices</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>deductAsPercentage.defaultValue</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>employeeDeduction.defaultValue</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>limitOption.choices</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>limitOption.defaultValue</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.companyBenefits.updateEmployeeBenefits()</code>:
+
+<ul>
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>employeeBenefitBulkUpdateRequest</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>requestBody</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>xGustoApiVersion</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>response.[]</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>additionalProperties</code> <strong>Added</strong></li>
+<li><code>retirementLoanIdentifier</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.companyBenefits.getSummary()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>response.employees</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.payrolls.get()</code>:  <code>response.withholdingPayPeriod</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.webhooks.createSubscription()</code>:  <code>response.subscriptionTypes[].enum(payrollSync)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.webhooks.listSubscriptions()</code>:  <code>response.[].subscriptionTypes[].enum(payrollSync)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.webhooks.updateSubscription()</code>:  <code>response.subscriptionTypes[].enum(payrollSync)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.webhooks.getSubscription()</code>:  <code>response.subscriptionTypes[].enum(payrollSync)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.webhooks.verify()</code>:  <code>response.subscriptionTypes[].enum(payrollSync)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.payrolls.list()</code>:  <code>response.[].withholdingPayPeriod</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.companyBenefits.getSupported()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>error.status[404]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.companyBenefits.getAll()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>error.status[404]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.timeOffPolicies.create()</code>: <code>response.policyType</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>enum(bereavement)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(custom)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(floatingHoliday)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(juryDuty)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(learningAndDevelopment)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(parentalLeave)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(personalDay)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(volunteer)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(weather)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.payrolls.prepare()</code>:  <code>response.withholdingPayPeriod</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.timeOffPolicies.get()</code>: <code>response.policyType</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>enum(bereavement)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(custom)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(floatingHoliday)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(juryDuty)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(learningAndDevelopment)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(parentalLeave)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(personalDay)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(volunteer)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(weather)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.timeOffPolicies.update()</code>: <code>response.policyType</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>enum(bereavement)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(custom)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(floatingHoliday)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(juryDuty)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(learningAndDevelopment)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(parentalLeave)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(personalDay)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(volunteer)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(weather)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.timeOffPolicies.getAll()</code>: <code>response.[].policyType</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>enum(bereavement)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(custom)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(floatingHoliday)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(juryDuty)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(learningAndDevelopment)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(parentalLeave)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(personalDay)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(volunteer)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(weather)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.payrolls.update()</code>:  <code>response.withholdingPayPeriod</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.timeOffPolicies.addEmployees()</code>: <code>response.policyType</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>enum(bereavement)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(custom)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(floatingHoliday)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(juryDuty)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(learningAndDevelopment)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(parentalLeave)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(personalDay)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(volunteer)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(weather)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.timeOffPolicies.removeEmployees()</code>: <code>response.policyType</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>enum(bereavement)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(custom)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(floatingHoliday)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(juryDuty)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(learningAndDevelopment)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(parentalLeave)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(personalDay)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(volunteer)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(weather)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.timeOffPolicies.updateBalance()</code>: <code>response.policyType</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>enum(bereavement)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(custom)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(floatingHoliday)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(juryDuty)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(learningAndDevelopment)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(parentalLeave)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(personalDay)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(volunteer)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(weather)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.timeOffPolicies.deactivate()</code>: <code>response.policyType</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>enum(bereavement)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(custom)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(floatingHoliday)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(juryDuty)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(learningAndDevelopment)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(parentalLeave)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(personalDay)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(volunteer)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(weather)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.companyBenefits.create()</code>:
+
+<ul>
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>companyBenefitCreateRequest</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>requestBody</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>xGustoApiVersion</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.companyBenefits.delete()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>error.status[422]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.companyBenefits.update()</code>:
+
+<ul>
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>companyBenefitUpdateRequest</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>requestBody</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>xGustoApiVersion</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.companyAttachments.getList()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>response.[]</code> <strong>Changed</strong>
+
+<ul>
+<li><code>category</code> <strong>Changed</strong></li>
+<li><code>name</code> <strong>Changed</strong></li>
+<li><code>uploadTime</code> <strong>Changed</strong></li>
+<li><code>uuid</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.contractors.list()</code>:
+
+<ul>
+<li><code>request.include</code> <strong>Added</strong></li>
+<li><code>response.[]</code> <strong>Changed</strong>
+
+<ul>
+<li><code>memberPortalInvitationStatus</code> <strong>Added</strong></li>
+<li><code>partnerPortalInvitationSent</code> <strong>Added</strong></li>
+</ul></li>
+</ul></li>
+<li><code>gustoembedded.contractors.update()</code>: <code>response</code> <strong>Changed</strong>
+
+<ul>
+<li><code>memberPortalInvitationStatus</code> <strong>Added</strong></li>
+<li><code>partnerPortalInvitationSent</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.companies.update()</code>: <code>response.compensations</code> <strong>Changed</strong>
+
+<ul>
+<li><code>fixed[].uuid</code> <strong>Added</strong></li>
+<li><code>hourly[].uuid</code> <strong>Added</strong></li>
+<li><code>paidTimeOff[].uuid</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.contractors.get()</code>:
+
+<ul>
+<li><code>request.include</code> <strong>Added</strong></li>
+<li><code>response</code> <strong>Changed</strong>
+
+<ul>
+<li><code>memberPortalInvitationStatus</code> <strong>Added</strong></li>
+<li><code>partnerPortalInvitationSent</code> <strong>Added</strong></li>
+</ul></li>
+</ul></li>
+<li><code>gustoembedded.companies.get()</code>: <code>response.compensations</code> <strong>Changed</strong>
+
+<ul>
+<li><code>fixed[].uuid</code> <strong>Added</strong></li>
+<li><code>hourly[].uuid</code> <strong>Added</strong></li>
+<li><code>paidTimeOff[].uuid</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.companyBenefits.get()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.contractors.create()</code>: <code>response</code> <strong>Changed</strong>
+
+<ul>
+<li><code>memberPortalInvitationStatus</code> <strong>Added</strong></li>
+<li><code>partnerPortalInvitationSent</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.companyBenefits.getV1CompanyBenefitsCompanyBenefitIdContributionExclusions()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.jobsAndCompensations.delete()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.companyBenefits.list()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.jobsAndCompensations.getJob()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.i9Verification.getDocumentOptions()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.jobsAndCompensations.getJobs()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.i9Verification.getAuthorization()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.signatories.invite()</code>:
+
+<ul>
+<li><code>request.signatoryInviteRequest.middleInitial</code> <strong>Added</strong></li>
+</ul></li>
 <li><code>gustoembedded.signatories.update()</code>:
 
 <ul>
-<li><code>request.signatoryUpdateRequest.ssn</code> <strong>Added</strong></li>
+<li><code>request.signatoryUpdateRequest.middleInitial</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.signatories.create()</code>:
+
+<ul>
+<li><code>request.signatoryCreateRequest.middleInitial</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.companyAttachment.getDownloadUrl()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.i9Verification.deleteDocument()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>error</code> <strong>Changed</strong>
+
+<ul>
+<li>&rdquo; <strong>Added</strong></li>
+<li><code>status[422]</code> <strong>Added</strong></li>
+</ul></li>
+</ul></li>
+<li><code>gustoembedded.employeeEmployments.createRehire()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.taxRequirements.get()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>response.requirementSets[].requirements[].editable</code> <strong>Added</strong></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.companyAttachments.getDetails()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>response</code> <strong>Changed</strong>
+
+<ul>
+<li><code>category</code> <strong>Changed</strong></li>
+<li><code>name</code> <strong>Changed</strong></li>
+<li><code>uploadTime</code> <strong>Changed</strong></li>
+<li><code>uuid</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.taxRequirements.getAll()</code>:
+
+<ul>
+<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>response.[]</code> <strong>Changed</strong>
+
+<ul>
+<li><code>defaultRatesApplied</code> <strong>Added</strong></li>
+<li><code>readyToRunPayroll</code> <strong>Added</strong></li>
+<li><code>setupComplete</code> <strong>Changed</strong></li>
+<li><code>setupStatus</code> <strong>Added</strong></li>
+<li><code>state</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>error.status[404]</code> <strong>Added</strong></li>
 </ul></li>
 </ul>
 </body>

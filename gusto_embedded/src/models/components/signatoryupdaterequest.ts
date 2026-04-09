@@ -24,6 +24,7 @@ export type SignatoryUpdateRequest = {
    */
   version: string;
   firstName?: string | undefined;
+  middleInitial?: string | undefined;
   lastName?: string | undefined;
   title?: string | undefined;
   phone?: string | undefined;
@@ -78,6 +79,7 @@ export function signatoryUpdateRequestHomeAddressToJSON(
 export type SignatoryUpdateRequest$Outbound = {
   version: string;
   first_name?: string | undefined;
+  middle_initial?: string | undefined;
   last_name?: string | undefined;
   title?: string | undefined;
   phone?: string | undefined;
@@ -94,6 +96,7 @@ export const SignatoryUpdateRequest$outboundSchema: z.ZodType<
 > = z.object({
   version: z.string(),
   firstName: z.string().optional(),
+  middleInitial: z.string().optional(),
   lastName: z.string().optional(),
   title: z.string().optional(),
   phone: z.string().optional(),
@@ -104,6 +107,7 @@ export const SignatoryUpdateRequest$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     firstName: "first_name",
+    middleInitial: "middle_initial",
     lastName: "last_name",
     homeAddress: "home_address",
   });

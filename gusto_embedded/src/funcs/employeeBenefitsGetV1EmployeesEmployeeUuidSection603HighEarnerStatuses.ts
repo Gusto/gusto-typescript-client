@@ -43,6 +43,8 @@ import { Result } from "../types/fp.js";
  * These employees are classified as high earners, and their catch-up contributions to pre-tax retirement benefits must be designated as post-tax contributions.
  *
  * scope: `employee_benefits:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses(
   client: GustoEmbeddedCore,
@@ -109,7 +111,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/employees/{employee_uuid}/section603_high_earner_statuses",
   )(pathParams);
@@ -127,7 +128,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

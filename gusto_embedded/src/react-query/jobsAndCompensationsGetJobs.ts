@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,11 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdJobsQueryParamInclude,
   GetV1EmployeesEmployeeIdJobsRequest,
 } from "../models/operations/getv1employeesemployeeidjobs.js";
@@ -45,6 +46,7 @@ export {
 };
 
 export type JobsAndCompensationsGetJobsQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -59,6 +61,9 @@ export type JobsAndCompensationsGetJobsQueryError =
  *
  * @remarks
  * Get all of the jobs that an employee holds.
+ * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
+ *
+ * Compensation data in the response requires the `compensations:read` scope.
  *
  * scope: `jobs:read`
  */
@@ -88,6 +93,9 @@ export function useJobsAndCompensationsGetJobs(
  *
  * @remarks
  * Get all of the jobs that an employee holds.
+ * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
+ *
+ * Compensation data in the response requires the `compensations:read` scope.
  *
  * scope: `jobs:read`
  */
@@ -120,7 +128,9 @@ export function setJobsAndCompensationsGetJobsData(
       page?: number | undefined;
       per?: number | undefined;
       include?: GetV1EmployeesEmployeeIdJobsQueryParamInclude | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
+      xGustoAPIVersion?:
+        | GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion
+        | undefined;
     },
   ],
   data: JobsAndCompensationsGetJobsQueryData,
@@ -139,7 +149,9 @@ export function invalidateJobsAndCompensationsGetJobs(
         page?: number | undefined;
         per?: number | undefined;
         include?: GetV1EmployeesEmployeeIdJobsQueryParamInclude | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
+        xGustoAPIVersion?:
+          | GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion
+          | undefined;
       },
     ]
   >,

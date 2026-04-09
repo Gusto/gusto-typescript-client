@@ -15,8 +15,10 @@ export class CompanyAttachment extends ClientSDK {
    * Get a temporary url to download the Company Attachment file
    *
    * @remarks
-   * Retrieve a temporary url to download a attachment file uploaded
-   * by the company.
+   * Retrieve a temporary url to download an attachment file uploaded by the company.
+   *
+   * ### Related guides
+   * - [Manage company attachments](doc:manage-company-attachments)
    *
    * scope: `company_attachments:read`
    */

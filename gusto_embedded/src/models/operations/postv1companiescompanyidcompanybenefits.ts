@@ -12,126 +12,65 @@ import {
   CompanyBenefit$inboundSchema,
 } from "../components/companybenefit.js";
 import {
+  CompanyBenefitCreateRequest,
+  CompanyBenefitCreateRequest$Outbound,
+  CompanyBenefitCreateRequest$outboundSchema,
+} from "../components/companybenefitcreaterequest.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0 Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const CatchUpType = {
-  Elective: "elective",
-  Deemed: "deemed",
+export const PostV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
- * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0 Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type CatchUpType = ClosedEnum<typeof CatchUpType>;
-
-export type PostV1CompaniesCompanyIdCompanyBenefitsRequestBody = {
-  /**
-   * The ID of the benefit to which the company benefit belongs.
-   */
-  benefitType?: number | undefined;
-  /**
-   * Whether this benefit is active for employee participation.
-   */
-  active?: boolean | undefined;
-  /**
-   * The description of the company benefit. For example, a company may offer multiple benefits with an ID of 1 (for Medical Insurance). The description would show something more specific like “Kaiser Permanente” or “Blue Cross/ Blue Shield”.
-   */
-  description: string;
-  /**
-   * Whether the employer is subject to pay employer taxes when an employee is on leave. Only applicable to third party sick pay benefits.
-   */
-  responsibleForEmployerTaxes?: boolean | undefined;
-  /**
-   * Whether the employer is subject to file W-2 forms for an employee on leave. Only applicable to third party sick pay benefits.
-   */
-  responsibleForEmployeeW2?: boolean | undefined;
-  /**
-   * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0 Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
-   */
-  catchUpType?: CatchUpType | null | undefined;
-};
+export type PostV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PostV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion
+  >;
 
 export type PostV1CompaniesCompanyIdCompanyBenefitsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
   companyId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostV1CompaniesCompanyIdCompanyBenefitsRequestBody;
+  companyBenefitCreateRequest: CompanyBenefitCreateRequest;
 };
 
 export type PostV1CompaniesCompanyIdCompanyBenefitsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Created
    */
   companyBenefit?: CompanyBenefit | undefined;
 };
 
 /** @internal */
-export const CatchUpType$outboundSchema: z.ZodNativeEnum<typeof CatchUpType> = z
-  .nativeEnum(CatchUpType);
-
-/** @internal */
-export type PostV1CompaniesCompanyIdCompanyBenefitsRequestBody$Outbound = {
-  benefit_type?: number | undefined;
-  active: boolean;
-  description: string;
-  responsible_for_employer_taxes?: boolean | undefined;
-  responsible_for_employee_w2?: boolean | undefined;
-  catch_up_type?: string | null | undefined;
-};
-
-/** @internal */
-export const PostV1CompaniesCompanyIdCompanyBenefitsRequestBody$outboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdCompanyBenefitsRequestBody$Outbound,
-    z.ZodTypeDef,
-    PostV1CompaniesCompanyIdCompanyBenefitsRequestBody
-  > = z.object({
-    benefitType: z.number().int().optional(),
-    active: z.boolean().default(true),
-    description: z.string(),
-    responsibleForEmployerTaxes: z.boolean().optional(),
-    responsibleForEmployeeW2: z.boolean().optional(),
-    catchUpType: z.nullable(CatchUpType$outboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      benefitType: "benefit_type",
-      responsibleForEmployerTaxes: "responsible_for_employer_taxes",
-      responsibleForEmployeeW2: "responsible_for_employee_w2",
-      catchUpType: "catch_up_type",
-    });
-  });
-
-export function postV1CompaniesCompanyIdCompanyBenefitsRequestBodyToJSON(
-  postV1CompaniesCompanyIdCompanyBenefitsRequestBody:
-    PostV1CompaniesCompanyIdCompanyBenefitsRequestBody,
-): string {
-  return JSON.stringify(
-    PostV1CompaniesCompanyIdCompanyBenefitsRequestBody$outboundSchema.parse(
-      postV1CompaniesCompanyIdCompanyBenefitsRequestBody,
-    ),
+export const PostV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PostV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion,
   );
-}
 
 /** @internal */
 export type PostV1CompaniesCompanyIdCompanyBenefitsRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostV1CompaniesCompanyIdCompanyBenefitsRequestBody$Outbound;
+  company_id: string;
+  "Company-Benefit-Create-Request": CompanyBenefitCreateRequest$Outbound;
 };
 
 /** @internal */
@@ -141,16 +80,16 @@ export const PostV1CompaniesCompanyIdCompanyBenefitsRequest$outboundSchema:
     z.ZodTypeDef,
     PostV1CompaniesCompanyIdCompanyBenefitsRequest
   > = z.object({
+    xGustoAPIVersion:
+      PostV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PostV1CompaniesCompanyIdCompanyBenefitsRequestBody$outboundSchema
-    ),
+    companyBenefitCreateRequest: CompanyBenefitCreateRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      companyId: "company_id",
+      companyBenefitCreateRequest: "Company-Benefit-Create-Request",
     });
   });
 

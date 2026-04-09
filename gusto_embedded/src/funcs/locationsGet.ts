@@ -44,6 +44,8 @@ import { Result } from "../types/fp.js";
  * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
  *
  * scope: `companies:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function locationsGet(
   client: GustoEmbeddedCore,
@@ -109,7 +111,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/locations")(pathParams);
 
   const query = encodeFormQuery({
@@ -130,7 +131,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

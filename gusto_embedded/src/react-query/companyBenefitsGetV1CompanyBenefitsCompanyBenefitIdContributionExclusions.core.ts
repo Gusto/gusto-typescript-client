@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions } from "../funcs/companyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion,
   GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest,
   GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse,
 } from "../models/operations/getv1companybenefitscompanybenefitidcontributionexclusions.js";
@@ -83,7 +83,11 @@ export function buildCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContribu
 
 export function queryKeyCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions(
   companyBenefitId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",
