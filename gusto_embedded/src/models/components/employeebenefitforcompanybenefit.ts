@@ -155,7 +155,7 @@ export type EmployeeBenefitForCompanyBenefit = {
   /**
    * Identifier for a 401(k) loan assigned by the 401(k) provider
    */
-  retirementLoanIdentifier?: string | undefined;
+  retirementLoanIdentifier?: string | null | undefined;
   /**
    * The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.
    */
@@ -203,6 +203,7 @@ export type EmployeeBenefitForCompanyBenefit = {
    * The action to perform on the employee benefit. Required for creating/updating an effective dated employee benefit.
    */
   action?: Action | undefined;
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -326,7 +327,7 @@ export type EmployeeBenefitForCompanyBenefit$Outbound = {
   company_contribution_annual_maximum?: string | null | undefined;
   limit_option?: string | null | undefined;
   catch_up: boolean | null;
-  retirement_loan_identifier?: string | undefined;
+  retirement_loan_identifier?: string | null | undefined;
   coverage_amount?: string | null | undefined;
   deduction_reduces_taxable_income: string | null;
   coverage_salary_multiplier: string | null;
@@ -337,6 +338,7 @@ export type EmployeeBenefitForCompanyBenefit$Outbound = {
   employee_uuid: string;
   uuid?: string | undefined;
   action?: string | undefined;
+  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -357,7 +359,7 @@ export const EmployeeBenefitForCompanyBenefit$outboundSchema: z.ZodType<
   companyContributionAnnualMaximum: z.nullable(z.string()).optional(),
   limitOption: z.nullable(z.string()).optional(),
   catchUp: z.nullable(z.boolean().default(false)),
-  retirementLoanIdentifier: z.string().optional(),
+  retirementLoanIdentifier: z.nullable(z.string()).optional(),
   coverageAmount: z.nullable(z.string()).optional(),
   deductionReducesTaxableIncome: z.nullable(
     EmployeeBenefitForCompanyBenefitDeductionReducesTaxableIncome$outboundSchema
@@ -372,24 +374,29 @@ export const EmployeeBenefitForCompanyBenefit$outboundSchema: z.ZodType<
   employeeUuid: z.string(),
   uuid: z.string().optional(),
   action: Action$outboundSchema.optional(),
+  additionalProperties: z.record(z.any()).optional(),
 }).transform((v) => {
-  return remap$(v, {
-    employeeDeduction: "employee_deduction",
-    deductAsPercentage: "deduct_as_percentage",
-    employeeDeductionAnnualMaximum: "employee_deduction_annual_maximum",
-    companyContributionAnnualMaximum: "company_contribution_annual_maximum",
-    limitOption: "limit_option",
-    catchUp: "catch_up",
-    retirementLoanIdentifier: "retirement_loan_identifier",
-    coverageAmount: "coverage_amount",
-    deductionReducesTaxableIncome: "deduction_reduces_taxable_income",
-    coverageSalaryMultiplier: "coverage_salary_multiplier",
-    companyContribution: "company_contribution",
-    contributeAsPercentage: "contribute_as_percentage",
-    effectiveDate: "effective_date",
-    expirationDate: "expiration_date",
-    employeeUuid: "employee_uuid",
-  });
+  return {
+    ...v.additionalProperties,
+    ...remap$(v, {
+      employeeDeduction: "employee_deduction",
+      deductAsPercentage: "deduct_as_percentage",
+      employeeDeductionAnnualMaximum: "employee_deduction_annual_maximum",
+      companyContributionAnnualMaximum: "company_contribution_annual_maximum",
+      limitOption: "limit_option",
+      catchUp: "catch_up",
+      retirementLoanIdentifier: "retirement_loan_identifier",
+      coverageAmount: "coverage_amount",
+      deductionReducesTaxableIncome: "deduction_reduces_taxable_income",
+      coverageSalaryMultiplier: "coverage_salary_multiplier",
+      companyContribution: "company_contribution",
+      contributeAsPercentage: "contribute_as_percentage",
+      effectiveDate: "effective_date",
+      expirationDate: "expiration_date",
+      employeeUuid: "employee_uuid",
+      additionalProperties: null,
+    }),
+  };
 });
 
 export function employeeBenefitForCompanyBenefitToJSON(

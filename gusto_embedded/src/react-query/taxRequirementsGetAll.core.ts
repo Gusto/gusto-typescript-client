@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { taxRequirementsGetAll } from "../funcs/taxRequirementsGetAll.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyUuidTaxRequirementsRequest,
   GetV1CompaniesCompanyUuidTaxRequirementsResponse,
 } from "../models/operations/getv1companiescompanyuuidtaxrequirements.js";
@@ -74,7 +74,11 @@ export function buildTaxRequirementsGetAllQuery(
 
 export function queryKeyTaxRequirementsGetAll(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

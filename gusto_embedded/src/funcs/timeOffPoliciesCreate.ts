@@ -44,6 +44,8 @@ import { Result } from "../types/fp.js";
  * Create a time off policy
  *
  * scope: `time_off_policies:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function timeOffPoliciesCreate(
   client: GustoEmbeddedCore,
@@ -115,7 +117,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_uuid}/time_off_policies")(
     pathParams,
   );
@@ -134,7 +135,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

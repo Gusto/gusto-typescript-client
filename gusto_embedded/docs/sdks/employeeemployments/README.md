@@ -1186,6 +1186,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
@@ -1208,7 +1209,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeeEmployments.rehire({
     employeeId: "<id>",
-    requestBody: {
+    rehireUpdateRequestBody: {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       effectiveDate: "<value>",
       fileNewHireReport: true,
@@ -1239,7 +1240,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeeEmploymentsRehire(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    rehireUpdateRequestBody: {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       effectiveDate: "<value>",
       fileNewHireReport: true,
@@ -1286,7 +1287,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeeEmployments.rehire({
     employeeId: "<id>",
-    requestBody: {
+    rehireUpdateRequestBody: {
       version: "1928d0c378e519e9c03fb959bc959a6b",
       effectiveDate: "2023-06-30",
       fileNewHireReport: true,
@@ -1317,7 +1318,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeeEmploymentsRehire(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    rehireUpdateRequestBody: {
       version: "1928d0c378e519e9c03fb959bc959a6b",
       effectiveDate: "2023-06-30",
       fileNewHireReport: true,
@@ -1364,7 +1365,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeeEmployments.rehire({
     employeeId: "<id>",
-    requestBody: {
+    rehireUpdateRequestBody: {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       effectiveDate: "<value>",
       fileNewHireReport: true,
@@ -1395,7 +1396,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeeEmploymentsRehire(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    rehireUpdateRequestBody: {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       effectiveDate: "<value>",
       fileNewHireReport: true,
@@ -1442,7 +1443,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeeEmployments.rehire({
     employeeId: "<id>",
-    requestBody: {
+    rehireUpdateRequestBody: {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       effectiveDate: "<value>",
       fileNewHireReport: true,
@@ -1473,7 +1474,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeeEmploymentsRehire(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    rehireUpdateRequestBody: {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       effectiveDate: "<value>",
       fileNewHireReport: true,
@@ -1525,7 +1526,8 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## getRehire
@@ -1627,10 +1629,10 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## deleteRehire
 
@@ -1722,7 +1724,8 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## getHistory

@@ -1,7 +1,5 @@
 # SupportedBenefit
 
-Example response
-
 ## Example Usage
 
 ```typescript

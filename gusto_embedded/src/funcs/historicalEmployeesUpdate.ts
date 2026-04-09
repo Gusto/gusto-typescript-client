@@ -103,7 +103,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/v1/companies/{company_uuid}/historical_employees/{historical_employee_uuid}",
   )(pathParams);

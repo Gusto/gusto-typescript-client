@@ -5,90 +5,75 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeBenefit,
   EmployeeBenefit$inboundSchema,
 } from "../components/employeebenefit.js";
 import {
-  EmployeeBenefitForCompanyBenefit,
-  EmployeeBenefitForCompanyBenefit$Outbound,
-  EmployeeBenefitForCompanyBenefit$outboundSchema,
-} from "../components/employeebenefitforcompanybenefit.js";
+  EmployeeBenefitBulkUpdateRequest,
+  EmployeeBenefitBulkUpdateRequest$Outbound,
+  EmployeeBenefitBulkUpdateRequest$outboundSchema,
+} from "../components/employeebenefitbulkupdaterequest.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody = {
-  /**
-   * The list of employee benefits to create or update
-   */
-  employeeBenefits: Array<EmployeeBenefitForCompanyBenefit>;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion
+  >;
 
 export type PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company benefit
    */
   companyBenefitId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody;
+  employeeBenefitBulkUpdateRequest: EmployeeBenefitBulkUpdateRequest;
 };
 
 export type PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
-  employeeBenefitList?: Array<EmployeeBenefit> | undefined;
+  employeeBenefits?: Array<EmployeeBenefit> | undefined;
 };
 
 /** @internal */
-export type PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody$Outbound =
-  {
-    employee_benefits: Array<EmployeeBenefitForCompanyBenefit$Outbound>;
-  };
-
-/** @internal */
-export const PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody$outboundSchema:
-  z.ZodType<
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody$Outbound,
-    z.ZodTypeDef,
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody
-  > = z.object({
-    employeeBenefits: z.array(EmployeeBenefitForCompanyBenefit$outboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      employeeBenefits: "employee_benefits",
-    });
-  });
-
-export function putV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBodyToJSON(
-  putV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody:
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody$outboundSchema
-      .parse(putV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody),
+export const PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion,
   );
-}
 
 /** @internal */
 export type PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$Outbound =
   {
-    company_benefit_id: string;
     "X-Gusto-API-Version": string;
-    RequestBody:
-      PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody$Outbound;
+    company_benefit_id: string;
+    "Employee-Benefit-Bulk-Update-Request":
+      EmployeeBenefitBulkUpdateRequest$Outbound;
   };
 
 /** @internal */
@@ -98,16 +83,17 @@ export const PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$outboun
     z.ZodTypeDef,
     PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest
   > = z.object({
+    xGustoAPIVersion:
+      PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyBenefitId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody$outboundSchema
-    ),
+    employeeBenefitBulkUpdateRequest:
+      EmployeeBenefitBulkUpdateRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      companyBenefitId: "company_benefit_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      companyBenefitId: "company_benefit_id",
+      employeeBenefitBulkUpdateRequest: "Employee-Benefit-Bulk-Update-Request",
     });
   });
 
@@ -129,11 +115,11 @@ export const PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$inboun
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Employee-Benefit-List": z.array(EmployeeBenefit$inboundSchema).optional(),
+    "Employee-Benefits": z.array(EmployeeBenefit$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Employee-Benefit-List": "employeeBenefitList",
+      "Employee-Benefits": "employeeBenefits",
     });
   });
 

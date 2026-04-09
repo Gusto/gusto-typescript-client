@@ -50,6 +50,8 @@ import { Result } from "../types/fp.js";
  * - [Payroll Processing Speeds](doc:2-day-vs-4-day)
  *
  * scope: `company_payment_configs:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function paymentConfigsUpdate(
   client: GustoEmbeddedCore,
@@ -118,7 +120,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_uuid}/payment_configs")(
     pathParams,
   );
@@ -137,7 +138,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

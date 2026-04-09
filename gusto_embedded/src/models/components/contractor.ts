@@ -87,6 +87,43 @@ export type UpcomingEmployment = {
 };
 
 /**
+ * The current status of the member portal invitation.
+ */
+export const ContractorStatus = {
+  Pending: "pending",
+  Sent: "sent",
+  Verified: "verified",
+  Complete: "complete",
+  Cancelled: "cancelled",
+} as const;
+/**
+ * The current status of the member portal invitation.
+ */
+export type ContractorStatus = ClosedEnum<typeof ContractorStatus>;
+
+/**
+ * Member portal invitation status information. Only included when the include param has the portal_invitations value set.
+ */
+export type ContractorMemberPortalInvitationStatus = {
+  /**
+   * The current status of the member portal invitation.
+   */
+  status?: ContractorStatus | undefined;
+  /**
+   * Whether the invitation token has expired.
+   */
+  tokenExpired?: boolean | null | undefined;
+  /**
+   * The date and time when the welcome email was sent.
+   */
+  welcomeEmailSentAt?: Date | null | undefined;
+  /**
+   * The date and time when the password reset was last resent.
+   */
+  lastPasswordResentAt?: Date | null | undefined;
+};
+
+/**
  * The representation of a contractor (individual or business) in Gusto.
  */
 export type Contractor = {
@@ -209,6 +246,17 @@ export type Contractor = {
    * Whether the contractor's pending rehire can be cancelled.
    */
   rehireCancellationEligible?: boolean | undefined;
+  /**
+   * Member portal invitation status information. Only included when the include param has the portal_invitations value set.
+   */
+  memberPortalInvitationStatus?:
+    | ContractorMemberPortalInvitationStatus
+    | null
+    | undefined;
+  /**
+   * Whether an external partner portal invitation webhook has been sent for this contractor. Only included when the include param has the portal_invitations value set.
+   */
+  partnerPortalInvitationSent?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -283,6 +331,44 @@ export function upcomingEmploymentFromJSON(
 }
 
 /** @internal */
+export const ContractorStatus$inboundSchema: z.ZodNativeEnum<
+  typeof ContractorStatus
+> = z.nativeEnum(ContractorStatus);
+
+/** @internal */
+export const ContractorMemberPortalInvitationStatus$inboundSchema: z.ZodType<
+  ContractorMemberPortalInvitationStatus,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  status: ContractorStatus$inboundSchema.optional(),
+  token_expired: z.nullable(z.boolean()).optional(),
+  welcome_email_sent_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  last_password_resent_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "token_expired": "tokenExpired",
+    "welcome_email_sent_at": "welcomeEmailSentAt",
+    "last_password_resent_at": "lastPasswordResentAt",
+  });
+});
+
+export function contractorMemberPortalInvitationStatusFromJSON(
+  jsonString: string,
+): SafeParseResult<ContractorMemberPortalInvitationStatus, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ContractorMemberPortalInvitationStatus$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ContractorMemberPortalInvitationStatus' from JSON`,
+  );
+}
+
+/** @internal */
 export const Contractor$inboundSchema: z.ZodType<
   Contractor,
   z.ZodTypeDef,
@@ -319,6 +405,10 @@ export const Contractor$inboundSchema: z.ZodType<
   ).optional(),
   dismissal_cancellation_eligible: z.boolean().optional(),
   rehire_cancellation_eligible: z.boolean().optional(),
+  member_portal_invitation_status: z.nullable(
+    z.lazy(() => ContractorMemberPortalInvitationStatus$inboundSchema),
+  ).optional(),
+  partner_portal_invitation_sent: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -342,6 +432,8 @@ export const Contractor$inboundSchema: z.ZodType<
     "upcoming_employment": "upcomingEmployment",
     "dismissal_cancellation_eligible": "dismissalCancellationEligible",
     "rehire_cancellation_eligible": "rehireCancellationEligible",
+    "member_portal_invitation_status": "memberPortalInvitationStatus",
+    "partner_portal_invitation_sent": "partnerPortalInvitationSent",
   });
 });
 

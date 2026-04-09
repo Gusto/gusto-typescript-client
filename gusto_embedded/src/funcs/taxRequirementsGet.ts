@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -30,51 +34,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get State Tax Requirements
+ * Get tax requirements for a state
  *
  * @remarks
- * Get all tax requirements for a given state.
+ * Retrieves the detailed tax requirements for a specific state. The response includes requirement sets grouped by
+ * category (e.g., registrations, tax rates, deposit schedules), each containing individual requirements with their
+ * current values, labels, and metadata describing the expected input format.
  *
- * ### Metadata Examples
- *
- * ```json select
- * {
- *   "type": "select",
- *   "options": [
- *     { "label": "Semiweekly",  value: "Semi-weekly" },
- *     { "label": "Monthly",  value: "Monthly" },
- *     { "label": "Quarterly",  value: "Quarterly" },
- *   ]
- * }
- * ```
- * ```json radio
- * {
- *   "type": "radio",
- *   "options": [
- *     { "label": "No, we cannot reimburse",  value: false, short_label: "Not Reimbursable" },
- *     { "label": "Yes, we can reimburse",  value: true, short_label: "Reimbursable" },
- *   ]
- * }
- * ```
- * ```json account_number
- * {
- *   "type": "account_number",
- *   "mask": "######-##',
- *   "prefix": null
- * }
- * ```
- * ```json tax_rate
- * {
- *   "type": "tax_rate",
- *   "validation": {
- *     "type": "min_max",
- *     "min": "0.0004",
- *     "max": "0.081"
- *   }
- * }
- * ```
+ * Use this to build dynamic UIs for tax setup or to read the current tax configuration for a state.
  *
  * scope: `company_tax_requirements:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function taxRequirementsGet(
   client: GustoEmbeddedCore,
@@ -83,6 +54,7 @@ export function taxRequirementsGet(
 ): APIPromise<
   Result<
     GetV1CompaniesCompanyUuidTaxRequirementsStateResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -108,6 +80,7 @@ async function $do(
   [
     Result<
       GetV1CompaniesCompanyUuidTaxRequirementsStateResponse,
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -144,7 +117,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/companies/{company_uuid}/tax_requirements/{state}",
   )(pathParams);
@@ -166,7 +138,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -216,6 +188,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1CompaniesCompanyUuidTaxRequirementsStateResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -230,7 +203,8 @@ async function $do(
       GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$inboundSchema,
       { key: "Tax-Requirements-State" },
     ),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

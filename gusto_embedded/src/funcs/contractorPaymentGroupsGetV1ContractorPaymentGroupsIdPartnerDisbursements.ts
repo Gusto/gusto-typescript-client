@@ -40,6 +40,8 @@ import { Result } from "../types/fp.js";
  * Get partner disbursements for a specific contractor payment group.
  *
  * scope: `partner_disbursements:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function contractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements(
   client: GustoEmbeddedCore,
@@ -106,7 +108,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/contractor_payment_groups/{id}/partner_disbursements",
   )(pathParams);
@@ -124,7 +125,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

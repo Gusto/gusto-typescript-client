@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompaniesAttachmentUrlRequest } from "../models/operations/getv1companiesattachmenturl.js";
+import {
+  GetV1CompaniesAttachmentUrlHeaderXGustoAPIVersion,
+  GetV1CompaniesAttachmentUrlRequest,
+} from "../models/operations/getv1companiesattachmenturl.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type CompanyAttachmentGetDownloadUrlQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -55,8 +59,10 @@ export type CompanyAttachmentGetDownloadUrlQueryError =
  * Get a temporary url to download the Company Attachment file
  *
  * @remarks
- * Retrieve a temporary url to download a attachment file uploaded
- * by the company.
+ * Retrieve a temporary url to download an attachment file uploaded by the company.
+ *
+ * ### Related guides
+ * - [Manage company attachments](doc:manage-company-attachments)
  *
  * scope: `company_attachments:read`
  */
@@ -85,8 +91,10 @@ export function useCompanyAttachmentGetDownloadUrl(
  * Get a temporary url to download the Company Attachment file
  *
  * @remarks
- * Retrieve a temporary url to download a attachment file uploaded
- * by the company.
+ * Retrieve a temporary url to download an attachment file uploaded by the company.
+ *
+ * ### Related guides
+ * - [Manage company attachments](doc:manage-company-attachments)
  *
  * scope: `company_attachments:read`
  */
@@ -116,7 +124,11 @@ export function setCompanyAttachmentGetDownloadUrlData(
   queryKeyBase: [
     companyId: string,
     companyAttachmentUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompaniesAttachmentUrlHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: CompanyAttachmentGetDownloadUrlQueryData,
 ): CompanyAttachmentGetDownloadUrlQueryData | undefined {
@@ -134,7 +146,11 @@ export function invalidateCompanyAttachmentGetDownloadUrl(
     [
       companyId: string,
       companyAttachmentUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompaniesAttachmentUrlHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

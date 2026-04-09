@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeEmploymentsGetRehire } from "../funcs/employeeEmploymentsGetRehire.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdRehireRequest,
   GetV1EmployeesEmployeeIdRehireResponse,
 } from "../models/operations/getv1employeesemployeeidrehire.js";
@@ -74,7 +74,11 @@ export function buildEmployeeEmploymentsGetRehireQuery(
 
 export function queryKeyEmployeeEmploymentsGetRehire(
   employeeId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

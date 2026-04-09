@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanyBenefit,
@@ -14,13 +15,29 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion
+  >;
+
 export type GetV1CompaniesCompanyIdCompanyBenefitsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
@@ -37,10 +54,6 @@ export type GetV1CompaniesCompanyIdCompanyBenefitsRequest = {
    * Filter by benefit type. Comma-separated list of benefit type IDs, i.e. `?benefit_type=5,105`
    */
   benefitType?: string | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1CompaniesCompanyIdCompanyBenefitsResponse = {
@@ -48,16 +61,24 @@ export type GetV1CompaniesCompanyIdCompanyBenefitsResponse = {
   /**
    * Example response
    */
-  companyBenefitList?: Array<CompanyBenefit> | undefined;
+  companyBenefits?: Array<CompanyBenefit> | undefined;
 };
 
 /** @internal */
+export const GetV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    GetV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export type GetV1CompaniesCompanyIdCompanyBenefitsRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_id: string;
   active?: boolean | undefined;
   enrollment_count?: boolean | undefined;
   benefit_type?: string | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -67,17 +88,19 @@ export const GetV1CompaniesCompanyIdCompanyBenefitsRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1CompaniesCompanyIdCompanyBenefitsRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyId: z.string(),
     active: z.boolean().optional(),
     enrollmentCount: z.boolean().optional(),
     benefitType: z.string().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       companyId: "company_id",
       enrollmentCount: "enrollment_count",
       benefitType: "benefit_type",
-      xGustoAPIVersion: "X-Gusto-API-Version",
     });
   });
 
@@ -100,11 +123,11 @@ export const GetV1CompaniesCompanyIdCompanyBenefitsResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Company-Benefit-List": z.array(CompanyBenefit$inboundSchema).optional(),
+    "Company-Benefits": z.array(CompanyBenefit$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Company-Benefit-List": "companyBenefitList",
+      "Company-Benefits": "companyBenefits",
     });
   });
 

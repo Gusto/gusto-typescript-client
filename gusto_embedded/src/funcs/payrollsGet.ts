@@ -47,6 +47,8 @@ import { Result } from "../types/fp.js";
  *   * Benefits containing PHI are only visible with the `employee_benefits:read:phi` scope
  *
  * scope: `payrolls:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function payrollsGet(
   client: GustoEmbeddedCore,
@@ -118,7 +120,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/payrolls/{payroll_id}")(
     pathParams,
   );
@@ -147,7 +148,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

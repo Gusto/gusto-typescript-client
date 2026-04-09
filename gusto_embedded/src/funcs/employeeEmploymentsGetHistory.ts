@@ -40,6 +40,8 @@ import { Result } from "../types/fp.js";
  * Retrieve the employment history for a given employee, which includes termination and rehire.
  *
  * scope: `employments:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function employeeEmploymentsGetHistory(
   client: GustoEmbeddedCore,
@@ -107,7 +109,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/employees/{employee_id}/employment_history")(
     pathParams,
   );
@@ -125,7 +126,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

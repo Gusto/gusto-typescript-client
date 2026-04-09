@@ -168,6 +168,7 @@ export class CompanyBenefits extends ClientSDK {
    *
    * @remarks
    * The following must be true in order to delete a company benefit
+   *
    *   - There are no employee benefits associated with the company benefit
    *   - There are no payroll items associated with the company benefit
    *   - The benefit is not managed by a Partner or by Gusto (type must be 'External')
@@ -188,12 +189,10 @@ export class CompanyBenefits extends ClientSDK {
   }
 
   /**
-   * Get all benefits supported by Gusto
+   * Get all supported benefits
    *
    * @remarks
-   * Returns all benefits supported by Gusto.
-   *
-   * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+   * Returns all benefits supported by Gusto. The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
    *
    * scope: `benefits:read`
    */
@@ -209,12 +208,10 @@ export class CompanyBenefits extends ClientSDK {
   }
 
   /**
-   * Get a supported benefit by ID
+   * Get a supported benefit
    *
    * @remarks
-   * Returns a benefit supported by Gusto.
-   *
-   * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+   * Returns a benefit supported by Gusto. The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
    *
    * scope: `benefits:read`
    */
@@ -254,7 +251,7 @@ export class CompanyBenefits extends ClientSDK {
    * Get all employee benefits for a company benefit
    *
    * @remarks
-   * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+   * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee's enrollment.
    *
    * Returns an array of all employee benefits enrolled for this company benefit.
    *
@@ -299,10 +296,10 @@ export class CompanyBenefits extends ClientSDK {
   }
 
   /**
-   * Get benefit fields requirements by ID
+   * Get benefit fields requirements by benefit type
    *
    * @remarks
-   * Returns field requirements for the requested benefit type.
+   * Returns the field requirements for a given benefit type.
    *
    * scope: `benefits:read`
    */

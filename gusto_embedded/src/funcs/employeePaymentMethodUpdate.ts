@@ -44,6 +44,8 @@ import { Result } from "../types/fp.js";
  * Updates the payment method for an employee. Can set to Check or Direct Deposit with split configuration.
  *
  * scope: `employee_payment_methods:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function employeePaymentMethodUpdate(
   client: GustoEmbeddedCore,
@@ -111,7 +113,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/employees/{employee_id}/payment_method")(
     pathParams,
   );
@@ -130,7 +131,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

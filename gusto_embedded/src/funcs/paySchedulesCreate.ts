@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -37,19 +41,23 @@ import { Result } from "../types/fp.js";
  * Create a new pay schedule
  *
  * @remarks
- * If a company does not have any pay schedules, this endpoint will create a single pay schedule and assign it to all employees. This is a common use case during company onboarding.
+ * If a company does not have any pay schedules, this endpoint creates a single pay schedule and assigns it to all employees (common during company onboarding).
  *
- * If a company has an existing active pay schedule and want to support multiple pay schedules, this endpoint will create a pay schedule that is not assigned to any employee.
+ * If a company already has an active pay schedule and wants multiple pay schedules, this endpoint creates a pay schedule that is not assigned to any employee.
  *
- * Be sure to **[check state laws](https://www.dol.gov/agencies/whd/state/payday)** to know what schedule is right for your customers.
+ * Be sure to [check state laws](https://www.dol.gov/agencies/whd/state/payday) to know what schedule is right for your customers. If an onboarded company misses their first pay date, the pay schedule may be automatically adjusted.
+ *
+ * ### Webhooks
+ * - `pay_schedule.created`: Fires when a pay schedule is successfully created.
+ *
+ * ### Related guides
+ * - [Create a pay schedule](doc:create-a-pay-schedule)
+ * - [Pay Schedules](doc:pay-schedule-info)
+ * - [Manage Pay Schedules via API](doc:manage-pay-schedules-api)
  *
  * scope: `pay_schedules:write`
  *
- * > ℹ️ Pay Schedules may be automatically adjusted
- * >
- * > If an onboarded company misses their first pay date, Gusto will automatically adjust the pay schedule to the next available pay date.
- * >
- * > See [Create a pay schedule](/embedded-payroll/docs/create-a-pay-schedule) for more information.
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function paySchedulesCreate(
   client: GustoEmbeddedCore,
@@ -58,6 +66,7 @@ export function paySchedulesCreate(
 ): APIPromise<
   Result<
     PostV1CompaniesCompanyIdPaySchedulesResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -84,6 +93,7 @@ async function $do(
   [
     Result<
       PostV1CompaniesCompanyIdPaySchedulesResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -107,7 +117,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload["Pay-Schedule-Create-Request"], {
+    explode: true,
+  });
 
   const pathParams = {
     company_id: encodeSimple("company_id", payload.company_id, {
@@ -115,7 +127,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/pay_schedules")(
     pathParams,
   );
@@ -134,7 +145,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -183,6 +194,7 @@ async function $do(
 
   const [result] = await M.match<
     PostV1CompaniesCompanyIdPaySchedulesResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -194,10 +206,11 @@ async function $do(
     | SDKValidationError
   >(
     M.json(201, PostV1CompaniesCompanyIdPaySchedulesResponse$inboundSchema, {
-      key: "Pay-Schedule-Create-Update",
+      key: "Pay-Schedule",
     }),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

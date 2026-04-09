@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -44,6 +48,8 @@ import { Result } from "../types/fp.js";
  * When the application has the `company_benefits:write:benefit_type_limited` data scope, the application can only create company benefits for benefit types that are permitted for the application.
  *
  * scope: `company_benefits:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function companyBenefitsCreate(
   client: GustoEmbeddedCore,
@@ -52,6 +58,7 @@ export function companyBenefitsCreate(
 ): APIPromise<
   Result<
     PostV1CompaniesCompanyIdCompanyBenefitsResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -78,6 +85,7 @@ async function $do(
   [
     Result<
       PostV1CompaniesCompanyIdCompanyBenefitsResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -103,7 +111,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload["Company-Benefit-Create-Request"], {
+    explode: true,
+  });
 
   const pathParams = {
     company_id: encodeSimple("company_id", payload.company_id, {
@@ -111,7 +121,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/companies/{company_id}/company_benefits")(
     pathParams,
   );
@@ -130,7 +139,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -179,6 +188,7 @@ async function $do(
 
   const [result] = await M.match<
     PostV1CompaniesCompanyIdCompanyBenefitsResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -192,8 +202,9 @@ async function $do(
     M.json(201, PostV1CompaniesCompanyIdCompanyBenefitsResponse$inboundSchema, {
       key: "Company-Benefit",
     }),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

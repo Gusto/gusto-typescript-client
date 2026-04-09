@@ -47,6 +47,8 @@ import { Result } from "../types/fp.js";
  * Simulate funding a contractor payment group. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment group's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
  *
  * scope: `payrolls:run`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function contractorPaymentGroupsFund(
   client: GustoEmbeddedCore,
@@ -116,7 +118,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/v1/contractor_payment_groups/{contractor_payment_group_uuid}/fund",
   )(pathParams);
@@ -134,7 +135,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

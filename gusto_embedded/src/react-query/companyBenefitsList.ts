@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompaniesCompanyIdCompanyBenefitsRequest } from "../models/operations/getv1companiescompanyidcompanybenefits.js";
+import {
+  GetV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion,
+  GetV1CompaniesCompanyIdCompanyBenefitsRequest,
+} from "../models/operations/getv1companiescompanyidcompanybenefits.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type CompanyBenefitsListQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -119,10 +123,12 @@ export function setCompanyBenefitsListData(
   queryKeyBase: [
     companyId: string,
     parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion
+        | undefined;
       active?: boolean | undefined;
       enrollmentCount?: boolean | undefined;
       benefitType?: string | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: CompanyBenefitsListQueryData,
@@ -138,10 +144,12 @@ export function invalidateCompanyBenefitsList(
     [
       companyId: string,
       parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion
+          | undefined;
         active?: boolean | undefined;
         enrollmentCount?: boolean | undefined;
         benefitType?: string | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,

@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -40,6 +44,8 @@ import { Result } from "../types/fp.js";
  * When with_employee_benefits parameter with true value is passed, employee_benefits:read scope is required to return employee_benefits.
  *
  * scope: `company_benefits:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function companyBenefitsGet(
   client: GustoEmbeddedCore,
@@ -48,6 +54,7 @@ export function companyBenefitsGet(
 ): APIPromise<
   Result<
     GetV1CompanyBenefitsCompanyBenefitIdResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -73,6 +80,7 @@ async function $do(
   [
     Result<
       GetV1CompanyBenefitsCompanyBenefitIdResponse,
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -104,7 +112,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc("/v1/company_benefits/{company_benefit_id}")(
     pathParams,
   );
@@ -127,7 +134,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -177,6 +184,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1CompanyBenefitsCompanyBenefitIdResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -189,7 +197,8 @@ async function $do(
     M.json(200, GetV1CompanyBenefitsCompanyBenefitIdResponse$inboundSchema, {
       key: "Company-Benefit-With-Employee-Benefits",
     }),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

@@ -108,7 +108,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/partner_managed_companies/{company_uuid}/migrate",
   )(pathParams);

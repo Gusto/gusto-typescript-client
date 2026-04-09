@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { paySchedulesGet } from "../funcs/paySchedulesGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
   GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
 } from "../models/operations/getv1companiescompanyidpayschedulespayscheduleid.js";
@@ -75,7 +75,11 @@ export function buildPaySchedulesGetQuery(
 export function queryKeyPaySchedulesGet(
   companyId: string,
   payScheduleId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

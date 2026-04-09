@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -14,35 +15,49 @@ import {
   SupportedBenefit,
   SupportedBenefit$inboundSchema,
 } from "../components/supportedbenefit.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1BenefitsBenefitIdHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1BenefitsBenefitIdHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1BenefitsBenefitIdHeaderXGustoAPIVersion
+>;
+
 export type GetV1BenefitsBenefitIdRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: GetV1BenefitsBenefitIdHeaderXGustoAPIVersion | undefined;
   /**
    * The benefit type in Gusto.
    */
   benefitId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1BenefitsBenefitIdResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Supported benefit response
+   * Successful
    */
   supportedBenefit?: SupportedBenefit | undefined;
 };
 
 /** @internal */
+export const GetV1BenefitsBenefitIdHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1BenefitsBenefitIdHeaderXGustoAPIVersion> = z
+    .nativeEnum(GetV1BenefitsBenefitIdHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetV1BenefitsBenefitIdRequest$Outbound = {
-  benefit_id: string;
   "X-Gusto-API-Version": string;
+  benefit_id: string;
 };
 
 /** @internal */
@@ -51,12 +66,13 @@ export const GetV1BenefitsBenefitIdRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1BenefitsBenefitIdRequest
 > = z.object({
+  xGustoAPIVersion: GetV1BenefitsBenefitIdHeaderXGustoAPIVersion$outboundSchema
+    .default("2025-06-15"),
   benefitId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
-    benefitId: "benefit_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    benefitId: "benefit_id",
   });
 });
 

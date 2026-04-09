@@ -51,6 +51,8 @@ import { Result } from "../types/fp.js";
  * - `employee_job_compensation.created`: Fires when a compensation is successfully created
  *
  * scope: `compensations:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function jobsAndCompensationsCreateCompensation(
   client: GustoEmbeddedCore,
@@ -120,7 +122,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/jobs/{job_id}/compensations")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -137,7 +138,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

@@ -109,7 +109,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/payrolls/{payroll_uuid}/reports/general_ledger")(
     pathParams,
   );

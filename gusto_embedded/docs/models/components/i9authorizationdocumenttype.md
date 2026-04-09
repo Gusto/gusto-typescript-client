@@ -1,7 +1,5 @@
 # I9AuthorizationDocumentType
 
-The document's document type
-
 ## Example Usage
 
 ```typescript

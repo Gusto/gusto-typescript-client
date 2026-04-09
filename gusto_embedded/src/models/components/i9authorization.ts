@@ -23,17 +23,11 @@ export const AuthorizationStatus = {
  */
 export type AuthorizationStatus = ClosedEnum<typeof AuthorizationStatus>;
 
-/**
- * The document's document type
- */
 export const I9AuthorizationDocumentType = {
   UscisAlienRegistrationNumber: "uscis_alien_registration_number",
   FormI94: "form_i94",
   ForeignPassport: "foreign_passport",
 } as const;
-/**
- * The document's document type
- */
 export type I9AuthorizationDocumentType = ClosedEnum<
   typeof I9AuthorizationDocumentType
 >;

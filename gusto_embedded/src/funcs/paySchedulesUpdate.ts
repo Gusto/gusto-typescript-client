@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -37,15 +41,24 @@ import { Result } from "../types/fp.js";
  * Update a pay schedule
  *
  * @remarks
- * Updates a pay schedule.
+ * Updates a pay schedule. The `version` parameter from the GET response is required for [optimistic concurrency](doc:api-fundamentals); a mismatch returns 409 Conflict.
+ *
+ * ### Effect on payrolls
+ * Updating a pay schedule will delete any unprocessed regular payrolls whose pay period end date is today or in the future. Already-processed payrolls are not affected.
+ *
+ * ### Pay schedules may be automatically adjusted
+ * If an onboarded company misses their first pay date, the pay schedule may be automatically adjusted.
+ *
+ * ### Webhooks
+ * - `pay_schedule.updated`: Fires when a pay schedule is successfully updated.
+ *
+ * ### Related guides
+ * - [Create a pay schedule](doc:create-a-pay-schedule)
+ * - [Manage Pay Schedules via API](doc:manage-pay-schedules-api)
  *
  * scope: `pay_schedules:write`
  *
- * > ℹ️ Pay Schedules may be automatically adjusted
- * >
- * > If an onboarded company misses their first pay date, Gusto will automatically adjust the pay schedule to the next available pay date.
- * >
- * > See [Create a pay schedule](/embedded-payroll/docs/create-a-pay-schedule) for more information.
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function paySchedulesUpdate(
   client: GustoEmbeddedCore,
@@ -54,6 +67,7 @@ export function paySchedulesUpdate(
 ): APIPromise<
   Result<
     PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -80,6 +94,7 @@ async function $do(
   [
     Result<
       PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -104,7 +119,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload["Pay-Schedule-Update-Request"], {
+    explode: true,
+  });
 
   const pathParams = {
     company_id: encodeSimple("company_id", payload.company_id, {
@@ -116,7 +133,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/companies/{company_id}/pay_schedules/{pay_schedule_id}",
   )(pathParams);
@@ -135,7 +151,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -169,7 +185,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    errorCodes: ["404", "409", "422", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -184,6 +200,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -197,10 +214,11 @@ async function $do(
     M.json(
       200,
       PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema,
-      { key: "Pay-Schedule-Create-Update" },
+      { key: "Pay-Schedule" },
     ),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.jsonErr([409, 422], UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

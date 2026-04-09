@@ -25,9 +25,6 @@ export const RehireEmploymentStatus = {
  */
 export type RehireEmploymentStatus = ClosedEnum<typeof RehireEmploymentStatus>;
 
-/**
- * Example response
- */
 export type Rehire = {
   /**
    * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.

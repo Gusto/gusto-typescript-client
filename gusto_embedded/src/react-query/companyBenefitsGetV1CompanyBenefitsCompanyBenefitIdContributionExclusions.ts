@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest } from "../models/operations/getv1companybenefitscompanybenefitidcontributionexclusions.js";
+import {
+  GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion,
+  GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest,
+} from "../models/operations/getv1companybenefitscompanybenefitidcontributionexclusions.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type CompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -117,7 +121,11 @@ export function setCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributi
   client: QueryClient,
   queryKeyBase: [
     companyBenefitId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data:
     CompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsQueryData,
@@ -140,7 +148,11 @@ export function invalidateCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdCon
   queryKeyBase: TupleToPrefixes<
     [
       companyBenefitId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

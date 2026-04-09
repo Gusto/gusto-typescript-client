@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompaniesAttachmentRequest } from "../models/operations/getv1companiesattachment.js";
+import {
+  GetV1CompaniesAttachmentHeaderXGustoAPIVersion,
+  GetV1CompaniesAttachmentRequest,
+} from "../models/operations/getv1companiesattachment.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type CompanyAttachmentsGetDetailsQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -56,6 +60,9 @@ export type CompanyAttachmentsGetDetailsQueryError =
  *
  * @remarks
  * Retrieve the detail of an attachment uploaded by the company.
+ *
+ * ### Related guides
+ * - [Manage company attachments](doc:manage-company-attachments)
  *
  * scope: `company_attachments:read`
  */
@@ -86,6 +93,9 @@ export function useCompanyAttachmentsGetDetails(
  * @remarks
  * Retrieve the detail of an attachment uploaded by the company.
  *
+ * ### Related guides
+ * - [Manage company attachments](doc:manage-company-attachments)
+ *
  * scope: `company_attachments:read`
  */
 export function useCompanyAttachmentsGetDetailsSuspense(
@@ -114,7 +124,11 @@ export function setCompanyAttachmentsGetDetailsData(
   queryKeyBase: [
     companyId: string,
     companyAttachmentUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompaniesAttachmentHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: CompanyAttachmentsGetDetailsQueryData,
 ): CompanyAttachmentsGetDetailsQueryData | undefined {
@@ -129,7 +143,11 @@ export function invalidateCompanyAttachmentsGetDetails(
     [
       companyId: string,
       companyAttachmentUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompaniesAttachmentHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

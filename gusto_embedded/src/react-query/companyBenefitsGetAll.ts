@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -21,7 +20,10 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1BenefitsRequest } from "../models/operations/getv1benefits.js";
+import {
+  GetV1BenefitsHeaderXGustoAPIVersion,
+  GetV1BenefitsRequest,
+} from "../models/operations/getv1benefits.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -52,12 +54,10 @@ export type CompanyBenefitsGetAllQueryError =
   | SDKValidationError;
 
 /**
- * Get all benefits supported by Gusto
+ * Get all supported benefits
  *
  * @remarks
- * Returns all benefits supported by Gusto.
- *
- * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+ * Returns all benefits supported by Gusto. The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
  *
  * scope: `benefits:read`
  */
@@ -83,12 +83,10 @@ export function useCompanyBenefitsGetAll(
 }
 
 /**
- * Get all benefits supported by Gusto
+ * Get all supported benefits
  *
  * @remarks
- * Returns all benefits supported by Gusto.
- *
- * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+ * Returns all benefits supported by Gusto. The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
  *
  * scope: `benefits:read`
  */
@@ -115,7 +113,11 @@ export function useCompanyBenefitsGetAllSuspense(
 
 export function setCompanyBenefitsGetAllData(
   client: QueryClient,
-  queryKeyBase: [parameters: { xGustoAPIVersion?: VersionHeader | undefined }],
+  queryKeyBase: [
+    parameters: {
+      xGustoAPIVersion?: GetV1BenefitsHeaderXGustoAPIVersion | undefined;
+    },
+  ],
   data: CompanyBenefitsGetAllQueryData,
 ): CompanyBenefitsGetAllQueryData | undefined {
   const key = queryKeyCompanyBenefitsGetAll(...queryKeyBase);
@@ -126,7 +128,9 @@ export function setCompanyBenefitsGetAllData(
 export function invalidateCompanyBenefitsGetAll(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
-    [parameters: { xGustoAPIVersion?: VersionHeader | undefined }]
+    [parameters: {
+      xGustoAPIVersion?: GetV1BenefitsHeaderXGustoAPIVersion | undefined;
+    }]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
 ): Promise<void> {

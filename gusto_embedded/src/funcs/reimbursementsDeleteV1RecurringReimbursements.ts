@@ -40,6 +40,8 @@ import { Result } from "../types/fp.js";
  * Delete (soft delete) a recurring reimbursement for an employee.
  *
  * scope: `reimbursements:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function reimbursementsDeleteV1RecurringReimbursements(
   client: GustoEmbeddedCore,
@@ -105,7 +107,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/recurring_reimbursements/{id}")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -121,7 +122,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

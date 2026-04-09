@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -40,6 +44,8 @@ import { Result } from "../types/fp.js";
  * Update an employee's rehire.
  *
  * scope: `employments:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function employeeEmploymentsRehire(
   client: GustoEmbeddedCore,
@@ -48,6 +54,7 @@ export function employeeEmploymentsRehire(
 ): APIPromise<
   Result<
     PutV1EmployeesEmployeeIdRehireResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -74,6 +81,7 @@ async function $do(
   [
     Result<
       PutV1EmployeesEmployeeIdRehireResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -97,7 +105,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload["Rehire-Update-Request-Body"], {
+    explode: true,
+  });
 
   const pathParams = {
     employee_id: encodeSimple("employee_id", payload.employee_id, {
@@ -105,7 +115,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/employees/{employee_id}/rehire")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -122,7 +131,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -171,6 +180,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1EmployeesEmployeeIdRehireResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -184,7 +194,8 @@ async function $do(
     M.json(200, PutV1EmployeesEmployeeIdRehireResponse$inboundSchema, {
       key: "Rehire",
     }),
-    M.jsonErr([404, 422], UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

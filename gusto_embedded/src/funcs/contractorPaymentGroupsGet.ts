@@ -40,6 +40,8 @@ import { Result } from "../types/fp.js";
  * Returns a contractor payment group with all associated contractor payments.
  *
  * scope: `payrolls:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function contractorPaymentGroupsGet(
   client: GustoEmbeddedCore,
@@ -107,7 +109,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/v1/contractor_payment_groups/{contractor_payment_group_uuid}",
   )(pathParams);
@@ -125,7 +126,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
