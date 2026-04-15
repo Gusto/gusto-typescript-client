@@ -1,0 +1,30 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest, PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse } from "../models/operations/putv1employeesemployeeidi9authorizationemployersign.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Employer sign an employee's Form I-9
+ *
+ * @remarks
+ * Sign an employee's Form I-9 as an employer. Once the form is signed, the employee's I-9 authorization is considered complete and cannot be modified.
+ *
+ * ### Prerequisites
+ * Before calling this endpoint:
+ * 1. The employee must have a completed [I-9 authorization](ref:put-v1-employees-employee_id-i9_authorization)
+ * 2. The employee must have signed the Form I-9
+ * 3. [I-9 verification documents](ref:put-v1-employees-employee_id-i9_authorization-documents) must be submitted
+ *
+ * ### Related guides
+ * - [I-9 employment verification](doc:i-9-employment-verification)
+ *
+ * scope: `i9_authorizations:manage`
+ */
+export declare function i9VerificationEmployerSign(client: GustoEmbeddedCore, request: PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest, options?: RequestOptions): APIPromise<Result<PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse, NotFoundErrorObject | UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=i9VerificationEmployerSign.d.ts.map

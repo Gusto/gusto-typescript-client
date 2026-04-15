@@ -1,0 +1,24 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { PutV1WebhookSubscriptionUuidRequest, PutV1WebhookSubscriptionUuidResponse, PutV1WebhookSubscriptionUuidSecurity } from "../models/operations/putv1webhooksubscriptionuuid.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Update a webhook subscription
+ *
+ * @remarks
+ * Updates the Webhook Subscription associated with the provided UUID.
+ *
+ * > 📘 System Access Authentication
+ * >
+ * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+ *
+ * scope: `webhook_subscriptions:write`
+ */
+export declare function webhooksUpdateSubscription(client: GustoEmbeddedCore, security: PutV1WebhookSubscriptionUuidSecurity, request: PutV1WebhookSubscriptionUuidRequest, options?: RequestOptions): APIPromise<Result<PutV1WebhookSubscriptionUuidResponse, UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=webhooksUpdateSubscription.d.ts.map

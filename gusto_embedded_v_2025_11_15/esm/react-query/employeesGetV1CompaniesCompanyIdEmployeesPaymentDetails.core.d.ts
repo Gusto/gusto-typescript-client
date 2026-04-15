@@ -1,0 +1,19 @@
+import { QueryClient, QueryFunctionContext, QueryKey } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest, GetV1CompaniesCompanyIdEmployeesPaymentDetailsResponse } from "../models/operations/getv1companiescompanyidemployeespaymentdetails.js";
+export type EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryData = GetV1CompaniesCompanyIdEmployeesPaymentDetailsResponse;
+export declare function prefetchEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails(queryClient: QueryClient, client$: GustoEmbeddedCore, request: GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest, options?: RequestOptions): Promise<void>;
+export declare function buildEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQuery(client$: GustoEmbeddedCore, request: GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryData>;
+};
+export declare function queryKeyEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails(companyId: string, parameters: {
+    employeeUuid?: string | undefined;
+    payrollUuid?: string | undefined;
+    page?: number | undefined;
+    per?: number | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=employeesGetV1CompaniesCompanyIdEmployeesPaymentDetails.core.d.ts.map

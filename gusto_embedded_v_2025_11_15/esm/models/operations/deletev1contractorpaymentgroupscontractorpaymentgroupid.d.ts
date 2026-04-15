@@ -1,0 +1,42 @@
+import * as z from "zod/v3";
+import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { HTTPMetadata } from "../components/httpmetadata.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export declare const DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion: {
+    readonly TwoThousandAndTwentySixMinus02Minus01: "2026-02-01";
+};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion = ClosedEnum<typeof DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion>;
+export type DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest = {
+    /**
+     * The UUID of the contractor payment group
+     */
+    contractorPaymentGroupUuid: string;
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    xGustoAPIVersion?: DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion | undefined;
+};
+export type DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse = {
+    httpMeta: HTTPMetadata;
+};
+/** @internal */
+export declare const DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion$outboundSchema: z.ZodNativeEnum<typeof DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion>;
+/** @internal */
+export type DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest$Outbound = {
+    contractor_payment_group_uuid: string;
+    "X-Gusto-API-Version": string;
+};
+/** @internal */
+export declare const DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest$outboundSchema: z.ZodType<DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest$Outbound, z.ZodTypeDef, DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest>;
+export declare function deleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequestToJSON(deleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest: DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest): string;
+/** @internal */
+export declare const DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse$inboundSchema: z.ZodType<DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse, z.ZodTypeDef, unknown>;
+export declare function deleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponseFromJSON(jsonString: string): SafeParseResult<DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse, SDKValidationError>;
+//# sourceMappingURL=deletev1contractorpaymentgroupscontractorpaymentgroupid.d.ts.map

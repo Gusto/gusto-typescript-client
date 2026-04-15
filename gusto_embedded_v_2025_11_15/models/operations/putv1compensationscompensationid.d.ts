@@ -1,0 +1,205 @@
+import * as z from "zod";
+import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+/**
+ * The unit accompanying the compensation rate. If the employee is an owner, rate should be 'Paycheck'.
+ */
+export declare const PutV1CompensationsCompensationIdPaymentUnit: {
+    readonly Hour: "Hour";
+    readonly Week: "Week";
+    readonly Month: "Month";
+    readonly Year: "Year";
+    readonly Paycheck: "Paycheck";
+};
+/**
+ * The unit accompanying the compensation rate. If the employee is an owner, rate should be 'Paycheck'.
+ */
+export type PutV1CompensationsCompensationIdPaymentUnit = ClosedEnum<typeof PutV1CompensationsCompensationIdPaymentUnit>;
+/**
+ * The minimum wage record you want to apply to the compensation
+ */
+export type PutV1CompensationsCompensationIdMinimumWages = {
+    /**
+     * The UUID of the minimum wage record. Required if adjust_for_minimum_wage set to true
+     */
+    uuid?: string | undefined;
+};
+export type PutV1CompensationsCompensationIdRequestBody = {
+    /**
+     * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
+     */
+    version: string;
+    /**
+     * The dollar amount paid per payment unit.
+     */
+    rate?: string | undefined;
+    /**
+     * The unit accompanying the compensation rate. If the employee is an owner, rate should be 'Paycheck'.
+     */
+    paymentUnit?: PutV1CompensationsCompensationIdPaymentUnit | undefined;
+    /**
+     * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Commissioned employees ('Commission Only Exempt') earn wages based only on commission. Commissioned with overtime ('Commission Only Nonexempt') earn wages based on commission, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company.
+     */
+    flsaStatus?: components.FlsaStatusType | undefined;
+    /**
+     * Determines whether the compensation should be adjusted for minimum wage. Only applies to Nonexempt employees.
+     */
+    adjustForMinimumWage?: boolean | undefined;
+    minimumWages?: Array<PutV1CompensationsCompensationIdMinimumWages> | undefined;
+};
+export type PutV1CompensationsCompensationIdRequest = {
+    /**
+     * The UUID of the compensation
+     */
+    compensationId: string;
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    xGustoAPIVersion?: components.VersionHeader | undefined;
+    requestBody: PutV1CompensationsCompensationIdRequestBody;
+};
+export type PutV1CompensationsCompensationIdResponse = {
+    /**
+     * HTTP response content type for this operation
+     */
+    contentType: string;
+    /**
+     * HTTP response status code for this operation
+     */
+    statusCode: number;
+    /**
+     * Raw HTTP response; suitable for custom response parsing
+     */
+    rawResponse: Response;
+    /**
+     * Example response
+     */
+    compensation?: components.Compensation | undefined;
+};
+/** @internal */
+export declare const PutV1CompensationsCompensationIdPaymentUnit$inboundSchema: z.ZodNativeEnum<typeof PutV1CompensationsCompensationIdPaymentUnit>;
+/** @internal */
+export declare const PutV1CompensationsCompensationIdPaymentUnit$outboundSchema: z.ZodNativeEnum<typeof PutV1CompensationsCompensationIdPaymentUnit>;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export declare namespace PutV1CompensationsCompensationIdPaymentUnit$ {
+    /** @deprecated use `PutV1CompensationsCompensationIdPaymentUnit$inboundSchema` instead. */
+    const inboundSchema: z.ZodNativeEnum<{
+        readonly Hour: "Hour";
+        readonly Week: "Week";
+        readonly Month: "Month";
+        readonly Year: "Year";
+        readonly Paycheck: "Paycheck";
+    }>;
+    /** @deprecated use `PutV1CompensationsCompensationIdPaymentUnit$outboundSchema` instead. */
+    const outboundSchema: z.ZodNativeEnum<{
+        readonly Hour: "Hour";
+        readonly Week: "Week";
+        readonly Month: "Month";
+        readonly Year: "Year";
+        readonly Paycheck: "Paycheck";
+    }>;
+}
+/** @internal */
+export declare const PutV1CompensationsCompensationIdMinimumWages$inboundSchema: z.ZodType<PutV1CompensationsCompensationIdMinimumWages, z.ZodTypeDef, unknown>;
+/** @internal */
+export type PutV1CompensationsCompensationIdMinimumWages$Outbound = {
+    uuid?: string | undefined;
+};
+/** @internal */
+export declare const PutV1CompensationsCompensationIdMinimumWages$outboundSchema: z.ZodType<PutV1CompensationsCompensationIdMinimumWages$Outbound, z.ZodTypeDef, PutV1CompensationsCompensationIdMinimumWages>;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export declare namespace PutV1CompensationsCompensationIdMinimumWages$ {
+    /** @deprecated use `PutV1CompensationsCompensationIdMinimumWages$inboundSchema` instead. */
+    const inboundSchema: z.ZodType<PutV1CompensationsCompensationIdMinimumWages, z.ZodTypeDef, unknown>;
+    /** @deprecated use `PutV1CompensationsCompensationIdMinimumWages$outboundSchema` instead. */
+    const outboundSchema: z.ZodType<PutV1CompensationsCompensationIdMinimumWages$Outbound, z.ZodTypeDef, PutV1CompensationsCompensationIdMinimumWages>;
+    /** @deprecated use `PutV1CompensationsCompensationIdMinimumWages$Outbound` instead. */
+    type Outbound = PutV1CompensationsCompensationIdMinimumWages$Outbound;
+}
+export declare function putV1CompensationsCompensationIdMinimumWagesToJSON(putV1CompensationsCompensationIdMinimumWages: PutV1CompensationsCompensationIdMinimumWages): string;
+export declare function putV1CompensationsCompensationIdMinimumWagesFromJSON(jsonString: string): SafeParseResult<PutV1CompensationsCompensationIdMinimumWages, SDKValidationError>;
+/** @internal */
+export declare const PutV1CompensationsCompensationIdRequestBody$inboundSchema: z.ZodType<PutV1CompensationsCompensationIdRequestBody, z.ZodTypeDef, unknown>;
+/** @internal */
+export type PutV1CompensationsCompensationIdRequestBody$Outbound = {
+    version: string;
+    rate?: string | undefined;
+    payment_unit?: string | undefined;
+    flsa_status?: string | undefined;
+    adjust_for_minimum_wage?: boolean | undefined;
+    minimum_wages?: Array<PutV1CompensationsCompensationIdMinimumWages$Outbound> | undefined;
+};
+/** @internal */
+export declare const PutV1CompensationsCompensationIdRequestBody$outboundSchema: z.ZodType<PutV1CompensationsCompensationIdRequestBody$Outbound, z.ZodTypeDef, PutV1CompensationsCompensationIdRequestBody>;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export declare namespace PutV1CompensationsCompensationIdRequestBody$ {
+    /** @deprecated use `PutV1CompensationsCompensationIdRequestBody$inboundSchema` instead. */
+    const inboundSchema: z.ZodType<PutV1CompensationsCompensationIdRequestBody, z.ZodTypeDef, unknown>;
+    /** @deprecated use `PutV1CompensationsCompensationIdRequestBody$outboundSchema` instead. */
+    const outboundSchema: z.ZodType<PutV1CompensationsCompensationIdRequestBody$Outbound, z.ZodTypeDef, PutV1CompensationsCompensationIdRequestBody>;
+    /** @deprecated use `PutV1CompensationsCompensationIdRequestBody$Outbound` instead. */
+    type Outbound = PutV1CompensationsCompensationIdRequestBody$Outbound;
+}
+export declare function putV1CompensationsCompensationIdRequestBodyToJSON(putV1CompensationsCompensationIdRequestBody: PutV1CompensationsCompensationIdRequestBody): string;
+export declare function putV1CompensationsCompensationIdRequestBodyFromJSON(jsonString: string): SafeParseResult<PutV1CompensationsCompensationIdRequestBody, SDKValidationError>;
+/** @internal */
+export declare const PutV1CompensationsCompensationIdRequest$inboundSchema: z.ZodType<PutV1CompensationsCompensationIdRequest, z.ZodTypeDef, unknown>;
+/** @internal */
+export type PutV1CompensationsCompensationIdRequest$Outbound = {
+    compensation_id: string;
+    "X-Gusto-API-Version": string;
+    RequestBody: PutV1CompensationsCompensationIdRequestBody$Outbound;
+};
+/** @internal */
+export declare const PutV1CompensationsCompensationIdRequest$outboundSchema: z.ZodType<PutV1CompensationsCompensationIdRequest$Outbound, z.ZodTypeDef, PutV1CompensationsCompensationIdRequest>;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export declare namespace PutV1CompensationsCompensationIdRequest$ {
+    /** @deprecated use `PutV1CompensationsCompensationIdRequest$inboundSchema` instead. */
+    const inboundSchema: z.ZodType<PutV1CompensationsCompensationIdRequest, z.ZodTypeDef, unknown>;
+    /** @deprecated use `PutV1CompensationsCompensationIdRequest$outboundSchema` instead. */
+    const outboundSchema: z.ZodType<PutV1CompensationsCompensationIdRequest$Outbound, z.ZodTypeDef, PutV1CompensationsCompensationIdRequest>;
+    /** @deprecated use `PutV1CompensationsCompensationIdRequest$Outbound` instead. */
+    type Outbound = PutV1CompensationsCompensationIdRequest$Outbound;
+}
+export declare function putV1CompensationsCompensationIdRequestToJSON(putV1CompensationsCompensationIdRequest: PutV1CompensationsCompensationIdRequest): string;
+export declare function putV1CompensationsCompensationIdRequestFromJSON(jsonString: string): SafeParseResult<PutV1CompensationsCompensationIdRequest, SDKValidationError>;
+/** @internal */
+export declare const PutV1CompensationsCompensationIdResponse$inboundSchema: z.ZodType<PutV1CompensationsCompensationIdResponse, z.ZodTypeDef, unknown>;
+/** @internal */
+export type PutV1CompensationsCompensationIdResponse$Outbound = {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    Compensation?: components.Compensation$Outbound | undefined;
+};
+/** @internal */
+export declare const PutV1CompensationsCompensationIdResponse$outboundSchema: z.ZodType<PutV1CompensationsCompensationIdResponse$Outbound, z.ZodTypeDef, PutV1CompensationsCompensationIdResponse>;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export declare namespace PutV1CompensationsCompensationIdResponse$ {
+    /** @deprecated use `PutV1CompensationsCompensationIdResponse$inboundSchema` instead. */
+    const inboundSchema: z.ZodType<PutV1CompensationsCompensationIdResponse, z.ZodTypeDef, unknown>;
+    /** @deprecated use `PutV1CompensationsCompensationIdResponse$outboundSchema` instead. */
+    const outboundSchema: z.ZodType<PutV1CompensationsCompensationIdResponse$Outbound, z.ZodTypeDef, PutV1CompensationsCompensationIdResponse>;
+    /** @deprecated use `PutV1CompensationsCompensationIdResponse$Outbound` instead. */
+    type Outbound = PutV1CompensationsCompensationIdResponse$Outbound;
+}
+export declare function putV1CompensationsCompensationIdResponseToJSON(putV1CompensationsCompensationIdResponse: PutV1CompensationsCompensationIdResponse): string;
+export declare function putV1CompensationsCompensationIdResponseFromJSON(jsonString: string): SafeParseResult<PutV1CompensationsCompensationIdResponse, SDKValidationError>;
+//# sourceMappingURL=putv1compensationscompensationid.d.ts.map

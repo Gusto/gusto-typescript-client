@@ -1,0 +1,17 @@
+import { QueryClient, QueryFunctionContext, QueryKey } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GetV1CompaniesCompanyIdCustomFieldsRequest, GetV1CompaniesCompanyIdCustomFieldsResponse } from "../models/operations/getv1companiescompanyidcustomfields.js";
+export type CompaniesGetCustomFieldsQueryData = GetV1CompaniesCompanyIdCustomFieldsResponse;
+export declare function prefetchCompaniesGetCustomFields(queryClient: QueryClient, client$: GustoEmbeddedCore, request: GetV1CompaniesCompanyIdCustomFieldsRequest, options?: RequestOptions): Promise<void>;
+export declare function buildCompaniesGetCustomFieldsQuery(client$: GustoEmbeddedCore, request: GetV1CompaniesCompanyIdCustomFieldsRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<CompaniesGetCustomFieldsQueryData>;
+};
+export declare function queryKeyCompaniesGetCustomFields(companyId: string, parameters: {
+    page?: number | undefined;
+    per?: number | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=companiesGetCustomFields.core.d.ts.map

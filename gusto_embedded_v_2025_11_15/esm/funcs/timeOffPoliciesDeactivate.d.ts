@@ -1,0 +1,21 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest, PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse } from "../models/operations/putv1timeoffpoliciestimeoffpolicyuuiddeactivate.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Deactivate a time off policy
+ *
+ * @remarks
+ * Deactivate a time off policy
+ *
+ * scope: `time_off_policies:write`
+ */
+export declare function timeOffPoliciesDeactivate(client: GustoEmbeddedCore, request: PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest, options?: RequestOptions): APIPromise<Result<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse, NotFoundErrorObject | UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=timeOffPoliciesDeactivate.d.ts.map

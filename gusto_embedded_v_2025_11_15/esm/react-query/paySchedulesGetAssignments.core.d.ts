@@ -1,0 +1,15 @@
+import { QueryClient, QueryFunctionContext, QueryKey } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest, GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse } from "../models/operations/getv1companiescompanyidpayschedulesassignments.js";
+export type PaySchedulesGetAssignmentsQueryData = GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse;
+export declare function prefetchPaySchedulesGetAssignments(queryClient: QueryClient, client$: GustoEmbeddedCore, request: GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest, options?: RequestOptions): Promise<void>;
+export declare function buildPaySchedulesGetAssignmentsQuery(client$: GustoEmbeddedCore, request: GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<PaySchedulesGetAssignmentsQueryData>;
+};
+export declare function queryKeyPaySchedulesGetAssignments(companyId: string, parameters: {
+    xGustoAPIVersion?: VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=paySchedulesGetAssignments.core.d.ts.map

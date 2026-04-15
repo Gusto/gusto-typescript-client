@@ -1,0 +1,19 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest, DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse } from "../models/operations/deletev1companiescompanyidearningtypesearningtypeuuid.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Deactivate an earning type
+ *
+ * @remarks
+ * Deactivate an earning type.
+ *
+ * scope: `payrolls:write`
+ */
+export declare function earningTypesDelete(client: GustoEmbeddedCore, request: DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest, options?: RequestOptions): APIPromise<Result<DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse, GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=earningTypesDelete.d.ts.map

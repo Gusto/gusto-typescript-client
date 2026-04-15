@@ -1,0 +1,43 @@
+import { InvalidateQueryFilters, QueryClient, UseQueryResult, UseSuspenseQueryResult } from "@tanstack/react-query";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { GetV1ContractorDocumentPdfRequest } from "../models/operations/getv1contractordocumentpdf.js";
+import { QueryHookOptions, SuspenseQueryHookOptions, TupleToPrefixes } from "./_types.js";
+import { buildContractorDocumentsGetPdfQuery, ContractorDocumentsGetPdfQueryData, prefetchContractorDocumentsGetPdf, queryKeyContractorDocumentsGetPdf } from "./contractorDocumentsGetPdf.core.js";
+export { buildContractorDocumentsGetPdfQuery, type ContractorDocumentsGetPdfQueryData, prefetchContractorDocumentsGetPdf, queryKeyContractorDocumentsGetPdf, };
+export type ContractorDocumentsGetPdfQueryError = GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError;
+/**
+ * Get the contractor document pdf
+ *
+ * @remarks
+ * Get the contractor document pdf.
+ *
+ * scope: `contractor_documents:read`
+ */
+export declare function useContractorDocumentsGetPdf(request: GetV1ContractorDocumentPdfRequest, options?: QueryHookOptions<ContractorDocumentsGetPdfQueryData, ContractorDocumentsGetPdfQueryError>): UseQueryResult<ContractorDocumentsGetPdfQueryData, ContractorDocumentsGetPdfQueryError>;
+/**
+ * Get the contractor document pdf
+ *
+ * @remarks
+ * Get the contractor document pdf.
+ *
+ * scope: `contractor_documents:read`
+ */
+export declare function useContractorDocumentsGetPdfSuspense(request: GetV1ContractorDocumentPdfRequest, options?: SuspenseQueryHookOptions<ContractorDocumentsGetPdfQueryData, ContractorDocumentsGetPdfQueryError>): UseSuspenseQueryResult<ContractorDocumentsGetPdfQueryData, ContractorDocumentsGetPdfQueryError>;
+export declare function setContractorDocumentsGetPdfData(client: QueryClient, queryKeyBase: [
+    documentUuid: string,
+    parameters: {
+        xGustoAPIVersion?: VersionHeader | undefined;
+    }
+], data: ContractorDocumentsGetPdfQueryData): ContractorDocumentsGetPdfQueryData | undefined;
+export declare function invalidateContractorDocumentsGetPdf(client: QueryClient, queryKeyBase: TupleToPrefixes<[
+    documentUuid: string,
+    parameters: {
+        xGustoAPIVersion?: VersionHeader | undefined;
+    }
+]>, filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">): Promise<void>;
+export declare function invalidateAllContractorDocumentsGetPdf(client: QueryClient, filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">): Promise<void>;
+//# sourceMappingURL=contractorDocumentsGetPdf.d.ts.map

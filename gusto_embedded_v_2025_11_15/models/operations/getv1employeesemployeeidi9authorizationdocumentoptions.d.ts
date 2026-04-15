@@ -1,0 +1,81 @@
+import * as z from "zod";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+export type GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest = {
+    /**
+     * The UUID of the employee
+     */
+    employeeId: string;
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    xGustoAPIVersion?: components.VersionHeader | undefined;
+};
+export type GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse = {
+    /**
+     * HTTP response content type for this operation
+     */
+    contentType: string;
+    /**
+     * HTTP response status code for this operation
+     */
+    statusCode: number;
+    /**
+     * Raw HTTP response; suitable for custom response parsing
+     */
+    rawResponse: Response;
+    /**
+     * Example response
+     */
+    i9AuthorizationDocumentOptionsObject?: Array<components.I9AuthorizationDocumentOption> | undefined;
+};
+/** @internal */
+export declare const GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest$inboundSchema: z.ZodType<GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest, z.ZodTypeDef, unknown>;
+/** @internal */
+export type GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest$Outbound = {
+    employee_id: string;
+    "X-Gusto-API-Version": string;
+};
+/** @internal */
+export declare const GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest$outboundSchema: z.ZodType<GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest$Outbound, z.ZodTypeDef, GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest>;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export declare namespace GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest$ {
+    /** @deprecated use `GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest$inboundSchema` instead. */
+    const inboundSchema: z.ZodType<GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest, z.ZodTypeDef, unknown>;
+    /** @deprecated use `GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest$outboundSchema` instead. */
+    const outboundSchema: z.ZodType<GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest$Outbound, z.ZodTypeDef, GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest>;
+    /** @deprecated use `GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest$Outbound` instead. */
+    type Outbound = GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest$Outbound;
+}
+export declare function getV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequestToJSON(getV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest: GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest): string;
+export declare function getV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequestFromJSON(jsonString: string): SafeParseResult<GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest, SDKValidationError>;
+/** @internal */
+export declare const GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse$inboundSchema: z.ZodType<GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse, z.ZodTypeDef, unknown>;
+/** @internal */
+export type GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse$Outbound = {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "I9-Authorization-Document-Options-Object"?: Array<components.I9AuthorizationDocumentOption$Outbound> | undefined;
+};
+/** @internal */
+export declare const GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse$outboundSchema: z.ZodType<GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse$Outbound, z.ZodTypeDef, GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse>;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export declare namespace GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse$ {
+    /** @deprecated use `GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse$inboundSchema` instead. */
+    const inboundSchema: z.ZodType<GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse, z.ZodTypeDef, unknown>;
+    /** @deprecated use `GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse$outboundSchema` instead. */
+    const outboundSchema: z.ZodType<GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse$Outbound, z.ZodTypeDef, GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse>;
+    /** @deprecated use `GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse$Outbound` instead. */
+    type Outbound = GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse$Outbound;
+}
+export declare function getV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponseToJSON(getV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse: GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse): string;
+export declare function getV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponseFromJSON(jsonString: string): SafeParseResult<GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse, SDKValidationError>;
+//# sourceMappingURL=getv1employeesemployeeidi9authorizationdocumentoptions.d.ts.map

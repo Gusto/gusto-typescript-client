@@ -1,0 +1,31 @@
+import { MutationKey, UseMutationResult } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { DeleteV1ExternalPayrollRequest, DeleteV1ExternalPayrollResponse } from "../models/operations/deletev1externalpayroll.js";
+import { MutationHookOptions } from "./_types.js";
+export type ExternalPayrollsDeleteMutationVariables = {
+    request: DeleteV1ExternalPayrollRequest;
+    options?: RequestOptions;
+};
+export type ExternalPayrollsDeleteMutationData = DeleteV1ExternalPayrollResponse;
+export type ExternalPayrollsDeleteMutationError = UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError;
+/**
+ * Delete an external payroll
+ *
+ * @remarks
+ * Delete an external payroll.
+ *
+ * scope: `external_payrolls:write`
+ */
+export declare function useExternalPayrollsDeleteMutation(options?: MutationHookOptions<ExternalPayrollsDeleteMutationData, ExternalPayrollsDeleteMutationError, ExternalPayrollsDeleteMutationVariables>): UseMutationResult<ExternalPayrollsDeleteMutationData, ExternalPayrollsDeleteMutationError, ExternalPayrollsDeleteMutationVariables>;
+export declare function mutationKeyExternalPayrollsDelete(): MutationKey;
+export declare function buildExternalPayrollsDeleteMutation(client$: GustoEmbeddedCore, hookOptions?: RequestOptions): {
+    mutationKey: MutationKey;
+    mutationFn: (variables: ExternalPayrollsDeleteMutationVariables) => Promise<ExternalPayrollsDeleteMutationData>;
+};
+//# sourceMappingURL=externalPayrollsDelete.d.ts.map

@@ -1,0 +1,19 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { GetV1EmployeeFormRequest, GetV1EmployeeFormResponse } from "../models/operations/getv1employeeform.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Get an employee form
+ *
+ * @remarks
+ * Get an employee form
+ *
+ * scope: `employee_forms:read`
+ */
+export declare function employeeFormsGet(client: GustoEmbeddedCore, request: GetV1EmployeeFormRequest, options?: RequestOptions): APIPromise<Result<GetV1EmployeeFormResponse, GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=employeeFormsGet.d.ts.map

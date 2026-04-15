@@ -1,0 +1,23 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { GetV1WebhookSubscriptionVerificationTokenUuidRequest, GetV1WebhookSubscriptionVerificationTokenUuidResponse, GetV1WebhookSubscriptionVerificationTokenUuidSecurity } from "../models/operations/getv1webhooksubscriptionverificationtokenuuid.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Request the webhook subscription verification_token
+ *
+ * @remarks
+ * Request that the webhook subscription `verification_token` be POSTed to the Subscription URL.
+ *
+ * > 📘 System Access Authentication
+ * >
+ * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+ *
+ * scope: `webhook_subscriptions:read`
+ */
+export declare function webhooksRequestVerificationToken(client: GustoEmbeddedCore, security: GetV1WebhookSubscriptionVerificationTokenUuidSecurity, request: GetV1WebhookSubscriptionVerificationTokenUuidRequest, options?: RequestOptions): APIPromise<Result<GetV1WebhookSubscriptionVerificationTokenUuidResponse, GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=webhooksRequestVerificationToken.d.ts.map

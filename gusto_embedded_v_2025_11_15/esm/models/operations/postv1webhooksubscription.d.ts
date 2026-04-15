@@ -1,0 +1,75 @@
+import * as z from "zod/v3";
+import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { HTTPMetadata } from "../components/httpmetadata.js";
+import { VersionHeader } from "../components/versionheader.js";
+import { WebhookSubscription } from "../components/webhooksubscription.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+export type PostV1WebhookSubscriptionSecurity = {
+    systemAccessAuth: string;
+};
+export declare const SubscriptionTypes: {
+    readonly BankAccount: "BankAccount";
+    readonly Company: "Company";
+    readonly CompanyBenefit: "CompanyBenefit";
+    readonly Contractor: "Contractor";
+    readonly ContractorPayment: "ContractorPayment";
+    readonly Employee: "Employee";
+    readonly EmployeeBenefit: "EmployeeBenefit";
+    readonly EmployeeJobCompensation: "EmployeeJobCompensation";
+    readonly ExternalPayroll: "ExternalPayroll";
+    readonly Form: "Form";
+    readonly Location: "Location";
+    readonly Notification: "Notification";
+    readonly Payroll: "Payroll";
+    readonly PaySchedule: "PaySchedule";
+    readonly Signatory: "Signatory";
+};
+export type SubscriptionTypes = ClosedEnum<typeof SubscriptionTypes>;
+export type PostV1WebhookSubscriptionRequestBody = {
+    url: string;
+    subscriptionTypes: Array<SubscriptionTypes>;
+};
+export type PostV1WebhookSubscriptionRequest = {
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    xGustoAPIVersion?: VersionHeader | undefined;
+    requestBody: PostV1WebhookSubscriptionRequestBody;
+};
+export type PostV1WebhookSubscriptionResponse = {
+    httpMeta: HTTPMetadata;
+    /**
+     * Example response
+     */
+    webhookSubscription?: WebhookSubscription | undefined;
+};
+/** @internal */
+export type PostV1WebhookSubscriptionSecurity$Outbound = {
+    SystemAccessAuth: string;
+};
+/** @internal */
+export declare const PostV1WebhookSubscriptionSecurity$outboundSchema: z.ZodType<PostV1WebhookSubscriptionSecurity$Outbound, z.ZodTypeDef, PostV1WebhookSubscriptionSecurity>;
+export declare function postV1WebhookSubscriptionSecurityToJSON(postV1WebhookSubscriptionSecurity: PostV1WebhookSubscriptionSecurity): string;
+/** @internal */
+export declare const SubscriptionTypes$outboundSchema: z.ZodNativeEnum<typeof SubscriptionTypes>;
+/** @internal */
+export type PostV1WebhookSubscriptionRequestBody$Outbound = {
+    url: string;
+    subscription_types: Array<string>;
+};
+/** @internal */
+export declare const PostV1WebhookSubscriptionRequestBody$outboundSchema: z.ZodType<PostV1WebhookSubscriptionRequestBody$Outbound, z.ZodTypeDef, PostV1WebhookSubscriptionRequestBody>;
+export declare function postV1WebhookSubscriptionRequestBodyToJSON(postV1WebhookSubscriptionRequestBody: PostV1WebhookSubscriptionRequestBody): string;
+/** @internal */
+export type PostV1WebhookSubscriptionRequest$Outbound = {
+    "X-Gusto-API-Version": string;
+    RequestBody: PostV1WebhookSubscriptionRequestBody$Outbound;
+};
+/** @internal */
+export declare const PostV1WebhookSubscriptionRequest$outboundSchema: z.ZodType<PostV1WebhookSubscriptionRequest$Outbound, z.ZodTypeDef, PostV1WebhookSubscriptionRequest>;
+export declare function postV1WebhookSubscriptionRequestToJSON(postV1WebhookSubscriptionRequest: PostV1WebhookSubscriptionRequest): string;
+/** @internal */
+export declare const PostV1WebhookSubscriptionResponse$inboundSchema: z.ZodType<PostV1WebhookSubscriptionResponse, z.ZodTypeDef, unknown>;
+export declare function postV1WebhookSubscriptionResponseFromJSON(jsonString: string): SafeParseResult<PostV1WebhookSubscriptionResponse, SDKValidationError>;
+//# sourceMappingURL=postv1webhooksubscription.d.ts.map

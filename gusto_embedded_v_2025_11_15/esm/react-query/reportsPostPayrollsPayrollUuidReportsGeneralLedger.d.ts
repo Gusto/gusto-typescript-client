@@ -1,0 +1,33 @@
+import { MutationKey, UseMutationResult } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { PostPayrollsPayrollUuidReportsGeneralLedgerRequest, PostPayrollsPayrollUuidReportsGeneralLedgerResponse } from "../models/operations/postpayrollspayrolluuidreportsgeneralledger.js";
+import { MutationHookOptions } from "./_types.js";
+export type ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationVariables = {
+    request: PostPayrollsPayrollUuidReportsGeneralLedgerRequest;
+    options?: RequestOptions;
+};
+export type ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationData = PostPayrollsPayrollUuidReportsGeneralLedgerResponse;
+export type ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationError = UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError;
+/**
+ * Create a general ledger report
+ *
+ * @remarks
+ * Create a general ledger report for a payroll. The report can be aggregated by different dimensions such as job or department.
+ *
+ * Use the `request_uuid` in the response with the [report GET endpoint](../reference/get-reports-request_uuid) to poll for the status and report URL upon completion. The retrieved report will be generated in a JSON format.
+ *
+ * scope: `company_reports:write` OR `company_reports:write:general_ledger`
+ */
+export declare function useReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutation(options?: MutationHookOptions<ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationData, ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationError, ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationVariables>): UseMutationResult<ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationData, ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationError, ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationVariables>;
+export declare function mutationKeyReportsPostPayrollsPayrollUuidReportsGeneralLedger(): MutationKey;
+export declare function buildReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutation(client$: GustoEmbeddedCore, hookOptions?: RequestOptions): {
+    mutationKey: MutationKey;
+    mutationFn: (variables: ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationVariables) => Promise<ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationData>;
+};
+//# sourceMappingURL=reportsPostPayrollsPayrollUuidReportsGeneralLedger.d.ts.map

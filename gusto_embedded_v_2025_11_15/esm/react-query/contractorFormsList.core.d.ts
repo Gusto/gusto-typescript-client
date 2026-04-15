@@ -1,0 +1,15 @@
+import { QueryClient, QueryFunctionContext, QueryKey } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GetV1ContractorFormsRequest, GetV1ContractorFormsResponse } from "../models/operations/getv1contractorforms.js";
+export type ContractorFormsListQueryData = GetV1ContractorFormsResponse;
+export declare function prefetchContractorFormsList(queryClient: QueryClient, client$: GustoEmbeddedCore, request: GetV1ContractorFormsRequest, options?: RequestOptions): Promise<void>;
+export declare function buildContractorFormsListQuery(client$: GustoEmbeddedCore, request: GetV1ContractorFormsRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<ContractorFormsListQueryData>;
+};
+export declare function queryKeyContractorFormsList(contractorUuid: string, parameters: {
+    xGustoAPIVersion?: VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=contractorFormsList.core.d.ts.map

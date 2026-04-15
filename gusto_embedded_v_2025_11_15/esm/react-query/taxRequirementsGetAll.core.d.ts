@@ -1,0 +1,15 @@
+import { QueryClient, QueryFunctionContext, QueryKey } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GetV1CompaniesCompanyUuidTaxRequirementsRequest, GetV1CompaniesCompanyUuidTaxRequirementsResponse } from "../models/operations/getv1companiescompanyuuidtaxrequirements.js";
+export type TaxRequirementsGetAllQueryData = GetV1CompaniesCompanyUuidTaxRequirementsResponse;
+export declare function prefetchTaxRequirementsGetAll(queryClient: QueryClient, client$: GustoEmbeddedCore, request: GetV1CompaniesCompanyUuidTaxRequirementsRequest, options?: RequestOptions): Promise<void>;
+export declare function buildTaxRequirementsGetAllQuery(client$: GustoEmbeddedCore, request: GetV1CompaniesCompanyUuidTaxRequirementsRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<TaxRequirementsGetAllQueryData>;
+};
+export declare function queryKeyTaxRequirementsGetAll(companyUuid: string, parameters: {
+    xGustoAPIVersion?: VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=taxRequirementsGetAll.core.d.ts.map

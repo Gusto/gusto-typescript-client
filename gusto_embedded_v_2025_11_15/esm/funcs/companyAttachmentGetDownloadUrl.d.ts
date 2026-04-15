@@ -1,0 +1,20 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { GetV1CompaniesAttachmentUrlRequest, GetV1CompaniesAttachmentUrlResponse } from "../models/operations/getv1companiesattachmenturl.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Get a temporary url to download the Company Attachment file
+ *
+ * @remarks
+ * Retrieve a temporary url to download a attachment file uploaded
+ * by the company.
+ *
+ * scope: `company_attachments:read`
+ */
+export declare function companyAttachmentGetDownloadUrl(client: GustoEmbeddedCore, request: GetV1CompaniesAttachmentUrlRequest, options?: RequestOptions): APIPromise<Result<GetV1CompaniesAttachmentUrlResponse, GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=companyAttachmentGetDownloadUrl.d.ts.map

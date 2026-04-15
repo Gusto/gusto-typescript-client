@@ -1,0 +1,1 @@
+{"version":3,"file":"ReactSDKProvider.d.ts","sourceRoot":"","sources":["../src/ReactSDKProvider.tsx"],"names":[],"mappings":"AAMA,OAAO,EAAE,cAAc,EAAE,MAAM,uBAAuB,CAAC;AAEvD,wBAAgB,gBAAgB,CAAC,EAC/B,GAAG,EACH,OAAO,EACP,QAAQ,GACT,EAAE;IACD,GAAG,EAAE,MAAM,CAAC;IACZ,OAAO,CAAC,EAAE,OAAO,CAAC;IAClB,QAAQ,EAAE,KAAK,CAAC,SAAS,CAAC;CAC3B,2CA8BA;;;;AAED,wBAAoC"}

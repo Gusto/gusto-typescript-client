@@ -1,0 +1,23 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { PutV1HomeAddressesHomeAddressUuidRequest, PutV1HomeAddressesHomeAddressUuidResponse } from "../models/operations/putv1homeaddresseshomeaddressuuid.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Update an employee's home address
+ *
+ * @remarks
+ * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
+ *
+ * Supports home address effective dating and courtesy withholding.
+ *
+ * scope: `employees:write`
+ */
+export declare function employeeAddressesUpdate(client: GustoEmbeddedCore, request: PutV1HomeAddressesHomeAddressUuidRequest, options?: RequestOptions): APIPromise<Result<PutV1HomeAddressesHomeAddressUuidResponse, NotFoundErrorObject | UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=employeeAddressesUpdate.d.ts.map

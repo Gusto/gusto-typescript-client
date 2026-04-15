@@ -1,0 +1,15 @@
+import { QueryClient, QueryFunctionContext, QueryKey } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest, GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse } from "../models/operations/getv1companybenefitscompanybenefitidcontributionexclusions.js";
+export type CompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsQueryData = GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse;
+export declare function prefetchCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions(queryClient: QueryClient, client$: GustoEmbeddedCore, request: GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest, options?: RequestOptions): Promise<void>;
+export declare function buildCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsQuery(client$: GustoEmbeddedCore, request: GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<CompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsQueryData>;
+};
+export declare function queryKeyCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions(companyBenefitId: string, parameters: {
+    xGustoAPIVersion?: VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=companyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions.core.d.ts.map

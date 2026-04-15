@@ -1,0 +1,21 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest, DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse } from "../models/operations/deletev1contractorpaymentgroupscontractorpaymentgroupid.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Cancel a contractor payment group
+ *
+ * @remarks
+ * Cancels a contractor payment group and all associated contractor payments. All contractor payments must be cancellable, unfunded.
+ *
+ * scope: `payrolls:run`
+ */
+export declare function contractorPaymentGroupsDelete(client: GustoEmbeddedCore, request: DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest, options?: RequestOptions): APIPromise<Result<DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse, NotFoundErrorObject | UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=contractorPaymentGroupsDelete.d.ts.map

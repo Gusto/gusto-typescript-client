@@ -1,0 +1,15 @@
+import { QueryClient, QueryFunctionContext, QueryKey } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GetV1CompaniesAttachmentRequest, GetV1CompaniesAttachmentResponse } from "../models/operations/getv1companiesattachment.js";
+export type CompanyAttachmentsGetDetailsQueryData = GetV1CompaniesAttachmentResponse;
+export declare function prefetchCompanyAttachmentsGetDetails(queryClient: QueryClient, client$: GustoEmbeddedCore, request: GetV1CompaniesAttachmentRequest, options?: RequestOptions): Promise<void>;
+export declare function buildCompanyAttachmentsGetDetailsQuery(client$: GustoEmbeddedCore, request: GetV1CompaniesAttachmentRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<CompanyAttachmentsGetDetailsQueryData>;
+};
+export declare function queryKeyCompanyAttachmentsGetDetails(companyId: string, companyAttachmentUuid: string, parameters: {
+    xGustoAPIVersion?: VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=companyAttachmentsGetDetails.core.d.ts.map

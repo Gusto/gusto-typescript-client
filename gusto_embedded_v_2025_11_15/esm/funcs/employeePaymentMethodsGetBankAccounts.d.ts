@@ -1,0 +1,19 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { GetV1EmployeesEmployeeIdBankAccountsRequest, GetV1EmployeesEmployeeIdBankAccountsResponse } from "../models/operations/getv1employeesemployeeidbankaccounts.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Get all employee bank accounts
+ *
+ * @remarks
+ * Returns all employee bank accounts.
+ *
+ * scope: `employee_payment_methods:read`
+ */
+export declare function employeePaymentMethodsGetBankAccounts(client: GustoEmbeddedCore, request: GetV1EmployeesEmployeeIdBankAccountsRequest, options?: RequestOptions): APIPromise<Result<GetV1EmployeesEmployeeIdBankAccountsResponse, GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=employeePaymentMethodsGetBankAccounts.d.ts.map

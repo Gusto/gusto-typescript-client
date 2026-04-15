@@ -1,0 +1,31 @@
+import { MutationKey, UseMutationResult } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { DeleteV1EmployeesEmployeeIdRehireRequest, DeleteV1EmployeesEmployeeIdRehireResponse } from "../models/operations/deletev1employeesemployeeidrehire.js";
+import { MutationHookOptions } from "./_types.js";
+export type EmployeeEmploymentsDeleteRehireMutationVariables = {
+    request: DeleteV1EmployeesEmployeeIdRehireRequest;
+    options?: RequestOptions;
+};
+export type EmployeeEmploymentsDeleteRehireMutationData = DeleteV1EmployeesEmployeeIdRehireResponse;
+export type EmployeeEmploymentsDeleteRehireMutationError = UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError;
+/**
+ * Delete an employee rehire
+ *
+ * @remarks
+ * Delete an employee rehire. An employee rehire cannot be deleted if it's active (past effective date).
+ *
+ * scope: `employments:write`
+ */
+export declare function useEmployeeEmploymentsDeleteRehireMutation(options?: MutationHookOptions<EmployeeEmploymentsDeleteRehireMutationData, EmployeeEmploymentsDeleteRehireMutationError, EmployeeEmploymentsDeleteRehireMutationVariables>): UseMutationResult<EmployeeEmploymentsDeleteRehireMutationData, EmployeeEmploymentsDeleteRehireMutationError, EmployeeEmploymentsDeleteRehireMutationVariables>;
+export declare function mutationKeyEmployeeEmploymentsDeleteRehire(): MutationKey;
+export declare function buildEmployeeEmploymentsDeleteRehireMutation(client$: GustoEmbeddedCore, hookOptions?: RequestOptions): {
+    mutationKey: MutationKey;
+    mutationFn: (variables: EmployeeEmploymentsDeleteRehireMutationVariables) => Promise<EmployeeEmploymentsDeleteRehireMutationData>;
+};
+//# sourceMappingURL=employeeEmploymentsDeleteRehire.d.ts.map

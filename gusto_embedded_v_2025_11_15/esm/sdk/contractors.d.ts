@@ -1,0 +1,177 @@
+import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import { DeleteV1ContractorsContractorUuidRequest, DeleteV1ContractorsContractorUuidResponse } from "../models/operations/deletev1contractorscontractoruuid.js";
+import { GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest, GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse } from "../models/operations/getv1companiescompanyidcontractorspaymentdetails.js";
+import { GetV1CompaniesCompanyUuidContractorsRequest, GetV1CompaniesCompanyUuidContractorsResponse } from "../models/operations/getv1companiescompanyuuidcontractors.js";
+import { GetV1ContractorsContractorUuidRequest, GetV1ContractorsContractorUuidResponse } from "../models/operations/getv1contractorscontractoruuid.js";
+import { GetV1ContractorsContractorUuidAddressRequest, GetV1ContractorsContractorUuidAddressResponse } from "../models/operations/getv1contractorscontractoruuidaddress.js";
+import { GetV1ContractorsContractorUuidOnboardingStatusRequest, GetV1ContractorsContractorUuidOnboardingStatusResponse } from "../models/operations/getv1contractorscontractoruuidonboardingstatus.js";
+import { PostV1CompaniesCompanyUuidContractorsRequest, PostV1CompaniesCompanyUuidContractorsResponse } from "../models/operations/postv1companiescompanyuuidcontractors.js";
+import { PutV1ContractorsContractorUuidRequest, PutV1ContractorsContractorUuidResponse } from "../models/operations/putv1contractorscontractoruuid.js";
+import { PutV1ContractorsContractorUuidAddressRequest, PutV1ContractorsContractorUuidAddressResponse } from "../models/operations/putv1contractorscontractoruuidaddress.js";
+import { PutV1ContractorsContractorUuidOnboardingStatusRequest, PutV1ContractorsContractorUuidOnboardingStatusResponse } from "../models/operations/putv1contractorscontractoruuidonboardingstatus.js";
+export declare class Contractors extends ClientSDK {
+    /**
+     * Create a contractor
+     *
+     * @remarks
+     * Create an individual or business contractor.
+     *
+     * scope: `contractors:manage`
+     */
+    create(request: PostV1CompaniesCompanyUuidContractorsRequest, options?: RequestOptions): Promise<PostV1CompaniesCompanyUuidContractorsResponse>;
+    /**
+     * Get contractors of a company
+     *
+     * @remarks
+     * Get all contractors, active and inactive, individual and business, for a company.
+     *
+     * scope: `contractors:read`
+     */
+    list(request: GetV1CompaniesCompanyUuidContractorsRequest, options?: RequestOptions): Promise<GetV1CompaniesCompanyUuidContractorsResponse>;
+    /**
+     * Get a contractor
+     *
+     * @remarks
+     * Get a contractor.
+     *
+     * scope: `contractors:read`
+     */
+    get(request: GetV1ContractorsContractorUuidRequest, options?: RequestOptions): Promise<GetV1ContractorsContractorUuidResponse>;
+    /**
+     * Update a contractor
+     *
+     * @remarks
+     * Update a contractor.
+     *
+     * > 🚧 Warning
+     * >
+     * > Watch out when changing a contractor's type (when the contractor is finished onboarding). Specifically, changing contractor type can be dangerous since Gusto won't recognize and file two separate 1099s if they simply change from business to individual
+     *
+     * scope: `contractors:write`
+     */
+    update(request: PutV1ContractorsContractorUuidRequest, options?: RequestOptions): Promise<PutV1ContractorsContractorUuidResponse>;
+    /**
+     * Delete a contractor
+     *
+     * @remarks
+     * A contractor can only be deleted when there are no contractor payments.
+     *
+     * scope: `contractors:manage`
+     */
+    delete(request: DeleteV1ContractorsContractorUuidRequest, options?: RequestOptions): Promise<DeleteV1ContractorsContractorUuidResponse>;
+    /**
+     * Get the contractor's onboarding status
+     *
+     * @remarks
+     * Retrieves a contractor's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
+     *
+     * scope: `contractors:read`
+     *
+     * ## onboarding_status
+     *
+     * ### Admin-facilitated onboarding
+     * | onboarding_status | Description |
+     * |:------------------|------------:|
+     * | `admin_onboarding_incomplete` | Admin needs to enter basic information about the contractor. |
+     * | `admin_onboarding_review` | All information has been completed and admin needs to confirm onboarding. |
+     * | `onboarding_completed` | Contractor has been fully onboarded and verified. |
+     *
+     * ### Contractor self-onboarding
+     *
+     * | onboarding_status | Description |
+     * | --- | ----------- |
+     * | `admin_onboarding_incomplete` | Admin needs to enter basic information about the contractor. |
+     * | `self_onboarding_not_invited` | Admin has the intention to invite the contractor to self-onboard (e.g., marking a checkbox), but the system has not yet sent the invitation. |
+     * | `self_onboarding_invited` | Contractor has been sent an invitation to self-onboard. |
+     * | `self_onboarding_started` | Contractor has started the self-onboarding process. |
+     * | `self_onboarding_review` | Admin needs to review contractors's entered information and confirm onboarding. |
+     * | `onboarding_completed` | Contractor has been fully onboarded and verified. |
+     *
+     * ## onboarding_steps
+     *
+     * | onboarding_steps | Requirement(s) to be completed |
+     * |:-----------------|-------------------------------:|
+     * | `basic_details` | Add individual contractor's first name, last name, social security number or Business name and EIN depending on the contractor type |
+     * | `add_address` | Add contractor address. |
+     * | `compensation_details` | Add contractor compensation. |
+     * | `payment_details` | (optional) Set up contractor's direct deposit or set to check. |
+     * | `sign_documents` | Contractor forms (e.g., W9) are generated & signed. |
+     * | `file_new_hire_report` | Contractor new hire report is generated. |
+     */
+    getOnboardingStatus(request: GetV1ContractorsContractorUuidOnboardingStatusRequest, options?: RequestOptions): Promise<GetV1ContractorsContractorUuidOnboardingStatusResponse>;
+    /**
+     * Change the contractor's onboarding status
+     *
+     * @remarks
+     * Updates a contractor's onboarding status.
+     *
+     * scope: `contractors:write`
+     *
+     * Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the contractor.
+     *
+     * | Action | current onboarding_status | new onboarding_status |
+     * |:------------------|:------------:|----------:|
+     * | Mark a contractor as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_not_invited` |
+     * | Invite a contractor to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_not_invited` | `self_onboarding_invited` |
+     * | Cancel a contractor's self-onboarding | `self_onboarding_invited` or `self_onboarding_not_invited` | `admin_onboarding_incomplete` |
+     * | Review a contractor's self-onboarded info | `self_onboarding_started` | `self_onboarding_review` |
+     * | Finish a contractor's onboarding | `admin_onboarding_review` or `self_onboarding_review` | `onboarding_completed` |
+     */
+    updateOnboardingStatus(request: PutV1ContractorsContractorUuidOnboardingStatusRequest, options?: RequestOptions): Promise<PutV1ContractorsContractorUuidOnboardingStatusResponse>;
+    /**
+     * Get a contractor address
+     *
+     * @remarks
+     * The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
+     *
+     * scope: `contractors:read`
+     */
+    getAddress(request: GetV1ContractorsContractorUuidAddressRequest, options?: RequestOptions): Promise<GetV1ContractorsContractorUuidAddressResponse>;
+    /**
+     * Create or update a contractor's address
+     *
+     * @remarks
+     * The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
+     *
+     * scope: `contractors:write`
+     *
+     * > 🚧 Contractors can only have one address.
+     * >
+     * > When a contractor is created, an address is created for them by default. Updating the address will replace the existing address.
+     */
+    updateAddress(request: PutV1ContractorsContractorUuidAddressRequest, options?: RequestOptions): Promise<PutV1ContractorsContractorUuidAddressResponse>;
+    /**
+     * List contractor payment details
+     *
+     * @remarks
+     * Get payment details for contractors in a company. This endpoint returns a list of all contractors
+     * associated with the specified company, including their payment methods and bank account details
+     * if they are paid via direct deposit.
+     *
+     * For contractors paid by direct deposit, the response includes their bank account information
+     * with sensitive data masked for security. The payment details also include information about
+     * how their payments are split if they have multiple bank accounts configured.
+     *
+     * For contractors paid by check, only the basic payment method information is returned.
+     *
+     * ### Response Details
+     * - For direct deposit contractors:
+     *   - Bank account details (masked)
+     *   - Payment splits configuration
+     *   - Routing numbers
+     *   - Account types
+     * - For check payments:
+     *   - Basic payment method designation
+     *
+     * ### Common Use Cases
+     * - Fetching contractor payment information for payroll processing
+     * - Verifying contractor payment methods
+     * - Reviewing payment split configurations
+     *
+     * `encrypted_account_number` is available only with the additional scope `contractor_payment_methods:read:account_numbers`.
+     *
+     * scope: `contractor_payment_methods:read`
+     */
+    getV1CompaniesCompanyIdContractorsPaymentDetails(request: GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest, options?: RequestOptions): Promise<GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse>;
+}
+//# sourceMappingURL=contractors.d.ts.map

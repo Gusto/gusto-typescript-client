@@ -1,0 +1,19 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { GetInformationRequestsRequest, GetInformationRequestsResponse } from "../models/operations/getinformationrequests.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Get all information requests for a company
+ *
+ * @remarks
+ * Fetch all information requests for a company.
+ *
+ * scope: `information_requests:read`
+ */
+export declare function informationRequestsGetInformationRequests(client: GustoEmbeddedCore, request: GetInformationRequestsRequest, options?: RequestOptions): APIPromise<Result<GetInformationRequestsResponse, GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=informationRequestsGetInformationRequests.d.ts.map

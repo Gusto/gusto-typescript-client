@@ -1,0 +1,31 @@
+import { MutationKey, UseMutationResult } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { PostV1EmployeesEmployeeIdRehireRequest, PostV1EmployeesEmployeeIdRehireResponse } from "../models/operations/postv1employeesemployeeidrehire.js";
+import { MutationHookOptions } from "./_types.js";
+export type EmployeeEmploymentsCreateRehireMutationVariables = {
+    request: PostV1EmployeesEmployeeIdRehireRequest;
+    options?: RequestOptions;
+};
+export type EmployeeEmploymentsCreateRehireMutationData = PostV1EmployeesEmployeeIdRehireResponse;
+export type EmployeeEmploymentsCreateRehireMutationError = UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError;
+/**
+ * Create an employee rehire
+ *
+ * @remarks
+ * Rehire is created whenever an employee is scheduled to return to the company.
+ *
+ * scope: `employments:write`
+ */
+export declare function useEmployeeEmploymentsCreateRehireMutation(options?: MutationHookOptions<EmployeeEmploymentsCreateRehireMutationData, EmployeeEmploymentsCreateRehireMutationError, EmployeeEmploymentsCreateRehireMutationVariables>): UseMutationResult<EmployeeEmploymentsCreateRehireMutationData, EmployeeEmploymentsCreateRehireMutationError, EmployeeEmploymentsCreateRehireMutationVariables>;
+export declare function mutationKeyEmployeeEmploymentsCreateRehire(): MutationKey;
+export declare function buildEmployeeEmploymentsCreateRehireMutation(client$: GustoEmbeddedCore, hookOptions?: RequestOptions): {
+    mutationKey: MutationKey;
+    mutationFn: (variables: EmployeeEmploymentsCreateRehireMutationVariables) => Promise<EmployeeEmploymentsCreateRehireMutationData>;
+};
+//# sourceMappingURL=employeeEmploymentsCreateRehire.d.ts.map

@@ -1,0 +1,32 @@
+import { MutationKey, UseMutationResult } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { PutV1ContractorsContractorIdPaymentMethodRequest, PutV1ContractorsContractorIdPaymentMethodResponse } from "../models/operations/putv1contractorscontractoridpaymentmethod.js";
+import { MutationHookOptions } from "./_types.js";
+export type ContractorPaymentMethodUpdateMutationVariables = {
+    request: PutV1ContractorsContractorIdPaymentMethodRequest;
+    options?: RequestOptions;
+};
+export type ContractorPaymentMethodUpdateMutationData = PutV1ContractorsContractorIdPaymentMethodResponse;
+export type ContractorPaymentMethodUpdateMutationError = UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError;
+/**
+ * Update a contractor's payment method
+ *
+ * @remarks
+ * Updates a contractor's payment method. Note that creating a contractor
+ * bank account will also update the contractor's payment method.
+ *
+ * scope: `contractor_payment_methods:write`
+ */
+export declare function useContractorPaymentMethodUpdateMutation(options?: MutationHookOptions<ContractorPaymentMethodUpdateMutationData, ContractorPaymentMethodUpdateMutationError, ContractorPaymentMethodUpdateMutationVariables>): UseMutationResult<ContractorPaymentMethodUpdateMutationData, ContractorPaymentMethodUpdateMutationError, ContractorPaymentMethodUpdateMutationVariables>;
+export declare function mutationKeyContractorPaymentMethodUpdate(): MutationKey;
+export declare function buildContractorPaymentMethodUpdateMutation(client$: GustoEmbeddedCore, hookOptions?: RequestOptions): {
+    mutationKey: MutationKey;
+    mutationFn: (variables: ContractorPaymentMethodUpdateMutationVariables) => Promise<ContractorPaymentMethodUpdateMutationData>;
+};
+//# sourceMappingURL=contractorPaymentMethodUpdate.d.ts.map

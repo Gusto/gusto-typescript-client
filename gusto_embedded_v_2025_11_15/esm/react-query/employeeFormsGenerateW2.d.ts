@@ -1,0 +1,35 @@
+import { MutationKey, UseMutationResult } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { PostV1SandboxGenerateW2Request, PostV1SandboxGenerateW2Response } from "../models/operations/postv1sandboxgeneratew2.js";
+import { MutationHookOptions } from "./_types.js";
+export type EmployeeFormsGenerateW2MutationVariables = {
+    request: PostV1SandboxGenerateW2Request;
+    options?: RequestOptions;
+};
+export type EmployeeFormsGenerateW2MutationData = PostV1SandboxGenerateW2Response;
+export type EmployeeFormsGenerateW2MutationError = UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError;
+/**
+ * Generate a W2 form [DEMO]
+ *
+ * @remarks
+ * > 🚧 Demo action
+ * >
+ * > This action is only available in the Demo environment
+ *
+ * Generates a W2 document for testing purposes.
+ *
+ * scope: `employees:write`
+ */
+export declare function useEmployeeFormsGenerateW2Mutation(options?: MutationHookOptions<EmployeeFormsGenerateW2MutationData, EmployeeFormsGenerateW2MutationError, EmployeeFormsGenerateW2MutationVariables>): UseMutationResult<EmployeeFormsGenerateW2MutationData, EmployeeFormsGenerateW2MutationError, EmployeeFormsGenerateW2MutationVariables>;
+export declare function mutationKeyEmployeeFormsGenerateW2(): MutationKey;
+export declare function buildEmployeeFormsGenerateW2Mutation(client$: GustoEmbeddedCore, hookOptions?: RequestOptions): {
+    mutationKey: MutationKey;
+    mutationFn: (variables: EmployeeFormsGenerateW2MutationVariables) => Promise<EmployeeFormsGenerateW2MutationData>;
+};
+//# sourceMappingURL=employeeFormsGenerateW2.d.ts.map

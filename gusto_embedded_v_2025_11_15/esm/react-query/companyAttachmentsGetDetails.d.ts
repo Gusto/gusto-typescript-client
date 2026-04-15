@@ -1,0 +1,45 @@
+import { InvalidateQueryFilters, QueryClient, UseQueryResult, UseSuspenseQueryResult } from "@tanstack/react-query";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { GetV1CompaniesAttachmentRequest } from "../models/operations/getv1companiesattachment.js";
+import { QueryHookOptions, SuspenseQueryHookOptions, TupleToPrefixes } from "./_types.js";
+import { buildCompanyAttachmentsGetDetailsQuery, CompanyAttachmentsGetDetailsQueryData, prefetchCompanyAttachmentsGetDetails, queryKeyCompanyAttachmentsGetDetails } from "./companyAttachmentsGetDetails.core.js";
+export { buildCompanyAttachmentsGetDetailsQuery, type CompanyAttachmentsGetDetailsQueryData, prefetchCompanyAttachmentsGetDetails, queryKeyCompanyAttachmentsGetDetails, };
+export type CompanyAttachmentsGetDetailsQueryError = GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError;
+/**
+ * Get Company Attachment Details
+ *
+ * @remarks
+ * Retrieve the detail of an attachment uploaded by the company.
+ *
+ * scope: `company_attachments:read`
+ */
+export declare function useCompanyAttachmentsGetDetails(request: GetV1CompaniesAttachmentRequest, options?: QueryHookOptions<CompanyAttachmentsGetDetailsQueryData, CompanyAttachmentsGetDetailsQueryError>): UseQueryResult<CompanyAttachmentsGetDetailsQueryData, CompanyAttachmentsGetDetailsQueryError>;
+/**
+ * Get Company Attachment Details
+ *
+ * @remarks
+ * Retrieve the detail of an attachment uploaded by the company.
+ *
+ * scope: `company_attachments:read`
+ */
+export declare function useCompanyAttachmentsGetDetailsSuspense(request: GetV1CompaniesAttachmentRequest, options?: SuspenseQueryHookOptions<CompanyAttachmentsGetDetailsQueryData, CompanyAttachmentsGetDetailsQueryError>): UseSuspenseQueryResult<CompanyAttachmentsGetDetailsQueryData, CompanyAttachmentsGetDetailsQueryError>;
+export declare function setCompanyAttachmentsGetDetailsData(client: QueryClient, queryKeyBase: [
+    companyId: string,
+    companyAttachmentUuid: string,
+    parameters: {
+        xGustoAPIVersion?: VersionHeader | undefined;
+    }
+], data: CompanyAttachmentsGetDetailsQueryData): CompanyAttachmentsGetDetailsQueryData | undefined;
+export declare function invalidateCompanyAttachmentsGetDetails(client: QueryClient, queryKeyBase: TupleToPrefixes<[
+    companyId: string,
+    companyAttachmentUuid: string,
+    parameters: {
+        xGustoAPIVersion?: VersionHeader | undefined;
+    }
+]>, filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">): Promise<void>;
+export declare function invalidateAllCompanyAttachmentsGetDetails(client: QueryClient, filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">): Promise<void>;
+//# sourceMappingURL=companyAttachmentsGetDetails.d.ts.map

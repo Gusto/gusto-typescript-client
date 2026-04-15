@@ -1,0 +1,15 @@
+import { QueryClient, QueryFunctionContext, QueryKey } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GetV1EmployeeFormPdfRequest, GetV1EmployeeFormPdfResponse } from "../models/operations/getv1employeeformpdf.js";
+export type EmployeeFormsGetPdfQueryData = GetV1EmployeeFormPdfResponse;
+export declare function prefetchEmployeeFormsGetPdf(queryClient: QueryClient, client$: GustoEmbeddedCore, request: GetV1EmployeeFormPdfRequest, options?: RequestOptions): Promise<void>;
+export declare function buildEmployeeFormsGetPdfQuery(client$: GustoEmbeddedCore, request: GetV1EmployeeFormPdfRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<EmployeeFormsGetPdfQueryData>;
+};
+export declare function queryKeyEmployeeFormsGetPdf(employeeId: string, formId: string, parameters: {
+    xGustoAPIVersion?: VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=employeeFormsGetPdf.core.d.ts.map

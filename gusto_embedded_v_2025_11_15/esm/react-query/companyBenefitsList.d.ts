@@ -1,0 +1,57 @@
+import { InvalidateQueryFilters, QueryClient, UseQueryResult, UseSuspenseQueryResult } from "@tanstack/react-query";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { GetV1CompaniesCompanyIdCompanyBenefitsRequest } from "../models/operations/getv1companiescompanyidcompanybenefits.js";
+import { QueryHookOptions, SuspenseQueryHookOptions, TupleToPrefixes } from "./_types.js";
+import { buildCompanyBenefitsListQuery, CompanyBenefitsListQueryData, prefetchCompanyBenefitsList, queryKeyCompanyBenefitsList } from "./companyBenefitsList.core.js";
+export { buildCompanyBenefitsListQuery, type CompanyBenefitsListQueryData, prefetchCompanyBenefitsList, queryKeyCompanyBenefitsList, };
+export type CompanyBenefitsListQueryError = GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError;
+/**
+ * Get benefits for a company
+ *
+ * @remarks
+ * Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
+ *
+ * Note that company benefits can be deactivated only when no employees are enrolled.
+ *
+ * Benefits containing PHI are only visible to applications with the `company_benefits:read:phi` scope.
+ *
+ * scope: `company_benefits:read`
+ */
+export declare function useCompanyBenefitsList(request: GetV1CompaniesCompanyIdCompanyBenefitsRequest, options?: QueryHookOptions<CompanyBenefitsListQueryData, CompanyBenefitsListQueryError>): UseQueryResult<CompanyBenefitsListQueryData, CompanyBenefitsListQueryError>;
+/**
+ * Get benefits for a company
+ *
+ * @remarks
+ * Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
+ *
+ * Note that company benefits can be deactivated only when no employees are enrolled.
+ *
+ * Benefits containing PHI are only visible to applications with the `company_benefits:read:phi` scope.
+ *
+ * scope: `company_benefits:read`
+ */
+export declare function useCompanyBenefitsListSuspense(request: GetV1CompaniesCompanyIdCompanyBenefitsRequest, options?: SuspenseQueryHookOptions<CompanyBenefitsListQueryData, CompanyBenefitsListQueryError>): UseSuspenseQueryResult<CompanyBenefitsListQueryData, CompanyBenefitsListQueryError>;
+export declare function setCompanyBenefitsListData(client: QueryClient, queryKeyBase: [
+    companyId: string,
+    parameters: {
+        active?: boolean | undefined;
+        enrollmentCount?: boolean | undefined;
+        benefitType?: string | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
+    }
+], data: CompanyBenefitsListQueryData): CompanyBenefitsListQueryData | undefined;
+export declare function invalidateCompanyBenefitsList(client: QueryClient, queryKeyBase: TupleToPrefixes<[
+    companyId: string,
+    parameters: {
+        active?: boolean | undefined;
+        enrollmentCount?: boolean | undefined;
+        benefitType?: string | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
+    }
+]>, filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">): Promise<void>;
+export declare function invalidateAllCompanyBenefitsList(client: QueryClient, filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">): Promise<void>;
+//# sourceMappingURL=companyBenefitsList.d.ts.map

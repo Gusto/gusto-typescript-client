@@ -1,0 +1,25 @@
+import { MutationKey, UseMutationResult } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import * as operations from "../models/operations/index.js";
+import { MutationHookOptions } from "./_types.js";
+export type JobsAndCompensationsDeleteMutationVariables = {
+    request: operations.DeleteV1JobsJobIdRequest;
+    options?: RequestOptions;
+};
+export type JobsAndCompensationsDeleteMutationData = operations.DeleteV1JobsJobIdResponse;
+/**
+ * Delete an individual job
+ *
+ * @remarks
+ * Deletes a specific job that an employee holds.
+ *
+ * scope: `jobs:write`
+ */
+export declare function useJobsAndCompensationsDeleteMutation(options?: MutationHookOptions<JobsAndCompensationsDeleteMutationData, Error, JobsAndCompensationsDeleteMutationVariables>): UseMutationResult<JobsAndCompensationsDeleteMutationData, Error, JobsAndCompensationsDeleteMutationVariables>;
+export declare function mutationKeyJobsAndCompensationsDelete(): MutationKey;
+export declare function buildJobsAndCompensationsDeleteMutation(client$: GustoEmbeddedCore, hookOptions?: RequestOptions): {
+    mutationKey: MutationKey;
+    mutationFn: (variables: JobsAndCompensationsDeleteMutationVariables) => Promise<JobsAndCompensationsDeleteMutationData>;
+};
+//# sourceMappingURL=jobsAndCompensationsDelete.d.ts.map

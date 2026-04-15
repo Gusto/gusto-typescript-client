@@ -1,0 +1,23 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest, DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse } from "../models/operations/deletev1companiescompanyidbankaccountsbankaccountid.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Delete a company bank account
+ *
+ * @remarks
+ * This endpoint disables a company bank account.
+ *
+ * A bank account cannot be disabled if it is used for any unprocessed payments.
+ *
+ * scope: `company_bank_accounts:write`
+ */
+export declare function bankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId(client: GustoEmbeddedCore, request: DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest, options?: RequestOptions): APIPromise<Result<DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse, NotFoundErrorObject | UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=bankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId.d.ts.map

@@ -1,0 +1,18 @@
+import { QueryClient, QueryFunctionContext, QueryKey } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GetV1BenefitsCompanyBenefitIdSummaryRequest, GetV1BenefitsCompanyBenefitIdSummaryResponse } from "../models/operations/getv1benefitscompanybenefitidsummary.js";
+export type CompanyBenefitsGetSummaryQueryData = GetV1BenefitsCompanyBenefitIdSummaryResponse;
+export declare function prefetchCompanyBenefitsGetSummary(queryClient: QueryClient, client$: GustoEmbeddedCore, request: GetV1BenefitsCompanyBenefitIdSummaryRequest, options?: RequestOptions): Promise<void>;
+export declare function buildCompanyBenefitsGetSummaryQuery(client$: GustoEmbeddedCore, request: GetV1BenefitsCompanyBenefitIdSummaryRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<CompanyBenefitsGetSummaryQueryData>;
+};
+export declare function queryKeyCompanyBenefitsGetSummary(companyBenefitId: string, parameters: {
+    startDate?: string | undefined;
+    endDate?: string | undefined;
+    detailed?: boolean | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=companyBenefitsGetSummary.core.d.ts.map

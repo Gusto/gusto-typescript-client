@@ -1,0 +1,15 @@
+import { QueryClient, QueryFunctionContext, QueryKey } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GetCompaniesCompanyUuidWireInRequestUuidRequest, GetCompaniesCompanyUuidWireInRequestUuidResponse } from "../models/operations/getcompaniescompanyuuidwireinrequestuuid.js";
+export type WireInRequestsListQueryData = GetCompaniesCompanyUuidWireInRequestUuidResponse;
+export declare function prefetchWireInRequestsList(queryClient: QueryClient, client$: GustoEmbeddedCore, request: GetCompaniesCompanyUuidWireInRequestUuidRequest, options?: RequestOptions): Promise<void>;
+export declare function buildWireInRequestsListQuery(client$: GustoEmbeddedCore, request: GetCompaniesCompanyUuidWireInRequestUuidRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<WireInRequestsListQueryData>;
+};
+export declare function queryKeyWireInRequestsList(companyUuid: string, parameters: {
+    xGustoAPIVersion?: VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=wireInRequestsList.core.d.ts.map

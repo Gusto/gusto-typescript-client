@@ -1,0 +1,45 @@
+import { InvalidateQueryFilters, QueryClient, UseQueryResult, UseSuspenseQueryResult } from "@tanstack/react-query";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { GetVersionEmployeesTimeOffActivitiesRequest } from "../models/operations/getversionemployeestimeoffactivities.js";
+import { QueryHookOptions, SuspenseQueryHookOptions, TupleToPrefixes } from "./_types.js";
+import { buildEmployeesGetTimeOffActivitiesQuery, EmployeesGetTimeOffActivitiesQueryData, prefetchEmployeesGetTimeOffActivities, queryKeyEmployeesGetTimeOffActivities } from "./employeesGetTimeOffActivities.core.js";
+export { buildEmployeesGetTimeOffActivitiesQuery, type EmployeesGetTimeOffActivitiesQueryData, prefetchEmployeesGetTimeOffActivities, queryKeyEmployeesGetTimeOffActivities, };
+export type EmployeesGetTimeOffActivitiesQueryError = GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError;
+/**
+ * Get employee time off activities
+ *
+ * @remarks
+ * Get employee time off activities.
+ *
+ * scope: `employee_time_off_activities:read`
+ */
+export declare function useEmployeesGetTimeOffActivities(request: GetVersionEmployeesTimeOffActivitiesRequest, options?: QueryHookOptions<EmployeesGetTimeOffActivitiesQueryData, EmployeesGetTimeOffActivitiesQueryError>): UseQueryResult<EmployeesGetTimeOffActivitiesQueryData, EmployeesGetTimeOffActivitiesQueryError>;
+/**
+ * Get employee time off activities
+ *
+ * @remarks
+ * Get employee time off activities.
+ *
+ * scope: `employee_time_off_activities:read`
+ */
+export declare function useEmployeesGetTimeOffActivitiesSuspense(request: GetVersionEmployeesTimeOffActivitiesRequest, options?: SuspenseQueryHookOptions<EmployeesGetTimeOffActivitiesQueryData, EmployeesGetTimeOffActivitiesQueryError>): UseSuspenseQueryResult<EmployeesGetTimeOffActivitiesQueryData, EmployeesGetTimeOffActivitiesQueryError>;
+export declare function setEmployeesGetTimeOffActivitiesData(client: QueryClient, queryKeyBase: [
+    employeeUuid: string,
+    parameters: {
+        timeOffType: string;
+        xGustoAPIVersion?: VersionHeader | undefined;
+    }
+], data: EmployeesGetTimeOffActivitiesQueryData): EmployeesGetTimeOffActivitiesQueryData | undefined;
+export declare function invalidateEmployeesGetTimeOffActivities(client: QueryClient, queryKeyBase: TupleToPrefixes<[
+    employeeUuid: string,
+    parameters: {
+        timeOffType: string;
+        xGustoAPIVersion?: VersionHeader | undefined;
+    }
+]>, filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">): Promise<void>;
+export declare function invalidateAllEmployeesGetTimeOffActivities(client: QueryClient, filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">): Promise<void>;
+//# sourceMappingURL=employeesGetTimeOffActivities.d.ts.map

@@ -1,0 +1,19 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { GetWireInRequestsWireInRequestUuidRequest, GetWireInRequestsWireInRequestUuidResponse } from "../models/operations/getwireinrequestswireinrequestuuid.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Get a single Wire In Request
+ *
+ * @remarks
+ * Fetch a Wire In Request.
+ *
+ * scope: `payrolls:read`
+ */
+export declare function wireInRequestsGet(client: GustoEmbeddedCore, request: GetWireInRequestsWireInRequestUuidRequest, options?: RequestOptions): APIPromise<Result<GetWireInRequestsWireInRequestUuidResponse, GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=wireInRequestsGet.d.ts.map

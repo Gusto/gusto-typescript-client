@@ -1,0 +1,31 @@
+import { MutationKey, UseMutationResult } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { PostDepartmentsRequest, PostDepartmentsResponse } from "../models/operations/postdepartments.js";
+import { MutationHookOptions } from "./_types.js";
+export type DepartmentsCreateMutationVariables = {
+    request: PostDepartmentsRequest;
+    options?: RequestOptions;
+};
+export type DepartmentsCreateMutationData = PostDepartmentsResponse;
+export type DepartmentsCreateMutationError = UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError;
+/**
+ * Create a department
+ *
+ * @remarks
+ * Create a department
+ *
+ * scope: `departments:write`
+ */
+export declare function useDepartmentsCreateMutation(options?: MutationHookOptions<DepartmentsCreateMutationData, DepartmentsCreateMutationError, DepartmentsCreateMutationVariables>): UseMutationResult<DepartmentsCreateMutationData, DepartmentsCreateMutationError, DepartmentsCreateMutationVariables>;
+export declare function mutationKeyDepartmentsCreate(): MutationKey;
+export declare function buildDepartmentsCreateMutation(client$: GustoEmbeddedCore, hookOptions?: RequestOptions): {
+    mutationKey: MutationKey;
+    mutationFn: (variables: DepartmentsCreateMutationVariables) => Promise<DepartmentsCreateMutationData>;
+};
+//# sourceMappingURL=departmentsCreate.d.ts.map

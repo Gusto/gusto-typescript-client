@@ -1,0 +1,20 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { GetV1EmployeesEmployeeIdRehireRequest, GetV1EmployeesEmployeeIdRehireResponse } from "../models/operations/getv1employeesemployeeidrehire.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Get an employee rehire
+ *
+ * @remarks
+ * Retrieve an employee's rehire, which contains information on when the employee returns to work.
+ *
+ * scope: `employments:read`
+ */
+export declare function employeeEmploymentsGetRehire(client: GustoEmbeddedCore, request: GetV1EmployeesEmployeeIdRehireRequest, options?: RequestOptions): APIPromise<Result<GetV1EmployeesEmployeeIdRehireResponse, UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=employeeEmploymentsGetRehire.d.ts.map

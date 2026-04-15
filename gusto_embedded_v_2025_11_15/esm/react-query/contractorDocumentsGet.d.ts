@@ -1,0 +1,43 @@
+import { InvalidateQueryFilters, QueryClient, UseQueryResult, UseSuspenseQueryResult } from "@tanstack/react-query";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { GetV1ContractorDocumentRequest } from "../models/operations/getv1contractordocument.js";
+import { QueryHookOptions, SuspenseQueryHookOptions, TupleToPrefixes } from "./_types.js";
+import { buildContractorDocumentsGetQuery, ContractorDocumentsGetQueryData, prefetchContractorDocumentsGet, queryKeyContractorDocumentsGet } from "./contractorDocumentsGet.core.js";
+export { buildContractorDocumentsGetQuery, type ContractorDocumentsGetQueryData, prefetchContractorDocumentsGet, queryKeyContractorDocumentsGet, };
+export type ContractorDocumentsGetQueryError = GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError;
+/**
+ * Get a contractor document
+ *
+ * @remarks
+ * Get a contractor document.
+ *
+ * scope: `contractor_documents:read`
+ */
+export declare function useContractorDocumentsGet(request: GetV1ContractorDocumentRequest, options?: QueryHookOptions<ContractorDocumentsGetQueryData, ContractorDocumentsGetQueryError>): UseQueryResult<ContractorDocumentsGetQueryData, ContractorDocumentsGetQueryError>;
+/**
+ * Get a contractor document
+ *
+ * @remarks
+ * Get a contractor document.
+ *
+ * scope: `contractor_documents:read`
+ */
+export declare function useContractorDocumentsGetSuspense(request: GetV1ContractorDocumentRequest, options?: SuspenseQueryHookOptions<ContractorDocumentsGetQueryData, ContractorDocumentsGetQueryError>): UseSuspenseQueryResult<ContractorDocumentsGetQueryData, ContractorDocumentsGetQueryError>;
+export declare function setContractorDocumentsGetData(client: QueryClient, queryKeyBase: [
+    documentUuid: string,
+    parameters: {
+        xGustoAPIVersion?: VersionHeader | undefined;
+    }
+], data: ContractorDocumentsGetQueryData): ContractorDocumentsGetQueryData | undefined;
+export declare function invalidateContractorDocumentsGet(client: QueryClient, queryKeyBase: TupleToPrefixes<[
+    documentUuid: string,
+    parameters: {
+        xGustoAPIVersion?: VersionHeader | undefined;
+    }
+]>, filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">): Promise<void>;
+export declare function invalidateAllContractorDocumentsGet(client: QueryClient, filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">): Promise<void>;
+//# sourceMappingURL=contractorDocumentsGet.d.ts.map

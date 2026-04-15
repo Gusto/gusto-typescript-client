@@ -1,0 +1,31 @@
+import { MutationKey, UseMutationResult } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest, PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse } from "../models/operations/putv1companiescompanyidearningtypesearningtypeuuid.js";
+import { MutationHookOptions } from "./_types.js";
+export type EarningTypesUpdateMutationVariables = {
+    request: PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest;
+    options?: RequestOptions;
+};
+export type EarningTypesUpdateMutationData = PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse;
+export type EarningTypesUpdateMutationError = UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError;
+/**
+ * Update an earning type
+ *
+ * @remarks
+ * Update an earning type.
+ *
+ * scope: `payrolls:write`
+ */
+export declare function useEarningTypesUpdateMutation(options?: MutationHookOptions<EarningTypesUpdateMutationData, EarningTypesUpdateMutationError, EarningTypesUpdateMutationVariables>): UseMutationResult<EarningTypesUpdateMutationData, EarningTypesUpdateMutationError, EarningTypesUpdateMutationVariables>;
+export declare function mutationKeyEarningTypesUpdate(): MutationKey;
+export declare function buildEarningTypesUpdateMutation(client$: GustoEmbeddedCore, hookOptions?: RequestOptions): {
+    mutationKey: MutationKey;
+    mutationFn: (variables: EarningTypesUpdateMutationVariables) => Promise<EarningTypesUpdateMutationData>;
+};
+//# sourceMappingURL=earningTypesUpdate.d.ts.map

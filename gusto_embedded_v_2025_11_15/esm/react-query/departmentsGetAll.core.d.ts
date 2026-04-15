@@ -1,0 +1,15 @@
+import { QueryClient, QueryFunctionContext, QueryKey } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GetCompaniesDepartmentsRequest, GetCompaniesDepartmentsResponse } from "../models/operations/getcompaniesdepartments.js";
+export type DepartmentsGetAllQueryData = GetCompaniesDepartmentsResponse;
+export declare function prefetchDepartmentsGetAll(queryClient: QueryClient, client$: GustoEmbeddedCore, request: GetCompaniesDepartmentsRequest, options?: RequestOptions): Promise<void>;
+export declare function buildDepartmentsGetAllQuery(client$: GustoEmbeddedCore, request: GetCompaniesDepartmentsRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<DepartmentsGetAllQueryData>;
+};
+export declare function queryKeyDepartmentsGetAll(companyUuid: string, parameters: {
+    xGustoAPIVersion?: VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=departmentsGetAll.core.d.ts.map

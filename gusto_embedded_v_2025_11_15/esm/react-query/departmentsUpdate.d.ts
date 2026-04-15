@@ -1,0 +1,31 @@
+import { MutationKey, UseMutationResult } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { PutDepartmentsRequest, PutDepartmentsResponse } from "../models/operations/putdepartments.js";
+import { MutationHookOptions } from "./_types.js";
+export type DepartmentsUpdateMutationVariables = {
+    request: PutDepartmentsRequest;
+    options?: RequestOptions;
+};
+export type DepartmentsUpdateMutationData = PutDepartmentsResponse;
+export type DepartmentsUpdateMutationError = UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError;
+/**
+ * Update a department
+ *
+ * @remarks
+ * Update a department
+ *
+ * scope: `departments:write`
+ */
+export declare function useDepartmentsUpdateMutation(options?: MutationHookOptions<DepartmentsUpdateMutationData, DepartmentsUpdateMutationError, DepartmentsUpdateMutationVariables>): UseMutationResult<DepartmentsUpdateMutationData, DepartmentsUpdateMutationError, DepartmentsUpdateMutationVariables>;
+export declare function mutationKeyDepartmentsUpdate(): MutationKey;
+export declare function buildDepartmentsUpdateMutation(client$: GustoEmbeddedCore, hookOptions?: RequestOptions): {
+    mutationKey: MutationKey;
+    mutationFn: (variables: DepartmentsUpdateMutationVariables) => Promise<DepartmentsUpdateMutationData>;
+};
+//# sourceMappingURL=departmentsUpdate.d.ts.map

@@ -1,0 +1,19 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { GetDepartmentRequest, GetDepartmentResponse } from "../models/operations/getdepartment.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Get a department
+ *
+ * @remarks
+ * Get a department given the UUID
+ *
+ * scope: `departments:read`
+ */
+export declare function departmentsGet(client: GustoEmbeddedCore, request: GetDepartmentRequest, options?: RequestOptions): APIPromise<Result<GetDepartmentResponse, GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=departmentsGet.d.ts.map

@@ -1,0 +1,19 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { GetV1ContractorDocumentsRequest, GetV1ContractorDocumentsResponse } from "../models/operations/getv1contractordocuments.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Get all contractor documents
+ *
+ * @remarks
+ * Get a list of all contractor's documents
+ *
+ * scope: `contractor_documents:read`
+ */
+export declare function contractorDocumentsGetAll(client: GustoEmbeddedCore, request: GetV1ContractorDocumentsRequest, options?: RequestOptions): APIPromise<Result<GetV1ContractorDocumentsResponse, GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=contractorDocumentsGetAll.d.ts.map

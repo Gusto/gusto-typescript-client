@@ -1,0 +1,14 @@
+import * as z from "zod/v3";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { CompanyCustomField } from "./companycustomfield.js";
+/**
+ * Example response
+ */
+export type CompanyCustomFieldList = {
+    customFields?: Array<CompanyCustomField> | undefined;
+};
+/** @internal */
+export declare const CompanyCustomFieldList$inboundSchema: z.ZodType<CompanyCustomFieldList, z.ZodTypeDef, unknown>;
+export declare function companyCustomFieldListFromJSON(jsonString: string): SafeParseResult<CompanyCustomFieldList, SDKValidationError>;
+//# sourceMappingURL=companycustomfieldlist.d.ts.map

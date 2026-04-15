@@ -1,0 +1,61 @@
+import { InvalidateQueryFilters, QueryClient, QueryFunctionContext, QueryKey, UseQueryResult, UseSuspenseQueryResult } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
+import * as operations from "../models/operations/index.js";
+import { QueryHookOptions, SuspenseQueryHookOptions, TupleToPrefixes } from "./_types.js";
+export type EmployeeBenefitsGetAllQueryData = Array<components.EmployeeBenefit>;
+/**
+ * Get all benefits for an employee
+ *
+ * @remarks
+ * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+ *
+ * Returns an array of all employee benefits for this employee
+ *
+ * Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+ *
+ * scope: `employee_benefits:read`
+ */
+export declare function useEmployeeBenefitsGetAll(request: operations.GetV1EmployeesEmployeeIdEmployeeBenefitsRequest, options?: QueryHookOptions<EmployeeBenefitsGetAllQueryData>): UseQueryResult<EmployeeBenefitsGetAllQueryData, Error>;
+/**
+ * Get all benefits for an employee
+ *
+ * @remarks
+ * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+ *
+ * Returns an array of all employee benefits for this employee
+ *
+ * Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+ *
+ * scope: `employee_benefits:read`
+ */
+export declare function useEmployeeBenefitsGetAllSuspense(request: operations.GetV1EmployeesEmployeeIdEmployeeBenefitsRequest, options?: SuspenseQueryHookOptions<EmployeeBenefitsGetAllQueryData>): UseSuspenseQueryResult<EmployeeBenefitsGetAllQueryData, Error>;
+export declare function prefetchEmployeeBenefitsGetAll(queryClient: QueryClient, client$: GustoEmbeddedCore, request: operations.GetV1EmployeesEmployeeIdEmployeeBenefitsRequest): Promise<void>;
+export declare function setEmployeeBenefitsGetAllData(client: QueryClient, queryKeyBase: [
+    employeeId: string,
+    parameters: {
+        page?: number | undefined;
+        per?: number | undefined;
+        xGustoAPIVersion?: components.VersionHeader | undefined;
+    }
+], data: EmployeeBenefitsGetAllQueryData): EmployeeBenefitsGetAllQueryData | undefined;
+export declare function invalidateEmployeeBenefitsGetAll(client: QueryClient, queryKeyBase: TupleToPrefixes<[
+    employeeId: string,
+    parameters: {
+        page?: number | undefined;
+        per?: number | undefined;
+        xGustoAPIVersion?: components.VersionHeader | undefined;
+    }
+]>, filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">): Promise<void>;
+export declare function invalidateAllEmployeeBenefitsGetAll(client: QueryClient, filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">): Promise<void>;
+export declare function buildEmployeeBenefitsGetAllQuery(client$: GustoEmbeddedCore, request: operations.GetV1EmployeesEmployeeIdEmployeeBenefitsRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<EmployeeBenefitsGetAllQueryData>;
+};
+export declare function queryKeyEmployeeBenefitsGetAll(employeeId: string, parameters: {
+    page?: number | undefined;
+    per?: number | undefined;
+    xGustoAPIVersion?: components.VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=employeeBenefitsGetAll.d.ts.map

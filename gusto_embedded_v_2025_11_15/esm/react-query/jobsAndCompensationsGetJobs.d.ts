@@ -1,0 +1,53 @@
+import { InvalidateQueryFilters, QueryClient, UseQueryResult, UseSuspenseQueryResult } from "@tanstack/react-query";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { GetV1EmployeesEmployeeIdJobsQueryParamInclude, GetV1EmployeesEmployeeIdJobsRequest } from "../models/operations/getv1employeesemployeeidjobs.js";
+import { QueryHookOptions, SuspenseQueryHookOptions, TupleToPrefixes } from "./_types.js";
+import { buildJobsAndCompensationsGetJobsQuery, JobsAndCompensationsGetJobsQueryData, prefetchJobsAndCompensationsGetJobs, queryKeyJobsAndCompensationsGetJobs } from "./jobsAndCompensationsGetJobs.core.js";
+export { buildJobsAndCompensationsGetJobsQuery, type JobsAndCompensationsGetJobsQueryData, prefetchJobsAndCompensationsGetJobs, queryKeyJobsAndCompensationsGetJobs, };
+export type JobsAndCompensationsGetJobsQueryError = GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError;
+/**
+ * Get jobs for an employee
+ *
+ * @remarks
+ * Get all of the jobs that an employee holds.
+ *
+ * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. These fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are returned only when the `compensations:read` scope is included.
+ *
+ * scope: `jobs:read`
+ */
+export declare function useJobsAndCompensationsGetJobs(request: GetV1EmployeesEmployeeIdJobsRequest, options?: QueryHookOptions<JobsAndCompensationsGetJobsQueryData, JobsAndCompensationsGetJobsQueryError>): UseQueryResult<JobsAndCompensationsGetJobsQueryData, JobsAndCompensationsGetJobsQueryError>;
+/**
+ * Get jobs for an employee
+ *
+ * @remarks
+ * Get all of the jobs that an employee holds.
+ *
+ * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. These fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are returned only when the `compensations:read` scope is included.
+ *
+ * scope: `jobs:read`
+ */
+export declare function useJobsAndCompensationsGetJobsSuspense(request: GetV1EmployeesEmployeeIdJobsRequest, options?: SuspenseQueryHookOptions<JobsAndCompensationsGetJobsQueryData, JobsAndCompensationsGetJobsQueryError>): UseSuspenseQueryResult<JobsAndCompensationsGetJobsQueryData, JobsAndCompensationsGetJobsQueryError>;
+export declare function setJobsAndCompensationsGetJobsData(client: QueryClient, queryKeyBase: [
+    employeeId: string,
+    parameters: {
+        page?: number | undefined;
+        per?: number | undefined;
+        include?: GetV1EmployeesEmployeeIdJobsQueryParamInclude | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
+    }
+], data: JobsAndCompensationsGetJobsQueryData): JobsAndCompensationsGetJobsQueryData | undefined;
+export declare function invalidateJobsAndCompensationsGetJobs(client: QueryClient, queryKeyBase: TupleToPrefixes<[
+    employeeId: string,
+    parameters: {
+        page?: number | undefined;
+        per?: number | undefined;
+        include?: GetV1EmployeesEmployeeIdJobsQueryParamInclude | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
+    }
+]>, filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">): Promise<void>;
+export declare function invalidateAllJobsAndCompensationsGetJobs(client: QueryClient, filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">): Promise<void>;
+//# sourceMappingURL=jobsAndCompensationsGetJobs.d.ts.map

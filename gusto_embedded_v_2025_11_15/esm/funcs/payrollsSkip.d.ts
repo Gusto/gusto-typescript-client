@@ -1,0 +1,22 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { PostCompaniesPayrollSkipCompanyUuidResponseBody } from "../models/errors/postcompaniespayrollskipcompanyuuid.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { PostCompaniesPayrollSkipCompanyUuidRequest, PostCompaniesPayrollSkipCompanyUuidResponse } from "../models/operations/postcompaniespayrollskipcompanyuuid.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Skip a payroll
+ *
+ * @remarks
+ * Submits a $0 payroll for employees associated with the pay schedule to skip payroll. This submission is asynchronous and a successful request responds with a 202 HTTP status. Upon success, the payroll is transitioned to the `processed` state.
+ *
+ * If the company is blocked from running payroll due to issues like incomplete setup, missing information or other compliance issues, the response will be 422 Unprocessable Entity with a categorization of the blockers as described in the error responses.
+ *
+ * scope: `payrolls:run`
+ */
+export declare function payrollsSkip(client: GustoEmbeddedCore, request: PostCompaniesPayrollSkipCompanyUuidRequest, options?: RequestOptions): APIPromise<Result<PostCompaniesPayrollSkipCompanyUuidResponse, PostCompaniesPayrollSkipCompanyUuidResponseBody | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=payrollsSkip.d.ts.map

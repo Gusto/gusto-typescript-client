@@ -1,0 +1,45 @@
+import { InvalidateQueryFilters, QueryClient, UseQueryResult, UseSuspenseQueryResult } from "@tanstack/react-query";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { GetCompaniesCompanyUuidReportTemplatesReportTypeRequest } from "../models/operations/getcompaniescompanyuuidreporttemplatesreporttype.js";
+import { QueryHookOptions, SuspenseQueryHookOptions, TupleToPrefixes } from "./_types.js";
+import { buildReportsGetTemplateQuery, prefetchReportsGetTemplate, queryKeyReportsGetTemplate, ReportsGetTemplateQueryData } from "./reportsGetTemplate.core.js";
+export { buildReportsGetTemplateQuery, prefetchReportsGetTemplate, queryKeyReportsGetTemplate, type ReportsGetTemplateQueryData, };
+export type ReportsGetTemplateQueryError = GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError;
+/**
+ * Get a report template
+ *
+ * @remarks
+ * Get a company's report template. The only supported report type is `payroll_journal`. The resulting columns and groupings from this endpoint can be used as a guidance to create the report using the POST create report endpoint.
+ *
+ * scope: `company_reports:write`
+ */
+export declare function useReportsGetTemplate(request: GetCompaniesCompanyUuidReportTemplatesReportTypeRequest, options?: QueryHookOptions<ReportsGetTemplateQueryData, ReportsGetTemplateQueryError>): UseQueryResult<ReportsGetTemplateQueryData, ReportsGetTemplateQueryError>;
+/**
+ * Get a report template
+ *
+ * @remarks
+ * Get a company's report template. The only supported report type is `payroll_journal`. The resulting columns and groupings from this endpoint can be used as a guidance to create the report using the POST create report endpoint.
+ *
+ * scope: `company_reports:write`
+ */
+export declare function useReportsGetTemplateSuspense(request: GetCompaniesCompanyUuidReportTemplatesReportTypeRequest, options?: SuspenseQueryHookOptions<ReportsGetTemplateQueryData, ReportsGetTemplateQueryError>): UseSuspenseQueryResult<ReportsGetTemplateQueryData, ReportsGetTemplateQueryError>;
+export declare function setReportsGetTemplateData(client: QueryClient, queryKeyBase: [
+    companyUuid: string,
+    reportType: string,
+    parameters: {
+        xGustoAPIVersion?: VersionHeader | undefined;
+    }
+], data: ReportsGetTemplateQueryData): ReportsGetTemplateQueryData | undefined;
+export declare function invalidateReportsGetTemplate(client: QueryClient, queryKeyBase: TupleToPrefixes<[
+    companyUuid: string,
+    reportType: string,
+    parameters: {
+        xGustoAPIVersion?: VersionHeader | undefined;
+    }
+]>, filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">): Promise<void>;
+export declare function invalidateAllReportsGetTemplate(client: QueryClient, filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">): Promise<void>;
+//# sourceMappingURL=reportsGetTemplate.d.ts.map

@@ -1,0 +1,15 @@
+import { QueryClient, QueryFunctionContext, QueryKey } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GetV1ContractorsContractorUuidAddressRequest, GetV1ContractorsContractorUuidAddressResponse } from "../models/operations/getv1contractorscontractoruuidaddress.js";
+export type ContractorsGetAddressQueryData = GetV1ContractorsContractorUuidAddressResponse;
+export declare function prefetchContractorsGetAddress(queryClient: QueryClient, client$: GustoEmbeddedCore, request: GetV1ContractorsContractorUuidAddressRequest, options?: RequestOptions): Promise<void>;
+export declare function buildContractorsGetAddressQuery(client$: GustoEmbeddedCore, request: GetV1ContractorsContractorUuidAddressRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<ContractorsGetAddressQueryData>;
+};
+export declare function queryKeyContractorsGetAddress(contractorUuid: string, parameters: {
+    xGustoAPIVersion?: VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=contractorsGetAddress.core.d.ts.map

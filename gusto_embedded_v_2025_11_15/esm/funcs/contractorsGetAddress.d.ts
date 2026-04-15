@@ -1,0 +1,19 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { GetV1ContractorsContractorUuidAddressRequest, GetV1ContractorsContractorUuidAddressResponse } from "../models/operations/getv1contractorscontractoruuidaddress.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Get a contractor address
+ *
+ * @remarks
+ * The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
+ *
+ * scope: `contractors:read`
+ */
+export declare function contractorsGetAddress(client: GustoEmbeddedCore, request: GetV1ContractorsContractorUuidAddressRequest, options?: RequestOptions): APIPromise<Result<GetV1ContractorsContractorUuidAddressResponse, GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=contractorsGetAddress.d.ts.map

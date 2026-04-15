@@ -1,0 +1,21 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequest, DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse } from "../models/operations/deletev1companiescompanyuuidholidaypaypolicy.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Delete a company's holiday pay policy
+ *
+ * @remarks
+ * Delete a company's holiday pay policy
+ *
+ * scope: `holiday_pay_policies:write`
+ */
+export declare function holidayPayPoliciesDelete(client: GustoEmbeddedCore, request: DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequest, options?: RequestOptions): APIPromise<Result<DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse, NotFoundErrorObject | UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=holidayPayPoliciesDelete.d.ts.map

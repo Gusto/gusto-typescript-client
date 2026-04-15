@@ -1,0 +1,19 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { GetV1EmployeesEmployeeIdCustomFieldsRequest, GetV1EmployeesEmployeeIdCustomFieldsResponse } from "../models/operations/getv1employeesemployeeidcustomfields.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Get an employee's custom fields
+ *
+ * @remarks
+ * Returns a list of the employee's custom fields.
+ *
+ * scope: `employees:read`
+ */
+export declare function employeesGetCustomFields(client: GustoEmbeddedCore, request: GetV1EmployeesEmployeeIdCustomFieldsRequest, options?: RequestOptions): APIPromise<Result<GetV1EmployeesEmployeeIdCustomFieldsResponse, GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=employeesGetCustomFields.d.ts.map

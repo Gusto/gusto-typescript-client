@@ -1,0 +1,31 @@
+import { MutationKey, UseMutationResult } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { PutWireInRequestsWireInRequestUuidRequest, PutWireInRequestsWireInRequestUuidResponse } from "../models/operations/putwireinrequestswireinrequestuuid.js";
+import { MutationHookOptions } from "./_types.js";
+export type WireInRequestsSubmitMutationVariables = {
+    request: PutWireInRequestsWireInRequestUuidRequest;
+    options?: RequestOptions;
+};
+export type WireInRequestsSubmitMutationData = PutWireInRequestsWireInRequestUuidResponse;
+export type WireInRequestsSubmitMutationError = UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError;
+/**
+ * Submit a wire in request
+ *
+ * @remarks
+ * Submit a wire in request for a payment
+ *
+ * scope: `payrolls:run`
+ */
+export declare function useWireInRequestsSubmitMutation(options?: MutationHookOptions<WireInRequestsSubmitMutationData, WireInRequestsSubmitMutationError, WireInRequestsSubmitMutationVariables>): UseMutationResult<WireInRequestsSubmitMutationData, WireInRequestsSubmitMutationError, WireInRequestsSubmitMutationVariables>;
+export declare function mutationKeyWireInRequestsSubmit(): MutationKey;
+export declare function buildWireInRequestsSubmitMutation(client$: GustoEmbeddedCore, hookOptions?: RequestOptions): {
+    mutationKey: MutationKey;
+    mutationFn: (variables: WireInRequestsSubmitMutationVariables) => Promise<WireInRequestsSubmitMutationData>;
+};
+//# sourceMappingURL=wireInRequestsSubmit.d.ts.map

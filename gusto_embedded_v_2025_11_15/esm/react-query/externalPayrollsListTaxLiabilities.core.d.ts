@@ -1,0 +1,15 @@
+import { QueryClient, QueryFunctionContext, QueryKey } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GetV1TaxLiabilitiesRequest, GetV1TaxLiabilitiesResponse } from "../models/operations/getv1taxliabilities.js";
+export type ExternalPayrollsListTaxLiabilitiesQueryData = GetV1TaxLiabilitiesResponse;
+export declare function prefetchExternalPayrollsListTaxLiabilities(queryClient: QueryClient, client$: GustoEmbeddedCore, request: GetV1TaxLiabilitiesRequest, options?: RequestOptions): Promise<void>;
+export declare function buildExternalPayrollsListTaxLiabilitiesQuery(client$: GustoEmbeddedCore, request: GetV1TaxLiabilitiesRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<ExternalPayrollsListTaxLiabilitiesQueryData>;
+};
+export declare function queryKeyExternalPayrollsListTaxLiabilities(companyUuid: string, parameters: {
+    xGustoAPIVersion?: VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=externalPayrollsListTaxLiabilities.core.d.ts.map

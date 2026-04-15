@@ -1,0 +1,24 @@
+# PostV1EmployeesEmployeeIdRehireRequest
+
+## Example Usage
+
+```typescript
+import { PostV1EmployeesEmployeeIdRehireRequest } from "@gusto/embedded-api/models/operations/postv1employeesemployeeidrehire.js";
+
+let value: PostV1EmployeesEmployeeIdRehireRequest = {
+  employeeId: "<id>",
+  rehireBody: {
+    effectiveDate: "2023-06-30",
+    fileNewHireReport: false,
+    workLocationUuid: "b6ae9d93-d4b8-4119-8c96-dba595dd8c30",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PostV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion](../../models/operations/postv1employeesemployeeidrehireheaderxgustoapiversion.md)                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `employeeId`                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
+| `rehireBody`                                                                                                                                                                                                                 | [components.RehireBody](../../models/components/rehirebody.md)                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

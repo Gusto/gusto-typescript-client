@@ -1,0 +1,35 @@
+import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as operations from "../models/operations/index.js";
+export declare class ContractorPaymentMethod extends ClientSDK {
+    /**
+     * Get all contractor bank accounts
+     *
+     * @remarks
+     * Returns all contractor bank accounts.
+     *
+     * scope: `contractor_payment_methods:read`
+     */
+    getBankAccounts(request: operations.GetV1ContractorsContractorUuidBankAccountsRequest, options?: RequestOptions): Promise<operations.GetV1ContractorsContractorUuidBankAccountsResponse>;
+    /**
+     * Get a contractor's payment method
+     *
+     * @remarks
+     * Fetches a contractor's payment method. A contractor payment method
+     * describes how the payment should be split across the contractor's associated
+     * bank accounts.
+     *
+     * scope: `contractor_payment_methods:read`
+     */
+    get(request: operations.GetV1ContractorsContractorUuidPaymentMethodRequest, options?: RequestOptions): Promise<operations.GetV1ContractorsContractorUuidPaymentMethodResponse>;
+    /**
+     * Update a contractor's payment method
+     *
+     * @remarks
+     * Updates a contractor's payment method. Note that creating a contractor
+     * bank account will also update the contractor's payment method.
+     *
+     * scope: `contractor_payment_methods:write`
+     */
+    update(request: operations.PutV1ContractorsContractorIdPaymentMethodRequest, options?: RequestOptions): Promise<operations.PutV1ContractorsContractorIdPaymentMethodResponse>;
+}
+//# sourceMappingURL=contractorpaymentmethod.d.ts.map

@@ -1,0 +1,15 @@
+import { QueryClient, QueryFunctionContext, QueryKey } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GetV1EmployeesEmployeeIdTerminationsRequest, GetV1EmployeesEmployeeIdTerminationsResponse } from "../models/operations/getv1employeesemployeeidterminations.js";
+export type EmployeeEmploymentsGetTerminationsQueryData = GetV1EmployeesEmployeeIdTerminationsResponse;
+export declare function prefetchEmployeeEmploymentsGetTerminations(queryClient: QueryClient, client$: GustoEmbeddedCore, request: GetV1EmployeesEmployeeIdTerminationsRequest, options?: RequestOptions): Promise<void>;
+export declare function buildEmployeeEmploymentsGetTerminationsQuery(client$: GustoEmbeddedCore, request: GetV1EmployeesEmployeeIdTerminationsRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<EmployeeEmploymentsGetTerminationsQueryData>;
+};
+export declare function queryKeyEmployeeEmploymentsGetTerminations(employeeId: string, parameters: {
+    xGustoAPIVersion?: VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=employeeEmploymentsGetTerminations.core.d.ts.map

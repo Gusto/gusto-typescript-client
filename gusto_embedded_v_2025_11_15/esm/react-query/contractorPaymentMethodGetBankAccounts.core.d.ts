@@ -1,0 +1,15 @@
+import { QueryClient, QueryFunctionContext, QueryKey } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GetV1ContractorsContractorUuidBankAccountsRequest, GetV1ContractorsContractorUuidBankAccountsResponse } from "../models/operations/getv1contractorscontractoruuidbankaccounts.js";
+export type ContractorPaymentMethodGetBankAccountsQueryData = GetV1ContractorsContractorUuidBankAccountsResponse;
+export declare function prefetchContractorPaymentMethodGetBankAccounts(queryClient: QueryClient, client$: GustoEmbeddedCore, request: GetV1ContractorsContractorUuidBankAccountsRequest, options?: RequestOptions): Promise<void>;
+export declare function buildContractorPaymentMethodGetBankAccountsQuery(client$: GustoEmbeddedCore, request: GetV1ContractorsContractorUuidBankAccountsRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<ContractorPaymentMethodGetBankAccountsQueryData>;
+};
+export declare function queryKeyContractorPaymentMethodGetBankAccounts(contractorUuid: string, parameters: {
+    xGustoAPIVersion?: VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=contractorPaymentMethodGetBankAccounts.core.d.ts.map

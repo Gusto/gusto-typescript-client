@@ -1,0 +1,19 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest, GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse } from "../models/operations/getv1partnermanagedcompaniescompanyuuidmigrationreadiness.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Check company migration readiness
+ *
+ * @remarks
+ * Check if an existing Gusto customer is ready to be migrated to embedded payroll. This endpoint returns blockers and warnings associated with migrating the company and is recommended to be called before attempting to migrate a company.
+ *
+ * scope: `partner_managed_companies:read`
+ */
+export declare function companiesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness(client: GustoEmbeddedCore, request: GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest, options?: RequestOptions): APIPromise<Result<GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse, GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=companiesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness.d.ts.map

@@ -1,0 +1,20 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { APIError } from "../models/errors/apierror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import * as operations from "../models/operations/index.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Assign pay schedules for a company
+ *
+ * @remarks
+ * This endpoint assigns employees to pay schedules based on the schedule type.
+ * For `by_employee` and `by_department` schedules, use the `partial_assignment` parameter to control the assignment scope. Set it to `true` for partial assignments (only some employees or departments at a time) and `false` for full assignments (all employees or departments at once).
+ *
+ * scope: `pay_schedules:write`
+ */
+export declare function paySchedulesAssign(client: GustoEmbeddedCore, request: operations.PostV1CompaniesCompanyIdPaySchedulesAssignRequest, options?: RequestOptions): APIPromise<Result<operations.PostV1CompaniesCompanyIdPaySchedulesAssignResponse, errors.UnprocessableEntityErrorObject | APIError | SDKValidationError | UnexpectedClientError | InvalidRequestError | RequestAbortedError | RequestTimeoutError | ConnectionError>>;
+//# sourceMappingURL=paySchedulesAssign.d.ts.map

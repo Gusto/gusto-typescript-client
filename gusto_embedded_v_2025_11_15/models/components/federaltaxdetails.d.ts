@@ -1,0 +1,102 @@
+import * as z from "zod";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+/**
+ * Example response
+ */
+export type FederalTaxDetails = {
+    /**
+     * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
+     */
+    version?: string | undefined;
+    /**
+     * What type of tax entity the company is. One of:
+     *
+     * @remarks
+     * - C-Corporation
+     * - S-Corporation
+     * - Sole proprietor
+     * - LLC
+     * - LLP
+     * - Limited partnership
+     * - Co-ownership
+     * - Association
+     * - Trusteeship
+     * - General partnership
+     * - Joint venture
+     * - Non-Profit
+     */
+    taxPayerType?: string | null | undefined;
+    /**
+     * Whether the company is taxed as an S-Corporation. Tax payer types that may be taxed as an S-Corporation include:
+     *
+     * @remarks
+     * - S-Corporation
+     * - C-Corporation
+     * - LLC
+     */
+    taxableAsScorp?: boolean | undefined;
+    /**
+     * The form used by the company for federal tax filing. One of:
+     *
+     * @remarks
+     * - 941 (Quarterly federal tax return form)
+     * - 944 (Annual federal tax return form)
+     */
+    filingForm?: string | undefined;
+    /**
+     * Whether company's Employer Identification Number (EIN) is present
+     */
+    hasEin?: boolean | undefined;
+    /**
+     * Whether the EIN was able to be verified as a valid EIN with the IRS.
+     */
+    einVerified?: boolean | undefined;
+    /**
+     * The legal name of the company
+     */
+    legalName?: string | undefined;
+    /**
+     * The date that these details took effect.
+     */
+    effectiveDate?: string | undefined;
+    /**
+     * How often the company sends money to the IRS. One of:
+     *
+     * @remarks
+     *   - Semiweekly
+     *   - Monthly
+     */
+    depositSchedule?: string | undefined;
+};
+/** @internal */
+export declare const FederalTaxDetails$inboundSchema: z.ZodType<FederalTaxDetails, z.ZodTypeDef, unknown>;
+/** @internal */
+export type FederalTaxDetails$Outbound = {
+    version?: string | undefined;
+    tax_payer_type?: string | null | undefined;
+    taxable_as_scorp?: boolean | undefined;
+    filing_form?: string | undefined;
+    has_ein?: boolean | undefined;
+    ein_verified?: boolean | undefined;
+    legal_name?: string | undefined;
+    effective_date?: string | undefined;
+    deposit_schedule?: string | undefined;
+};
+/** @internal */
+export declare const FederalTaxDetails$outboundSchema: z.ZodType<FederalTaxDetails$Outbound, z.ZodTypeDef, FederalTaxDetails>;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export declare namespace FederalTaxDetails$ {
+    /** @deprecated use `FederalTaxDetails$inboundSchema` instead. */
+    const inboundSchema: z.ZodType<FederalTaxDetails, z.ZodTypeDef, unknown>;
+    /** @deprecated use `FederalTaxDetails$outboundSchema` instead. */
+    const outboundSchema: z.ZodType<FederalTaxDetails$Outbound, z.ZodTypeDef, FederalTaxDetails>;
+    /** @deprecated use `FederalTaxDetails$Outbound` instead. */
+    type Outbound = FederalTaxDetails$Outbound;
+}
+export declare function federalTaxDetailsToJSON(federalTaxDetails: FederalTaxDetails): string;
+export declare function federalTaxDetailsFromJSON(jsonString: string): SafeParseResult<FederalTaxDetails, SDKValidationError>;
+//# sourceMappingURL=federaltaxdetails.d.ts.map

@@ -1,0 +1,21 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest, DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse } from "../models/operations/deletev1employeesemployeeidbankaccountsbankaccountid.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Delete an employee bank account
+ *
+ * @remarks
+ * Deletes an employee bank account. To update an employee's bank
+ * account details, delete the bank account first and create a new one.
+ *
+ * scope: `employee_payment_methods:write`
+ */
+export declare function employeePaymentMethodDeleteBankAccount(client: GustoEmbeddedCore, request: DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest, options?: RequestOptions): APIPromise<Result<DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse, UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=employeePaymentMethodDeleteBankAccount.d.ts.map

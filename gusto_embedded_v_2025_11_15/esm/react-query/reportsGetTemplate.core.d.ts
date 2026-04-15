@@ -1,0 +1,15 @@
+import { QueryClient, QueryFunctionContext, QueryKey } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GetCompaniesCompanyUuidReportTemplatesReportTypeRequest, GetCompaniesCompanyUuidReportTemplatesReportTypeResponse } from "../models/operations/getcompaniescompanyuuidreporttemplatesreporttype.js";
+export type ReportsGetTemplateQueryData = GetCompaniesCompanyUuidReportTemplatesReportTypeResponse;
+export declare function prefetchReportsGetTemplate(queryClient: QueryClient, client$: GustoEmbeddedCore, request: GetCompaniesCompanyUuidReportTemplatesReportTypeRequest, options?: RequestOptions): Promise<void>;
+export declare function buildReportsGetTemplateQuery(client$: GustoEmbeddedCore, request: GetCompaniesCompanyUuidReportTemplatesReportTypeRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<ReportsGetTemplateQueryData>;
+};
+export declare function queryKeyReportsGetTemplate(companyUuid: string, reportType: string, parameters: {
+    xGustoAPIVersion?: VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=reportsGetTemplate.core.d.ts.map

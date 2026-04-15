@@ -1,0 +1,21 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { PostV1CompaniesCompanyUuidContractorsRequest, PostV1CompaniesCompanyUuidContractorsResponse } from "../models/operations/postv1companiescompanyuuidcontractors.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Create a contractor
+ *
+ * @remarks
+ * Create an individual or business contractor.
+ *
+ * scope: `contractors:manage`
+ */
+export declare function contractorsCreate(client: GustoEmbeddedCore, request: PostV1CompaniesCompanyUuidContractorsRequest, options?: RequestOptions): APIPromise<Result<PostV1CompaniesCompanyUuidContractorsResponse, NotFoundErrorObject | UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=contractorsCreate.d.ts.map

@@ -1,0 +1,15 @@
+import { QueryClient, QueryFunctionContext, QueryKey } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GetRecoveryCasesRequest, GetRecoveryCasesResponse } from "../models/operations/getrecoverycases.js";
+export type RecoveryCasesGetQueryData = GetRecoveryCasesResponse;
+export declare function prefetchRecoveryCasesGet(queryClient: QueryClient, client$: GustoEmbeddedCore, request: GetRecoveryCasesRequest, options?: RequestOptions): Promise<void>;
+export declare function buildRecoveryCasesGetQuery(client$: GustoEmbeddedCore, request: GetRecoveryCasesRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<RecoveryCasesGetQueryData>;
+};
+export declare function queryKeyRecoveryCasesGet(companyUuid: string, parameters: {
+    xGustoAPIVersion?: VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=recoveryCasesGet.core.d.ts.map

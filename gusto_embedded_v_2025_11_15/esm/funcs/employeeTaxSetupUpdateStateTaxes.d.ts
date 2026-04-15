@@ -1,0 +1,23 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { PutV1EmployeesEmployeeIdStateTaxesRequest, PutV1EmployeesEmployeeIdStateTaxesResponse } from "../models/operations/putv1employeesemployeeidstatetaxes.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Update an employee's state taxes
+ *
+ * @remarks
+ * Update attributes relevant for an employee's state taxes.
+ *
+ * As described for the GET endpoint, the answers must be supplied in the effective-dated format, but currently only a single answer will be accepted - `valid_from` and `valid_up_to` must be `"2010-01-01"` and `null` respectively.
+ *
+ * scope: `employee_state_taxes:write`
+ */
+export declare function employeeTaxSetupUpdateStateTaxes(client: GustoEmbeddedCore, request: PutV1EmployeesEmployeeIdStateTaxesRequest, options?: RequestOptions): APIPromise<Result<PutV1EmployeesEmployeeIdStateTaxesResponse, NotFoundErrorObject | UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=employeeTaxSetupUpdateStateTaxes.d.ts.map

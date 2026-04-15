@@ -1,0 +1,23 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { DeleteV1EmployeeRequest, DeleteV1EmployeeResponse } from "../models/operations/deletev1employee.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Delete an onboarding employee
+ *
+ * @remarks
+ * Use this endpoint to delete an employee who is in onboarding. Deleting
+ * an onboarded employee is not allowed and will return a 422 response. Please check out the Terminations api
+ * if you need to terminate an onboarded employee.
+ *
+ * scope: `employees:manage`
+ */
+export declare function employeesDelete(client: GustoEmbeddedCore, request: DeleteV1EmployeeRequest, options?: RequestOptions): APIPromise<Result<DeleteV1EmployeeResponse, NotFoundErrorObject | UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=employeesDelete.d.ts.map

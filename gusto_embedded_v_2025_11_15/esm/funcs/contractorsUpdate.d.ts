@@ -1,0 +1,25 @@
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import { ConnectionError, InvalidRequestError, RequestAbortedError, RequestTimeoutError, UnexpectedClientError } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { PutV1ContractorsContractorUuidRequest, PutV1ContractorsContractorUuidResponse } from "../models/operations/putv1contractorscontractoruuid.js";
+import { APIPromise } from "../types/async.js";
+import { Result } from "../types/fp.js";
+/**
+ * Update a contractor
+ *
+ * @remarks
+ * Update a contractor.
+ *
+ * > 🚧 Warning
+ * >
+ * > Watch out when changing a contractor's type (when the contractor is finished onboarding). Specifically, changing contractor type can be dangerous since Gusto won't recognize and file two separate 1099s if they simply change from business to individual
+ *
+ * scope: `contractors:write`
+ */
+export declare function contractorsUpdate(client: GustoEmbeddedCore, request: PutV1ContractorsContractorUuidRequest, options?: RequestOptions): APIPromise<Result<PutV1ContractorsContractorUuidResponse, NotFoundErrorObject | UnprocessableEntityErrorObject | GustoEmbeddedError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError>>;
+//# sourceMappingURL=contractorsUpdate.d.ts.map

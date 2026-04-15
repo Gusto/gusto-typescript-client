@@ -1,0 +1,15 @@
+import { QueryClient, QueryFunctionContext, QueryKey } from "@tanstack/react-query";
+import { GustoEmbeddedCore } from "../core.js";
+import { RequestOptions } from "../lib/sdks.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import { GetV1GarnishmentsGarnishmentIdRequest, GetV1GarnishmentsGarnishmentIdResponse } from "../models/operations/getv1garnishmentsgarnishmentid.js";
+export type GarnishmentsGetQueryData = GetV1GarnishmentsGarnishmentIdResponse;
+export declare function prefetchGarnishmentsGet(queryClient: QueryClient, client$: GustoEmbeddedCore, request: GetV1GarnishmentsGarnishmentIdRequest, options?: RequestOptions): Promise<void>;
+export declare function buildGarnishmentsGetQuery(client$: GustoEmbeddedCore, request: GetV1GarnishmentsGarnishmentIdRequest, options?: RequestOptions): {
+    queryKey: QueryKey;
+    queryFn: (context: QueryFunctionContext) => Promise<GarnishmentsGetQueryData>;
+};
+export declare function queryKeyGarnishmentsGet(garnishmentId: string, parameters: {
+    xGustoAPIVersion?: VersionHeader | undefined;
+}): QueryKey;
+//# sourceMappingURL=garnishmentsGet.core.d.ts.map

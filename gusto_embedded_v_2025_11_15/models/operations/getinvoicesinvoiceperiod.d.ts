@@ -1,0 +1,121 @@
+import * as z from "zod";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+export type GetInvoicesInvoicePeriodSecurity = {
+    systemAccessAuth: string;
+};
+export type GetInvoicesInvoicePeriodRequest = {
+    /**
+     * The month we are calculating the invoice for. Must be in YYYY-MM format
+     */
+    invoicePeriod: string;
+    /**
+     * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     */
+    page?: number | undefined;
+    /**
+     * Number of objects per page. For majority of endpoints will default to 25
+     */
+    per?: number | undefined;
+    /**
+     * Filter companies returned in the active_companies response, will return an error if company not active during provided invoice period. i.e. `?company_uuids=781922d8-e780-4b6b-bf74-ee303166d022,bbbca930-7322-491c-ba7f-98707a52a9c5`
+     */
+    companyUuids?: string | undefined;
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    xGustoAPIVersion?: components.VersionHeader | undefined;
+};
+export type GetInvoicesInvoicePeriodResponse = {
+    /**
+     * HTTP response content type for this operation
+     */
+    contentType: string;
+    /**
+     * HTTP response status code for this operation
+     */
+    statusCode: number;
+    /**
+     * Raw HTTP response; suitable for custom response parsing
+     */
+    rawResponse: Response;
+    /**
+     * Example response
+     */
+    invoiceData?: components.InvoiceData | undefined;
+};
+/** @internal */
+export declare const GetInvoicesInvoicePeriodSecurity$inboundSchema: z.ZodType<GetInvoicesInvoicePeriodSecurity, z.ZodTypeDef, unknown>;
+/** @internal */
+export type GetInvoicesInvoicePeriodSecurity$Outbound = {
+    SystemAccessAuth: string;
+};
+/** @internal */
+export declare const GetInvoicesInvoicePeriodSecurity$outboundSchema: z.ZodType<GetInvoicesInvoicePeriodSecurity$Outbound, z.ZodTypeDef, GetInvoicesInvoicePeriodSecurity>;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export declare namespace GetInvoicesInvoicePeriodSecurity$ {
+    /** @deprecated use `GetInvoicesInvoicePeriodSecurity$inboundSchema` instead. */
+    const inboundSchema: z.ZodType<GetInvoicesInvoicePeriodSecurity, z.ZodTypeDef, unknown>;
+    /** @deprecated use `GetInvoicesInvoicePeriodSecurity$outboundSchema` instead. */
+    const outboundSchema: z.ZodType<GetInvoicesInvoicePeriodSecurity$Outbound, z.ZodTypeDef, GetInvoicesInvoicePeriodSecurity>;
+    /** @deprecated use `GetInvoicesInvoicePeriodSecurity$Outbound` instead. */
+    type Outbound = GetInvoicesInvoicePeriodSecurity$Outbound;
+}
+export declare function getInvoicesInvoicePeriodSecurityToJSON(getInvoicesInvoicePeriodSecurity: GetInvoicesInvoicePeriodSecurity): string;
+export declare function getInvoicesInvoicePeriodSecurityFromJSON(jsonString: string): SafeParseResult<GetInvoicesInvoicePeriodSecurity, SDKValidationError>;
+/** @internal */
+export declare const GetInvoicesInvoicePeriodRequest$inboundSchema: z.ZodType<GetInvoicesInvoicePeriodRequest, z.ZodTypeDef, unknown>;
+/** @internal */
+export type GetInvoicesInvoicePeriodRequest$Outbound = {
+    invoice_period: string;
+    page?: number | undefined;
+    per?: number | undefined;
+    company_uuids?: string | undefined;
+    "X-Gusto-API-Version": string;
+};
+/** @internal */
+export declare const GetInvoicesInvoicePeriodRequest$outboundSchema: z.ZodType<GetInvoicesInvoicePeriodRequest$Outbound, z.ZodTypeDef, GetInvoicesInvoicePeriodRequest>;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export declare namespace GetInvoicesInvoicePeriodRequest$ {
+    /** @deprecated use `GetInvoicesInvoicePeriodRequest$inboundSchema` instead. */
+    const inboundSchema: z.ZodType<GetInvoicesInvoicePeriodRequest, z.ZodTypeDef, unknown>;
+    /** @deprecated use `GetInvoicesInvoicePeriodRequest$outboundSchema` instead. */
+    const outboundSchema: z.ZodType<GetInvoicesInvoicePeriodRequest$Outbound, z.ZodTypeDef, GetInvoicesInvoicePeriodRequest>;
+    /** @deprecated use `GetInvoicesInvoicePeriodRequest$Outbound` instead. */
+    type Outbound = GetInvoicesInvoicePeriodRequest$Outbound;
+}
+export declare function getInvoicesInvoicePeriodRequestToJSON(getInvoicesInvoicePeriodRequest: GetInvoicesInvoicePeriodRequest): string;
+export declare function getInvoicesInvoicePeriodRequestFromJSON(jsonString: string): SafeParseResult<GetInvoicesInvoicePeriodRequest, SDKValidationError>;
+/** @internal */
+export declare const GetInvoicesInvoicePeriodResponse$inboundSchema: z.ZodType<GetInvoicesInvoicePeriodResponse, z.ZodTypeDef, unknown>;
+/** @internal */
+export type GetInvoicesInvoicePeriodResponse$Outbound = {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "Invoice-Data"?: components.InvoiceData$Outbound | undefined;
+};
+/** @internal */
+export declare const GetInvoicesInvoicePeriodResponse$outboundSchema: z.ZodType<GetInvoicesInvoicePeriodResponse$Outbound, z.ZodTypeDef, GetInvoicesInvoicePeriodResponse>;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export declare namespace GetInvoicesInvoicePeriodResponse$ {
+    /** @deprecated use `GetInvoicesInvoicePeriodResponse$inboundSchema` instead. */
+    const inboundSchema: z.ZodType<GetInvoicesInvoicePeriodResponse, z.ZodTypeDef, unknown>;
+    /** @deprecated use `GetInvoicesInvoicePeriodResponse$outboundSchema` instead. */
+    const outboundSchema: z.ZodType<GetInvoicesInvoicePeriodResponse$Outbound, z.ZodTypeDef, GetInvoicesInvoicePeriodResponse>;
+    /** @deprecated use `GetInvoicesInvoicePeriodResponse$Outbound` instead. */
+    type Outbound = GetInvoicesInvoicePeriodResponse$Outbound;
+}
+export declare function getInvoicesInvoicePeriodResponseToJSON(getInvoicesInvoicePeriodResponse: GetInvoicesInvoicePeriodResponse): string;
+export declare function getInvoicesInvoicePeriodResponseFromJSON(jsonString: string): SafeParseResult<GetInvoicesInvoicePeriodResponse, SDKValidationError>;
+//# sourceMappingURL=getinvoicesinvoiceperiod.d.ts.map
