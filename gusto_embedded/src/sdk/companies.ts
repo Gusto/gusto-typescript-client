@@ -329,7 +329,7 @@ export class Companies extends ClientSDK {
    * Get the custom fields of a company
    *
    * @remarks
-   * Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company
+   * Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company.
    *
    * scope: `companies:read`
    */

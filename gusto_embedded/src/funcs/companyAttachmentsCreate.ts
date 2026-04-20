@@ -3,12 +3,13 @@
  */
 
 import { GustoEmbeddedCore } from "../core.js";
-import { appendForm, encodeSimple } from "../lib/encodings.js";
+import { appendForm, encodeSimple, normalizeBlob } from "../lib/encodings.js";
 import {
   bytesToBlob,
   getContentTypeFromFileName,
   readableStreamToArrayBuffer,
 } from "../lib/files.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -122,8 +123,9 @@ async function $do(
     payload["Company-Attachment-Create-Request-Body"].category,
   );
   if (isBlobLike(payload["Company-Attachment-Create-Request-Body"].document)) {
-    const blob = payload["Company-Attachment-Create-Request-Body"].document;
-    const name = "name" in blob ? (blob.name as string) : undefined;
+    const file = payload["Company-Attachment-Create-Request-Body"].document;
+    const blob = await normalizeBlob(file);
+    const name = "name" in file ? (file.name as string) : undefined;
     appendForm(body, "document", blob, name);
   } else if (
     isReadableStream(
@@ -214,7 +216,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

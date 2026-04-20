@@ -1670,27 +1670,63 @@ paths:
       x-speakeasy-name-override: finishOnboarding
   "/v1/companies/{company_id}/custom_fields":
     get:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company.
+
+        scope: `companies:read`
       x-gusto-integration-type:
         - embedded
         - app-integrations
       summary: Get the custom fields of a company
-      description: |-
-        Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company
-
-        scope: `companies:read`
       operationId: get-v1-companies-company_id-custom_fields
       tags:
         - Companies
       parameters:
-        - "$ref": "#/components/parameters/company_id"
-        - "$ref": "#/components/parameters/pageParam"
-        - "$ref": "#/components/parameters/perParam"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_id
+          in: path
+          description: The UUID of the company
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          description: The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+          schema:
+            type: integer
+        - name: per
+          in: query
+          required: false
+          description: Number of objects per page. For majority of endpoints will default to 25
+          schema:
+            type: integer
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Company-Custom-Field-List"
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Company-Custom-Field-List"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       x-speakeasy-name-override: getCustomFields
   "/v1/companies/{company_uuid}/flows":
     post:
@@ -3753,6 +3789,8 @@ paths:
       x-speakeasy-name-override: update
   "/v1/companies/{company_uuid}/departments":
     post:
+      security:
+        - CompanyAccessAuth: []
       x-gusto-integration-type:
         - embedded
         - app-integrations
@@ -3764,53 +3802,109 @@ paths:
         Create a department
 
         scope: `departments:write`
+      x-gusto-rswag: true
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                title:
-                  type: string
-            examples:
-              Example:
-                value:
-                  title: Stage Hand
+              "$ref": "#/components/schemas/Department-Create-Request-Body"
       parameters:
-        - "$ref": "#/components/parameters/company_uuid"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: company_uuid
+          in: path
+          description: The UUID of the company
+          required: true
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       responses:
         '201':
-          "$ref": "#/components/responses/Department-Object"
+          description: Created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Department"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       x-speakeasy-name-override: create
     get:
+      security:
+        - CompanyAccessAuth: []
       x-gusto-integration-type:
         - embedded
         - app-integrations
       summary: Get all departments of a company
       operationId: get-companies-departments
       parameters:
-        - "$ref": "#/components/parameters/company_uuid"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: company_uuid
+          in: path
+          description: The UUID of the company
+          required: true
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       description: |-
         Get all of the departments for a given company with the employees and contractors assigned to that department.
 
         scope: `departments:read`
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Department-List"
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Department-List"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       tags:
         - Departments
       x-speakeasy-name-override: getAll
   "/v1/departments/{department_uuid}":
     get:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Get a department given the UUID
+
+        scope: `departments:read`
       x-gusto-integration-type:
         - embedded
         - app-integrations
@@ -3818,20 +3912,42 @@ paths:
       summary: Get a department
       tags:
         - Departments
-      description: |
-        Get a department given the UUID
-
-        scope: `departments:read`
       parameters:
-        - "$ref": "#/components/parameters/department_uuid"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: department_uuid
+          in: path
+          description: The UUID of the department
+          required: true
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Department-Object"
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Department"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       x-speakeasy-name-override: get
     put:
+      security:
+        - CompanyAccessAuth: []
       x-gusto-integration-type:
         - embedded
         - app-integrations
@@ -3844,36 +3960,66 @@ paths:
 
         scope: `departments:write`
       parameters:
-        - "$ref": "#/components/parameters/department_uuid"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: department_uuid
+          in: path
+          description: The UUID of the department
+          required: true
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+      x-gusto-rswag: true
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                version:
-                  type: string
-                  description: The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
-                title:
-                  type: string
-              required:
-                - version
-            examples:
-              Example:
-                value:
-                  version: db0edd04aaac4506f7edab03ac855d56
-                  title: Backup Dancer
+              "$ref": "#/components/schemas/Department-Update-Request-Body"
       responses:
         '200':
-          "$ref": "#/components/responses/Department-Object"
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Department"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Conflict-Error-Object"
       x-speakeasy-name-override: update
     delete:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Delete a department. You cannot delete a department until all employees and contractors have been removed.
+
+        scope: `departments:write`
       x-gusto-integration-type:
         - embedded
         - app-integrations
@@ -3881,23 +4027,52 @@ paths:
       summary: Delete a department
       tags:
         - Departments
-      description: |
-        Delete a department. You cannot delete a department until all employees and contractors have been removed.
-
-        scope: `departments:write`
       parameters:
-        - "$ref": "#/components/parameters/department_uuid"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: department_uuid
+          in: path
+          description: The UUID of the department
+          required: true
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+      x-gusto-rswag: true
       responses:
         '204':
           description: No Content
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
       x-speakeasy-name-override: delete
   "/v1/departments/{department_uuid}/add":
     put:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Add employees and contractors to a department
+
+        scope: `departments:write`
       x-gusto-integration-type:
         - embedded
         - app-integrations
@@ -3905,45 +4080,62 @@ paths:
       summary: Add people to a department
       tags:
         - Departments
-      description: |
-        Add employees and contractors to a department
-
-        scope: `departments:write`
       parameters:
-        - "$ref": "#/components/parameters/department_uuid"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: department_uuid
+          in: path
+          description: The UUID of the department
+          required: true
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+      x-gusto-rswag: true
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                version:
-                  type: string
-                  description: The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
-                employees:
-                  type: array
-                  description: Array of employees to add to the department
-                  items:
-                    properties:
-                      uuid:
-                        type: string
-                contractors:
-                  type: array
-                  description: Array of contractors to add to the department
-                  items:
-                    properties:
-                      uuid:
-                        type: string
+              "$ref": "#/components/schemas/Department-People-Request-Body"
       responses:
         '200':
-          "$ref": "#/components/responses/Department-Object"
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Department"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+        '422':
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
       x-speakeasy-name-override: addPeople
   "/v1/departments/{department_uuid}/remove":
     put:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Remove employees and contractors from a department
+
+        scope: `departments:write`
       x-gusto-integration-type:
         - embedded
         - app-integrations
@@ -3951,42 +4143,53 @@ paths:
       summary: Remove people from a department
       tags:
         - Departments
-      description: |
-        Remove employees and contractors from a department
-
-        scope: `departments:write`
       parameters:
-        - "$ref": "#/components/parameters/department_uuid"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: department_uuid
+          in: path
+          description: The UUID of the department
+          required: true
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+      x-gusto-rswag: true
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                version:
-                  type: string
-                  description: The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
-                employees:
-                  type: array
-                  description: Array of employees to remove from a department
-                  items:
-                    properties:
-                      uuid:
-                        type: string
-                contractors:
-                  type: array
-                  description: Array of contractors to remove from a department
-                  items:
-                    properties:
-                      uuid:
-                        type: string
+              "$ref": "#/components/schemas/Department-People-Request-Body"
       responses:
         '200':
-          "$ref": "#/components/responses/Department-Object"
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Department"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+        '422':
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
       x-speakeasy-name-override: removePeople
   "/v1/employees/{employee_id}":
     get:
@@ -4213,64 +4416,113 @@ paths:
       x-speakeasy-name-override: delete
   "/v1/employees/{employee_id}/terminations":
     post:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Create a termination for an employee. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
+
+        Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+
+        scope: `employments:write`
       x-gusto-integration-type:
         - embedded
         - app-integrations
       summary: Create an employee termination
       tags:
         - Employee Employments
+      x-gusto-rswag: true
       responses:
         '201':
-          "$ref": "#/components/responses/Termination-Object"
+          description: Created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Termination"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: post-v1-employees-employee_id-terminations
-      description: |-
-        Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
-
-        Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
-
-        scope: `employments:write`
       parameters:
-        - "$ref": "#/components/parameters/employee_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: employee_id
+          in: path
+          description: The UUID of the employee
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              description: ''
               type: object
               properties:
                 effective_date:
                   type: string
                   description: The employee's last day of work.
+                  example: '2020-06-30'
                 run_termination_payroll:
                   type: boolean
                   description: If true, the employee should receive their final wages via an off-cycle payroll. If false, they should receive their final wages on their current pay schedule.
+                  default: false
+                  example: true
               required:
                 - effective_date
-            examples:
-              Example:
-                value:
-                  effective_date: '2020-06-30'
-                  run_termination_payroll: true
+              example:
+                effective_date: '2020-06-30'
+                run_termination_payroll: false
       x-speakeasy-name-override: createTermination
       x-speakeasy-group: employeeEmployments
     get:
+      security:
+        - CompanyAccessAuth: []
       x-gusto-integration-type:
         - embedded
         - app-integrations
       summary: Get terminations for an employee
       tags:
         - Employee Employments
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Termination-List"
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Termination"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: get-v1-employees-employee_id-terminations
       description: |-
         Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
@@ -4279,49 +4531,159 @@ paths:
 
         scope: `employments:read`
       parameters:
-        - "$ref": "#/components/parameters/employee_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: employee_id
+          in: path
+          description: The UUID of the employee
+          required: true
+          schema:
+            type: string
       x-speakeasy-group: employeeEmployments
       x-speakeasy-name-override: getTerminations
     delete:
+      security:
+        - CompanyAccessAuth: []
       x-gusto-integration-type:
         - embedded
         - app-integrations
       summary: Delete an employee termination
       operationId: delete-v1-employees-employee_id-terminations
+      x-gusto-rswag: true
       responses:
         '204':
           description: No Content
         '404':
-          "$ref": "#/components/responses/Employment-Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
       description: |-
         Delete an employee termination.
 
         scope: `employments:write`
       parameters:
-        - "$ref": "#/components/parameters/employee_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: employee_id
+          in: path
+          description: The UUID of the employee
+          required: true
+          schema:
+            type: string
       tags:
         - Employee Employments
       x-speakeasy-group: employeeEmployments
       x-speakeasy-name-override: deleteTermination
   "/v1/terminations/{employee_id}":
+    get:
+      summary: Get an employee termination
+      operationId: get-v1-terminations-employee_id
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
+
+        Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+
+        scope: `employments:read`
+      tags:
+        - Employee Employments
+      x-gusto-integration-type:
+        - embedded
+        - app-integrations
+      parameters:
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: employee_id
+          in: path
+          description: The UUID of the employee
+          required: true
+          schema:
+            type: string
+      x-gusto-rswag: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Termination"
+        '404':
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
     put:
+      security:
+        - CompanyAccessAuth: []
       x-gusto-integration-type:
         - embedded
         - app-integrations
       summary: Update an employee termination
       tags:
         - Employee Employments
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Termination-Object"
+          description: Successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Termination"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
         '404':
-          "$ref": "#/components/responses/Employment-Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: put-v1-terminations-employee_id
       description: |-
         Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
@@ -4330,8 +4692,20 @@ paths:
 
         scope: `employments:write`
       parameters:
-        - "$ref": "#/components/parameters/employee_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: employee_id
+          in: path
+          description: The UUID of the employee
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -4340,22 +4714,22 @@ paths:
               allOf:
                 - "$ref": "#/components/schemas/Versionable-Required"
                 - type: object
-                  description: ''
                   properties:
                     effective_date:
                       type: string
                       description: The employee's last day of work.
+                      example: '2020-06-30'
                     run_termination_payroll:
                       type: boolean
                       description: If true, the employee should receive their final wages via an off-cycle payroll. If false, they should receive their final wages on their current pay schedule.
+                      default: false
+                      example: true
                   required:
                     - effective_date
-            examples:
-              Example:
-                value:
-                  version: 1928d0c378e519e9c03fb959bc959a6b
-                  effective_date: '2020-06-30'
-                  run_termination_payroll: true
+              example:
+                version: d487dd0b55dfcacdd920ccbdaeafa351
+                effective_date: '2020-06-30'
+                run_termination_payroll: false
       x-speakeasy-group: employeeEmployments
       x-speakeasy-name-override: updateTermination
   "/v1/employees/{employee_id}/rehire":
@@ -5231,6 +5605,8 @@ paths:
       x-speakeasy-name-override: deleteWorkAddress
   "/v1/employees/{employee_id}/custom_fields":
     get:
+      security:
+        - CompanyAccessAuth: []
       x-gusto-integration-type:
         - embedded
         - app-integrations
@@ -5238,24 +5614,49 @@ paths:
       tags:
         - Employees
       parameters:
-        - "$ref": "#/components/parameters/employee_id"
-        - "$ref": "#/components/parameters/pageParam"
-        - "$ref": "#/components/parameters/perParam"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: employee_id
+          in: path
+          description: The UUID of the employee
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          description: The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+          schema:
+            type: integer
+        - name: per
+          in: query
+          required: false
+          description: Number of objects per page. For majority of endpoints will default to 25
+          schema:
+            type: integer
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+      x-gusto-rswag: true
       responses:
         '200':
-          description: OK
+          description: Success
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  custom_fields:
-                    type: array
-                    items:
-                      "$ref": "#/components/schemas/Employee-Custom-Field"
+                "$ref": "#/components/schemas/Employee-Custom-Field-List"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: get-v1-employees-employee_id-custom_fields
       description: |-
         Returns a list of the employee's custom fields.
@@ -5408,15 +5809,15 @@ paths:
       operationId: put-v1-employees-employee_id-onboarding_status
       description: |-
         Updates an employee's onboarding status.
-                Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
+        Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
 
-                | Action | current onboarding_status | new onboarding_status |
-                |:------------------|:------------:|----------:|
-                | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
-                | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
-                | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
-                | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
-                | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
+        | Action | current onboarding_status | new onboarding_status |
+        |:------------------|:------------:|----------:|
+        | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
+        | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
+        | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
+        | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
+        | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
 
         scope: `employees:manage`
       tags:
@@ -5654,7 +6055,7 @@ paths:
 
         The data required to correctly calculate an employee's state taxes varies by both home and work location. This API returns information about each question that must be answered grouped by state. Mostly commonly, an employee lives and works in the same state and will only have questions for a single state. The response contains metadata about each question, the type of answer expected, and the current answer stored in Gusto for that question.
 
-        Answers are represented by an array. Today, this array can only be empty or contain exactly one element, but is designed to allow for forward compatibility with effective-dated fields. Until effective dated answers are supported, the `valid_from` and `valid_up_to` must always be `"2010-01-01"` and `null` respectively.
+        Answers are represented by an array. Today, this array can only be empty or contain exactly one element, but is designed to allow for forward compatibility with effective-dated fields. The `valid_from` and `valid_up_to` fields are optional and currently ignored.
 
         ## About filing new hire reports
         Payroll Admins are responsible for filing a new hire report for each Employee. The `file_new_hire_report` question will only be listed if:
@@ -5707,7 +6108,7 @@ paths:
       description: |-
         Update attributes relevant for an employee's state taxes.
 
-        As described for the GET endpoint, the answers must be supplied in the effective-dated format, but currently only a single answer will be accepted - `valid_from` and `valid_up_to` must be `"2010-01-01"` and `null` respectively.
+        As described for the GET endpoint, the answers must be supplied in the effective-dated format, but currently only a single answer will be accepted. The `valid_from` and `valid_up_to` fields are optional and currently ignored.
 
         scope: `employee_state_taxes:write`
       tags:
@@ -6738,19 +7139,40 @@ paths:
       x-speakeasy-name-override: deleteCompensation
   "/v1/companies/{company_id}/earning_types":
     post:
+      security:
+        - CompanyAccessAuth: []
       x-gusto-integration-type:
         - embedded
         - app-integrations
       summary: Create a custom earning type
       tags:
         - Earning Types
+      x-gusto-rswag: true
       responses:
         '201':
-          "$ref": "#/components/responses/Earning-Type-Object"
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Earning-Type"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: post-v1-companies-company_id-earning_types
       description: |-
         Create a custom earning type.
@@ -6759,8 +7181,20 @@ paths:
 
         scope: `payrolls:write`
       parameters:
-        - "$ref": "#/components/parameters/company_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_id
+          in: path
+          description: The UUID of the company
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -6770,27 +7204,38 @@ paths:
               properties:
                 name:
                   type: string
+                  default: Gym Membership
                   description: The name of the custom earning type.
               required:
                 - name
-            examples:
-              Example:
-                value:
-                  name: Gym Membership Stipend
       x-speakeasy-group: earningTypes
       x-speakeasy-name-override: create
     get:
+      security:
+        - CompanyAccessAuth: []
       x-gusto-integration-type:
         - embedded
         - app-integrations
       summary: Get all earning types for a company
       tags:
         - Earning Types
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Earning-Type-List"
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Earning-Type-List"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: get-v1-companies-company_id-earning_types
       description: |-
         A payroll item in Gusto is associated to an earning type to name the type of earning described by the payroll item.
@@ -6803,34 +7248,84 @@ paths:
 
         scope: `payrolls:read`
       parameters:
-        - "$ref": "#/components/parameters/company_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_id
+          in: path
+          description: The UUID of the company
+          required: true
+          schema:
+            type: string
       x-speakeasy-group: earningTypes
       x-speakeasy-name-override: list
   "/v1/companies/{company_id}/earning_types/{earning_type_uuid}":
     put:
+      security:
+        - CompanyAccessAuth: []
       x-gusto-integration-type:
         - embedded
         - app-integrations
       summary: Update an earning type
       tags:
         - Earning Types
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Earning-Type-Object"
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Earning-Type"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: put-v1-companies-company_id-earning_types-earning_type_uuid
       description: |-
         Update an earning type.
 
         scope: `payrolls:write`
       parameters:
-        - "$ref": "#/components/parameters/company_id"
-        - "$ref": "#/components/parameters/earning_type_uuid"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_id
+          in: path
+          description: The UUID of the company
+          required: true
+          schema:
+            type: string
+        - name: earning_type_uuid
+          in: path
+          description: The UUID of the earning type
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -6841,33 +7336,54 @@ paths:
                 name:
                   type: string
                   description: The name of the custom earning type.
-            examples:
-              Example:
-                value:
-                  name: Gym Membership Stipend
       x-speakeasy-group: earningTypes
       x-speakeasy-name-override: update
     delete:
+      security:
+        - CompanyAccessAuth: []
       x-gusto-integration-type:
         - embedded
         - app-integrations
       summary: Deactivate an earning type
       tags:
         - Earning Types
+      x-gusto-rswag: true
       responses:
         '204':
           description: No Content
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json: {}
       operationId: delete-v1-companies-company_id-earning_types-earning_type_uuid
       description: |-
         Deactivate an earning type.
 
         scope: `payrolls:write`
       parameters:
-        - "$ref": "#/components/parameters/company_id"
-        - "$ref": "#/components/parameters/earning_type_uuid"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_id
+          in: path
+          description: The UUID of the company
+          required: true
+          schema:
+            type: string
+        - name: earning_type_uuid
+          in: path
+          description: The UUID of the earning type
+          required: true
+          schema:
+            type: string
       x-speakeasy-group: earningTypes
       x-speakeasy-name-override: delete
   "/v1/companies/{company_uuid}/contractors":
@@ -9320,6 +9836,12 @@ paths:
     get:
       security:
         - CompanyAccessAuth: []
+      description: |-
+        Returns an object containing individual contractor payments, within a given time period, including totals.
+
+        Results are returned in reverse chronological order (newest first).
+
+        scope: `payrolls:read`
       x-gusto-integration-type:
         - embedded
         - app-integrations
@@ -9346,10 +9868,6 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: get-v1-companies-company_id-contractor_payments
-      description: |-
-        Returns an object containing individual contractor payments, within a given time period, including totals.
-
-        scope: `payrolls:read`
       parameters:
         - name: X-Gusto-API-Version
           in: header
@@ -10371,7 +10889,9 @@ paths:
       summary: Get an employee's pay stubs
       operationId: get-v1-employees-employee_uuid-pay_stubs
       description: |-
-        Get an employee's pay stubs
+        Get an employee's pay stubs.
+
+        Results are returned in reverse chronological order (newest first).
 
         scope: `pay_stubs:read`
       x-gusto-integration-type:
@@ -16324,6 +16844,886 @@ paths:
                   description: The end year for the report (must be the current year or earlier, and must be >= start_year)
                   example: 2024
         required: true
+  "/v1/contractor_payments/{contractor_payment_id}/pdf":
+    get:
+      summary: Get a contractor payment PDF
+      operationId: get-v1-contractor_payments-contractor_payment_id-pdf
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Get a PDF document for a single contractor payment.
+
+        scope: `payrolls:read`
+      tags:
+        - Contractor Payments
+      x-gusto-integration-type:
+        - embedded
+      parameters:
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: contractor_payment_id
+          in: path
+          required: true
+          description: The UUID of the contractor payment
+          schema:
+            type: string
+      x-gusto-rswag: true
+      responses:
+        '200':
+          description: A PDF document of the contractor payment
+        '404':
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided ID/UUID is valid.
+          content:
+            application/json: {}
+            application/pdf:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+  "/v1/contractors/{contractor_uuid}/rehire":
+    post:
+      summary: Schedule a contractor rehire
+      parameters:
+        - name: contractor_uuid
+          in: path
+          required: true
+          description: The UUID of the contractor
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+      operationId: post-v1-contractors-contractor_uuid-rehire
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        ## Purpose
+        Schedules a contractor rehire for a given date. Creates a new employment record for the contractor.
+
+        ## Prerequisites
+        Before calling this endpoint:
+        1. The contractor must be inactive (previously dismissed)
+        2. The contractor must not already have an upcoming employment
+
+        ## Related webhooks
+        - `contractor.reactivated`: Fires when the contractor becomes active again (on or after start_date)
+
+        scope: `contractors:write`
+      tags:
+        - Contractors
+      x-gusto-integration-type:
+        - embedded
+      x-gusto-rswag: true
+      responses:
+        '204':
+          description: no content
+        '422':
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                start_date:
+                  type: string
+                  format: date
+                  description: The rehire date
+                  example: '2025-07-01'
+              required:
+                - start_date
+    delete:
+      summary: Cancel a pending contractor rehire
+      parameters:
+        - name: contractor_uuid
+          in: path
+          required: true
+          description: The UUID of the contractor
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+      operationId: delete-v1-contractors-contractor_uuid-rehire
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        ## Purpose
+        Cancels a pending contractor rehire. For future-dated rehires, cancellation is available anytime before the date.
+        For past-dated rehires, cancellation is only available within the 2-day grace period.
+
+        ## Prerequisites
+        Before calling this endpoint:
+        - The contractor must have a pending rehire (upcoming employment)
+
+        ## Related webhooks
+        - `contractor.deactivated`: Fires when the contractor returns to inactive state after cancellation
+
+        scope: `contractors:write`
+      tags:
+        - Contractors
+      x-gusto-integration-type:
+        - embedded
+      x-gusto-rswag: true
+      responses:
+        '204':
+          description: no content
+        '422':
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json: {}
+  "/v1/contractors/{contractor_uuid}/termination":
+    post:
+      summary: Schedule a contractor termination
+      parameters:
+        - name: contractor_uuid
+          in: path
+          required: true
+          description: The UUID of the contractor
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+      operationId: post-v1-contractors-contractor_uuid-termination
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        ## Purpose
+        Schedules a contractor dismissal for a given date. Supports both immediate (past dates) and future-dated dismissals.
+
+        ## Prerequisites
+        Before calling this endpoint:
+        1. The contractor must be active (no existing pending dismissal)
+        2. The contractor must have a current employment
+
+        ## Related webhooks
+        - `contractor.deactivated`: Fires when the contractor becomes inactive (on or after end_date)
+
+        scope: `contractors:write`
+      tags:
+        - Contractors
+      x-gusto-integration-type:
+        - embedded
+      x-gusto-rswag: true
+      responses:
+        '204':
+          description: no content
+        '422':
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                end_date:
+                  type: string
+                  format: date
+                  description: The date of dismissal
+                  example: '2025-06-15'
+              required:
+                - end_date
+    delete:
+      summary: Cancel a pending contractor termination
+      parameters:
+        - name: contractor_uuid
+          in: path
+          required: true
+          description: The UUID of the contractor
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+      operationId: delete-v1-contractors-contractor_uuid-termination
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        ## Purpose
+        Cancels a pending contractor dismissal. For future-dated dismissals, cancellation is available anytime before the date.
+        For past-dated dismissals, cancellation is only available within the 2-day grace period.
+
+        ## Prerequisites
+        Before calling this endpoint:
+        - The contractor must have a pending dismissal (scheduled or within the grace period)
+
+        ## Related webhooks
+        - `contractor.reactivated`: Fires when the contractor becomes active again after cancellation
+
+        scope: `contractors:write`
+      tags:
+        - Contractors
+      x-gusto-integration-type:
+        - embedded
+      x-gusto-rswag: true
+      responses:
+        '204':
+          description: no content
+        '422':
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json: {}
+  "/v1/companies/{company_uuid}/time_off/admin_approved_requests":
+    post:
+      summary: Create an admin-approved time off request
+      operationId: post-v1-companies-company_uuid-time_off-admin_approved_requests
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Create a pre-approved time off request on behalf of an employee (admin or system initiated).
+        The request is always created with approved status.
+
+        scope: `time_off_requests:manage`
+      tags:
+        - Time Off Requests
+      x-gusto-integration-type:
+        - embedded
+      parameters:
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_uuid
+          in: path
+          description: The UUID of the company
+          required: true
+          schema:
+            type: string
+      x-gusto-rswag: true
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Embedded-Time-Off-Request"
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                employee_uuid:
+                  type: string
+                  description: The UUID of the employee
+                policy_uuid:
+                  type: string
+                  description: The UUID of the time off policy
+                employer_note:
+                  type: string
+                  description: A note from the employer about the request
+                approver_uuid:
+                  type: string
+                  description: The UUID of the approving admin. Defaults to the primary payroll admin.
+                start_date:
+                  type: string
+                  description: The start date of the time off request (YYYY-MM-DD)
+                end_date:
+                  type: string
+                  description: The end date of the time off request (YYYY-MM-DD)
+                days:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: 'An object where keys are dates in YYYY-MM-DD format and values are hours as string decimals (e.g. {"2025-01-20": "8.000"})'
+              required:
+                - employee_uuid
+                - policy_uuid
+                - start_date
+                - end_date
+                - days
+        required: true
+  "/v1/companies/{company_uuid}/time_off/balances":
+    get:
+      summary: Get time off balances for a company
+      operationId: get-v1-companies-company_uuid-time_off-balances
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Get time off balances for all employees in a company
+
+        scope: `time_off_requests:read`
+      tags:
+        - Time Off Requests
+      x-gusto-integration-type:
+        - embedded
+      parameters:
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_uuid
+          in: path
+          description: The UUID of the company
+          required: true
+          schema:
+            type: string
+        - name: employee_uuids
+          in: query
+          required: false
+          description: Filter by employee UUIDs (comma-separated)
+          schema:
+            type: string
+        - name: policy_uuids
+          in: query
+          required: false
+          description: Filter by time off policy UUIDs (comma-separated)
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          description: The page that is requested
+          schema:
+            type: integer
+        - name: per
+          in: query
+          required: false
+          description: Number of objects per page
+          schema:
+            type: integer
+      x-gusto-rswag: true
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Embedded-Time-Off-Balance"
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+  "/v1/companies/{company_uuid}/time_off/requests":
+    get:
+      summary: List time off requests for a company
+      operationId: get-v1-companies-company_uuid-time_off-requests
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Get all time off requests for a company. Supports filtering by status, employee, and date ranges.
+
+        Possible statuses:
+        - `pending` — awaiting approval
+        - `approved` — approved by an admin but not yet processed in a payroll
+        - `declined` — declined by an admin
+        - `consumed` — processed in a completed payroll
+
+        scope: `time_off_requests:read`
+      tags:
+        - Time Off Requests
+      x-gusto-integration-type:
+        - embedded
+      parameters:
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_uuid
+          in: path
+          description: The UUID of the company
+          required: true
+          schema:
+            type: string
+        - name: employee_uuids
+          in: query
+          required: false
+          description: Filter by employee UUIDs. Comma-separated for multiple values.
+          schema:
+            type: string
+        - name: status
+          in: query
+          required: false
+          description: Filter by request status. Comma-separated for multiple values (e.g. pending,approved,declined,consumed).
+          schema:
+            type: string
+        - name: start_date
+          in: query
+          required: false
+          description: Filter requests that overlap with this start date
+          schema:
+            type: string
+        - name: end_date
+          in: query
+          required: false
+          description: Filter requests that overlap with this end date
+          schema:
+            type: string
+        - name: sort_order
+          in: query
+          required: false
+          description: Sort order by start_date (asc or desc, defaults to desc)
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          description: The page that is requested
+          schema:
+            type: integer
+        - name: per
+          in: query
+          required: false
+          description: Number of objects per page
+          schema:
+            type: integer
+      x-gusto-rswag: true
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Embedded-Time-Off-Request"
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+    post:
+      summary: Create a time off request
+      operationId: post-v1-companies-company_uuid-time_off-requests
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Create a time off request for an employee
+
+        scope: `time_off_requests:write`
+      tags:
+        - Time Off Requests
+      x-gusto-integration-type:
+        - embedded
+      parameters:
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_uuid
+          in: path
+          description: The UUID of the company
+          required: true
+          schema:
+            type: string
+      x-gusto-rswag: true
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Embedded-Time-Off-Request"
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                employee_uuid:
+                  type: string
+                  description: The UUID of the employee
+                policy_uuid:
+                  type: string
+                  description: The UUID of the time off policy
+                employee_note:
+                  type: string
+                  description: A note from the employee about the request
+                start_date:
+                  type: string
+                  description: The start date of the time off request (YYYY-MM-DD)
+                end_date:
+                  type: string
+                  description: The end date of the time off request (YYYY-MM-DD)
+                days:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: 'An object where keys are dates in YYYY-MM-DD format and values are hours as string decimals (e.g. {"2025-01-20": "8.000"})'
+              required:
+                - employee_uuid
+                - policy_uuid
+                - start_date
+                - end_date
+                - days
+        required: true
+  "/v1/companies/{company_uuid}/time_off/requests/preview":
+    post:
+      summary: Preview a time off request
+      operationId: post-v1-companies-company_uuid-time_off-requests-preview
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Preview a time off request to see balance impact before creating
+
+        scope: `time_off_requests:read`
+      tags:
+        - Time Off Requests
+      x-gusto-integration-type:
+        - embedded
+      parameters:
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_uuid
+          in: path
+          description: The UUID of the company
+          required: true
+          schema:
+            type: string
+      x-gusto-rswag: true
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Embedded-Time-Off-Request-Preview"
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                request_uuid:
+                  type: string
+                  description: The UUID of an existing time off request to preview changes for
+                employee_uuid:
+                  type: string
+                  description: The UUID of the employee
+                policy_uuid:
+                  type: string
+                  description: The UUID of the time off policy
+                start_date:
+                  type: string
+                  description: The start date of the time off request (YYYY-MM-DD)
+                end_date:
+                  type: string
+                  description: The end date of the time off request (YYYY-MM-DD)
+                days:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: 'An object where keys are dates in YYYY-MM-DD format and values are hours as string decimals (e.g. {"2025-01-20": "8.000"})'
+              required:
+                - employee_uuid
+                - policy_uuid
+                - start_date
+                - end_date
+                - days
+        required: true
+  "/v1/time_off/requests/{time_off_request_uuid}":
+    get:
+      summary: Get a time off request
+      operationId: get-v1-time_off-requests-time_off_request_uuid
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Get a single time off request by UUID
+
+        scope: `time_off_requests:read`
+      tags:
+        - Time Off Requests
+      x-gusto-integration-type:
+        - embedded
+      parameters:
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: time_off_request_uuid
+          in: path
+          description: The UUID of the time off request
+          required: true
+          schema:
+            type: string
+      x-gusto-rswag: true
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Embedded-Time-Off-Request"
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+    delete:
+      summary: Delete a time off request
+      operationId: delete-v1-time_off-requests-time_off_request_uuid
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Delete a time off request
+
+        scope: `time_off_requests:write`
+      tags:
+        - Time Off Requests
+      x-gusto-integration-type:
+        - embedded
+      parameters:
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: time_off_request_uuid
+          in: path
+          description: The UUID of the time off request
+          required: true
+          schema:
+            type: string
+      x-gusto-rswag: true
+      responses:
+        '204':
+          description: no content
+        '404':
+          description: Not Found
+          content:
+            application/json: {}
+        '422':
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json: {}
+  "/v1/time_off/requests/{time_off_request_uuid}/approve":
+    put:
+      summary: Approve a time off request
+      operationId: put-v1-time_off-requests-time_off_request_uuid-approve
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Approve a pending time off request. Optionally override the dates and hours.
+
+        Only requests with a `pending` status can be approved. Attempting to approve a request that has already been `declined` or `consumed` will fail with a 422 error.
+
+        scope: `time_off_requests:manage`
+      tags:
+        - Time Off Requests
+      x-gusto-integration-type:
+        - embedded
+      parameters:
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: time_off_request_uuid
+          in: path
+          description: The UUID of the time off request
+          required: true
+          schema:
+            type: string
+      x-gusto-rswag: true
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Embedded-Time-Off-Request"
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+        '422':
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                approver_uuid:
+                  type: string
+                  description: The UUID of the admin approving the request. Defaults to the company's primary payroll admin.
+                employer_note:
+                  type: string
+                  description: A note from the employer about the approval
+                days:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: 'An object where keys are dates in YYYY-MM-DD format and values are hours as string decimals (e.g. {"2025-01-20": "8.000"}). Use this to override the requested hours.'
+  "/v1/time_off/requests/{time_off_request_uuid}/decline":
+    put:
+      summary: Decline a time off request
+      operationId: put-v1-time_off-requests-time_off_request_uuid-decline
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Decline a pending or approved time off request. Requires an employer_note.
+
+        scope: `time_off_requests:manage`
+      tags:
+        - Time Off Requests
+      x-gusto-integration-type:
+        - embedded
+      parameters:
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: time_off_request_uuid
+          in: path
+          description: The UUID of the time off request
+          required: true
+          schema:
+            type: string
+      x-gusto-rswag: true
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Embedded-Time-Off-Request"
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+        '422':
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                employer_note:
+                  type: string
+                  description: Note explaining why the request was declined
+                approver_uuid:
+                  type: string
+                  description: The UUID of the admin declining the request. Defaults to the company's primary payroll admin.
+              required:
+                - employer_note
+        required: true
   "/v1/information_requests/{information_request_uuid}/submit":
     put:
       x-gusto-integration-type:
@@ -17224,6 +18624,23 @@ components:
                 properties:
                   uuid:
                     type: string
+      x-examples:
+        example:
+          uuid: 56260b3d-c375-415c-b77a-75d99f717193
+          company_uuid: 7087a288-8349-4632-b92e-bc94fb79f29e
+          title: Stage Hand
+          version: d90440dd464601d1c8f4e9e240dfb7a6
+          employees:
+            - uuid: 41199375-a999-4414-9f40-d9bf596b134d
+          contractors:
+            - uuid: 3488549f-60e4-494f-a34a-9d8aad3aabf5
+        example_created:
+          uuid: 56260b3d-c375-415c-b77a-75d99f717193
+          company_uuid: 7087a288-8349-4632-b92e-bc94fb79f29e
+          title: Stage Hand
+          version: d90440dd464601d1c8f4e9e240dfb7a6
+          employees: []
+          contractors: []
     Employee:
       title: Employee
       type: object
@@ -18243,6 +19660,23 @@ components:
           description: If true, the employee should receive their final wages via an off-cycle payroll. If false, they should receive their final wages on their current pay schedule.
       required:
         - uuid
+      x-examples:
+        terminated_employee:
+          uuid: da441196-43a9-4d23-ad5d-f37ce6bb99c0
+          employee_uuid: da441196-43a9-4d23-ad5d-f37ce6bb99c0
+          version: d487dd0b55dfcacdd920ccbdaeafa351
+          active: true
+          cancelable: false
+          effective_date: '2024-01-15'
+          run_termination_payroll: false
+        cancelable_termination:
+          uuid: da441196-43a9-4d23-ad5d-f37ce6bb99c0
+          employee_uuid: da441196-43a9-4d23-ad5d-f37ce6bb99c0
+          version: d487dd0b55dfcacdd920ccbdaeafa351
+          active: false
+          cancelable: true
+          effective_date: '2024-06-15'
+          run_termination_payroll: false
     Rehire-Body:
       type: object
       properties:
@@ -19918,6 +21352,13 @@ components:
               skippable: true
               requirements:
                 - add_addresses
+            - title: Select Industry
+              id: select_industry
+              required: true
+              completed: true
+              completed_at: '2025-02-18T10:00:00Z'
+              skippable: false
+              requirements: []
             - title: Enter Your Federal Tax Information
               id: federal_tax_setup
               required: true
@@ -19932,6 +21373,15 @@ components:
               completed_at: '2025-02-18T10:00:00Z'
               skippable: false
               requirements: []
+            - title: Enter Your State Tax Information
+              id: state_setup
+              required: true
+              completed: false
+              completed_at:
+              skippable: false
+              requirements:
+                - add_addresses
+                - add_employees
             - title: Select a Pay Schedule
               id: payroll_schedule
               required: true
@@ -20180,7 +21630,7 @@ components:
             This attribute is optional for `Business` contractors and will be ignored for `Individual` contractors.
         is_active:
           type: boolean
-          description: The status of the contractor. If the contractor's start date is in the future, updating this field to true means we are setting the start date to today.
+          description: The status of the contractor. If the contractor's start date is in the future, updating this field to true means we are setting the start date to today. Attempting to deactivate a contractor while a dismissal is already scheduled, or reactivate while a rehire is already scheduled, will return a 422 error. Cancel the pending transition first using the appropriate cancel endpoint.
     Contractor:
       description: The representation of a contractor (individual or business) in Gusto.
       type: object
@@ -21596,6 +23046,21 @@ components:
               message: Company must complete all onboarding requirements in order to run payroll.
               metadata:
                 key: needs_onboarding
+        contractor_is_active_pending_dismissal:
+          errors:
+            - error_key: is_active
+              category: invalid_attribute_value
+              message: Cannot deactivate while a dismissal is scheduled. Use the cancel termination endpoint to remove the pending dismissal first.
+        contractor_is_active_pending_dismissal_uncancelable:
+          errors:
+            - error_key: is_active
+              category: invalid_attribute_value
+              message: Cannot deactivate while a non-cancelable dismissal is in progress. The dismissal has already been processed.
+        contractor_is_active_pending_rehire:
+          errors:
+            - error_key: is_active
+              category: invalid_attribute_value
+              message: Cannot reactivate while a rehire is scheduled. Use the cancel rehire endpoint to remove the pending rehire first.
         contractor_payment_invalid_wage:
           errors:
             - error_key: wage
@@ -21662,6 +23127,36 @@ components:
             - error_key: base
               category: invalid_operation
               message: Compensation has already been processed on payroll.
+        termination_already_terminated:
+          errors:
+            - error_key: base
+              category: invalid_operation
+              message: Employee may only have one termination
+        termination_invalid_effective_date:
+          errors:
+            - error_key: effective_date
+              category: invalid_attribute_value
+              message: Effective date is not a valid date
+        termination_effective_date_required:
+          errors:
+            - error_key: effective_date
+              category: invalid_attribute_value
+              message: Effective date is required
+        termination_already_in_effect:
+          errors:
+            - error_key: base
+              category: invalid_operation
+              message: Employee has already been terminated
+        termination_payroll_exists:
+          errors:
+            - error_key: base
+              category: invalid_operation
+              message: Cannot cancel a termination with a termination payroll
+        termination_rehired:
+          errors:
+            - error_key: base
+              category: invalid_operation
+              message: Unable to modify a termination with a future rehire.
         job_title_required:
           errors:
             - error_key: title
@@ -21828,6 +23323,34 @@ components:
             - error_key: base
               category: invalid_operation
               message: The employee does not have any future employment, please rehire the employee first.
+        earning_type_missing_name:
+          errors:
+            - error_key: name
+              category: invalid_attribute_value
+              message: Name is required
+        earning_type_duplicate_name:
+          errors:
+            - error_key: name
+              category: invalid_attribute_value
+              message: There is already an earning called Bonus
+        department_duplicate_title:
+          errors:
+            - error_key: title
+              category: invalid_attribute_value
+              message: Department name has already been taken.
+        department_has_active_members:
+          errors:
+            - error_key: base
+              category: invalid_operation
+              message: You cannot delete a department that has active team members. Please remove them first.
+        department_invalid_employees:
+          errors:
+            - error_key: employees
+              category: invalid_attribute_value
+              message: Employees must be valid
+            - error_key: contractors
+              category: invalid_attribute_value
+              message: Contractors must be valid
     Entity-Error-Object:
       type: object
       required:
@@ -23307,12 +24830,17 @@ components:
       required:
         - uuid
     Earning-Type:
-      description: ''
+      description: The representation of an earning type in Gusto.
       type: object
       x-examples:
-        Example:
+        success:
           name: Cash Tips
           uuid: f5618c94-ed7d-4366-b2c4-ff05e430064f
+          active: true
+        custom_earning_type:
+          name: Gym Membership Stipend
+          uuid: 6b4a8efb-db90-4c13-a75f-aae11b3f4ff9
+          active: true
       properties:
         name:
           type: string
@@ -23321,6 +24849,9 @@ components:
           type: string
           description: The ID of the earning type.
           readOnly: true
+        active:
+          type: boolean
+          description: Whether the earning type is active.
       x-tags:
         - Earning Types
       required:
@@ -23762,6 +25293,10 @@ components:
                   uuid:
                     type: string
                     description: The UUID of the deduction. Only present for unprocessed payrolls.
+                  updatable_via_payroll:
+                    type: boolean
+                    description: Whether the deduction can be updated via the payroll update endpoint. Only present for unprocessed payrolls.
+                    readOnly: true
     Payroll-Totals-Type:
       type: object
       description: The subtotals for the payroll.
@@ -24864,7 +26399,9 @@ components:
         type:
           "$ref": "#/components/schemas/Custom-Field-Type"
         description:
-          type: string
+          type:
+            - string
+            - 'null'
         value:
           type: string
         selection_options:
@@ -24880,6 +26417,26 @@ components:
         - name
         - type
         - value
+      x-examples:
+        example_text_field:
+          id: ee515986-f3ca-49da-b576-2691b95262f9
+          company_custom_field_id: ea7e5d57-6abb-47d7-b654-347c142886c0
+          name: employee_level
+          description: Employee Level
+          type: text
+          value: '2'
+          selection_options:
+        example_radio_field:
+          id: 3796e08d-c2e3-434c-b4de-4ce1893e7b59
+          company_custom_field_id: 024ec137-6c92-43a3-b061-14a9720531d6
+          name: favorite fruit
+          description: Which is your favorite fruit?
+          type: radio
+          value: apple
+          selection_options:
+            - apple
+            - banana
+            - orange
     Company-Custom-Field:
       type: object
       description: A custom field on a company
@@ -28304,6 +29861,10 @@ components:
                 type: string
                 description: The UUID of the deduction. Only present for unprocessed payrolls.
                 readOnly: true
+              updatable_via_payroll:
+                type: boolean
+                description: Whether the deduction can be updated via the payroll update endpoint. Only present for unprocessed payrolls.
+                readOnly: true
     Payroll-Show:
       type: object
       x-examples:
@@ -28729,6 +30290,7 @@ components:
             '2019-06-01': '4.000'
             '2019-06-02': '8.000'
             '2019-06-03': '2.000'
+          request_type: vacation
           policy_type: vacation
           policy_uuid: ae382963-06b2-4b57-9780-8feda862bb70
           employee:
@@ -28841,6 +30403,7 @@ components:
               '2019-06-01': '4.000'
               '2019-06-02': '8.000'
               '2019-06-03': '2.000'
+            request_type: vacation
             policy_type: vacation
             policy_uuid: ae382963-06b2-4b57-9780-8feda862bb70
             employee:
@@ -28858,6 +30421,7 @@ components:
             employer_note: ''
             days:
               '2019-02-01': '8.000'
+            request_type: sick
             policy_type: sick
             policy_uuid: bf493c7e-1a2d-4e5f-8c9a-3d7b6e4f2a1c
             employee:
@@ -32155,6 +33719,541 @@ components:
             "$ref": "#/components/schemas/Employee-Benefit-For-Company-Benefit"
       required:
         - employee_benefits
+    Earning-Type-List:
+      type: object
+      description: Lists of default and custom earning types for a company.
+      x-examples:
+        success:
+          default:
+            - name: Bonus
+              uuid: b82e35c5-d7c6-4705-9e16-9f87499ade18
+              active: true
+            - name: Cash Tips
+              uuid: f5618c94-ed7d-4366-b2c4-ff05e430064f
+              active: true
+            - name: Commission
+              uuid: 60191999-004a-49d9-b163-630574433653
+              active: true
+            - name: Correction Payment
+              uuid: 368226e0-8e8c-48f0-bc91-aee46caafbc9
+              active: true
+            - name: Minimum Wage Adjustment
+              uuid: 88a2e519-9ff5-4c19-9071-6a709f3c2939
+              active: true
+            - name: Paycheck Tips
+              uuid: a3eaf03d-e712-4144-8f9b-71a85528adcf
+              active: true
+            - name: Severance
+              uuid: a6a2eba7-6c7d-4ced-bbe8-43452fbc9f63
+              active: true
+          custom:
+            - name: Gym Membership Stipend
+              uuid: 6b4a8efb-db90-4c13-a75f-aae11b3f4ff9
+              active: true
+        defaults_only:
+          default:
+            - name: Bonus
+              uuid: b82e35c5-d7c6-4705-9e16-9f87499ade18
+              active: true
+            - name: Cash Tips
+              uuid: f5618c94-ed7d-4366-b2c4-ff05e430064f
+              active: true
+            - name: Commission
+              uuid: 60191999-004a-49d9-b163-630574433653
+              active: true
+            - name: Correction Payment
+              uuid: 368226e0-8e8c-48f0-bc91-aee46caafbc9
+              active: true
+            - name: Minimum Wage Adjustment
+              uuid: 88a2e519-9ff5-4c19-9071-6a709f3c2939
+              active: true
+            - name: Paycheck Tips
+              uuid: a3eaf03d-e712-4144-8f9b-71a85528adcf
+              active: true
+            - name: Severance
+              uuid: a6a2eba7-6c7d-4ced-bbe8-43452fbc9f63
+              active: true
+          custom: []
+      properties:
+        default:
+          type: array
+          description: The default earning types for the company.
+          items:
+            "$ref": "#/components/schemas/Earning-Type"
+        custom:
+          type: array
+          description: The custom earning types for the company.
+          items:
+            "$ref": "#/components/schemas/Earning-Type"
+    Embedded-Time-Off-Request:
+      type: object
+      description: The representation of a time off request.
+      required:
+        - uuid
+        - status
+        - employee_note
+        - employer_note
+        - policy_type
+        - policy_uuid
+        - days
+        - employee
+        - initiator
+        - approver
+      x-examples:
+        success_status:
+          uuid: ad158cfb-99e4-4741-9db3-0bd3a267f222
+          status: pending
+          employee_note: Family vacation
+          employer_note:
+          days:
+            '2026-10-20': '8.000'
+            '2026-10-21': '8.000'
+          policy_type: vacation
+          policy_uuid: c2d9b1bd-3f36-4c2d-a727-b2af057d6a7f
+          employee:
+            uuid: 51924fa0-26c6-4d4c-8832-3ef0b422c67e
+            full_name: Alex Johnson
+          approver:
+          initiator:
+            uuid: 51924fa0-26c6-4d4c-8832-3ef0b422c67e
+            full_name: Alex Johnson
+        approved_status:
+          uuid: ad158cfb-99e4-4741-9db3-0bd3a267f222
+          status: approved
+          employee_note: Family vacation
+          employer_note:
+          days:
+            '2026-10-20': '8.000'
+            '2026-10-21': '8.000'
+          policy_type: vacation
+          policy_uuid: c2d9b1bd-3f36-4c2d-a727-b2af057d6a7f
+          employee:
+            uuid: 51924fa0-26c6-4d4c-8832-3ef0b422c67e
+            full_name: Alex Johnson
+          approver:
+            uuid: 21d8dff4-ce09-4120-a274-3a5628bf6769
+            full_name: Morgan Chen
+          initiator:
+            uuid: 51924fa0-26c6-4d4c-8832-3ef0b422c67e
+            full_name: Alex Johnson
+        declined_status:
+          uuid: ad158cfb-99e4-4741-9db3-0bd3a267f222
+          status: declined
+          employee_note: Family vacation
+          employer_note: Not enough coverage
+          days:
+            '2026-10-20': '8.000'
+            '2026-10-21': '8.000'
+          policy_type: vacation
+          policy_uuid: c2d9b1bd-3f36-4c2d-a727-b2af057d6a7f
+          employee:
+            uuid: 51924fa0-26c6-4d4c-8832-3ef0b422c67e
+            full_name: Alex Johnson
+          approver:
+          initiator:
+            uuid: 51924fa0-26c6-4d4c-8832-3ef0b422c67e
+            full_name: Alex Johnson
+      properties:
+        uuid:
+          type: string
+          description: The UUID of the time off request.
+          example: ad158cfb-99e4-4741-9db3-0bd3a267f222
+          readOnly: true
+        status:
+          type: string
+          description: The status of the time off request.
+          example: pending
+          enum:
+            - pending
+            - approved
+            - declined
+            - consumed
+          readOnly: true
+        employee_note:
+          type:
+            - string
+            - 'null'
+          description: A note about the time off request, from the employee to the employer.
+          example: Family vacation
+          readOnly: true
+        employer_note:
+          type:
+            - string
+            - 'null'
+          description: A note about the time off request, from the employer to the employee.
+          example:
+          readOnly: true
+        policy_type:
+          type:
+            - string
+            - 'null'
+          description: The type of the time off policy (e.g. vacation, sick).
+          example: vacation
+          readOnly: true
+        policy_uuid:
+          type:
+            - string
+            - 'null'
+          description: The UUID of the time off policy associated with this request.
+          example: c2d9b1bd-3f36-4c2d-a727-b2af057d6a7f
+          readOnly: true
+        days:
+          description: 'An object where keys are dates in YYYY-MM-DD format and values are hours as string decimals (e.g. {"2025-01-20": "8.000"}).'
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            '2026-10-20': '8.000'
+            '2026-10-21': '8.000'
+          readOnly: true
+        employee:
+          type: object
+          description: ''
+          properties:
+            uuid:
+              type: string
+              description: The UUID of the employee the time off request is for.
+              example: 51924fa0-26c6-4d4c-8832-3ef0b422c67e
+              readOnly: true
+            full_name:
+              type: string
+              description: The full name of the employee the time off request is for.
+              example: Alex Johnson
+              readOnly: true
+          readOnly: true
+        initiator:
+          type:
+            - object
+            - 'null'
+          description: ''
+          properties:
+            uuid:
+              type: string
+              description: The UUID of the employee who initiated the time off request.
+              example: 51924fa0-26c6-4d4c-8832-3ef0b422c67e
+              readOnly: true
+            full_name:
+              type: string
+              description: The full name of the employee who initiated the time off request.
+              example: Alex Johnson
+              readOnly: true
+          readOnly: true
+        approver:
+          type:
+            - object
+            - 'null'
+          description: This value will be null if the request has not been approved.
+          properties:
+            uuid:
+              type: string
+              description: The UUID of the employee who approved the time off request.
+              example: 21d8dff4-ce09-4120-a274-3a5628bf6769
+              readOnly: true
+            full_name:
+              type: string
+              description: The full name of the employee who approved the time off request.
+              example: Morgan Chen
+              readOnly: true
+          readOnly: true
+    Embedded-Time-Off-Request-List:
+      type: array
+      items:
+        "$ref": "#/components/schemas/Embedded-Time-Off-Request"
+      x-examples:
+        success_status:
+          - uuid: ad158cfb-99e4-4741-9db3-0bd3a267f222
+            status: pending
+            employee_note: Family vacation
+            employer_note:
+            days:
+              '2026-10-20': '8.000'
+              '2026-10-21': '8.000'
+            policy_type: vacation
+            policy_uuid: c2d9b1bd-3f36-4c2d-a727-b2af057d6a7f
+            employee:
+              uuid: 51924fa0-26c6-4d4c-8832-3ef0b422c67e
+              full_name: Alex Johnson
+            approver:
+            initiator:
+              uuid: 51924fa0-26c6-4d4c-8832-3ef0b422c67e
+              full_name: Alex Johnson
+          - uuid: 944cbbf4-8b13-4c45-babd-11ff13e17581
+            status: approved
+            employee_note: Feeling under the weather
+            employer_note: Feel better soon!
+            days:
+              '2026-11-05': '8.000'
+            policy_type: sick
+            policy_uuid: bf493c7e-1a2d-4e5f-8c9a-3d7b6e4f2a1c
+            employee:
+              uuid: c2236d10-959a-4bb9-a21d-e14c6df447b6
+              full_name: James Rivera
+            approver:
+              uuid: 21d8dff4-ce09-4120-a274-3a5628bf6769
+              full_name: Morgan Chen
+            initiator:
+              uuid: c2236d10-959a-4bb9-a21d-e14c6df447b6
+              full_name: James Rivera
+    Embedded-Time-Off-Request-Preview:
+      type: object
+      description: Preview of the balance impact for a time off request before it is created or updated.
+      required:
+        - balance_hours
+        - this_request_hours
+        - other_requested_hours
+        - remaining_balance_hours
+        - allow_negative_balance
+        - unlimited
+      x-examples:
+        success_status:
+          balance_hours: '64.0'
+          this_request_hours: '16.0'
+          other_requested_hours: '0.0'
+          remaining_balance_hours: '48.0'
+          allow_negative_balance: false
+          unlimited: false
+      properties:
+        balance_hours:
+          type: string
+          nullable: true
+          description: The employee's current available balance hours for this policy. Null for unlimited policies.
+          example: '64.0'
+          readOnly: true
+        this_request_hours:
+          type: string
+          description: The total hours for this time off request.
+          example: '16.0'
+          readOnly: true
+        other_requested_hours:
+          type: string
+          description: Hours from other pending or approved requests for this policy.
+          example: '0.0'
+          readOnly: true
+        remaining_balance_hours:
+          type: string
+          nullable: true
+          description: The projected balance after this request is applied. Null for unlimited policies.
+          example: '48.0'
+          readOnly: true
+        allow_negative_balance:
+          type: boolean
+          description: Whether the time off policy allows a negative balance.
+          example: false
+          readOnly: true
+        unlimited:
+          type: boolean
+          description: Whether the time off policy provides unlimited time off.
+          example: false
+          readOnly: true
+    Embedded-Time-Off-Balance:
+      type: object
+      description: Time off balance for an employee, grouped by policy.
+      x-examples:
+        success_status:
+          employee_uuid: 51924fa0-26c6-4d4c-8832-3ef0b422c67e
+          balances:
+            - policy_uuid: c2d9b1bd-3f36-4c2d-a727-b2af057d6a7f
+              balance_hours: '32.0'
+              accrued_hours: '40.0'
+              used_hours: '8.0'
+              pending_hours: '0.0'
+      properties:
+        employee_uuid:
+          type: string
+          description: The UUID of the employee.
+          example: 51924fa0-26c6-4d4c-8832-3ef0b422c67e
+          readOnly: true
+        balances:
+          type: array
+          description: The employee's time off balances, one entry per policy.
+          readOnly: true
+          items:
+            type: object
+            properties:
+              policy_uuid:
+                type: string
+                description: The UUID of the time off policy.
+                example: c2d9b1bd-3f36-4c2d-a727-b2af057d6a7f
+                readOnly: true
+              balance_hours:
+                type: string
+                description: The employee's current available balance hours for this policy.
+                example: '32.0'
+                readOnly: true
+              accrued_hours:
+                type: string
+                description: The total hours accrued year-to-date for this policy.
+                example: '40.0'
+                readOnly: true
+              used_hours:
+                type: string
+                description: The total hours used year-to-date for this policy.
+                example: '8.0'
+                readOnly: true
+              pending_hours:
+                type:
+                  - string
+                  - 'null'
+                description: The total hours from pending time off requests for this policy.
+                example: '0.0'
+                readOnly: true
+    Embedded-Time-Off-Balance-List:
+      type: array
+      items:
+        "$ref": "#/components/schemas/Embedded-Time-Off-Balance"
+      x-examples:
+        success_status:
+          - employee_uuid: 51924fa0-26c6-4d4c-8832-3ef0b422c67e
+            balances:
+              - policy_uuid: c2d9b1bd-3f36-4c2d-a727-b2af057d6a7f
+                balance_hours: '32.0'
+                accrued_hours: '40.0'
+                used_hours: '8.0'
+                pending_hours: '0.0'
+    Conflict-Error-Object:
+      description: "Conflict\n  \nThis error occurs when the resource version provided does not match the current version. Retrieve the latest version and retry."
+      type: object
+      required:
+        - errors
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            required:
+              - error_key
+              - category
+            properties:
+              error_key:
+                type: string
+                description: Specifies where the error occurs. Typically this key identifies the attribute/parameter related to the error.
+              category:
+                type: string
+                description: Specifies the type of error. The category provides error groupings and can be used to build custom error handling in your integration.
+              message:
+                type: string
+                description: Provides details about the error - generally this message can be surfaced to an end user.
+      x-examples:
+        invalid_version:
+          errors:
+            - error_key: base
+              category: invalid_resource_version
+              message: You are attempting to update a resource using an out-of-date version.
+    Employee-Custom-Field-List:
+      type: object
+      description: A list of an employee's custom fields
+      properties:
+        custom_fields:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Employee-Custom-Field"
+      x-examples:
+        example:
+          custom_fields:
+            - id: ee515986-f3ca-49da-b576-2691b95262f9
+              company_custom_field_id: ea7e5d57-6abb-47d7-b654-347c142886c0
+              name: employee_level
+              description: Employee Level
+              type: text
+              value: '2'
+              selection_options:
+            - id: 3796e08d-c2e3-434c-b4de-4ce1893e7b59
+              company_custom_field_id: 024ec137-6c92-43a3-b061-14a9720531d6
+              name: favorite fruit
+              description: Which is your favorite fruit?
+              type: radio
+              value: apple
+              selection_options:
+                - apple
+                - banana
+                - orange
+    Department-List:
+      type: array
+      items:
+        "$ref": "#/components/schemas/Department"
+      x-examples:
+        example:
+          - uuid: 56260b3d-c375-415c-b77a-75d99f717193
+            company_uuid: 7087a288-8349-4632-b92e-bc94fb79f29e
+            title: Stage Hand
+            version: d90440dd464601d1c8f4e9e240dfb7a6
+            employees:
+              - uuid: 41199375-a999-4414-9f40-d9bf596b134d
+            contractors: []
+          - uuid: ec5c8a85-3233-4f39-a9f5-fb1ab7b5f5f3
+            company_uuid: 7087a288-8349-4632-b92e-bc94fb79f29e
+            title: Actors
+            version: 34f39a30b45d077cb83aed2df4810d74
+            employees:
+              - uuid: 7ee4aca1-814b-4034-b0f8-07f93cc679d1
+            contractors: []
+          - uuid: 1802465d-4f68-4865-920c-1307ab095f12
+            company_uuid: 7087a288-8349-4632-b92e-bc94fb79f29e
+            title: Band
+            version: 1fe3076d35ef7c97d0ae68c5f4df0acd
+            employees:
+              - uuid: a73955be-c009-44dc-915e-6246e2bdedbb
+            contractors:
+              - uuid: 3488549f-60e4-494f-a34a-9d8aad3aabf5
+    Department-Create-Request-Body:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Name of the department
+          example: Stage Hand
+      required:
+        - title
+    Department-Update-Request-Body:
+      type: object
+      allOf:
+        - "$ref": "#/components/schemas/Versionable-Required"
+        - "$ref": "#/components/schemas/Department-Create-Request-Body"
+    Department-People-Request-Body:
+      type: object
+      allOf:
+        - "$ref": "#/components/schemas/Versionable-Required"
+        - type: object
+          properties:
+            employees:
+              type: array
+              description: Array of employees to add or remove from the department
+              items:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+            contractors:
+              type: array
+              description: Array of contractors to add or remove from the department
+              items:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+    Company-Custom-Field-List:
+      type: object
+      x-examples:
+        success_status:
+          custom_fields:
+            - uuid: ea7e5d57-6abb-47d7-b654-347c142886c0
+              name: employee_level
+              description: Employee Level
+              type: text
+              selection_options:
+            - uuid: 024ec137-6c92-43a3-b061-14a9720531d6
+              name: favorite fruit
+              description: Which is your favorite fruit?
+              type: radio
+              selection_options:
+                - apple
+                - banana
+                - orange
+      properties:
+        custom_fields:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Company-Custom-Field"
   securitySchemes:
     CompanyAccessAuth:
       type: http
@@ -35247,21 +37346,29 @@ components:
                 default:
                   - name: Bonus
                     uuid: b82e35c5-d7c6-4705-9e16-9f87499ade18
+                    active: true
                   - name: Cash Tips
                     uuid: f5618c94-ed7d-4366-b2c4-ff05e430064f
+                    active: true
                   - name: Commission
                     uuid: 60191999-004a-49d9-b163-630574433653
+                    active: true
                   - name: Correction Payment
                     uuid: 368226e0-8e8c-48f0-bc91-aee46caafbc9
+                    active: true
                   - name: Minimum Wage Adjustment
                     uuid: 88a2e519-9ff5-4c19-9071-6a709f3c2939
+                    active: true
                   - name: Paycheck Tips
                     uuid: a3eaf03d-e712-4144-8f9b-71a85528adcf
+                    active: true
                   - name: Severance
                     uuid: a6a2eba7-6c7d-4ced-bbe8-43452fbc9f63
+                    active: true
                 custom:
                   - name: Gym Membership Stipend
                     uuid: 6b4a8efb-db90-4c13-a75f-aae11b3f4ff9
+                    active: true
     Earning-Type-Object:
       description: Example response
       content:
@@ -35273,6 +37380,7 @@ components:
               value:
                 name: Gym Membership Stipend
                 uuid: f4dc8972-8830-4c07-b623-349a04b040d7
+                active: true
     Employee-Benefit-Object:
       description: Example response
       content:

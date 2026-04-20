@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanyCustomFieldList,
@@ -14,13 +15,27 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompaniesCompanyIdCustomFieldsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompaniesCompanyIdCustomFieldsHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetV1CompaniesCompanyIdCustomFieldsHeaderXGustoAPIVersion>;
+
 export type GetV1CompaniesCompanyIdCustomFieldsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyIdCustomFieldsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
@@ -33,26 +48,28 @@ export type GetV1CompaniesCompanyIdCustomFieldsRequest = {
    * Number of objects per page. For majority of endpoints will default to 25
    */
   per?: number | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1CompaniesCompanyIdCustomFieldsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * successful
    */
   companyCustomFieldList?: CompanyCustomFieldList | undefined;
 };
 
 /** @internal */
+export const GetV1CompaniesCompanyIdCustomFieldsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesCompanyIdCustomFieldsHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1CompaniesCompanyIdCustomFieldsHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetV1CompaniesCompanyIdCustomFieldsRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_id: string;
   page?: number | undefined;
   per?: number | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -62,14 +79,16 @@ export const GetV1CompaniesCompanyIdCustomFieldsRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1CompaniesCompanyIdCustomFieldsRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1CompaniesCompanyIdCustomFieldsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyId: z.string(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyId: "company_id",
     });
   });
 
