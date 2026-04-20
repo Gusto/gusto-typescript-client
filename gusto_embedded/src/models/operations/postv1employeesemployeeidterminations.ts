@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -14,11 +15,21 @@ import {
   Termination,
   Termination$inboundSchema,
 } from "../components/termination.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PostV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion
+  >;
 
 export type PostV1EmployeesEmployeeIdTerminationsRequestBody = {
   /**
@@ -33,28 +44,36 @@ export type PostV1EmployeesEmployeeIdTerminationsRequestBody = {
 
 export type PostV1EmployeesEmployeeIdTerminationsRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the employee
    */
   employeeId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PostV1EmployeesEmployeeIdTerminationsRequestBody;
 };
 
 export type PostV1EmployeesEmployeeIdTerminationsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example Response
+   * Created
    */
   termination?: Termination | undefined;
 };
 
 /** @internal */
+export const PostV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion
+  > = z.nativeEnum(PostV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion);
+
+/** @internal */
 export type PostV1EmployeesEmployeeIdTerminationsRequestBody$Outbound = {
   effective_date: string;
-  run_termination_payroll?: boolean | undefined;
+  run_termination_payroll: boolean;
 };
 
 /** @internal */
@@ -65,7 +84,7 @@ export const PostV1EmployeesEmployeeIdTerminationsRequestBody$outboundSchema:
     PostV1EmployeesEmployeeIdTerminationsRequestBody
   > = z.object({
     effectiveDate: z.string(),
-    runTerminationPayroll: z.boolean().optional(),
+    runTerminationPayroll: z.boolean().default(false),
   }).transform((v) => {
     return remap$(v, {
       effectiveDate: "effective_date",
@@ -86,8 +105,8 @@ export function postV1EmployeesEmployeeIdTerminationsRequestBodyToJSON(
 
 /** @internal */
 export type PostV1EmployeesEmployeeIdTerminationsRequest$Outbound = {
-  employee_id: string;
   "X-Gusto-API-Version": string;
+  employee_id: string;
   RequestBody: PostV1EmployeesEmployeeIdTerminationsRequestBody$Outbound;
 };
 
@@ -98,15 +117,17 @@ export const PostV1EmployeesEmployeeIdTerminationsRequest$outboundSchema:
     z.ZodTypeDef,
     PostV1EmployeesEmployeeIdTerminationsRequest
   > = z.object({
+    xGustoAPIVersion:
+      PostV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PostV1EmployeesEmployeeIdTerminationsRequestBody$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      employeeId: "employee_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      employeeId: "employee_id",
       requestBody: "RequestBody",
     });
   });

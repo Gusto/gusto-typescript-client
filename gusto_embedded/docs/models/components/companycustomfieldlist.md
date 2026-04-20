@@ -1,7 +1,5 @@
 # CompanyCustomFieldList
 
-Example response
-
 ## Example Usage
 
 ```typescript

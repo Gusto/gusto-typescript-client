@@ -14,6 +14,10 @@
 * [getAddress](#getaddress) - Get a contractor address
 * [updateAddress](#updateaddress) - Create or update a contractor's address
 * [getV1CompaniesCompanyIdContractorsPaymentDetails](#getv1companiescompanyidcontractorspaymentdetails) - List contractor payment details
+* [postV1ContractorsContractorUuidRehire](#postv1contractorscontractoruuidrehire) - Schedule a contractor rehire
+* [deleteV1ContractorsContractorUuidRehire](#deletev1contractorscontractoruuidrehire) - Cancel a pending contractor rehire
+* [postV1ContractorsContractorUuidTermination](#postv1contractorscontractoruuidtermination) - Schedule a contractor termination
+* [deleteV1ContractorsContractorUuidTermination](#deletev1contractorscontractoruuidtermination) - Cancel a pending contractor termination
 
 ## create
 
@@ -2546,3 +2550,423 @@ import {
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.NotFoundErrorObject | 404                        | application/json           |
 | errors.APIError            | 4XX, 5XX                   | \*/\*                      |
+
+## postV1ContractorsContractorUuidRehire
+
+## Purpose
+Schedules a contractor rehire for a given date. Creates a new employment record for the contractor.
+
+## Prerequisites
+Before calling this endpoint:
+1. The contractor must be inactive (previously dismissed)
+2. The contractor must not already have an upcoming employment
+
+## Related webhooks
+- `contractor.reactivated`: Fires when the contractor becomes active again (on or after start_date)
+
+scope: `contractors:write`
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-contractors-contractor_uuid-rehire" method="post" path="/v1/contractors/{contractor_uuid}/rehire" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.contractors.postV1ContractorsContractorUuidRehire({
+    contractorUuid: "<id>",
+    requestBody: {
+      startDate: new RFCDate("2025-07-01"),
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { contractorsPostV1ContractorsContractorUuidRehire } from "@gusto/embedded-api/funcs/contractorsPostV1ContractorsContractorUuidRehire.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contractorsPostV1ContractorsContractorUuidRehire(gustoEmbedded, {
+    contractorUuid: "<id>",
+    requestBody: {
+      startDate: new RFCDate("2025-07-01"),
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorsPostV1ContractorsContractorUuidRehire failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useContractorsPostV1ContractorsContractorUuidRehireMutation
+} from "@gusto/embedded-api/react-query/contractorsPostV1ContractorsContractorUuidRehire.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.PostV1ContractorsContractorUuidRehireRequest](../../models/operations/postv1contractorscontractoruuidrehirerequest.md)                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.PostV1ContractorsContractorUuidRehireResponse](../../models/operations/postv1contractorscontractoruuidrehireresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## deleteV1ContractorsContractorUuidRehire
+
+## Purpose
+Cancels a pending contractor rehire. For future-dated rehires, cancellation is available anytime before the date.
+For past-dated rehires, cancellation is only available within the 2-day grace period.
+
+## Prerequisites
+Before calling this endpoint:
+- The contractor must have a pending rehire (upcoming employment)
+
+## Related webhooks
+- `contractor.deactivated`: Fires when the contractor returns to inactive state after cancellation
+
+scope: `contractors:write`
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="delete-v1-contractors-contractor_uuid-rehire" method="delete" path="/v1/contractors/{contractor_uuid}/rehire" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.contractors.deleteV1ContractorsContractorUuidRehire({
+    contractorUuid: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { contractorsDeleteV1ContractorsContractorUuidRehire } from "@gusto/embedded-api/funcs/contractorsDeleteV1ContractorsContractorUuidRehire.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contractorsDeleteV1ContractorsContractorUuidRehire(gustoEmbedded, {
+    contractorUuid: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorsDeleteV1ContractorsContractorUuidRehire failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useContractorsDeleteV1ContractorsContractorUuidRehireMutation
+} from "@gusto/embedded-api/react-query/contractorsDeleteV1ContractorsContractorUuidRehire.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.DeleteV1ContractorsContractorUuidRehireRequest](../../models/operations/deletev1contractorscontractoruuidrehirerequest.md)                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.DeleteV1ContractorsContractorUuidRehireResponse](../../models/operations/deletev1contractorscontractoruuidrehireresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## postV1ContractorsContractorUuidTermination
+
+## Purpose
+Schedules a contractor dismissal for a given date. Supports both immediate (past dates) and future-dated dismissals.
+
+## Prerequisites
+Before calling this endpoint:
+1. The contractor must be active (no existing pending dismissal)
+2. The contractor must have a current employment
+
+## Related webhooks
+- `contractor.deactivated`: Fires when the contractor becomes inactive (on or after end_date)
+
+scope: `contractors:write`
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-contractors-contractor_uuid-termination" method="post" path="/v1/contractors/{contractor_uuid}/termination" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.contractors.postV1ContractorsContractorUuidTermination({
+    contractorUuid: "<id>",
+    requestBody: {
+      endDate: new RFCDate("2025-06-15"),
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { contractorsPostV1ContractorsContractorUuidTermination } from "@gusto/embedded-api/funcs/contractorsPostV1ContractorsContractorUuidTermination.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contractorsPostV1ContractorsContractorUuidTermination(gustoEmbedded, {
+    contractorUuid: "<id>",
+    requestBody: {
+      endDate: new RFCDate("2025-06-15"),
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorsPostV1ContractorsContractorUuidTermination failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useContractorsPostV1ContractorsContractorUuidTerminationMutation
+} from "@gusto/embedded-api/react-query/contractorsPostV1ContractorsContractorUuidTermination.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.PostV1ContractorsContractorUuidTerminationRequest](../../models/operations/postv1contractorscontractoruuidterminationrequest.md)                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.PostV1ContractorsContractorUuidTerminationResponse](../../models/operations/postv1contractorscontractoruuidterminationresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## deleteV1ContractorsContractorUuidTermination
+
+## Purpose
+Cancels a pending contractor dismissal. For future-dated dismissals, cancellation is available anytime before the date.
+For past-dated dismissals, cancellation is only available within the 2-day grace period.
+
+## Prerequisites
+Before calling this endpoint:
+- The contractor must have a pending dismissal (scheduled or within the grace period)
+
+## Related webhooks
+- `contractor.reactivated`: Fires when the contractor becomes active again after cancellation
+
+scope: `contractors:write`
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="delete-v1-contractors-contractor_uuid-termination" method="delete" path="/v1/contractors/{contractor_uuid}/termination" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.contractors.deleteV1ContractorsContractorUuidTermination({
+    contractorUuid: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { contractorsDeleteV1ContractorsContractorUuidTermination } from "@gusto/embedded-api/funcs/contractorsDeleteV1ContractorsContractorUuidTermination.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contractorsDeleteV1ContractorsContractorUuidTermination(gustoEmbedded, {
+    contractorUuid: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorsDeleteV1ContractorsContractorUuidTermination failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useContractorsDeleteV1ContractorsContractorUuidTerminationMutation
+} from "@gusto/embedded-api/react-query/contractorsDeleteV1ContractorsContractorUuidTermination.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.DeleteV1ContractorsContractorUuidTerminationRequest](../../models/operations/deletev1contractorscontractoruuidterminationrequest.md)                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.DeleteV1ContractorsContractorUuidTerminationResponse](../../models/operations/deletev1contractorscontractoruuidterminationresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |

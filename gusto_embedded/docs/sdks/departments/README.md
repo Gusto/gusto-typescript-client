@@ -31,7 +31,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.departments.create({
     companyUuid: "<id>",
-    requestBody: {},
+    departmentCreateRequestBody: {
+      title: "Stage Hand",
+    },
   });
 
   console.log(result);
@@ -57,7 +59,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await departmentsCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {},
+    departmentCreateRequestBody: {
+      title: "Stage Hand",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -99,7 +103,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.departments.create({
     companyUuid: "<id>",
-    requestBody: {
+    departmentCreateRequestBody: {
       title: "Stage Hand",
     },
   });
@@ -127,7 +131,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await departmentsCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
+    departmentCreateRequestBody: {
       title: "Stage Hand",
     },
   });
@@ -171,7 +175,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.departments.create({
     companyUuid: "<id>",
-    requestBody: {},
+    departmentCreateRequestBody: {
+      title: "Stage Hand",
+    },
   });
 
   console.log(result);
@@ -197,7 +203,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await departmentsCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {},
+    departmentCreateRequestBody: {
+      title: "Stage Hand",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -239,7 +247,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.departments.create({
     companyUuid: "<id>",
-    requestBody: {},
+    departmentCreateRequestBody: {
+      title: "Stage Hand",
+    },
   });
 
   console.log(result);
@@ -265,7 +275,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await departmentsCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {},
+    departmentCreateRequestBody: {
+      title: "Stage Hand",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -312,6 +324,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
@@ -414,16 +427,16 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## get
 
 Get a department given the UUID
 
 scope: `departments:read`
-
 
 ### Example Usage
 
@@ -518,9 +531,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## update
 
@@ -541,8 +555,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.departments.update({
     departmentUuid: "<id>",
-    requestBody: {
+    departmentUpdateRequestBody: {
       version: "<value>",
+      title: "Stage Hand",
     },
   });
 
@@ -569,8 +584,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await departmentsUpdate(gustoEmbedded, {
     departmentUuid: "<id>",
-    requestBody: {
+    departmentUpdateRequestBody: {
       version: "<value>",
+      title: "Stage Hand",
     },
   });
   if (res.ok) {
@@ -613,7 +629,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.departments.update({
     departmentUuid: "<id>",
-    requestBody: {
+    departmentUpdateRequestBody: {
       version: "db0edd04aaac4506f7edab03ac855d56",
       title: "Backup Dancer",
     },
@@ -642,7 +658,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await departmentsUpdate(gustoEmbedded, {
     departmentUuid: "<id>",
-    requestBody: {
+    departmentUpdateRequestBody: {
       version: "db0edd04aaac4506f7edab03ac855d56",
       title: "Backup Dancer",
     },
@@ -687,8 +703,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.departments.update({
     departmentUuid: "<id>",
-    requestBody: {
+    departmentUpdateRequestBody: {
       version: "<value>",
+      title: "Stage Hand",
     },
   });
 
@@ -715,8 +732,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await departmentsUpdate(gustoEmbedded, {
     departmentUuid: "<id>",
-    requestBody: {
+    departmentUpdateRequestBody: {
       version: "<value>",
+      title: "Stage Hand",
     },
   });
   if (res.ok) {
@@ -759,8 +777,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.departments.update({
     departmentUuid: "<id>",
-    requestBody: {
+    departmentUpdateRequestBody: {
       version: "<value>",
+      title: "Stage Hand",
     },
   });
 
@@ -787,8 +806,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await departmentsUpdate(gustoEmbedded, {
     departmentUuid: "<id>",
-    requestBody: {
+    departmentUpdateRequestBody: {
       version: "<value>",
+      title: "Stage Hand",
     },
   });
   if (res.ok) {
@@ -836,6 +856,8 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.ConflictErrorObject            | 409                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
@@ -844,7 +866,6 @@ import {
 Delete a department. You cannot delete a department until all employees and contractors have been removed.
 
 scope: `departments:write`
-
 
 ### Example Usage
 
@@ -930,6 +951,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
@@ -938,7 +960,6 @@ import {
 Add employees and contractors to a department
 
 scope: `departments:write`
-
 
 ### Example Usage
 
@@ -953,7 +974,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.departments.addPeople({
     departmentUuid: "<id>",
-    requestBody: {},
+    departmentPeopleRequestBody: {
+      version: "56d00c178bc7393b2a206ed6a86afcb4",
+    },
   });
 
   console.log(result);
@@ -979,7 +1002,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await departmentsAddPeople(gustoEmbedded, {
     departmentUuid: "<id>",
-    requestBody: {},
+    departmentPeopleRequestBody: {
+      version: "56d00c178bc7393b2a206ed6a86afcb4",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1024,16 +1049,17 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## removePeople
 
 Remove employees and contractors from a department
 
 scope: `departments:write`
-
 
 ### Example Usage
 
@@ -1048,7 +1074,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.departments.removePeople({
     departmentUuid: "<id>",
-    requestBody: {},
+    departmentPeopleRequestBody: {
+      version: "56d00c178bc7393b2a206ed6a86afcb4",
+    },
   });
 
   console.log(result);
@@ -1074,7 +1102,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await departmentsRemovePeople(gustoEmbedded, {
     departmentUuid: "<id>",
-    requestBody: {},
+    departmentPeopleRequestBody: {
+      version: "56d00c178bc7393b2a206ed6a86afcb4",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1119,6 +1149,8 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
