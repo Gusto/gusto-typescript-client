@@ -24,7 +24,6 @@ jobs:
       force: ${{ github.event.inputs.force }}
       mode: pr
       set_version: ${{ github.event.inputs.set_version }}
-      target: gusto-embedded
       runs-on: "{\"group\": \"gusto-ubuntu-default\"}"
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
