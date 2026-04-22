@@ -1,0 +1,18 @@
+# CompanyPaidTimeOff
+
+## Example Usage
+
+```typescript
+import { CompanyPaidTimeOff } from "@gusto/embedded-api-v-2025-11-15/models/components/company.js";
+
+let value: CompanyPaidTimeOff = {
+  name: "Vacation Hours",
+};
+```
+
+## Fields
+
+| Field                               | Type                                | Required                            | Description                         | Example                             |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| `uuid`                              | *string*                            | :heavy_minus_sign:                  | The UUID of the paid time off type. |                                     |
+| `name`                              | *string*                            | :heavy_minus_sign:                  | The name of the paid time off type. | Vacation Hours                      |

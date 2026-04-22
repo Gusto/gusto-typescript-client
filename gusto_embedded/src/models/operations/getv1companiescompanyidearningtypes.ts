@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EarningTypeList,
@@ -14,35 +15,51 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion>;
+
 export type GetV1CompaniesCompanyIdEarningTypesRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
   companyId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1CompaniesCompanyIdEarningTypesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
   earningTypeList?: EarningTypeList | undefined;
 };
 
 /** @internal */
+export const GetV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetV1CompaniesCompanyIdEarningTypesRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
+  company_id: string;
 };
 
 /** @internal */
@@ -52,12 +69,14 @@ export const GetV1CompaniesCompanyIdEarningTypesRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1CompaniesCompanyIdEarningTypesRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyId: "company_id",
     });
   });
 

@@ -1,0 +1,21 @@
+# Results
+
+## Example Usage
+
+```typescript
+import { Results } from "@gusto/embedded-api-v-2025-11-15/models/components/peoplebatchresults.js";
+
+let value: Results = {};
+```
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `externalId`                                                                                             | *string*                                                                                                 | :heavy_minus_sign:                                                                                       | The external ID provided in the batch request.                                                           |
+| `role`                                                                                                   | [components.Role](../../models/components/role.md)                                                       | :heavy_minus_sign:                                                                                       | The type of person created.                                                                              |
+| `status`                                                                                                 | [components.PeopleBatchResultsResultsStatus](../../models/components/peoplebatchresultsresultsstatus.md) | :heavy_minus_sign:                                                                                       | The status of this batch item.                                                                           |
+| `idx`                                                                                                    | *number*                                                                                                 | :heavy_minus_sign:                                                                                       | The index of this item in the original batch request.                                                    |
+| `uuid`                                                                                                   | *string*                                                                                                 | :heavy_minus_sign:                                                                                       | The UUID of the created person.                                                                          |
+| `employeeUuid`                                                                                           | *string*                                                                                                 | :heavy_minus_sign:                                                                                       | The UUID of the created employee (if role is employee).                                                  |
+| `errors`                                                                                                 | [components.Errors](../../models/components/errors.md)[]                                                 | :heavy_minus_sign:                                                                                       | Errors encountered while processing this batch item.                                                     |

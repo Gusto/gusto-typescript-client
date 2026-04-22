@@ -2560,7 +2560,7 @@ import {
 
 ## getCustomFields
 
-Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company
+Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company.
 
 scope: `companies:read`
 
@@ -2657,6 +2657,7 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |

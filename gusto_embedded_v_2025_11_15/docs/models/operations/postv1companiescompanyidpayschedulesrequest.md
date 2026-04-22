@@ -1,0 +1,25 @@
+# PostV1CompaniesCompanyIdPaySchedulesRequest
+
+## Example Usage
+
+```typescript
+import { PostV1CompaniesCompanyIdPaySchedulesRequest } from "@gusto/embedded-api-v-2025-11-15/models/operations/postv1companiescompanyidpayschedules.js";
+import { RFCDate } from "@gusto/embedded-api-v-2025-11-15/types/rfcdate.js";
+
+let value: PostV1CompaniesCompanyIdPaySchedulesRequest = {
+  companyId: "<id>",
+  payScheduleCreateRequest: {
+    frequency: "Every week",
+    anchorPayDate: new RFCDate("2024-01-14"),
+    anchorEndOfPayPeriod: new RFCDate("2024-02-17"),
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PostV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion](../../models/operations/postv1companiescompanyidpayschedulesheaderxgustoapiversion.md)                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyId`                                                                                                                                                                                                                  | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `payScheduleCreateRequest`                                                                                                                                                                                                   | [components.PayScheduleCreateRequest](../../models/components/payschedulecreaterequest.md)                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

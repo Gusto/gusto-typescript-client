@@ -5,46 +5,94 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { Form, Form$inboundSchema } from "../components/form.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompanyFormsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompanyFormsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1CompanyFormsHeaderXGustoAPIVersion
+>;
+
+/**
+ * Sort company forms by a given field. Append `:asc` or `:desc` to specify direction (e.g., `name:asc`). Defaults to ascending.
+ */
+export const GetV1CompanyFormsQueryParamSortBy = {
+  Name: "name",
+  Year: "year",
+  Quarter: "quarter",
+  Draft: "draft",
+  DocumentContentType: "document_content_type",
+  CreatedAt: "created_at",
+} as const;
+/**
+ * Sort company forms by a given field. Append `:asc` or `:desc` to specify direction (e.g., `name:asc`). Defaults to ascending.
+ */
+export type GetV1CompanyFormsQueryParamSortBy = ClosedEnum<
+  typeof GetV1CompanyFormsQueryParamSortBy
+>;
+
 export type GetV1CompanyFormsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: GetV1CompanyFormsHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the company
    */
   companyId: string;
   /**
-   * Sort company forms. Options: name, year, quarter, draft, document_content_type, created_at (optionally with :asc or :desc suffix)
+   * Sort company forms by a given field. Append `:asc` or `:desc` to specify direction (e.g., `name:asc`). Defaults to ascending.
    */
-  sortBy?: string | undefined;
+  sortBy?: GetV1CompanyFormsQueryParamSortBy | undefined;
   /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  page?: number | undefined;
+  /**
+   * Number of objects per page. For majority of endpoints will default to 25
+   */
+  per?: number | undefined;
 };
 
 export type GetV1CompanyFormsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
-  formList?: Array<Form> | undefined;
+  forms?: Array<Form> | undefined;
 };
 
 /** @internal */
+export const GetV1CompanyFormsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1CompanyFormsHeaderXGustoAPIVersion> = z
+    .nativeEnum(GetV1CompanyFormsHeaderXGustoAPIVersion);
+
+/** @internal */
+export const GetV1CompanyFormsQueryParamSortBy$outboundSchema: z.ZodNativeEnum<
+  typeof GetV1CompanyFormsQueryParamSortBy
+> = z.nativeEnum(GetV1CompanyFormsQueryParamSortBy);
+
+/** @internal */
 export type GetV1CompanyFormsRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_id: string;
   sort_by?: string | undefined;
-  "X-Gusto-API-Version": string;
+  page?: number | undefined;
+  per?: number | undefined;
 };
 
 /** @internal */
@@ -53,14 +101,17 @@ export const GetV1CompanyFormsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1CompanyFormsRequest
 > = z.object({
+  xGustoAPIVersion: GetV1CompanyFormsHeaderXGustoAPIVersion$outboundSchema
+    .default("2025-06-15"),
   companyId: z.string(),
-  sortBy: z.string().optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  sortBy: GetV1CompanyFormsQueryParamSortBy$outboundSchema.optional(),
+  page: z.number().int().optional(),
+  per: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
+    xGustoAPIVersion: "X-Gusto-API-Version",
     companyId: "company_id",
     sortBy: "sort_by",
-    xGustoAPIVersion: "X-Gusto-API-Version",
   });
 });
 
@@ -79,11 +130,11 @@ export const GetV1CompanyFormsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Form-List": z.array(Form$inboundSchema).optional(),
+  Forms: z.array(Form$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
-    "Form-List": "formList",
+    "Forms": "forms",
   });
 });
 

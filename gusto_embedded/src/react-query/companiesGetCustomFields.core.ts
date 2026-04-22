@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesGetCustomFields } from "../funcs/companiesGetCustomFields.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesCompanyIdCustomFieldsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdCustomFieldsRequest,
   GetV1CompaniesCompanyIdCustomFieldsResponse,
 } from "../models/operations/getv1companiescompanyidcustomfields.js";
@@ -47,9 +47,9 @@ export function buildCompaniesGetCustomFieldsQuery(
 } {
   return {
     queryKey: queryKeyCompaniesGetCustomFields(request.companyId, {
+      xGustoAPIVersion: request.xGustoAPIVersion,
       page: request.page,
       per: request.per,
-      xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function companiesGetCustomFieldsQueryFn(
       ctx,
@@ -77,9 +77,11 @@ export function buildCompaniesGetCustomFieldsQuery(
 export function queryKeyCompaniesGetCustomFields(
   companyId: string,
   parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyIdCustomFieldsHeaderXGustoAPIVersion
+      | undefined;
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

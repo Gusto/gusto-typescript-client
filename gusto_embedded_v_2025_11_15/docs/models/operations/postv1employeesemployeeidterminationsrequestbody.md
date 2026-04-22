@@ -1,0 +1,18 @@
+# PostV1EmployeesEmployeeIdTerminationsRequestBody
+
+## Example Usage
+
+```typescript
+import { PostV1EmployeesEmployeeIdTerminationsRequestBody } from "@gusto/embedded-api-v-2025-11-15/models/operations/postv1employeesemployeeidterminations.js";
+
+let value: PostV1EmployeesEmployeeIdTerminationsRequestBody = {
+  effectiveDate: "2020-06-30",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                           | Type                                                                                                                                                            | Required                                                                                                                                                        | Description                                                                                                                                                     | Example                                                                                                                                                         |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `effectiveDate`                                                                                                                                                 | *string*                                                                                                                                                        | :heavy_check_mark:                                                                                                                                              | The employee's last day of work.                                                                                                                                | 2020-06-30                                                                                                                                                      |
+| `runTerminationPayroll`                                                                                                                                         | *boolean*                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                              | If true, the employee should receive their final wages via an off-cycle payroll. If false, they should receive their final wages on their current pay schedule. | true                                                                                                                                                            |
