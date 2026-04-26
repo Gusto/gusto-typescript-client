@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { garnishmentsList } from "../funcs/garnishmentsList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1EmployeesEmployeeIdGarnishmentsHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdGarnishmentsRequest,
   GetV1EmployeesEmployeeIdGarnishmentsResponse,
 } from "../models/operations/getv1employeesemployeeidgarnishments.js";
@@ -47,9 +47,9 @@ export function buildGarnishmentsListQuery(
 } {
   return {
     queryKey: queryKeyGarnishmentsList(request.employeeId, {
+      xGustoAPIVersion: request.xGustoAPIVersion,
       page: request.page,
       per: request.per,
-      xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function garnishmentsListQueryFn(
       ctx,
@@ -77,9 +77,11 @@ export function buildGarnishmentsListQuery(
 export function queryKeyGarnishmentsList(
   employeeId: string,
   parameters: {
+    xGustoAPIVersion?:
+      | GetV1EmployeesEmployeeIdGarnishmentsHeaderXGustoAPIVersion
+      | undefined;
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

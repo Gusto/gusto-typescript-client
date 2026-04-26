@@ -19,8 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutRemovePeopleFromDepartmentRequest,
   PutRemovePeopleFromDepartmentResponse,
@@ -38,6 +40,8 @@ export type DepartmentsRemovePeopleMutationData =
   PutRemovePeopleFromDepartmentResponse;
 
 export type DepartmentsRemovePeopleMutationError =
+  | NotFoundErrorObject
+  | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

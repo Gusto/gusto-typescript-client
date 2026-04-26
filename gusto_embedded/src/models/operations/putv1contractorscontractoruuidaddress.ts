@@ -5,99 +5,70 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ContractorAddress,
   ContractorAddress$inboundSchema,
 } from "../components/contractoraddress.js";
 import {
+  ContractorAddressUpdateBody,
+  ContractorAddressUpdateBody$Outbound,
+  ContractorAddressUpdateBody$outboundSchema,
+} from "../components/contractoraddressupdatebody.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PutV1ContractorsContractorUuidAddressRequestBody = {
-  /**
-   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
-   */
-  version: string;
-  street1?: string | undefined;
-  street2?: string | undefined;
-  city?: string | undefined;
-  state?: string | undefined;
-  zip?: string | undefined;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1ContractorsContractorUuidAddressHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1ContractorsContractorUuidAddressHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutV1ContractorsContractorUuidAddressHeaderXGustoAPIVersion
+  >;
 
 export type PutV1ContractorsContractorUuidAddressRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1ContractorsContractorUuidAddressHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the contractor
    */
   contractorUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutV1ContractorsContractorUuidAddressRequestBody;
+  contractorAddressUpdateBody: ContractorAddressUpdateBody;
 };
 
 export type PutV1ContractorsContractorUuidAddressResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
   contractorAddress?: ContractorAddress | undefined;
 };
 
 /** @internal */
-export type PutV1ContractorsContractorUuidAddressRequestBody$Outbound = {
-  version: string;
-  street_1?: string | undefined;
-  street_2?: string | undefined;
-  city?: string | undefined;
-  state?: string | undefined;
-  zip?: string | undefined;
-};
-
-/** @internal */
-export const PutV1ContractorsContractorUuidAddressRequestBody$outboundSchema:
-  z.ZodType<
-    PutV1ContractorsContractorUuidAddressRequestBody$Outbound,
-    z.ZodTypeDef,
-    PutV1ContractorsContractorUuidAddressRequestBody
-  > = z.object({
-    version: z.string(),
-    street1: z.string().optional(),
-    street2: z.string().optional(),
-    city: z.string().optional(),
-    state: z.string().optional(),
-    zip: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      street1: "street_1",
-      street2: "street_2",
-    });
-  });
-
-export function putV1ContractorsContractorUuidAddressRequestBodyToJSON(
-  putV1ContractorsContractorUuidAddressRequestBody:
-    PutV1ContractorsContractorUuidAddressRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1ContractorsContractorUuidAddressRequestBody$outboundSchema.parse(
-      putV1ContractorsContractorUuidAddressRequestBody,
-    ),
-  );
-}
+export const PutV1ContractorsContractorUuidAddressHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1ContractorsContractorUuidAddressHeaderXGustoAPIVersion
+  > = z.nativeEnum(PutV1ContractorsContractorUuidAddressHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PutV1ContractorsContractorUuidAddressRequest$Outbound = {
-  contractor_uuid: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PutV1ContractorsContractorUuidAddressRequestBody$Outbound;
+  contractor_uuid: string;
+  "Contractor-Address-Update-Body": ContractorAddressUpdateBody$Outbound;
 };
 
 /** @internal */
@@ -107,16 +78,16 @@ export const PutV1ContractorsContractorUuidAddressRequest$outboundSchema:
     z.ZodTypeDef,
     PutV1ContractorsContractorUuidAddressRequest
   > = z.object({
+    xGustoAPIVersion:
+      PutV1ContractorsContractorUuidAddressHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     contractorUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PutV1ContractorsContractorUuidAddressRequestBody$outboundSchema
-    ),
+    contractorAddressUpdateBody: ContractorAddressUpdateBody$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      contractorUuid: "contractor_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      contractorUuid: "contractor_uuid",
+      contractorAddressUpdateBody: "Contractor-Address-Update-Body",
     });
   });
 

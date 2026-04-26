@@ -12,9 +12,6 @@ import {
   CompanyCustomField$inboundSchema,
 } from "./companycustomfield.js";
 
-/**
- * Example response
- */
 export type CompanyCustomFieldList = {
   customFields?: Array<CompanyCustomField> | undefined;
 };

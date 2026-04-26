@@ -5,24 +5,35 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Department,
   Department$inboundSchema,
 } from "../components/department.js";
 import {
+  DepartmentCreateRequestBody,
+  DepartmentCreateRequestBody$Outbound,
+  DepartmentCreateRequestBody$outboundSchema,
+} from "../components/departmentcreaterequestbody.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PostDepartmentsRequestBody = {
-  title?: string | undefined;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostDepartmentsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostDepartmentsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PostDepartmentsHeaderXGustoAPIVersion
+>;
 
 export type PostDepartmentsRequest = {
   /**
@@ -32,45 +43,29 @@ export type PostDepartmentsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostDepartmentsRequestBody;
+  xGustoAPIVersion?: PostDepartmentsHeaderXGustoAPIVersion | undefined;
+  departmentCreateRequestBody: DepartmentCreateRequestBody;
 };
 
 export type PostDepartmentsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Department Object Example
+   * Created
    */
   department?: Department | undefined;
 };
 
 /** @internal */
-export type PostDepartmentsRequestBody$Outbound = {
-  title?: string | undefined;
-};
-
-/** @internal */
-export const PostDepartmentsRequestBody$outboundSchema: z.ZodType<
-  PostDepartmentsRequestBody$Outbound,
-  z.ZodTypeDef,
-  PostDepartmentsRequestBody
-> = z.object({
-  title: z.string().optional(),
-});
-
-export function postDepartmentsRequestBodyToJSON(
-  postDepartmentsRequestBody: PostDepartmentsRequestBody,
-): string {
-  return JSON.stringify(
-    PostDepartmentsRequestBody$outboundSchema.parse(postDepartmentsRequestBody),
+export const PostDepartmentsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PostDepartmentsHeaderXGustoAPIVersion> = z.nativeEnum(
+    PostDepartmentsHeaderXGustoAPIVersion,
   );
-}
 
 /** @internal */
 export type PostDepartmentsRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostDepartmentsRequestBody$Outbound;
+  "Department-Create-Request-Body": DepartmentCreateRequestBody$Outbound;
 };
 
 /** @internal */
@@ -80,13 +75,14 @@ export const PostDepartmentsRequest$outboundSchema: z.ZodType<
   PostDepartmentsRequest
 > = z.object({
   companyUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.lazy(() => PostDepartmentsRequestBody$outboundSchema),
+  xGustoAPIVersion: PostDepartmentsHeaderXGustoAPIVersion$outboundSchema
+    .default("2025-06-15"),
+  departmentCreateRequestBody: DepartmentCreateRequestBody$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    departmentCreateRequestBody: "Department-Create-Request-Body",
   });
 });
 
