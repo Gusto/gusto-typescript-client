@@ -42,7 +42,7 @@ export type PostV1SandboxGenerateW2Request = {
  */
 export type PostV1SandboxGenerateW2Form = {
   /**
-   * The UUID of the employee
+   * The UUID of the employee to which the form belongs, if applicable.
    */
   employeeUuid?: string | undefined;
   /**

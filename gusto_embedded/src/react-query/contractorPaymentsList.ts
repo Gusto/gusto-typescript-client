@@ -61,6 +61,8 @@ export type ContractorPaymentsListQueryError =
  * @remarks
  * Returns an object containing individual contractor payments, within a given time period, including totals.
  *
+ * Results are returned in reverse chronological order (newest first).
+ *
  * scope: `payrolls:read`
  */
 export function useContractorPaymentsList(
@@ -89,6 +91,8 @@ export function useContractorPaymentsList(
  *
  * @remarks
  * Returns an object containing individual contractor payments, within a given time period, including totals.
+ *
+ * Results are returned in reverse chronological order (newest first).
  *
  * scope: `payrolls:read`
  */

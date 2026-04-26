@@ -8,14 +8,15 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * Example response
- */
 export type Form = {
   /**
    * The UUID of the form
    */
   uuid: string;
+  /**
+   * The UUID of the employee to which the form belongs, if applicable.
+   */
+  employeeUuid?: string | undefined;
   /**
    * The type identifier of the form
    */
@@ -54,6 +55,7 @@ export type Form = {
 export const Form$inboundSchema: z.ZodType<Form, z.ZodTypeDef, unknown> = z
   .object({
     uuid: z.string(),
+    employee_uuid: z.string().optional(),
     name: z.string().optional(),
     title: z.string().optional(),
     description: z.string().optional(),
@@ -64,6 +66,7 @@ export const Form$inboundSchema: z.ZodType<Form, z.ZodTypeDef, unknown> = z
     document_content_type: z.nullable(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
+      "employee_uuid": "employeeUuid",
       "requires_signing": "requiresSigning",
       "document_content_type": "documentContentType",
     });
