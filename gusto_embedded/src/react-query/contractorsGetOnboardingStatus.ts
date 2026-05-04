@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1ContractorsContractorUuidOnboardingStatusRequest } from "../models/operations/getv1contractorscontractoruuidonboardingstatus.js";
+import {
+  GetV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion,
+  GetV1ContractorsContractorUuidOnboardingStatusRequest,
+} from "../models/operations/getv1contractorscontractoruuidonboardingstatus.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type ContractorsGetOnboardingStatusQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -56,8 +60,6 @@ export type ContractorsGetOnboardingStatusQueryError =
  *
  * @remarks
  * Retrieves a contractor's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
- *
- * scope: `contractors:read`
  *
  * ## onboarding_status
  *
@@ -89,6 +91,8 @@ export type ContractorsGetOnboardingStatusQueryError =
  * | `payment_details` | (optional) Set up contractor's direct deposit or set to check. |
  * | `sign_documents` | Contractor forms (e.g., W9) are generated & signed. |
  * | `file_new_hire_report` | Contractor new hire report is generated. |
+ *
+ * scope: `contractors:read`
  */
 export function useContractorsGetOnboardingStatus(
   request: GetV1ContractorsContractorUuidOnboardingStatusRequest,
@@ -117,8 +121,6 @@ export function useContractorsGetOnboardingStatus(
  * @remarks
  * Retrieves a contractor's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
  *
- * scope: `contractors:read`
- *
  * ## onboarding_status
  *
  * ### Admin-facilitated onboarding
@@ -149,6 +151,8 @@ export function useContractorsGetOnboardingStatus(
  * | `payment_details` | (optional) Set up contractor's direct deposit or set to check. |
  * | `sign_documents` | Contractor forms (e.g., W9) are generated & signed. |
  * | `file_new_hire_report` | Contractor new hire report is generated. |
+ *
+ * scope: `contractors:read`
  */
 export function useContractorsGetOnboardingStatusSuspense(
   request: GetV1ContractorsContractorUuidOnboardingStatusRequest,
@@ -175,7 +179,11 @@ export function setContractorsGetOnboardingStatusData(
   client: QueryClient,
   queryKeyBase: [
     contractorUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: ContractorsGetOnboardingStatusQueryData,
 ): ContractorsGetOnboardingStatusQueryData | undefined {
@@ -192,7 +200,11 @@ export function invalidateContractorsGetOnboardingStatus(
   queryKeyBase: TupleToPrefixes<
     [
       contractorUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

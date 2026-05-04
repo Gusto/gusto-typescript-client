@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -21,7 +20,10 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetCompaniesCompanyUuidWireInRequestUuidRequest } from "../models/operations/getcompaniescompanyuuidwireinrequestuuid.js";
+import {
+  GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion,
+  GetCompaniesCompanyUuidWireInRequestUuidRequest,
+} from "../models/operations/getcompaniescompanyuuidwireinrequestuuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -110,7 +112,13 @@ export function setWireInRequestsListData(
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion
+        | undefined;
+      page?: number | undefined;
+      per?: number | undefined;
+    },
   ],
   data: WireInRequestsListQueryData,
 ): WireInRequestsListQueryData | undefined {
@@ -124,7 +132,13 @@ export function invalidateWireInRequestsList(
   queryKeyBase: TupleToPrefixes<
     [
       companyUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion
+          | undefined;
+        page?: number | undefined;
+        per?: number | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

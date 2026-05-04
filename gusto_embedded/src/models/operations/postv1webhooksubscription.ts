@@ -12,10 +12,6 @@ import {
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
-import {
   WebhookSubscription,
   WebhookSubscription$inboundSchema,
 } from "../components/webhooksubscription.js";
@@ -24,6 +20,19 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type PostV1WebhookSubscriptionSecurity = {
   systemAccessAuth: string;
 };
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostV1WebhookSubscriptionHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1WebhookSubscriptionHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PostV1WebhookSubscriptionHeaderXGustoAPIVersion
+>;
 
 export const SubscriptionTypes = {
   BankAccount: "BankAccount",
@@ -39,13 +48,20 @@ export const SubscriptionTypes = {
   Location: "Location",
   Notification: "Notification",
   Payroll: "Payroll",
+  PayrollSync: "PayrollSync",
   PaySchedule: "PaySchedule",
   Signatory: "Signatory",
 } as const;
 export type SubscriptionTypes = ClosedEnum<typeof SubscriptionTypes>;
 
 export type PostV1WebhookSubscriptionRequestBody = {
+  /**
+   * The URL where webhook events will be POSTed.
+   */
   url: string;
+  /**
+   * The types of events to subscribe to.
+   */
   subscriptionTypes: Array<SubscriptionTypes>;
 };
 
@@ -53,14 +69,16 @@ export type PostV1WebhookSubscriptionRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | PostV1WebhookSubscriptionHeaderXGustoAPIVersion
+    | undefined;
   requestBody: PostV1WebhookSubscriptionRequestBody;
 };
 
 export type PostV1WebhookSubscriptionResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * created
    */
   webhookSubscription?: WebhookSubscription | undefined;
 };
@@ -92,6 +110,11 @@ export function postV1WebhookSubscriptionSecurityToJSON(
     ),
   );
 }
+
+/** @internal */
+export const PostV1WebhookSubscriptionHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PostV1WebhookSubscriptionHeaderXGustoAPIVersion> = z
+    .nativeEnum(PostV1WebhookSubscriptionHeaderXGustoAPIVersion);
 
 /** @internal */
 export const SubscriptionTypes$outboundSchema: z.ZodNativeEnum<
@@ -140,7 +163,10 @@ export const PostV1WebhookSubscriptionRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1WebhookSubscriptionRequest
 > = z.object({
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion:
+    PostV1WebhookSubscriptionHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
   requestBody: z.lazy(() =>
     PostV1WebhookSubscriptionRequestBody$outboundSchema
   ),

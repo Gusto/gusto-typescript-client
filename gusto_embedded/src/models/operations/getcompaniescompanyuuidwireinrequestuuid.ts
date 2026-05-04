@@ -5,20 +5,31 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
-import {
   WireInRequest,
   WireInRequest$inboundSchema,
 } from "../components/wireinrequest.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion
+  >;
 
 export type GetCompaniesCompanyUuidWireInRequestUuidRequest = {
   /**
@@ -28,21 +39,41 @@ export type GetCompaniesCompanyUuidWireInRequestUuidRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion
+    | undefined;
+  /**
+   * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+   */
+  page?: number | undefined;
+  /**
+   * Number of objects per page. For majority of endpoints will default to 25
+   */
+  per?: number | undefined;
 };
 
 export type GetCompaniesCompanyUuidWireInRequestUuidResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
   wireInRequestList?: Array<WireInRequest> | undefined;
 };
 
 /** @internal */
+export const GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export type GetCompaniesCompanyUuidWireInRequestUuidRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
+  page?: number | undefined;
+  per?: number | undefined;
 };
 
 /** @internal */
@@ -53,7 +84,11 @@ export const GetCompaniesCompanyUuidWireInRequestUuidRequest$outboundSchema:
     GetCompaniesCompanyUuidWireInRequestUuidRequest
   > = z.object({
     companyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion:
+      GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
+    page: z.number().int().optional(),
+    per: z.number().int().optional(),
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",

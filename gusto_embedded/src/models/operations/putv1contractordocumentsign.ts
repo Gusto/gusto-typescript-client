@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   DocumentSigned,
@@ -14,11 +15,20 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1ContractorDocumentSignHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1ContractorDocumentSignHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PutV1ContractorDocumentSignHeaderXGustoAPIVersion
+>;
 
 export type Fields = {
   /**
@@ -48,6 +58,12 @@ export type PutV1ContractorDocumentSignRequestBody = {
 
 export type PutV1ContractorDocumentSignRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1ContractorDocumentSignHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the document
    */
   documentUuid: string;
@@ -55,10 +71,6 @@ export type PutV1ContractorDocumentSignRequest = {
    * Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
    */
   xGustoClientIp?: string | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PutV1ContractorDocumentSignRequestBody;
 };
 
@@ -69,6 +81,11 @@ export type PutV1ContractorDocumentSignResponse = {
    */
   documentSigned?: DocumentSigned | undefined;
 };
+
+/** @internal */
+export const PutV1ContractorDocumentSignHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1ContractorDocumentSignHeaderXGustoAPIVersion> = z
+    .nativeEnum(PutV1ContractorDocumentSignHeaderXGustoAPIVersion);
 
 /** @internal */
 export type Fields$Outbound = {
@@ -125,9 +142,9 @@ export function putV1ContractorDocumentSignRequestBodyToJSON(
 
 /** @internal */
 export type PutV1ContractorDocumentSignRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   document_uuid: string;
   "x-gusto-client-ip"?: string | undefined;
-  "X-Gusto-API-Version": string;
   RequestBody: PutV1ContractorDocumentSignRequestBody$Outbound;
 };
 
@@ -137,17 +154,20 @@ export const PutV1ContractorDocumentSignRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1ContractorDocumentSignRequest
 > = z.object({
+  xGustoAPIVersion:
+    PutV1ContractorDocumentSignHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
   documentUuid: z.string(),
   xGustoClientIp: z.string().optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   requestBody: z.lazy(() =>
     PutV1ContractorDocumentSignRequestBody$outboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
+    xGustoAPIVersion: "X-Gusto-API-Version",
     documentUuid: "document_uuid",
     xGustoClientIp: "x-gusto-client-ip",
-    xGustoAPIVersion: "X-Gusto-API-Version",
     requestBody: "RequestBody",
   });
 });

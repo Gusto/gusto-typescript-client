@@ -12,98 +12,42 @@ import {
   Garnishment$inboundSchema,
 } from "../components/garnishment.js";
 import {
-  GarnishmentChildSupport,
-  GarnishmentChildSupport$Outbound,
-  GarnishmentChildSupport$outboundSchema,
-} from "../components/garnishmentchildsupport.js";
+  GarnishmentRequest,
+  GarnishmentRequest$Outbound,
+  GarnishmentRequest$outboundSchema,
+} from "../components/garnishmentrequest.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The specific type of garnishment for court ordered garnishments.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const GarnishmentType = {
-  ChildSupport: "child_support",
-  FederalTaxLien: "federal_tax_lien",
-  StateTaxLien: "state_tax_lien",
-  StudentLoan: "student_loan",
-  CreditorGarnishment: "creditor_garnishment",
-  FederalLoan: "federal_loan",
-  OtherGarnishment: "other_garnishment",
+export const PostV1EmployeesEmployeeIdGarnishmentsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
- * The specific type of garnishment for court ordered garnishments.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type GarnishmentType = ClosedEnum<typeof GarnishmentType>;
-
-export type PostV1EmployeesEmployeeIdGarnishmentsRequestBody = {
-  /**
-   * Whether or not this garnishment is currently active.
-   */
-  active?: boolean | undefined;
-  /**
-   * The amount of the garnishment. Either a percentage or a fixed dollar amount. Represented as a float, e.g. "8.00".
-   */
-  amount: string;
-  /**
-   * The description of the garnishment.
-   */
-  description?: string | undefined;
-  /**
-   * Whether the garnishment is court ordered.
-   */
-  courtOrdered: boolean;
-  /**
-   * The specific type of garnishment for court ordered garnishments.
-   */
-  garnishmentType?: GarnishmentType | null | undefined;
-  /**
-   * The number of times to apply the garnishment. Ignored if recurring is true.
-   */
-  times?: number | null | undefined;
-  /**
-   * Whether the garnishment should recur indefinitely.
-   */
-  recurring?: boolean | undefined;
-  /**
-   * The maximum deduction per annum. A null value indicates no maximum. Represented as a float, e.g. "200.00".
-   */
-  annualMaximum?: string | null | undefined;
-  /**
-   * The maximum deduction per pay period. A null value indicates no maximum. Represented as a float, e.g. "16.00".
-   */
-  payPeriodMaximum?: string | null | undefined;
-  /**
-   * Whether the amount should be treated as a percentage to be deducted per pay period.
-   */
-  deductAsPercentage?: boolean | undefined;
-  /**
-   * A maximum total deduction for the lifetime of this garnishment. A null value indicates no maximum.
-   */
-  totalAmount?: string | null | undefined;
-  /**
-   * Additional child support order details
-   */
-  childSupport?: GarnishmentChildSupport | null | undefined;
-};
+export type PostV1EmployeesEmployeeIdGarnishmentsHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PostV1EmployeesEmployeeIdGarnishmentsHeaderXGustoAPIVersion
+  >;
 
 export type PostV1EmployeesEmployeeIdGarnishmentsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostV1EmployeesEmployeeIdGarnishmentsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the employee
    */
   employeeId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostV1EmployeesEmployeeIdGarnishmentsRequestBody;
+  garnishmentRequest: GarnishmentRequest;
 };
 
 export type PostV1EmployeesEmployeeIdGarnishmentsResponse = {
@@ -115,73 +59,16 @@ export type PostV1EmployeesEmployeeIdGarnishmentsResponse = {
 };
 
 /** @internal */
-export const GarnishmentType$outboundSchema: z.ZodNativeEnum<
-  typeof GarnishmentType
-> = z.nativeEnum(GarnishmentType);
-
-/** @internal */
-export type PostV1EmployeesEmployeeIdGarnishmentsRequestBody$Outbound = {
-  active: boolean;
-  amount: string;
-  description?: string | undefined;
-  court_ordered: boolean;
-  garnishment_type?: string | null | undefined;
-  times: number | null;
-  recurring: boolean;
-  annual_maximum: string | null;
-  pay_period_maximum: string | null;
-  deduct_as_percentage: boolean;
-  total_amount?: string | null | undefined;
-  child_support?: GarnishmentChildSupport$Outbound | null | undefined;
-};
-
-/** @internal */
-export const PostV1EmployeesEmployeeIdGarnishmentsRequestBody$outboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdGarnishmentsRequestBody$Outbound,
-    z.ZodTypeDef,
-    PostV1EmployeesEmployeeIdGarnishmentsRequestBody
-  > = z.object({
-    active: z.boolean().default(true),
-    amount: z.string(),
-    description: z.string().optional(),
-    courtOrdered: z.boolean(),
-    garnishmentType: z.nullable(GarnishmentType$outboundSchema).optional(),
-    times: z.nullable(z.number().int()).default(null),
-    recurring: z.boolean().default(false),
-    annualMaximum: z.nullable(z.string()).default(null),
-    payPeriodMaximum: z.nullable(z.string()).default(null),
-    deductAsPercentage: z.boolean().default(false),
-    totalAmount: z.nullable(z.string()).optional(),
-    childSupport: z.nullable(GarnishmentChildSupport$outboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      courtOrdered: "court_ordered",
-      garnishmentType: "garnishment_type",
-      annualMaximum: "annual_maximum",
-      payPeriodMaximum: "pay_period_maximum",
-      deductAsPercentage: "deduct_as_percentage",
-      totalAmount: "total_amount",
-      childSupport: "child_support",
-    });
-  });
-
-export function postV1EmployeesEmployeeIdGarnishmentsRequestBodyToJSON(
-  postV1EmployeesEmployeeIdGarnishmentsRequestBody:
-    PostV1EmployeesEmployeeIdGarnishmentsRequestBody,
-): string {
-  return JSON.stringify(
-    PostV1EmployeesEmployeeIdGarnishmentsRequestBody$outboundSchema.parse(
-      postV1EmployeesEmployeeIdGarnishmentsRequestBody,
-    ),
-  );
-}
+export const PostV1EmployeesEmployeeIdGarnishmentsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1EmployeesEmployeeIdGarnishmentsHeaderXGustoAPIVersion
+  > = z.nativeEnum(PostV1EmployeesEmployeeIdGarnishmentsHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PostV1EmployeesEmployeeIdGarnishmentsRequest$Outbound = {
-  employee_id: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostV1EmployeesEmployeeIdGarnishmentsRequestBody$Outbound;
+  employee_id: string;
+  "Garnishment-Request": GarnishmentRequest$Outbound;
 };
 
 /** @internal */
@@ -191,16 +78,16 @@ export const PostV1EmployeesEmployeeIdGarnishmentsRequest$outboundSchema:
     z.ZodTypeDef,
     PostV1EmployeesEmployeeIdGarnishmentsRequest
   > = z.object({
+    xGustoAPIVersion:
+      PostV1EmployeesEmployeeIdGarnishmentsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PostV1EmployeesEmployeeIdGarnishmentsRequestBody$outboundSchema
-    ),
+    garnishmentRequest: GarnishmentRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      employeeId: "employee_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      employeeId: "employee_id",
+      garnishmentRequest: "Garnishment-Request",
     });
   });
 

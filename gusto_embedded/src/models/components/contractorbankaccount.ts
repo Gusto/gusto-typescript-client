@@ -23,34 +23,31 @@ export type ContractorBankAccountAccountType = ClosedEnum<
   typeof ContractorBankAccountAccountType
 >;
 
-/**
- * Example response
- */
 export type ContractorBankAccount = {
   /**
    * UUID of the bank account
    */
   uuid: string;
   /**
-   * UUID of the employee
+   * UUID of the contractor
    */
-  contractorUuid?: string | undefined;
+  contractorUuid: string;
   /**
    * Bank account type
    */
-  accountType?: ContractorBankAccountAccountType | undefined;
+  accountType: ContractorBankAccountAccountType;
   /**
    * Name for the bank account
    */
-  name?: string | undefined;
+  name: string;
   /**
    * The bank account's routing number
    */
-  routingNumber?: string | undefined;
+  routingNumber: string;
   /**
    * Masked bank account number
    */
-  hiddenAccountNumber?: string | undefined;
+  hiddenAccountNumber: string;
 };
 
 /** @internal */
@@ -65,11 +62,11 @@ export const ContractorBankAccount$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   uuid: z.string(),
-  contractor_uuid: z.string().optional(),
-  account_type: ContractorBankAccountAccountType$inboundSchema.optional(),
-  name: z.string().optional(),
-  routing_number: z.string().optional(),
-  hidden_account_number: z.string().optional(),
+  contractor_uuid: z.string(),
+  account_type: ContractorBankAccountAccountType$inboundSchema,
+  name: z.string(),
+  routing_number: z.string(),
+  hidden_account_number: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "contractor_uuid": "contractorUuid",

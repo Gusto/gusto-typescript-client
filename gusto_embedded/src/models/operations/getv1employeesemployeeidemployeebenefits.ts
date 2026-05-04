@@ -15,11 +15,21 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1EmployeesEmployeeIdEmployeeBenefitsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1EmployeesEmployeeIdEmployeeBenefitsHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetV1EmployeesEmployeeIdEmployeeBenefitsHeaderXGustoAPIVersion
+  >;
 
 /**
  * Available options:
@@ -41,6 +51,12 @@ export type GetV1EmployeesEmployeeIdEmployeeBenefitsQueryParamInclude =
 
 export type GetV1EmployeesEmployeeIdEmployeeBenefitsRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1EmployeesEmployeeIdEmployeeBenefitsHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the employee
    */
   employeeId: string;
@@ -61,10 +77,6 @@ export type GetV1EmployeesEmployeeIdEmployeeBenefitsRequest = {
   include?:
     | GetV1EmployeesEmployeeIdEmployeeBenefitsQueryParamInclude
     | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1EmployeesEmployeeIdEmployeeBenefitsResponse = {
@@ -72,8 +84,16 @@ export type GetV1EmployeesEmployeeIdEmployeeBenefitsResponse = {
   /**
    * Example response
    */
-  employeeBenefitList?: Array<EmployeeBenefit> | undefined;
+  employeeBenefits?: Array<EmployeeBenefit> | undefined;
 };
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdEmployeeBenefitsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1EmployeesEmployeeIdEmployeeBenefitsHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    GetV1EmployeesEmployeeIdEmployeeBenefitsHeaderXGustoAPIVersion,
+  );
 
 /** @internal */
 export const GetV1EmployeesEmployeeIdEmployeeBenefitsQueryParamInclude$outboundSchema:
@@ -83,11 +103,11 @@ export const GetV1EmployeesEmployeeIdEmployeeBenefitsQueryParamInclude$outboundS
 
 /** @internal */
 export type GetV1EmployeesEmployeeIdEmployeeBenefitsRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   employee_id: string;
   page?: number | undefined;
   per?: number | undefined;
   include?: string | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -97,17 +117,19 @@ export const GetV1EmployeesEmployeeIdEmployeeBenefitsRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1EmployeesEmployeeIdEmployeeBenefitsRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1EmployeesEmployeeIdEmployeeBenefitsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     employeeId: z.string(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
     include:
       GetV1EmployeesEmployeeIdEmployeeBenefitsQueryParamInclude$outboundSchema
         .optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
-      employeeId: "employee_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      employeeId: "employee_id",
     });
   });
 
@@ -130,11 +152,11 @@ export const GetV1EmployeesEmployeeIdEmployeeBenefitsResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Employee-Benefit-List": z.array(EmployeeBenefit$inboundSchema).optional(),
+    "Employee-Benefits": z.array(EmployeeBenefit$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Employee-Benefit-List": "employeeBenefitList",
+      "Employee-Benefits": "employeeBenefits",
     });
   });
 

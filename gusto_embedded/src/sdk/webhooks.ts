@@ -60,9 +60,9 @@ export class Webhooks extends ClientSDK {
    * @remarks
    * Create a webhook subscription to receive events of the specified subscription_types whenever there is a state change.
    *
-   * > 📘 System Access Authentication
-   * >
-   * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+   * 📘 System Access Authentication
+   *
+   * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
    *
    * scope: `webhook_subscriptions:write`
    */
@@ -85,9 +85,9 @@ export class Webhooks extends ClientSDK {
    * @remarks
    * Returns all webhook subscriptions associated with the provided Partner API token.
    *
-   * > 📘 System Access Authentication
-   * >
-   * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+   * 📘 System Access Authentication
+   *
+   * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
    *
    * scope: `webhook_subscriptions:read`
    */
@@ -110,9 +110,9 @@ export class Webhooks extends ClientSDK {
    * @remarks
    * Updates the Webhook Subscription associated with the provided UUID.
    *
-   * > 📘 System Access Authentication
-   * >
-   * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+   * 📘 System Access Authentication
+   *
+   * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
    *
    * scope: `webhook_subscriptions:write`
    */
@@ -135,9 +135,9 @@ export class Webhooks extends ClientSDK {
    * @remarks
    * Returns the Webhook Subscription associated with the provided UUID.
    *
-   * > 📘 System Access Authentication
-   * >
-   * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+   * 📘 System Access Authentication
+   *
+   * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
    *
    * scope: `webhook_subscriptions:read`
    */
@@ -160,9 +160,9 @@ export class Webhooks extends ClientSDK {
    * @remarks
    * Deletes the Webhook Subscription associated with the provided UUID.
    *
-   * > 📘 System Access Authentication
-   * >
-   * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+   * 📘 System Access Authentication
+   *
+   * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
    *
    * scope: `webhook_subscriptions:write`
    */
@@ -180,16 +180,16 @@ export class Webhooks extends ClientSDK {
   }
 
   /**
-   * Verify the webhook subscription
+   * Verify a webhook subscription
    *
    * @remarks
    * When a webhook subscription is created, a `verification_token` is POSTed to the registered webhook subscription URL. This `verify` endpoint needs to be called with `verification_token` before webhook events can be sent to the registered webhook URL.
    *
    * Use the /v1/webhook_subscriptions/{webhook_subscription_uuid}/request_verification_token API to resend the `verification_token` to the Subscriber.
    *
-   * > 📘 System Access Authentication
-   * >
-   * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+   * 📘 System Access Authentication
+   *
+   * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
    *
    * scope: `webhook_subscriptions:write`
    */
@@ -207,14 +207,14 @@ export class Webhooks extends ClientSDK {
   }
 
   /**
-   * Request the webhook subscription verification_token
+   * Request a verification token for a webhook subscription
    *
    * @remarks
    * Request that the webhook subscription `verification_token` be POSTed to the Subscription URL.
    *
-   * > 📘 System Access Authentication
-   * >
-   * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+   * 📘 System Access Authentication
+   *
+   * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
    *
    * scope: `webhook_subscriptions:read`
    */

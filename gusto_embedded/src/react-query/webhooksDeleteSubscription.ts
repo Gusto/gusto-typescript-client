@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -40,6 +41,7 @@ export type WebhooksDeleteSubscriptionMutationData =
   DeleteV1WebhookSubscriptionUuidResponse;
 
 export type WebhooksDeleteSubscriptionMutationError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -55,9 +57,9 @@ export type WebhooksDeleteSubscriptionMutationError =
  * @remarks
  * Deletes the Webhook Subscription associated with the provided UUID.
  *
- * > 📘 System Access Authentication
- * >
- * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *
  * scope: `webhook_subscriptions:write`
  */

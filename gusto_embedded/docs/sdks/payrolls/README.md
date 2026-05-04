@@ -670,9 +670,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## get
 
@@ -1741,11 +1742,11 @@ import {
 
 ### Errors
 
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| errors.UnprocessableEntityErrorObject1 | 422                                    | application/json                       |
-| errors.PayrollBlockersError            | 422                                    | application/json                       |
-| errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+| Error Type                  | Status Code                 | Content Type                |
+| --------------------------- | --------------------------- | --------------------------- |
+| errors.NotFoundErrorObject  | 404                         | application/json            |
+| errors.PayrollBlockersError | 422                         | application/json            |
+| errors.APIError             | 4XX, 5XX                    | \*/\*                       |
 
 ## calculateGrossUp
 
@@ -2328,7 +2329,9 @@ import {
 
 ## getPayStubs
 
-Get an employee's pay stubs
+Get an employee's pay stubs.
+
+Results are returned in reverse chronological order (newest first).
 
 scope: `pay_stubs:read`
 

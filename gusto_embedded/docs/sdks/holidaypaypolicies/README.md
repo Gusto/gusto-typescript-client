@@ -10,6 +10,7 @@
 * [delete](#delete) - Delete a company's holiday pay policy
 * [addEmployees](#addemployees) - Add employees to a company's holiday pay policy
 * [removeEmployees](#removeemployees) - Remove employees from a company's holiday pay policy
+* [previewPaidHolidays](#previewpaidholidays) - Preview a company's paid holidays
 
 ## get
 
@@ -602,6 +603,115 @@ import {
 ### Response
 
 **Promise\<[operations.PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse](../../models/operations/putv1companiescompanyuuidholidaypaypolicyremoveresponse.md)\>**
+
+### Errors
+
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+
+## previewPaidHolidays
+
+Preview a company's paid holidays
+
+If a year is passed, paid holidays for that year will be returned. Otherwise, paid holidays for the next three years will be returned.
+
+scope: `holiday_pay_policies:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get-companies-company_uuid-paid_holidays" method="get" path="/v1/companies/{company_uuid}/paid_holidays" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.holidayPayPolicies.previewPaidHolidays({
+    companyUuid: "<id>",
+    year: "2023",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { holidayPayPoliciesPreviewPaidHolidays } from "@gusto/embedded-api/funcs/holidayPayPoliciesPreviewPaidHolidays.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await holidayPayPoliciesPreviewPaidHolidays(gustoEmbedded, {
+    companyUuid: "<id>",
+    year: "2023",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("holidayPayPoliciesPreviewPaidHolidays failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useHolidayPayPoliciesPreviewPaidHolidays,
+  useHolidayPayPoliciesPreviewPaidHolidaysSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchHolidayPayPoliciesPreviewPaidHolidays,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateHolidayPayPoliciesPreviewPaidHolidays,
+  invalidateAllHolidayPayPoliciesPreviewPaidHolidays,
+} from "@gusto/embedded-api/react-query/holidayPayPoliciesPreviewPaidHolidays.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetCompaniesCompanyUuidPaidHolidaysRequest](../../models/operations/getcompaniescompanyuuidpaidholidaysrequest.md)                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetCompaniesCompanyUuidPaidHolidaysResponse](../../models/operations/getcompaniescompanyuuidpaidholidaysresponse.md)\>**
 
 ### Errors
 

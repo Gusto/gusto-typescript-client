@@ -5,16 +5,26 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const DeleteDepartmentHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type DeleteDepartmentHeaderXGustoAPIVersion = ClosedEnum<
+  typeof DeleteDepartmentHeaderXGustoAPIVersion
+>;
 
 export type DeleteDepartmentRequest = {
   /**
@@ -24,12 +34,18 @@ export type DeleteDepartmentRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?: DeleteDepartmentHeaderXGustoAPIVersion | undefined;
 };
 
 export type DeleteDepartmentResponse = {
   httpMeta: HTTPMetadata;
 };
+
+/** @internal */
+export const DeleteDepartmentHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof DeleteDepartmentHeaderXGustoAPIVersion> = z.nativeEnum(
+    DeleteDepartmentHeaderXGustoAPIVersion,
+  );
 
 /** @internal */
 export type DeleteDepartmentRequest$Outbound = {
@@ -44,7 +60,8 @@ export const DeleteDepartmentRequest$outboundSchema: z.ZodType<
   DeleteDepartmentRequest
 > = z.object({
   departmentUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: DeleteDepartmentHeaderXGustoAPIVersion$outboundSchema
+    .default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     departmentUuid: "department_uuid",

@@ -32,6 +32,9 @@ export class CompanyForms extends ClientSDK {
    * @remarks
    * Get a list of all company's forms
    *
+   * ### Related guides
+   * - [Company Forms](doc:company-form)
+   *
    * scope: `company_forms:read`
    */
   async getAll(

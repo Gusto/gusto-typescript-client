@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeesGetV1CompaniesCompanyIdEmployeesPaymentDetails } from "../funcs/employeesGetV1CompaniesCompanyIdEmployeesPaymentDetails.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesCompanyIdEmployeesPaymentDetailsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest,
   GetV1CompaniesCompanyIdEmployeesPaymentDetailsResponse,
 } from "../models/operations/getv1companiescompanyidemployeespaymentdetails.js";
@@ -51,11 +51,11 @@ export function buildEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQuer
     queryKey: queryKeyEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails(
       request.companyId,
       {
+        xGustoAPIVersion: request.xGustoAPIVersion,
         employeeUuid: request.employeeUuid,
         payrollUuid: request.payrollUuid,
         page: request.page,
         per: request.per,
-        xGustoAPIVersion: request.xGustoAPIVersion,
       },
     ),
     queryFn:
@@ -89,11 +89,13 @@ export function buildEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQuer
 export function queryKeyEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails(
   companyId: string,
   parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyIdEmployeesPaymentDetailsHeaderXGustoAPIVersion
+      | undefined;
     employeeUuid?: string | undefined;
     payrollUuid?: string | undefined;
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

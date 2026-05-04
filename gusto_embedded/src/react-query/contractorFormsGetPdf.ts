@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1ContractorFormPdfRequest } from "../models/operations/getv1contractorformpdf.js";
+import {
+  GetV1ContractorFormPdfHeaderXGustoAPIVersion,
+  GetV1ContractorFormPdfRequest,
+} from "../models/operations/getv1contractorformpdf.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type ContractorFormsGetPdfQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -114,7 +118,11 @@ export function setContractorFormsGetPdfData(
   queryKeyBase: [
     contractorUuid: string,
     formId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1ContractorFormPdfHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: ContractorFormsGetPdfQueryData,
 ): ContractorFormsGetPdfQueryData | undefined {
@@ -129,7 +137,11 @@ export function invalidateContractorFormsGetPdf(
     [
       contractorUuid: string,
       formId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1ContractorFormPdfHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

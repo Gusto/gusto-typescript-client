@@ -4,6 +4,7 @@
 
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -37,7 +38,7 @@ import { Result } from "../types/fp.js";
  * Get a pay schedule
  *
  * @remarks
- * Returns a single pay schedule by UUID. The pay schedule object captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+ * Returns a single pay schedule by UUID. The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
  *
  * scope: `pay_schedules:read`
  *
@@ -163,7 +164,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -191,7 +193,7 @@ async function $do(
     M.json(
       200,
       GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema,
-      { key: "Pay-Schedule" },
+      { key: "Pay-Schedule-Show" },
     ),
     M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.fail("4XX"),

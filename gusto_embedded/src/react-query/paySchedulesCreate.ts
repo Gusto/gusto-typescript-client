@@ -55,11 +55,13 @@ export type PaySchedulesCreateMutationError =
  * Create a new pay schedule
  *
  * @remarks
- * If a company does not have any pay schedules, this endpoint creates a single pay schedule and assigns it to all employees (common during company onboarding).
+ * If a company does not have any pay schedules, this endpoint will create a single pay schedule and assign it to all employees. This is a common use case during company onboarding.
  *
- * If a company already has an active pay schedule and wants multiple pay schedules, this endpoint creates a pay schedule that is not assigned to any employee.
+ * If a company has an existing active pay schedule and want to support multiple pay schedules, this endpoint will create a pay schedule that is not assigned to any employee.
  *
- * Be sure to [check state laws](https://www.dol.gov/agencies/whd/state/payday) to know what schedule is right for your customers. If an onboarded company misses their first pay date, the pay schedule may be automatically adjusted.
+ * Be sure to **[check state laws](https://www.dol.gov/agencies/whd/state/payday)** to know what schedule is right for your customers.
+ *
+ * > If an onboarded company misses their first pay date, Gusto will automatically adjust the pay schedule to the next available pay date.
  *
  * ### Webhooks
  * - `pay_schedule.created`: Fires when a pay schedule is successfully created.

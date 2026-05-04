@@ -4,11 +4,36 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { RFCDate } from "../../types/rfcdate.js";
-import {
-  PayScheduleFrequencyCreateUpdate,
-  PayScheduleFrequencyCreateUpdate$outboundSchema,
-} from "./payschedulefrequencycreateupdate.js";
+
+/**
+ * The frequency that employees on this pay schedule are paid with Gusto. Only weekly, bi-weekly, twice per month, and monthly are supported on create and update.
+ *
+ * @remarks
+ *
+ * - `Every week`: Weekly pay.
+ * - `Every other week`: Biweekly pay.
+ * - `Twice per month`: Two pay dates per month; require day_1 and day_2 (use 31 for last day of month).
+ * - `Monthly`: One pay date per month; require day_1 (1-31).
+ */
+export const Frequency = {
+  EveryWeek: "Every week",
+  EveryOtherWeek: "Every other week",
+  TwicePerMonth: "Twice per month",
+  Monthly: "Monthly",
+} as const;
+/**
+ * The frequency that employees on this pay schedule are paid with Gusto. Only weekly, bi-weekly, twice per month, and monthly are supported on create and update.
+ *
+ * @remarks
+ *
+ * - `Every week`: Weekly pay.
+ * - `Every other week`: Biweekly pay.
+ * - `Twice per month`: Two pay dates per month; require day_1 and day_2 (use 31 for last day of month).
+ * - `Monthly`: One pay date per month; require day_1 (1-31).
+ */
+export type Frequency = ClosedEnum<typeof Frequency>;
 
 /**
  * Request body for creating a pay schedule. Required when a company has no pay schedules (onboarding) or when adding an additional schedule. Be sure to [check state laws](https://www.dol.gov/agencies/whd/state/payday) to know what schedule is right for your customers.
@@ -19,43 +44,27 @@ import {
  * - **anchor_end_of_pay_period**: The last date of the first pay period; can be the same as anchor_pay_date.
  */
 export type PayScheduleCreateRequest = {
-  /**
-   * Pay frequency when creating or updating a schedule. Only weekly, bi-weekly, twice per month, and monthly are supported via the API.
-   *
-   * @remarks
-   *
-   * - `Every week`: Weekly pay.
-   * - `Every other week`: Biweekly pay.
-   * - `Twice per month`: Two pay dates per month; require day_1 and day_2 (use 31 for last day of month).
-   * - `Monthly`: One pay date per month; require day_1 (1-31).
-   */
-  frequency: PayScheduleFrequencyCreateUpdate;
-  /**
-   * ISO 8601 date (YYYY-MM-DD). Required for anchor and period dates in create, update, and preview requests.
-   */
+  frequency: Frequency;
   anchorPayDate: RFCDate;
-  /**
-   * ISO 8601 date (YYYY-MM-DD). Required for anchor and period dates in create, update, and preview requests.
-   */
   anchorEndOfPayPeriod: RFCDate;
   /**
-   * First pay day of the month (1-31).
+   * An integer between 1 and 31 indicating the first day of the month that employees are paid. This field is only relevant for pay schedules with the "Twice per month" and "Monthly" frequencies. It will be null for pay schedules with other frequencies.
    *
    * @remarks
-   * - **Twice per month, Monthly:** required.
-   * - **Every week, Every other week:** omit or null.
+   *
+   * On create: required for Twice per month and Monthly; omit or null for Every week and Every other week.
    */
   day1?: number | null | undefined;
   /**
-   * Second pay day of the month (1-31); only for **Twice per month**.
+   * An integer between 1 and 31 indicating the second day of the month that employees are paid. This field is the second pay date for pay schedules with the "Twice per month" frequency. For semi-monthly pay schedules, set this field to 31. For months shorter than 31 days, the second pay date is set to the last day of the month. It will be null for pay schedules with other frequencies.
    *
    * @remarks
-   * - Use 31 for last day of month (shorter months use the actual last day).
-   * - **Other frequencies:** omit or null.
+   *
+   * On create: only for Twice per month; omit or null for other frequencies.
    */
   day2?: number | null | undefined;
   /**
-   * Optional display name for the pay schedule.
+   * A custom pay schedule name; defaults to the pay frequency description when null or omitted.
    *
    * @remarks
    *
@@ -63,6 +72,10 @@ export type PayScheduleCreateRequest = {
    */
   customName?: string | null | undefined;
 };
+
+/** @internal */
+export const Frequency$outboundSchema: z.ZodNativeEnum<typeof Frequency> = z
+  .nativeEnum(Frequency);
 
 /** @internal */
 export type PayScheduleCreateRequest$Outbound = {
@@ -80,7 +93,7 @@ export const PayScheduleCreateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PayScheduleCreateRequest
 > = z.object({
-  frequency: PayScheduleFrequencyCreateUpdate$outboundSchema,
+  frequency: Frequency$outboundSchema,
   anchorPayDate: z.instanceof(RFCDate).transform(v => v.toString()),
   anchorEndOfPayPeriod: z.instanceof(RFCDate).transform(v => v.toString()),
   day1: z.nullable(z.number().int()).optional(),

@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -14,38 +15,59 @@ import {
   UnprocessedTerminationPayPeriod,
   UnprocessedTerminationPayPeriod$inboundSchema,
 } from "../components/unprocessedterminationpayperiod.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsHeaderXGustoAPIVersion
+  >;
+
 export type GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
   companyId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
-  unprocessedTerminationPayPeriodList?:
+  unprocessedTerminationPayPeriods?:
     | Array<UnprocessedTerminationPayPeriod>
     | undefined;
 };
 
 /** @internal */
+export const GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export type GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$Outbound =
   {
-    company_id: string;
     "X-Gusto-API-Version": string;
+    company_id: string;
   };
 
 /** @internal */
@@ -55,12 +77,14 @@ export const GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$outb
     z.ZodTypeDef,
     GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyId: "company_id",
     });
   });
 
@@ -82,14 +106,13 @@ export const GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$inb
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Unprocessed-Termination-Pay-Period-List": z.array(
+    "Unprocessed-Termination-Pay-Periods": z.array(
       UnprocessedTerminationPayPeriod$inboundSchema,
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Unprocessed-Termination-Pay-Period-List":
-        "unprocessedTerminationPayPeriodList",
+      "Unprocessed-Termination-Pay-Periods": "unprocessedTerminationPayPeriods",
     });
   });
 

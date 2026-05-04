@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,11 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion,
   GetV1WebhookSubscriptionVerificationTokenUuidRequest,
   GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
 } from "../models/operations/getv1webhooksubscriptionverificationtokenuuid.js";
@@ -45,6 +46,7 @@ export {
 };
 
 export type WebhooksRequestVerificationTokenQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -55,14 +57,14 @@ export type WebhooksRequestVerificationTokenQueryError =
   | SDKValidationError;
 
 /**
- * Request the webhook subscription verification_token
+ * Request a verification token for a webhook subscription
  *
  * @remarks
  * Request that the webhook subscription `verification_token` be POSTed to the Subscription URL.
  *
- * > 📘 System Access Authentication
- * >
- * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *
  * scope: `webhook_subscriptions:read`
  */
@@ -90,14 +92,14 @@ export function useWebhooksRequestVerificationToken(
 }
 
 /**
- * Request the webhook subscription verification_token
+ * Request a verification token for a webhook subscription
  *
  * @remarks
  * Request that the webhook subscription `verification_token` be POSTed to the Subscription URL.
  *
- * > 📘 System Access Authentication
- * >
- * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *
  * scope: `webhook_subscriptions:read`
  */
@@ -128,7 +130,11 @@ export function setWebhooksRequestVerificationTokenData(
   client: QueryClient,
   queryKeyBase: [
     webhookSubscriptionUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: WebhooksRequestVerificationTokenQueryData,
 ): WebhooksRequestVerificationTokenQueryData | undefined {
@@ -145,7 +151,11 @@ export function invalidateWebhooksRequestVerificationToken(
   queryKeyBase: TupleToPrefixes<
     [
       webhookSubscriptionUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

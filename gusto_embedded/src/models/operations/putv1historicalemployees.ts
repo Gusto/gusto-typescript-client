@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
 import { Employee, Employee$inboundSchema } from "../components/employee.js";
@@ -12,41 +13,80 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1HistoricalEmployeesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1HistoricalEmployeesHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PutV1HistoricalEmployeesHeaderXGustoAPIVersion
+>;
+
+/**
+ * Primary work location for this historical employment row.
+ */
 export type WorkAddress = {
   /**
-   * Reference to a company location
+   * UUID of a company work location from the company locations response.
    */
-  locationUuid?: string | undefined;
+  locationUuid: string;
 };
 
+/**
+ * Residential address on file for tax withholding and compliance mail.
+ */
 export type HomeAddress = {
+  /**
+   * Street address line 1.
+   */
   street1: string;
+  /**
+   * Apartment, suite, unit, or building (optional).
+   */
   street2?: string | null | undefined;
+  /**
+   * City.
+   */
   city: string;
+  /**
+   * Two-letter U.S. state or territory postal abbreviation.
+   */
   state: string;
+  /**
+   * ZIP or ZIP+4.
+   */
   zip: string;
 };
 
+/**
+ * End of the historical employment period.
+ */
 export type Termination = {
   /**
-   * Date the employee was terminated from the company
+   * Last day of employment (termination date). This is recorded on the employment; use the calendar date the person stopped working for the company.
    */
-  effectiveDate?: RFCDate | undefined;
+  effectiveDate: RFCDate;
 };
 
+/**
+ * Hire date for the historical job used to build employments and filings.
+ */
 export type Job = {
   /**
-   * The date when the employee was hired to the company
+   * First calendar day the employee was employed in this role at the company.
    */
-  hireDate?: RFCDate | undefined;
+  hireDate: RFCDate;
 };
 
+/**
+ * Workers' compensation fields for Washington (WA) or Wyoming (WY) when the work address is in those states; omit when not applicable.
+ */
 export type EmployeeStateTaxes = {
   /**
    * Whether this job is eligible for workers' compensation coverage in the states of Washington (WA) or Wyoming (WY).
@@ -59,60 +99,101 @@ export type EmployeeStateTaxes = {
 };
 
 /**
- * Update a historical employee.
+ * Request body for creating or updating a **historical employee**—someone who already separated from the company and must appear on year-to-date or tax filings without receiving ongoing payroll.
+ *
+ * @remarks
+ *
+ * Send this object under the JSON root key `employee`. All dates are ISO 8601 (`YYYY-MM-DD`). Use a `work_address.location_uuid` returned from your company locations API for an active work site.
  */
 export type PutV1HistoricalEmployeesRequestBody = {
   /**
    * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
    */
   version: string;
+  /**
+   * Legal first name as it appears on government-issued identification.
+   */
   firstName: string;
+  /**
+   * Single middle initial, if any.
+   */
   middleInitial?: string | undefined;
+  /**
+   * Legal last name as it appears on government-issued identification.
+   */
   lastName: string;
+  /**
+   * Preferred given name for display; omit when the same as legal first name.
+   */
   preferredFirstName?: string | undefined;
-  dateOfBirth: string;
+  /**
+   * Date of birth (YYYY-MM-DD).
+   */
+  dateOfBirth: RFCDate;
+  /**
+   * Nine-digit U.S. Social Security number **without** dashes or spaces. Must pass Gusto/SSA validation in production; use a valid test SSN in sandbox environments.
+   *
+   * @remarks
+   */
   ssn: string;
+  /**
+   * Primary work location for this historical employment row.
+   */
   workAddress: WorkAddress;
+  /**
+   * Residential address on file for tax withholding and compliance mail.
+   */
   homeAddress: HomeAddress;
+  /**
+   * End of the historical employment period.
+   */
   termination: Termination;
   /**
-   * Optional. If provided, the email address will be saved to the employee.
+   * Optional. When provided, stored on the employee record for notifications and profile.
    */
   email?: string | undefined;
+  /**
+   * Hire date for the historical job used to build employments and filings.
+   */
   job: Job;
+  /**
+   * Workers' compensation fields for Washington (WA) or Wyoming (WY) when the work address is in those states; omit when not applicable.
+   */
   employeeStateTaxes?: EmployeeStateTaxes | undefined;
 };
 
 export type PutV1HistoricalEmployeesRequest = {
   /**
-   * The UUID of the company
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: PutV1HistoricalEmployeesHeaderXGustoAPIVersion | undefined;
+  /**
+   * The UUID of the company that will employ this historical record.
    */
   companyUuid: string;
   /**
-   * The UUID of the historical employee
+   * The UUID of the historical employee returned from create or list responses.
    */
   historicalEmployeeUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  /**
-   * Update a historical employee.
-   */
   requestBody: PutV1HistoricalEmployeesRequestBody;
 };
 
 export type PutV1HistoricalEmployeesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
   employee?: Employee | undefined;
 };
 
 /** @internal */
+export const PutV1HistoricalEmployeesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1HistoricalEmployeesHeaderXGustoAPIVersion> = z
+    .nativeEnum(PutV1HistoricalEmployeesHeaderXGustoAPIVersion);
+
+/** @internal */
 export type WorkAddress$Outbound = {
-  location_uuid?: string | undefined;
+  location_uuid: string;
 };
 
 /** @internal */
@@ -121,7 +202,7 @@ export const WorkAddress$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WorkAddress
 > = z.object({
-  locationUuid: z.string().optional(),
+  locationUuid: z.string(),
 }).transform((v) => {
   return remap$(v, {
     locationUuid: "location_uuid",
@@ -165,7 +246,7 @@ export function homeAddressToJSON(homeAddress: HomeAddress): string {
 
 /** @internal */
 export type Termination$Outbound = {
-  effective_date?: string | undefined;
+  effective_date: string;
 };
 
 /** @internal */
@@ -174,7 +255,7 @@ export const Termination$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Termination
 > = z.object({
-  effectiveDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  effectiveDate: z.instanceof(RFCDate).transform(v => v.toString()),
 }).transform((v) => {
   return remap$(v, {
     effectiveDate: "effective_date",
@@ -187,13 +268,13 @@ export function terminationToJSON(termination: Termination): string {
 
 /** @internal */
 export type Job$Outbound = {
-  hire_date?: string | undefined;
+  hire_date: string;
 };
 
 /** @internal */
 export const Job$outboundSchema: z.ZodType<Job$Outbound, z.ZodTypeDef, Job> = z
   .object({
-    hireDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+    hireDate: z.instanceof(RFCDate).transform(v => v.toString()),
   }).transform((v) => {
     return remap$(v, {
       hireDate: "hire_date",
@@ -261,7 +342,7 @@ export const PutV1HistoricalEmployeesRequestBody$outboundSchema: z.ZodType<
   middleInitial: z.string().optional(),
   lastName: z.string(),
   preferredFirstName: z.string().optional(),
-  dateOfBirth: z.string(),
+  dateOfBirth: z.instanceof(RFCDate).transform(v => v.toString()),
   ssn: z.string(),
   workAddress: z.lazy(() => WorkAddress$outboundSchema),
   homeAddress: z.lazy(() => HomeAddress$outboundSchema),
@@ -295,9 +376,9 @@ export function putV1HistoricalEmployeesRequestBodyToJSON(
 
 /** @internal */
 export type PutV1HistoricalEmployeesRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_uuid: string;
   historical_employee_uuid: string;
-  "X-Gusto-API-Version": string;
   RequestBody: PutV1HistoricalEmployeesRequestBody$Outbound;
 };
 
@@ -307,15 +388,18 @@ export const PutV1HistoricalEmployeesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1HistoricalEmployeesRequest
 > = z.object({
+  xGustoAPIVersion:
+    PutV1HistoricalEmployeesHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
   companyUuid: z.string(),
   historicalEmployeeUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   requestBody: z.lazy(() => PutV1HistoricalEmployeesRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
+    xGustoAPIVersion: "X-Gusto-API-Version",
     companyUuid: "company_uuid",
     historicalEmployeeUuid: "historical_employee_uuid",
-    xGustoAPIVersion: "X-Gusto-API-Version",
     requestBody: "RequestBody",
   });
 });

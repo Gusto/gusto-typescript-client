@@ -6,6 +6,7 @@ import { holidayPayPoliciesAddEmployees } from "../funcs/holidayPayPoliciesAddEm
 import { holidayPayPoliciesCreate } from "../funcs/holidayPayPoliciesCreate.js";
 import { holidayPayPoliciesDelete } from "../funcs/holidayPayPoliciesDelete.js";
 import { holidayPayPoliciesGet } from "../funcs/holidayPayPoliciesGet.js";
+import { holidayPayPoliciesPreviewPaidHolidays } from "../funcs/holidayPayPoliciesPreviewPaidHolidays.js";
 import { holidayPayPoliciesRemoveEmployees } from "../funcs/holidayPayPoliciesRemoveEmployees.js";
 import { holidayPayPoliciesUpdate } from "../funcs/holidayPayPoliciesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -13,6 +14,10 @@ import {
   DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequest,
   DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse,
 } from "../models/operations/deletev1companiescompanyuuidholidaypaypolicy.js";
+import {
+  GetCompaniesCompanyUuidPaidHolidaysRequest,
+  GetCompaniesCompanyUuidPaidHolidaysResponse,
+} from "../models/operations/getcompaniescompanyuuidpaidholidays.js";
 import {
   GetV1CompaniesCompanyUuidHolidayPayPolicyRequest,
   GetV1CompaniesCompanyUuidHolidayPayPolicyResponse,
@@ -144,6 +149,27 @@ export class HolidayPayPolicies extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse> {
     return unwrapAsync(holidayPayPoliciesRemoveEmployees(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Preview a company's paid holidays
+   *
+   * @remarks
+   * Preview a company's paid holidays
+   *
+   * If a year is passed, paid holidays for that year will be returned. Otherwise, paid holidays for the next three years will be returned.
+   *
+   * scope: `holiday_pay_policies:read`
+   */
+  async previewPaidHolidays(
+    request: GetCompaniesCompanyUuidPaidHolidaysRequest,
+    options?: RequestOptions,
+  ): Promise<GetCompaniesCompanyUuidPaidHolidaysResponse> {
+    return unwrapAsync(holidayPayPoliciesPreviewPaidHolidays(
       this,
       request,
       options,

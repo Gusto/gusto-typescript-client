@@ -5,20 +5,29 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
-import {
   WireInRequest,
   WireInRequest$inboundSchema,
 } from "../components/wireinrequest.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion>;
 
 export type GetWireInRequestsWireInRequestUuidRequest = {
   /**
@@ -28,16 +37,24 @@ export type GetWireInRequestsWireInRequestUuidRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type GetWireInRequestsWireInRequestUuidResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
   wireInRequest?: WireInRequest | undefined;
 };
+
+/** @internal */
+export const GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion);
 
 /** @internal */
 export type GetWireInRequestsWireInRequestUuidRequest$Outbound = {
@@ -53,7 +70,9 @@ export const GetWireInRequestsWireInRequestUuidRequest$outboundSchema:
     GetWireInRequestsWireInRequestUuidRequest
   > = z.object({
     wireInRequestUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion:
+      GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       wireInRequestUuid: "wire_in_request_uuid",

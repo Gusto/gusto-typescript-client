@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,14 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1ContractorDocumentPdfRequest } from "../models/operations/getv1contractordocumentpdf.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  GetV1ContractorDocumentPdfHeaderXGustoAPIVersion,
+  GetV1ContractorDocumentPdfRequest,
+} from "../models/operations/getv1contractordocumentpdf.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +46,8 @@ export {
 };
 
 export type ContractorDocumentsGetPdfQueryError =
+  | NotFoundErrorObject
+  | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -113,7 +119,11 @@ export function setContractorDocumentsGetPdfData(
   client: QueryClient,
   queryKeyBase: [
     documentUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1ContractorDocumentPdfHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: ContractorDocumentsGetPdfQueryData,
 ): ContractorDocumentsGetPdfQueryData | undefined {
@@ -127,7 +137,11 @@ export function invalidateContractorDocumentsGetPdf(
   queryKeyBase: TupleToPrefixes<
     [
       documentUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1ContractorDocumentPdfHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

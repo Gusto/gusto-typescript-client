@@ -17,7 +17,7 @@ export class HistoricalEmployees extends ClientSDK {
    * @remarks
    * Update a historical employee, an employee that was previously dismissed from the company in the current year.
    *
-   * scope: `employees:manage`
+   * scope: `employees:manage employees:write`
    */
   async update(
     request: PutV1HistoricalEmployeesRequest,

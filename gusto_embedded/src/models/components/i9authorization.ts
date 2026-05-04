@@ -23,14 +23,12 @@ export const AuthorizationStatus = {
  */
 export type AuthorizationStatus = ClosedEnum<typeof AuthorizationStatus>;
 
-export const I9AuthorizationDocumentType = {
+export const DocumentType = {
   UscisAlienRegistrationNumber: "uscis_alien_registration_number",
   FormI94: "form_i94",
   ForeignPassport: "foreign_passport",
 } as const;
-export type I9AuthorizationDocumentType = ClosedEnum<
-  typeof I9AuthorizationDocumentType
->;
+export type DocumentType = ClosedEnum<typeof DocumentType>;
 
 /**
  * An employee's I-9 authorization
@@ -55,7 +53,7 @@ export type I9Authorization = {
   /**
    * The document's document type
    */
-  documentType?: I9AuthorizationDocumentType | null | undefined;
+  documentType?: DocumentType | null | undefined;
   /**
    * Whether or not a `document_number` exists for this document.
    */
@@ -92,9 +90,8 @@ export const AuthorizationStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(AuthorizationStatus);
 
 /** @internal */
-export const I9AuthorizationDocumentType$inboundSchema: z.ZodNativeEnum<
-  typeof I9AuthorizationDocumentType
-> = z.nativeEnum(I9AuthorizationDocumentType);
+export const DocumentType$inboundSchema: z.ZodNativeEnum<typeof DocumentType> =
+  z.nativeEnum(DocumentType);
 
 /** @internal */
 export const I9Authorization$inboundSchema: z.ZodType<
@@ -106,8 +103,7 @@ export const I9Authorization$inboundSchema: z.ZodType<
   form_uuid: z.nullable(z.string()).optional(),
   version: z.string(),
   authorization_status: AuthorizationStatus$inboundSchema,
-  document_type: z.nullable(I9AuthorizationDocumentType$inboundSchema)
-    .optional(),
+  document_type: z.nullable(DocumentType$inboundSchema).optional(),
   has_document_number: z.nullable(z.boolean()).optional(),
   expiration_date: z.nullable(z.string()).optional(),
   country: z.nullable(z.string()).optional(),

@@ -5,26 +5,39 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const DeleteV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type DeleteV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof DeleteV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion
+  >;
+
 export type DeleteV1EmployeesEmployeeIdTerminationsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | DeleteV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the employee
    */
   employeeId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type DeleteV1EmployeesEmployeeIdTerminationsResponse = {
@@ -32,9 +45,17 @@ export type DeleteV1EmployeesEmployeeIdTerminationsResponse = {
 };
 
 /** @internal */
+export const DeleteV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeleteV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    DeleteV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export type DeleteV1EmployeesEmployeeIdTerminationsRequest$Outbound = {
-  employee_id: string;
   "X-Gusto-API-Version": string;
+  employee_id: string;
 };
 
 /** @internal */
@@ -44,12 +65,14 @@ export const DeleteV1EmployeesEmployeeIdTerminationsRequest$outboundSchema:
     z.ZodTypeDef,
     DeleteV1EmployeesEmployeeIdTerminationsRequest
   > = z.object({
+    xGustoAPIVersion:
+      DeleteV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
-      employeeId: "employee_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      employeeId: "employee_id",
     });
   });
 

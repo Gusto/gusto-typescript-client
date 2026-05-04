@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import { PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody } from "../models/errors/putv1partnermanagedcompaniescompanyuuidmigrate.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest,
   PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
@@ -39,7 +40,8 @@ export type CompaniesMigrateMutationData =
   PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse;
 
 export type CompaniesMigrateMutationError =
-  | PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody
+  | NotFoundErrorObject
+  | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -55,7 +57,13 @@ export type CompaniesMigrateMutationError =
  * @remarks
  * Migrate an existing Gusto customer to your embedded payroll product.
  *
- * To use this endpoint, the customer will need to connect their Gusto account to your application using [OAuth2](https://docs.gusto.com/embedded-payroll/docs/oauth2) then view and [accept the Embedded Payroll Terms of Service](https://docs.gusto.com/embedded-payroll/reference/post-partner-managed-companies-company_uuid-accept_terms_of_service).
+ * ### Prerequisites
+ * Before calling this endpoint:
+ * 1. The customer must connect their Gusto account to your application using [OAuth2](doc:oauth2)
+ * 2. The customer must view and [accept the Embedded Payroll Terms of Service](ref:post-v1-partner-managed-companies-company_uuid-accept-terms-of-service)
+ *
+ * ### Related guides
+ * - [Migrate an existing company](doc:migrate-existing-company)
  *
  * scope: `partner_managed_companies:write`
  */

@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesCompanyIdPayrollReversalsRequest } from "../models/operations/getv1companiescompanyidpayrollreversals.js";
@@ -42,6 +43,7 @@ export {
 };
 
 export type PayrollsGetApprovedReversalsQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

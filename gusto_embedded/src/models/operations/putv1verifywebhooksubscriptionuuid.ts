@@ -5,15 +5,12 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import {
   WebhookSubscription,
   WebhookSubscription$inboundSchema,
@@ -24,9 +21,21 @@ export type PutV1VerifyWebhookSubscriptionUuidSecurity = {
   systemAccessAuth: string;
 };
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion =
+  ClosedEnum<typeof PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion>;
+
 export type PutV1VerifyWebhookSubscriptionUuidRequestBody = {
   /**
-   * The token POSTed to the Subscription URL.
+   * The verification token received at the webhook subscription URL.
    */
   verificationToken: string;
 };
@@ -39,14 +48,16 @@ export type PutV1VerifyWebhookSubscriptionUuidRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion
+    | undefined;
   requestBody: PutV1VerifyWebhookSubscriptionUuidRequestBody;
 };
 
 export type PutV1VerifyWebhookSubscriptionUuidResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * successful
    */
   webhookSubscription?: WebhookSubscription | undefined;
 };
@@ -80,6 +91,12 @@ export function putV1VerifyWebhookSubscriptionUuidSecurityToJSON(
     ),
   );
 }
+
+/** @internal */
+export const PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion
+  > = z.nativeEnum(PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PutV1VerifyWebhookSubscriptionUuidRequestBody$Outbound = {
@@ -126,7 +143,9 @@ export const PutV1VerifyWebhookSubscriptionUuidRequest$outboundSchema:
     PutV1VerifyWebhookSubscriptionUuidRequest
   > = z.object({
     webhookSubscriptionUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion:
+      PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     requestBody: z.lazy(() =>
       PutV1VerifyWebhookSubscriptionUuidRequestBody$outboundSchema
     ),
