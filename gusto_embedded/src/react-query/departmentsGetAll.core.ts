@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { departmentsGetAll } from "../funcs/departmentsGetAll.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetCompaniesDepartmentsHeaderXGustoAPIVersion,
   GetCompaniesDepartmentsRequest,
   GetCompaniesDepartmentsResponse,
 } from "../models/operations/getcompaniesdepartments.js";
@@ -73,7 +73,11 @@ export function buildDepartmentsGetAllQuery(
 
 export function queryKeyDepartmentsGetAll(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetCompaniesDepartmentsHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

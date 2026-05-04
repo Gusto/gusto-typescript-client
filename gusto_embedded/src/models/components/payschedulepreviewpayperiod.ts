@@ -14,7 +14,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type PaySchedulePreviewPayPeriod = {
   /**
-   * The date employees will be paid (check date).
+   * The payment date, "Check date", for the pay period.
    */
   checkDate: RFCDate;
   /**
@@ -22,7 +22,7 @@ export type PaySchedulePreviewPayPeriod = {
    */
   startDate: RFCDate;
   /**
-   * The deadline by which payroll must be run for this period to be paid on check_date.
+   * The deadline to run payroll for direct deposit on the check date.
    */
   runPayrollBy: RFCDate;
   /**

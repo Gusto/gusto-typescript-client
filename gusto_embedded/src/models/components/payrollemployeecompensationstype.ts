@@ -129,6 +129,10 @@ export type Deductions = {
    * The UUID of the deduction. Only present for unprocessed payrolls.
    */
   uuid?: string | undefined;
+  /**
+   * Whether the deduction can be updated via the payroll update endpoint. Only present for unprocessed payrolls.
+   */
+  updatableViaPayroll?: boolean | undefined;
 };
 
 export type PayrollEmployeeCompensationsType = {
@@ -356,9 +360,11 @@ export const Deductions$inboundSchema: z.ZodType<
   amount: z.number().optional(),
   amount_type: AmountType$inboundSchema.optional(),
   uuid: z.string().optional(),
+  updatable_via_payroll: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "amount_type": "amountType",
+    "updatable_via_payroll": "updatableViaPayroll",
   });
 });
 

@@ -5,20 +5,29 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
-  EmployeeCustomField,
-  EmployeeCustomField$inboundSchema,
-} from "../components/employeecustomfield.js";
+  EmployeeCustomFieldList,
+  EmployeeCustomFieldList$inboundSchema,
+} from "../components/employeecustomfieldlist.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion>;
 
 export type GetV1EmployeesEmployeeIdCustomFieldsRequest = {
   /**
@@ -36,23 +45,24 @@ export type GetV1EmployeesEmployeeIdCustomFieldsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-};
-
-/**
- * OK
- */
-export type GetV1EmployeesEmployeeIdCustomFieldsResponseBody = {
-  customFields?: Array<EmployeeCustomField> | undefined;
+  xGustoAPIVersion?:
+    | GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type GetV1EmployeesEmployeeIdCustomFieldsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * OK
+   * Success
    */
-  object?: GetV1EmployeesEmployeeIdCustomFieldsResponseBody | undefined;
+  employeeCustomFieldList?: EmployeeCustomFieldList | undefined;
 };
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion);
 
 /** @internal */
 export type GetV1EmployeesEmployeeIdCustomFieldsRequest$Outbound = {
@@ -72,7 +82,9 @@ export const GetV1EmployeesEmployeeIdCustomFieldsRequest$outboundSchema:
     employeeId: z.string(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion:
+      GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       employeeId: "employee_id",
@@ -92,36 +104,6 @@ export function getV1EmployeesEmployeeIdCustomFieldsRequestToJSON(
 }
 
 /** @internal */
-export const GetV1EmployeesEmployeeIdCustomFieldsResponseBody$inboundSchema:
-  z.ZodType<
-    GetV1EmployeesEmployeeIdCustomFieldsResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    custom_fields: z.array(EmployeeCustomField$inboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "custom_fields": "customFields",
-    });
-  });
-
-export function getV1EmployeesEmployeeIdCustomFieldsResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1EmployeesEmployeeIdCustomFieldsResponseBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1EmployeesEmployeeIdCustomFieldsResponseBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1EmployeesEmployeeIdCustomFieldsResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
 export const GetV1EmployeesEmployeeIdCustomFieldsResponse$inboundSchema:
   z.ZodType<
     GetV1EmployeesEmployeeIdCustomFieldsResponse,
@@ -129,12 +111,12 @@ export const GetV1EmployeesEmployeeIdCustomFieldsResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    object: z.lazy(() =>
-      GetV1EmployeesEmployeeIdCustomFieldsResponseBody$inboundSchema
-    ).optional(),
+    "Employee-Custom-Field-List": EmployeeCustomFieldList$inboundSchema
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
+      "Employee-Custom-Field-List": "employeeCustomFieldList",
     });
   });
 

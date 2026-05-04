@@ -107,9 +107,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## submit
 
@@ -130,7 +131,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.wireInRequests.submit({
     wireInRequestUuid: "<id>",
-    requestBody: {
+    wireInRequestUpdateRequestBody: {
       dateSent: "<value>",
       bankName: "<value>",
       amountSent: "<value>",
@@ -160,7 +161,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await wireInRequestsSubmit(gustoEmbedded, {
     wireInRequestUuid: "<id>",
-    requestBody: {
+    wireInRequestUpdateRequestBody: {
       dateSent: "<value>",
       bankName: "<value>",
       amountSent: "<value>",
@@ -206,7 +207,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.wireInRequests.submit({
     wireInRequestUuid: "<id>",
-    requestBody: {
+    wireInRequestUpdateRequestBody: {
       dateSent: "2024-06-10T00:00:00Z",
       bankName: "Chase",
       amountSent: "314500",
@@ -237,7 +238,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await wireInRequestsSubmit(gustoEmbedded, {
     wireInRequestUuid: "<id>",
-    requestBody: {
+    wireInRequestUpdateRequestBody: {
       dateSent: "2024-06-10T00:00:00Z",
       bankName: "Chase",
       amountSent: "314500",
@@ -284,7 +285,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.wireInRequests.submit({
     wireInRequestUuid: "<id>",
-    requestBody: {
+    wireInRequestUpdateRequestBody: {
       dateSent: "<value>",
       bankName: "<value>",
       amountSent: "<value>",
@@ -314,7 +315,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await wireInRequestsSubmit(gustoEmbedded, {
     wireInRequestUuid: "<id>",
-    requestBody: {
+    wireInRequestUpdateRequestBody: {
       dateSent: "<value>",
       bankName: "<value>",
       amountSent: "<value>",
@@ -360,7 +361,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.wireInRequests.submit({
     wireInRequestUuid: "<id>",
-    requestBody: {
+    wireInRequestUpdateRequestBody: {
       dateSent: "<value>",
       bankName: "<value>",
       amountSent: "<value>",
@@ -390,7 +391,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await wireInRequestsSubmit(gustoEmbedded, {
     wireInRequestUuid: "<id>",
-    requestBody: {
+    wireInRequestUpdateRequestBody: {
       dateSent: "<value>",
       bankName: "<value>",
       amountSent: "<value>",
@@ -436,7 +437,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.wireInRequests.submit({
     wireInRequestUuid: "<id>",
-    requestBody: {
+    wireInRequestUpdateRequestBody: {
       dateSent: "<value>",
       bankName: "<value>",
       amountSent: "<value>",
@@ -466,7 +467,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await wireInRequestsSubmit(gustoEmbedded, {
     wireInRequestUuid: "<id>",
-    requestBody: {
+    wireInRequestUpdateRequestBody: {
       dateSent: "<value>",
       bankName: "<value>",
       amountSent: "<value>",
@@ -517,6 +518,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 

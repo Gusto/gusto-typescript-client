@@ -6,14 +6,10 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  HTTPMetadata,
-  HTTPMetadata$inboundSchema,
-} from "../components/httpmetadata.js";
 import { GustoEmbeddedError } from "./gustoembeddederror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
 
-export type PayrollBlockersErrorMetadata = {
+export type Metadata = {
   /**
    * A categorization of the payroll blocker, e.g. "geocode_error"
    */
@@ -33,7 +29,7 @@ export type PayrollBlockersErrorErrors = {
    * Human readable description of the payroll blocker
    */
   message?: string | undefined;
-  metadata?: PayrollBlockersErrorMetadata | undefined;
+  metadata?: Metadata | undefined;
 };
 
 /**
@@ -45,7 +41,6 @@ export type PayrollBlockersErrorErrors = {
  */
 export type PayrollBlockersErrorData = {
   errors?: Array<PayrollBlockersErrorErrors> | undefined;
-  httpMeta: HTTPMetadata;
 };
 
 /**
@@ -77,21 +72,21 @@ export class PayrollBlockersError extends GustoEmbeddedError {
 }
 
 /** @internal */
-export const PayrollBlockersErrorMetadata$inboundSchema: z.ZodType<
-  PayrollBlockersErrorMetadata,
+export const Metadata$inboundSchema: z.ZodType<
+  Metadata,
   z.ZodTypeDef,
   unknown
 > = z.object({
   key: z.string().optional(),
 });
 
-export function payrollBlockersErrorMetadataFromJSON(
+export function metadataFromJSON(
   jsonString: string,
-): SafeParseResult<PayrollBlockersErrorMetadata, SDKValidationError> {
+): SafeParseResult<Metadata, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PayrollBlockersErrorMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayrollBlockersErrorMetadata' from JSON`,
+    (x) => Metadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Metadata' from JSON`,
   );
 }
 
@@ -104,7 +99,7 @@ export const PayrollBlockersErrorErrors$inboundSchema: z.ZodType<
   error_key: z.string().optional(),
   category: z.string().optional(),
   message: z.string().optional(),
-  metadata: z.lazy(() => PayrollBlockersErrorMetadata$inboundSchema).optional(),
+  metadata: z.lazy(() => Metadata$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "error_key": "errorKey",
@@ -129,17 +124,12 @@ export const PayrollBlockersError$inboundSchema: z.ZodType<
 > = z.object({
   errors: z.array(z.lazy(() => PayrollBlockersErrorErrors$inboundSchema))
     .optional(),
-  HttpMeta: HTTPMetadata$inboundSchema,
   request$: z.instanceof(Request),
   response$: z.instanceof(Response),
   body$: z.string(),
 })
   .transform((v) => {
-    const remapped = remap$(v, {
-      "HttpMeta": "httpMeta",
-    });
-
-    return new PayrollBlockersError(remapped, {
+    return new PayrollBlockersError(v, {
       request: v.request$,
       response: v.response$,
       body: v.body$,

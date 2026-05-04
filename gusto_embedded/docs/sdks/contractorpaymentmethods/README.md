@@ -27,7 +27,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractorPaymentMethods.createBankAccount({
     contractorUuid: "<id>",
-    requestBody: {
+    contractorBankAccountCreateRequestBody: {
       name: "<value>",
       routingNumber: "<value>",
       accountNumber: "<value>",
@@ -58,7 +58,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorPaymentMethodsCreateBankAccount(gustoEmbedded, {
     contractorUuid: "<id>",
-    requestBody: {
+    contractorBankAccountCreateRequestBody: {
       name: "<value>",
       routingNumber: "<value>",
       accountNumber: "<value>",
@@ -105,7 +105,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractorPaymentMethods.createBankAccount({
     contractorUuid: "<id>",
-    requestBody: {
+    contractorBankAccountCreateRequestBody: {
       name: "BoA Checking Account",
       routingNumber: "266905059",
       accountNumber: "5809431207",
@@ -136,7 +136,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorPaymentMethodsCreateBankAccount(gustoEmbedded, {
     contractorUuid: "<id>",
-    requestBody: {
+    contractorBankAccountCreateRequestBody: {
       name: "BoA Checking Account",
       routingNumber: "266905059",
       accountNumber: "5809431207",
@@ -183,7 +183,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractorPaymentMethods.createBankAccount({
     contractorUuid: "<id>",
-    requestBody: {
+    contractorBankAccountCreateRequestBody: {
       name: "<value>",
       routingNumber: "<value>",
       accountNumber: "<value>",
@@ -214,7 +214,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorPaymentMethodsCreateBankAccount(gustoEmbedded, {
     contractorUuid: "<id>",
-    requestBody: {
+    contractorBankAccountCreateRequestBody: {
       name: "<value>",
       routingNumber: "<value>",
       accountNumber: "<value>",
@@ -261,7 +261,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractorPaymentMethods.createBankAccount({
     contractorUuid: "<id>",
-    requestBody: {
+    contractorBankAccountCreateRequestBody: {
       name: "<value>",
       routingNumber: "<value>",
       accountNumber: "<value>",
@@ -292,7 +292,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorPaymentMethodsCreateBankAccount(gustoEmbedded, {
     contractorUuid: "<id>",
-    requestBody: {
+    contractorBankAccountCreateRequestBody: {
       name: "<value>",
       routingNumber: "<value>",
       accountNumber: "<value>",
@@ -344,5 +344,6 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

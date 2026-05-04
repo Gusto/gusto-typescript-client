@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -14,13 +15,27 @@ import {
   TimeOffActivity,
   TimeOffActivity$inboundSchema,
 } from "../components/timeoffactivity.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetVersionEmployeesTimeOffActivitiesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetVersionEmployeesTimeOffActivitiesHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetVersionEmployeesTimeOffActivitiesHeaderXGustoAPIVersion>;
+
 export type GetVersionEmployeesTimeOffActivitiesRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetVersionEmployeesTimeOffActivitiesHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the employee
    */
@@ -29,25 +44,27 @@ export type GetVersionEmployeesTimeOffActivitiesRequest = {
    * The time off type name you want to query data for. ex: 'sick' or 'vacation'
    */
   timeOffType: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetVersionEmployeesTimeOffActivitiesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
-  timeOffActivity?: TimeOffActivity | undefined;
+  timeOffActivityList?: Array<TimeOffActivity> | undefined;
 };
 
 /** @internal */
+export const GetVersionEmployeesTimeOffActivitiesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetVersionEmployeesTimeOffActivitiesHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetVersionEmployeesTimeOffActivitiesHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetVersionEmployeesTimeOffActivitiesRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   employee_uuid: string;
   time_off_type: string;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -57,14 +74,16 @@ export const GetVersionEmployeesTimeOffActivitiesRequest$outboundSchema:
     z.ZodTypeDef,
     GetVersionEmployeesTimeOffActivitiesRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetVersionEmployeesTimeOffActivitiesHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     employeeUuid: z.string(),
     timeOffType: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       employeeUuid: "employee_uuid",
       timeOffType: "time_off_type",
-      xGustoAPIVersion: "X-Gusto-API-Version",
     });
   });
 
@@ -87,11 +106,11 @@ export const GetVersionEmployeesTimeOffActivitiesResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Time-Off-Activity": TimeOffActivity$inboundSchema.optional(),
+    "Time-Off-Activity-List": z.array(TimeOffActivity$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Time-Off-Activity": "timeOffActivity",
+      "Time-Off-Activity-List": "timeOffActivityList",
     });
   });
 

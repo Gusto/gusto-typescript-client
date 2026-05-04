@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetWireInRequestsWireInRequestUuidRequest } from "../models/operations/getwireinrequestswireinrequestuuid.js";
+import {
+  GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion,
+  GetWireInRequestsWireInRequestUuidRequest,
+} from "../models/operations/getwireinrequestswireinrequestuuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type WireInRequestsGetQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -110,7 +114,11 @@ export function setWireInRequestsGetData(
   client: QueryClient,
   queryKeyBase: [
     wireInRequestUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: WireInRequestsGetQueryData,
 ): WireInRequestsGetQueryData | undefined {
@@ -124,7 +132,11 @@ export function invalidateWireInRequestsGet(
   queryKeyBase: TupleToPrefixes<
     [
       wireInRequestUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

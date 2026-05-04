@@ -15,27 +15,31 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The payment method type. If type is Direct Deposit, the contractor is required to have a bank account.
- *
- * @remarks
- * see [Bank account endpoint](./post-v1-contractors-contractor_uuid-bank_accounts)
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1ContractorsContractorIdPaymentMethodHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1ContractorsContractorIdPaymentMethodHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutV1ContractorsContractorIdPaymentMethodHeaderXGustoAPIVersion
+  >;
+
+/**
+ * The payment method type. If type is Direct Deposit, the contractor is required to have a bank account. See [Bank account endpoint](./post-v1-contractors-contractor_uuid-bank_accounts).
  */
 export const PutV1ContractorsContractorIdPaymentMethodType = {
   DirectDeposit: "Direct Deposit",
   Check: "Check",
 } as const;
 /**
- * The payment method type. If type is Direct Deposit, the contractor is required to have a bank account.
- *
- * @remarks
- * see [Bank account endpoint](./post-v1-contractors-contractor_uuid-bank_accounts)
+ * The payment method type. If type is Direct Deposit, the contractor is required to have a bank account. See [Bank account endpoint](./post-v1-contractors-contractor_uuid-bank_accounts).
  */
 export type PutV1ContractorsContractorIdPaymentMethodType = ClosedEnum<
   typeof PutV1ContractorsContractorIdPaymentMethodType
@@ -47,23 +51,22 @@ export type PutV1ContractorsContractorIdPaymentMethodRequestBody = {
    */
   version: string;
   /**
-   * The payment method type. If type is Direct Deposit, the contractor is required to have a bank account.
-   *
-   * @remarks
-   * see [Bank account endpoint](./post-v1-contractors-contractor_uuid-bank_accounts)
+   * The payment method type. If type is Direct Deposit, the contractor is required to have a bank account. See [Bank account endpoint](./post-v1-contractors-contractor_uuid-bank_accounts).
    */
   type: PutV1ContractorsContractorIdPaymentMethodType;
 };
 
 export type PutV1ContractorsContractorIdPaymentMethodRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1ContractorsContractorIdPaymentMethodHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the contractor
    */
   contractorUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PutV1ContractorsContractorIdPaymentMethodRequestBody;
 };
 
@@ -74,6 +77,14 @@ export type PutV1ContractorsContractorIdPaymentMethodResponse = {
    */
   contractorPaymentMethod?: ContractorPaymentMethod | undefined;
 };
+
+/** @internal */
+export const PutV1ContractorsContractorIdPaymentMethodHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1ContractorsContractorIdPaymentMethodHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PutV1ContractorsContractorIdPaymentMethodHeaderXGustoAPIVersion,
+  );
 
 /** @internal */
 export const PutV1ContractorsContractorIdPaymentMethodType$outboundSchema:
@@ -110,8 +121,8 @@ export function putV1ContractorsContractorIdPaymentMethodRequestBodyToJSON(
 
 /** @internal */
 export type PutV1ContractorsContractorIdPaymentMethodRequest$Outbound = {
-  contractor_uuid: string;
   "X-Gusto-API-Version": string;
+  contractor_uuid: string;
   RequestBody: PutV1ContractorsContractorIdPaymentMethodRequestBody$Outbound;
 };
 
@@ -122,15 +133,17 @@ export const PutV1ContractorsContractorIdPaymentMethodRequest$outboundSchema:
     z.ZodTypeDef,
     PutV1ContractorsContractorIdPaymentMethodRequest
   > = z.object({
+    xGustoAPIVersion:
+      PutV1ContractorsContractorIdPaymentMethodHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     contractorUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PutV1ContractorsContractorIdPaymentMethodRequestBody$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      contractorUuid: "contractor_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      contractorUuid: "contractor_uuid",
       requestBody: "RequestBody",
     });
   });

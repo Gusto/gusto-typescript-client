@@ -4,6 +4,7 @@
 
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -19,11 +20,15 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import {
-  PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody,
-  PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$inboundSchema,
-} from "../models/errors/putv1partnermanagedcompaniescompanyuuidmigrate.js";
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest,
   PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$outboundSchema,
@@ -39,9 +44,17 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Migrate an existing Gusto customer to your embedded payroll product.
  *
- * To use this endpoint, the customer will need to connect their Gusto account to your application using [OAuth2](https://docs.gusto.com/embedded-payroll/docs/oauth2) then view and [accept the Embedded Payroll Terms of Service](https://docs.gusto.com/embedded-payroll/reference/post-partner-managed-companies-company_uuid-accept_terms_of_service).
+ * ### Prerequisites
+ * Before calling this endpoint:
+ * 1. The customer must connect their Gusto account to your application using [OAuth2](doc:oauth2)
+ * 2. The customer must view and [accept the Embedded Payroll Terms of Service](ref:post-v1-partner-managed-companies-company_uuid-accept-terms-of-service)
+ *
+ * ### Related guides
+ * - [Migrate an existing company](doc:migrate-existing-company)
  *
  * scope: `partner_managed_companies:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function companiesMigrate(
   client: GustoEmbeddedCore,
@@ -50,7 +63,8 @@ export function companiesMigrate(
 ): APIPromise<
   Result<
     PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
-    | PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody
+    | NotFoundErrorObject
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -76,7 +90,8 @@ async function $do(
   [
     Result<
       PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
-      | PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody
+      | NotFoundErrorObject
+      | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -100,7 +115,11 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON(
+    "body",
+    payload["Partner-Managed-Company-Migrate-Request"],
+    { explode: true },
+  );
 
   const pathParams = {
     company_uuid: encodeSimple("company_uuid", payload.company_uuid, {
@@ -126,7 +145,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -160,7 +179,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -175,7 +195,8 @@ async function $do(
 
   const [result] = await M.match<
     PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
-    | PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody
+    | NotFoundErrorObject
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -188,13 +209,11 @@ async function $do(
     M.json(
       200,
       PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$inboundSchema,
-      { key: "object" },
+      { key: "Partner-Managed-Company-Migrate-Response" },
     ),
-    M.jsonErr(
-      422,
-      PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$inboundSchema,
-    ),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

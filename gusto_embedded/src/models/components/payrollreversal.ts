@@ -8,9 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * Example response
- */
 export type PayrollReversal = {
   /**
    * The UUID for the payroll run being reversed.
@@ -19,7 +16,7 @@ export type PayrollReversal = {
   /**
    * The UUID of the payroll where the reversal was applied.
    */
-  reversalPayrollUuid?: string | undefined;
+  reversalPayrollUuid?: string | null | undefined;
   /**
    * A reason provided by the admin who created the reversal.
    */
@@ -31,7 +28,7 @@ export type PayrollReversal = {
   /**
    * Category chosen by the admin who requested the reversal.
    */
-  category?: string | undefined;
+  category?: string | null | undefined;
   /**
    * Array of affected employee UUIDs.
    */
@@ -45,10 +42,10 @@ export const PayrollReversal$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   reversed_payroll_uuid: z.string().optional(),
-  reversal_payroll_uuid: z.string().optional(),
+  reversal_payroll_uuid: z.nullable(z.string()).optional(),
   reason: z.string().optional(),
   approved_at: z.nullable(z.string()).optional(),
-  category: z.string().optional(),
+  category: z.nullable(z.string()).optional(),
   reversed_employee_uuids: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {

@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { garnishmentsGetChildSupportData } from "../funcs/garnishmentsGetChildSupportData.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion,
   GetV1GarnishmentsChildSupportRequest,
   GetV1GarnishmentsChildSupportResponse,
 } from "../models/operations/getv1garnishmentschildsupport.js";
@@ -73,7 +73,11 @@ export function buildGarnishmentsGetChildSupportDataQuery(
 }
 
 export function queryKeyGarnishmentsGetChildSupportData(
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

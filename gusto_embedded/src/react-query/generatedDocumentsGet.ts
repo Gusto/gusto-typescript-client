@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { DocumentType } from "../models/components/documenttype.js";
 import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
@@ -20,9 +19,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest } from "../models/operations/getv1generateddocumentsdocumenttyperequestuuid.js";
+import {
+  DocumentType,
+  GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
+} from "../models/operations/getv1generateddocumentsdocumenttyperequestuuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -43,6 +46,7 @@ export {
 };
 
 export type GeneratedDocumentsGetQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

@@ -3,13 +3,16 @@
 ## Example Usage
 
 ```typescript
-import { Employees } from "@gusto/embedded-api/models/operations/putaddpeopletodepartment.js";
+import { Employees } from "@gusto/embedded-api/models/operations/putv1timeoffpoliciestimeoffpolicyuuidaddemployees.js";
 
-let value: Employees = {};
+let value: Employees = {
+  uuid: "2607e451-623d-4fb8-b6c5-0ddada451873",
+};
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `uuid`             | *string*           | :heavy_minus_sign: | N/A                |
+| Field                                 | Type                                  | Required                              | Description                           |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| `uuid`                                | *string*                              | :heavy_check_mark:                    | The UUID of the employee              |
+| `balance`                             | *string*                              | :heavy_minus_sign:                    | The starting balance for the employee |

@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ChildSupportData,
@@ -14,17 +15,28 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion
+>;
 
 export type GetV1GarnishmentsChildSupportRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type GetV1GarnishmentsChildSupportResponse = {
@@ -34,6 +46,11 @@ export type GetV1GarnishmentsChildSupportResponse = {
    */
   childSupportData?: ChildSupportData | undefined;
 };
+
+/** @internal */
+export const GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion> =
+    z.nativeEnum(GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion);
 
 /** @internal */
 export type GetV1GarnishmentsChildSupportRequest$Outbound = {
@@ -46,7 +63,10 @@ export const GetV1GarnishmentsChildSupportRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1GarnishmentsChildSupportRequest
 > = z.object({
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion:
+    GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",

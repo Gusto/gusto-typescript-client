@@ -10,13 +10,14 @@
 
 Update a historical employee, an employee that was previously dismissed from the company in the current year.
 
-scope: `employees:manage`
+scope: `employees:manage employees:write`
 
 ### Example Usage: Create Historical Employee Example
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-historical_employees" method="put" path="/v1/companies/{company_uuid}/historical_employees/{historical_employee_uuid}" example="Create Historical Employee Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -30,17 +31,23 @@ async function run() {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       firstName: "Leanna",
       lastName: "Swaniawski",
-      dateOfBirth: "1977-07-17",
+      dateOfBirth: new RFCDate("1977-07-17"),
       ssn: "<value>",
-      workAddress: {},
+      workAddress: {
+        locationUuid: "1da85d35-1910-40a7-9c1f-8e2b3d4c5a6f",
+      },
       homeAddress: {
         street1: "<value>",
         city: "Port Mitchell",
         state: "Kentucky",
         zip: "85765",
       },
-      termination: {},
-      job: {},
+      termination: {
+        effectiveDate: new RFCDate("2022-01-01"),
+      },
+      job: {
+        hireDate: new RFCDate("2020-01-01"),
+      },
     },
   });
 
@@ -57,6 +64,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { historicalEmployeesUpdate } from "@gusto/embedded-api/funcs/historicalEmployeesUpdate.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -72,17 +80,23 @@ async function run() {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       firstName: "Leanna",
       lastName: "Swaniawski",
-      dateOfBirth: "1977-07-17",
+      dateOfBirth: new RFCDate("1977-07-17"),
       ssn: "<value>",
-      workAddress: {},
+      workAddress: {
+        locationUuid: "1da85d35-1910-40a7-9c1f-8e2b3d4c5a6f",
+      },
       homeAddress: {
         street1: "<value>",
         city: "Port Mitchell",
         state: "Kentucky",
         zip: "85765",
       },
-      termination: {},
-      job: {},
+      termination: {
+        effectiveDate: new RFCDate("2022-01-01"),
+      },
+      job: {
+        hireDate: new RFCDate("2020-01-01"),
+      },
     },
   });
   if (res.ok) {
@@ -132,7 +146,7 @@ async function run() {
       firstName: "Soren",
       middleInitial: "A",
       lastName: "Kierkegaard",
-      dateOfBirth: "1995-05-05T00:00:00Z",
+      dateOfBirth: new RFCDate("1995-05-05T00:00:00Z"),
       ssn: "123456294",
       workAddress: {
         locationUuid: "1da85d35-1910-4d5e-8e94-39e8cdfe8c9a",
@@ -187,7 +201,7 @@ async function run() {
       firstName: "Soren",
       middleInitial: "A",
       lastName: "Kierkegaard",
-      dateOfBirth: "1995-05-05T00:00:00Z",
+      dateOfBirth: new RFCDate("1995-05-05T00:00:00Z"),
       ssn: "123456294",
       workAddress: {
         locationUuid: "1da85d35-1910-4d5e-8e94-39e8cdfe8c9a",
@@ -254,6 +268,8 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

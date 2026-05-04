@@ -4,11 +4,15 @@
 
 import { contractorsCreate } from "../funcs/contractorsCreate.js";
 import { contractorsDelete } from "../funcs/contractorsDelete.js";
+import { contractorsDeleteV1ContractorsContractorUuidRehire } from "../funcs/contractorsDeleteV1ContractorsContractorUuidRehire.js";
+import { contractorsDeleteV1ContractorsContractorUuidTermination } from "../funcs/contractorsDeleteV1ContractorsContractorUuidTermination.js";
 import { contractorsGet } from "../funcs/contractorsGet.js";
 import { contractorsGetAddress } from "../funcs/contractorsGetAddress.js";
 import { contractorsGetOnboardingStatus } from "../funcs/contractorsGetOnboardingStatus.js";
 import { contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails } from "../funcs/contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails.js";
 import { contractorsList } from "../funcs/contractorsList.js";
+import { contractorsPostV1ContractorsContractorUuidRehire } from "../funcs/contractorsPostV1ContractorsContractorUuidRehire.js";
+import { contractorsPostV1ContractorsContractorUuidTermination } from "../funcs/contractorsPostV1ContractorsContractorUuidTermination.js";
 import { contractorsUpdate } from "../funcs/contractorsUpdate.js";
 import { contractorsUpdateAddress } from "../funcs/contractorsUpdateAddress.js";
 import { contractorsUpdateOnboardingStatus } from "../funcs/contractorsUpdateOnboardingStatus.js";
@@ -17,6 +21,14 @@ import {
   DeleteV1ContractorsContractorUuidRequest,
   DeleteV1ContractorsContractorUuidResponse,
 } from "../models/operations/deletev1contractorscontractoruuid.js";
+import {
+  DeleteV1ContractorsContractorUuidRehireRequest,
+  DeleteV1ContractorsContractorUuidRehireResponse,
+} from "../models/operations/deletev1contractorscontractoruuidrehire.js";
+import {
+  DeleteV1ContractorsContractorUuidTerminationRequest,
+  DeleteV1ContractorsContractorUuidTerminationResponse,
+} from "../models/operations/deletev1contractorscontractoruuidtermination.js";
 import {
   GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest,
   GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse,
@@ -41,6 +53,14 @@ import {
   PostV1CompaniesCompanyUuidContractorsRequest,
   PostV1CompaniesCompanyUuidContractorsResponse,
 } from "../models/operations/postv1companiescompanyuuidcontractors.js";
+import {
+  PostV1ContractorsContractorUuidRehireRequest,
+  PostV1ContractorsContractorUuidRehireResponse,
+} from "../models/operations/postv1contractorscontractoruuidrehire.js";
+import {
+  PostV1ContractorsContractorUuidTerminationRequest,
+  PostV1ContractorsContractorUuidTerminationResponse,
+} from "../models/operations/postv1contractorscontractoruuidtermination.js";
 import {
   PutV1ContractorsContractorUuidRequest,
   PutV1ContractorsContractorUuidResponse,
@@ -161,8 +181,6 @@ export class Contractors extends ClientSDK {
    * @remarks
    * Retrieves a contractor's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
    *
-   * scope: `contractors:read`
-   *
    * ## onboarding_status
    *
    * ### Admin-facilitated onboarding
@@ -193,6 +211,8 @@ export class Contractors extends ClientSDK {
    * | `payment_details` | (optional) Set up contractor's direct deposit or set to check. |
    * | `sign_documents` | Contractor forms (e.g., W9) are generated & signed. |
    * | `file_new_hire_report` | Contractor new hire report is generated. |
+   *
+   * scope: `contractors:read`
    */
   async getOnboardingStatus(
     request: GetV1ContractorsContractorUuidOnboardingStatusRequest,
@@ -211,8 +231,6 @@ export class Contractors extends ClientSDK {
    * @remarks
    * Updates a contractor's onboarding status.
    *
-   * scope: `contractors:write`
-   *
    * Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the contractor.
    *
    * | Action | current onboarding_status | new onboarding_status |
@@ -222,6 +240,8 @@ export class Contractors extends ClientSDK {
    * | Cancel a contractor's self-onboarding | `self_onboarding_invited` or `self_onboarding_not_invited` | `admin_onboarding_incomplete` |
    * | Review a contractor's self-onboarded info | `self_onboarding_started` | `self_onboarding_review` |
    * | Finish a contractor's onboarding | `admin_onboarding_review` or `self_onboarding_review` | `onboarding_completed` |
+   *
+   * scope: `contractors:write`
    */
   async updateOnboardingStatus(
     request: PutV1ContractorsContractorUuidOnboardingStatusRequest,
@@ -259,11 +279,11 @@ export class Contractors extends ClientSDK {
    * @remarks
    * The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
    *
-   * scope: `contractors:write`
-   *
    * > 🚧 Contractors can only have one address.
    * >
    * > When a contractor is created, an address is created for them by default. Updating the address will replace the existing address.
+   *
+   * scope: `contractors:write`
    */
   async updateAddress(
     request: PutV1ContractorsContractorUuidAddressRequest,
@@ -319,5 +339,117 @@ export class Contractors extends ClientSDK {
         options,
       ),
     );
+  }
+
+  /**
+   * Schedule a contractor rehire
+   *
+   * @remarks
+   * ## Purpose
+   * Schedules a contractor rehire for a given date. Creates a new employment record for the contractor.
+   *
+   * ## Prerequisites
+   * Before calling this endpoint:
+   * 1. The contractor must be inactive (previously dismissed)
+   * 2. The contractor must not already have an upcoming employment
+   *
+   * ## Related webhooks
+   * - `contractor.reactivated`: Fires when the contractor becomes active again (on or after start_date)
+   *
+   * scope: `contractors:write`
+   */
+  async postV1ContractorsContractorUuidRehire(
+    request: PostV1ContractorsContractorUuidRehireRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1ContractorsContractorUuidRehireResponse> {
+    return unwrapAsync(contractorsPostV1ContractorsContractorUuidRehire(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Cancel a pending contractor rehire
+   *
+   * @remarks
+   * ## Purpose
+   * Cancels a pending contractor rehire. For future-dated rehires, cancellation is available anytime before the date.
+   * For past-dated rehires, cancellation is only available within the 2-day grace period.
+   *
+   * ## Prerequisites
+   * Before calling this endpoint:
+   * - The contractor must have a pending rehire (upcoming employment)
+   *
+   * ## Related webhooks
+   * - `contractor.deactivated`: Fires when the contractor returns to inactive state after cancellation
+   *
+   * scope: `contractors:write`
+   */
+  async deleteV1ContractorsContractorUuidRehire(
+    request: DeleteV1ContractorsContractorUuidRehireRequest,
+    options?: RequestOptions,
+  ): Promise<DeleteV1ContractorsContractorUuidRehireResponse> {
+    return unwrapAsync(contractorsDeleteV1ContractorsContractorUuidRehire(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Schedule a contractor termination
+   *
+   * @remarks
+   * ## Purpose
+   * Schedules a contractor dismissal for a given date. Supports both immediate (past dates) and future-dated dismissals.
+   *
+   * ## Prerequisites
+   * Before calling this endpoint:
+   * 1. The contractor must be active (no existing pending dismissal)
+   * 2. The contractor must have a current employment
+   *
+   * ## Related webhooks
+   * - `contractor.deactivated`: Fires when the contractor becomes inactive (on or after end_date)
+   *
+   * scope: `contractors:write`
+   */
+  async postV1ContractorsContractorUuidTermination(
+    request: PostV1ContractorsContractorUuidTerminationRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1ContractorsContractorUuidTerminationResponse> {
+    return unwrapAsync(contractorsPostV1ContractorsContractorUuidTermination(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Cancel a pending contractor termination
+   *
+   * @remarks
+   * ## Purpose
+   * Cancels a pending contractor dismissal. For future-dated dismissals, cancellation is available anytime before the date.
+   * For past-dated dismissals, cancellation is only available within the 2-day grace period.
+   *
+   * ## Prerequisites
+   * Before calling this endpoint:
+   * - The contractor must have a pending dismissal (scheduled or within the grace period)
+   *
+   * ## Related webhooks
+   * - `contractor.reactivated`: Fires when the contractor becomes active again after cancellation
+   *
+   * scope: `contractors:write`
+   */
+  async deleteV1ContractorsContractorUuidTermination(
+    request: DeleteV1ContractorsContractorUuidTerminationRequest,
+    options?: RequestOptions,
+  ): Promise<DeleteV1ContractorsContractorUuidTerminationResponse> {
+    return unwrapAsync(contractorsDeleteV1ContractorsContractorUuidTermination(
+      this,
+      request,
+      options,
+    ));
   }
 }

@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorsGetOnboardingStatus } from "../funcs/contractorsGetOnboardingStatus.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion,
   GetV1ContractorsContractorUuidOnboardingStatusRequest,
   GetV1ContractorsContractorUuidOnboardingStatusResponse,
 } from "../models/operations/getv1contractorscontractoruuidonboardingstatus.js";
@@ -74,7 +74,11 @@ export function buildContractorsGetOnboardingStatusQuery(
 
 export function queryKeyContractorsGetOnboardingStatus(
   contractorUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

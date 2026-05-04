@@ -12,25 +12,30 @@ import {
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  PartnerManagedCompanyMigrateRequest,
+  PartnerManagedCompanyMigrateRequest$Outbound,
+  PartnerManagedCompanyMigrateRequest$outboundSchema,
+} from "../components/partnermanagedcompanymigraterequest.js";
+import {
+  PartnerManagedCompanyMigrateResponse,
+  PartnerManagedCompanyMigrateResponse$inboundSchema,
+} from "../components/partnermanagedcompanymigrateresponse.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody = {
-  /**
-   * Email of the company signatory who is authorized to accept our [Terms of Service](https://flows.gusto.com/terms) and migration decision. You can retrieve the signatory email from the `GET /v/1/companies/{company_id}/signatories` endpoint.
-   */
-  email: string;
-  /**
-   * The IP address of the signatory who viewed and accepted the Terms of Service.
-   */
-  ipAddress: string;
-  /**
-   * The signatory's user ID on your platform.
-   */
-  externalUserId: string;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion
+  >;
 
 export type PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest = {
   /**
@@ -40,86 +45,36 @@ export type PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody;
-};
-
-/**
- * The migration status. 'success' is the only valid return value.
- */
-export const MigrationStatus = {
-  Success: "success",
-} as const;
-/**
- * The migration status. 'success' is the only valid return value.
- */
-export type MigrationStatus = ClosedEnum<typeof MigrationStatus>;
-
-/**
- * Example response
- */
-export type PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody = {
-  /**
-   * The company UUID
-   */
-  companyUuid?: string | undefined;
-  /**
-   * The migration status. 'success' is the only valid return value.
-   */
-  migrationStatus?: MigrationStatus | undefined;
+  xGustoAPIVersion?:
+    | PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion
+    | undefined;
+  partnerManagedCompanyMigrateRequest: PartnerManagedCompanyMigrateRequest;
 };
 
 export type PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
-  object?:
-    | PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody
+  partnerManagedCompanyMigrateResponse?:
+    | PartnerManagedCompanyMigrateResponse
     | undefined;
 };
 
 /** @internal */
-export type PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$Outbound =
-  {
-    email: string;
-    ip_address: string;
-    external_user_id: string;
-  };
-
-/** @internal */
-export const PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$outboundSchema:
-  z.ZodType<
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$Outbound,
-    z.ZodTypeDef,
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody
-  > = z.object({
-    email: z.string(),
-    ipAddress: z.string(),
-    externalUserId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      ipAddress: "ip_address",
-      externalUserId: "external_user_id",
-    });
-  });
-
-export function putV1PartnerManagedCompaniesCompanyUuidMigrateRequestBodyToJSON(
-  putV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody:
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$outboundSchema
-      .parse(putV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody),
+export const PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion,
   );
-}
 
 /** @internal */
 export type PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
-  RequestBody:
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$Outbound;
+  "Partner-Managed-Company-Migrate-Request":
+    PartnerManagedCompanyMigrateRequest$Outbound;
 };
 
 /** @internal */
@@ -130,15 +85,17 @@ export const PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$outboundSchem
     PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest
   > = z.object({
     companyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$outboundSchema
-    ),
+    xGustoAPIVersion:
+      PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
+    partnerManagedCompanyMigrateRequest:
+      PartnerManagedCompanyMigrateRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      partnerManagedCompanyMigrateRequest:
+        "Partner-Managed-Company-Migrate-Request",
     });
   });
 
@@ -154,42 +111,6 @@ export function putV1PartnerManagedCompaniesCompanyUuidMigrateRequestToJSON(
 }
 
 /** @internal */
-export const MigrationStatus$inboundSchema: z.ZodNativeEnum<
-  typeof MigrationStatus
-> = z.nativeEnum(MigrationStatus);
-
-/** @internal */
-export const PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$inboundSchema:
-  z.ZodType<
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_uuid: z.string().optional(),
-    migration_status: MigrationStatus$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_uuid": "companyUuid",
-      "migration_status": "migrationStatus",
-    });
-  });
-
-export function putV1PartnerManagedCompaniesCompanyUuidMigrateResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
 export const PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$inboundSchema:
   z.ZodType<
     PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
@@ -197,12 +118,13 @@ export const PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$inboundSchem
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    object: z.lazy(() =>
-      PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$inboundSchema
-    ).optional(),
+    "Partner-Managed-Company-Migrate-Response":
+      PartnerManagedCompanyMigrateResponse$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
+      "Partner-Managed-Company-Migrate-Response":
+        "partnerManagedCompanyMigrateResponse",
     });
   });
 

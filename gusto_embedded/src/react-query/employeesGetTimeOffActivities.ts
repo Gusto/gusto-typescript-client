@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,14 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetVersionEmployeesTimeOffActivitiesRequest } from "../models/operations/getversionemployeestimeoffactivities.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  GetVersionEmployeesTimeOffActivitiesHeaderXGustoAPIVersion,
+  GetVersionEmployeesTimeOffActivitiesRequest,
+} from "../models/operations/getversionemployeestimeoffactivities.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +46,8 @@ export {
 };
 
 export type EmployeesGetTimeOffActivitiesQueryError =
+  | NotFoundErrorObject
+  | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -114,8 +120,10 @@ export function setEmployeesGetTimeOffActivitiesData(
   queryKeyBase: [
     employeeUuid: string,
     parameters: {
+      xGustoAPIVersion?:
+        | GetVersionEmployeesTimeOffActivitiesHeaderXGustoAPIVersion
+        | undefined;
       timeOffType: string;
-      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: EmployeesGetTimeOffActivitiesQueryData,
@@ -131,8 +139,10 @@ export function invalidateEmployeesGetTimeOffActivities(
     [
       employeeUuid: string,
       parameters: {
+        xGustoAPIVersion?:
+          | GetVersionEmployeesTimeOffActivitiesHeaderXGustoAPIVersion
+          | undefined;
         timeOffType: string;
-        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,

@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { achTransactionsGetAll } from "../funcs/achTransactionsGetAll.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetAchTransactionsHeaderXGustoAPIVersion,
   GetAchTransactionsRequest,
   GetAchTransactionsResponse,
 } from "../models/operations/getachtransactions.js";
@@ -46,13 +46,13 @@ export function buildAchTransactionsGetAllQuery(
 } {
   return {
     queryKey: queryKeyAchTransactionsGetAll(request.companyUuid, {
+      xGustoAPIVersion: request.xGustoAPIVersion,
       contractorPaymentUuid: request.contractorPaymentUuid,
       payrollUuid: request.payrollUuid,
       transactionType: request.transactionType,
       paymentDirection: request.paymentDirection,
       page: request.page,
       per: request.per,
-      xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function achTransactionsGetAllQueryFn(
       ctx,
@@ -80,13 +80,13 @@ export function buildAchTransactionsGetAllQuery(
 export function queryKeyAchTransactionsGetAll(
   companyUuid: string,
   parameters: {
+    xGustoAPIVersion?: GetAchTransactionsHeaderXGustoAPIVersion | undefined;
     contractorPaymentUuid?: string | undefined;
     payrollUuid?: string | undefined;
     transactionType?: string | undefined;
     paymentDirection?: string | undefined;
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

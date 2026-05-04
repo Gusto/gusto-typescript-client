@@ -23,11 +23,11 @@ import {
  */
 export type PaySchedulePreview = {
   /**
-   * Pay periods in the preview range (default 18 months from today, or up to end_date if provided).
+   * A list of pay periods for the previewed pay schedule (default range is 18 months from today, or up to end_date when provided).
    */
   payPeriods?: Array<PaySchedulePreviewPayPeriod> | undefined;
   /**
-   * Observed bank holidays (ISO date strings) in the preview range; may affect payroll processing.
+   * A list of dates for bank closures (ISO date strings); may affect payroll processing.
    */
   holidays?: Array<RFCDate> | undefined;
 };

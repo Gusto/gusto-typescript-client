@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Garnishment,
@@ -14,13 +15,27 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1EmployeesEmployeeIdGarnishmentsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1EmployeesEmployeeIdGarnishmentsHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetV1EmployeesEmployeeIdGarnishmentsHeaderXGustoAPIVersion>;
+
 export type GetV1EmployeesEmployeeIdGarnishmentsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1EmployeesEmployeeIdGarnishmentsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the employee
    */
@@ -33,10 +48,6 @@ export type GetV1EmployeesEmployeeIdGarnishmentsRequest = {
    * Number of objects per page. For majority of endpoints will default to 25
    */
   per?: number | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1EmployeesEmployeeIdGarnishmentsResponse = {
@@ -44,15 +55,21 @@ export type GetV1EmployeesEmployeeIdGarnishmentsResponse = {
   /**
    * Example response
    */
-  garnishmentList?: Array<Garnishment> | undefined;
+  garnishments?: Array<Garnishment> | undefined;
 };
 
 /** @internal */
+export const GetV1EmployeesEmployeeIdGarnishmentsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1EmployeesEmployeeIdGarnishmentsHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1EmployeesEmployeeIdGarnishmentsHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetV1EmployeesEmployeeIdGarnishmentsRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   employee_id: string;
   page?: number | undefined;
   per?: number | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -62,14 +79,16 @@ export const GetV1EmployeesEmployeeIdGarnishmentsRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1EmployeesEmployeeIdGarnishmentsRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1EmployeesEmployeeIdGarnishmentsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     employeeId: z.string(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
-      employeeId: "employee_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      employeeId: "employee_id",
     });
   });
 
@@ -92,11 +111,11 @@ export const GetV1EmployeesEmployeeIdGarnishmentsResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Garnishment-List": z.array(Garnishment$inboundSchema).optional(),
+    Garnishments: z.array(Garnishment$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Garnishment-List": "garnishmentList",
+      "Garnishments": "garnishments",
     });
   });
 

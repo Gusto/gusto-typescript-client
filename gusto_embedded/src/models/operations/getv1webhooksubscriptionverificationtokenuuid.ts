@@ -5,20 +5,36 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  WebhookVerificationTokenResponse,
+  WebhookVerificationTokenResponse$inboundSchema,
+} from "../components/webhookverificationtokenresponse.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1WebhookSubscriptionVerificationTokenUuidSecurity = {
   systemAccessAuth: string;
 };
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion
+  >;
 
 export type GetV1WebhookSubscriptionVerificationTokenUuidRequest = {
   /**
@@ -28,11 +44,19 @@ export type GetV1WebhookSubscriptionVerificationTokenUuidRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type GetV1WebhookSubscriptionVerificationTokenUuidResponse = {
   httpMeta: HTTPMetadata;
+  /**
+   * No Content. The `verification_token` is POSTed to the Subscription URL.
+   */
+  webhookVerificationTokenResponse?:
+    | WebhookVerificationTokenResponse
+    | undefined;
 };
 
 /** @internal */
@@ -66,6 +90,14 @@ export function getV1WebhookSubscriptionVerificationTokenUuidSecurityToJSON(
 }
 
 /** @internal */
+export const GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export type GetV1WebhookSubscriptionVerificationTokenUuidRequest$Outbound = {
   webhook_subscription_uuid: string;
   "X-Gusto-API-Version": string;
@@ -79,7 +111,9 @@ export const GetV1WebhookSubscriptionVerificationTokenUuidRequest$outboundSchema
     GetV1WebhookSubscriptionVerificationTokenUuidRequest
   > = z.object({
     webhookSubscriptionUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion:
+      GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       webhookSubscriptionUuid: "webhook_subscription_uuid",
@@ -106,9 +140,12 @@ export const GetV1WebhookSubscriptionVerificationTokenUuidResponse$inboundSchema
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
+    "Webhook-Verification-Token-Response":
+      WebhookVerificationTokenResponse$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
+      "Webhook-Verification-Token-Response": "webhookVerificationTokenResponse",
     });
   });
 

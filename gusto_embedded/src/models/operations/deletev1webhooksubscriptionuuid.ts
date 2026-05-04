@@ -5,20 +5,30 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteV1WebhookSubscriptionUuidSecurity = {
   systemAccessAuth: string;
 };
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion = ClosedEnum<
+  typeof DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion
+>;
 
 export type DeleteV1WebhookSubscriptionUuidRequest = {
   /**
@@ -28,7 +38,9 @@ export type DeleteV1WebhookSubscriptionUuidRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type DeleteV1WebhookSubscriptionUuidResponse = {
@@ -65,6 +77,12 @@ export function deleteV1WebhookSubscriptionUuidSecurityToJSON(
 }
 
 /** @internal */
+export const DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion
+  > = z.nativeEnum(DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion);
+
+/** @internal */
 export type DeleteV1WebhookSubscriptionUuidRequest$Outbound = {
   webhook_subscription_uuid: string;
   "X-Gusto-API-Version": string;
@@ -77,7 +95,9 @@ export const DeleteV1WebhookSubscriptionUuidRequest$outboundSchema: z.ZodType<
   DeleteV1WebhookSubscriptionUuidRequest
 > = z.object({
   webhookSubscriptionUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion:
+    DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion$outboundSchema
+      .default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     webhookSubscriptionUuid: "webhook_subscription_uuid",

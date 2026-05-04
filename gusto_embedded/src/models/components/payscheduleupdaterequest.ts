@@ -4,11 +4,38 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { RFCDate } from "../../types/rfcdate.js";
-import {
-  PayScheduleFrequencyCreateUpdate,
-  PayScheduleFrequencyCreateUpdate$outboundSchema,
-} from "./payschedulefrequencycreateupdate.js";
+
+/**
+ * The frequency that employees on this pay schedule are paid with Gusto. Only weekly, bi-weekly, twice per month, and monthly are supported on create and update.
+ *
+ * @remarks
+ *
+ * - `Every week`: Weekly pay.
+ * - `Every other week`: Biweekly pay.
+ * - `Twice per month`: Two pay dates per month; require day_1 and day_2 (use 31 for last day of month).
+ * - `Monthly`: One pay date per month; require day_1 (1-31).
+ */
+export const PayScheduleUpdateRequestFrequency = {
+  EveryWeek: "Every week",
+  EveryOtherWeek: "Every other week",
+  TwicePerMonth: "Twice per month",
+  Monthly: "Monthly",
+} as const;
+/**
+ * The frequency that employees on this pay schedule are paid with Gusto. Only weekly, bi-weekly, twice per month, and monthly are supported on create and update.
+ *
+ * @remarks
+ *
+ * - `Every week`: Weekly pay.
+ * - `Every other week`: Biweekly pay.
+ * - `Twice per month`: Two pay dates per month; require day_1 and day_2 (use 31 for last day of month).
+ * - `Monthly`: One pay date per month; require day_1 (1-31).
+ */
+export type PayScheduleUpdateRequestFrequency = ClosedEnum<
+  typeof PayScheduleUpdateRequestFrequency
+>;
 
 /**
  * Request body for updating a pay schedule. Sent in the pay_schedule_update root key. Version is required for optimistic concurrency. Pay schedules may be automatically adjusted if an onboarded company misses their first pay date; see [Create a pay schedule](https://docs.gusto.com/embedded-payroll/docs/create-a-pay-schedule).
@@ -19,48 +46,37 @@ export type PayScheduleUpdateRequest = {
    */
   version: string;
   /**
-   * When true, Autopayroll is enabled and payroll runs automatically one day before payroll deadlines. When false, payroll does not run automatically and must be run manually.
+   * With automatic payroll enabled, payroll runs automatically one day before payroll deadlines. When false, payroll does not run automatically and must be run manually.
    *
    * @remarks
    * For API versions before 2025-11-15 the request field is auto_pilot.
    */
   autoPayroll?: boolean | undefined;
-  /**
-   * Pay frequency when creating or updating a schedule. Only weekly, bi-weekly, twice per month, and monthly are supported via the API.
-   *
-   * @remarks
-   *
-   * - `Every week`: Weekly pay.
-   * - `Every other week`: Biweekly pay.
-   * - `Twice per month`: Two pay dates per month; require day_1 and day_2 (use 31 for last day of month).
-   * - `Monthly`: One pay date per month; require day_1 (1-31).
-   */
-  frequency?: PayScheduleFrequencyCreateUpdate | undefined;
-  /**
-   * ISO 8601 date (YYYY-MM-DD). Required for anchor and period dates in create, update, and preview requests.
-   */
+  frequency?: PayScheduleUpdateRequestFrequency | undefined;
   anchorPayDate?: RFCDate | undefined;
-  /**
-   * ISO 8601 date (YYYY-MM-DD). Required for anchor and period dates in create, update, and preview requests.
-   */
   anchorEndOfPayPeriod?: RFCDate | undefined;
   /**
-   * First pay day of the month (1–31). Required for Twice per month and Monthly; null for Every week and Every other week.
+   * An integer between 1 and 31 indicating the first day of the month that employees are paid. This field is only relevant for pay schedules with the "Twice per month" and "Monthly" frequencies. It will be null for pay schedules with other frequencies.
    *
    * @remarks
    */
   day1?: number | null | undefined;
   /**
-   * Second pay day of the month (1–31); only for Twice per month. Use 31 for last day of month. Null for other frequencies.
+   * An integer between 1 and 31 indicating the second day of the month that employees are paid. This field is the second pay date for pay schedules with the "Twice per month" frequency. For semi-monthly pay schedules, set this field to 31. For months shorter than 31 days, the second pay date is set to the last day of the month. It will be null for pay schedules with other frequencies.
    *
    * @remarks
    */
   day2?: number | null | undefined;
   /**
-   * Custom name for the pay schedule; null clears it.
+   * A custom pay schedule name; null clears any custom name so the default frequency description applies.
    */
   customName?: string | null | undefined;
 };
+
+/** @internal */
+export const PayScheduleUpdateRequestFrequency$outboundSchema: z.ZodNativeEnum<
+  typeof PayScheduleUpdateRequestFrequency
+> = z.nativeEnum(PayScheduleUpdateRequestFrequency);
 
 /** @internal */
 export type PayScheduleUpdateRequest$Outbound = {
@@ -82,7 +98,7 @@ export const PayScheduleUpdateRequest$outboundSchema: z.ZodType<
 > = z.object({
   version: z.string(),
   autoPayroll: z.boolean().optional(),
-  frequency: PayScheduleFrequencyCreateUpdate$outboundSchema.optional(),
+  frequency: PayScheduleUpdateRequestFrequency$outboundSchema.optional(),
   anchorPayDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
   anchorEndOfPayPeriod: z.instanceof(RFCDate).transform(v => v.toString())
     .optional(),

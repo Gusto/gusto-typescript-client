@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeBenefitsRetrieve } from "../funcs/employeeBenefitsRetrieve.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1EmployeeBenefitsEmployeeBenefitIdHeaderXGustoAPIVersion,
   GetV1EmployeeBenefitsEmployeeBenefitIdRequest,
   GetV1EmployeeBenefitsEmployeeBenefitIdResponse,
 } from "../models/operations/getv1employeebenefitsemployeebenefitid.js";
@@ -74,7 +74,11 @@ export function buildEmployeeBenefitsRetrieveQuery(
 
 export function queryKeyEmployeeBenefitsRetrieve(
   employeeBenefitId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1EmployeeBenefitsEmployeeBenefitIdHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

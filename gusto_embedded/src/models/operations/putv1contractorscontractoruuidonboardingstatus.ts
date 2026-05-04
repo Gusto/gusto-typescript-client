@@ -12,110 +12,68 @@ import {
   ContractorOnboardingStatus$inboundSchema,
 } from "../components/contractoronboardingstatus.js";
 import {
+  ContractorOnboardingStatusUpdateRequestBody,
+  ContractorOnboardingStatusUpdateRequestBody$Outbound,
+  ContractorOnboardingStatusUpdateRequestBody$outboundSchema,
+} from "../components/contractoronboardingstatusupdaterequestbody.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The updated onboarding status for the contractor
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus = {
-  AdminOnboardingIncomplete: "admin_onboarding_incomplete",
-  AdminOnboardingReview: "admin_onboarding_review",
-  SelfOnboardingNotInvited: "self_onboarding_not_invited",
-  SelfOnboardingInvited: "self_onboarding_invited",
-  SelfOnboardingStarted: "self_onboarding_started",
-  SelfOnboardingReview: "self_onboarding_review",
-  OnboardingCompleted: "onboarding_completed",
-} as const;
+export const PutV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
 /**
- * The updated onboarding status for the contractor
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus =
+export type PutV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion =
   ClosedEnum<
-    typeof PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus
+    typeof PutV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion
   >;
 
-export type PutV1ContractorsContractorUuidOnboardingStatusRequestBody = {
-  /**
-   * The updated onboarding status for the contractor
-   */
-  onboardingStatus?:
-    | PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus
-    | undefined;
-};
-
 export type PutV1ContractorsContractorUuidOnboardingStatusRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the contractor
    */
   contractorUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutV1ContractorsContractorUuidOnboardingStatusRequestBody;
+  contractorOnboardingStatusUpdateRequestBody:
+    ContractorOnboardingStatusUpdateRequestBody;
 };
 
 export type PutV1ContractorsContractorUuidOnboardingStatusResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response.
+   * Successful
    */
   contractorOnboardingStatus?: ContractorOnboardingStatus | undefined;
 };
 
 /** @internal */
-export const PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus$outboundSchema:
+export const PutV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
-    typeof PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus
+    typeof PutV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion
   > = z.nativeEnum(
-    PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus,
+    PutV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion,
   );
-
-/** @internal */
-export type PutV1ContractorsContractorUuidOnboardingStatusRequestBody$Outbound =
-  {
-    onboarding_status: string;
-  };
-
-/** @internal */
-export const PutV1ContractorsContractorUuidOnboardingStatusRequestBody$outboundSchema:
-  z.ZodType<
-    PutV1ContractorsContractorUuidOnboardingStatusRequestBody$Outbound,
-    z.ZodTypeDef,
-    PutV1ContractorsContractorUuidOnboardingStatusRequestBody
-  > = z.object({
-    onboardingStatus:
-      PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus$outboundSchema
-        .default("onboarding_completed"),
-  }).transform((v) => {
-    return remap$(v, {
-      onboardingStatus: "onboarding_status",
-    });
-  });
-
-export function putV1ContractorsContractorUuidOnboardingStatusRequestBodyToJSON(
-  putV1ContractorsContractorUuidOnboardingStatusRequestBody:
-    PutV1ContractorsContractorUuidOnboardingStatusRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1ContractorsContractorUuidOnboardingStatusRequestBody$outboundSchema
-      .parse(putV1ContractorsContractorUuidOnboardingStatusRequestBody),
-  );
-}
 
 /** @internal */
 export type PutV1ContractorsContractorUuidOnboardingStatusRequest$Outbound = {
-  contractor_uuid: string;
   "X-Gusto-API-Version": string;
-  RequestBody:
-    PutV1ContractorsContractorUuidOnboardingStatusRequestBody$Outbound;
+  contractor_uuid: string;
+  "Contractor-Onboarding-Status-Update-Request-Body":
+    ContractorOnboardingStatusUpdateRequestBody$Outbound;
 };
 
 /** @internal */
@@ -125,16 +83,18 @@ export const PutV1ContractorsContractorUuidOnboardingStatusRequest$outboundSchem
     z.ZodTypeDef,
     PutV1ContractorsContractorUuidOnboardingStatusRequest
   > = z.object({
+    xGustoAPIVersion:
+      PutV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     contractorUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PutV1ContractorsContractorUuidOnboardingStatusRequestBody$outboundSchema
-    ),
+    contractorOnboardingStatusUpdateRequestBody:
+      ContractorOnboardingStatusUpdateRequestBody$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      contractorUuid: "contractor_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      contractorUuid: "contractor_uuid",
+      contractorOnboardingStatusUpdateRequestBody:
+        "Contractor-Onboarding-Status-Update-Request-Body",
     });
   });
 

@@ -293,6 +293,7 @@ run();
 * [list](docs/sdks/contractorpayments/README.md#list) - Get contractor payments for a company
 * [get](docs/sdks/contractorpayments/README.md#get) - Get a single contractor payment
 * [delete](docs/sdks/contractorpayments/README.md#delete) - Cancel a contractor payment
+* [getV1ContractorPaymentsContractorPaymentIdPdf](docs/sdks/contractorpayments/README.md#getv1contractorpaymentscontractorpaymentidpdf) - Get a contractor payment PDF
 
 ### [Contractors](docs/sdks/contractors/README.md)
 
@@ -306,6 +307,10 @@ run();
 * [getAddress](docs/sdks/contractors/README.md#getaddress) - Get a contractor address
 * [updateAddress](docs/sdks/contractors/README.md#updateaddress) - Create or update a contractor's address
 * [getV1CompaniesCompanyIdContractorsPaymentDetails](docs/sdks/contractors/README.md#getv1companiescompanyidcontractorspaymentdetails) - List contractor payment details
+* [postV1ContractorsContractorUuidRehire](docs/sdks/contractors/README.md#postv1contractorscontractoruuidrehire) - Schedule a contractor rehire
+* [deleteV1ContractorsContractorUuidRehire](docs/sdks/contractors/README.md#deletev1contractorscontractoruuidrehire) - Cancel a pending contractor rehire
+* [postV1ContractorsContractorUuidTermination](docs/sdks/contractors/README.md#postv1contractorscontractoruuidtermination) - Schedule a contractor termination
+* [deleteV1ContractorsContractorUuidTermination](docs/sdks/contractors/README.md#deletev1contractorscontractoruuidtermination) - Cancel a pending contractor termination
 
 ### [Departments](docs/sdks/departments/README.md)
 
@@ -362,6 +367,7 @@ run();
 * [getRehire](docs/sdks/employeeemployments/README.md#getrehire) - Get an employee rehire
 * [deleteRehire](docs/sdks/employeeemployments/README.md#deleterehire) - Delete an employee rehire
 * [getHistory](docs/sdks/employeeemployments/README.md#gethistory) - Get employment history for an employee
+* [getV1TerminationsEmployeeId](docs/sdks/employeeemployments/README.md#getv1terminationsemployeeid) - Get an employee termination
 
 ### [EmployeeForms](docs/sdks/employeeforms/README.md)
 
@@ -454,6 +460,7 @@ run();
 * [delete](docs/sdks/holidaypaypolicies/README.md#delete) - Delete a company's holiday pay policy
 * [addEmployees](docs/sdks/holidaypaypolicies/README.md#addemployees) - Add employees to a company's holiday pay policy
 * [removeEmployees](docs/sdks/holidaypaypolicies/README.md#removeemployees) - Remove employees from a company's holiday pay policy
+* [previewPaidHolidays](docs/sdks/holidaypaypolicies/README.md#previewpaidholidays) - Preview a company's paid holidays
 
 ### [I9Verification](docs/sdks/i9verification/README.md)
 
@@ -598,6 +605,18 @@ run();
 * [updateState](docs/sdks/taxrequirements/README.md#updatestate) - Update tax requirements for a state
 * [getAll](docs/sdks/taxrequirements/README.md#getall) - Get all tax requirements for a company
 
+### [TimeOffRequests](docs/sdks/timeoffrequests/README.md)
+
+* [postV1CompaniesCompanyUuidTimeOffAdminApprovedRequests](docs/sdks/timeoffrequests/README.md#postv1companiescompanyuuidtimeoffadminapprovedrequests) - Create an admin-approved time off request
+* [getV1CompaniesCompanyUuidTimeOffBalances](docs/sdks/timeoffrequests/README.md#getv1companiescompanyuuidtimeoffbalances) - Get time off balances for a company
+* [getV1CompaniesCompanyUuidTimeOffRequests](docs/sdks/timeoffrequests/README.md#getv1companiescompanyuuidtimeoffrequests) - List time off requests for a company
+* [postV1CompaniesCompanyUuidTimeOffRequests](docs/sdks/timeoffrequests/README.md#postv1companiescompanyuuidtimeoffrequests) - Create a time off request
+* [postV1CompaniesCompanyUuidTimeOffRequestsPreview](docs/sdks/timeoffrequests/README.md#postv1companiescompanyuuidtimeoffrequestspreview) - Preview a time off request
+* [getV1TimeOffRequestsTimeOffRequestUuid](docs/sdks/timeoffrequests/README.md#getv1timeoffrequeststimeoffrequestuuid) - Get a time off request
+* [deleteV1TimeOffRequestsTimeOffRequestUuid](docs/sdks/timeoffrequests/README.md#deletev1timeoffrequeststimeoffrequestuuid) - Delete a time off request
+* [putV1TimeOffRequestsTimeOffRequestUuidApprove](docs/sdks/timeoffrequests/README.md#putv1timeoffrequeststimeoffrequestuuidapprove) - Approve a time off request
+* [putV1TimeOffRequestsTimeOffRequestUuidDecline](docs/sdks/timeoffrequests/README.md#putv1timeoffrequeststimeoffrequestuuiddecline) - Decline a time off request
+
 ### [TimeOffPolicies](docs/sdks/timeoffpolicies/README.md)
 
 * [calculateAccruingTimeOffHours](docs/sdks/timeoffpolicies/README.md#calculateaccruingtimeoffhours) - Calculate accruing time off hours
@@ -617,8 +636,8 @@ run();
 * [updateSubscription](docs/sdks/webhooks/README.md#updatesubscription) - Update a webhook subscription
 * [getSubscription](docs/sdks/webhooks/README.md#getsubscription) - Get a webhook subscription
 * [deleteSubscription](docs/sdks/webhooks/README.md#deletesubscription) - Delete a webhook subscription
-* [verify](docs/sdks/webhooks/README.md#verify) - Verify the webhook subscription
-* [requestVerificationToken](docs/sdks/webhooks/README.md#requestverificationtoken) - Request the webhook subscription verification_token
+* [verify](docs/sdks/webhooks/README.md#verify) - Verify a webhook subscription
+* [requestVerificationToken](docs/sdks/webhooks/README.md#requestverificationtoken) - Request a verification token for a webhook subscription
 * [getV1WebhooksHealthCheck](docs/sdks/webhooks/README.md#getv1webhookshealthcheck) - Get the webhooks health status
 
 ### [WireInRequests](docs/sdks/wireinrequests/README.md)
@@ -711,14 +730,19 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`contractorPaymentsFund`](docs/sdks/contractorpayments/README.md#fund) - Fund a contractor payment [DEMO]
 - [`contractorPaymentsGet`](docs/sdks/contractorpayments/README.md#get) - Get a single contractor payment
 - [`contractorPaymentsGetReceipt`](docs/sdks/contractorpayments/README.md#getreceipt) - Get a single contractor payment receipt
+- [`contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf`](docs/sdks/contractorpayments/README.md#getv1contractorpaymentscontractorpaymentidpdf) - Get a contractor payment PDF
 - [`contractorPaymentsList`](docs/sdks/contractorpayments/README.md#list) - Get contractor payments for a company
 - [`contractorsCreate`](docs/sdks/contractors/README.md#create) - Create a contractor
 - [`contractorsDelete`](docs/sdks/contractors/README.md#delete) - Delete a contractor
+- [`contractorsDeleteV1ContractorsContractorUuidRehire`](docs/sdks/contractors/README.md#deletev1contractorscontractoruuidrehire) - Cancel a pending contractor rehire
+- [`contractorsDeleteV1ContractorsContractorUuidTermination`](docs/sdks/contractors/README.md#deletev1contractorscontractoruuidtermination) - Cancel a pending contractor termination
 - [`contractorsGet`](docs/sdks/contractors/README.md#get) - Get a contractor
 - [`contractorsGetAddress`](docs/sdks/contractors/README.md#getaddress) - Get a contractor address
 - [`contractorsGetOnboardingStatus`](docs/sdks/contractors/README.md#getonboardingstatus) - Get the contractor's onboarding status
 - [`contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails`](docs/sdks/contractors/README.md#getv1companiescompanyidcontractorspaymentdetails) - List contractor payment details
 - [`contractorsList`](docs/sdks/contractors/README.md#list) - Get contractors of a company
+- [`contractorsPostV1ContractorsContractorUuidRehire`](docs/sdks/contractors/README.md#postv1contractorscontractoruuidrehire) - Schedule a contractor rehire
+- [`contractorsPostV1ContractorsContractorUuidTermination`](docs/sdks/contractors/README.md#postv1contractorscontractoruuidtermination) - Schedule a contractor termination
 - [`contractorsUpdate`](docs/sdks/contractors/README.md#update) - Update a contractor
 - [`contractorsUpdateAddress`](docs/sdks/contractors/README.md#updateaddress) - Create or update a contractor's address
 - [`contractorsUpdateOnboardingStatus`](docs/sdks/contractors/README.md#updateonboardingstatus) - Change the contractor's onboarding status
@@ -761,6 +785,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`employeeEmploymentsGetHistory`](docs/sdks/employeeemployments/README.md#gethistory) - Get employment history for an employee
 - [`employeeEmploymentsGetRehire`](docs/sdks/employeeemployments/README.md#getrehire) - Get an employee rehire
 - [`employeeEmploymentsGetTerminations`](docs/sdks/employeeemployments/README.md#getterminations) - Get terminations for an employee
+- [`employeeEmploymentsGetV1TerminationsEmployeeId`](docs/sdks/employeeemployments/README.md#getv1terminationsemployeeid) - Get an employee termination
 - [`employeeEmploymentsRehire`](docs/sdks/employeeemployments/README.md#rehire) - Update an employee rehire
 - [`employeeEmploymentsUpdateTermination`](docs/sdks/employeeemployments/README.md#updatetermination) - Update an employee termination
 - [`employeeFormsGenerateW2`](docs/sdks/employeeforms/README.md#generatew2) - Generate a W2 form [DEMO]
@@ -814,6 +839,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`holidayPayPoliciesCreate`](docs/sdks/holidaypaypolicies/README.md#create) - Create a holiday pay policy for a company
 - [`holidayPayPoliciesDelete`](docs/sdks/holidaypaypolicies/README.md#delete) - Delete a company's holiday pay policy
 - [`holidayPayPoliciesGet`](docs/sdks/holidaypaypolicies/README.md#get) - Get a company's holiday pay policy
+- [`holidayPayPoliciesPreviewPaidHolidays`](docs/sdks/holidaypaypolicies/README.md#previewpaidholidays) - Preview a company's paid holidays
 - [`holidayPayPoliciesRemoveEmployees`](docs/sdks/holidaypaypolicies/README.md#removeemployees) - Remove employees from a company's holiday pay policy
 - [`holidayPayPoliciesUpdate`](docs/sdks/holidaypaypolicies/README.md#update) - Update a company's holiday pay policy
 - [`i9VerificationCreateDocuments`](docs/sdks/i9verification/README.md#createdocuments) - Create an employee's I-9 authorization verification documents
@@ -914,14 +940,23 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`timeOffPoliciesRemoveEmployees`](docs/sdks/timeoffpolicies/README.md#removeemployees) - Remove employees from a time off policy
 - [`timeOffPoliciesUpdate`](docs/sdks/timeoffpolicies/README.md#update) - Update a time off policy
 - [`timeOffPoliciesUpdateBalance`](docs/sdks/timeoffpolicies/README.md#updatebalance) - Update employee time off balances
+- [`timeOffRequestsDeleteV1TimeOffRequestsTimeOffRequestUuid`](docs/sdks/timeoffrequests/README.md#deletev1timeoffrequeststimeoffrequestuuid) - Delete a time off request
+- [`timeOffRequestsGetV1CompaniesCompanyUuidTimeOffBalances`](docs/sdks/timeoffrequests/README.md#getv1companiescompanyuuidtimeoffbalances) - Get time off balances for a company
+- [`timeOffRequestsGetV1CompaniesCompanyUuidTimeOffRequests`](docs/sdks/timeoffrequests/README.md#getv1companiescompanyuuidtimeoffrequests) - List time off requests for a company
+- [`timeOffRequestsGetV1TimeOffRequestsTimeOffRequestUuid`](docs/sdks/timeoffrequests/README.md#getv1timeoffrequeststimeoffrequestuuid) - Get a time off request
+- [`timeOffRequestsPostV1CompaniesCompanyUuidTimeOffAdminApprovedRequests`](docs/sdks/timeoffrequests/README.md#postv1companiescompanyuuidtimeoffadminapprovedrequests) - Create an admin-approved time off request
+- [`timeOffRequestsPostV1CompaniesCompanyUuidTimeOffRequests`](docs/sdks/timeoffrequests/README.md#postv1companiescompanyuuidtimeoffrequests) - Create a time off request
+- [`timeOffRequestsPostV1CompaniesCompanyUuidTimeOffRequestsPreview`](docs/sdks/timeoffrequests/README.md#postv1companiescompanyuuidtimeoffrequestspreview) - Preview a time off request
+- [`timeOffRequestsPutV1TimeOffRequestsTimeOffRequestUuidApprove`](docs/sdks/timeoffrequests/README.md#putv1timeoffrequeststimeoffrequestuuidapprove) - Approve a time off request
+- [`timeOffRequestsPutV1TimeOffRequestsTimeOffRequestUuidDecline`](docs/sdks/timeoffrequests/README.md#putv1timeoffrequeststimeoffrequestuuiddecline) - Decline a time off request
 - [`webhooksCreateSubscription`](docs/sdks/webhooks/README.md#createsubscription) - Create a webhook subscription
 - [`webhooksDeleteSubscription`](docs/sdks/webhooks/README.md#deletesubscription) - Delete a webhook subscription
 - [`webhooksGetSubscription`](docs/sdks/webhooks/README.md#getsubscription) - Get a webhook subscription
 - [`webhooksGetV1WebhooksHealthCheck`](docs/sdks/webhooks/README.md#getv1webhookshealthcheck) - Get the webhooks health status
 - [`webhooksListSubscriptions`](docs/sdks/webhooks/README.md#listsubscriptions) - List webhook subscriptions
-- [`webhooksRequestVerificationToken`](docs/sdks/webhooks/README.md#requestverificationtoken) - Request the webhook subscription verification_token
+- [`webhooksRequestVerificationToken`](docs/sdks/webhooks/README.md#requestverificationtoken) - Request a verification token for a webhook subscription
 - [`webhooksUpdateSubscription`](docs/sdks/webhooks/README.md#updatesubscription) - Update a webhook subscription
-- [`webhooksVerify`](docs/sdks/webhooks/README.md#verify) - Verify the webhook subscription
+- [`webhooksVerify`](docs/sdks/webhooks/README.md#verify) - Verify a webhook subscription
 - [`wireInRequestsGet`](docs/sdks/wireinrequests/README.md#get) - Get a single Wire In Request
 - [`wireInRequestsList`](docs/sdks/wireinrequests/README.md#list) - Get all Wire In Requests for a company
 - [`wireInRequestsSubmit`](docs/sdks/wireinrequests/README.md#submit) - Submit a wire in request
@@ -1017,14 +1052,19 @@ To learn about this feature and how to get started, check
 - [`useContractorPaymentsFundMutation`](docs/sdks/contractorpayments/README.md#fund) - Fund a contractor payment [DEMO]
 - [`useContractorPaymentsGet`](docs/sdks/contractorpayments/README.md#get) - Get a single contractor payment
 - [`useContractorPaymentsGetReceipt`](docs/sdks/contractorpayments/README.md#getreceipt) - Get a single contractor payment receipt
+- [`useContractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf`](docs/sdks/contractorpayments/README.md#getv1contractorpaymentscontractorpaymentidpdf) - Get a contractor payment PDF
 - [`useContractorPaymentsList`](docs/sdks/contractorpayments/README.md#list) - Get contractor payments for a company
 - [`useContractorsCreateMutation`](docs/sdks/contractors/README.md#create) - Create a contractor
 - [`useContractorsDeleteMutation`](docs/sdks/contractors/README.md#delete) - Delete a contractor
+- [`useContractorsDeleteV1ContractorsContractorUuidRehireMutation`](docs/sdks/contractors/README.md#deletev1contractorscontractoruuidrehire) - Cancel a pending contractor rehire
+- [`useContractorsDeleteV1ContractorsContractorUuidTerminationMutation`](docs/sdks/contractors/README.md#deletev1contractorscontractoruuidtermination) - Cancel a pending contractor termination
 - [`useContractorsGet`](docs/sdks/contractors/README.md#get) - Get a contractor
 - [`useContractorsGetAddress`](docs/sdks/contractors/README.md#getaddress) - Get a contractor address
 - [`useContractorsGetOnboardingStatus`](docs/sdks/contractors/README.md#getonboardingstatus) - Get the contractor's onboarding status
 - [`useContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails`](docs/sdks/contractors/README.md#getv1companiescompanyidcontractorspaymentdetails) - List contractor payment details
 - [`useContractorsList`](docs/sdks/contractors/README.md#list) - Get contractors of a company
+- [`useContractorsPostV1ContractorsContractorUuidRehireMutation`](docs/sdks/contractors/README.md#postv1contractorscontractoruuidrehire) - Schedule a contractor rehire
+- [`useContractorsPostV1ContractorsContractorUuidTerminationMutation`](docs/sdks/contractors/README.md#postv1contractorscontractoruuidtermination) - Schedule a contractor termination
 - [`useContractorsUpdateAddressMutation`](docs/sdks/contractors/README.md#updateaddress) - Create or update a contractor's address
 - [`useContractorsUpdateMutation`](docs/sdks/contractors/README.md#update) - Update a contractor
 - [`useContractorsUpdateOnboardingStatusMutation`](docs/sdks/contractors/README.md#updateonboardingstatus) - Change the contractor's onboarding status
@@ -1067,6 +1107,7 @@ To learn about this feature and how to get started, check
 - [`useEmployeeEmploymentsGetHistory`](docs/sdks/employeeemployments/README.md#gethistory) - Get employment history for an employee
 - [`useEmployeeEmploymentsGetRehire`](docs/sdks/employeeemployments/README.md#getrehire) - Get an employee rehire
 - [`useEmployeeEmploymentsGetTerminations`](docs/sdks/employeeemployments/README.md#getterminations) - Get terminations for an employee
+- [`useEmployeeEmploymentsGetV1TerminationsEmployeeId`](docs/sdks/employeeemployments/README.md#getv1terminationsemployeeid) - Get an employee termination
 - [`useEmployeeEmploymentsRehireMutation`](docs/sdks/employeeemployments/README.md#rehire) - Update an employee rehire
 - [`useEmployeeEmploymentsUpdateTerminationMutation`](docs/sdks/employeeemployments/README.md#updatetermination) - Update an employee termination
 - [`useEmployeeFormsGenerateW2Mutation`](docs/sdks/employeeforms/README.md#generatew2) - Generate a W2 form [DEMO]
@@ -1120,6 +1161,7 @@ To learn about this feature and how to get started, check
 - [`useHolidayPayPoliciesCreateMutation`](docs/sdks/holidaypaypolicies/README.md#create) - Create a holiday pay policy for a company
 - [`useHolidayPayPoliciesDeleteMutation`](docs/sdks/holidaypaypolicies/README.md#delete) - Delete a company's holiday pay policy
 - [`useHolidayPayPoliciesGet`](docs/sdks/holidaypaypolicies/README.md#get) - Get a company's holiday pay policy
+- [`useHolidayPayPoliciesPreviewPaidHolidays`](docs/sdks/holidaypaypolicies/README.md#previewpaidholidays) - Preview a company's paid holidays
 - [`useHolidayPayPoliciesRemoveEmployeesMutation`](docs/sdks/holidaypaypolicies/README.md#removeemployees) - Remove employees from a company's holiday pay policy
 - [`useHolidayPayPoliciesUpdateMutation`](docs/sdks/holidaypaypolicies/README.md#update) - Update a company's holiday pay policy
 - [`useI9VerificationCreateDocumentsMutation`](docs/sdks/i9verification/README.md#createdocuments) - Create an employee's I-9 authorization verification documents
@@ -1220,14 +1262,23 @@ To learn about this feature and how to get started, check
 - [`useTimeOffPoliciesRemoveEmployeesMutation`](docs/sdks/timeoffpolicies/README.md#removeemployees) - Remove employees from a time off policy
 - [`useTimeOffPoliciesUpdateBalanceMutation`](docs/sdks/timeoffpolicies/README.md#updatebalance) - Update employee time off balances
 - [`useTimeOffPoliciesUpdateMutation`](docs/sdks/timeoffpolicies/README.md#update) - Update a time off policy
+- [`useTimeOffRequestsDeleteV1TimeOffRequestsTimeOffRequestUuidMutation`](docs/sdks/timeoffrequests/README.md#deletev1timeoffrequeststimeoffrequestuuid) - Delete a time off request
+- [`useTimeOffRequestsGetV1CompaniesCompanyUuidTimeOffBalances`](docs/sdks/timeoffrequests/README.md#getv1companiescompanyuuidtimeoffbalances) - Get time off balances for a company
+- [`useTimeOffRequestsGetV1CompaniesCompanyUuidTimeOffRequests`](docs/sdks/timeoffrequests/README.md#getv1companiescompanyuuidtimeoffrequests) - List time off requests for a company
+- [`useTimeOffRequestsGetV1TimeOffRequestsTimeOffRequestUuid`](docs/sdks/timeoffrequests/README.md#getv1timeoffrequeststimeoffrequestuuid) - Get a time off request
+- [`useTimeOffRequestsPostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsMutation`](docs/sdks/timeoffrequests/README.md#postv1companiescompanyuuidtimeoffadminapprovedrequests) - Create an admin-approved time off request
+- [`useTimeOffRequestsPostV1CompaniesCompanyUuidTimeOffRequestsMutation`](docs/sdks/timeoffrequests/README.md#postv1companiescompanyuuidtimeoffrequests) - Create a time off request
+- [`useTimeOffRequestsPostV1CompaniesCompanyUuidTimeOffRequestsPreviewMutation`](docs/sdks/timeoffrequests/README.md#postv1companiescompanyuuidtimeoffrequestspreview) - Preview a time off request
+- [`useTimeOffRequestsPutV1TimeOffRequestsTimeOffRequestUuidApproveMutation`](docs/sdks/timeoffrequests/README.md#putv1timeoffrequeststimeoffrequestuuidapprove) - Approve a time off request
+- [`useTimeOffRequestsPutV1TimeOffRequestsTimeOffRequestUuidDeclineMutation`](docs/sdks/timeoffrequests/README.md#putv1timeoffrequeststimeoffrequestuuiddecline) - Decline a time off request
 - [`useWebhooksCreateSubscriptionMutation`](docs/sdks/webhooks/README.md#createsubscription) - Create a webhook subscription
 - [`useWebhooksDeleteSubscriptionMutation`](docs/sdks/webhooks/README.md#deletesubscription) - Delete a webhook subscription
 - [`useWebhooksGetSubscription`](docs/sdks/webhooks/README.md#getsubscription) - Get a webhook subscription
 - [`useWebhooksGetV1WebhooksHealthCheck`](docs/sdks/webhooks/README.md#getv1webhookshealthcheck) - Get the webhooks health status
 - [`useWebhooksListSubscriptions`](docs/sdks/webhooks/README.md#listsubscriptions) - List webhook subscriptions
-- [`useWebhooksRequestVerificationToken`](docs/sdks/webhooks/README.md#requestverificationtoken) - Request the webhook subscription verification_token
+- [`useWebhooksRequestVerificationToken`](docs/sdks/webhooks/README.md#requestverificationtoken) - Request a verification token for a webhook subscription
 - [`useWebhooksUpdateSubscriptionMutation`](docs/sdks/webhooks/README.md#updatesubscription) - Update a webhook subscription
-- [`useWebhooksVerifyMutation`](docs/sdks/webhooks/README.md#verify) - Verify the webhook subscription
+- [`useWebhooksVerifyMutation`](docs/sdks/webhooks/README.md#verify) - Verify a webhook subscription
 - [`useWireInRequestsGet`](docs/sdks/wireinrequests/README.md#get) - Get a single Wire In Request
 - [`useWireInRequestsList`](docs/sdks/wireinrequests/README.md#list) - Get all Wire In Requests for a company
 - [`useWireInRequestsSubmitMutation`](docs/sdks/wireinrequests/README.md#submit) - Submit a wire in request
@@ -1400,10 +1451,11 @@ run();
 ```
 
 ### Error Classes
-**Primary error:**
+**Primary errors:**
 * [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts): The base class for HTTP error responses.
+  * [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. *
 
-<details><summary>Less common errors (13)</summary>
+<details><summary>Less common errors (11)</summary>
 
 <br />
 
@@ -1416,13 +1468,11 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Applicable to 162 of 280 methods.*
-* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 142 of 280 methods.*
-* [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 2 of 280 methods.*
-* [`PeopleBatchConflictError`](./src/models/errors/peoplebatchconflicterror.ts): Error response when a people batch idempotency key conflict occurs. Status code `409`. Applicable to 1 of 280 methods.*
-* [`MigrationBlocker`](./src/models/errors/migrationblocker.ts): Migration blocker that blocks company migration. Status code `422`. Applicable to 1 of 280 methods.*
-* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 1 of 280 methods.*
-* [`CompanySuspensionCreationErrors`](./src/models/errors/companysuspensioncreationerrors.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 280 methods.*
+* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 152 of 296 methods.*
+* [`ConflictErrorObject`](./src/models/errors/conflicterrorobject.ts): Conflict    This error occurs when the resource version provided does not match the current version. Retrieve the latest version and retry. Status code `409`. Applicable to 2 of 296 methods.*
+* [`PeopleBatchConflictError`](./src/models/errors/peoplebatchconflicterror.ts): Error response when a people batch idempotency key conflict occurs. Status code `409`. Applicable to 1 of 296 methods.*
+* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 1 of 296 methods.*
+* [`CompanySuspensionCreationErrors`](./src/models/errors/companysuspensioncreationerrors.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 296 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

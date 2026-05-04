@@ -25,9 +25,6 @@ export type GeneratedDocumentStatus = ClosedEnum<
   typeof GeneratedDocumentStatus
 >;
 
-/**
- * Example response
- */
 export type GeneratedDocument = {
   /**
    * A unique identifier of the Generated Document request

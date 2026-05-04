@@ -26,7 +26,7 @@ export type EmployeeCustomField = {
    * Input type for the custom field.
    */
   type: CustomFieldType;
-  description?: string | undefined;
+  description?: string | null | undefined;
   value: string;
   /**
    * An array of options for fields of type radio. Otherwise, null.
@@ -44,7 +44,7 @@ export const EmployeeCustomField$inboundSchema: z.ZodType<
   company_custom_field_id: z.string(),
   name: z.string(),
   type: CustomFieldType$inboundSchema,
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   value: z.string(),
   selection_options: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {

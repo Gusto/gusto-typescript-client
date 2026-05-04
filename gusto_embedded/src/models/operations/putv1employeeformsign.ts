@@ -5,17 +5,27 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { Form, Form$inboundSchema } from "../components/form.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1EmployeeFormSignHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1EmployeeFormSignHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PutV1EmployeeFormSignHeaderXGustoAPIVersion
+>;
 
 export type PutV1EmployeeFormSignRequestBody = {
   /**
@@ -94,6 +104,10 @@ export type PutV1EmployeeFormSignRequestBody = {
 
 export type PutV1EmployeeFormSignRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: PutV1EmployeeFormSignHeaderXGustoAPIVersion | undefined;
+  /**
    * The UUID of the employee
    */
   employeeId: string;
@@ -105,20 +119,21 @@ export type PutV1EmployeeFormSignRequest = {
    * Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
    */
   xGustoClientIp?: string | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PutV1EmployeeFormSignRequestBody;
 };
 
 export type PutV1EmployeeFormSignResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
   form?: Form | undefined;
 };
+
+/** @internal */
+export const PutV1EmployeeFormSignHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1EmployeeFormSignHeaderXGustoAPIVersion> = z
+    .nativeEnum(PutV1EmployeeFormSignHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PutV1EmployeeFormSignRequestBody$Outbound = {
@@ -259,10 +274,10 @@ export function putV1EmployeeFormSignRequestBodyToJSON(
 
 /** @internal */
 export type PutV1EmployeeFormSignRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   employee_id: string;
   form_id: string;
   "x-gusto-client-ip"?: string | undefined;
-  "X-Gusto-API-Version": string;
   RequestBody: PutV1EmployeeFormSignRequestBody$Outbound;
 };
 
@@ -272,17 +287,18 @@ export const PutV1EmployeeFormSignRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1EmployeeFormSignRequest
 > = z.object({
+  xGustoAPIVersion: PutV1EmployeeFormSignHeaderXGustoAPIVersion$outboundSchema
+    .default("2025-06-15"),
   employeeId: z.string(),
   formId: z.string(),
   xGustoClientIp: z.string().optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   requestBody: z.lazy(() => PutV1EmployeeFormSignRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
+    xGustoAPIVersion: "X-Gusto-API-Version",
     employeeId: "employee_id",
     formId: "form_id",
     xGustoClientIp: "x-gusto-client-ip",
-    xGustoAPIVersion: "X-Gusto-API-Version",
     requestBody: "RequestBody",
   });
 });
