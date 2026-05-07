@@ -27,6 +27,10 @@ generation:
   requestBodyFieldName: ""
   versioningStrategy: automatic
   persistentEdits: {}
+  license:
+    disabled: false
+    licenseType: MIT
+    companyName: Gusto
   tests:
     generateTests: true
     generateNewTests: false
