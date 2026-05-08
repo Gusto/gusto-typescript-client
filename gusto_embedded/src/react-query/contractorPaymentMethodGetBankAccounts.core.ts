@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentMethodGetBankAccounts } from "../funcs/contractorPaymentMethodGetBankAccounts.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion,
   GetV1ContractorsContractorUuidBankAccountsRequest,
   GetV1ContractorsContractorUuidBankAccountsResponse,
 } from "../models/operations/getv1contractorscontractoruuidbankaccounts.js";
@@ -75,7 +75,11 @@ export function buildContractorPaymentMethodGetBankAccountsQuery(
 
 export function queryKeyContractorPaymentMethodGetBankAccounts(
   contractorUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

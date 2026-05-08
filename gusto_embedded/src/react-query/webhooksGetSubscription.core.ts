@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { webhooksGetSubscription } from "../funcs/webhooksGetSubscription.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1WebhookSubscriptionUuidHeaderXGustoAPIVersion,
   GetV1WebhookSubscriptionUuidRequest,
   GetV1WebhookSubscriptionUuidResponse,
   GetV1WebhookSubscriptionUuidSecurity,
@@ -79,7 +79,11 @@ export function buildWebhooksGetSubscriptionQuery(
 
 export function queryKeyWebhooksGetSubscription(
   webhookSubscriptionUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1WebhookSubscriptionUuidHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

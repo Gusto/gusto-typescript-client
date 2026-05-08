@@ -4,6 +4,7 @@
 
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -21,10 +22,6 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  UnprocessableEntityErrorObject,
-  UnprocessableEntityErrorObject$inboundSchema,
-} from "../models/errors/unprocessableentityerrorobject.js";
-import {
   PutV1TaxLiabilitiesFinishRequest,
   PutV1TaxLiabilitiesFinishRequest$outboundSchema,
   PutV1TaxLiabilitiesFinishResponse,
@@ -39,7 +36,12 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Finalizes tax liabilities for a company. All external payrolls edit action will be disabled.
  *
+ * ### Asynchronous processing
+ * This endpoint triggers an asynchronous operation. The external payrolls will be processed in the background after finalization.
+ *
  * scope: `external_payrolls:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function externalPayrollsFinalizeTaxLiabilities(
   client: GustoEmbeddedCore,
@@ -48,7 +50,6 @@ export function externalPayrollsFinalizeTaxLiabilities(
 ): APIPromise<
   Result<
     PutV1TaxLiabilitiesFinishResponse,
-    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -74,7 +75,6 @@ async function $do(
   [
     Result<
       PutV1TaxLiabilitiesFinishResponse,
-      | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -109,7 +109,7 @@ async function $do(
   )(pathParams);
 
   const headers = new Headers(compactMap({
-    Accept: "application/json",
+    Accept: "*/*",
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
       payload["X-Gusto-API-Version"],
@@ -121,7 +121,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -155,7 +155,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -170,7 +171,6 @@ async function $do(
 
   const [result] = await M.match<
     PutV1TaxLiabilitiesFinishResponse,
-    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -181,8 +181,7 @@ async function $do(
     | SDKValidationError
   >(
     M.nil(202, PutV1TaxLiabilitiesFinishResponse$inboundSchema),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail([404, 422, "4XX"]),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

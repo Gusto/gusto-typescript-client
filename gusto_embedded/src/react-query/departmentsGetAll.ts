@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetCompaniesDepartmentsRequest } from "../models/operations/getcompaniesdepartments.js";
+import {
+  GetCompaniesDepartmentsHeaderXGustoAPIVersion,
+  GetCompaniesDepartmentsRequest,
+} from "../models/operations/getcompaniesdepartments.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type DepartmentsGetAllQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -110,7 +114,11 @@ export function setDepartmentsGetAllData(
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetCompaniesDepartmentsHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: DepartmentsGetAllQueryData,
 ): DepartmentsGetAllQueryData | undefined {
@@ -124,7 +132,11 @@ export function invalidateDepartmentsGetAll(
   queryKeyBase: TupleToPrefixes<
     [
       companyUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetCompaniesDepartmentsHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

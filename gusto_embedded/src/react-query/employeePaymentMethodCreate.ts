@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type EmployeePaymentMethodCreateMutationData =
   PostV1EmployeesEmployeeIdBankAccountsResponse;
 
 export type EmployeePaymentMethodCreateMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -53,9 +55,7 @@ export type EmployeePaymentMethodCreateMutationError =
  * Create an employee bank account
  *
  * @remarks
- * Creates an employee bank account. An employee can have multiple
- * bank accounts. Note that creating an employee bank account will also update
- * the employee's payment method.
+ * Creates an employee bank account. An employee can have multiple bank accounts. Note that creating an employee bank account will also update the employee's payment method.
  *
  * scope: `employee_payment_methods:write`
  */

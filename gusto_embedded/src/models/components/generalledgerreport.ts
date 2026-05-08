@@ -10,61 +10,47 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The breakdown level used for the report
+ * The breakdown level used for the report.
  */
-export const Aggregation = {
+export const GeneralLedgerReportAggregation = {
   Default: "default",
   Job: "job",
   Department: "department",
   Integration: "integration",
 } as const;
 /**
- * The breakdown level used for the report
+ * The breakdown level used for the report.
  */
-export type Aggregation = ClosedEnum<typeof Aggregation>;
+export type GeneralLedgerReportAggregation = ClosedEnum<
+  typeof GeneralLedgerReportAggregation
+>;
 
 /**
- * The `integration_type` used for the report, if `aggregation` was 'integration.' Otherwise, this will be null.
- */
-export const IntegrationType = {
-  Xero: "xero",
-  Qbo: "qbo",
-} as const;
-/**
- * The `integration_type` used for the report, if `aggregation` was 'integration.' Otherwise, this will be null.
- */
-export type IntegrationType = ClosedEnum<typeof IntegrationType>;
-
-/**
- * Successful response for general ledger report generation
+ * A request for a general ledger report. The report is generated asynchronously and the URL is available via the report GET endpoint using the returned `request_uuid`.
  */
 export type GeneralLedgerReport = {
   /**
-   * The UUID of the payroll record for which the report was generated
+   * The UUID of the payroll record for which the report was generated.
    */
   payrollUuid?: string | undefined;
   /**
-   * The breakdown level used for the report
+   * The breakdown level used for the report.
    */
-  aggregation?: Aggregation | undefined;
+  aggregation?: GeneralLedgerReportAggregation | undefined;
   /**
-   * The `integration_type` used for the report, if `aggregation` was 'integration.' Otherwise, this will be null.
+   * The `integration_type` used for the report when `aggregation` is 'integration' (e.g., `xero`, `qbo`). Otherwise, this will be null or an empty string.
    */
-  integrationType?: IntegrationType | null | undefined;
+  integrationType?: string | null | undefined;
   /**
-   * UUID to use for polling the report status
+   * UUID to use for polling the report status.
    */
   requestUuid?: string | undefined;
 };
 
 /** @internal */
-export const Aggregation$inboundSchema: z.ZodNativeEnum<typeof Aggregation> = z
-  .nativeEnum(Aggregation);
-
-/** @internal */
-export const IntegrationType$inboundSchema: z.ZodNativeEnum<
-  typeof IntegrationType
-> = z.nativeEnum(IntegrationType);
+export const GeneralLedgerReportAggregation$inboundSchema: z.ZodNativeEnum<
+  typeof GeneralLedgerReportAggregation
+> = z.nativeEnum(GeneralLedgerReportAggregation);
 
 /** @internal */
 export const GeneralLedgerReport$inboundSchema: z.ZodType<
@@ -73,8 +59,8 @@ export const GeneralLedgerReport$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   payroll_uuid: z.string().optional(),
-  aggregation: Aggregation$inboundSchema.optional(),
-  integration_type: z.nullable(IntegrationType$inboundSchema).optional(),
+  aggregation: GeneralLedgerReportAggregation$inboundSchema.optional(),
+  integration_type: z.nullable(z.string()).optional(),
   request_uuid: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {

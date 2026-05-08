@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { earningTypesList } from "../funcs/earningTypesList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdEarningTypesRequest,
   GetV1CompaniesCompanyIdEarningTypesResponse,
 } from "../models/operations/getv1companiescompanyidearningtypes.js";
@@ -74,7 +74,11 @@ export function buildEarningTypesListQuery(
 
 export function queryKeyEarningTypesList(
   companyId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return ["@gusto/embedded-api", "earningTypes", "list", companyId, parameters];
 }

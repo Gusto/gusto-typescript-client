@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ExternalPayroll,
@@ -14,13 +15,26 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1ExternalPayrollHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1ExternalPayrollHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1ExternalPayrollHeaderXGustoAPIVersion
+>;
+
 export type GetV1ExternalPayrollRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: GetV1ExternalPayrollHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the company
    */
@@ -29,25 +43,26 @@ export type GetV1ExternalPayrollRequest = {
    * The UUID of the external payroll
    */
   externalPayrollId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1ExternalPayrollResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
   externalPayroll?: ExternalPayroll | undefined;
 };
 
 /** @internal */
+export const GetV1ExternalPayrollHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1ExternalPayrollHeaderXGustoAPIVersion> = z
+    .nativeEnum(GetV1ExternalPayrollHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetV1ExternalPayrollRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_uuid: string;
   external_payroll_id: string;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -56,14 +71,15 @@ export const GetV1ExternalPayrollRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1ExternalPayrollRequest
 > = z.object({
+  xGustoAPIVersion: GetV1ExternalPayrollHeaderXGustoAPIVersion$outboundSchema
+    .default("2025-06-15"),
   companyUuid: z.string(),
   externalPayrollId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
+    xGustoAPIVersion: "X-Gusto-API-Version",
     companyUuid: "company_uuid",
     externalPayrollId: "external_payroll_id",
-    xGustoAPIVersion: "X-Gusto-API-Version",
   });
 });
 

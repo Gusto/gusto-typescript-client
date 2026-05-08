@@ -29,7 +29,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.garnishments.create({
     employeeId: "<id>",
-    requestBody: {
+    garnishmentRequest: {
       amount: "<value>",
       courtOrdered: false,
     },
@@ -58,7 +58,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await garnishmentsCreate(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    garnishmentRequest: {
       amount: "<value>",
       courtOrdered: false,
     },
@@ -103,7 +103,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.garnishments.create({
     employeeId: "<id>",
-    requestBody: {
+    garnishmentRequest: {
       amount: "40",
       courtOrdered: true,
       garnishmentType: "child_support",
@@ -142,7 +142,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await garnishmentsCreate(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    garnishmentRequest: {
       amount: "40",
       courtOrdered: true,
       garnishmentType: "child_support",
@@ -197,7 +197,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.garnishments.create({
     employeeId: "<id>",
-    requestBody: {
+    garnishmentRequest: {
       amount: "150.00",
       description: "Back taxes",
       courtOrdered: true,
@@ -228,7 +228,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await garnishmentsCreate(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    garnishmentRequest: {
       amount: "150.00",
       description: "Back taxes",
       courtOrdered: true,
@@ -275,7 +275,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.garnishments.create({
     employeeId: "<id>",
-    requestBody: {
+    garnishmentRequest: {
       amount: "<value>",
       courtOrdered: false,
     },
@@ -304,7 +304,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await garnishmentsCreate(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    garnishmentRequest: {
       amount: "<value>",
       courtOrdered: false,
     },
@@ -349,7 +349,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.garnishments.create({
     employeeId: "<id>",
-    requestBody: {
+    garnishmentRequest: {
       amount: "<value>",
       courtOrdered: false,
     },
@@ -378,7 +378,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await garnishmentsCreate(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    garnishmentRequest: {
       amount: "<value>",
       courtOrdered: false,
     },
@@ -428,6 +428,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
@@ -530,9 +531,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## get
 
@@ -710,9 +712,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## update
 
@@ -733,7 +736,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.garnishments.update({
     garnishmentId: "<id>",
-    requestBody: {
+    updateGarnishmentRequest: {
       version: "<value>",
     },
   });
@@ -761,7 +764,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await garnishmentsUpdate(gustoEmbedded, {
     garnishmentId: "<id>",
-    requestBody: {
+    updateGarnishmentRequest: {
       version: "<value>",
     },
   });
@@ -805,7 +808,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.garnishments.update({
     garnishmentId: "<id>",
-    requestBody: {
+    updateGarnishmentRequest: {
       version: "<value>",
     },
   });
@@ -833,7 +836,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await garnishmentsUpdate(gustoEmbedded, {
     garnishmentId: "<id>",
-    requestBody: {
+    updateGarnishmentRequest: {
       version: "<value>",
     },
   });
@@ -877,7 +880,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.garnishments.update({
     garnishmentId: "<id>",
-    requestBody: {
+    updateGarnishmentRequest: {
       active: false,
       version: "52b7c567242cb7452e89ba2bc02cb476",
     },
@@ -906,7 +909,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await garnishmentsUpdate(gustoEmbedded, {
     garnishmentId: "<id>",
-    requestBody: {
+    updateGarnishmentRequest: {
       active: false,
       version: "52b7c567242cb7452e89ba2bc02cb476",
     },
@@ -951,7 +954,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.garnishments.update({
     garnishmentId: "<id>",
-    requestBody: {
+    updateGarnishmentRequest: {
       version: "<value>",
     },
   });
@@ -979,7 +982,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await garnishmentsUpdate(gustoEmbedded, {
     garnishmentId: "<id>",
-    requestBody: {
+    updateGarnishmentRequest: {
       version: "<value>",
     },
   });
@@ -1023,7 +1026,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.garnishments.update({
     garnishmentId: "<id>",
-    requestBody: {
+    updateGarnishmentRequest: {
       version: "<value>",
     },
   });
@@ -1051,7 +1054,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await garnishmentsUpdate(gustoEmbedded, {
     garnishmentId: "<id>",
-    requestBody: {
+    updateGarnishmentRequest: {
       version: "<value>",
     },
   });
@@ -1100,6 +1103,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 

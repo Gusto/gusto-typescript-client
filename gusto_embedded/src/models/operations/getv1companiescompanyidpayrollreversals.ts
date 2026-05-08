@@ -44,7 +44,7 @@ export type GetV1CompaniesCompanyIdPayrollReversalsResponse = {
   /**
    * Example response
    */
-  payrollReversal?: PayrollReversal | undefined;
+  payrollReversalList?: Array<PayrollReversal> | undefined;
 };
 
 /** @internal */
@@ -92,11 +92,11 @@ export const GetV1CompaniesCompanyIdPayrollReversalsResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Payroll-Reversal": PayrollReversal$inboundSchema.optional(),
+    "Payroll-Reversal-List": z.array(PayrollReversal$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Payroll-Reversal": "payrollReversal",
+      "Payroll-Reversal-List": "payrollReversalList",
     });
   });
 

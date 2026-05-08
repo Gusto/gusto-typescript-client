@@ -6,35 +6,65 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { RFCDate } from "../../types/rfcdate.js";
 
+/**
+ * Primary work location for this historical employment row.
+ */
 export type WorkAddress = {
   /**
-   * Reference to a company location
+   * UUID of a company work location from the company locations response.
    */
-  locationUuid?: string | undefined;
+  locationUuid: string;
 };
 
+/**
+ * Residential address on file for tax withholding and compliance mail.
+ */
 export type HistoricalEmployeeBodyHomeAddress = {
+  /**
+   * Street address line 1.
+   */
   street1: string;
+  /**
+   * Apartment, suite, unit, or building (optional).
+   */
   street2?: string | null | undefined;
+  /**
+   * City.
+   */
   city: string;
+  /**
+   * Two-letter U.S. state or territory postal abbreviation.
+   */
   state: string;
+  /**
+   * ZIP or ZIP+4.
+   */
   zip: string;
 };
 
+/**
+ * End of the historical employment period.
+ */
 export type HistoricalEmployeeBodyTermination = {
   /**
-   * Date the employee was terminated from the company
+   * Last day of employment (termination date). This is recorded on the employment; use the calendar date the person stopped working for the company.
    */
-  effectiveDate?: RFCDate | undefined;
+  effectiveDate: RFCDate;
 };
 
+/**
+ * Hire date for the historical job used to build employments and filings.
+ */
 export type HistoricalEmployeeBodyJob = {
   /**
-   * The date when the employee was hired to the company
+   * First calendar day the employee was employed in this role at the company.
    */
-  hireDate?: RFCDate | undefined;
+  hireDate: RFCDate;
 };
 
+/**
+ * Workers' compensation fields for Washington (WA) or Wyoming (WY) when the work address is in those states; omit when not applicable.
+ */
 export type EmployeeStateTaxes = {
   /**
    * Whether this job is eligible for workers' compensation coverage in the states of Washington (WA) or Wyoming (WY).
@@ -46,27 +76,69 @@ export type EmployeeStateTaxes = {
   wcClassCode?: string | undefined;
 };
 
+/**
+ * Request body for creating or updating a **historical employee**—someone who already separated from the company and must appear on year-to-date or tax filings without receiving ongoing payroll.
+ *
+ * @remarks
+ *
+ * Send this object under the JSON root key `employee`. All dates are ISO 8601 (`YYYY-MM-DD`). Use a `work_address.location_uuid` returned from your company locations API for an active work site.
+ */
 export type HistoricalEmployeeBody = {
+  /**
+   * Legal first name as it appears on government-issued identification.
+   */
   firstName: string;
+  /**
+   * Single middle initial, if any.
+   */
   middleInitial?: string | undefined;
+  /**
+   * Legal last name as it appears on government-issued identification.
+   */
   lastName: string;
+  /**
+   * Preferred given name for display; omit when the same as legal first name.
+   */
   preferredFirstName?: string | undefined;
-  dateOfBirth: string;
+  /**
+   * Date of birth (YYYY-MM-DD).
+   */
+  dateOfBirth: RFCDate;
+  /**
+   * Nine-digit U.S. Social Security number **without** dashes or spaces. Must pass Gusto/SSA validation in production; use a valid test SSN in sandbox environments.
+   *
+   * @remarks
+   */
   ssn: string;
+  /**
+   * Primary work location for this historical employment row.
+   */
   workAddress: WorkAddress;
+  /**
+   * Residential address on file for tax withholding and compliance mail.
+   */
   homeAddress: HistoricalEmployeeBodyHomeAddress;
+  /**
+   * End of the historical employment period.
+   */
   termination: HistoricalEmployeeBodyTermination;
   /**
-   * Optional. If provided, the email address will be saved to the employee.
+   * Optional. When provided, stored on the employee record for notifications and profile.
    */
   email?: string | undefined;
+  /**
+   * Hire date for the historical job used to build employments and filings.
+   */
   job: HistoricalEmployeeBodyJob;
+  /**
+   * Workers' compensation fields for Washington (WA) or Wyoming (WY) when the work address is in those states; omit when not applicable.
+   */
   employeeStateTaxes?: EmployeeStateTaxes | undefined;
 };
 
 /** @internal */
 export type WorkAddress$Outbound = {
-  location_uuid?: string | undefined;
+  location_uuid: string;
 };
 
 /** @internal */
@@ -75,7 +147,7 @@ export const WorkAddress$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WorkAddress
 > = z.object({
-  locationUuid: z.string().optional(),
+  locationUuid: z.string(),
 }).transform((v) => {
   return remap$(v, {
     locationUuid: "location_uuid",
@@ -125,7 +197,7 @@ export function historicalEmployeeBodyHomeAddressToJSON(
 
 /** @internal */
 export type HistoricalEmployeeBodyTermination$Outbound = {
-  effective_date?: string | undefined;
+  effective_date: string;
 };
 
 /** @internal */
@@ -134,7 +206,7 @@ export const HistoricalEmployeeBodyTermination$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   HistoricalEmployeeBodyTermination
 > = z.object({
-  effectiveDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  effectiveDate: z.instanceof(RFCDate).transform(v => v.toString()),
 }).transform((v) => {
   return remap$(v, {
     effectiveDate: "effective_date",
@@ -153,7 +225,7 @@ export function historicalEmployeeBodyTerminationToJSON(
 
 /** @internal */
 export type HistoricalEmployeeBodyJob$Outbound = {
-  hire_date?: string | undefined;
+  hire_date: string;
 };
 
 /** @internal */
@@ -162,7 +234,7 @@ export const HistoricalEmployeeBodyJob$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   HistoricalEmployeeBodyJob
 > = z.object({
-  hireDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  hireDate: z.instanceof(RFCDate).transform(v => v.toString()),
 }).transform((v) => {
   return remap$(v, {
     hireDate: "hire_date",
@@ -232,7 +304,7 @@ export const HistoricalEmployeeBody$outboundSchema: z.ZodType<
   middleInitial: z.string().optional(),
   lastName: z.string(),
   preferredFirstName: z.string().optional(),
-  dateOfBirth: z.string(),
+  dateOfBirth: z.instanceof(RFCDate).transform(v => v.toString()),
   ssn: z.string(),
   workAddress: z.lazy(() => WorkAddress$outboundSchema),
   homeAddress: z.lazy(() => HistoricalEmployeeBodyHomeAddress$outboundSchema),

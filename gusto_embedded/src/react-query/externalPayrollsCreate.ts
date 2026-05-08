@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -38,6 +39,7 @@ export type ExternalPayrollsCreateMutationVariables = {
 export type ExternalPayrollsCreateMutationData = PostV1ExternalPayrollResponse;
 
 export type ExternalPayrollsCreateMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -49,10 +51,10 @@ export type ExternalPayrollsCreateMutationError =
   | SDKValidationError;
 
 /**
- * Create a new external payroll for a company
+ * Create an external payroll for a company
  *
  * @remarks
- * Creates a new external payroll for the company.
+ * Creates a new external payroll for a company.
  *
  * scope: `external_payrolls:write`
  */

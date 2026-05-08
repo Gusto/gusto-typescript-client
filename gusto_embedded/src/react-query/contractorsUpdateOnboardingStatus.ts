@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type ContractorsUpdateOnboardingStatusMutationData =
   PutV1ContractorsContractorUuidOnboardingStatusResponse;
 
 export type ContractorsUpdateOnboardingStatusMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -55,8 +57,6 @@ export type ContractorsUpdateOnboardingStatusMutationError =
  * @remarks
  * Updates a contractor's onboarding status.
  *
- * scope: `contractors:write`
- *
  * Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the contractor.
  *
  * | Action | current onboarding_status | new onboarding_status |
@@ -66,6 +66,8 @@ export type ContractorsUpdateOnboardingStatusMutationError =
  * | Cancel a contractor's self-onboarding | `self_onboarding_invited` or `self_onboarding_not_invited` | `admin_onboarding_incomplete` |
  * | Review a contractor's self-onboarded info | `self_onboarding_started` | `self_onboarding_review` |
  * | Finish a contractor's onboarding | `admin_onboarding_review` or `self_onboarding_review` | `onboarding_completed` |
+ *
+ * scope: `contractors:write`
  */
 export function useContractorsUpdateOnboardingStatusMutation(
   options?: MutationHookOptions<

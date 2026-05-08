@@ -92,7 +92,7 @@ export type AchTransaction = {
   /**
    * The error code associated with the ACH transaction, if any. If there is no error on the ACH transaction, this field will be nil. See [this article](https://engineering.gusto.com/how-ach-works-a-developer-perspective-part-2/) for a complete list of ACH return codes.
    */
-  errorCode?: string | undefined;
+  errorCode?: string | null | undefined;
   /**
    * The type of transaction associated with the ACH transaction
    */
@@ -156,7 +156,7 @@ export const AchTransaction$inboundSchema: z.ZodType<
   recipient_type: z.nullable(AchTransactionRecipientType$inboundSchema)
     .optional(),
   recipient_uuid: z.string().optional(),
-  error_code: z.string().optional(),
+  error_code: z.nullable(z.string()).optional(),
   transaction_type: z.string().optional(),
   payment_status: PaymentStatus$inboundSchema.optional(),
   payment_direction: PaymentDirection$inboundSchema.optional(),

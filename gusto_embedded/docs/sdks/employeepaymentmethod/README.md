@@ -12,9 +12,7 @@
 
 ## create
 
-Creates an employee bank account. An employee can have multiple
-bank accounts. Note that creating an employee bank account will also update
-the employee's payment method.
+Creates an employee bank account. An employee can have multiple bank accounts. Note that creating an employee bank account will also update the employee's payment method.
 
 scope: `employee_payment_methods:write`
 
@@ -31,11 +29,11 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeePaymentMethod.create({
     employeeId: "<id>",
-    requestBody: {
-      name: "<value>",
+    employeeBankAccountRequest: {
       routingNumber: "<value>",
       accountNumber: "<value>",
       accountType: "Checking",
+      name: "<value>",
     },
   });
 
@@ -62,11 +60,11 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeePaymentMethodCreate(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
-      name: "<value>",
+    employeeBankAccountRequest: {
       routingNumber: "<value>",
       accountNumber: "<value>",
       accountType: "Checking",
+      name: "<value>",
     },
   });
   if (res.ok) {
@@ -109,11 +107,11 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeePaymentMethod.create({
     employeeId: "<id>",
-    requestBody: {
-      name: "BoA Checking Account",
+    employeeBankAccountRequest: {
       routingNumber: "266905059",
       accountNumber: "5809431207",
       accountType: "Checking",
+      name: "BoA Checking Account",
     },
   });
 
@@ -140,11 +138,11 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeePaymentMethodCreate(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
-      name: "BoA Checking Account",
+    employeeBankAccountRequest: {
       routingNumber: "266905059",
       accountNumber: "5809431207",
       accountType: "Checking",
+      name: "BoA Checking Account",
     },
   });
   if (res.ok) {
@@ -187,11 +185,11 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeePaymentMethod.create({
     employeeId: "<id>",
-    requestBody: {
-      name: "<value>",
+    employeeBankAccountRequest: {
       routingNumber: "<value>",
       accountNumber: "<value>",
       accountType: "Checking",
+      name: "<value>",
     },
   });
 
@@ -218,11 +216,11 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeePaymentMethodCreate(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
-      name: "<value>",
+    employeeBankAccountRequest: {
       routingNumber: "<value>",
       accountNumber: "<value>",
       accountType: "Checking",
+      name: "<value>",
     },
   });
   if (res.ok) {
@@ -265,11 +263,11 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeePaymentMethod.create({
     employeeId: "<id>",
-    requestBody: {
-      name: "<value>",
+    employeeBankAccountRequest: {
       routingNumber: "<value>",
       accountNumber: "<value>",
       accountType: "Checking",
+      name: "<value>",
     },
   });
 
@@ -296,11 +294,11 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeePaymentMethodCreate(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
-      name: "<value>",
+    employeeBankAccountRequest: {
       routingNumber: "<value>",
       accountNumber: "<value>",
       accountType: "Checking",
+      name: "<value>",
     },
   });
   if (res.ok) {
@@ -348,13 +346,13 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## deleteBankAccount
 
-Deletes an employee bank account. To update an employee's bank
-account details, delete the bank account first and create a new one.
+Deletes an employee bank account. To update an employee's bank account details, delete the bank account first and create a new one.
 
 scope: `employee_payment_methods:write`
 
@@ -442,10 +440,9 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## updateBankAccount
 
@@ -467,11 +464,11 @@ async function run() {
   const result = await gustoEmbedded.employeePaymentMethod.updateBankAccount({
     employeeId: "<id>",
     bankAccountUuid: "<id>",
-    requestBody: {
-      name: "<value>",
+    employeeBankAccountRequest: {
       routingNumber: "<value>",
       accountNumber: "<value>",
       accountType: "Savings",
+      name: "<value>",
     },
   });
 
@@ -499,11 +496,11 @@ async function run() {
   const res = await employeePaymentMethodUpdateBankAccount(gustoEmbedded, {
     employeeId: "<id>",
     bankAccountUuid: "<id>",
-    requestBody: {
-      name: "<value>",
+    employeeBankAccountRequest: {
       routingNumber: "<value>",
       accountNumber: "<value>",
       accountType: "Savings",
+      name: "<value>",
     },
   });
   if (res.ok) {
@@ -547,11 +544,11 @@ async function run() {
   const result = await gustoEmbedded.employeePaymentMethod.updateBankAccount({
     employeeId: "<id>",
     bankAccountUuid: "<id>",
-    requestBody: {
-      name: "BoA Checking Account",
+    employeeBankAccountRequest: {
       routingNumber: "266905059",
       accountNumber: "5809431207",
       accountType: "Checking",
+      name: "BoA Checking Account",
     },
   });
 
@@ -579,11 +576,11 @@ async function run() {
   const res = await employeePaymentMethodUpdateBankAccount(gustoEmbedded, {
     employeeId: "<id>",
     bankAccountUuid: "<id>",
-    requestBody: {
-      name: "BoA Checking Account",
+    employeeBankAccountRequest: {
       routingNumber: "266905059",
       accountNumber: "5809431207",
       accountType: "Checking",
+      name: "BoA Checking Account",
     },
   });
   if (res.ok) {
@@ -627,11 +624,11 @@ async function run() {
   const result = await gustoEmbedded.employeePaymentMethod.updateBankAccount({
     employeeId: "<id>",
     bankAccountUuid: "<id>",
-    requestBody: {
-      name: "<value>",
+    employeeBankAccountRequest: {
       routingNumber: "<value>",
       accountNumber: "<value>",
       accountType: "Savings",
+      name: "<value>",
     },
   });
 
@@ -659,11 +656,11 @@ async function run() {
   const res = await employeePaymentMethodUpdateBankAccount(gustoEmbedded, {
     employeeId: "<id>",
     bankAccountUuid: "<id>",
-    requestBody: {
-      name: "<value>",
+    employeeBankAccountRequest: {
       routingNumber: "<value>",
       accountNumber: "<value>",
       accountType: "Savings",
+      name: "<value>",
     },
   });
   if (res.ok) {
@@ -707,11 +704,11 @@ async function run() {
   const result = await gustoEmbedded.employeePaymentMethod.updateBankAccount({
     employeeId: "<id>",
     bankAccountUuid: "<id>",
-    requestBody: {
-      name: "<value>",
+    employeeBankAccountRequest: {
       routingNumber: "<value>",
       accountNumber: "<value>",
       accountType: "Savings",
+      name: "<value>",
     },
   });
 
@@ -739,11 +736,11 @@ async function run() {
   const res = await employeePaymentMethodUpdateBankAccount(gustoEmbedded, {
     employeeId: "<id>",
     bankAccountUuid: "<id>",
-    requestBody: {
-      name: "<value>",
+    employeeBankAccountRequest: {
       routingNumber: "<value>",
       accountNumber: "<value>",
       accountType: "Savings",
+      name: "<value>",
     },
   });
   if (res.ok) {
@@ -791,6 +788,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 

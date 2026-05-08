@@ -63,7 +63,7 @@ export type PaySchedulesGetPreviewQueryError =
  * Preview pay schedule dates
  *
  * @remarks
- * Returns a preview of pay period dates and holidays for the given parameters (e.g. frequency, anchor pay date) for the next 18 months. Use this before creating or updating a pay schedule to show expected check dates and payroll deadlines.
+ * Provides a preview of a pay schedule with the specified parameters for the next 18 months. Use this before creating or updating a pay schedule to show expected check dates, pay period boundaries, and payroll deadlines.
  *
  * ### Related guides
  * - [Create a pay schedule](doc:create-a-pay-schedule)
@@ -96,7 +96,7 @@ export function usePaySchedulesGetPreview(
  * Preview pay schedule dates
  *
  * @remarks
- * Returns a preview of pay period dates and holidays for the given parameters (e.g. frequency, anchor pay date) for the next 18 months. Use this before creating or updating a pay schedule to show expected check dates and payroll deadlines.
+ * Provides a preview of a pay schedule with the specified parameters for the next 18 months. Use this before creating or updating a pay schedule to show expected check dates, pay period boundaries, and payroll deadlines.
  *
  * ### Related guides
  * - [Create a pay schedule](doc:create-a-pay-schedule)

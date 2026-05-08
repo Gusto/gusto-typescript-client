@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorFormsList } from "../funcs/contractorFormsList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1ContractorFormsHeaderXGustoAPIVersion,
   GetV1ContractorFormsRequest,
   GetV1ContractorFormsResponse,
 } from "../models/operations/getv1contractorforms.js";
@@ -73,7 +73,9 @@ export function buildContractorFormsListQuery(
 
 export function queryKeyContractorFormsList(
   contractorUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?: GetV1ContractorFormsHeaderXGustoAPIVersion | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

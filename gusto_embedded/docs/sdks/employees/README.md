@@ -297,12 +297,12 @@ Fetches payment details for employees in a given company. Results are paginated.
 
 Use the `employee_uuid` query parameter to filter for a single employee.
 Use the `payroll_uuid` query parameter to filter for employees on a specific payroll.
-Providing both `employee_uuid` and `payroll_uuid` will result in a 400 error.
+Providing both `employee_uuid` and `payroll_uuid` will result in a 422 error.
 An empty array is returned if the company has no employees or if no employees match the filter criteria.
 
 The `encrypted_account_number` in the `splits` array is only visible if the `employee_payment_methods:read:account_number` scope is present.
 
-Base scope: `employee_payment_methods:read`
+scope: `employee_payment_methods:read`
 
 ### Example Usage
 
@@ -397,9 +397,11 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## createHistorical
 
@@ -412,6 +414,7 @@ scope: `employees:manage`
 <!-- UsageSnippet language="typescript" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" example="Basic" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -423,17 +426,23 @@ async function run() {
     historicalEmployeeBody: {
       firstName: "Martin",
       lastName: "Flatley",
-      dateOfBirth: "1991-02-20",
+      dateOfBirth: new RFCDate("1991-02-20"),
       ssn: "<value>",
-      workAddress: {},
+      workAddress: {
+        locationUuid: "1da85d35-1910-40a7-9c1f-8e2b3d4c5a6f",
+      },
       homeAddress: {
         street1: "<value>",
         city: "New Alysonfield",
         state: "Arizona",
         zip: "00061-3612",
       },
-      termination: {},
-      job: {},
+      termination: {
+        effectiveDate: new RFCDate("2022-01-01"),
+      },
+      job: {
+        hireDate: new RFCDate("2020-01-01"),
+      },
     },
   });
 
@@ -450,6 +459,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { employeesCreateHistorical } from "@gusto/embedded-api/funcs/employeesCreateHistorical.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -463,17 +473,23 @@ async function run() {
     historicalEmployeeBody: {
       firstName: "Martin",
       lastName: "Flatley",
-      dateOfBirth: "1991-02-20",
+      dateOfBirth: new RFCDate("1991-02-20"),
       ssn: "<value>",
-      workAddress: {},
+      workAddress: {
+        locationUuid: "1da85d35-1910-40a7-9c1f-8e2b3d4c5a6f",
+      },
       homeAddress: {
         street1: "<value>",
         city: "New Alysonfield",
         state: "Arizona",
         zip: "00061-3612",
       },
-      termination: {},
-      job: {},
+      termination: {
+        effectiveDate: new RFCDate("2022-01-01"),
+      },
+      job: {
+        hireDate: new RFCDate("2020-01-01"),
+      },
     },
   });
   if (res.ok) {
@@ -508,6 +524,7 @@ import {
 <!-- UsageSnippet language="typescript" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" example="Create Historical Employee Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -519,17 +536,23 @@ async function run() {
     historicalEmployeeBody: {
       firstName: "Martin",
       lastName: "Flatley",
-      dateOfBirth: "1991-02-20",
+      dateOfBirth: new RFCDate("1991-02-20"),
       ssn: "<value>",
-      workAddress: {},
+      workAddress: {
+        locationUuid: "1da85d35-1910-40a7-9c1f-8e2b3d4c5a6f",
+      },
       homeAddress: {
         street1: "<value>",
         city: "New Alysonfield",
         state: "Arizona",
         zip: "00061-3612",
       },
-      termination: {},
-      job: {},
+      termination: {
+        effectiveDate: new RFCDate("2022-01-01"),
+      },
+      job: {
+        hireDate: new RFCDate("2020-01-01"),
+      },
     },
   });
 
@@ -546,6 +569,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { employeesCreateHistorical } from "@gusto/embedded-api/funcs/employeesCreateHistorical.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -559,17 +583,23 @@ async function run() {
     historicalEmployeeBody: {
       firstName: "Martin",
       lastName: "Flatley",
-      dateOfBirth: "1991-02-20",
+      dateOfBirth: new RFCDate("1991-02-20"),
       ssn: "<value>",
-      workAddress: {},
+      workAddress: {
+        locationUuid: "1da85d35-1910-40a7-9c1f-8e2b3d4c5a6f",
+      },
       homeAddress: {
         street1: "<value>",
         city: "New Alysonfield",
         state: "Arizona",
         zip: "00061-3612",
       },
-      termination: {},
-      job: {},
+      termination: {
+        effectiveDate: new RFCDate("2022-01-01"),
+      },
+      job: {
+        hireDate: new RFCDate("2020-01-01"),
+      },
     },
   });
   if (res.ok) {
@@ -618,7 +648,7 @@ async function run() {
       middleInitial: "A",
       lastName: "Kierkegaard",
       preferredFirstName: "Angel",
-      dateOfBirth: "1995-05-05T00:00:00Z",
+      dateOfBirth: new RFCDate("1995-05-05T00:00:00Z"),
       ssn: "123456294",
       workAddress: {
         locationUuid: "1da85d35-1910-4d5e-8e94-39e8cdfe8c9a",
@@ -672,7 +702,7 @@ async function run() {
       middleInitial: "A",
       lastName: "Kierkegaard",
       preferredFirstName: "Angel",
-      dateOfBirth: "1995-05-05T00:00:00Z",
+      dateOfBirth: new RFCDate("1995-05-05T00:00:00Z"),
       ssn: "123456294",
       workAddress: {
         locationUuid: "1da85d35-1910-4d5e-8e94-39e8cdfe8c9a",
@@ -728,6 +758,7 @@ import {
 <!-- UsageSnippet language="typescript" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" example="Nested" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -739,17 +770,23 @@ async function run() {
     historicalEmployeeBody: {
       firstName: "Martin",
       lastName: "Flatley",
-      dateOfBirth: "1991-02-20",
+      dateOfBirth: new RFCDate("1991-02-20"),
       ssn: "<value>",
-      workAddress: {},
+      workAddress: {
+        locationUuid: "1da85d35-1910-40a7-9c1f-8e2b3d4c5a6f",
+      },
       homeAddress: {
         street1: "<value>",
         city: "New Alysonfield",
         state: "Arizona",
         zip: "00061-3612",
       },
-      termination: {},
-      job: {},
+      termination: {
+        effectiveDate: new RFCDate("2022-01-01"),
+      },
+      job: {
+        hireDate: new RFCDate("2020-01-01"),
+      },
     },
   });
 
@@ -766,6 +803,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { employeesCreateHistorical } from "@gusto/embedded-api/funcs/employeesCreateHistorical.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -779,17 +817,23 @@ async function run() {
     historicalEmployeeBody: {
       firstName: "Martin",
       lastName: "Flatley",
-      dateOfBirth: "1991-02-20",
+      dateOfBirth: new RFCDate("1991-02-20"),
       ssn: "<value>",
-      workAddress: {},
+      workAddress: {
+        locationUuid: "1da85d35-1910-40a7-9c1f-8e2b3d4c5a6f",
+      },
       homeAddress: {
         street1: "<value>",
         city: "New Alysonfield",
         state: "Arizona",
         zip: "00061-3612",
       },
-      termination: {},
-      job: {},
+      termination: {
+        effectiveDate: new RFCDate("2022-01-01"),
+      },
+      job: {
+        hireDate: new RFCDate("2020-01-01"),
+      },
     },
   });
   if (res.ok) {
@@ -824,6 +868,7 @@ import {
 <!-- UsageSnippet language="typescript" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" example="Resource" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -835,17 +880,23 @@ async function run() {
     historicalEmployeeBody: {
       firstName: "Martin",
       lastName: "Flatley",
-      dateOfBirth: "1991-02-20",
+      dateOfBirth: new RFCDate("1991-02-20"),
       ssn: "<value>",
-      workAddress: {},
+      workAddress: {
+        locationUuid: "1da85d35-1910-40a7-9c1f-8e2b3d4c5a6f",
+      },
       homeAddress: {
         street1: "<value>",
         city: "New Alysonfield",
         state: "Arizona",
         zip: "00061-3612",
       },
-      termination: {},
-      job: {},
+      termination: {
+        effectiveDate: new RFCDate("2022-01-01"),
+      },
+      job: {
+        hireDate: new RFCDate("2020-01-01"),
+      },
     },
   });
 
@@ -862,6 +913,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { employeesCreateHistorical } from "@gusto/embedded-api/funcs/employeesCreateHistorical.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -875,17 +927,23 @@ async function run() {
     historicalEmployeeBody: {
       firstName: "Martin",
       lastName: "Flatley",
-      dateOfBirth: "1991-02-20",
+      dateOfBirth: new RFCDate("1991-02-20"),
       ssn: "<value>",
-      workAddress: {},
+      workAddress: {
+        locationUuid: "1da85d35-1910-40a7-9c1f-8e2b3d4c5a6f",
+      },
       homeAddress: {
         street1: "<value>",
         city: "New Alysonfield",
         state: "Arizona",
         zip: "00061-3612",
       },
-      termination: {},
-      job: {},
+      termination: {
+        effectiveDate: new RFCDate("2022-01-01"),
+      },
+      job: {
+        hireDate: new RFCDate("2020-01-01"),
+      },
     },
   });
   if (res.ok) {
@@ -933,6 +991,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
@@ -1423,9 +1482,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## updateOnboardingDocumentsConfig
 
@@ -1674,15 +1734,15 @@ import {
 ## updateOnboardingStatus
 
 Updates an employee's onboarding status.
-        Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
+Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
 
-        | Action | current onboarding_status | new onboarding_status |
-        |:------------------|:------------:|----------:|
-        | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
-        | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
-        | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
-        | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
-        | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
+| Action | current onboarding_status | new onboarding_status |
+|:------------------|:------------:|----------:|
+| Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
+| Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
+| Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
+| Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
+| Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
 
 scope: `employees:manage`
 
@@ -1953,6 +2013,8 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

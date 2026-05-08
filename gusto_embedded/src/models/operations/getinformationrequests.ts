@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -14,35 +15,49 @@ import {
   InformationRequest,
   InformationRequest$inboundSchema,
 } from "../components/informationrequest.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetInformationRequestsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetInformationRequestsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetInformationRequestsHeaderXGustoAPIVersion
+>;
+
 export type GetInformationRequestsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: GetInformationRequestsHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the company
    */
   companyUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetInformationRequestsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
-  informationRequestList?: Array<InformationRequest> | undefined;
+  informationRequests?: Array<InformationRequest> | undefined;
 };
 
 /** @internal */
+export const GetInformationRequestsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetInformationRequestsHeaderXGustoAPIVersion> = z
+    .nativeEnum(GetInformationRequestsHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetInformationRequestsRequest$Outbound = {
-  company_uuid: string;
   "X-Gusto-API-Version": string;
+  company_uuid: string;
 };
 
 /** @internal */
@@ -51,12 +66,13 @@ export const GetInformationRequestsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetInformationRequestsRequest
 > = z.object({
+  xGustoAPIVersion: GetInformationRequestsHeaderXGustoAPIVersion$outboundSchema
+    .default("2025-06-15"),
   companyUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
-    companyUuid: "company_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    companyUuid: "company_uuid",
   });
 });
 
@@ -77,12 +93,11 @@ export const GetInformationRequestsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Information-Request-List": z.array(InformationRequest$inboundSchema)
-    .optional(),
+  "Information-Requests": z.array(InformationRequest$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
-    "Information-Request-List": "informationRequestList",
+    "Information-Requests": "informationRequests",
   });
 });
 

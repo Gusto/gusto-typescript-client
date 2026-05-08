@@ -4,6 +4,7 @@
 
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -18,6 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -43,6 +48,8 @@ import { Result } from "../types/fp.js";
  * first name, last name, street address, city, state, and zip for that preparer are all required.
  *
  * scope: `employee_forms:sign`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function employeeFormsSign(
   client: GustoEmbeddedCore,
@@ -51,6 +58,7 @@ export function employeeFormsSign(
 ): APIPromise<
   Result<
     PutV1EmployeeFormSignResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -77,6 +85,7 @@ async function $do(
   [
     Result<
       PutV1EmployeeFormSignResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -134,7 +143,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -168,7 +177,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -183,6 +193,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1EmployeeFormSignResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -194,8 +205,9 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, PutV1EmployeeFormSignResponse$inboundSchema, { key: "Form" }),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

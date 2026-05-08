@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -40,6 +41,7 @@ export type ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationData =
   PostPayrollsPayrollUuidReportsGeneralLedgerResponse;
 
 export type ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -58,7 +60,7 @@ export type ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationError =
  *
  * Use the `request_uuid` in the response with the [report GET endpoint](../reference/get-reports-request_uuid) to poll for the status and report URL upon completion. The retrieved report will be generated in a JSON format.
  *
- * scope: `company_reports:write` OR `company_reports:write:general_ledger`
+ * scope: `company_reports:write`
  */
 export function useReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutation(
   options?: MutationHookOptions<

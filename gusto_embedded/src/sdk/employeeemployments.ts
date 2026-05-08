@@ -9,6 +9,7 @@ import { employeeEmploymentsDeleteTermination } from "../funcs/employeeEmploymen
 import { employeeEmploymentsGetHistory } from "../funcs/employeeEmploymentsGetHistory.js";
 import { employeeEmploymentsGetRehire } from "../funcs/employeeEmploymentsGetRehire.js";
 import { employeeEmploymentsGetTerminations } from "../funcs/employeeEmploymentsGetTerminations.js";
+import { employeeEmploymentsGetV1TerminationsEmployeeId } from "../funcs/employeeEmploymentsGetV1TerminationsEmployeeId.js";
 import { employeeEmploymentsRehire } from "../funcs/employeeEmploymentsRehire.js";
 import { employeeEmploymentsUpdateTermination } from "../funcs/employeeEmploymentsUpdateTermination.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -33,6 +34,10 @@ import {
   GetV1EmployeesEmployeeIdTerminationsResponse,
 } from "../models/operations/getv1employeesemployeeidterminations.js";
 import {
+  GetV1TerminationsEmployeeIdRequest,
+  GetV1TerminationsEmployeeIdResponse,
+} from "../models/operations/getv1terminationsemployeeid.js";
+import {
   PostV1EmployeesEmployeeIdRehireRequest,
   PostV1EmployeesEmployeeIdRehireResponse,
 } from "../models/operations/postv1employeesemployeeidrehire.js";
@@ -55,7 +60,7 @@ export class EmployeeEmployments extends ClientSDK {
    * Create an employee termination
    *
    * @remarks
-   * Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
+   * Create a termination for an employee. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
    *
    * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
    *
@@ -222,6 +227,27 @@ export class EmployeeEmployments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetV1EmployeesEmployeeIdEmploymentHistoryResponse> {
     return unwrapAsync(employeeEmploymentsGetHistory(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get an employee termination
+   *
+   * @remarks
+   * Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
+   *
+   * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+   *
+   * scope: `employments:read`
+   */
+  async getV1TerminationsEmployeeId(
+    request: GetV1TerminationsEmployeeIdRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1TerminationsEmployeeIdResponse> {
+    return unwrapAsync(employeeEmploymentsGetV1TerminationsEmployeeId(
       this,
       request,
       options,

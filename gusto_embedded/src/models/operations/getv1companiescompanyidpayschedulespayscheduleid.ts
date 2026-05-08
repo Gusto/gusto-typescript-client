@@ -12,9 +12,9 @@ import {
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  PaySchedule,
-  PaySchedule$inboundSchema,
-} from "../components/payschedule.js";
+  PayScheduleShow,
+  PayScheduleShow$inboundSchema,
+} from "../components/payscheduleshow.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -54,7 +54,7 @@ export type GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse = {
   /**
    * Successful
    */
-  paySchedule?: PaySchedule | undefined;
+  payScheduleShow?: PayScheduleShow | undefined;
 };
 
 /** @internal */
@@ -110,11 +110,11 @@ export const GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSch
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Pay-Schedule": PaySchedule$inboundSchema.optional(),
+    "Pay-Schedule-Show": PayScheduleShow$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Pay-Schedule": "paySchedule",
+      "Pay-Schedule-Show": "payScheduleShow",
     });
   });
 

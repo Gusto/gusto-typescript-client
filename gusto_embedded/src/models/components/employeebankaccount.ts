@@ -23,9 +23,6 @@ export type EmployeeBankAccountAccountType = ClosedEnum<
   typeof EmployeeBankAccountAccountType
 >;
 
-/**
- * Example response
- */
 export type EmployeeBankAccount = {
   /**
    * UUID of the bank account

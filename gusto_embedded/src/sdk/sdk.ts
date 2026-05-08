@@ -54,6 +54,7 @@ import { SalaryEstimates } from "./salaryestimates.js";
 import { Signatories } from "./signatories.js";
 import { TaxRequirements } from "./taxrequirements.js";
 import { TimeOffPolicies } from "./timeoffpolicies.js";
+import { TimeOffRequests } from "./timeoffrequests.js";
 import { Webhooks } from "./webhooks.js";
 import { WireInRequests } from "./wireinrequests.js";
 
@@ -341,5 +342,10 @@ export class GustoEmbedded extends ClientSDK {
   private _peopleBatches?: PeopleBatches;
   get peopleBatches(): PeopleBatches {
     return (this._peopleBatches ??= new PeopleBatches(this._options));
+  }
+
+  private _timeOffRequests?: TimeOffRequests;
+  get timeOffRequests(): TimeOffRequests {
+    return (this._timeOffRequests ??= new TimeOffRequests(this._options));
   }
 }

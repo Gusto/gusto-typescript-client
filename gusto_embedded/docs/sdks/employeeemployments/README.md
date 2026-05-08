@@ -13,10 +13,11 @@
 * [getRehire](#getrehire) - Get an employee rehire
 * [deleteRehire](#deleterehire) - Delete an employee rehire
 * [getHistory](#gethistory) - Get employment history for an employee
+* [getV1TerminationsEmployeeId](#getv1terminationsemployeeid) - Get an employee termination
 
 ## createTermination
 
-Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
+Create a termination for an employee. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
 
 Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
 
@@ -330,6 +331,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
@@ -434,9 +436,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## deleteTermination
 
@@ -528,7 +531,8 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## updateTermination
@@ -855,7 +859,8 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## createRehire
@@ -1824,6 +1829,112 @@ import {
 ### Response
 
 **Promise\<[operations.GetV1EmployeesEmployeeIdEmploymentHistoryResponse](../../models/operations/getv1employeesemployeeidemploymenthistoryresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
+
+## getV1TerminationsEmployeeId
+
+Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
+
+Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+
+scope: `employments:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get-v1-terminations-employee_id" method="get" path="/v1/terminations/{employee_id}" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeeEmployments.getV1TerminationsEmployeeId({
+    employeeId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeeEmploymentsGetV1TerminationsEmployeeId } from "@gusto/embedded-api/funcs/employeeEmploymentsGetV1TerminationsEmployeeId.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeeEmploymentsGetV1TerminationsEmployeeId(gustoEmbedded, {
+    employeeId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeEmploymentsGetV1TerminationsEmployeeId failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useEmployeeEmploymentsGetV1TerminationsEmployeeId,
+  useEmployeeEmploymentsGetV1TerminationsEmployeeIdSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchEmployeeEmploymentsGetV1TerminationsEmployeeId,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateEmployeeEmploymentsGetV1TerminationsEmployeeId,
+  invalidateAllEmployeeEmploymentsGetV1TerminationsEmployeeId,
+} from "@gusto/embedded-api/react-query/employeeEmploymentsGetV1TerminationsEmployeeId.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetV1TerminationsEmployeeIdRequest](../../models/operations/getv1terminationsemployeeidrequest.md)                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetV1TerminationsEmployeeIdResponse](../../models/operations/getv1terminationsemployeeidresponse.md)\>**
 
 ### Errors
 

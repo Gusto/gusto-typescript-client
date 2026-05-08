@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -23,6 +22,7 @@ import { ResponseValidationError } from "../models/errors/responsevalidationerro
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
+  GetInvoicesInvoicePeriodHeaderXGustoAPIVersion,
   GetInvoicesInvoicePeriodRequest,
   GetInvoicesInvoicePeriodSecurity,
 } from "../models/operations/getinvoicesinvoiceperiod.js";
@@ -62,9 +62,9 @@ export type InvoicesGetQueryError =
  * @remarks
  * Retrieve data for active companies used to calculate invoices for Gusto Embedded Payroll. A company is considered active for an invoice period if they are an active partner managed company, have run payroll or created contractor payments since becoming a partner managed company, and are not suspended at any point during the invoice period.  This endpoint forces pagination, with 100 results returned at a time. You can learn more about our pagination here: [pagination guide](https://docs.gusto.com/embedded-payroll/docs/pagination)
  *
- * > 📘 System Access Authentication
- * >
- * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *
  * scope: `invoices:read`
  */
@@ -91,9 +91,9 @@ export function useInvoicesGet(
  * @remarks
  * Retrieve data for active companies used to calculate invoices for Gusto Embedded Payroll. A company is considered active for an invoice period if they are an active partner managed company, have run payroll or created contractor payments since becoming a partner managed company, and are not suspended at any point during the invoice period.  This endpoint forces pagination, with 100 results returned at a time. You can learn more about our pagination here: [pagination guide](https://docs.gusto.com/embedded-payroll/docs/pagination)
  *
- * > 📘 System Access Authentication
- * >
- * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *
  * scope: `invoices:read`
  */
@@ -122,10 +122,12 @@ export function setInvoicesGetData(
   queryKeyBase: [
     invoicePeriod: string,
     parameters: {
+      xGustoAPIVersion?:
+        | GetInvoicesInvoicePeriodHeaderXGustoAPIVersion
+        | undefined;
       page?: number | undefined;
       per?: number | undefined;
       companyUuids?: string | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: InvoicesGetQueryData,
@@ -141,10 +143,12 @@ export function invalidateInvoicesGet(
     [
       invoicePeriod: string,
       parameters: {
+        xGustoAPIVersion?:
+          | GetInvoicesInvoicePeriodHeaderXGustoAPIVersion
+          | undefined;
         page?: number | undefined;
         per?: number | undefined;
         companyUuids?: string | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,

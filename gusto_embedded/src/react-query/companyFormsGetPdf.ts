@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompanyFormPdfRequest } from "../models/operations/getv1companyformpdf.js";
+import {
+  GetV1CompanyFormPdfHeaderXGustoAPIVersion,
+  GetV1CompanyFormPdfRequest,
+} from "../models/operations/getv1companyformpdf.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type CompanyFormsGetPdfQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -110,7 +114,9 @@ export function setCompanyFormsGetPdfData(
   client: QueryClient,
   queryKeyBase: [
     formId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?: GetV1CompanyFormPdfHeaderXGustoAPIVersion | undefined;
+    },
   ],
   data: CompanyFormsGetPdfQueryData,
 ): CompanyFormsGetPdfQueryData | undefined {
@@ -124,7 +130,11 @@ export function invalidateCompanyFormsGetPdf(
   queryKeyBase: TupleToPrefixes<
     [
       formId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompanyFormPdfHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

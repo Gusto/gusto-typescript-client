@@ -57,9 +57,9 @@ export type WebhooksCreateSubscriptionMutationError =
  * @remarks
  * Create a webhook subscription to receive events of the specified subscription_types whenever there is a state change.
  *
- * > 📘 System Access Authentication
- * >
- * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *
  * scope: `webhook_subscriptions:write`
  */

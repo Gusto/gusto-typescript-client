@@ -11,6 +11,7 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentMethodUpdate } from "../funcs/contractorPaymentMethodUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { ConflictErrorObject } from "../models/errors/conflicterrorobject.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,6 +20,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +41,8 @@ export type ContractorPaymentMethodUpdateMutationData =
   PutV1ContractorsContractorIdPaymentMethodResponse;
 
 export type ContractorPaymentMethodUpdateMutationError =
+  | NotFoundErrorObject
+  | ConflictErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError

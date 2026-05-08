@@ -4,6 +4,7 @@
 
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -18,6 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -31,14 +36,14 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Request the webhook subscription verification_token
+ * Request a verification token for a webhook subscription
  *
  * @remarks
  * Request that the webhook subscription `verification_token` be POSTed to the Subscription URL.
  *
- * > 📘 System Access Authentication
- * >
- * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *
  * scope: `webhook_subscriptions:read`
  */
@@ -50,6 +55,7 @@ export function webhooksRequestVerificationToken(
 ): APIPromise<
   Result<
     GetV1WebhookSubscriptionVerificationTokenUuidResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -77,6 +83,7 @@ async function $do(
   [
     Result<
       GetV1WebhookSubscriptionVerificationTokenUuidResponse,
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -115,7 +122,7 @@ async function $do(
   )(pathParams);
 
   const headers = new Headers(compactMap({
-    Accept: "*/*",
+    Accept: "application/json",
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
       payload["X-Gusto-API-Version"],
@@ -165,7 +172,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -180,6 +188,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1WebhookSubscriptionVerificationTokenUuidResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -189,11 +198,13 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.nil(
+    M.json(
       200,
       GetV1WebhookSubscriptionVerificationTokenUuidResponse$inboundSchema,
+      { key: "Webhook-Verification-Token-Response" },
     ),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

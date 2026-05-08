@@ -670,9 +670,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## get
 
@@ -1741,11 +1742,11 @@ import {
 
 ### Errors
 
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| errors.UnprocessableEntityErrorObject1 | 422                                    | application/json                       |
-| errors.PayrollBlockersError            | 422                                    | application/json                       |
-| errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+| Error Type                  | Status Code                 | Content Type                |
+| --------------------------- | --------------------------- | --------------------------- |
+| errors.NotFoundErrorObject  | 404                         | application/json            |
+| errors.PayrollBlockersError | 422                         | application/json            |
+| errors.APIError             | 4XX, 5XX                    | \*/\*                       |
 
 ## calculateGrossUp
 
@@ -2328,7 +2329,9 @@ import {
 
 ## getPayStubs
 
-Get an employee's pay stubs
+Get an employee's pay stubs.
+
+Results are returned in reverse chronological order (newest first).
 
 scope: `pay_stubs:read`
 
@@ -2449,7 +2452,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.payrolls.generatePrintableChecks({
     payrollUuid: "<id>",
-    requestBody: {
+    printablePayrollChecksBody: {
       printingFormat: "top",
     },
   });
@@ -2477,7 +2480,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await payrollsGeneratePrintableChecks(gustoEmbedded, {
     payrollUuid: "<id>",
-    requestBody: {
+    printablePayrollChecksBody: {
       printingFormat: "top",
     },
   });
@@ -2521,7 +2524,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.payrolls.generatePrintableChecks({
     payrollUuid: "<id>",
-    requestBody: {
+    printablePayrollChecksBody: {
       printingFormat: "top",
     },
   });
@@ -2549,7 +2552,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await payrollsGeneratePrintableChecks(gustoEmbedded, {
     payrollUuid: "<id>",
-    requestBody: {
+    printablePayrollChecksBody: {
       printingFormat: "top",
     },
   });
@@ -2593,7 +2596,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.payrolls.generatePrintableChecks({
     payrollUuid: "<id>",
-    requestBody: {
+    printablePayrollChecksBody: {
       printingFormat: "top",
     },
   });
@@ -2621,7 +2624,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await payrollsGeneratePrintableChecks(gustoEmbedded, {
     payrollUuid: "<id>",
-    requestBody: {
+    printablePayrollChecksBody: {
       printingFormat: "top",
     },
   });
@@ -2665,7 +2668,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.payrolls.generatePrintableChecks({
     payrollUuid: "<id>",
-    requestBody: {
+    printablePayrollChecksBody: {
       printingFormat: "top",
     },
   });
@@ -2693,7 +2696,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await payrollsGeneratePrintableChecks(gustoEmbedded, {
     payrollUuid: "<id>",
-    requestBody: {
+    printablePayrollChecksBody: {
       printingFormat: "top",
     },
   });
@@ -2742,6 +2745,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 

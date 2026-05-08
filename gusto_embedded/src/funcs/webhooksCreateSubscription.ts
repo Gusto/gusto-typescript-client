@@ -4,6 +4,7 @@
 
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -40,9 +41,9 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Create a webhook subscription to receive events of the specified subscription_types whenever there is a state change.
  *
- * > 📘 System Access Authentication
- * >
- * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *
  * scope: `webhook_subscriptions:write`
  */
@@ -160,7 +161,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -189,7 +191,7 @@ async function $do(
       key: "Webhook-Subscription",
     }),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

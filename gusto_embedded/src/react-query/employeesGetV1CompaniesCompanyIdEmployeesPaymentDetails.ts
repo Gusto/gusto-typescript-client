@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,14 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest } from "../models/operations/getv1companiescompanyidemployeespaymentdetails.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  GetV1CompaniesCompanyIdEmployeesPaymentDetailsHeaderXGustoAPIVersion,
+  GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest,
+} from "../models/operations/getv1companiescompanyidemployeespaymentdetails.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +46,8 @@ export {
 };
 
 export type EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryError =
+  | NotFoundErrorObject
+  | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -59,12 +65,12 @@ export type EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryError =
  *
  * Use the `employee_uuid` query parameter to filter for a single employee.
  * Use the `payroll_uuid` query parameter to filter for employees on a specific payroll.
- * Providing both `employee_uuid` and `payroll_uuid` will result in a 400 error.
+ * Providing both `employee_uuid` and `payroll_uuid` will result in a 422 error.
  * An empty array is returned if the company has no employees or if no employees match the filter criteria.
  *
  * The `encrypted_account_number` in the `splits` array is only visible if the `employee_payment_methods:read:account_number` scope is present.
  *
- * Base scope: `employee_payment_methods:read`
+ * scope: `employee_payment_methods:read`
  */
 export function useEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails(
   request: GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest,
@@ -95,12 +101,12 @@ export function useEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails(
  *
  * Use the `employee_uuid` query parameter to filter for a single employee.
  * Use the `payroll_uuid` query parameter to filter for employees on a specific payroll.
- * Providing both `employee_uuid` and `payroll_uuid` will result in a 400 error.
+ * Providing both `employee_uuid` and `payroll_uuid` will result in a 422 error.
  * An empty array is returned if the company has no employees or if no employees match the filter criteria.
  *
  * The `encrypted_account_number` in the `splits` array is only visible if the `employee_payment_methods:read:account_number` scope is present.
  *
- * Base scope: `employee_payment_methods:read`
+ * scope: `employee_payment_methods:read`
  */
 export function useEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsSuspense(
   request: GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest,
@@ -128,11 +134,13 @@ export function setEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsData(
   queryKeyBase: [
     companyId: string,
     parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyIdEmployeesPaymentDetailsHeaderXGustoAPIVersion
+        | undefined;
       employeeUuid?: string | undefined;
       payrollUuid?: string | undefined;
       page?: number | undefined;
       per?: number | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryData,
@@ -155,11 +163,13 @@ export function invalidateEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetail
     [
       companyId: string,
       parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyIdEmployeesPaymentDetailsHeaderXGustoAPIVersion
+          | undefined;
         employeeUuid?: string | undefined;
         payrollUuid?: string | undefined;
         page?: number | undefined;
         per?: number | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,

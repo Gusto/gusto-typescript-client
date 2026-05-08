@@ -55,7 +55,7 @@ export type RecoveryCase = {
   /**
    * The uuid of the associated payroll for which the recovery case was created. If the recovery case was created for a contractor payment, this field will be null.
    */
-  payrollUuid?: string | undefined;
+  payrollUuid?: string | null | undefined;
   /**
    * The uuids of the associated contractor payments for which the recovery case was created. If the recovery case was created for a payroll, this field will be null.
    */
@@ -87,7 +87,7 @@ export const RecoveryCase$inboundSchema: z.ZodType<
   latest_error_code: z.nullable(z.string()).optional(),
   original_debit_date: z.nullable(z.string()).optional(),
   check_date: z.string().optional(),
-  payroll_uuid: z.string().optional(),
+  payroll_uuid: z.nullable(z.string()).optional(),
   contractor_payment_uuids: z.nullable(z.array(z.string())).optional(),
   amount_outstanding: z.string().optional(),
   event_total_amount: z.string().optional(),

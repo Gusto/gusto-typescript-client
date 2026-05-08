@@ -5,15 +5,12 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import {
   WebhookSubscription,
   WebhookSubscription$inboundSchema,
@@ -24,19 +21,34 @@ export type GetV1WebhookSubscriptionsSecurity = {
   systemAccessAuth: string;
 };
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1WebhookSubscriptionsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1WebhookSubscriptionsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1WebhookSubscriptionsHeaderXGustoAPIVersion
+>;
+
 export type GetV1WebhookSubscriptionsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | GetV1WebhookSubscriptionsHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type GetV1WebhookSubscriptionsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * successful
    */
-  webhookSubscriptionsList?: Array<WebhookSubscription> | undefined;
+  webhookSubscriptions?: Array<WebhookSubscription> | undefined;
 };
 
 /** @internal */
@@ -68,6 +80,11 @@ export function getV1WebhookSubscriptionsSecurityToJSON(
 }
 
 /** @internal */
+export const GetV1WebhookSubscriptionsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1WebhookSubscriptionsHeaderXGustoAPIVersion> = z
+    .nativeEnum(GetV1WebhookSubscriptionsHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetV1WebhookSubscriptionsRequest$Outbound = {
   "X-Gusto-API-Version": string;
 };
@@ -78,7 +95,10 @@ export const GetV1WebhookSubscriptionsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1WebhookSubscriptionsRequest
 > = z.object({
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion:
+    GetV1WebhookSubscriptionsHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",
@@ -102,12 +122,12 @@ export const GetV1WebhookSubscriptionsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Webhook-Subscriptions-List": z.array(WebhookSubscription$inboundSchema)
+  "Webhook-Subscriptions": z.array(WebhookSubscription$inboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
-    "Webhook-Subscriptions-List": "webhookSubscriptionsList",
+    "Webhook-Subscriptions": "webhookSubscriptions",
   });
 });
 

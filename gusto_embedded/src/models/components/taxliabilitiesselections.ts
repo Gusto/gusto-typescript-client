@@ -36,6 +36,10 @@ export type TaxLiabilitiesSelections = {
    */
   taxName?: string | undefined;
   /**
+   * A description of the tax, providing additional detail about the tax type.
+   */
+  description?: string | null | undefined;
+  /**
    * The UUID of last unpaid external payroll.
    */
   lastUnpaidExternalPayrollUuid?: string | null | undefined;
@@ -80,6 +84,7 @@ export const TaxLiabilitiesSelections$inboundSchema: z.ZodType<
 > = z.object({
   tax_id: z.number().int().optional(),
   tax_name: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   last_unpaid_external_payroll_uuid: z.nullable(z.string()).optional(),
   possible_liabilities: z.array(z.lazy(() => PossibleLiabilities$inboundSchema))
     .optional(),

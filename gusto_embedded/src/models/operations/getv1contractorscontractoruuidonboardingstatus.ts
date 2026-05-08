@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ContractorOnboardingStatus,
@@ -14,35 +15,56 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion
+  >;
+
 export type GetV1ContractorsContractorUuidOnboardingStatusRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the contractor
    */
   contractorUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1ContractorsContractorUuidOnboardingStatusResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response.
+   * Successful
    */
   contractorOnboardingStatus?: ContractorOnboardingStatus | undefined;
 };
 
 /** @internal */
+export const GetV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    GetV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export type GetV1ContractorsContractorUuidOnboardingStatusRequest$Outbound = {
-  contractor_uuid: string;
   "X-Gusto-API-Version": string;
+  contractor_uuid: string;
 };
 
 /** @internal */
@@ -52,12 +74,14 @@ export const GetV1ContractorsContractorUuidOnboardingStatusRequest$outboundSchem
     z.ZodTypeDef,
     GetV1ContractorsContractorUuidOnboardingStatusRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     contractorUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
-      contractorUuid: "contractor_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      contractorUuid: "contractor_uuid",
     });
   });
 

@@ -1,7 +1,5 @@
 # CreateReport
 
-Example response
-
 ## Example Usage
 
 ```typescript

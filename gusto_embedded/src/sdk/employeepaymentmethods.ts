@@ -12,7 +12,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class EmployeePaymentMethods extends ClientSDK {
   /**
-   * Get all employee bank accounts
+   * List employee bank accounts
    *
    * @remarks
    * Returns all employee bank accounts.

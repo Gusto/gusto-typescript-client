@@ -4,6 +4,7 @@
 
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -18,6 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -40,6 +45,8 @@ import { Result } from "../types/fp.js";
  * This endpoint initiates the generation of employee checks for the payroll specified by payroll_uuid. A generation status and corresponding request_uuid will be returned. Use the generated document GET endpoint with document_type: `printable_payroll_checks` and request_uuid to poll the check generation process and retrieve the generated check URL upon completion.
  *
  * scope: `generated_documents:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function payrollsGeneratePrintableChecks(
   client: GustoEmbeddedCore,
@@ -49,6 +56,7 @@ export function payrollsGeneratePrintableChecks(
 ): APIPromise<
   Result<
     PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -76,6 +84,7 @@ async function $do(
   [
     Result<
       PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -100,7 +109,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload["Printable-Payroll-Checks-Body"], {
+    explode: true,
+  });
 
   const pathParams = {
     payroll_uuid: encodeSimple("payroll_uuid", payload.payroll_uuid, {
@@ -126,7 +137,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -161,7 +172,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -176,6 +188,7 @@ async function $do(
 
   const [result] = await M.match<
     PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -191,8 +204,9 @@ async function $do(
       PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse$inboundSchema,
       { key: "Payroll-Check" },
     ),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

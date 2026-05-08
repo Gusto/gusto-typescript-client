@@ -13,6 +13,9 @@
 
 Get a list of all company's forms
 
+### Related guides
+- [Company Forms](doc:company-form)
+
 scope: `company_forms:read`
 
 ### Example Usage
@@ -108,9 +111,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## get
 
@@ -211,9 +215,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## getPdf
 
@@ -314,9 +319,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## sign
 
@@ -640,5 +646,6 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

@@ -86,9 +86,11 @@ export class Companies extends ClientSDK {
    *
    * IMPORTANT: the returned access and refresh tokens are reserved for this company only. They cannot be used to access other companies AND previously granted tokens cannot be used to access this company.
    *
-   * > 📘 System Access Authentication
-   * >
-   * > this endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+   * 📘 System Access Authentication
+   *
+   * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+   *
+   * scope: `partner_managed_companies:manage`
    */
   async createPartnerManaged(
     security: PostV1PartnerManagedCompaniesSecurity,
@@ -151,7 +153,13 @@ export class Companies extends ClientSDK {
    * @remarks
    * Migrate an existing Gusto customer to your embedded payroll product.
    *
-   * To use this endpoint, the customer will need to connect their Gusto account to your application using [OAuth2](https://docs.gusto.com/embedded-payroll/docs/oauth2) then view and [accept the Embedded Payroll Terms of Service](https://docs.gusto.com/embedded-payroll/reference/post-partner-managed-companies-company_uuid-accept_terms_of_service).
+   * ### Prerequisites
+   * Before calling this endpoint:
+   * 1. The customer must connect their Gusto account to your application using [OAuth2](doc:oauth2)
+   * 2. The customer must view and [accept the Embedded Payroll Terms of Service](ref:post-partner-managed-companies-company_uuid-accept_terms_of_service)
+   *
+   * ### Related guides
+   * - [Migrate an existing company](doc:migrate-existing-company)
    *
    * scope: `partner_managed_companies:write`
    */
@@ -329,7 +337,7 @@ export class Companies extends ClientSDK {
    * Get the custom fields of a company
    *
    * @remarks
-   * Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company
+   * Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company.
    *
    * scope: `companies:read`
    */
