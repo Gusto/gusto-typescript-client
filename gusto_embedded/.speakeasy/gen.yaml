@@ -38,7 +38,8 @@ typescript:
     dependencies: {}
     devDependencies: {}
     peerDependencies: {}
-  additionalPackageJSON: {}
+  additionalPackageJSON:
+    license: MIT
   additionalScripts: {}
   alwaysIncludeInboundAndOutbound: false
   author: Speakeasy
