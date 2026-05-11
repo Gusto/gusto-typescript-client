@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,10 +18,14 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
-import { GetNotificationsNotificationUuidRequest } from "../models/operations/getnotificationsnotificationuuid.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
+import {
+  GetNotificationsNotificationUuidHeaderXGustoAPIVersion,
+  GetNotificationsNotificationUuidRequest,
+} from "../models/operations/getnotificationsnotificationuuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -43,7 +46,8 @@ export {
 };
 
 export type NotificationsGetDetailsQueryError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -123,7 +127,11 @@ export function setNotificationsGetDetailsData(
   client: QueryClient,
   queryKeyBase: [
     notificationUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetNotificationsNotificationUuidHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: NotificationsGetDetailsQueryData,
 ): NotificationsGetDetailsQueryData | undefined {
@@ -137,7 +145,11 @@ export function invalidateNotificationsGetDetails(
   queryKeyBase: TupleToPrefixes<
     [
       notificationUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetNotificationsNotificationUuidHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

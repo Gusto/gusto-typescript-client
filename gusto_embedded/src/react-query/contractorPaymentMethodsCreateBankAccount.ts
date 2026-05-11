@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1ContractorsContractorUuidBankAccountsRequest,
   PostV1ContractorsContractorUuidBankAccountsResponse,
@@ -39,7 +40,8 @@ export type ContractorPaymentMethodsCreateBankAccountMutationData =
   PostV1ContractorsContractorUuidBankAccountsResponse;
 
 export type ContractorPaymentMethodsCreateBankAccountMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

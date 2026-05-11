@@ -21,7 +21,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1PartnerManagedCompaniesRequest,
   PostV1PartnerManagedCompaniesResponse,
@@ -41,7 +41,7 @@ export type CompaniesCreatePartnerManagedMutationData =
   PostV1PartnerManagedCompaniesResponse;
 
 export type CompaniesCreatePartnerManagedMutationError =
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -64,9 +64,11 @@ export type CompaniesCreatePartnerManagedMutationError =
  *
  * IMPORTANT: the returned access and refresh tokens are reserved for this company only. They cannot be used to access other companies AND previously granted tokens cannot be used to access this company.
  *
- * > 📘 System Access Authentication
- * >
- * > this endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+ *
+ * scope: `partner_managed_companies:manage`
  */
 export function useCompaniesCreatePartnerManagedMutation(
   options?: MutationHookOptions<

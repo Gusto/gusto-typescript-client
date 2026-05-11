@@ -1,7 +1,5 @@
 # PayrollReversal
 
-Example response
-
 ## Example Usage
 
 ```typescript

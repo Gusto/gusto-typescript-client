@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest } from "../models/operations/getemployeeytdbenefitamountsfromdifferentcompany.js";
+import {
+  GetEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion,
+  GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
+} from "../models/operations/getemployeeytdbenefitamountsfromdifferentcompany.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -120,8 +124,10 @@ export function setEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyData(
   queryKeyBase: [
     employeeId: string,
     parameters: {
+      xGustoAPIVersion?:
+        | GetEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion
+        | undefined;
       taxYear?: number | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryData,
@@ -144,8 +150,10 @@ export function invalidateEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompa
     [
       employeeId: string,
       parameters: {
+        xGustoAPIVersion?:
+          | GetEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion
+          | undefined;
         taxYear?: number | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,

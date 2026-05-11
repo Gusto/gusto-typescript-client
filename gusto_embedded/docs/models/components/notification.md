@@ -1,7 +1,5 @@
 # Notification
 
-Example response
-
 ## Example Usage
 
 ```typescript

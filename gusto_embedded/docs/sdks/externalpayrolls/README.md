@@ -4,7 +4,7 @@
 
 ### Available Operations
 
-* [create](#create) - Create a new external payroll for a company
+* [create](#create) - Create an external payroll for a company
 * [get](#get) - Get external payrolls for a company
 * [retrieve](#retrieve) - Get an external payroll
 * [delete](#delete) - Delete an external payroll
@@ -16,7 +16,7 @@
 
 ## create
 
-Creates a new external payroll for the company.
+Creates a new external payroll for a company.
 
 scope: `external_payrolls:write`
 
@@ -25,6 +25,7 @@ scope: `external_payrolls:write`
 <!-- UsageSnippet language="typescript" operationID="post-v1-external-payroll" method="post" path="/v1/companies/{company_uuid}/external_payrolls" example="Basic" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -33,10 +34,10 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.externalPayrolls.create({
     companyUuid: "<id>",
-    requestBody: {
-      checkDate: "<value>",
-      paymentPeriodStartDate: "<value>",
-      paymentPeriodEndDate: "<value>",
+    externalPayrollCreateRequest: {
+      checkDate: new RFCDate("<value>"),
+      paymentPeriodStartDate: new RFCDate("<value>"),
+      paymentPeriodEndDate: new RFCDate("<value>"),
     },
   });
 
@@ -53,6 +54,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { externalPayrollsCreate } from "@gusto/embedded-api/funcs/externalPayrollsCreate.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -63,10 +65,10 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await externalPayrollsCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
-      checkDate: "<value>",
-      paymentPeriodStartDate: "<value>",
-      paymentPeriodEndDate: "<value>",
+    externalPayrollCreateRequest: {
+      checkDate: new RFCDate("<value>"),
+      paymentPeriodStartDate: new RFCDate("<value>"),
+      paymentPeriodEndDate: new RFCDate("<value>"),
     },
   });
   if (res.ok) {
@@ -101,6 +103,7 @@ import {
 <!-- UsageSnippet language="typescript" operationID="post-v1-external-payroll" method="post" path="/v1/companies/{company_uuid}/external_payrolls" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -109,10 +112,10 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.externalPayrolls.create({
     companyUuid: "<id>",
-    requestBody: {
-      checkDate: "2022-06-01",
-      paymentPeriodStartDate: "2022-05-15",
-      paymentPeriodEndDate: "2022-05-30",
+    externalPayrollCreateRequest: {
+      checkDate: new RFCDate("2022-06-01"),
+      paymentPeriodStartDate: new RFCDate("2022-05-15"),
+      paymentPeriodEndDate: new RFCDate("2022-05-30"),
     },
   });
 
@@ -129,6 +132,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { externalPayrollsCreate } from "@gusto/embedded-api/funcs/externalPayrollsCreate.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -139,10 +143,10 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await externalPayrollsCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
-      checkDate: "2022-06-01",
-      paymentPeriodStartDate: "2022-05-15",
-      paymentPeriodEndDate: "2022-05-30",
+    externalPayrollCreateRequest: {
+      checkDate: new RFCDate("2022-06-01"),
+      paymentPeriodStartDate: new RFCDate("2022-05-15"),
+      paymentPeriodEndDate: new RFCDate("2022-05-30"),
     },
   });
   if (res.ok) {
@@ -177,6 +181,7 @@ import {
 <!-- UsageSnippet language="typescript" operationID="post-v1-external-payroll" method="post" path="/v1/companies/{company_uuid}/external_payrolls" example="Nested" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -185,10 +190,10 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.externalPayrolls.create({
     companyUuid: "<id>",
-    requestBody: {
-      checkDate: "<value>",
-      paymentPeriodStartDate: "<value>",
-      paymentPeriodEndDate: "<value>",
+    externalPayrollCreateRequest: {
+      checkDate: new RFCDate("<value>"),
+      paymentPeriodStartDate: new RFCDate("<value>"),
+      paymentPeriodEndDate: new RFCDate("<value>"),
     },
   });
 
@@ -205,6 +210,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { externalPayrollsCreate } from "@gusto/embedded-api/funcs/externalPayrollsCreate.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -215,10 +221,10 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await externalPayrollsCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
-      checkDate: "<value>",
-      paymentPeriodStartDate: "<value>",
-      paymentPeriodEndDate: "<value>",
+    externalPayrollCreateRequest: {
+      checkDate: new RFCDate("<value>"),
+      paymentPeriodStartDate: new RFCDate("<value>"),
+      paymentPeriodEndDate: new RFCDate("<value>"),
     },
   });
   if (res.ok) {
@@ -253,6 +259,7 @@ import {
 <!-- UsageSnippet language="typescript" operationID="post-v1-external-payroll" method="post" path="/v1/companies/{company_uuid}/external_payrolls" example="Resource" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -261,10 +268,10 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.externalPayrolls.create({
     companyUuid: "<id>",
-    requestBody: {
-      checkDate: "<value>",
-      paymentPeriodStartDate: "<value>",
-      paymentPeriodEndDate: "<value>",
+    externalPayrollCreateRequest: {
+      checkDate: new RFCDate("<value>"),
+      paymentPeriodStartDate: new RFCDate("<value>"),
+      paymentPeriodEndDate: new RFCDate("<value>"),
     },
   });
 
@@ -281,6 +288,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { externalPayrollsCreate } from "@gusto/embedded-api/funcs/externalPayrollsCreate.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -291,10 +299,10 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await externalPayrollsCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
-      checkDate: "<value>",
-      paymentPeriodStartDate: "<value>",
-      paymentPeriodEndDate: "<value>",
+    externalPayrollCreateRequest: {
+      checkDate: new RFCDate("<value>"),
+      paymentPeriodStartDate: new RFCDate("<value>"),
+      paymentPeriodEndDate: new RFCDate("<value>"),
     },
   });
   if (res.ok) {
@@ -340,14 +348,15 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## get
 
-Get an external payroll for a given company.
+Get external payrolls for a company.
 
 scope: `external_payrolls:read`
 
@@ -444,9 +453,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## retrieve
 
@@ -549,9 +559,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## delete
 
@@ -643,14 +654,13 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## update
 
-Update an external payroll with a list of external payroll items
+Update an external payroll with a list of external payroll items.
 
 scope: `external_payrolls:write`
 
@@ -668,7 +678,34 @@ async function run() {
   const result = await gustoEmbedded.externalPayrolls.update({
     companyUuid: "<id>",
     externalPayrollId: "<id>",
-    requestBody: {},
+    externalPayrollUpdateRequest: {
+      externalPayrollItems: [
+        {
+          employeeUuid: "44f7cba9-7a3d-4f08-b7bd-6fcf5211f8ca",
+          earnings: [
+            {
+              earningType: "CompanyPayType",
+              earningId: 1,
+              amount: "10000.00",
+              hours: "80.0",
+            },
+          ],
+          benefits: [
+            {
+              benefitId: 22,
+              companyContributionAmount: "100.00",
+              employeeDeductionAmount: "50.00",
+            },
+          ],
+          taxes: [
+            {
+              taxId: 1,
+              amount: "400.00",
+            },
+          ],
+        },
+      ],
+    },
   });
 
   console.log(result);
@@ -695,7 +732,9 @@ async function run() {
   const res = await externalPayrollsUpdate(gustoEmbedded, {
     companyUuid: "<id>",
     externalPayrollId: "<id>",
-    requestBody: {},
+    externalPayrollUpdateRequest: {
+      externalPayrollItems: [],
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -738,45 +777,44 @@ async function run() {
   const result = await gustoEmbedded.externalPayrolls.update({
     companyUuid: "<id>",
     externalPayrollId: "<id>",
-    requestBody: {
-      replaceFields: true,
+    externalPayrollUpdateRequest: {
       externalPayrollItems: [
         {
           employeeUuid: "403c6ee3-5f58-40ef-a117-ff7175cd9ee3",
           earnings: [
             {
-              hours: "0.0",
-              amount: "200.00",
-              earningId: 1,
               earningType: "CompanyPayType",
+              earningId: 1,
+              amount: "200.00",
+              hours: "0.0",
             },
             {
-              hours: "0.0",
-              amount: "5000.00",
-              earningId: 2,
               earningType: "CompanyEarningType",
+              earningId: 2,
+              amount: "5000.00",
+              hours: "0.0",
             },
           ],
           benefits: [
             {
+              benefitId: 10,
               companyContributionAmount: "300.0",
               employeeDeductionAmount: "300.0",
-              benefitId: 10,
             },
             {
+              benefitId: 21,
               companyContributionAmount: "50.0",
               employeeDeductionAmount: "100.0",
-              benefitId: 21,
             },
           ],
           taxes: [
             {
-              amount: "20.0",
               taxId: 1,
+              amount: "20.0",
             },
             {
-              amount: "100.0",
               taxId: 2,
+              amount: "100.0",
             },
           ],
         },
@@ -808,45 +846,44 @@ async function run() {
   const res = await externalPayrollsUpdate(gustoEmbedded, {
     companyUuid: "<id>",
     externalPayrollId: "<id>",
-    requestBody: {
-      replaceFields: true,
+    externalPayrollUpdateRequest: {
       externalPayrollItems: [
         {
           employeeUuid: "403c6ee3-5f58-40ef-a117-ff7175cd9ee3",
           earnings: [
             {
-              hours: "0.0",
-              amount: "200.00",
-              earningId: 1,
               earningType: "CompanyPayType",
+              earningId: 1,
+              amount: "200.00",
+              hours: "0.0",
             },
             {
-              hours: "0.0",
-              amount: "5000.00",
-              earningId: 2,
               earningType: "CompanyEarningType",
+              earningId: 2,
+              amount: "5000.00",
+              hours: "0.0",
             },
           ],
           benefits: [
             {
+              benefitId: 10,
               companyContributionAmount: "300.0",
               employeeDeductionAmount: "300.0",
-              benefitId: 10,
             },
             {
+              benefitId: 21,
               companyContributionAmount: "50.0",
               employeeDeductionAmount: "100.0",
-              benefitId: 21,
             },
           ],
           taxes: [
             {
-              amount: "20.0",
               taxId: 1,
+              amount: "20.0",
             },
             {
-              amount: "100.0",
               taxId: 2,
+              amount: "100.0",
             },
           ],
         },
@@ -894,7 +931,34 @@ async function run() {
   const result = await gustoEmbedded.externalPayrolls.update({
     companyUuid: "<id>",
     externalPayrollId: "<id>",
-    requestBody: {},
+    externalPayrollUpdateRequest: {
+      externalPayrollItems: [
+        {
+          employeeUuid: "44f7cba9-7a3d-4f08-b7bd-6fcf5211f8ca",
+          earnings: [
+            {
+              earningType: "CompanyPayType",
+              earningId: 1,
+              amount: "10000.00",
+              hours: "80.0",
+            },
+          ],
+          benefits: [
+            {
+              benefitId: 22,
+              companyContributionAmount: "100.00",
+              employeeDeductionAmount: "50.00",
+            },
+          ],
+          taxes: [
+            {
+              taxId: 1,
+              amount: "400.00",
+            },
+          ],
+        },
+      ],
+    },
   });
 
   console.log(result);
@@ -921,7 +985,9 @@ async function run() {
   const res = await externalPayrollsUpdate(gustoEmbedded, {
     companyUuid: "<id>",
     externalPayrollId: "<id>",
-    requestBody: {},
+    externalPayrollUpdateRequest: {
+      externalPayrollItems: [],
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -964,7 +1030,9 @@ async function run() {
   const result = await gustoEmbedded.externalPayrolls.update({
     companyUuid: "<id>",
     externalPayrollId: "<id>",
-    requestBody: {},
+    externalPayrollUpdateRequest: {
+      externalPayrollItems: [],
+    },
   });
 
   console.log(result);
@@ -991,7 +1059,9 @@ async function run() {
   const res = await externalPayrollsUpdate(gustoEmbedded, {
     companyUuid: "<id>",
     externalPayrollId: "<id>",
-    requestBody: {},
+    externalPayrollUpdateRequest: {
+      externalPayrollItems: [],
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1036,16 +1106,15 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## calculateTaxes
 
-Get tax suggestions for an external payroll. Earnings and/or benefits
-data must be saved prior to the calculation in order to retrieve accurate
-tax calculation.
+Get tax suggestions for an external payroll. Earnings and/or benefits data must be saved prior to the calculation in order to retrieve accurate tax calculation.
 
 scope: `external_payrolls:read`
 
@@ -1144,10 +1213,11 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## listTaxLiabilities
 
@@ -1248,9 +1318,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## updateTaxLiabilities
 
@@ -1271,7 +1342,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.externalPayrolls.updateTaxLiabilities({
     companyUuid: "<id>",
-    requestBody: {},
+    taxLiabilitySelectionsRequest: {
+      liabilitySelections: [],
+    },
   });
 
   console.log(result);
@@ -1297,7 +1370,15 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await externalPayrollsUpdateTaxLiabilities(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {},
+    taxLiabilitySelectionsRequest: {
+      liabilitySelections: [
+        {
+          taxId: 1,
+          lastUnpaidExternalPayrollUuid: "1bf1efe1-72d4-4e6e-a181-611f3ea66435",
+          unpaidLiabilityAmount: "47.5",
+        },
+      ],
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1339,22 +1420,22 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.externalPayrolls.updateTaxLiabilities({
     companyUuid: "<id>",
-    requestBody: {
+    taxLiabilitySelectionsRequest: {
       liabilitySelections: [
         {
           taxId: 1,
           lastUnpaidExternalPayrollUuid: "7985032c-ee3a-4e98-af27-d56551eb5f1c",
-          unpaidLiabilityAmount: 50,
+          unpaidLiabilityAmount: "50",
         },
         {
           taxId: 2,
           lastUnpaidExternalPayrollUuid: "5ed14dbb-958f-47c8-b16e-c4fed82dc486",
-          unpaidLiabilityAmount: 400,
+          unpaidLiabilityAmount: "400",
         },
         {
           taxId: 8,
           lastUnpaidExternalPayrollUuid: null,
-          unpaidLiabilityAmount: 0,
+          unpaidLiabilityAmount: "0",
         },
       ],
     },
@@ -1383,22 +1464,22 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await externalPayrollsUpdateTaxLiabilities(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
+    taxLiabilitySelectionsRequest: {
       liabilitySelections: [
         {
           taxId: 1,
           lastUnpaidExternalPayrollUuid: "7985032c-ee3a-4e98-af27-d56551eb5f1c",
-          unpaidLiabilityAmount: 50,
+          unpaidLiabilityAmount: "50",
         },
         {
           taxId: 2,
           lastUnpaidExternalPayrollUuid: "5ed14dbb-958f-47c8-b16e-c4fed82dc486",
-          unpaidLiabilityAmount: 400,
+          unpaidLiabilityAmount: "400",
         },
         {
           taxId: 8,
           lastUnpaidExternalPayrollUuid: null,
-          unpaidLiabilityAmount: 0,
+          unpaidLiabilityAmount: "0",
         },
       ],
     },
@@ -1443,7 +1524,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.externalPayrolls.updateTaxLiabilities({
     companyUuid: "<id>",
-    requestBody: {},
+    taxLiabilitySelectionsRequest: {
+      liabilitySelections: [],
+    },
   });
 
   console.log(result);
@@ -1469,7 +1552,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await externalPayrollsUpdateTaxLiabilities(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {},
+    taxLiabilitySelectionsRequest: {
+      liabilitySelections: [],
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1511,7 +1596,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.externalPayrolls.updateTaxLiabilities({
     companyUuid: "<id>",
-    requestBody: {},
+    taxLiabilitySelectionsRequest: {
+      liabilitySelections: [],
+    },
   });
 
   console.log(result);
@@ -1537,7 +1624,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await externalPayrollsUpdateTaxLiabilities(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {},
+    taxLiabilitySelectionsRequest: {
+      liabilitySelections: [],
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1582,14 +1671,17 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## finalizeTaxLiabilities
 
 Finalizes tax liabilities for a company. All external payrolls edit action will be disabled.
+
+### Asynchronous processing
+This endpoint triggers an asynchronous operation. The external payrolls will be processed in the background after finalization.
 
 scope: `external_payrolls:write`
 
@@ -1675,7 +1767,6 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |

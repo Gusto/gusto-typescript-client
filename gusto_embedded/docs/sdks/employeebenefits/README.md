@@ -37,7 +37,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeeBenefits.create({
     employeeId: "<id>",
-    requestBody: {
+    employeeBenefitCreateRequest: {
       companyBenefitUuid: "<id>",
     },
   });
@@ -65,7 +65,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeeBenefitsCreate(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    employeeBenefitCreateRequest: {
       companyBenefitUuid: "<id>",
     },
   });
@@ -109,7 +109,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeeBenefits.create({
     employeeId: "<id>",
-    requestBody: {
+    employeeBenefitCreateRequest: {
       companyBenefitUuid: "f68abb42-431e-4392-bc3f-2795627e00f3",
       employeeDeduction: "100.00",
       contribution: {
@@ -142,7 +142,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeeBenefitsCreate(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    employeeBenefitCreateRequest: {
       companyBenefitUuid: "f68abb42-431e-4392-bc3f-2795627e00f3",
       employeeDeduction: "100.00",
       contribution: {
@@ -191,7 +191,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeeBenefits.create({
     employeeId: "<id>",
-    requestBody: {
+    employeeBenefitCreateRequest: {
       companyBenefitUuid: "<id>",
     },
   });
@@ -219,7 +219,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeeBenefitsCreate(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    employeeBenefitCreateRequest: {
       companyBenefitUuid: "<id>",
     },
   });
@@ -263,7 +263,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeeBenefits.create({
     employeeId: "<id>",
-    requestBody: {
+    employeeBenefitCreateRequest: {
       companyBenefitUuid: "<id>",
     },
   });
@@ -291,7 +291,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeeBenefitsCreate(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    employeeBenefitCreateRequest: {
       companyBenefitUuid: "<id>",
     },
   });
@@ -335,7 +335,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeeBenefits.create({
     employeeId: "<id>",
-    requestBody: {
+    employeeBenefitCreateRequest: {
       companyBenefitUuid: "<id>",
     },
   });
@@ -363,7 +363,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeeBenefitsCreate(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    employeeBenefitCreateRequest: {
       companyBenefitUuid: "<id>",
     },
   });
@@ -410,10 +410,11 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## get
 
@@ -518,9 +519,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## retrieve
 
@@ -700,9 +702,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## update
 
@@ -725,7 +728,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeeBenefits.update({
     employeeBenefitId: "<id>",
-    requestBody: {
+    employeeBenefitUpdateRequest: {
       version: "<value>",
     },
   });
@@ -753,7 +756,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeeBenefitsUpdate(gustoEmbedded, {
     employeeBenefitId: "<id>",
-    requestBody: {
+    employeeBenefitUpdateRequest: {
       version: "<value>",
     },
   });
@@ -797,7 +800,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeeBenefits.update({
     employeeBenefitId: "<id>",
-    requestBody: {
+    employeeBenefitUpdateRequest: {
       version: "09j3d29jqdpj92109j9j2d90dq",
       employeeDeduction: "250.00",
     },
@@ -826,7 +829,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeeBenefitsUpdate(gustoEmbedded, {
     employeeBenefitId: "<id>",
-    requestBody: {
+    employeeBenefitUpdateRequest: {
       version: "09j3d29jqdpj92109j9j2d90dq",
       employeeDeduction: "250.00",
     },
@@ -871,7 +874,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeeBenefits.update({
     employeeBenefitId: "<id>",
-    requestBody: {
+    employeeBenefitUpdateRequest: {
       version: "<value>",
     },
   });
@@ -899,7 +902,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeeBenefitsUpdate(gustoEmbedded, {
     employeeBenefitId: "<id>",
-    requestBody: {
+    employeeBenefitUpdateRequest: {
       version: "<value>",
     },
   });
@@ -943,7 +946,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeeBenefits.update({
     employeeBenefitId: "<id>",
-    requestBody: {
+    employeeBenefitUpdateRequest: {
       version: "<value>",
     },
   });
@@ -971,7 +974,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeeBenefitsUpdate(gustoEmbedded, {
     employeeBenefitId: "<id>",
-    requestBody: {
+    employeeBenefitUpdateRequest: {
       version: "<value>",
     },
   });
@@ -1015,7 +1018,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeeBenefits.update({
     employeeBenefitId: "<id>",
-    requestBody: {
+    employeeBenefitUpdateRequest: {
       version: "<value>",
     },
   });
@@ -1043,7 +1046,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeeBenefitsUpdate(gustoEmbedded, {
     employeeBenefitId: "<id>",
-    requestBody: {
+    employeeBenefitUpdateRequest: {
       version: "<value>",
     },
   });
@@ -1090,10 +1093,11 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## delete
 
@@ -1185,10 +1189,9 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## getYtdBenefitAmountsFromDifferentCompany
 
@@ -1294,9 +1297,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## createYtdBenefitAmountsFromDifferentCompany
 
@@ -1319,7 +1323,8 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeeBenefits.createYtdBenefitAmountsFromDifferentCompany({
     employeeId: "<id>",
-    postEmployeeYtdBenefitAmountsFromDifferentCompany: {
+    ytdBenefitAmountsFromDifferentCompanyBody: {
+      benefitType: 182856,
       taxYear: 1828.56,
     },
   });
@@ -1347,7 +1352,8 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany(gustoEmbedded, {
     employeeId: "<id>",
-    postEmployeeYtdBenefitAmountsFromDifferentCompany: {
+    ytdBenefitAmountsFromDifferentCompanyBody: {
+      benefitType: 270638,
       taxYear: 1828.56,
     },
   });
@@ -1391,7 +1397,8 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeeBenefits.createYtdBenefitAmountsFromDifferentCompany({
     employeeId: "<id>",
-    postEmployeeYtdBenefitAmountsFromDifferentCompany: {
+    ytdBenefitAmountsFromDifferentCompanyBody: {
+      benefitType: 528438,
       taxYear: 1828.56,
     },
   });
@@ -1419,7 +1426,8 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany(gustoEmbedded, {
     employeeId: "<id>",
-    postEmployeeYtdBenefitAmountsFromDifferentCompany: {
+    ytdBenefitAmountsFromDifferentCompanyBody: {
+      benefitType: 54999,
       taxYear: 1828.56,
     },
   });
@@ -1463,7 +1471,8 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeeBenefits.createYtdBenefitAmountsFromDifferentCompany({
     employeeId: "<id>",
-    postEmployeeYtdBenefitAmountsFromDifferentCompany: {
+    ytdBenefitAmountsFromDifferentCompanyBody: {
+      benefitType: 55436,
       taxYear: 1828.56,
     },
   });
@@ -1491,7 +1500,8 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany(gustoEmbedded, {
     employeeId: "<id>",
-    postEmployeeYtdBenefitAmountsFromDifferentCompany: {
+    ytdBenefitAmountsFromDifferentCompanyBody: {
+      benefitType: 565378,
       taxYear: 1828.56,
     },
   });
@@ -1538,10 +1548,11 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## getV1EmployeesEmployeeUuidSection603HighEarnerStatuses
 
@@ -1749,11 +1760,11 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.NotFoundErrorObject            | 404                                   | application/json                      |
-| errors.UnprocessableEntityErrorObject | 409, 422                              | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 409, 422                        | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## getV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear
 
@@ -1861,11 +1872,11 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.NotFoundErrorObject            | 404                                   | application/json                      |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## patchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear
 
@@ -1968,8 +1979,8 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.NotFoundErrorObject            | 404                                   | application/json                      |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |

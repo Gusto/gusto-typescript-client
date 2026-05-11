@@ -1,0 +1,15 @@
+# GetV1GarnishmentsChildSupportRequest
+
+## Example Usage
+
+```typescript
+import { GetV1GarnishmentsChildSupportRequest } from "@gusto/embedded-api-v-2025-11-15/models/operations/getv1garnishmentschildsupport.js";
+
+let value: GetV1GarnishmentsChildSupportRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion](../../models/operations/getv1garnishmentschildsupportheaderxgustoapiversion.md)                                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |

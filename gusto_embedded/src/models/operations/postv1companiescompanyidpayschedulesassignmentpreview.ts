@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -19,21 +20,34 @@ import {
   PayScheduleAssignmentPreview,
   PayScheduleAssignmentPreview$inboundSchema,
 } from "../components/payscheduleassignmentpreview.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewHeaderXGustoAPIVersion
+  >;
+
 export type PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
   companyId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
   payScheduleAssignmentBody: PayScheduleAssignmentBody;
 };
 
@@ -46,10 +60,18 @@ export type PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse = {
 };
 
 /** @internal */
+export const PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export type PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$Outbound =
   {
-    company_id: string;
     "X-Gusto-API-Version": string;
+    company_id: string;
     "Pay-Schedule-Assignment-Body": PayScheduleAssignmentBody$Outbound;
   };
 
@@ -60,13 +82,15 @@ export const PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$outbou
     z.ZodTypeDef,
     PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest
   > = z.object({
+    xGustoAPIVersion:
+      PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     payScheduleAssignmentBody: PayScheduleAssignmentBody$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyId: "company_id",
       payScheduleAssignmentBody: "Pay-Schedule-Assignment-Body",
     });
   });

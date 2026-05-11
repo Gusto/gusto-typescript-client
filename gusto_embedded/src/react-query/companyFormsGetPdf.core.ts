@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyFormsGetPdf } from "../funcs/companyFormsGetPdf.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompanyFormPdfHeaderXGustoAPIVersion,
   GetV1CompanyFormPdfRequest,
   GetV1CompanyFormPdfResponse,
 } from "../models/operations/getv1companyformpdf.js";
@@ -73,7 +73,9 @@ export function buildCompanyFormsGetPdfQuery(
 
 export function queryKeyCompanyFormsGetPdf(
   formId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?: GetV1CompanyFormPdfHeaderXGustoAPIVersion | undefined;
+  },
 ): QueryKey {
   return ["@gusto/embedded-api", "companyForms", "getPdf", formId, parameters];
 }

@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeFormsList } from "../funcs/employeeFormsList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1EmployeeFormsHeaderXGustoAPIVersion,
   GetV1EmployeeFormsRequest,
   GetV1EmployeeFormsResponse,
 } from "../models/operations/getv1employeeforms.js";
@@ -73,7 +73,9 @@ export function buildEmployeeFormsListQuery(
 
 export function queryKeyEmployeeFormsList(
   employeeId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?: GetV1EmployeeFormsHeaderXGustoAPIVersion | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

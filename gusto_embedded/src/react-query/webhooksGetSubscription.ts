@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,11 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  GetV1WebhookSubscriptionUuidHeaderXGustoAPIVersion,
   GetV1WebhookSubscriptionUuidRequest,
   GetV1WebhookSubscriptionUuidSecurity,
 } from "../models/operations/getv1webhooksubscriptionuuid.js";
@@ -45,6 +46,7 @@ export {
 };
 
 export type WebhooksGetSubscriptionQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -60,9 +62,9 @@ export type WebhooksGetSubscriptionQueryError =
  * @remarks
  * Returns the Webhook Subscription associated with the provided UUID.
  *
- * > 📘 System Access Authentication
- * >
- * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *
  * scope: `webhook_subscriptions:read`
  */
@@ -95,9 +97,9 @@ export function useWebhooksGetSubscription(
  * @remarks
  * Returns the Webhook Subscription associated with the provided UUID.
  *
- * > 📘 System Access Authentication
- * >
- * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *
  * scope: `webhook_subscriptions:read`
  */
@@ -128,7 +130,11 @@ export function setWebhooksGetSubscriptionData(
   client: QueryClient,
   queryKeyBase: [
     webhookSubscriptionUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1WebhookSubscriptionUuidHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: WebhooksGetSubscriptionQueryData,
 ): WebhooksGetSubscriptionQueryData | undefined {
@@ -142,7 +148,11 @@ export function invalidateWebhooksGetSubscription(
   queryKeyBase: TupleToPrefixes<
     [
       webhookSubscriptionUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1WebhookSubscriptionUuidHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

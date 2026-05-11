@@ -12,40 +12,44 @@ import {
   ContractorBankAccount$inboundSchema,
 } from "../components/contractorbankaccount.js";
 import {
+  ContractorBankAccountCreateRequestBody,
+  ContractorBankAccountCreateRequestBody$Outbound,
+  ContractorBankAccountCreateRequestBody$outboundSchema,
+} from "../components/contractorbankaccountcreaterequestbody.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const PostV1ContractorsContractorUuidBankAccountsAccountType = {
-  Checking: "Checking",
-  Savings: "Savings",
-} as const;
-export type PostV1ContractorsContractorUuidBankAccountsAccountType = ClosedEnum<
-  typeof PostV1ContractorsContractorUuidBankAccountsAccountType
->;
-
-export type PostV1ContractorsContractorUuidBankAccountsRequestBody = {
-  name: string;
-  routingNumber: string;
-  accountNumber: string;
-  accountType: PostV1ContractorsContractorUuidBankAccountsAccountType;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PostV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion
+  >;
 
 export type PostV1ContractorsContractorUuidBankAccountsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the contractor
    */
   contractorUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostV1ContractorsContractorUuidBankAccountsRequestBody;
+  contractorBankAccountCreateRequestBody:
+    ContractorBankAccountCreateRequestBody;
 };
 
 export type PostV1ContractorsContractorUuidBankAccountsResponse = {
@@ -57,55 +61,19 @@ export type PostV1ContractorsContractorUuidBankAccountsResponse = {
 };
 
 /** @internal */
-export const PostV1ContractorsContractorUuidBankAccountsAccountType$outboundSchema:
+export const PostV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
-    typeof PostV1ContractorsContractorUuidBankAccountsAccountType
-  > = z.nativeEnum(PostV1ContractorsContractorUuidBankAccountsAccountType);
-
-/** @internal */
-export type PostV1ContractorsContractorUuidBankAccountsRequestBody$Outbound = {
-  name: string;
-  routing_number: string;
-  account_number: string;
-  account_type: string;
-};
-
-/** @internal */
-export const PostV1ContractorsContractorUuidBankAccountsRequestBody$outboundSchema:
-  z.ZodType<
-    PostV1ContractorsContractorUuidBankAccountsRequestBody$Outbound,
-    z.ZodTypeDef,
-    PostV1ContractorsContractorUuidBankAccountsRequestBody
-  > = z.object({
-    name: z.string(),
-    routingNumber: z.string(),
-    accountNumber: z.string(),
-    accountType:
-      PostV1ContractorsContractorUuidBankAccountsAccountType$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      routingNumber: "routing_number",
-      accountNumber: "account_number",
-      accountType: "account_type",
-    });
-  });
-
-export function postV1ContractorsContractorUuidBankAccountsRequestBodyToJSON(
-  postV1ContractorsContractorUuidBankAccountsRequestBody:
-    PostV1ContractorsContractorUuidBankAccountsRequestBody,
-): string {
-  return JSON.stringify(
-    PostV1ContractorsContractorUuidBankAccountsRequestBody$outboundSchema.parse(
-      postV1ContractorsContractorUuidBankAccountsRequestBody,
-    ),
+    typeof PostV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PostV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion,
   );
-}
 
 /** @internal */
 export type PostV1ContractorsContractorUuidBankAccountsRequest$Outbound = {
-  contractor_uuid: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostV1ContractorsContractorUuidBankAccountsRequestBody$Outbound;
+  contractor_uuid: string;
+  "Contractor-Bank-Account-Create-Request-Body":
+    ContractorBankAccountCreateRequestBody$Outbound;
 };
 
 /** @internal */
@@ -115,16 +83,18 @@ export const PostV1ContractorsContractorUuidBankAccountsRequest$outboundSchema:
     z.ZodTypeDef,
     PostV1ContractorsContractorUuidBankAccountsRequest
   > = z.object({
+    xGustoAPIVersion:
+      PostV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     contractorUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PostV1ContractorsContractorUuidBankAccountsRequestBody$outboundSchema
-    ),
+    contractorBankAccountCreateRequestBody:
+      ContractorBankAccountCreateRequestBody$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      contractorUuid: "contractor_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      contractorUuid: "contractor_uuid",
+      contractorBankAccountCreateRequestBody:
+        "Contractor-Bank-Account-Create-Request-Body",
     });
   });
 

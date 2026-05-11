@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { wireInRequestsList } from "../funcs/wireInRequestsList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion,
   GetCompaniesCompanyUuidWireInRequestUuidRequest,
   GetCompaniesCompanyUuidWireInRequestUuidResponse,
 } from "../models/operations/getcompaniescompanyuuidwireinrequestuuid.js";
@@ -48,6 +48,8 @@ export function buildWireInRequestsListQuery(
   return {
     queryKey: queryKeyWireInRequestsList(request.companyUuid, {
       xGustoAPIVersion: request.xGustoAPIVersion,
+      page: request.page,
+      per: request.per,
     }),
     queryFn: async function wireInRequestsListQueryFn(
       ctx,
@@ -74,7 +76,13 @@ export function buildWireInRequestsListQuery(
 
 export function queryKeyWireInRequestsList(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion
+      | undefined;
+    page?: number | undefined;
+    per?: number | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

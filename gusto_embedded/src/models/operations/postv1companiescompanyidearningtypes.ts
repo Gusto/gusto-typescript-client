@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EarningType,
@@ -14,38 +15,54 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion =
+  ClosedEnum<typeof PostV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion>;
 
 export type PostV1CompaniesCompanyIdEarningTypesRequestBody = {
   /**
    * The name of the custom earning type.
    */
-  name: string;
+  name?: string | undefined;
 };
 
 export type PostV1CompaniesCompanyIdEarningTypesRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the company
    */
   companyId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PostV1CompaniesCompanyIdEarningTypesRequestBody;
 };
 
 export type PostV1CompaniesCompanyIdEarningTypesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
   earningType?: EarningType | undefined;
 };
+
+/** @internal */
+export const PostV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion
+  > = z.nativeEnum(PostV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PostV1CompaniesCompanyIdEarningTypesRequestBody$Outbound = {
@@ -59,7 +76,7 @@ export const PostV1CompaniesCompanyIdEarningTypesRequestBody$outboundSchema:
     z.ZodTypeDef,
     PostV1CompaniesCompanyIdEarningTypesRequestBody
   > = z.object({
-    name: z.string(),
+    name: z.string().default("Gym Membership"),
   });
 
 export function postV1CompaniesCompanyIdEarningTypesRequestBodyToJSON(
@@ -75,8 +92,8 @@ export function postV1CompaniesCompanyIdEarningTypesRequestBodyToJSON(
 
 /** @internal */
 export type PostV1CompaniesCompanyIdEarningTypesRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
+  company_id: string;
   RequestBody: PostV1CompaniesCompanyIdEarningTypesRequestBody$Outbound;
 };
 
@@ -87,15 +104,17 @@ export const PostV1CompaniesCompanyIdEarningTypesRequest$outboundSchema:
     z.ZodTypeDef,
     PostV1CompaniesCompanyIdEarningTypesRequest
   > = z.object({
+    xGustoAPIVersion:
+      PostV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdEarningTypesRequestBody$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyId: "company_id",
       requestBody: "RequestBody",
     });
   });

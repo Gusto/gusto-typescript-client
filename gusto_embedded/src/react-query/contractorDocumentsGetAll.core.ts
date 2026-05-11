@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorDocumentsGetAll } from "../funcs/contractorDocumentsGetAll.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1ContractorDocumentsHeaderXGustoAPIVersion,
   GetV1ContractorDocumentsRequest,
   GetV1ContractorDocumentsResponse,
 } from "../models/operations/getv1contractordocuments.js";
@@ -74,7 +74,11 @@ export function buildContractorDocumentsGetAllQuery(
 
 export function queryKeyContractorDocumentsGetAll(
   contractorUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1ContractorDocumentsHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

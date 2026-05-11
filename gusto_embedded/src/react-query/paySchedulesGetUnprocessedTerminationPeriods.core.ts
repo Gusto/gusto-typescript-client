@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { paySchedulesGetUnprocessedTerminationPeriods } from "../funcs/paySchedulesGetUnprocessedTerminationPeriods.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
   GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse,
 } from "../models/operations/getv1companiescompanyidunprocessedterminationpayperiods.js";
@@ -75,7 +75,11 @@ export function buildPaySchedulesGetUnprocessedTerminationPeriodsQuery(
 
 export function queryKeyPaySchedulesGetUnprocessedTerminationPeriods(
   companyId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

@@ -21,7 +21,6 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest,
   DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse,
@@ -39,7 +38,6 @@ export type EmployeePaymentMethodDeleteBankAccountMutationData =
   DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse;
 
 export type EmployeePaymentMethodDeleteBankAccountMutationError =
-  | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -53,8 +51,7 @@ export type EmployeePaymentMethodDeleteBankAccountMutationError =
  * Delete an employee bank account
  *
  * @remarks
- * Deletes an employee bank account. To update an employee's bank
- * account details, delete the bank account first and create a new one.
+ * Deletes an employee bank account. To update an employee's bank account details, delete the bank account first and create a new one.
  *
  * scope: `employee_payment_methods:write`
  */

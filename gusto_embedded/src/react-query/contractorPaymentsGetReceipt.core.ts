@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentsGetReceipt } from "../funcs/contractorPaymentsGetReceipt.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1ContractorPaymentsContractorPaymentUuidReceiptHeaderXGustoAPIVersion,
   GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
   GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse,
 } from "../models/operations/getv1contractorpaymentscontractorpaymentuuidreceipt.js";
@@ -75,7 +75,11 @@ export function buildContractorPaymentsGetReceiptQuery(
 
 export function queryKeyContractorPaymentsGetReceipt(
   contractorPaymentUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1ContractorPaymentsContractorPaymentUuidReceiptHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",
