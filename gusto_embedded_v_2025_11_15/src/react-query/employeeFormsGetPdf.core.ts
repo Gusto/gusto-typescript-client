@@ -79,7 +79,7 @@ export function queryKeyEmployeeFormsGetPdf(
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "employeeForms",
     "getPdf",
     employeeId,

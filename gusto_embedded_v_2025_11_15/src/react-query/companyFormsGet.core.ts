@@ -75,5 +75,11 @@ export function queryKeyCompanyFormsGet(
     xGustoAPIVersion?: GetV1CompanyFormHeaderXGustoAPIVersion | undefined;
   },
 ): QueryKey {
-  return ["@gusto/embedded-api", "companyForms", "get", formId, parameters];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "companyForms",
+    "get",
+    formId,
+    parameters,
+  ];
 }

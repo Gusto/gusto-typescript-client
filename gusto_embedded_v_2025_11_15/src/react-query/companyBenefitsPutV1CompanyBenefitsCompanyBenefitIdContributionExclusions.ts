@@ -85,7 +85,7 @@ export function useCompanyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributi
 
 export function mutationKeyCompanyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "companyBenefits",
     "putV1CompanyBenefitsCompanyBenefitIdContributionExclusions",
   ];

@@ -155,7 +155,7 @@ export function invalidateAchTransactionsGetAll(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "achTransactions",
       "getAll",
       ...queryKeyBase,
@@ -169,6 +169,6 @@ export function invalidateAllAchTransactionsGetAll(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "achTransactions", "getAll"],
+    queryKey: ["@gusto/embedded-api-v-2025-11-15", "achTransactions", "getAll"],
   });
 }

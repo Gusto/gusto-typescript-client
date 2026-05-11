@@ -1,0 +1,24 @@
+# PutV1JobsJobIdRequest
+
+## Example Usage
+
+```typescript
+import { PutV1JobsJobIdRequest } from "@gusto/embedded-api-v-2025-11-15/models/operations/putv1jobsjobid.js";
+
+let value: PutV1JobsJobIdRequest = {
+  jobId: "<id>",
+  jobsUpdateRequestBody: {
+    version: "56d00c178bc7393b2a206ed6a86afcb4",
+    title: "Regional Manager",
+    hireDate: "2020-12-21",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `jobId`                                                                                                                                                                                                                      | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the job                                                                                                                                                                                                          |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PutV1JobsJobIdHeaderXGustoAPIVersion](../../models/operations/putv1jobsjobidheaderxgustoapiversion.md)                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `jobsUpdateRequestBody`                                                                                                                                                                                                      | [components.JobsUpdateRequestBody](../../models/components/jobsupdaterequestbody.md)                                                                                                                                         | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

@@ -74,7 +74,11 @@ export function useEmployeePaymentMethodDeleteBankAccountMutation(
 }
 
 export function mutationKeyEmployeePaymentMethodDeleteBankAccount(): MutationKey {
-  return ["@gusto/embedded-api", "employeePaymentMethod", "deleteBankAccount"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "employeePaymentMethod",
+    "deleteBankAccount",
+  ];
 }
 
 export function buildEmployeePaymentMethodDeleteBankAccountMutation(

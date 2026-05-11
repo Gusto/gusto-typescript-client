@@ -82,7 +82,7 @@ export function queryKeyContractorPaymentGroupsGet(
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "contractorPaymentGroups",
     "get",
     contractorPaymentGroupUuid,

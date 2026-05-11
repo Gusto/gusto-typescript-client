@@ -153,7 +153,7 @@ export function invalidateI9VerificationGetDocuments(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "i9Verification",
       "getDocuments",
       ...queryKeyBase,
@@ -167,6 +167,10 @@ export function invalidateAllI9VerificationGetDocuments(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "i9Verification", "getDocuments"],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "i9Verification",
+      "getDocuments",
+    ],
   });
 }

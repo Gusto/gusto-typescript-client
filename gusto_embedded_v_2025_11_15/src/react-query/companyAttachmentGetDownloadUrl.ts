@@ -158,7 +158,7 @@ export function invalidateCompanyAttachmentGetDownloadUrl(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "companyAttachment",
       "getDownloadUrl",
       ...queryKeyBase,
@@ -172,6 +172,10 @@ export function invalidateAllCompanyAttachmentGetDownloadUrl(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "companyAttachment", "getDownloadUrl"],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "companyAttachment",
+      "getDownloadUrl",
+    ],
   });
 }

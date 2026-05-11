@@ -76,7 +76,7 @@ export function useCompaniesSuspensionsSuspendMutation(
 }
 
 export function mutationKeyCompaniesSuspensionsSuspend(): MutationKey {
-  return ["@gusto/embedded-api", "suspensions", "suspend"];
+  return ["@gusto/embedded-api-v-2025-11-15", "suspensions", "suspend"];
 }
 
 export function buildCompaniesSuspensionsSuspendMutation(

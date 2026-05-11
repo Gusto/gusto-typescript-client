@@ -87,7 +87,11 @@ export function useEmployeesUpdateOnboardingStatusMutation(
 }
 
 export function mutationKeyEmployeesUpdateOnboardingStatus(): MutationKey {
-  return ["@gusto/embedded-api", "Employees", "updateOnboardingStatus"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "Employees",
+    "updateOnboardingStatus",
+  ];
 }
 
 export function buildEmployeesUpdateOnboardingStatusMutation(

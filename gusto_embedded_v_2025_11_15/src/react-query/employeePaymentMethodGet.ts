@@ -147,7 +147,7 @@ export function invalidateEmployeePaymentMethodGet(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "employeePaymentMethod",
       "get",
       ...queryKeyBase,
@@ -161,6 +161,10 @@ export function invalidateAllEmployeePaymentMethodGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "employeePaymentMethod", "get"],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "employeePaymentMethod",
+      "get",
+    ],
   });
 }

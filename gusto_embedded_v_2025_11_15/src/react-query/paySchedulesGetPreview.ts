@@ -171,7 +171,7 @@ export function invalidatePaySchedulesGetPreview(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "paySchedules",
       "getPreview",
       ...queryKeyBase,
@@ -185,6 +185,10 @@ export function invalidateAllPaySchedulesGetPreview(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "paySchedules", "getPreview"],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "paySchedules",
+      "getPreview",
+    ],
   });
 }

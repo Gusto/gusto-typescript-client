@@ -78,7 +78,7 @@ export function useReportsCreateCustomMutation(
 }
 
 export function mutationKeyReportsCreateCustom(): MutationKey {
-  return ["@gusto/embedded-api", "Reports", "createCustom"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Reports", "createCustom"];
 }
 
 export function buildReportsCreateCustomMutation(

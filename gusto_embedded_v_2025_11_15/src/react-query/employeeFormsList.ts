@@ -139,7 +139,12 @@ export function invalidateEmployeeFormsList(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "employeeForms", "list", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "employeeForms",
+      "list",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -149,6 +154,6 @@ export function invalidateAllEmployeeFormsList(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "employeeForms", "list"],
+    queryKey: ["@gusto/embedded-api-v-2025-11-15", "employeeForms", "list"],
   });
 }

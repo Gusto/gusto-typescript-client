@@ -83,7 +83,7 @@ export function useContractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartne
 
 export function mutationKeyContractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursements(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "contractorPaymentGroups",
     "patchV1ContractorPaymentGroupsIdPartnerDisbursements",
   ];

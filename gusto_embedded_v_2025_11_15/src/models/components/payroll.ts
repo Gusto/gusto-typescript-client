@@ -130,9 +130,9 @@ export type Payroll = {
    */
   offCycleReason?: OffCycleReasonType | null | undefined;
   /**
-   * Indicates whether the payroll is an auto pilot payroll
+   * Indicates whether the payroll has automatic payroll enabled
    */
-  autoPilot?: boolean | undefined;
+  autoPayroll?: boolean | undefined;
   /**
    * Indicates whether the payroll is an external payroll
    */
@@ -238,7 +238,7 @@ export type PayrollUnprocessed = {
    */
   offCycleReason?: OffCycleReasonType | null | undefined;
   /**
-   * Indicates whether the payroll is an auto pilot payroll
+   * Indicates whether the payroll has automatic payroll enabled
    */
   autoPilot?: boolean | undefined;
   /**
@@ -542,9 +542,9 @@ export type PayrollShow = {
    */
   offCycleReason?: OffCycleReasonType | null | undefined;
   /**
-   * Indicates whether the payroll is an auto pilot payroll
+   * Indicates whether the payroll has automatic payroll enabled
    */
-  autoPilot?: boolean | undefined;
+  autoPayroll?: boolean | undefined;
   /**
    * Indicates whether the payroll is an external payroll
    */
@@ -651,9 +651,9 @@ export type PayrollPrepared = {
    */
   offCycleReason?: OffCycleReasonType | null | undefined;
   /**
-   * Indicates whether the payroll is an auto pilot payroll
+   * Indicates whether the payroll has automatic payroll enabled
    */
-  autoPilot?: boolean | undefined;
+  autoPayroll?: boolean | undefined;
   /**
    * Indicates whether the payroll is an external payroll
    */
@@ -741,9 +741,9 @@ export type UnprocessedPayroll = {
    */
   offCycleReason?: OffCycleReasonType | null | undefined;
   /**
-   * Indicates whether the payroll is an auto pilot payroll
+   * Indicates whether the payroll has automatic payroll enabled
    */
-  autoPilot?: boolean | undefined;
+  autoPayroll?: boolean | undefined;
   /**
    * Indicates whether the payroll is an external payroll
    */
@@ -786,7 +786,7 @@ export const Payroll$inboundSchema: z.ZodType<Payroll, z.ZodTypeDef, unknown> =
     company_uuid: z.string().optional(),
     off_cycle: z.boolean().optional(),
     off_cycle_reason: z.nullable(OffCycleReasonType$inboundSchema).optional(),
-    auto_pilot: z.boolean().optional(),
+    auto_payroll: z.boolean().optional(),
     external: z.boolean().optional(),
     final_termination_payroll: z.boolean().optional(),
     withholding_pay_period: z.nullable(
@@ -820,7 +820,7 @@ export const Payroll$inboundSchema: z.ZodType<Payroll, z.ZodTypeDef, unknown> =
       "company_uuid": "companyUuid",
       "off_cycle": "offCycle",
       "off_cycle_reason": "offCycleReason",
-      "auto_pilot": "autoPilot",
+      "auto_payroll": "autoPayroll",
       "final_termination_payroll": "finalTerminationPayroll",
       "withholding_pay_period": "withholdingPayPeriod",
       "skip_regular_deductions": "skipRegularDeductions",
@@ -1199,7 +1199,7 @@ export const PayrollShow$inboundSchema: z.ZodType<
   company_uuid: z.string().optional(),
   off_cycle: z.boolean().optional(),
   off_cycle_reason: z.nullable(OffCycleReasonType$inboundSchema).optional(),
-  auto_pilot: z.boolean().optional(),
+  auto_payroll: z.boolean().optional(),
   external: z.boolean().optional(),
   final_termination_payroll: z.boolean().optional(),
   withholding_pay_period: z.nullable(
@@ -1235,7 +1235,7 @@ export const PayrollShow$inboundSchema: z.ZodType<
     "company_uuid": "companyUuid",
     "off_cycle": "offCycle",
     "off_cycle_reason": "offCycleReason",
-    "auto_pilot": "autoPilot",
+    "auto_payroll": "autoPayroll",
     "final_termination_payroll": "finalTerminationPayroll",
     "withholding_pay_period": "withholdingPayPeriod",
     "skip_regular_deductions": "skipRegularDeductions",
@@ -1284,7 +1284,7 @@ export const PayrollPrepared$inboundSchema: z.ZodType<
   company_uuid: z.string().optional(),
   off_cycle: z.boolean().optional(),
   off_cycle_reason: z.nullable(OffCycleReasonType$inboundSchema).optional(),
-  auto_pilot: z.boolean().optional(),
+  auto_payroll: z.boolean().optional(),
   external: z.boolean().optional(),
   final_termination_payroll: z.boolean().optional(),
   withholding_pay_period: z.nullable(
@@ -1317,7 +1317,7 @@ export const PayrollPrepared$inboundSchema: z.ZodType<
     "company_uuid": "companyUuid",
     "off_cycle": "offCycle",
     "off_cycle_reason": "offCycleReason",
-    "auto_pilot": "autoPilot",
+    "auto_payroll": "autoPayroll",
     "final_termination_payroll": "finalTerminationPayroll",
     "withholding_pay_period": "withholdingPayPeriod",
     "skip_regular_deductions": "skipRegularDeductions",
@@ -1363,7 +1363,7 @@ export const UnprocessedPayroll$inboundSchema: z.ZodType<
   company_uuid: z.string().optional(),
   off_cycle: z.boolean().optional(),
   off_cycle_reason: z.nullable(OffCycleReasonType$inboundSchema).optional(),
-  auto_pilot: z.boolean().optional(),
+  auto_payroll: z.boolean().optional(),
   external: z.boolean().optional(),
   pay_period: PayrollPayPeriodType$inboundSchema.optional(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
@@ -1379,7 +1379,7 @@ export const UnprocessedPayroll$inboundSchema: z.ZodType<
     "company_uuid": "companyUuid",
     "off_cycle": "offCycle",
     "off_cycle_reason": "offCycleReason",
-    "auto_pilot": "autoPilot",
+    "auto_payroll": "autoPayroll",
     "pay_period": "payPeriod",
     "created_at": "createdAt",
     "partner_owned_disbursement": "partnerOwnedDisbursement",

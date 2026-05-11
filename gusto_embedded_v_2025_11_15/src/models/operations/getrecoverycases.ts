@@ -21,7 +21,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
 export const GetRecoveryCasesHeaderXGustoAPIVersion = {
-  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -78,7 +78,7 @@ export const GetRecoveryCasesRequest$outboundSchema: z.ZodType<
   GetRecoveryCasesRequest
 > = z.object({
   xGustoAPIVersion: GetRecoveryCasesHeaderXGustoAPIVersion$outboundSchema
-    .default("2025-06-15"),
+    .default("2025-11-15"),
   companyUuid: z.string(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),

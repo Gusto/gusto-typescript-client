@@ -18,7 +18,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
 export const GetV1CompanyFormsHeaderXGustoAPIVersion = {
-  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -102,7 +102,7 @@ export const GetV1CompanyFormsRequest$outboundSchema: z.ZodType<
   GetV1CompanyFormsRequest
 > = z.object({
   xGustoAPIVersion: GetV1CompanyFormsHeaderXGustoAPIVersion$outboundSchema
-    .default("2025-06-15"),
+    .default("2025-11-15"),
   companyId: z.string(),
   sortBy: GetV1CompanyFormsQueryParamSortBy$outboundSchema.optional(),
   page: z.number().int().optional(),

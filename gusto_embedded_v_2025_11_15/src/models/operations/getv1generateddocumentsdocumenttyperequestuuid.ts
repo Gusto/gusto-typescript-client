@@ -75,7 +75,7 @@ export const GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$outboundSchem
   > = z.object({
     documentType: DocumentType$outboundSchema,
     requestUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-11-15"),
   }).transform((v) => {
     return remap$(v, {
       documentType: "document_type",

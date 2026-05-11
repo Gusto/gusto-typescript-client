@@ -21,7 +21,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
 export const GetV1BenefitsCompanyBenefitIdSummaryHeaderXGustoAPIVersion = {
-  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -86,7 +86,7 @@ export const GetV1BenefitsCompanyBenefitIdSummaryRequest$outboundSchema:
   > = z.object({
     xGustoAPIVersion:
       GetV1BenefitsCompanyBenefitIdSummaryHeaderXGustoAPIVersion$outboundSchema
-        .default("2025-06-15"),
+        .default("2025-11-15"),
     companyBenefitId: z.string(),
     startDate: z.string().optional(),
     endDate: z.string().optional(),

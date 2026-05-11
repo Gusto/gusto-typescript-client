@@ -156,7 +156,7 @@ export function invalidateCompaniesGetV1PartnerManagedCompaniesCompanyUuidMigrat
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "Companies",
       "getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness",
       ...queryKeyBase,
@@ -171,7 +171,7 @@ export function invalidateAllCompaniesGetV1PartnerManagedCompaniesCompanyUuidMig
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "Companies",
       "getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness",
     ],

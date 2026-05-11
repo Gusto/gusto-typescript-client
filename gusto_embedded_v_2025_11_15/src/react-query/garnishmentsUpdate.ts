@@ -78,7 +78,7 @@ export function useGarnishmentsUpdateMutation(
 }
 
 export function mutationKeyGarnishmentsUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "Garnishments", "update"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Garnishments", "update"];
 }
 
 export function buildGarnishmentsUpdateMutation(

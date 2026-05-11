@@ -81,7 +81,7 @@ export function queryKeyNotificationsGetDetails(
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "Notifications",
     "getDetails",
     notificationUuid,

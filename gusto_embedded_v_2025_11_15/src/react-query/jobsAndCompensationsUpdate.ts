@@ -77,7 +77,7 @@ export function useJobsAndCompensationsUpdateMutation(
 }
 
 export function mutationKeyJobsAndCompensationsUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "jobsAndCompensations", "update"];
+  return ["@gusto/embedded-api-v-2025-11-15", "jobsAndCompensations", "update"];
 }
 
 export function buildJobsAndCompensationsUpdateMutation(

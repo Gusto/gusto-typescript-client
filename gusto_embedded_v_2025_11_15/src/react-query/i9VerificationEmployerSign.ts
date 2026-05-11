@@ -87,7 +87,7 @@ export function useI9VerificationEmployerSignMutation(
 }
 
 export function mutationKeyI9VerificationEmployerSign(): MutationKey {
-  return ["@gusto/embedded-api", "i9Verification", "employerSign"];
+  return ["@gusto/embedded-api-v-2025-11-15", "i9Verification", "employerSign"];
 }
 
 export function buildI9VerificationEmployerSignMutation(

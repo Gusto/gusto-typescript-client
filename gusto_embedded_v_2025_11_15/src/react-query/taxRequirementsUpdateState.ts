@@ -84,7 +84,7 @@ export function useTaxRequirementsUpdateStateMutation(
 }
 
 export function mutationKeyTaxRequirementsUpdateState(): MutationKey {
-  return ["@gusto/embedded-api", "taxRequirements", "updateState"];
+  return ["@gusto/embedded-api-v-2025-11-15", "taxRequirements", "updateState"];
 }
 
 export function buildTaxRequirementsUpdateStateMutation(

@@ -80,7 +80,7 @@ export function useEarningTypesCreateMutation(
 }
 
 export function mutationKeyEarningTypesCreate(): MutationKey {
-  return ["@gusto/embedded-api", "earningTypes", "create"];
+  return ["@gusto/embedded-api-v-2025-11-15", "earningTypes", "create"];
 }
 
 export function buildEarningTypesCreateMutation(

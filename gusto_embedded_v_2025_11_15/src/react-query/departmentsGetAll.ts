@@ -143,7 +143,12 @@ export function invalidateDepartmentsGetAll(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Departments", "getAll", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "Departments",
+      "getAll",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -153,6 +158,6 @@ export function invalidateAllDepartmentsGetAll(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Departments", "getAll"],
+    queryKey: ["@gusto/embedded-api-v-2025-11-15", "Departments", "getAll"],
   });
 }

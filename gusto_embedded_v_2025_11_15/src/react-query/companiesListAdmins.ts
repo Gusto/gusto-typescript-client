@@ -148,7 +148,7 @@ export function invalidateCompaniesListAdmins(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "Companies",
       "listAdmins",
       ...queryKeyBase,
@@ -162,6 +162,6 @@ export function invalidateAllCompaniesListAdmins(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Companies", "listAdmins"],
+    queryKey: ["@gusto/embedded-api-v-2025-11-15", "Companies", "listAdmins"],
   });
 }

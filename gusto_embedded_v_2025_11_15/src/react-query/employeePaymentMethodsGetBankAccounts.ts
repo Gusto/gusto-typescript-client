@@ -154,7 +154,7 @@ export function invalidateEmployeePaymentMethodsGetBankAccounts(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "employeePaymentMethods",
       "getBankAccounts",
       ...queryKeyBase,
@@ -169,7 +169,7 @@ export function invalidateAllEmployeePaymentMethodsGetBankAccounts(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "employeePaymentMethods",
       "getBankAccounts",
     ],

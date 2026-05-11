@@ -82,7 +82,7 @@ export function useContractorsUpdateMutation(
 }
 
 export function mutationKeyContractorsUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "Contractors", "update"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Contractors", "update"];
 }
 
 export function buildContractorsUpdateMutation(

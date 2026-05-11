@@ -83,7 +83,7 @@ export function usePayrollsPrepareMutation(
 }
 
 export function mutationKeyPayrollsPrepare(): MutationKey {
-  return ["@gusto/embedded-api", "Payrolls", "prepare"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Payrolls", "prepare"];
 }
 
 export function buildPayrollsPrepareMutation(

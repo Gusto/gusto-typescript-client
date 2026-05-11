@@ -82,7 +82,7 @@ export function useCompanyBenefitsUpdateMutation(
 }
 
 export function mutationKeyCompanyBenefitsUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "companyBenefits", "update"];
+  return ["@gusto/embedded-api-v-2025-11-15", "companyBenefits", "update"];
 }
 
 export function buildCompanyBenefitsUpdateMutation(

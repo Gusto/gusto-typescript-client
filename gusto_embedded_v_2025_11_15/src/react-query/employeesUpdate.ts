@@ -77,7 +77,7 @@ export function useEmployeesUpdateMutation(
 }
 
 export function mutationKeyEmployeesUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "Employees", "update"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Employees", "update"];
 }
 
 export function buildEmployeesUpdateMutation(

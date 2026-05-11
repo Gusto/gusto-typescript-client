@@ -81,7 +81,11 @@ export function useI9VerificationDeleteDocumentMutation(
 }
 
 export function mutationKeyI9VerificationDeleteDocument(): MutationKey {
-  return ["@gusto/embedded-api", "i9Verification", "deleteDocument"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "i9Verification",
+    "deleteDocument",
+  ];
 }
 
 export function buildI9VerificationDeleteDocumentMutation(

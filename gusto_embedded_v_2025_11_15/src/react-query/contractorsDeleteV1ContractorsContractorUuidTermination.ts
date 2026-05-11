@@ -88,7 +88,7 @@ export function useContractorsDeleteV1ContractorsContractorUuidTerminationMutati
 
 export function mutationKeyContractorsDeleteV1ContractorsContractorUuidTermination(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "Contractors",
     "deleteV1ContractorsContractorUuidTermination",
   ];

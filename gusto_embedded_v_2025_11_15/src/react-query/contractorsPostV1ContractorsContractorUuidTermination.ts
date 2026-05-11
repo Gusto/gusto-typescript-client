@@ -88,7 +88,7 @@ export function useContractorsPostV1ContractorsContractorUuidTerminationMutation
 
 export function mutationKeyContractorsPostV1ContractorsContractorUuidTermination(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "Contractors",
     "postV1ContractorsContractorUuidTermination",
   ];

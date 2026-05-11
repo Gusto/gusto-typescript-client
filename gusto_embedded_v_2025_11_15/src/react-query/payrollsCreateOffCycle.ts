@@ -85,7 +85,7 @@ export function usePayrollsCreateOffCycleMutation(
 }
 
 export function mutationKeyPayrollsCreateOffCycle(): MutationKey {
-  return ["@gusto/embedded-api", "Payrolls", "createOffCycle"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Payrolls", "createOffCycle"];
 }
 
 export function buildPayrollsCreateOffCycleMutation(

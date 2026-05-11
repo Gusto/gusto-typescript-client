@@ -151,7 +151,7 @@ export function invalidateReportsGetReportsRequestUuid(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "Reports",
       "getReportsRequestUuid",
       ...queryKeyBase,
@@ -165,6 +165,10 @@ export function invalidateAllReportsGetReportsRequestUuid(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Reports", "getReportsRequestUuid"],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "Reports",
+      "getReportsRequestUuid",
+    ],
   });
 }

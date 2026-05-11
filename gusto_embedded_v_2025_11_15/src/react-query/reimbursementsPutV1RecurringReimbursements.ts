@@ -77,7 +77,7 @@ export function useReimbursementsPutV1RecurringReimbursementsMutation(
 
 export function mutationKeyReimbursementsPutV1RecurringReimbursements(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "Reimbursements",
     "putV1RecurringReimbursements",
   ];

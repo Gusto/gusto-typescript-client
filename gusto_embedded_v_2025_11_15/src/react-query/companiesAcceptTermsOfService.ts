@@ -79,7 +79,11 @@ export function useCompaniesAcceptTermsOfServiceMutation(
 }
 
 export function mutationKeyCompaniesAcceptTermsOfService(): MutationKey {
-  return ["@gusto/embedded-api", "Companies", "acceptTermsOfService"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "Companies",
+    "acceptTermsOfService",
+  ];
 }
 
 export function buildCompaniesAcceptTermsOfServiceMutation(

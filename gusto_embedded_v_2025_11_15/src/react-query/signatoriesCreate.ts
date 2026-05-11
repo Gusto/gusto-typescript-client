@@ -85,7 +85,7 @@ export function useSignatoriesCreateMutation(
 }
 
 export function mutationKeySignatoriesCreate(): MutationKey {
-  return ["@gusto/embedded-api", "Signatories", "create"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Signatories", "create"];
 }
 
 export function buildSignatoriesCreateMutation(

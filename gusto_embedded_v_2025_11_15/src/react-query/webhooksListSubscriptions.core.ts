@@ -84,5 +84,10 @@ export function queryKeyWebhooksListSubscriptions(
       | undefined;
   },
 ): QueryKey {
-  return ["@gusto/embedded-api", "Webhooks", "listSubscriptions", parameters];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "Webhooks",
+    "listSubscriptions",
+    parameters,
+  ];
 }

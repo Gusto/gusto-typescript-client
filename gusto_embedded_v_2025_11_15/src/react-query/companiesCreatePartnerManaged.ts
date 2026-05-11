@@ -89,7 +89,11 @@ export function useCompaniesCreatePartnerManagedMutation(
 }
 
 export function mutationKeyCompaniesCreatePartnerManaged(): MutationKey {
-  return ["@gusto/embedded-api", "Companies", "createPartnerManaged"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "Companies",
+    "createPartnerManaged",
+  ];
 }
 
 export function buildCompaniesCreatePartnerManagedMutation(

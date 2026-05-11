@@ -151,7 +151,7 @@ export function invalidateInformationRequestsGetInformationRequests(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "Information Requests",
       "getInformationRequests",
       ...queryKeyBase,
@@ -166,7 +166,7 @@ export function invalidateAllInformationRequestsGetInformationRequests(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "Information Requests",
       "getInformationRequests",
     ],

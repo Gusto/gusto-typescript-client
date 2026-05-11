@@ -78,7 +78,7 @@ export function useHolidayPayPoliciesCreateMutation(
 }
 
 export function mutationKeyHolidayPayPoliciesCreate(): MutationKey {
-  return ["@gusto/embedded-api", "holidayPayPolicies", "create"];
+  return ["@gusto/embedded-api-v-2025-11-15", "holidayPayPolicies", "create"];
 }
 
 export function buildHolidayPayPoliciesCreateMutation(

@@ -155,7 +155,7 @@ export function invalidatePaySchedulesGetUnprocessedTerminationPeriods(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "paySchedules",
       "getUnprocessedTerminationPeriods",
       ...queryKeyBase,
@@ -170,7 +170,7 @@ export function invalidateAllPaySchedulesGetUnprocessedTerminationPeriods(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "paySchedules",
       "getUnprocessedTerminationPeriods",
     ],

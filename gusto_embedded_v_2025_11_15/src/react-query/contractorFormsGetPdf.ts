@@ -149,7 +149,7 @@ export function invalidateContractorFormsGetPdf(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "contractorForms",
       "getPdf",
       ...queryKeyBase,
@@ -163,6 +163,6 @@ export function invalidateAllContractorFormsGetPdf(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "contractorForms", "getPdf"],
+    queryKey: ["@gusto/embedded-api-v-2025-11-15", "contractorForms", "getPdf"],
   });
 }

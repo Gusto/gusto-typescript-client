@@ -80,7 +80,11 @@ export function useSalaryEstimatesPutV1SalaryEstimatesIdMutation(
 }
 
 export function mutationKeySalaryEstimatesPutV1SalaryEstimatesId(): MutationKey {
-  return ["@gusto/embedded-api", "Salary Estimates", "putV1SalaryEstimatesId"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "Salary Estimates",
+    "putV1SalaryEstimatesId",
+  ];
 }
 
 export function buildSalaryEstimatesPutV1SalaryEstimatesIdMutation(

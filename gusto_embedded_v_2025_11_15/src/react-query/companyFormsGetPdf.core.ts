@@ -77,5 +77,11 @@ export function queryKeyCompanyFormsGetPdf(
     xGustoAPIVersion?: GetV1CompanyFormPdfHeaderXGustoAPIVersion | undefined;
   },
 ): QueryKey {
-  return ["@gusto/embedded-api", "companyForms", "getPdf", formId, parameters];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "companyForms",
+    "getPdf",
+    formId,
+    parameters,
+  ];
 }

@@ -92,7 +92,7 @@ export function usePaySchedulesCreateMutation(
 }
 
 export function mutationKeyPaySchedulesCreate(): MutationKey {
-  return ["@gusto/embedded-api", "paySchedules", "create"];
+  return ["@gusto/embedded-api-v-2025-11-15", "paySchedules", "create"];
 }
 
 export function buildPaySchedulesCreateMutation(

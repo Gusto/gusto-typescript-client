@@ -156,7 +156,12 @@ export function invalidateInvoicesGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Invoices", "get", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "Invoices",
+      "get",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -166,6 +171,6 @@ export function invalidateAllInvoicesGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Invoices", "get"],
+    queryKey: ["@gusto/embedded-api-v-2025-11-15", "Invoices", "get"],
   });
 }

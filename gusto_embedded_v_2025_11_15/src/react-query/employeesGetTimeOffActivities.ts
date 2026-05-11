@@ -151,7 +151,7 @@ export function invalidateEmployeesGetTimeOffActivities(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "Employees",
       "getTimeOffActivities",
       ...queryKeyBase,
@@ -165,6 +165,10 @@ export function invalidateAllEmployeesGetTimeOffActivities(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Employees", "getTimeOffActivities"],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "Employees",
+      "getTimeOffActivities",
+    ],
   });
 }

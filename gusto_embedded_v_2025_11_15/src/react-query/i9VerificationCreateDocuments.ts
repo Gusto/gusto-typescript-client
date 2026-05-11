@@ -87,7 +87,11 @@ export function useI9VerificationCreateDocumentsMutation(
 }
 
 export function mutationKeyI9VerificationCreateDocuments(): MutationKey {
-  return ["@gusto/embedded-api", "i9Verification", "createDocuments"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "i9Verification",
+    "createDocuments",
+  ];
 }
 
 export function buildI9VerificationCreateDocumentsMutation(

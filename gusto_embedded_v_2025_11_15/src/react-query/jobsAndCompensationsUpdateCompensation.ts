@@ -57,9 +57,6 @@ export type JobsAndCompensationsUpdateCompensationMutationError =
  * @remarks
  * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
  *
- * ### Webhooks
- * - `employee_job_compensation.updated`: Fires when a compensation is successfully updated
- *
  * scope: `compensations:write`
  */
 export function useJobsAndCompensationsUpdateCompensationMutation(
@@ -81,7 +78,11 @@ export function useJobsAndCompensationsUpdateCompensationMutation(
 }
 
 export function mutationKeyJobsAndCompensationsUpdateCompensation(): MutationKey {
-  return ["@gusto/embedded-api", "jobsAndCompensations", "updateCompensation"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "jobsAndCompensations",
+    "updateCompensation",
+  ];
 }
 
 export function buildJobsAndCompensationsUpdateCompensationMutation(

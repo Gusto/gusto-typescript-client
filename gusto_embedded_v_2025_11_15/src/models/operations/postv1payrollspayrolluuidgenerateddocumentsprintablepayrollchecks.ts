@@ -27,7 +27,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export const PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion =
   {
-    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+    TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
   } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -86,7 +86,7 @@ export const PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRe
   > = z.object({
     xGustoAPIVersion:
       PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion$outboundSchema
-        .default("2025-06-15"),
+        .default("2025-11-15"),
     payrollUuid: z.string(),
     printablePayrollChecksBody: PrintablePayrollChecksBody$outboundSchema,
   }).transform((v) => {

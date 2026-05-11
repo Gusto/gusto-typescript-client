@@ -85,7 +85,7 @@ export function useEmployeeBenefitsCreateYtdBenefitAmountsFromDifferentCompanyMu
 
 export function mutationKeyEmployeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "employeeBenefits",
     "createYtdBenefitAmountsFromDifferentCompany",
   ];

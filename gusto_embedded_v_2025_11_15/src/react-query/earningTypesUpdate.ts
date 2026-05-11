@@ -78,7 +78,7 @@ export function useEarningTypesUpdateMutation(
 }
 
 export function mutationKeyEarningTypesUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "earningTypes", "update"];
+  return ["@gusto/embedded-api-v-2025-11-15", "earningTypes", "update"];
 }
 
 export function buildEarningTypesUpdateMutation(

@@ -158,7 +158,7 @@ export function invalidateCompanyBenefitsList(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "companyBenefits",
       "list",
       ...queryKeyBase,
@@ -172,6 +172,6 @@ export function invalidateAllCompanyBenefitsList(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "companyBenefits", "list"],
+    queryKey: ["@gusto/embedded-api-v-2025-11-15", "companyBenefits", "list"],
   });
 }

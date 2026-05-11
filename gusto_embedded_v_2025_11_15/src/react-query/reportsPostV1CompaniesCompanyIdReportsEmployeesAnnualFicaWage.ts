@@ -87,7 +87,7 @@ export function useReportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage
 
 export function mutationKeyReportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "Reports",
     "postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage",
   ];

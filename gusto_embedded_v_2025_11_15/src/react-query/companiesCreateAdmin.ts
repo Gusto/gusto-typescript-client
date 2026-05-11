@@ -79,7 +79,7 @@ export function useCompaniesCreateAdminMutation(
 }
 
 export function mutationKeyCompaniesCreateAdmin(): MutationKey {
-  return ["@gusto/embedded-api", "Companies", "createAdmin"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Companies", "createAdmin"];
 }
 
 export function buildCompaniesCreateAdminMutation(

@@ -78,7 +78,7 @@ export function queryKeyContractorFormsList(
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "contractorForms",
     "list",
     contractorUuid,

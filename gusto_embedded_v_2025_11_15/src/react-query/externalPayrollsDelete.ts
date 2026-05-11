@@ -74,7 +74,7 @@ export function useExternalPayrollsDeleteMutation(
 }
 
 export function mutationKeyExternalPayrollsDelete(): MutationKey {
-  return ["@gusto/embedded-api", "externalPayrolls", "delete"];
+  return ["@gusto/embedded-api-v-2025-11-15", "externalPayrolls", "delete"];
 }
 
 export function buildExternalPayrollsDeleteMutation(

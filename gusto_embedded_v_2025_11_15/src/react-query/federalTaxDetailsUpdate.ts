@@ -87,7 +87,7 @@ export function useFederalTaxDetailsUpdateMutation(
 }
 
 export function mutationKeyFederalTaxDetailsUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "federalTaxDetails", "update"];
+  return ["@gusto/embedded-api-v-2025-11-15", "federalTaxDetails", "update"];
 }
 
 export function buildFederalTaxDetailsUpdateMutation(

@@ -142,7 +142,12 @@ export function invalidatePaySchedulesGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "paySchedules", "get", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "paySchedules",
+      "get",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -152,6 +157,6 @@ export function invalidateAllPaySchedulesGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "paySchedules", "get"],
+    queryKey: ["@gusto/embedded-api-v-2025-11-15", "paySchedules", "get"],
   });
 }

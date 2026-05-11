@@ -77,7 +77,7 @@ export function useCompanyFormsSignMutation(
 }
 
 export function mutationKeyCompanyFormsSign(): MutationKey {
-  return ["@gusto/embedded-api", "companyForms", "sign"];
+  return ["@gusto/embedded-api-v-2025-11-15", "companyForms", "sign"];
 }
 
 export function buildCompanyFormsSignMutation(

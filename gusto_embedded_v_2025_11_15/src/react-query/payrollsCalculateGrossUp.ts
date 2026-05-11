@@ -80,7 +80,7 @@ export function usePayrollsCalculateGrossUpMutation(
 }
 
 export function mutationKeyPayrollsCalculateGrossUp(): MutationKey {
-  return ["@gusto/embedded-api", "Payrolls", "calculateGrossUp"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Payrolls", "calculateGrossUp"];
 }
 
 export function buildPayrollsCalculateGrossUpMutation(

@@ -149,7 +149,7 @@ export function invalidateTaxRequirementsGetAll(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "taxRequirements",
       "getAll",
       ...queryKeyBase,
@@ -163,6 +163,6 @@ export function invalidateAllTaxRequirementsGetAll(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "taxRequirements", "getAll"],
+    queryKey: ["@gusto/embedded-api-v-2025-11-15", "taxRequirements", "getAll"],
   });
 }

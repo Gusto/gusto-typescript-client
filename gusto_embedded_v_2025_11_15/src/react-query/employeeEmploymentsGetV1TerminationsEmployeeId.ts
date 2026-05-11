@@ -155,7 +155,7 @@ export function invalidateEmployeeEmploymentsGetV1TerminationsEmployeeId(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "employeeEmployments",
       "getV1TerminationsEmployeeId",
       ...queryKeyBase,
@@ -170,7 +170,7 @@ export function invalidateAllEmployeeEmploymentsGetV1TerminationsEmployeeId(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "employeeEmployments",
       "getV1TerminationsEmployeeId",
     ],

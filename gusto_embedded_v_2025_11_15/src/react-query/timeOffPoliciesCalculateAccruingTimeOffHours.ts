@@ -91,7 +91,7 @@ export function useTimeOffPoliciesCalculateAccruingTimeOffHoursMutation(
 
 export function mutationKeyTimeOffPoliciesCalculateAccruingTimeOffHours(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "timeOffPolicies",
     "calculateAccruingTimeOffHours",
   ];

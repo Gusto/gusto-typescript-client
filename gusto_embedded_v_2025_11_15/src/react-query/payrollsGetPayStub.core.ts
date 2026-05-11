@@ -84,7 +84,7 @@ export function queryKeyPayrollsGetPayStub(
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "Payrolls",
     "getPayStub",
     payrollId,

@@ -79,7 +79,11 @@ export function usePayrollsGeneratePrintableChecksMutation(
 }
 
 export function mutationKeyPayrollsGeneratePrintableChecks(): MutationKey {
-  return ["@gusto/embedded-api", "Payrolls", "generatePrintableChecks"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "Payrolls",
+    "generatePrintableChecks",
+  ];
 }
 
 export function buildPayrollsGeneratePrintableChecksMutation(

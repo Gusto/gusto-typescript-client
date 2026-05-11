@@ -6,7 +6,7 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const VersionHeader = {
-  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
 } as const;
 export type VersionHeader = ClosedEnum<typeof VersionHeader>;
 

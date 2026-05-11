@@ -86,7 +86,7 @@ export function useCompaniesMigrateMutation(
 }
 
 export function mutationKeyCompaniesMigrate(): MutationKey {
-  return ["@gusto/embedded-api", "Companies", "migrate"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Companies", "migrate"];
 }
 
 export function buildCompaniesMigrateMutation(

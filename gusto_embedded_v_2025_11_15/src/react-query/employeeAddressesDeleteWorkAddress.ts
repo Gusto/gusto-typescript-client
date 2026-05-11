@@ -78,7 +78,11 @@ export function useEmployeeAddressesDeleteWorkAddressMutation(
 }
 
 export function mutationKeyEmployeeAddressesDeleteWorkAddress(): MutationKey {
-  return ["@gusto/embedded-api", "employeeAddresses", "deleteWorkAddress"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "employeeAddresses",
+    "deleteWorkAddress",
+  ];
 }
 
 export function buildEmployeeAddressesDeleteWorkAddressMutation(

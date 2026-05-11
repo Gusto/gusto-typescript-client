@@ -151,7 +151,7 @@ export function invalidateTimeOffRequestsGetV1TimeOffRequestsTimeOffRequestUuid(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "Time Off Requests",
       "getV1TimeOffRequestsTimeOffRequestUuid",
       ...queryKeyBase,
@@ -166,7 +166,7 @@ export function invalidateAllTimeOffRequestsGetV1TimeOffRequestsTimeOffRequestUu
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "Time Off Requests",
       "getV1TimeOffRequestsTimeOffRequestUuid",
     ],

@@ -91,7 +91,7 @@ export function usePaySchedulesUpdateMutation(
 }
 
 export function mutationKeyPaySchedulesUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "paySchedules", "update"];
+  return ["@gusto/embedded-api-v-2025-11-15", "paySchedules", "update"];
 }
 
 export function buildPaySchedulesUpdateMutation(

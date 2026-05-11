@@ -88,5 +88,11 @@ export function queryKeyInvoicesGet(
     companyUuids?: string | undefined;
   },
 ): QueryKey {
-  return ["@gusto/embedded-api", "Invoices", "get", invoicePeriod, parameters];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "Invoices",
+    "get",
+    invoicePeriod,
+    parameters,
+  ];
 }

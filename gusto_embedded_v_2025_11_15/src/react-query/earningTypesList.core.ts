@@ -80,5 +80,11 @@ export function queryKeyEarningTypesList(
       | undefined;
   },
 ): QueryKey {
-  return ["@gusto/embedded-api", "earningTypes", "list", companyId, parameters];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "earningTypes",
+    "list",
+    companyId,
+    parameters,
+  ];
 }

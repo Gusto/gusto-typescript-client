@@ -144,7 +144,7 @@ export function invalidateContractorFormsGet(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "contractorForms",
       "get",
       ...queryKeyBase,
@@ -158,6 +158,6 @@ export function invalidateAllContractorFormsGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "contractorForms", "get"],
+    queryKey: ["@gusto/embedded-api-v-2025-11-15", "contractorForms", "get"],
   });
 }

@@ -25,7 +25,7 @@ export type PostV1WebhookSubscriptionSecurity = {
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
 export const PostV1WebhookSubscriptionHeaderXGustoAPIVersion = {
-  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -165,7 +165,7 @@ export const PostV1WebhookSubscriptionRequest$outboundSchema: z.ZodType<
 > = z.object({
   xGustoAPIVersion:
     PostV1WebhookSubscriptionHeaderXGustoAPIVersion$outboundSchema.default(
-      "2025-06-15",
+      "2025-11-15",
     ),
   requestBody: z.lazy(() =>
     PostV1WebhookSubscriptionRequestBody$outboundSchema

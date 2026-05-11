@@ -97,7 +97,7 @@ export function useI9VerificationUpdateMutation(
 }
 
 export function mutationKeyI9VerificationUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "i9Verification", "update"];
+  return ["@gusto/embedded-api-v-2025-11-15", "i9Verification", "update"];
 }
 
 export function buildI9VerificationUpdateMutation(

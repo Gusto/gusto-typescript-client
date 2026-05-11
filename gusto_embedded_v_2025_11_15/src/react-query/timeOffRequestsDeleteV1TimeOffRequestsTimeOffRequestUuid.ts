@@ -79,7 +79,7 @@ export function useTimeOffRequestsDeleteV1TimeOffRequestsTimeOffRequestUuidMutat
 
 export function mutationKeyTimeOffRequestsDeleteV1TimeOffRequestsTimeOffRequestUuid(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "Time Off Requests",
     "deleteV1TimeOffRequestsTimeOffRequestUuid",
   ];

@@ -81,7 +81,7 @@ export function useTimeOffRequestsPostV1CompaniesCompanyUuidTimeOffRequestsMutat
 
 export function mutationKeyTimeOffRequestsPostV1CompaniesCompanyUuidTimeOffRequests(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "Time Off Requests",
     "postV1CompaniesCompanyUuidTimeOffRequests",
   ];

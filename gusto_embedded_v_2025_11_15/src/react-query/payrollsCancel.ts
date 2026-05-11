@@ -56,9 +56,8 @@ export type PayrollsCancelMutationError =
  *
  * @remarks
  * Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it meets both criteria:
- *
- * - `processed` is `true`
- * - Current time is earlier than 4pm PT on the `payroll_deadline`
+ * - `processed` is true
+ * - Current time is earlier than 3:30pm PT on the payroll_deadline
  *
  * scope: `payrolls:run`
  */
@@ -81,7 +80,7 @@ export function usePayrollsCancelMutation(
 }
 
 export function mutationKeyPayrollsCancel(): MutationKey {
-  return ["@gusto/embedded-api", "Payrolls", "cancel"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Payrolls", "cancel"];
 }
 
 export function buildPayrollsCancelMutation(

@@ -82,7 +82,7 @@ export function useEmployeeFormsGenerateW2Mutation(
 }
 
 export function mutationKeyEmployeeFormsGenerateW2(): MutationKey {
-  return ["@gusto/embedded-api", "employeeForms", "generateW2"];
+  return ["@gusto/embedded-api-v-2025-11-15", "employeeForms", "generateW2"];
 }
 
 export function buildEmployeeFormsGenerateW2Mutation(

@@ -80,7 +80,7 @@ export function useEmployeeFormsSignMutation(
 }
 
 export function mutationKeyEmployeeFormsSign(): MutationKey {
-  return ["@gusto/embedded-api", "employeeForms", "sign"];
+  return ["@gusto/embedded-api-v-2025-11-15", "employeeForms", "sign"];
 }
 
 export function buildEmployeeFormsSignMutation(

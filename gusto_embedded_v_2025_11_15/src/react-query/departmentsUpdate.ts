@@ -79,7 +79,7 @@ export function useDepartmentsUpdateMutation(
 }
 
 export function mutationKeyDepartmentsUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "Departments", "update"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Departments", "update"];
 }
 
 export function buildDepartmentsUpdateMutation(

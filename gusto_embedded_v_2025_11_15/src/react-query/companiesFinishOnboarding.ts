@@ -92,7 +92,7 @@ export function useCompaniesFinishOnboardingMutation(
 }
 
 export function mutationKeyCompaniesFinishOnboarding(): MutationKey {
-  return ["@gusto/embedded-api", "Companies", "finishOnboarding"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Companies", "finishOnboarding"];
 }
 
 export function buildCompaniesFinishOnboardingMutation(

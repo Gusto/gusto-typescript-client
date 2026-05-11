@@ -77,7 +77,7 @@ export function useCompaniesUpdateMutation(
 }
 
 export function mutationKeyCompaniesUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "Companies", "update"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Companies", "update"];
 }
 
 export function buildCompaniesUpdateMutation(

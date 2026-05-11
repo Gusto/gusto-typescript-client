@@ -81,5 +81,11 @@ export function queryKeyLocationsGet(
     per?: number | undefined;
   },
 ): QueryKey {
-  return ["@gusto/embedded-api", "Locations", "get", companyId, parameters];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "Locations",
+    "get",
+    companyId,
+    parameters,
+  ];
 }

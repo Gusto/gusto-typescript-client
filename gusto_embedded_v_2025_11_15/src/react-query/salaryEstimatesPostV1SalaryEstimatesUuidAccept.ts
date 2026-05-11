@@ -84,7 +84,7 @@ export function useSalaryEstimatesPostV1SalaryEstimatesUuidAcceptMutation(
 
 export function mutationKeySalaryEstimatesPostV1SalaryEstimatesUuidAccept(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "Salary Estimates",
     "postV1SalaryEstimatesUuidAccept",
   ];
