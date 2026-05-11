@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest } from "../models/operations/getv1partnermanagedcompaniescompanyuuidmigrationreadiness.js";
+import {
+  GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion,
+  GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest,
+} from "../models/operations/getv1partnermanagedcompaniescompanyuuidmigrationreadiness.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type CompaniesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -113,7 +117,11 @@ export function setCompaniesGetV1PartnerManagedCompaniesCompanyUuidMigrationRead
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data:
     CompaniesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessQueryData,
@@ -136,7 +144,11 @@ export function invalidateCompaniesGetV1PartnerManagedCompaniesCompanyUuidMigrat
   queryKeyBase: TupleToPrefixes<
     [
       companyUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -144,7 +156,7 @@ export function invalidateCompaniesGetV1PartnerManagedCompaniesCompanyUuidMigrat
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "Companies",
       "getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness",
       ...queryKeyBase,
@@ -159,7 +171,7 @@ export function invalidateAllCompaniesGetV1PartnerManagedCompaniesCompanyUuidMig
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "Companies",
       "getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness",
     ],

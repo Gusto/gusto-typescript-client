@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -14,17 +15,30 @@ import {
   InvoiceData,
   InvoiceData$inboundSchema,
 } from "../components/invoicedata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetInvoicesInvoicePeriodSecurity = {
   systemAccessAuth: string;
 };
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetInvoicesInvoicePeriodHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetInvoicesInvoicePeriodHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetInvoicesInvoicePeriodHeaderXGustoAPIVersion
+>;
+
 export type GetInvoicesInvoicePeriodRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: GetInvoicesInvoicePeriodHeaderXGustoAPIVersion | undefined;
   /**
    * The month we are calculating the invoice for. Must be in YYYY-MM format
    */
@@ -41,16 +55,12 @@ export type GetInvoicesInvoicePeriodRequest = {
    * Filter companies returned in the active_companies response, will return an error if company not active during provided invoice period. i.e. `?company_uuids=781922d8-e780-4b6b-bf74-ee303166d022,bbbca930-7322-491c-ba7f-98707a52a9c5`
    */
   companyUuids?: string | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetInvoicesInvoicePeriodResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * OK
    */
   invoiceData?: InvoiceData | undefined;
 };
@@ -84,12 +94,17 @@ export function getInvoicesInvoicePeriodSecurityToJSON(
 }
 
 /** @internal */
+export const GetInvoicesInvoicePeriodHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetInvoicesInvoicePeriodHeaderXGustoAPIVersion> = z
+    .nativeEnum(GetInvoicesInvoicePeriodHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetInvoicesInvoicePeriodRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   invoice_period: string;
   page?: number | undefined;
   per?: number | undefined;
   company_uuids?: string | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -98,16 +113,19 @@ export const GetInvoicesInvoicePeriodRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetInvoicesInvoicePeriodRequest
 > = z.object({
+  xGustoAPIVersion:
+    GetInvoicesInvoicePeriodHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-11-15",
+    ),
   invoicePeriod: z.string(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
   companyUuids: z.string().optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
+    xGustoAPIVersion: "X-Gusto-API-Version",
     invoicePeriod: "invoice_period",
     companyUuids: "company_uuids",
-    xGustoAPIVersion: "X-Gusto-API-Version",
   });
 });
 

@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesCompanyIdPayrollReversalsRequest } from "../models/operations/getv1companiescompanyidpayrollreversals.js";
@@ -42,6 +43,7 @@ export {
 };
 
 export type PayrollsGetApprovedReversalsQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -143,7 +145,7 @@ export function invalidatePayrollsGetApprovedReversals(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "Payrolls",
       "getApprovedReversals",
       ...queryKeyBase,
@@ -157,6 +159,10 @@ export function invalidateAllPayrollsGetApprovedReversals(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Payrolls", "getApprovedReversals"],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "Payrolls",
+      "getApprovedReversals",
+    ],
   });
 }

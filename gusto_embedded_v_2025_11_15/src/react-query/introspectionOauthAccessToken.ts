@@ -72,7 +72,11 @@ export function useIntrospectionOauthAccessTokenMutation(
 }
 
 export function mutationKeyIntrospectionOauthAccessToken(): MutationKey {
-  return ["@gusto/embedded-api", "Introspection", "oauthAccessToken"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "Introspection",
+    "oauthAccessToken",
+  ];
 }
 
 export function buildIntrospectionOauthAccessTokenMutation(

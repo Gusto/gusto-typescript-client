@@ -1,11 +1,11 @@
 # IntegrationType
 
-The `integration_type` used for the report, if `aggregation` was 'integration.' Otherwise, this will be null.
+The kind of integration set up for the company. Required when `aggregation` is 'integration'. Must be null if `aggregation` is not 'integration'.
 
 ## Example Usage
 
 ```typescript
-import { IntegrationType } from "@gusto/embedded-api/models/components/generalledgerreport.js";
+import { IntegrationType } from "@gusto/embedded-api/models/components/generalledgerreportbody.js";
 
 let value: IntegrationType = "qbo";
 ```

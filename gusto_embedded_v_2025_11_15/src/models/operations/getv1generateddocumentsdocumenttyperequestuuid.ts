@@ -5,11 +5,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  DocumentType,
-  DocumentType$outboundSchema,
-} from "../components/documenttype.js";
 import {
   GeneratedDocument,
   GeneratedDocument$inboundSchema,
@@ -23,6 +20,17 @@ import {
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * The type of document being generated
+ */
+export const DocumentType = {
+  PrintablePayrollChecks: "printable_payroll_checks",
+} as const;
+/**
+ * The type of document being generated
+ */
+export type DocumentType = ClosedEnum<typeof DocumentType>;
 
 export type GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest = {
   /**
@@ -48,6 +56,10 @@ export type GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse = {
 };
 
 /** @internal */
+export const DocumentType$outboundSchema: z.ZodNativeEnum<typeof DocumentType> =
+  z.nativeEnum(DocumentType);
+
+/** @internal */
 export type GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$Outbound = {
   document_type: string;
   request_uuid: string;
@@ -63,7 +75,7 @@ export const GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$outboundSchem
   > = z.object({
     documentType: DocumentType$outboundSchema,
     requestUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-11-15"),
   }).transform((v) => {
     return remap$(v, {
       documentType: "document_type",

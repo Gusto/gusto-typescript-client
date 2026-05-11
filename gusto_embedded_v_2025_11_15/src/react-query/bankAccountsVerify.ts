@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1CompaniesCompanyIdBankAccountsVerifyRequest,
   PutV1CompaniesCompanyIdBankAccountsVerifyResponse,
@@ -41,7 +41,7 @@ export type BankAccountsVerifyMutationData =
 
 export type BankAccountsVerifyMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -91,7 +91,7 @@ export function useBankAccountsVerifyMutation(
 }
 
 export function mutationKeyBankAccountsVerify(): MutationKey {
-  return ["@gusto/embedded-api", "bankAccounts", "verify"];
+  return ["@gusto/embedded-api-v-2025-11-15", "bankAccounts", "verify"];
 }
 
 export function buildBankAccountsVerifyMutation(

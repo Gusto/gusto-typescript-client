@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1PlaidProcessorTokenRequest,
   PostV1PlaidProcessorTokenResponse,
@@ -39,7 +40,8 @@ export type BankAccountsCreateFromPlaidTokenMutationData =
   PostV1PlaidProcessorTokenResponse;
 
 export type BankAccountsCreateFromPlaidTokenMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -55,14 +57,14 @@ export type BankAccountsCreateFromPlaidTokenMutationError =
  * @remarks
  * This endpoint creates a new **verified** bank account by using a plaid processor token to retrieve its information.
  *
- * scope: `plaid_processor:write`
- *
  * > 📘
  * > To create a token please use the [plaid api](https://plaid.com/docs/api/processors/#processortokencreate) and select "gusto" as processor.
  *
  * > 🚧 Warning - Company Bank Accounts
  * >
  * > If a default company bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
+ *
+ * scope: `plaid_processor:write`
  */
 export function useBankAccountsCreateFromPlaidTokenMutation(
   options?: MutationHookOptions<
@@ -83,7 +85,11 @@ export function useBankAccountsCreateFromPlaidTokenMutation(
 }
 
 export function mutationKeyBankAccountsCreateFromPlaidToken(): MutationKey {
-  return ["@gusto/embedded-api", "bankAccounts", "createFromPlaidToken"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "bankAccounts",
+    "createFromPlaidToken",
+  ];
 }
 
 export function buildBankAccountsCreateFromPlaidTokenMutation(

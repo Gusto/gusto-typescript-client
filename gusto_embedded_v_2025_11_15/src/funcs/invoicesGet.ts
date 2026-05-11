@@ -4,6 +4,7 @@
 
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -21,9 +22,9 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  UnprocessableEntityErrorObject,
-  UnprocessableEntityErrorObject$inboundSchema,
-} from "../models/errors/unprocessableentityerrorobject.js";
+  UnprocessableEntityError,
+  UnprocessableEntityError$inboundSchema,
+} from "../models/errors/unprocessableentityerror.js";
 import {
   GetInvoicesInvoicePeriodRequest,
   GetInvoicesInvoicePeriodRequest$outboundSchema,
@@ -40,9 +41,9 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Retrieve data for active companies used to calculate invoices for Gusto Embedded Payroll. A company is considered active for an invoice period if they are an active partner managed company, have run payroll or created contractor payments since becoming a partner managed company, and are not suspended at any point during the invoice period.  This endpoint forces pagination, with 100 results returned at a time. You can learn more about our pagination here: [pagination guide](https://docs.gusto.com/embedded-payroll/docs/pagination)
  *
- * > 📘 System Access Authentication
- * >
- * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *
  * scope: `invoices:read`
  */
@@ -54,7 +55,7 @@ export function invoicesGet(
 ): APIPromise<
   Result<
     GetInvoicesInvoicePeriodResponse,
-    | UnprocessableEntityErrorObject
+    | UnprocessableEntityError
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -82,7 +83,7 @@ async function $do(
   [
     Result<
       GetInvoicesInvoicePeriodResponse,
-      | UnprocessableEntityErrorObject
+      | UnprocessableEntityError
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -172,7 +173,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -187,7 +189,7 @@ async function $do(
 
   const [result] = await M.match<
     GetInvoicesInvoicePeriodResponse,
-    | UnprocessableEntityErrorObject
+    | UnprocessableEntityError
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -200,8 +202,8 @@ async function $do(
     M.json(200, GetInvoicesInvoicePeriodResponse$inboundSchema, {
       key: "Invoice-Data",
     }),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.jsonErr(422, UnprocessableEntityError$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

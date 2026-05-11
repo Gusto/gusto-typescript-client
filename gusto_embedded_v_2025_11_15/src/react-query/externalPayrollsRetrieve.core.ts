@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { externalPayrollsRetrieve } from "../funcs/externalPayrollsRetrieve.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1ExternalPayrollHeaderXGustoAPIVersion,
   GetV1ExternalPayrollRequest,
   GetV1ExternalPayrollResponse,
 } from "../models/operations/getv1externalpayroll.js";
@@ -76,10 +76,12 @@ export function buildExternalPayrollsRetrieveQuery(
 export function queryKeyExternalPayrollsRetrieve(
   companyUuid: string,
   externalPayrollId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?: GetV1ExternalPayrollHeaderXGustoAPIVersion | undefined;
+  },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "externalPayrolls",
     "retrieve",
     companyUuid,

@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1ContractorsContractorUuidAddressRequest,
   PutV1ContractorsContractorUuidAddressResponse,
@@ -39,7 +40,8 @@ export type ContractorsUpdateAddressMutationData =
   PutV1ContractorsContractorUuidAddressResponse;
 
 export type ContractorsUpdateAddressMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -55,11 +57,11 @@ export type ContractorsUpdateAddressMutationError =
  * @remarks
  * The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
  *
- * scope: `contractors:write`
- *
  * > 🚧 Contractors can only have one address.
  * >
  * > When a contractor is created, an address is created for them by default. Updating the address will replace the existing address.
+ *
+ * scope: `contractors:write`
  */
 export function useContractorsUpdateAddressMutation(
   options?: MutationHookOptions<
@@ -80,7 +82,7 @@ export function useContractorsUpdateAddressMutation(
 }
 
 export function mutationKeyContractorsUpdateAddress(): MutationKey {
-  return ["@gusto/embedded-api", "Contractors", "updateAddress"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Contractors", "updateAddress"];
 }
 
 export function buildContractorsUpdateAddressMutation(

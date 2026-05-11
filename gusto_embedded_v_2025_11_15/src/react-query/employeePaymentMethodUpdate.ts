@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1EmployeesEmployeeIdPaymentMethodRequest,
   PutV1EmployeesEmployeeIdPaymentMethodResponse,
@@ -41,7 +41,7 @@ export type EmployeePaymentMethodUpdateMutationData =
 
 export type EmployeePaymentMethodUpdateMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -78,7 +78,11 @@ export function useEmployeePaymentMethodUpdateMutation(
 }
 
 export function mutationKeyEmployeePaymentMethodUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "employeePaymentMethod", "update"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "employeePaymentMethod",
+    "update",
+  ];
 }
 
 export function buildEmployeePaymentMethodUpdateMutation(

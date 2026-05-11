@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1HistoricalEmployeesRequest,
   PostV1HistoricalEmployeesResponse,
@@ -39,7 +40,8 @@ export type EmployeesCreateHistoricalMutationData =
   PostV1HistoricalEmployeesResponse;
 
 export type EmployeesCreateHistoricalMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -76,7 +78,7 @@ export function useEmployeesCreateHistoricalMutation(
 }
 
 export function mutationKeyEmployeesCreateHistorical(): MutationKey {
-  return ["@gusto/embedded-api", "Employees", "createHistorical"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Employees", "createHistorical"];
 }
 
 export function buildEmployeesCreateHistoricalMutation(

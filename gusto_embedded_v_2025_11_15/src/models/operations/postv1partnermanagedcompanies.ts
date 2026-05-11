@@ -5,15 +5,21 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  PartnerManagedCompany,
+  PartnerManagedCompany$inboundSchema,
+} from "../components/partnermanagedcompany.js";
+import {
+  PartnerManagedCompanyCreateRequest,
+  PartnerManagedCompanyCreateRequest$Outbound,
+  PartnerManagedCompanyCreateRequest$outboundSchema,
+} from "../components/partnermanagedcompanycreaterequest.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PostV1PartnerManagedCompaniesSecurity = {
@@ -21,82 +27,26 @@ export type PostV1PartnerManagedCompaniesSecurity = {
 };
 
 /**
- * Information for the user who will be the primary payroll administrator for the new company.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type User = {
-  /**
-   * The first name of the user who will be the primary payroll admin.
-   */
-  firstName: string;
-  /**
-   * The last name of the user who will be the primary payroll admin.
-   */
-  lastName: string;
-  /**
-   * The email of the user who will be the primary payroll admin.
-   */
-  email: string;
-  /**
-   * The phone number of the user who will be the primary payroll admin.
-   */
-  phone?: string | undefined;
-};
-
-export type Company = {
-  /**
-   * The legal name of the company.
-   */
-  name: string;
-  /**
-   * The name of the company.
-   */
-  tradeName?: string | undefined;
-  /**
-   * The employer identification number (EIN) of the company.
-   */
-  ein?: string | undefined;
-  /**
-   * Whether the company only supports contractors. Should be set to true if the company has no W-2 employees. If not passed, will default to false (i.e. the company will support both contractors and employees).
-   */
-  contractorOnly?: boolean | undefined;
-};
-
-export type PostV1PartnerManagedCompaniesRequestBody = {
-  /**
-   * Information for the user who will be the primary payroll administrator for the new company.
-   */
-  user: User;
-  company: Company;
-};
+export const PostV1PartnerManagedCompaniesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1PartnerManagedCompaniesHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PostV1PartnerManagedCompaniesHeaderXGustoAPIVersion
+>;
 
 export type PostV1PartnerManagedCompaniesRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostV1PartnerManagedCompaniesRequestBody;
-};
-
-/**
- * Object returned when creating a partner managed company
- */
-export type PostV1PartnerManagedCompaniesResponseBody = {
-  /**
-   * Access token that can be used for OAuth access to the account. Access tokens expire 2 hours after they are issued.
-   */
-  accessToken?: string | undefined;
-  /**
-   * Refresh token that can be exchanged for a new access token.
-   */
-  refreshToken?: string | undefined;
-  /**
-   * Gusto’s UUID for the company
-   */
-  companyUuid?: string | undefined;
-  /**
-   * Time of access_token expiration in seconds
-   */
-  expiresIn?: number | undefined;
+  xGustoAPIVersion?:
+    | PostV1PartnerManagedCompaniesHeaderXGustoAPIVersion
+    | undefined;
+  partnerManagedCompanyCreateRequest: PartnerManagedCompanyCreateRequest;
 };
 
 export type PostV1PartnerManagedCompaniesResponse = {
@@ -104,7 +54,7 @@ export type PostV1PartnerManagedCompaniesResponse = {
   /**
    * OK
    */
-  object?: PostV1PartnerManagedCompaniesResponseBody | undefined;
+  partnerManagedCompany?: PartnerManagedCompany | undefined;
 };
 
 /** @internal */
@@ -136,91 +86,15 @@ export function postV1PartnerManagedCompaniesSecurityToJSON(
 }
 
 /** @internal */
-export type User$Outbound = {
-  first_name: string;
-  last_name: string;
-  email: string;
-  phone?: string | undefined;
-};
-
-/** @internal */
-export const User$outboundSchema: z.ZodType<User$Outbound, z.ZodTypeDef, User> =
-  z.object({
-    firstName: z.string(),
-    lastName: z.string(),
-    email: z.string(),
-    phone: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      firstName: "first_name",
-      lastName: "last_name",
-    });
-  });
-
-export function userToJSON(user: User): string {
-  return JSON.stringify(User$outboundSchema.parse(user));
-}
-
-/** @internal */
-export type Company$Outbound = {
-  name: string;
-  trade_name?: string | undefined;
-  ein?: string | undefined;
-  contractor_only?: boolean | undefined;
-};
-
-/** @internal */
-export const Company$outboundSchema: z.ZodType<
-  Company$Outbound,
-  z.ZodTypeDef,
-  Company
-> = z.object({
-  name: z.string(),
-  tradeName: z.string().optional(),
-  ein: z.string().optional(),
-  contractorOnly: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    tradeName: "trade_name",
-    contractorOnly: "contractor_only",
-  });
-});
-
-export function companyToJSON(company: Company): string {
-  return JSON.stringify(Company$outboundSchema.parse(company));
-}
-
-/** @internal */
-export type PostV1PartnerManagedCompaniesRequestBody$Outbound = {
-  user: User$Outbound;
-  company: Company$Outbound;
-};
-
-/** @internal */
-export const PostV1PartnerManagedCompaniesRequestBody$outboundSchema: z.ZodType<
-  PostV1PartnerManagedCompaniesRequestBody$Outbound,
-  z.ZodTypeDef,
-  PostV1PartnerManagedCompaniesRequestBody
-> = z.object({
-  user: z.lazy(() => User$outboundSchema),
-  company: z.lazy(() => Company$outboundSchema),
-});
-
-export function postV1PartnerManagedCompaniesRequestBodyToJSON(
-  postV1PartnerManagedCompaniesRequestBody:
-    PostV1PartnerManagedCompaniesRequestBody,
-): string {
-  return JSON.stringify(
-    PostV1PartnerManagedCompaniesRequestBody$outboundSchema.parse(
-      postV1PartnerManagedCompaniesRequestBody,
-    ),
-  );
-}
+export const PostV1PartnerManagedCompaniesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PostV1PartnerManagedCompaniesHeaderXGustoAPIVersion> =
+    z.nativeEnum(PostV1PartnerManagedCompaniesHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PostV1PartnerManagedCompaniesRequest$Outbound = {
   "X-Gusto-API-Version": string;
-  RequestBody: PostV1PartnerManagedCompaniesRequestBody$Outbound;
+  "Partner-Managed-Company-Create-Request":
+    PartnerManagedCompanyCreateRequest$Outbound;
 };
 
 /** @internal */
@@ -229,14 +103,17 @@ export const PostV1PartnerManagedCompaniesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1PartnerManagedCompaniesRequest
 > = z.object({
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.lazy(() =>
-    PostV1PartnerManagedCompaniesRequestBody$outboundSchema
-  ),
+  xGustoAPIVersion:
+    PostV1PartnerManagedCompaniesHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-11-15",
+    ),
+  partnerManagedCompanyCreateRequest:
+    PartnerManagedCompanyCreateRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    partnerManagedCompanyCreateRequest:
+      "Partner-Managed-Company-Create-Request",
   });
 });
 
@@ -251,52 +128,17 @@ export function postV1PartnerManagedCompaniesRequestToJSON(
 }
 
 /** @internal */
-export const PostV1PartnerManagedCompaniesResponseBody$inboundSchema: z.ZodType<
-  PostV1PartnerManagedCompaniesResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  access_token: z.string().optional(),
-  refresh_token: z.string().optional(),
-  company_uuid: z.string().optional(),
-  expires_in: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "access_token": "accessToken",
-    "refresh_token": "refreshToken",
-    "company_uuid": "companyUuid",
-    "expires_in": "expiresIn",
-  });
-});
-
-export function postV1PartnerManagedCompaniesResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1PartnerManagedCompaniesResponseBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1PartnerManagedCompaniesResponseBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1PartnerManagedCompaniesResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
 export const PostV1PartnerManagedCompaniesResponse$inboundSchema: z.ZodType<
   PostV1PartnerManagedCompaniesResponse,
   z.ZodTypeDef,
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  object: z.lazy(() => PostV1PartnerManagedCompaniesResponseBody$inboundSchema)
-    .optional(),
+  "Partner-Managed-Company": PartnerManagedCompany$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
+    "Partner-Managed-Company": "partnerManagedCompany",
   });
 });
 

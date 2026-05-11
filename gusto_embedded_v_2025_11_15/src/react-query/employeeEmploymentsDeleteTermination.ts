@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   DeleteV1EmployeesEmployeeIdTerminationsRequest,
   DeleteV1EmployeesEmployeeIdTerminationsResponse,
@@ -39,7 +40,8 @@ export type EmployeeEmploymentsDeleteTerminationMutationData =
   DeleteV1EmployeesEmployeeIdTerminationsResponse;
 
 export type EmployeeEmploymentsDeleteTerminationMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -76,7 +78,11 @@ export function useEmployeeEmploymentsDeleteTerminationMutation(
 }
 
 export function mutationKeyEmployeeEmploymentsDeleteTermination(): MutationKey {
-  return ["@gusto/embedded-api", "employeeEmployments", "deleteTermination"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "employeeEmployments",
+    "deleteTermination",
+  ];
 }
 
 export function buildEmployeeEmploymentsDeleteTerminationMutation(

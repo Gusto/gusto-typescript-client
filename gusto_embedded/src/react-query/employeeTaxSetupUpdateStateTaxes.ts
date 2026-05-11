@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1EmployeesEmployeeIdStateTaxesRequest,
   PutV1EmployeesEmployeeIdStateTaxesResponse,
@@ -41,7 +41,7 @@ export type EmployeeTaxSetupUpdateStateTaxesMutationData =
 
 export type EmployeeTaxSetupUpdateStateTaxesMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -57,7 +57,7 @@ export type EmployeeTaxSetupUpdateStateTaxesMutationError =
  * @remarks
  * Update attributes relevant for an employee's state taxes.
  *
- * As described for the GET endpoint, the answers must be supplied in the effective-dated format, but currently only a single answer will be accepted - `valid_from` and `valid_up_to` must be `"2010-01-01"` and `null` respectively.
+ * As described for the GET endpoint, the answers must be supplied in the effective-dated format, but currently only a single answer will be accepted. The `valid_from` and `valid_up_to` fields are optional and currently ignored.
  *
  * scope: `employee_state_taxes:write`
  */

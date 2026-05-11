@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   DeleteV1ContractorsContractorUuidRequest,
   DeleteV1ContractorsContractorUuidResponse,
@@ -41,7 +41,7 @@ export type ContractorsDeleteMutationData =
 
 export type ContractorsDeleteMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -78,7 +78,7 @@ export function useContractorsDeleteMutation(
 }
 
 export function mutationKeyContractorsDelete(): MutationKey {
-  return ["@gusto/embedded-api", "Contractors", "delete"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Contractors", "delete"];
 }
 
 export function buildContractorsDeleteMutation(

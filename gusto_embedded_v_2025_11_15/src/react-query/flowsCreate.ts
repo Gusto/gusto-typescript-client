@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1CompanyFlowsRequest,
   PostV1CompanyFlowsResponse,
@@ -40,7 +40,7 @@ export type FlowsCreateMutationData = PostV1CompanyFlowsResponse;
 
 export type FlowsCreateMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -93,7 +93,7 @@ export function useFlowsCreateMutation(
 }
 
 export function mutationKeyFlowsCreate(): MutationKey {
-  return ["@gusto/embedded-api", "Flows", "create"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Flows", "create"];
 }
 
 export function buildFlowsCreateMutation(

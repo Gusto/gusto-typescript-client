@@ -5,95 +5,66 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ExternalPayroll,
   ExternalPayroll$inboundSchema,
 } from "../components/externalpayroll.js";
 import {
+  ExternalPayrollCreateRequest,
+  ExternalPayrollCreateRequest$Outbound,
+  ExternalPayrollCreateRequest$outboundSchema,
+} from "../components/externalpayrollcreaterequest.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PostV1ExternalPayrollRequestBody = {
-  /**
-   * External payroll's check date.
-   */
-  checkDate: string;
-  /**
-   * External payroll's pay period start date.
-   */
-  paymentPeriodStartDate: string;
-  /**
-   * External payroll's pay period end date.
-   */
-  paymentPeriodEndDate: string;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostV1ExternalPayrollHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1ExternalPayrollHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PostV1ExternalPayrollHeaderXGustoAPIVersion
+>;
 
 export type PostV1ExternalPayrollRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: PostV1ExternalPayrollHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the company
    */
   companyUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostV1ExternalPayrollRequestBody;
+  externalPayrollCreateRequest: ExternalPayrollCreateRequest;
 };
 
 export type PostV1ExternalPayrollResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
   externalPayroll?: ExternalPayroll | undefined;
 };
 
 /** @internal */
-export type PostV1ExternalPayrollRequestBody$Outbound = {
-  check_date: string;
-  payment_period_start_date: string;
-  payment_period_end_date: string;
-};
-
-/** @internal */
-export const PostV1ExternalPayrollRequestBody$outboundSchema: z.ZodType<
-  PostV1ExternalPayrollRequestBody$Outbound,
-  z.ZodTypeDef,
-  PostV1ExternalPayrollRequestBody
-> = z.object({
-  checkDate: z.string(),
-  paymentPeriodStartDate: z.string(),
-  paymentPeriodEndDate: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    checkDate: "check_date",
-    paymentPeriodStartDate: "payment_period_start_date",
-    paymentPeriodEndDate: "payment_period_end_date",
-  });
-});
-
-export function postV1ExternalPayrollRequestBodyToJSON(
-  postV1ExternalPayrollRequestBody: PostV1ExternalPayrollRequestBody,
-): string {
-  return JSON.stringify(
-    PostV1ExternalPayrollRequestBody$outboundSchema.parse(
-      postV1ExternalPayrollRequestBody,
-    ),
-  );
-}
+export const PostV1ExternalPayrollHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PostV1ExternalPayrollHeaderXGustoAPIVersion> = z
+    .nativeEnum(PostV1ExternalPayrollHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PostV1ExternalPayrollRequest$Outbound = {
-  company_uuid: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostV1ExternalPayrollRequestBody$Outbound;
+  company_uuid: string;
+  "External-Payroll-Create-Request": ExternalPayrollCreateRequest$Outbound;
 };
 
 /** @internal */
@@ -102,14 +73,15 @@ export const PostV1ExternalPayrollRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1ExternalPayrollRequest
 > = z.object({
+  xGustoAPIVersion: PostV1ExternalPayrollHeaderXGustoAPIVersion$outboundSchema
+    .default("2025-11-15"),
   companyUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.lazy(() => PostV1ExternalPayrollRequestBody$outboundSchema),
+  externalPayrollCreateRequest: ExternalPayrollCreateRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    companyUuid: "company_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    companyUuid: "company_uuid",
+    externalPayrollCreateRequest: "External-Payroll-Create-Request",
   });
 });
 

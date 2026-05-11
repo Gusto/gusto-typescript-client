@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1EmployeesEmployeeIdOnboardingStatusRequest,
   PutV1EmployeesEmployeeIdOnboardingStatusResponse,
@@ -41,7 +41,7 @@ export type EmployeesUpdateOnboardingStatusMutationData =
 
 export type EmployeesUpdateOnboardingStatusMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -56,15 +56,15 @@ export type EmployeesUpdateOnboardingStatusMutationError =
  *
  * @remarks
  * Updates an employee's onboarding status.
- *         Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
+ * Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
  *
- *         | Action | current onboarding_status | new onboarding_status |
- *         |:------------------|:------------:|----------:|
- *         | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
- *         | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
- *         | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
- *         | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
- *         | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
+ * | Action | current onboarding_status | new onboarding_status |
+ * |:------------------|:------------:|----------:|
+ * | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
+ * | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
+ * | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
+ * | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
+ * | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
  *
  * scope: `employees:manage`
  */
@@ -87,7 +87,11 @@ export function useEmployeesUpdateOnboardingStatusMutation(
 }
 
 export function mutationKeyEmployeesUpdateOnboardingStatus(): MutationKey {
-  return ["@gusto/embedded-api", "Employees", "updateOnboardingStatus"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "Employees",
+    "updateOnboardingStatus",
+  ];
 }
 
 export function buildEmployeesUpdateOnboardingStatusMutation(

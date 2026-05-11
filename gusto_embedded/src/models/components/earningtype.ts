@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Example response
+ * The representation of an earning type in Gusto.
  */
 export type EarningType = {
   /**
@@ -19,6 +19,10 @@ export type EarningType = {
    * The ID of the earning type.
    */
   uuid: string;
+  /**
+   * Whether the earning type is active.
+   */
+  active?: boolean | undefined;
 };
 
 /** @internal */
@@ -29,6 +33,7 @@ export const EarningType$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   uuid: z.string(),
+  active: z.boolean().optional(),
 });
 
 export function earningTypeFromJSON(

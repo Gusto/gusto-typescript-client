@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   GetV1CompanyFinishOnboardingRequest,
   GetV1CompanyFinishOnboardingResponse,
@@ -41,7 +41,7 @@ export type CompaniesFinishOnboardingMutationData =
 
 export type CompaniesFinishOnboardingMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -92,7 +92,7 @@ export function useCompaniesFinishOnboardingMutation(
 }
 
 export function mutationKeyCompaniesFinishOnboarding(): MutationKey {
-  return ["@gusto/embedded-api", "Companies", "finishOnboarding"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Companies", "finishOnboarding"];
 }
 
 export function buildCompaniesFinishOnboardingMutation(

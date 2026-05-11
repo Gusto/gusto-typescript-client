@@ -21,7 +21,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest,
@@ -47,7 +47,7 @@ export {
 
 export type EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQueryError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -168,7 +168,7 @@ export function invalidateEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603Hi
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "employeeBenefits",
       "getV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear",
       ...queryKeyBase,
@@ -183,7 +183,7 @@ export function invalidateAllEmployeeBenefitsGetV1EmployeesEmployeeUuidSection60
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "employeeBenefits",
       "getV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear",
     ],

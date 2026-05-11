@@ -127,7 +127,7 @@ export type ContractorCreateRequestBody = {
    */
   ein?: string | undefined;
   /**
-   * The status of the contractor. If the contractor's start date is in the future, updating this field to true means we are setting the start date to today.
+   * The status of the contractor. If the contractor's start date is in the future, updating this field to true means we are setting the start date to today. Attempting to deactivate a contractor while a dismissal is already scheduled, or reactivate while a rehire is already scheduled, will return a 422 error. Cancel the pending transition first using the appropriate cancel endpoint.
    */
   isActive?: boolean | undefined;
 };

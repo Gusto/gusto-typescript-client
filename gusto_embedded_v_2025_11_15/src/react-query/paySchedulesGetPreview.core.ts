@@ -95,7 +95,7 @@ export function queryKeyPaySchedulesGetPreview(
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "paySchedules",
     "getPreview",
     companyId,

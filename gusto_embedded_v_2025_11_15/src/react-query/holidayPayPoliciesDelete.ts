@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequest,
   DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse,
@@ -41,7 +41,7 @@ export type HolidayPayPoliciesDeleteMutationData =
 
 export type HolidayPayPoliciesDeleteMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -78,7 +78,7 @@ export function useHolidayPayPoliciesDeleteMutation(
 }
 
 export function mutationKeyHolidayPayPoliciesDelete(): MutationKey {
-  return ["@gusto/embedded-api", "holidayPayPolicies", "delete"];
+  return ["@gusto/embedded-api-v-2025-11-15", "holidayPayPolicies", "delete"];
 }
 
 export function buildHolidayPayPoliciesDeleteMutation(

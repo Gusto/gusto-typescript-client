@@ -5,41 +5,57 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { Form, Form$inboundSchema } from "../components/form.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompanyFormHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompanyFormHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1CompanyFormHeaderXGustoAPIVersion
+>;
+
 export type GetV1CompanyFormRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: GetV1CompanyFormHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the form
    */
   formId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1CompanyFormResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
   form?: Form | undefined;
 };
 
 /** @internal */
+export const GetV1CompanyFormHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1CompanyFormHeaderXGustoAPIVersion> = z.nativeEnum(
+    GetV1CompanyFormHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export type GetV1CompanyFormRequest$Outbound = {
-  form_id: string;
   "X-Gusto-API-Version": string;
+  form_id: string;
 };
 
 /** @internal */
@@ -48,12 +64,13 @@ export const GetV1CompanyFormRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1CompanyFormRequest
 > = z.object({
+  xGustoAPIVersion: GetV1CompanyFormHeaderXGustoAPIVersion$outboundSchema
+    .default("2025-11-15"),
   formId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
-    formId: "form_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    formId: "form_id",
   });
 });
 

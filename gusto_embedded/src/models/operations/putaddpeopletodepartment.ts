@@ -5,43 +5,35 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Department,
   Department$inboundSchema,
 } from "../components/department.js";
 import {
+  DepartmentPeopleRequestBody,
+  DepartmentPeopleRequestBody$Outbound,
+  DepartmentPeopleRequestBody$outboundSchema,
+} from "../components/departmentpeoplerequestbody.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type Employees = {
-  uuid?: string | undefined;
-};
-
-export type Contractors = {
-  uuid?: string | undefined;
-};
-
-export type PutAddPeopleToDepartmentRequestBody = {
-  /**
-   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
-   */
-  version?: string | undefined;
-  /**
-   * Array of employees to add to the department
-   */
-  employees?: Array<Employees> | undefined;
-  /**
-   * Array of contractors to add to the department
-   */
-  contractors?: Array<Contractors> | undefined;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutAddPeopleToDepartmentHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutAddPeopleToDepartmentHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PutAddPeopleToDepartmentHeaderXGustoAPIVersion
+>;
 
 export type PutAddPeopleToDepartmentRequest = {
   /**
@@ -51,87 +43,28 @@ export type PutAddPeopleToDepartmentRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutAddPeopleToDepartmentRequestBody;
+  xGustoAPIVersion?: PutAddPeopleToDepartmentHeaderXGustoAPIVersion | undefined;
+  departmentPeopleRequestBody: DepartmentPeopleRequestBody;
 };
 
 export type PutAddPeopleToDepartmentResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Department Object Example
+   * Success
    */
   department?: Department | undefined;
 };
 
 /** @internal */
-export type Employees$Outbound = {
-  uuid?: string | undefined;
-};
-
-/** @internal */
-export const Employees$outboundSchema: z.ZodType<
-  Employees$Outbound,
-  z.ZodTypeDef,
-  Employees
-> = z.object({
-  uuid: z.string().optional(),
-});
-
-export function employeesToJSON(employees: Employees): string {
-  return JSON.stringify(Employees$outboundSchema.parse(employees));
-}
-
-/** @internal */
-export type Contractors$Outbound = {
-  uuid?: string | undefined;
-};
-
-/** @internal */
-export const Contractors$outboundSchema: z.ZodType<
-  Contractors$Outbound,
-  z.ZodTypeDef,
-  Contractors
-> = z.object({
-  uuid: z.string().optional(),
-});
-
-export function contractorsToJSON(contractors: Contractors): string {
-  return JSON.stringify(Contractors$outboundSchema.parse(contractors));
-}
-
-/** @internal */
-export type PutAddPeopleToDepartmentRequestBody$Outbound = {
-  version?: string | undefined;
-  employees?: Array<Employees$Outbound> | undefined;
-  contractors?: Array<Contractors$Outbound> | undefined;
-};
-
-/** @internal */
-export const PutAddPeopleToDepartmentRequestBody$outboundSchema: z.ZodType<
-  PutAddPeopleToDepartmentRequestBody$Outbound,
-  z.ZodTypeDef,
-  PutAddPeopleToDepartmentRequestBody
-> = z.object({
-  version: z.string().optional(),
-  employees: z.array(z.lazy(() => Employees$outboundSchema)).optional(),
-  contractors: z.array(z.lazy(() => Contractors$outboundSchema)).optional(),
-});
-
-export function putAddPeopleToDepartmentRequestBodyToJSON(
-  putAddPeopleToDepartmentRequestBody: PutAddPeopleToDepartmentRequestBody,
-): string {
-  return JSON.stringify(
-    PutAddPeopleToDepartmentRequestBody$outboundSchema.parse(
-      putAddPeopleToDepartmentRequestBody,
-    ),
-  );
-}
+export const PutAddPeopleToDepartmentHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PutAddPeopleToDepartmentHeaderXGustoAPIVersion> = z
+    .nativeEnum(PutAddPeopleToDepartmentHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PutAddPeopleToDepartmentRequest$Outbound = {
   department_uuid: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PutAddPeopleToDepartmentRequestBody$Outbound;
+  "Department-People-Request-Body": DepartmentPeopleRequestBody$Outbound;
 };
 
 /** @internal */
@@ -141,13 +74,16 @@ export const PutAddPeopleToDepartmentRequest$outboundSchema: z.ZodType<
   PutAddPeopleToDepartmentRequest
 > = z.object({
   departmentUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.lazy(() => PutAddPeopleToDepartmentRequestBody$outboundSchema),
+  xGustoAPIVersion:
+    PutAddPeopleToDepartmentHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
+  departmentPeopleRequestBody: DepartmentPeopleRequestBody$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     departmentUuid: "department_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    departmentPeopleRequestBody: "Department-People-Request-Body",
   });
 });
 

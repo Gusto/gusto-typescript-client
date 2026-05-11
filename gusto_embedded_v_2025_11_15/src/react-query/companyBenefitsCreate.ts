@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1CompaniesCompanyIdCompanyBenefitsRequest,
   PostV1CompaniesCompanyIdCompanyBenefitsResponse,
@@ -41,7 +41,7 @@ export type CompanyBenefitsCreateMutationData =
 
 export type CompanyBenefitsCreateMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -82,7 +82,7 @@ export function useCompanyBenefitsCreateMutation(
 }
 
 export function mutationKeyCompanyBenefitsCreate(): MutationKey {
-  return ["@gusto/embedded-api", "companyBenefits", "create"];
+  return ["@gusto/embedded-api-v-2025-11-15", "companyBenefits", "create"];
 }
 
 export function buildCompanyBenefitsCreateMutation(

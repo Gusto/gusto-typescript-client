@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1EmployeesEmployeeIdGarnishmentsRequest,
   PostV1EmployeesEmployeeIdGarnishmentsResponse,
@@ -39,7 +40,8 @@ export type GarnishmentsCreateMutationData =
   PostV1EmployeesEmployeeIdGarnishmentsResponse;
 
 export type GarnishmentsCreateMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -76,7 +78,7 @@ export function useGarnishmentsCreateMutation(
 }
 
 export function mutationKeyGarnishmentsCreate(): MutationKey {
-  return ["@gusto/embedded-api", "Garnishments", "create"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Garnishments", "create"];
 }
 
 export function buildGarnishmentsCreateMutation(

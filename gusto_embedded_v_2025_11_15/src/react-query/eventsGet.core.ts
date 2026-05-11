@@ -88,5 +88,5 @@ export function queryKeyEventsGet(
     sortOrder?: QueryParamSortOrder | undefined;
   },
 ): QueryKey {
-  return ["@gusto/embedded-api", "Events", "get", parameters];
+  return ["@gusto/embedded-api-v-2025-11-15", "Events", "get", parameters];
 }

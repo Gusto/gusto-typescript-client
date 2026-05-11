@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,10 +18,14 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
-import { GetV1ExternalPayrollCalculateTaxesRequest } from "../models/operations/getv1externalpayrollcalculatetaxes.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
+import {
+  GetV1ExternalPayrollCalculateTaxesHeaderXGustoAPIVersion,
+  GetV1ExternalPayrollCalculateTaxesRequest,
+} from "../models/operations/getv1externalpayrollcalculatetaxes.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -43,7 +46,8 @@ export {
 };
 
 export type ExternalPayrollsCalculateTaxesQueryError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -57,9 +61,7 @@ export type ExternalPayrollsCalculateTaxesQueryError =
  * Get tax suggestions for an external payroll
  *
  * @remarks
- * Get tax suggestions for an external payroll. Earnings and/or benefits
- * data must be saved prior to the calculation in order to retrieve accurate
- * tax calculation.
+ * Get tax suggestions for an external payroll. Earnings and/or benefits data must be saved prior to the calculation in order to retrieve accurate tax calculation.
  *
  * scope: `external_payrolls:read`
  */
@@ -88,9 +90,7 @@ export function useExternalPayrollsCalculateTaxes(
  * Get tax suggestions for an external payroll
  *
  * @remarks
- * Get tax suggestions for an external payroll. Earnings and/or benefits
- * data must be saved prior to the calculation in order to retrieve accurate
- * tax calculation.
+ * Get tax suggestions for an external payroll. Earnings and/or benefits data must be saved prior to the calculation in order to retrieve accurate tax calculation.
  *
  * scope: `external_payrolls:read`
  */
@@ -120,7 +120,11 @@ export function setExternalPayrollsCalculateTaxesData(
   queryKeyBase: [
     companyUuid: string,
     externalPayrollId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1ExternalPayrollCalculateTaxesHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: ExternalPayrollsCalculateTaxesQueryData,
 ): ExternalPayrollsCalculateTaxesQueryData | undefined {
@@ -138,7 +142,11 @@ export function invalidateExternalPayrollsCalculateTaxes(
     [
       companyUuid: string,
       externalPayrollId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1ExternalPayrollCalculateTaxesHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -146,7 +154,7 @@ export function invalidateExternalPayrollsCalculateTaxes(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "externalPayrolls",
       "calculateTaxes",
       ...queryKeyBase,
@@ -160,6 +168,10 @@ export function invalidateAllExternalPayrollsCalculateTaxes(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "externalPayrolls", "calculateTaxes"],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "externalPayrolls",
+      "calculateTaxes",
+    ],
   });
 }

@@ -4,6 +4,7 @@
 
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -21,9 +22,9 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  UnprocessableEntityErrorObject,
-  UnprocessableEntityErrorObject$inboundSchema,
-} from "../models/errors/unprocessableentityerrorobject.js";
+  UnprocessableEntityError,
+  UnprocessableEntityError$inboundSchema,
+} from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1PartnerManagedCompaniesRequest,
   PostV1PartnerManagedCompaniesRequest$outboundSchema,
@@ -47,9 +48,11 @@ import { Result } from "../types/fp.js";
  *
  * IMPORTANT: the returned access and refresh tokens are reserved for this company only. They cannot be used to access other companies AND previously granted tokens cannot be used to access this company.
  *
- * > 📘 System Access Authentication
- * >
- * > this endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+ *
+ * scope: `partner_managed_companies:manage`
  */
 export function companiesCreatePartnerManaged(
   client: GustoEmbeddedCore,
@@ -59,7 +62,7 @@ export function companiesCreatePartnerManaged(
 ): APIPromise<
   Result<
     PostV1PartnerManagedCompaniesResponse,
-    | UnprocessableEntityErrorObject
+    | UnprocessableEntityError
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -87,7 +90,7 @@ async function $do(
   [
     Result<
       PostV1PartnerManagedCompaniesResponse,
-      | UnprocessableEntityErrorObject
+      | UnprocessableEntityError
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -109,7 +112,11 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON(
+    "body",
+    payload["Partner-Managed-Company-Create-Request"],
+    { explode: true },
+  );
 
   const path = pathToFunc("/v1/partner_managed_companies")();
 
@@ -165,7 +172,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["401", "422", "4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -180,7 +188,7 @@ async function $do(
 
   const [result] = await M.match<
     PostV1PartnerManagedCompaniesResponse,
-    | UnprocessableEntityErrorObject
+    | UnprocessableEntityError
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -191,10 +199,10 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, PostV1PartnerManagedCompaniesResponse$inboundSchema, {
-      key: "object",
+      key: "Partner-Managed-Company",
     }),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([401, "4XX"]),
+    M.jsonErr(422, UnprocessableEntityError$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

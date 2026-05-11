@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1CompaniesCompanyIdContractorPaymentsRequest,
   PostV1CompaniesCompanyIdContractorPaymentsResponse,
@@ -41,7 +41,7 @@ export type ContractorPaymentsCreateMutationData =
 
 export type ContractorPaymentsCreateMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -78,7 +78,7 @@ export function useContractorPaymentsCreateMutation(
 }
 
 export function mutationKeyContractorPaymentsCreate(): MutationKey {
-  return ["@gusto/embedded-api", "contractorPayments", "create"];
+  return ["@gusto/embedded-api-v-2025-11-15", "contractorPayments", "create"];
 }
 
 export function buildContractorPaymentsCreateMutation(

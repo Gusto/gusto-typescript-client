@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1CompaniesCompanyIdPayrollsRequest,
   PostV1CompaniesCompanyIdPayrollsResponse,
@@ -41,7 +41,7 @@ export type PayrollsCreateOffCycleMutationData =
 
 export type PayrollsCreateOffCycleMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -85,7 +85,7 @@ export function usePayrollsCreateOffCycleMutation(
 }
 
 export function mutationKeyPayrollsCreateOffCycle(): MutationKey {
-  return ["@gusto/embedded-api", "Payrolls", "createOffCycle"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Payrolls", "createOffCycle"];
 }
 
 export function buildPayrollsCreateOffCycleMutation(

@@ -59,7 +59,9 @@ export type PayrollsGetPayStubsQueryError =
  * Get an employee's pay stubs
  *
  * @remarks
- * Get an employee's pay stubs
+ * Get an employee's pay stubs.
+ *
+ * Results are returned in reverse chronological order (newest first).
  *
  * scope: `pay_stubs:read`
  */
@@ -85,7 +87,9 @@ export function usePayrollsGetPayStubs(
  * Get an employee's pay stubs
  *
  * @remarks
- * Get an employee's pay stubs
+ * Get an employee's pay stubs.
+ *
+ * Results are returned in reverse chronological order (newest first).
  *
  * scope: `pay_stubs:read`
  */
@@ -148,7 +152,7 @@ export function invalidatePayrollsGetPayStubs(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "Payrolls",
       "getPayStubs",
       ...queryKeyBase,
@@ -162,6 +166,6 @@ export function invalidateAllPayrollsGetPayStubs(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Payrolls", "getPayStubs"],
+    queryKey: ["@gusto/embedded-api-v-2025-11-15", "Payrolls", "getPayStubs"],
   });
 }

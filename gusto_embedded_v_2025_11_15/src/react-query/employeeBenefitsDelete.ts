@@ -21,7 +21,6 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest,
   DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse,
@@ -39,7 +38,6 @@ export type EmployeeBenefitsDeleteMutationData =
   DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse;
 
 export type EmployeeBenefitsDeleteMutationError =
-  | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -78,7 +76,7 @@ export function useEmployeeBenefitsDeleteMutation(
 }
 
 export function mutationKeyEmployeeBenefitsDelete(): MutationKey {
-  return ["@gusto/embedded-api", "employeeBenefits", "delete"];
+  return ["@gusto/embedded-api-v-2025-11-15", "employeeBenefits", "delete"];
 }
 
 export function buildEmployeeBenefitsDeleteMutation(

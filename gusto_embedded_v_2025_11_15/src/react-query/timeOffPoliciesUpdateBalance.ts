@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequest,
   PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse,
@@ -41,7 +41,7 @@ export type TimeOffPoliciesUpdateBalanceMutationData =
 
 export type TimeOffPoliciesUpdateBalanceMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -78,7 +78,11 @@ export function useTimeOffPoliciesUpdateBalanceMutation(
 }
 
 export function mutationKeyTimeOffPoliciesUpdateBalance(): MutationKey {
-  return ["@gusto/embedded-api", "timeOffPolicies", "updateBalance"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "timeOffPolicies",
+    "updateBalance",
+  ];
 }
 
 export function buildTimeOffPoliciesUpdateBalanceMutation(

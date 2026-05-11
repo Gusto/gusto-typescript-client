@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1CompaniesAttachmentRequest,
   PostV1CompaniesAttachmentResponse,
@@ -41,7 +41,7 @@ export type CompanyAttachmentsCreateMutationData =
 
 export type CompanyAttachmentsCreateMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -81,7 +81,7 @@ export function useCompanyAttachmentsCreateMutation(
 }
 
 export function mutationKeyCompanyAttachmentsCreate(): MutationKey {
-  return ["@gusto/embedded-api", "companyAttachments", "create"];
+  return ["@gusto/embedded-api-v-2025-11-15", "companyAttachments", "create"];
 }
 
 export function buildCompanyAttachmentsCreateMutation(

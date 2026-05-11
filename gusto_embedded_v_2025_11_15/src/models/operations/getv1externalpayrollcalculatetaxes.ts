@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ExternalPayrollTaxSuggestions,
@@ -14,13 +15,27 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1ExternalPayrollCalculateTaxesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1ExternalPayrollCalculateTaxesHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetV1ExternalPayrollCalculateTaxesHeaderXGustoAPIVersion>;
+
 export type GetV1ExternalPayrollCalculateTaxesRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1ExternalPayrollCalculateTaxesHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
@@ -29,27 +44,29 @@ export type GetV1ExternalPayrollCalculateTaxesRequest = {
    * The UUID of the external payroll
    */
   externalPayrollId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1ExternalPayrollCalculateTaxesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
-  externalPayrollTaxSuggestionsList?:
+  externalPayrollTaxSuggestions?:
     | Array<ExternalPayrollTaxSuggestions>
     | undefined;
 };
 
 /** @internal */
+export const GetV1ExternalPayrollCalculateTaxesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1ExternalPayrollCalculateTaxesHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1ExternalPayrollCalculateTaxesHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetV1ExternalPayrollCalculateTaxesRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_uuid: string;
   external_payroll_id: string;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -59,14 +76,16 @@ export const GetV1ExternalPayrollCalculateTaxesRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1ExternalPayrollCalculateTaxesRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1ExternalPayrollCalculateTaxesHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-11-15"),
     companyUuid: z.string(),
     externalPayrollId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       companyUuid: "company_uuid",
       externalPayrollId: "external_payroll_id",
-      xGustoAPIVersion: "X-Gusto-API-Version",
     });
   });
 
@@ -86,14 +105,13 @@ export const GetV1ExternalPayrollCalculateTaxesResponse$inboundSchema:
   z.ZodType<GetV1ExternalPayrollCalculateTaxesResponse, z.ZodTypeDef, unknown> =
     z.object({
       HttpMeta: HTTPMetadata$inboundSchema,
-      "External-Payroll-Tax-Suggestions-List": z.array(
+      "External-Payroll-Tax-Suggestions": z.array(
         ExternalPayrollTaxSuggestions$inboundSchema,
       ).optional(),
     }).transform((v) => {
       return remap$(v, {
         "HttpMeta": "httpMeta",
-        "External-Payroll-Tax-Suggestions-List":
-          "externalPayrollTaxSuggestionsList",
+        "External-Payroll-Tax-Suggestions": "externalPayrollTaxSuggestions",
       });
     });
 

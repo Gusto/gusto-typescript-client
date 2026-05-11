@@ -24,7 +24,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest,
   PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse,
@@ -45,7 +45,7 @@ export type EmployeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStat
 
 export type EmployeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -89,7 +89,7 @@ export function useEmployeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEar
 
 export function mutationKeyEmployeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "employeeBenefits",
     "patchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear",
   ];

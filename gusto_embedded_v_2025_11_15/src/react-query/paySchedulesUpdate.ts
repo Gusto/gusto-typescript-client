@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
   PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
@@ -41,7 +41,7 @@ export type PaySchedulesUpdateMutationData =
 
 export type PaySchedulesUpdateMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -61,7 +61,7 @@ export type PaySchedulesUpdateMutationError =
  * Updating a pay schedule will delete any unprocessed regular payrolls whose pay period end date is today or in the future. Already-processed payrolls are not affected.
  *
  * ### Pay schedules may be automatically adjusted
- * If an onboarded company misses their first pay date, the pay schedule may be automatically adjusted.
+ * If an onboarded company misses their first pay date, Gusto will automatically adjust the pay schedule to the next available pay date.
  *
  * ### Webhooks
  * - `pay_schedule.updated`: Fires when a pay schedule is successfully updated.
@@ -91,7 +91,7 @@ export function usePaySchedulesUpdateMutation(
 }
 
 export function mutationKeyPaySchedulesUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "paySchedules", "update"];
+  return ["@gusto/embedded-api-v-2025-11-15", "paySchedules", "update"];
 }
 
 export function buildPaySchedulesUpdateMutation(

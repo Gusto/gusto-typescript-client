@@ -5,17 +5,27 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { Form, Form$inboundSchema } from "../components/form.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1CompanyFormSignHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1CompanyFormSignHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PutV1CompanyFormSignHeaderXGustoAPIVersion
+>;
 
 export type PutV1CompanyFormSignRequestBody = {
   /**
@@ -34,6 +44,10 @@ export type PutV1CompanyFormSignRequestBody = {
 
 export type PutV1CompanyFormSignRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: PutV1CompanyFormSignHeaderXGustoAPIVersion | undefined;
+  /**
    * The UUID of the form
    */
   formId: string;
@@ -41,20 +55,21 @@ export type PutV1CompanyFormSignRequest = {
    * Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
    */
   xGustoClientIp?: string | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PutV1CompanyFormSignRequestBody;
 };
 
 export type PutV1CompanyFormSignResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
   form?: Form | undefined;
 };
+
+/** @internal */
+export const PutV1CompanyFormSignHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1CompanyFormSignHeaderXGustoAPIVersion> = z
+    .nativeEnum(PutV1CompanyFormSignHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PutV1CompanyFormSignRequestBody$Outbound = {
@@ -91,9 +106,9 @@ export function putV1CompanyFormSignRequestBodyToJSON(
 
 /** @internal */
 export type PutV1CompanyFormSignRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   form_id: string;
   "x-gusto-client-ip"?: string | undefined;
-  "X-Gusto-API-Version": string;
   RequestBody: PutV1CompanyFormSignRequestBody$Outbound;
 };
 
@@ -103,15 +118,16 @@ export const PutV1CompanyFormSignRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1CompanyFormSignRequest
 > = z.object({
+  xGustoAPIVersion: PutV1CompanyFormSignHeaderXGustoAPIVersion$outboundSchema
+    .default("2025-11-15"),
   formId: z.string(),
   xGustoClientIp: z.string().optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   requestBody: z.lazy(() => PutV1CompanyFormSignRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
+    xGustoAPIVersion: "X-Gusto-API-Version",
     formId: "form_id",
     xGustoClientIp: "x-gusto-client-ip",
-    xGustoAPIVersion: "X-Gusto-API-Version",
     requestBody: "RequestBody",
   });
 });

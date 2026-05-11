@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1EmployeesEmployeeIdTerminationsRequest } from "../models/operations/getv1employeesemployeeidterminations.js";
+import {
+  GetV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion,
+  GetV1EmployeesEmployeeIdTerminationsRequest,
+} from "../models/operations/getv1employeesemployeeidterminations.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type EmployeeEmploymentsGetTerminationsQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -117,7 +121,11 @@ export function setEmployeeEmploymentsGetTerminationsData(
   client: QueryClient,
   queryKeyBase: [
     employeeId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: EmployeeEmploymentsGetTerminationsQueryData,
 ): EmployeeEmploymentsGetTerminationsQueryData | undefined {
@@ -134,7 +142,11 @@ export function invalidateEmployeeEmploymentsGetTerminations(
   queryKeyBase: TupleToPrefixes<
     [
       employeeId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -142,7 +154,7 @@ export function invalidateEmployeeEmploymentsGetTerminations(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "employeeEmployments",
       "getTerminations",
       ...queryKeyBase,
@@ -156,6 +168,10 @@ export function invalidateAllEmployeeEmploymentsGetTerminations(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "employeeEmployments", "getTerminations"],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "employeeEmployments",
+      "getTerminations",
+    ],
   });
 }

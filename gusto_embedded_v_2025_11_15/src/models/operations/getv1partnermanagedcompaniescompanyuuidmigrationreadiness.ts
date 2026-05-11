@@ -5,16 +5,32 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  PartnerManagedCompanyMigrationReadinessResponse,
+  PartnerManagedCompanyMigrationReadinessResponse$inboundSchema,
+} from "../components/partnermanagedcompanymigrationreadinessresponse.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion
+  >;
 
 export type GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest = {
   /**
@@ -24,74 +40,10 @@ export type GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-};
-
-export type Metadata = {
-  /**
-   * A categorization of the migration blocker, e.g. "migrated_company"
-   */
-  key?: string | undefined;
-};
-
-export type Errors = {
-  /**
-   * Error key
-   */
-  errorKey?: string | undefined;
-  /**
-   * Error category
-   */
-  category?: string | undefined;
-  /**
-   * Blocker message
-   */
-  message?: string | undefined;
-  metadata?: Metadata | undefined;
-};
-
-export type GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessMetadata =
-  {
-    /**
-     * A categorization of the migration warning, e.g. "marijuana_related_business"
-     */
-    key?: string | undefined;
-  };
-
-export type Warnings = {
-  /**
-   * Error key
-   */
-  errorKey?: string | undefined;
-  /**
-   * Error category
-   */
-  category?: string | undefined;
-  /**
-   * Warning message
-   */
-  message?: string | undefined;
-  metadata?:
-    | GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessMetadata
+  xGustoAPIVersion?:
+    | GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion
     | undefined;
 };
-
-/**
- * Example response
- */
-export type GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponseBody =
-  {
-    /**
-     * Indicates if the company is ready to be migrated.
-     */
-    readyToMigrate?: boolean | undefined;
-    /**
-     * The company UUID
-     */
-    companyUuid?: string | undefined;
-    errors?: Array<Errors> | undefined;
-    warnings?: Array<Warnings> | undefined;
-  };
 
 export type GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse =
   {
@@ -99,10 +51,18 @@ export type GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse =
     /**
      * Example response
      */
-    object?:
-      | GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponseBody
+    partnerManagedCompanyMigrationReadinessResponse?:
+      | PartnerManagedCompanyMigrationReadinessResponse
       | undefined;
   };
+
+/** @internal */
+export const GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion,
+  );
 
 /** @internal */
 export type GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest$Outbound =
@@ -119,7 +79,9 @@ export const GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest$ou
     GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest
   > = z.object({
     companyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    xGustoAPIVersion:
+      GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-11-15"),
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",
@@ -138,134 +100,6 @@ export function getV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest
 }
 
 /** @internal */
-export const Metadata$inboundSchema: z.ZodType<
-  Metadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  key: z.string().optional(),
-});
-
-export function metadataFromJSON(
-  jsonString: string,
-): SafeParseResult<Metadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Metadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Metadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const Errors$inboundSchema: z.ZodType<Errors, z.ZodTypeDef, unknown> = z
-  .object({
-    error_key: z.string().optional(),
-    category: z.string().optional(),
-    message: z.string().optional(),
-    metadata: z.lazy(() => Metadata$inboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "error_key": "errorKey",
-    });
-  });
-
-export function errorsFromJSON(
-  jsonString: string,
-): SafeParseResult<Errors, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Errors$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Errors' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessMetadata$inboundSchema:
-  z.ZodType<
-    GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessMetadata,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    key: z.string().optional(),
-  });
-
-export function getV1PartnerManagedCompaniesCompanyUuidMigrationReadinessMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessMetadata,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessMetadata$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessMetadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const Warnings$inboundSchema: z.ZodType<
-  Warnings,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  error_key: z.string().optional(),
-  category: z.string().optional(),
-  message: z.string().optional(),
-  metadata: z.lazy(() =>
-    GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessMetadata$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "error_key": "errorKey",
-  });
-});
-
-export function warningsFromJSON(
-  jsonString: string,
-): SafeParseResult<Warnings, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Warnings$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Warnings' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponseBody$inboundSchema:
-  z.ZodType<
-    GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    ready_to_migrate: z.boolean().optional(),
-    company_uuid: z.string().optional(),
-    errors: z.array(z.lazy(() => Errors$inboundSchema)).optional(),
-    warnings: z.array(z.lazy(() => Warnings$inboundSchema)).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ready_to_migrate": "readyToMigrate",
-      "company_uuid": "companyUuid",
-    });
-  });
-
-export function getV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponseBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponseBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
 export const GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse$inboundSchema:
   z.ZodType<
     GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse,
@@ -273,12 +107,13 @@ export const GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse$i
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    object: z.lazy(() =>
-      GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponseBody$inboundSchema
-    ).optional(),
+    "Partner-Managed-Company-Migration-Readiness-Response":
+      PartnerManagedCompanyMigrationReadinessResponse$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
+      "Partner-Managed-Company-Migration-Readiness-Response":
+        "partnerManagedCompanyMigrationReadinessResponse",
     });
   });
 

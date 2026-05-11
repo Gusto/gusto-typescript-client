@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness } from "../funcs/companiesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion,
   GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest,
   GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse,
 } from "../models/operations/getv1partnermanagedcompaniescompanyuuidmigrationreadiness.js";
@@ -83,10 +83,14 @@ export function buildCompaniesGetV1PartnerManagedCompaniesCompanyUuidMigrationRe
 
 export function queryKeyCompaniesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "Companies",
     "getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness",
     companyUuid,

@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
   DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse,
@@ -41,7 +41,7 @@ export type ContractorPaymentGroupsDeleteMutationData =
 
 export type ContractorPaymentGroupsDeleteMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

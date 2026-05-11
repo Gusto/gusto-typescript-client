@@ -9,7 +9,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { EarningType, EarningType$inboundSchema } from "./earningtype.js";
 
 /**
- * Example response
+ * Lists of default and custom earning types for a company.
  */
 export type EarningTypeList = {
   /**

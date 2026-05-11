@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1EmployeeFormSignRequest,
   PutV1EmployeeFormSignResponse,
@@ -38,7 +39,8 @@ export type EmployeeFormsSignMutationVariables = {
 export type EmployeeFormsSignMutationData = PutV1EmployeeFormSignResponse;
 
 export type EmployeeFormsSignMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -78,7 +80,7 @@ export function useEmployeeFormsSignMutation(
 }
 
 export function mutationKeyEmployeeFormsSign(): MutationKey {
-  return ["@gusto/embedded-api", "employeeForms", "sign"];
+  return ["@gusto/embedded-api-v-2025-11-15", "employeeForms", "sign"];
 }
 
 export function buildEmployeeFormsSignMutation(

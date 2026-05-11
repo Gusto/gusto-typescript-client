@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1CompanyFormSignRequest,
   PutV1CompanyFormSignResponse,
@@ -38,7 +39,8 @@ export type CompanyFormsSignMutationVariables = {
 export type CompanyFormsSignMutationData = PutV1CompanyFormSignResponse;
 
 export type CompanyFormsSignMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -75,7 +77,7 @@ export function useCompanyFormsSignMutation(
 }
 
 export function mutationKeyCompanyFormsSign(): MutationKey {
-  return ["@gusto/embedded-api", "companyForms", "sign"];
+  return ["@gusto/embedded-api-v-2025-11-15", "companyForms", "sign"];
 }
 
 export function buildCompanyFormsSignMutation(

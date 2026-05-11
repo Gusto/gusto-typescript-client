@@ -22,7 +22,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
 export const PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion = {
-  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -229,16 +229,14 @@ export type Compensation = {
 /**
  * Type of bank account
  */
-export const PostV1CompaniesCompanyIdPeopleBatchesAccountType = {
+export const AccountType = {
   Checking: "Checking",
   Savings: "Savings",
 } as const;
 /**
  * Type of bank account
  */
-export type PostV1CompaniesCompanyIdPeopleBatchesAccountType = ClosedEnum<
-  typeof PostV1CompaniesCompanyIdPeopleBatchesAccountType
->;
+export type AccountType = ClosedEnum<typeof AccountType>;
 
 /**
  * Payment type (must be Direct Deposit)
@@ -275,7 +273,7 @@ export type BankAccounts = {
   /**
    * Type of bank account
    */
-  accountType: PostV1CompaniesCompanyIdPeopleBatchesAccountType;
+  accountType: AccountType;
   /**
    * Bank routing number
    */
@@ -604,9 +602,8 @@ export function compensationToJSON(compensation: Compensation): string {
 }
 
 /** @internal */
-export const PostV1CompaniesCompanyIdPeopleBatchesAccountType$outboundSchema:
-  z.ZodNativeEnum<typeof PostV1CompaniesCompanyIdPeopleBatchesAccountType> = z
-    .nativeEnum(PostV1CompaniesCompanyIdPeopleBatchesAccountType);
+export const AccountType$outboundSchema: z.ZodNativeEnum<typeof AccountType> = z
+  .nativeEnum(AccountType);
 
 /** @internal */
 export const PostV1CompaniesCompanyIdPeopleBatchesType$outboundSchema:
@@ -636,7 +633,7 @@ export const BankAccounts$outboundSchema: z.ZodType<
   BankAccounts
 > = z.object({
   name: z.nullable(z.string()).optional(),
-  accountType: PostV1CompaniesCompanyIdPeopleBatchesAccountType$outboundSchema,
+  accountType: AccountType$outboundSchema,
   routingNumber: z.string(),
   accountNumber: z.string(),
   type: PostV1CompaniesCompanyIdPeopleBatchesType$outboundSchema,
@@ -756,7 +753,7 @@ export const PostV1CompaniesCompanyIdPeopleBatchesRequest$outboundSchema:
     companyId: z.string(),
     xGustoAPIVersion:
       PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion$outboundSchema
-        .default("2025-06-15"),
+        .default("2025-11-15"),
     requestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdPeopleBatchesRequestBody$outboundSchema
     ),

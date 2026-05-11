@@ -5,26 +5,36 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const RedebitRecoveryCaseHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type RedebitRecoveryCaseHeaderXGustoAPIVersion = ClosedEnum<
+  typeof RedebitRecoveryCaseHeaderXGustoAPIVersion
+>;
+
 export type RedebitRecoveryCaseRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: RedebitRecoveryCaseHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the recovery case
    */
   recoveryCaseUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type RedebitRecoveryCaseResponse = {
@@ -32,9 +42,14 @@ export type RedebitRecoveryCaseResponse = {
 };
 
 /** @internal */
+export const RedebitRecoveryCaseHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof RedebitRecoveryCaseHeaderXGustoAPIVersion> = z
+    .nativeEnum(RedebitRecoveryCaseHeaderXGustoAPIVersion);
+
+/** @internal */
 export type RedebitRecoveryCaseRequest$Outbound = {
-  recovery_case_uuid: string;
   "X-Gusto-API-Version": string;
+  recovery_case_uuid: string;
 };
 
 /** @internal */
@@ -43,12 +58,13 @@ export const RedebitRecoveryCaseRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RedebitRecoveryCaseRequest
 > = z.object({
+  xGustoAPIVersion: RedebitRecoveryCaseHeaderXGustoAPIVersion$outboundSchema
+    .default("2025-11-15"),
   recoveryCaseUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
-    recoveryCaseUuid: "recovery_case_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    recoveryCaseUuid: "recovery_case_uuid",
   });
 });
 

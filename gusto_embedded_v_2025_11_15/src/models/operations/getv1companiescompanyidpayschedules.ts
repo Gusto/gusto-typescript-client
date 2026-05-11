@@ -12,16 +12,16 @@ import {
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  PaySchedule,
-  PaySchedule$inboundSchema,
-} from "../components/payschedule.js";
+  PayScheduleShow,
+  PayScheduleShow$inboundSchema,
+} from "../components/payscheduleshow.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
 export const GetV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion = {
-  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -55,7 +55,7 @@ export type GetV1CompaniesCompanyIdPaySchedulesResponse = {
   /**
    * Successful
    */
-  paySchedules?: Array<PaySchedule> | undefined;
+  payScheduleShowResponse?: Array<PayScheduleShow> | undefined;
 };
 
 /** @internal */
@@ -81,7 +81,7 @@ export const GetV1CompaniesCompanyIdPaySchedulesRequest$outboundSchema:
   > = z.object({
     xGustoAPIVersion:
       GetV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion$outboundSchema
-        .default("2025-06-15"),
+        .default("2025-11-15"),
     companyId: z.string(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
@@ -111,11 +111,12 @@ export const GetV1CompaniesCompanyIdPaySchedulesResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Pay-Schedules": z.array(PaySchedule$inboundSchema).optional(),
+    "Pay-Schedule-Show-Response": z.array(PayScheduleShow$inboundSchema)
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Pay-Schedules": "paySchedules",
+      "Pay-Schedule-Show-Response": "payScheduleShowResponse",
     });
   });
 

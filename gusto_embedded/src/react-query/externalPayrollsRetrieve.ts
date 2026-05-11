@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1ExternalPayrollRequest } from "../models/operations/getv1externalpayroll.js";
+import {
+  GetV1ExternalPayrollHeaderXGustoAPIVersion,
+  GetV1ExternalPayrollRequest,
+} from "../models/operations/getv1externalpayroll.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type ExternalPayrollsRetrieveQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -114,7 +118,9 @@ export function setExternalPayrollsRetrieveData(
   queryKeyBase: [
     companyUuid: string,
     externalPayrollId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?: GetV1ExternalPayrollHeaderXGustoAPIVersion | undefined;
+    },
   ],
   data: ExternalPayrollsRetrieveQueryData,
 ): ExternalPayrollsRetrieveQueryData | undefined {
@@ -129,7 +135,11 @@ export function invalidateExternalPayrollsRetrieve(
     [
       companyUuid: string,
       externalPayrollId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1ExternalPayrollHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

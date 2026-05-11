@@ -74,7 +74,7 @@ export function useEarningTypesDeleteMutation(
 }
 
 export function mutationKeyEarningTypesDelete(): MutationKey {
-  return ["@gusto/embedded-api", "earningTypes", "delete"];
+  return ["@gusto/embedded-api-v-2025-11-15", "earningTypes", "delete"];
 }
 
 export function buildEarningTypesDeleteMutation(

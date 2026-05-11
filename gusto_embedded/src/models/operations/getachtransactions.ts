@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   AchTransaction,
@@ -14,13 +15,26 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetAchTransactionsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetAchTransactionsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetAchTransactionsHeaderXGustoAPIVersion
+>;
+
 export type GetAchTransactionsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: GetAchTransactionsHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the company
    */
@@ -49,10 +63,6 @@ export type GetAchTransactionsRequest = {
    * Number of objects per page. For majority of endpoints will default to 25
    */
   per?: number | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetAchTransactionsResponse = {
@@ -64,7 +74,13 @@ export type GetAchTransactionsResponse = {
 };
 
 /** @internal */
+export const GetAchTransactionsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetAchTransactionsHeaderXGustoAPIVersion> = z
+    .nativeEnum(GetAchTransactionsHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetAchTransactionsRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_uuid: string;
   contractor_payment_uuid?: string | undefined;
   payroll_uuid?: string | undefined;
@@ -72,7 +88,6 @@ export type GetAchTransactionsRequest$Outbound = {
   payment_direction?: string | undefined;
   page?: number | undefined;
   per?: number | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -81,6 +96,8 @@ export const GetAchTransactionsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAchTransactionsRequest
 > = z.object({
+  xGustoAPIVersion: GetAchTransactionsHeaderXGustoAPIVersion$outboundSchema
+    .default("2025-06-15"),
   companyUuid: z.string(),
   contractorPaymentUuid: z.string().optional(),
   payrollUuid: z.string().optional(),
@@ -88,15 +105,14 @@ export const GetAchTransactionsRequest$outboundSchema: z.ZodType<
   paymentDirection: z.string().optional(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
+    xGustoAPIVersion: "X-Gusto-API-Version",
     companyUuid: "company_uuid",
     contractorPaymentUuid: "contractor_payment_uuid",
     payrollUuid: "payroll_uuid",
     transactionType: "transaction_type",
     paymentDirection: "payment_direction",
-    xGustoAPIVersion: "X-Gusto-API-Version",
   });
 });
 

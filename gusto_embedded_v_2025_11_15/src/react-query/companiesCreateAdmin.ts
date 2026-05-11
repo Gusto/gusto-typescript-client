@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1CompaniesCompanyIdAdminsRequest,
   PostV1CompaniesCompanyIdAdminsResponse,
@@ -41,7 +41,7 @@ export type CompaniesCreateAdminMutationData =
 
 export type CompaniesCreateAdminMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -79,7 +79,7 @@ export function useCompaniesCreateAdminMutation(
 }
 
 export function mutationKeyCompaniesCreateAdmin(): MutationKey {
-  return ["@gusto/embedded-api", "Companies", "createAdmin"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Companies", "createAdmin"];
 }
 
 export function buildCompaniesCreateAdminMutation(

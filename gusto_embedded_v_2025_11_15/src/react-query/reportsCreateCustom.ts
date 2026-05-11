@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostCompaniesCompanyUuidReportsRequest,
   PostCompaniesCompanyUuidReportsResponse,
@@ -39,7 +40,8 @@ export type ReportsCreateCustomMutationData =
   PostCompaniesCompanyUuidReportsResponse;
 
 export type ReportsCreateCustomMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -76,7 +78,7 @@ export function useReportsCreateCustomMutation(
 }
 
 export function mutationKeyReportsCreateCustom(): MutationKey {
-  return ["@gusto/embedded-api", "Reports", "createCustom"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Reports", "createCustom"];
 }
 
 export function buildReportsCreateCustomMutation(

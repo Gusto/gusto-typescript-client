@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetAchTransactionsRequest } from "../models/operations/getachtransactions.js";
+import {
+  GetAchTransactionsHeaderXGustoAPIVersion,
+  GetAchTransactionsRequest,
+} from "../models/operations/getachtransactions.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type AchTransactionsGetAllQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -114,13 +118,13 @@ export function setAchTransactionsGetAllData(
   queryKeyBase: [
     companyUuid: string,
     parameters: {
+      xGustoAPIVersion?: GetAchTransactionsHeaderXGustoAPIVersion | undefined;
       contractorPaymentUuid?: string | undefined;
       payrollUuid?: string | undefined;
       transactionType?: string | undefined;
       paymentDirection?: string | undefined;
       page?: number | undefined;
       per?: number | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: AchTransactionsGetAllQueryData,
@@ -136,13 +140,13 @@ export function invalidateAchTransactionsGetAll(
     [
       companyUuid: string,
       parameters: {
+        xGustoAPIVersion?: GetAchTransactionsHeaderXGustoAPIVersion | undefined;
         contractorPaymentUuid?: string | undefined;
         payrollUuid?: string | undefined;
         transactionType?: string | undefined;
         paymentDirection?: string | undefined;
         page?: number | undefined;
         per?: number | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,

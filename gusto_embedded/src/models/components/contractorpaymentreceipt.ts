@@ -109,9 +109,6 @@ export type ContractorPaymentReceiptLicensee = {
   phoneNumber?: string | undefined;
 };
 
-/**
- * Example response
- */
 export type ContractorPaymentReceipt = {
   /**
    * A unique identifier of the contractor payment receipt.

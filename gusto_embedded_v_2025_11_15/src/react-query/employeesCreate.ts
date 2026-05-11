@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1EmployeesRequest,
   PostV1EmployeesResponse,
@@ -40,7 +40,7 @@ export type EmployeesCreateMutationData = PostV1EmployeesResponse;
 
 export type EmployeesCreateMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -77,7 +77,7 @@ export function useEmployeesCreateMutation(
 }
 
 export function mutationKeyEmployeesCreate(): MutationKey {
-  return ["@gusto/embedded-api", "Employees", "create"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Employees", "create"];
 }
 
 export function buildEmployeesCreateMutation(

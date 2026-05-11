@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1EmployeesEmployeeIdFederalTaxesRequest,
   PutV1EmployeesEmployeeIdFederalTaxesResponse,
@@ -41,7 +41,7 @@ export type EmployeeTaxSetupUpdateFederalTaxesMutationData =
 
 export type EmployeeTaxSetupUpdateFederalTaxesMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -78,7 +78,11 @@ export function useEmployeeTaxSetupUpdateFederalTaxesMutation(
 }
 
 export function mutationKeyEmployeeTaxSetupUpdateFederalTaxes(): MutationKey {
-  return ["@gusto/embedded-api", "employeeTaxSetup", "updateFederalTaxes"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "employeeTaxSetup",
+    "updateFederalTaxes",
+  ];
 }
 
 export function buildEmployeeTaxSetupUpdateFederalTaxesMutation(

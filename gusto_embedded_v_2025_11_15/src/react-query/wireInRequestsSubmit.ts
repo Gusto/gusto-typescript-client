@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutWireInRequestsWireInRequestUuidRequest,
   PutWireInRequestsWireInRequestUuidResponse,
@@ -39,7 +40,8 @@ export type WireInRequestsSubmitMutationData =
   PutWireInRequestsWireInRequestUuidResponse;
 
 export type WireInRequestsSubmitMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -76,7 +78,7 @@ export function useWireInRequestsSubmitMutation(
 }
 
 export function mutationKeyWireInRequestsSubmit(): MutationKey {
-  return ["@gusto/embedded-api", "wireInRequests", "submit"];
+  return ["@gusto/embedded-api-v-2025-11-15", "wireInRequests", "submit"];
 }
 
 export function buildWireInRequestsSubmitMutation(

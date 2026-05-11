@@ -22,7 +22,6 @@ import {
   isConnectionError,
   isTimeoutError,
   matchContentType,
-  matchStatusCode,
 } from "./http.js";
 import { Logger } from "./logger.js";
 import { retry, RetryConfig } from "./retries.js";
@@ -97,17 +96,16 @@ export class ClientSDK {
     } else {
       this.#hooks = new SDKHooks();
     }
+    const defaultHttpClient = new HTTPClient();
+    options.httpClient = options.httpClient || defaultHttpClient;
+    options = this.#hooks.sdkInit(options);
+
     const url = serverURLFromOptions(options);
     if (url) {
       url.pathname = url.pathname.replace(/\/+$/, "") + "/";
     }
-
-    const { baseURL, client } = this.#hooks.sdkInit({
-      baseURL: url,
-      client: options.httpClient || new HTTPClient(),
-    });
-    this._baseURL = baseURL;
-    this.#httpClient = client;
+    this._baseURL = url;
+    this.#httpClient = options.httpClient || defaultHttpClient;
 
     this._options = { ...options, hooks: this.#hooks };
 
@@ -234,7 +232,7 @@ export class ClientSDK {
     request: Request,
     options: {
       context: HookContext;
-      errorCodes: number | string | (number | string)[];
+      isErrorStatusCode: (statusCode: number) => boolean;
       retryConfig: RetryConfig;
       retryCodes: string[];
     },
@@ -247,7 +245,7 @@ export class ClientSDK {
       | UnexpectedClientError
     >
   > {
-    const { context, errorCodes } = options;
+    const { context, isErrorStatusCode } = options;
 
     return retry(
       async () => {
@@ -259,7 +257,7 @@ export class ClientSDK {
         let response = await this.#httpClient.request(req);
 
         try {
-          if (matchStatusCode(response, errorCodes)) {
+          if (isErrorStatusCode(response.status)) {
             const result = await this.#hooks.afterError(
               context,
               response,
@@ -383,8 +381,6 @@ async function logResponse(
       break;
     case matchContentType(res, "application/jsonl")
       || jsonlLikeContentTypeRE.test(ct):
-      logger.log(await res.clone().text());
-      break;
     case matchContentType(res, "text/event-stream"):
       logger.log(`<${contentType}>`);
       break;

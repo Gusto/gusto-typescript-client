@@ -81,7 +81,7 @@ export function queryKeyEmployeeAddressesGetWorkAddresses(
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "employeeAddresses",
     "getWorkAddresses",
     employeeId,

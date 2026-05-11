@@ -144,7 +144,7 @@ export function invalidatePayrollsGetBlockers(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "Payrolls",
       "getBlockers",
       ...queryKeyBase,
@@ -158,6 +158,6 @@ export function invalidateAllPayrollsGetBlockers(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Payrolls", "getBlockers"],
+    queryKey: ["@gusto/embedded-api-v-2025-11-15", "Payrolls", "getBlockers"],
   });
 }

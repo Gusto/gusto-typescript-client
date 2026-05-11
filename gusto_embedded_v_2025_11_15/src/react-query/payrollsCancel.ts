@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest,
   PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse,
@@ -41,7 +41,7 @@ export type PayrollsCancelMutationData =
 
 export type PayrollsCancelMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -56,9 +56,8 @@ export type PayrollsCancelMutationError =
  *
  * @remarks
  * Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it meets both criteria:
- *
- * - `processed` is `true`
- * - Current time is earlier than 4pm PT on the `payroll_deadline`
+ * - `processed` is true
+ * - Current time is earlier than 3:30pm PT on the payroll_deadline
  *
  * scope: `payrolls:run`
  */
@@ -81,7 +80,7 @@ export function usePayrollsCancelMutation(
 }
 
 export function mutationKeyPayrollsCancel(): MutationKey {
-  return ["@gusto/embedded-api", "Payrolls", "cancel"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Payrolls", "cancel"];
 }
 
 export function buildPayrollsCancelMutation(

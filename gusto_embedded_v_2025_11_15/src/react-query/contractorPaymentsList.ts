@@ -61,6 +61,8 @@ export type ContractorPaymentsListQueryError =
  * @remarks
  * Returns an object containing individual contractor payments, within a given time period, including totals.
  *
+ * Results are returned in reverse chronological order (newest first).
+ *
  * scope: `payrolls:read`
  */
 export function useContractorPaymentsList(
@@ -89,6 +91,8 @@ export function useContractorPaymentsList(
  *
  * @remarks
  * Returns an object containing individual contractor payments, within a given time period, including totals.
+ *
+ * Results are returned in reverse chronological order (newest first).
  *
  * scope: `payrolls:read`
  */
@@ -159,7 +163,7 @@ export function invalidateContractorPaymentsList(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "contractorPayments",
       "list",
       ...queryKeyBase,
@@ -173,6 +177,10 @@ export function invalidateAllContractorPaymentsList(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "contractorPayments", "list"],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "contractorPayments",
+      "list",
+    ],
   });
 }

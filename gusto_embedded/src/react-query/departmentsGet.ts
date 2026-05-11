@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetDepartmentRequest } from "../models/operations/getdepartment.js";
+import {
+  GetDepartmentHeaderXGustoAPIVersion,
+  GetDepartmentRequest,
+} from "../models/operations/getdepartment.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type DepartmentsGetQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -104,7 +108,9 @@ export function setDepartmentsGetData(
   client: QueryClient,
   queryKeyBase: [
     departmentUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?: GetDepartmentHeaderXGustoAPIVersion | undefined;
+    },
   ],
   data: DepartmentsGetQueryData,
 ): DepartmentsGetQueryData | undefined {
@@ -118,7 +124,9 @@ export function invalidateDepartmentsGet(
   queryKeyBase: TupleToPrefixes<
     [
       departmentUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?: GetDepartmentHeaderXGustoAPIVersion | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

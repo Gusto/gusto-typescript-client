@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1CompaniesCompanyIdPaySchedulesAssignRequest,
   PostV1CompaniesCompanyIdPaySchedulesAssignResponse,
@@ -39,7 +40,8 @@ export type PaySchedulesAssignMutationData =
   PostV1CompaniesCompanyIdPaySchedulesAssignResponse;
 
 export type PaySchedulesAssignMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -77,7 +79,7 @@ export function usePaySchedulesAssignMutation(
 }
 
 export function mutationKeyPaySchedulesAssign(): MutationKey {
-  return ["@gusto/embedded-api", "paySchedules", "assign"];
+  return ["@gusto/embedded-api-v-2025-11-15", "paySchedules", "assign"];
 }
 
 export function buildPaySchedulesAssignMutation(

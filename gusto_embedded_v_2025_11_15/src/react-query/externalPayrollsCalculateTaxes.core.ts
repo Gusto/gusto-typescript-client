@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { externalPayrollsCalculateTaxes } from "../funcs/externalPayrollsCalculateTaxes.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1ExternalPayrollCalculateTaxesHeaderXGustoAPIVersion,
   GetV1ExternalPayrollCalculateTaxesRequest,
   GetV1ExternalPayrollCalculateTaxesResponse,
 } from "../models/operations/getv1externalpayrollcalculatetaxes.js";
@@ -77,10 +77,14 @@ export function buildExternalPayrollsCalculateTaxesQuery(
 export function queryKeyExternalPayrollsCalculateTaxes(
   companyUuid: string,
   externalPayrollId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1ExternalPayrollCalculateTaxesHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "externalPayrolls",
     "calculateTaxes",
     companyUuid,

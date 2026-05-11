@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -14,11 +15,20 @@ import {
   Notification,
   Notification$inboundSchema,
 } from "../components/notification.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetNotificationsNotificationUuidHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetNotificationsNotificationUuidHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetNotificationsNotificationUuidHeaderXGustoAPIVersion
+>;
 
 export type GetNotificationsNotificationUuidRequest = {
   /**
@@ -28,16 +38,24 @@ export type GetNotificationsNotificationUuidRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | GetNotificationsNotificationUuidHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type GetNotificationsNotificationUuidResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
   notification?: Notification | undefined;
 };
+
+/** @internal */
+export const GetNotificationsNotificationUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetNotificationsNotificationUuidHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetNotificationsNotificationUuidHeaderXGustoAPIVersion);
 
 /** @internal */
 export type GetNotificationsNotificationUuidRequest$Outbound = {
@@ -52,7 +70,9 @@ export const GetNotificationsNotificationUuidRequest$outboundSchema: z.ZodType<
   GetNotificationsNotificationUuidRequest
 > = z.object({
   notificationUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion:
+    GetNotificationsNotificationUuidHeaderXGustoAPIVersion$outboundSchema
+      .default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     notificationUuid: "notification_uuid",

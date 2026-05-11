@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   DeleteV1JobsJobIdRequest,
   DeleteV1JobsJobIdResponse,
@@ -40,7 +40,7 @@ export type JobsAndCompensationsDeleteMutationData = DeleteV1JobsJobIdResponse;
 
 export type JobsAndCompensationsDeleteMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -77,7 +77,7 @@ export function useJobsAndCompensationsDeleteMutation(
 }
 
 export function mutationKeyJobsAndCompensationsDelete(): MutationKey {
-  return ["@gusto/embedded-api", "jobsAndCompensations", "delete"];
+  return ["@gusto/embedded-api-v-2025-11-15", "jobsAndCompensations", "delete"];
 }
 
 export function buildJobsAndCompensationsDeleteMutation(

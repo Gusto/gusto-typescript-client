@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
   PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse,
@@ -42,7 +42,7 @@ export type PayrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsMutat
 
 export type PayrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -83,7 +83,7 @@ export function usePayrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursemen
 
 export function mutationKeyPayrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "Payrolls",
     "patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements",
   ];

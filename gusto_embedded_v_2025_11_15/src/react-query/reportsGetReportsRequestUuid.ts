@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetReportsRequestUuidRequest } from "../models/operations/getreportsrequestuuid.js";
+import {
+  GetReportsRequestUuidHeaderXGustoAPIVersion,
+  GetReportsRequestUuidRequest,
+} from "../models/operations/getreportsrequestuuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type ReportsGetReportsRequestUuidQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -117,7 +121,11 @@ export function setReportsGetReportsRequestUuidData(
   client: QueryClient,
   queryKeyBase: [
     requestUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetReportsRequestUuidHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: ReportsGetReportsRequestUuidQueryData,
 ): ReportsGetReportsRequestUuidQueryData | undefined {
@@ -131,7 +139,11 @@ export function invalidateReportsGetReportsRequestUuid(
   queryKeyBase: TupleToPrefixes<
     [
       requestUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetReportsRequestUuidHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -139,7 +151,7 @@ export function invalidateReportsGetReportsRequestUuid(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "Reports",
       "getReportsRequestUuid",
       ...queryKeyBase,
@@ -153,6 +165,10 @@ export function invalidateAllReportsGetReportsRequestUuid(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "Reports", "getReportsRequestUuid"],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "Reports",
+      "getReportsRequestUuid",
+    ],
   });
 }

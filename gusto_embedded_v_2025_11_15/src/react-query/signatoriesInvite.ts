@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1CompaniesCompanyUuidSignatoriesInviteRequest,
   PostV1CompaniesCompanyUuidSignatoriesInviteResponse,
@@ -41,7 +41,7 @@ export type SignatoriesInviteMutationData =
 
 export type SignatoriesInviteMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -81,7 +81,7 @@ export function useSignatoriesInviteMutation(
 }
 
 export function mutationKeySignatoriesInvite(): MutationKey {
-  return ["@gusto/embedded-api", "Signatories", "invite"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Signatories", "invite"];
 }
 
 export function buildSignatoriesInviteMutation(

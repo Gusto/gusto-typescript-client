@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1HomeAddressesHomeAddressUuidRequest,
   PutV1HomeAddressesHomeAddressUuidResponse,
@@ -41,7 +41,7 @@ export type EmployeeAddressesUpdateMutationData =
 
 export type EmployeeAddressesUpdateMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -80,7 +80,7 @@ export function useEmployeeAddressesUpdateMutation(
 }
 
 export function mutationKeyEmployeeAddressesUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "employeeAddresses", "update"];
+  return ["@gusto/embedded-api-v-2025-11-15", "employeeAddresses", "update"];
 }
 
 export function buildEmployeeAddressesUpdateMutation(

@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type EmployeeHomeAddress = {
@@ -24,22 +23,6 @@ export type EmployeeHomeAddress = {
    * Unique identifier for this address.
    */
   uuid?: string | undefined;
-  /**
-   * The internal ID of the address.
-   */
-  id?: number | undefined;
-  /**
-   * The date the address became effective.
-   */
-  effectiveFrom?: RFCDate | undefined;
-  /**
-   * The date the address became inactive.
-   */
-  effectiveTo?: RFCDate | undefined;
-  /**
-   * The date the address became effective.
-   */
-  effectiveDate?: RFCDate | undefined;
 };
 
 /** @internal */
@@ -56,17 +39,10 @@ export const EmployeeHomeAddress$inboundSchema: z.ZodType<
   country: z.nullable(z.string().default("USA")),
   active: z.boolean().optional(),
   uuid: z.string().optional(),
-  id: z.number().int().optional(),
-  effective_from: z.string().transform(v => new RFCDate(v)).optional(),
-  effective_to: z.string().transform(v => new RFCDate(v)).optional(),
-  effective_date: z.string().transform(v => new RFCDate(v)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "street_1": "street1",
     "street_2": "street2",
-    "effective_from": "effectiveFrom",
-    "effective_to": "effectiveTo",
-    "effective_date": "effectiveDate",
   });
 });
 

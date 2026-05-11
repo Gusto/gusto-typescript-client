@@ -27,7 +27,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export const PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion =
   {
-    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+    TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
   } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -91,7 +91,7 @@ export const PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest$outbound
   > = z.object({
     xGustoAPIVersion:
       PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion$outboundSchema
-        .default("2025-06-15"),
+        .default("2025-11-15"),
     employeeId: z.string(),
     xGustoClientIp: z.string().optional(),
     i9AuthorizationEmployerSignRequestBody:

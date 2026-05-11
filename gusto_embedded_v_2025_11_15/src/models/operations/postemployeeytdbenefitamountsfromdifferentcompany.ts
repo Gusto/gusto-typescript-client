@@ -5,33 +5,47 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  PostEmployeeYtdBenefitAmountsFromDifferentCompany,
-  PostEmployeeYtdBenefitAmountsFromDifferentCompany$Outbound,
-  PostEmployeeYtdBenefitAmountsFromDifferentCompany$outboundSchema,
-} from "../components/postemployeeytdbenefitamountsfromdifferentcompany.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  YtdBenefitAmountsFromDifferentCompanyBody,
+  YtdBenefitAmountsFromDifferentCompanyBody$Outbound,
+  YtdBenefitAmountsFromDifferentCompanyBody$outboundSchema,
+} from "../components/ytdbenefitamountsfromdifferentcompanybody.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PostEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion
+  >;
+
 export type PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the employee
    */
   employeeId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  postEmployeeYtdBenefitAmountsFromDifferentCompany:
-    PostEmployeeYtdBenefitAmountsFromDifferentCompany;
+  ytdBenefitAmountsFromDifferentCompanyBody:
+    YtdBenefitAmountsFromDifferentCompanyBody;
 };
 
 export type PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse = {
@@ -39,12 +53,20 @@ export type PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse = {
 };
 
 /** @internal */
+export const PostEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PostEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export type PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$Outbound =
   {
-    employee_id: string;
     "X-Gusto-API-Version": string;
-    "post-employee-ytd-benefit-amounts-from-different-company":
-      PostEmployeeYtdBenefitAmountsFromDifferentCompany$Outbound;
+    employee_id: string;
+    "Ytd-Benefit-Amounts-From-Different-Company-Body":
+      YtdBenefitAmountsFromDifferentCompanyBody$Outbound;
   };
 
 /** @internal */
@@ -54,17 +76,18 @@ export const PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$outboundSc
     z.ZodTypeDef,
     PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest
   > = z.object({
+    xGustoAPIVersion:
+      PostEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-11-15"),
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    postEmployeeYtdBenefitAmountsFromDifferentCompany: z.lazy(() =>
-      PostEmployeeYtdBenefitAmountsFromDifferentCompany$outboundSchema
-    ),
+    ytdBenefitAmountsFromDifferentCompanyBody:
+      YtdBenefitAmountsFromDifferentCompanyBody$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      employeeId: "employee_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      postEmployeeYtdBenefitAmountsFromDifferentCompany:
-        "post-employee-ytd-benefit-amounts-from-different-company",
+      employeeId: "employee_id",
+      ytdBenefitAmountsFromDifferentCompanyBody:
+        "Ytd-Benefit-Amounts-From-Different-Company-Body",
     });
   });
 

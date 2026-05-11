@@ -156,7 +156,7 @@ export function invalidateContractorPaymentGroupsGetV1ContractorPaymentGroupsIdP
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "contractorPaymentGroups",
       "getV1ContractorPaymentGroupsIdPartnerDisbursements",
       ...queryKeyBase,
@@ -171,7 +171,7 @@ export function invalidateAllContractorPaymentGroupsGetV1ContractorPaymentGroups
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "contractorPaymentGroups",
       "getV1ContractorPaymentGroupsIdPartnerDisbursements",
     ],

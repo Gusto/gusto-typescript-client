@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1EmployeesEmployeeIdBankAccountsRequest } from "../models/operations/getv1employeesemployeeidbankaccounts.js";
+import {
+  GetV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion,
+  GetV1EmployeesEmployeeIdBankAccountsRequest,
+} from "../models/operations/getv1employeesemployeeidbankaccounts.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type EmployeePaymentMethodsGetBankAccountsQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -52,7 +56,7 @@ export type EmployeePaymentMethodsGetBankAccountsQueryError =
   | SDKValidationError;
 
 /**
- * Get all employee bank accounts
+ * List employee bank accounts
  *
  * @remarks
  * Returns all employee bank accounts.
@@ -81,7 +85,7 @@ export function useEmployeePaymentMethodsGetBankAccounts(
 }
 
 /**
- * Get all employee bank accounts
+ * List employee bank accounts
  *
  * @remarks
  * Returns all employee bank accounts.
@@ -114,9 +118,11 @@ export function setEmployeePaymentMethodsGetBankAccountsData(
   queryKeyBase: [
     employeeId: string,
     parameters: {
+      xGustoAPIVersion?:
+        | GetV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion
+        | undefined;
       page?: number | undefined;
       per?: number | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: EmployeePaymentMethodsGetBankAccountsQueryData,
@@ -135,9 +141,11 @@ export function invalidateEmployeePaymentMethodsGetBankAccounts(
     [
       employeeId: string,
       parameters: {
+        xGustoAPIVersion?:
+          | GetV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion
+          | undefined;
         page?: number | undefined;
         per?: number | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -146,7 +154,7 @@ export function invalidateEmployeePaymentMethodsGetBankAccounts(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "employeePaymentMethods",
       "getBankAccounts",
       ...queryKeyBase,
@@ -161,7 +169,7 @@ export function invalidateAllEmployeePaymentMethodsGetBankAccounts(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "employeePaymentMethods",
       "getBankAccounts",
     ],

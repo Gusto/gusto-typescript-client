@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   GetV1ContractorPaymentsContractorPaymentUuidFundRequest,
   GetV1ContractorPaymentsContractorPaymentUuidFundResponse,
@@ -39,7 +40,8 @@ export type ContractorPaymentsFundMutationData =
   GetV1ContractorPaymentsContractorPaymentUuidFundResponse;
 
 export type ContractorPaymentsFundMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -80,7 +82,7 @@ export function useContractorPaymentsFundMutation(
 }
 
 export function mutationKeyContractorPaymentsFund(): MutationKey {
-  return ["@gusto/embedded-api", "contractorPayments", "fund"];
+  return ["@gusto/embedded-api-v-2025-11-15", "contractorPayments", "fund"];
 }
 
 export function buildContractorPaymentsFundMutation(

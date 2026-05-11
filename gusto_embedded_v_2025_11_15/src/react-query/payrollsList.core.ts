@@ -106,5 +106,11 @@ export function queryKeyPayrollsList(
     sortOrder?: SortOrder | undefined;
   },
 ): QueryKey {
-  return ["@gusto/embedded-api", "Payrolls", "list", companyId, parameters];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "Payrolls",
+    "list",
+    companyId,
+    parameters,
+  ];
 }

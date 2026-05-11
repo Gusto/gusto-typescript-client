@@ -12,103 +12,34 @@ import {
   ExternalPayroll$inboundSchema,
 } from "../components/externalpayroll.js";
 import {
+  ExternalPayrollUpdateRequest,
+  ExternalPayrollUpdateRequest$Outbound,
+  ExternalPayrollUpdateRequest$outboundSchema,
+} from "../components/externalpayrollupdaterequest.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The earning type for the compensation.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const EarningType = {
-  CompanyPayType: "CompanyPayType",
-  CompanyEarningType: "CompanyEarningType",
+export const PutV1ExternalPayrollHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
 } as const;
 /**
- * The earning type for the compensation.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type EarningType = ClosedEnum<typeof EarningType>;
-
-/**
- * An array of earnings for the employee. Depends on your company selections, earnings includes wages, hours, bonuses, tips, commission and more.
- */
-export type Earnings = {
-  /**
-   * The hour of the compensation for the pay period.
-   */
-  hours?: string | undefined;
-  /**
-   * The amount of the earning.
-   */
-  amount?: string | undefined;
-  /**
-   * The ID of the earning.
-   */
-  earningId?: number | undefined;
-  /**
-   * The earning type for the compensation.
-   */
-  earningType?: EarningType | undefined;
-};
-
-/**
- * An array of benefits for the employee. Depends on your company selections, benefits include 401k, health insurance and more.
- */
-export type Benefits = {
-  /**
-   * Company contribution amount towards the benefit
-   */
-  companyContributionAmount?: string | undefined;
-  /**
-   * Employee deduction amount towards the benefit
-   */
-  employeeDeductionAmount?: string | undefined;
-  /**
-   * The ID of the benefit.
-   */
-  benefitId?: number | undefined;
-};
-
-export type Taxes = {
-  /**
-   * The amount of the tax.
-   */
-  amount?: string | undefined;
-  /**
-   * The ID of the tax.
-   */
-  taxId?: number | undefined;
-};
-
-/**
- * Submit wages, benefits, taxes for each employee
- */
-export type ExternalPayrollItems = {
-  /**
-   * The UUID of the employee.
-   */
-  employeeUuid?: string | undefined;
-  earnings?: Array<Earnings> | undefined;
-  benefits?: Array<Benefits> | undefined;
-  /**
-   * An array of taxes for the employee. Depends on your company selections, taxes include federal income tax, social security, medicare, and more.
-   */
-  taxes?: Array<Taxes> | undefined;
-};
-
-export type PutV1ExternalPayrollRequestBody = {
-  /**
-   * Patch update external payroll items when set to true, otherwise it will overwrite the previous changes.
-   */
-  replaceFields?: boolean | undefined;
-  externalPayrollItems?: Array<ExternalPayrollItems> | undefined;
-};
+export type PutV1ExternalPayrollHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PutV1ExternalPayrollHeaderXGustoAPIVersion
+>;
 
 export type PutV1ExternalPayrollRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: PutV1ExternalPayrollHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the company
    */
@@ -117,177 +48,28 @@ export type PutV1ExternalPayrollRequest = {
    * The UUID of the external payroll
    */
   externalPayrollId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutV1ExternalPayrollRequestBody;
+  externalPayrollUpdateRequest: ExternalPayrollUpdateRequest;
 };
 
 export type PutV1ExternalPayrollResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
   externalPayroll?: ExternalPayroll | undefined;
 };
 
 /** @internal */
-export const EarningType$outboundSchema: z.ZodNativeEnum<typeof EarningType> = z
-  .nativeEnum(EarningType);
-
-/** @internal */
-export type Earnings$Outbound = {
-  hours?: string | undefined;
-  amount?: string | undefined;
-  earning_id?: number | undefined;
-  earning_type?: string | undefined;
-};
-
-/** @internal */
-export const Earnings$outboundSchema: z.ZodType<
-  Earnings$Outbound,
-  z.ZodTypeDef,
-  Earnings
-> = z.object({
-  hours: z.string().optional(),
-  amount: z.string().optional(),
-  earningId: z.number().int().optional(),
-  earningType: EarningType$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    earningId: "earning_id",
-    earningType: "earning_type",
-  });
-});
-
-export function earningsToJSON(earnings: Earnings): string {
-  return JSON.stringify(Earnings$outboundSchema.parse(earnings));
-}
-
-/** @internal */
-export type Benefits$Outbound = {
-  company_contribution_amount?: string | undefined;
-  employee_deduction_amount?: string | undefined;
-  benefit_id?: number | undefined;
-};
-
-/** @internal */
-export const Benefits$outboundSchema: z.ZodType<
-  Benefits$Outbound,
-  z.ZodTypeDef,
-  Benefits
-> = z.object({
-  companyContributionAmount: z.string().optional(),
-  employeeDeductionAmount: z.string().optional(),
-  benefitId: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyContributionAmount: "company_contribution_amount",
-    employeeDeductionAmount: "employee_deduction_amount",
-    benefitId: "benefit_id",
-  });
-});
-
-export function benefitsToJSON(benefits: Benefits): string {
-  return JSON.stringify(Benefits$outboundSchema.parse(benefits));
-}
-
-/** @internal */
-export type Taxes$Outbound = {
-  amount?: string | undefined;
-  tax_id?: number | undefined;
-};
-
-/** @internal */
-export const Taxes$outboundSchema: z.ZodType<
-  Taxes$Outbound,
-  z.ZodTypeDef,
-  Taxes
-> = z.object({
-  amount: z.string().optional(),
-  taxId: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    taxId: "tax_id",
-  });
-});
-
-export function taxesToJSON(taxes: Taxes): string {
-  return JSON.stringify(Taxes$outboundSchema.parse(taxes));
-}
-
-/** @internal */
-export type ExternalPayrollItems$Outbound = {
-  employee_uuid?: string | undefined;
-  earnings?: Array<Earnings$Outbound> | undefined;
-  benefits?: Array<Benefits$Outbound> | undefined;
-  taxes?: Array<Taxes$Outbound> | undefined;
-};
-
-/** @internal */
-export const ExternalPayrollItems$outboundSchema: z.ZodType<
-  ExternalPayrollItems$Outbound,
-  z.ZodTypeDef,
-  ExternalPayrollItems
-> = z.object({
-  employeeUuid: z.string().optional(),
-  earnings: z.array(z.lazy(() => Earnings$outboundSchema)).optional(),
-  benefits: z.array(z.lazy(() => Benefits$outboundSchema)).optional(),
-  taxes: z.array(z.lazy(() => Taxes$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeUuid: "employee_uuid",
-  });
-});
-
-export function externalPayrollItemsToJSON(
-  externalPayrollItems: ExternalPayrollItems,
-): string {
-  return JSON.stringify(
-    ExternalPayrollItems$outboundSchema.parse(externalPayrollItems),
-  );
-}
-
-/** @internal */
-export type PutV1ExternalPayrollRequestBody$Outbound = {
-  replace_fields?: boolean | undefined;
-  external_payroll_items?: Array<ExternalPayrollItems$Outbound> | undefined;
-};
-
-/** @internal */
-export const PutV1ExternalPayrollRequestBody$outboundSchema: z.ZodType<
-  PutV1ExternalPayrollRequestBody$Outbound,
-  z.ZodTypeDef,
-  PutV1ExternalPayrollRequestBody
-> = z.object({
-  replaceFields: z.boolean().optional(),
-  externalPayrollItems: z.array(
-    z.lazy(() => ExternalPayrollItems$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    replaceFields: "replace_fields",
-    externalPayrollItems: "external_payroll_items",
-  });
-});
-
-export function putV1ExternalPayrollRequestBodyToJSON(
-  putV1ExternalPayrollRequestBody: PutV1ExternalPayrollRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1ExternalPayrollRequestBody$outboundSchema.parse(
-      putV1ExternalPayrollRequestBody,
-    ),
-  );
-}
+export const PutV1ExternalPayrollHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1ExternalPayrollHeaderXGustoAPIVersion> = z
+    .nativeEnum(PutV1ExternalPayrollHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PutV1ExternalPayrollRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_uuid: string;
   external_payroll_id: string;
-  "X-Gusto-API-Version": string;
-  RequestBody: PutV1ExternalPayrollRequestBody$Outbound;
+  "External-Payroll-Update-Request": ExternalPayrollUpdateRequest$Outbound;
 };
 
 /** @internal */
@@ -296,16 +78,17 @@ export const PutV1ExternalPayrollRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1ExternalPayrollRequest
 > = z.object({
+  xGustoAPIVersion: PutV1ExternalPayrollHeaderXGustoAPIVersion$outboundSchema
+    .default("2025-11-15"),
   companyUuid: z.string(),
   externalPayrollId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.lazy(() => PutV1ExternalPayrollRequestBody$outboundSchema),
+  externalPayrollUpdateRequest: ExternalPayrollUpdateRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
+    xGustoAPIVersion: "X-Gusto-API-Version",
     companyUuid: "company_uuid",
     externalPayrollId: "external_payroll_id",
-    xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    externalPayrollUpdateRequest: "External-Payroll-Update-Request",
   });
 });
 

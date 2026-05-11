@@ -5,41 +5,56 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { Form, Form$inboundSchema } from "../components/form.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1EmployeeFormsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1EmployeeFormsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1EmployeeFormsHeaderXGustoAPIVersion
+>;
+
 export type GetV1EmployeeFormsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: GetV1EmployeeFormsHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the employee
    */
   employeeId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1EmployeeFormsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
-  formList?: Array<Form> | undefined;
+  forms?: Array<Form> | undefined;
 };
 
 /** @internal */
+export const GetV1EmployeeFormsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1EmployeeFormsHeaderXGustoAPIVersion> = z
+    .nativeEnum(GetV1EmployeeFormsHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetV1EmployeeFormsRequest$Outbound = {
-  employee_id: string;
   "X-Gusto-API-Version": string;
+  employee_id: string;
 };
 
 /** @internal */
@@ -48,12 +63,13 @@ export const GetV1EmployeeFormsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1EmployeeFormsRequest
 > = z.object({
+  xGustoAPIVersion: GetV1EmployeeFormsHeaderXGustoAPIVersion$outboundSchema
+    .default("2025-06-15"),
   employeeId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
-    employeeId: "employee_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    employeeId: "employee_id",
   });
 });
 
@@ -72,11 +88,11 @@ export const GetV1EmployeeFormsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Form-List": z.array(Form$inboundSchema).optional(),
+  Forms: z.array(Form$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
-    "Form-List": "formList",
+    "Forms": "forms",
   });
 });
 

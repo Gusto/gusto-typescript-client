@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest,
   DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse,
@@ -41,7 +41,7 @@ export type I9VerificationDeleteDocumentMutationData =
 
 export type I9VerificationDeleteDocumentMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -81,7 +81,11 @@ export function useI9VerificationDeleteDocumentMutation(
 }
 
 export function mutationKeyI9VerificationDeleteDocument(): MutationKey {
-  return ["@gusto/embedded-api", "i9Verification", "deleteDocument"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "i9Verification",
+    "deleteDocument",
+  ];
 }
 
 export function buildI9VerificationDeleteDocumentMutation(

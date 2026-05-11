@@ -4,6 +4,7 @@
 
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -25,9 +26,9 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  UnprocessableEntityErrorObject,
-  UnprocessableEntityErrorObject$inboundSchema,
-} from "../models/errors/unprocessableentityerrorobject.js";
+  UnprocessableEntityError,
+  UnprocessableEntityError$inboundSchema,
+} from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1EmployeesEmployeeIdSalaryEstimatesRequest,
   PostV1EmployeesEmployeeIdSalaryEstimatesRequest$outboundSchema,
@@ -62,7 +63,7 @@ export function salaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimates(
   Result<
     PostV1EmployeesEmployeeIdSalaryEstimatesResponse,
     | NotFoundErrorObject
-    | UnprocessableEntityErrorObject
+    | UnprocessableEntityError
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -89,7 +90,7 @@ async function $do(
     Result<
       PostV1EmployeesEmployeeIdSalaryEstimatesResponse,
       | NotFoundErrorObject
-      | UnprocessableEntityErrorObject
+      | UnprocessableEntityError
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -174,7 +175,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -190,7 +192,7 @@ async function $do(
   const [result] = await M.match<
     PostV1EmployeesEmployeeIdSalaryEstimatesResponse,
     | NotFoundErrorObject
-    | UnprocessableEntityErrorObject
+    | UnprocessableEntityError
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -206,7 +208,7 @@ async function $do(
       { key: "Salary-Estimate" },
     ),
     M.jsonErr(404, NotFoundErrorObject$inboundSchema),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

@@ -62,9 +62,7 @@ export type JobsAndCompensationsGetJobQueryError =
  * @remarks
  * Get a job.
  *
- * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
- *
- * Compensation data in the response requires the `compensations:read` scope.
+ * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. These fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are returned only when the `compensations:read` scope is included.
  *
  * scope: `jobs:read`
  */
@@ -95,9 +93,7 @@ export function useJobsAndCompensationsGetJob(
  * @remarks
  * Get a job.
  *
- * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
- *
- * Compensation data in the response requires the `compensations:read` scope.
+ * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. These fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are returned only when the `compensations:read` scope is included.
  *
  * scope: `jobs:read`
  */
@@ -154,7 +150,7 @@ export function invalidateJobsAndCompensationsGetJob(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "jobsAndCompensations",
       "getJob",
       ...queryKeyBase,
@@ -168,6 +164,10 @@ export function invalidateAllJobsAndCompensationsGetJob(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "jobsAndCompensations", "getJob"],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "jobsAndCompensations",
+      "getJob",
+    ],
   });
 }

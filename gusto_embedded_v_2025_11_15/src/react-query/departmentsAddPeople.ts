@@ -19,8 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutAddPeopleToDepartmentRequest,
   PutAddPeopleToDepartmentResponse,
@@ -37,6 +39,8 @@ export type DepartmentsAddPeopleMutationVariables = {
 export type DepartmentsAddPeopleMutationData = PutAddPeopleToDepartmentResponse;
 
 export type DepartmentsAddPeopleMutationError =
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -73,7 +77,7 @@ export function useDepartmentsAddPeopleMutation(
 }
 
 export function mutationKeyDepartmentsAddPeople(): MutationKey {
-  return ["@gusto/embedded-api", "Departments", "addPeople"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Departments", "addPeople"];
 }
 
 export function buildDepartmentsAddPeopleMutation(

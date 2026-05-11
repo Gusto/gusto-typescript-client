@@ -19,7 +19,8 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import { PostCompaniesPayrollSkipCompanyUuidResponseBody } from "../models/errors/postcompaniespayrollskipcompanyuuid.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
+import { PayrollBlockersError } from "../models/errors/payrollblockerserror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -39,7 +40,8 @@ export type PayrollsSkipMutationData =
   PostCompaniesPayrollSkipCompanyUuidResponse;
 
 export type PayrollsSkipMutationError =
-  | PostCompaniesPayrollSkipCompanyUuidResponseBody
+  | NotFoundErrorObject
+  | PayrollBlockersError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

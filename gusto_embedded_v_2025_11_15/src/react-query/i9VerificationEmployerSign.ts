@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest,
   PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse,
@@ -41,7 +41,7 @@ export type I9VerificationEmployerSignMutationData =
 
 export type I9VerificationEmployerSignMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -87,7 +87,7 @@ export function useI9VerificationEmployerSignMutation(
 }
 
 export function mutationKeyI9VerificationEmployerSign(): MutationKey {
-  return ["@gusto/embedded-api", "i9Verification", "employerSign"];
+  return ["@gusto/embedded-api-v-2025-11-15", "i9Verification", "employerSign"];
 }
 
 export function buildI9VerificationEmployerSignMutation(

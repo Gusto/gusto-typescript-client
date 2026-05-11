@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1EmployeesEmployeeIdBankAccountsRequest,
   PutV1EmployeesEmployeeIdBankAccountsResponse,
@@ -39,7 +40,8 @@ export type EmployeePaymentMethodUpdateBankAccountMutationData =
   PutV1EmployeesEmployeeIdBankAccountsResponse;
 
 export type EmployeePaymentMethodUpdateBankAccountMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -76,7 +78,11 @@ export function useEmployeePaymentMethodUpdateBankAccountMutation(
 }
 
 export function mutationKeyEmployeePaymentMethodUpdateBankAccount(): MutationKey {
-  return ["@gusto/embedded-api", "employeePaymentMethod", "updateBankAccount"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "employeePaymentMethod",
+    "updateBankAccount",
+  ];
 }
 
 export function buildEmployeePaymentMethodUpdateBankAccountMutation(

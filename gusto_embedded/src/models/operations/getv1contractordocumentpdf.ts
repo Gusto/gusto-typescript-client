@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   DocumentPdf,
@@ -14,21 +15,32 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1ContractorDocumentPdfHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1ContractorDocumentPdfHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1ContractorDocumentPdfHeaderXGustoAPIVersion
+>;
+
 export type GetV1ContractorDocumentPdfRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1ContractorDocumentPdfHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the document
    */
   documentUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1ContractorDocumentPdfResponse = {
@@ -40,9 +52,14 @@ export type GetV1ContractorDocumentPdfResponse = {
 };
 
 /** @internal */
+export const GetV1ContractorDocumentPdfHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1ContractorDocumentPdfHeaderXGustoAPIVersion> = z
+    .nativeEnum(GetV1ContractorDocumentPdfHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetV1ContractorDocumentPdfRequest$Outbound = {
-  document_uuid: string;
   "X-Gusto-API-Version": string;
+  document_uuid: string;
 };
 
 /** @internal */
@@ -51,12 +68,15 @@ export const GetV1ContractorDocumentPdfRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1ContractorDocumentPdfRequest
 > = z.object({
+  xGustoAPIVersion:
+    GetV1ContractorDocumentPdfHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
   documentUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
-    documentUuid: "document_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    documentUuid: "document_uuid",
   });
 });
 

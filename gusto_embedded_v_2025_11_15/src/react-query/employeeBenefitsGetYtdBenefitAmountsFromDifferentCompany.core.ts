@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany } from "../funcs/employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion,
   GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
   GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
 } from "../models/operations/getemployeeytdbenefitamountsfromdifferentcompany.js";
@@ -50,7 +50,7 @@ export function buildEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQue
   return {
     queryKey: queryKeyEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompany(
       request.employeeId,
-      { taxYear: request.taxYear, xGustoAPIVersion: request.xGustoAPIVersion },
+      { xGustoAPIVersion: request.xGustoAPIVersion, taxYear: request.taxYear },
     ),
     queryFn:
       async function employeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryFn(
@@ -83,12 +83,14 @@ export function buildEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQue
 export function queryKeyEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompany(
   employeeId: string,
   parameters: {
+    xGustoAPIVersion?:
+      | GetEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion
+      | undefined;
     taxYear?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "employeeBenefits",
     "getYtdBenefitAmountsFromDifferentCompany",
     employeeId,

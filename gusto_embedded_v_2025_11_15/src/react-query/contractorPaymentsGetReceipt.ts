@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest } from "../models/operations/getv1contractorpaymentscontractorpaymentuuidreceipt.js";
+import {
+  GetV1ContractorPaymentsContractorPaymentUuidReceiptHeaderXGustoAPIVersion,
+  GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
+} from "../models/operations/getv1contractorpaymentscontractorpaymentuuidreceipt.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type ContractorPaymentsGetReceiptQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -127,7 +131,11 @@ export function setContractorPaymentsGetReceiptData(
   client: QueryClient,
   queryKeyBase: [
     contractorPaymentUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1ContractorPaymentsContractorPaymentUuidReceiptHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: ContractorPaymentsGetReceiptQueryData,
 ): ContractorPaymentsGetReceiptQueryData | undefined {
@@ -141,7 +149,11 @@ export function invalidateContractorPaymentsGetReceipt(
   queryKeyBase: TupleToPrefixes<
     [
       contractorPaymentUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1ContractorPaymentsContractorPaymentUuidReceiptHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -149,7 +161,7 @@ export function invalidateContractorPaymentsGetReceipt(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "contractorPayments",
       "getReceipt",
       ...queryKeyBase,
@@ -163,6 +175,10 @@ export function invalidateAllContractorPaymentsGetReceipt(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "contractorPayments", "getReceipt"],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "contractorPayments",
+      "getReceipt",
+    ],
   });
 }

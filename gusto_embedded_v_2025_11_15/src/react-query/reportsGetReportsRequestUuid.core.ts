@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { reportsGetReportsRequestUuid } from "../funcs/reportsGetReportsRequestUuid.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetReportsRequestUuidHeaderXGustoAPIVersion,
   GetReportsRequestUuidRequest,
   GetReportsRequestUuidResponse,
 } from "../models/operations/getreportsrequestuuid.js";
@@ -74,10 +74,12 @@ export function buildReportsGetReportsRequestUuidQuery(
 
 export function queryKeyReportsGetReportsRequestUuid(
   requestUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?: GetReportsRequestUuidHeaderXGustoAPIVersion | undefined;
+  },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "Reports",
     "getReportsRequestUuid",
     requestUuid,

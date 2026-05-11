@@ -19,9 +19,9 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1TaxLiabilitiesRequest,
   PutV1TaxLiabilitiesResponse,
@@ -39,7 +39,7 @@ export type ExternalPayrollsUpdateTaxLiabilitiesMutationData =
   PutV1TaxLiabilitiesResponse;
 
 export type ExternalPayrollsUpdateTaxLiabilitiesMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -76,7 +76,11 @@ export function useExternalPayrollsUpdateTaxLiabilitiesMutation(
 }
 
 export function mutationKeyExternalPayrollsUpdateTaxLiabilities(): MutationKey {
-  return ["@gusto/embedded-api", "externalPayrolls", "updateTaxLiabilities"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "externalPayrolls",
+    "updateTaxLiabilities",
+  ];
 }
 
 export function buildExternalPayrollsUpdateTaxLiabilitiesMutation(

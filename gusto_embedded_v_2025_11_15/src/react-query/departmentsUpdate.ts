@@ -11,6 +11,7 @@ import { GustoEmbeddedCore } from "../core.js";
 import { departmentsUpdate } from "../funcs/departmentsUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { ConflictErrorObject } from "../models/errors/conflicterrorobject.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +20,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutDepartmentsRequest,
   PutDepartmentsResponse,
@@ -38,7 +40,9 @@ export type DepartmentsUpdateMutationVariables = {
 export type DepartmentsUpdateMutationData = PutDepartmentsResponse;
 
 export type DepartmentsUpdateMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | ConflictErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -75,7 +79,7 @@ export function useDepartmentsUpdateMutation(
 }
 
 export function mutationKeyDepartmentsUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "Departments", "update"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Departments", "update"];
 }
 
 export function buildDepartmentsUpdateMutation(

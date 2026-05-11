@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
   PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
@@ -40,7 +41,8 @@ export type EmployeeBenefitsCreateYtdBenefitAmountsFromDifferentCompanyMutationD
   PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse;
 
 export type EmployeeBenefitsCreateYtdBenefitAmountsFromDifferentCompanyMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -83,7 +85,7 @@ export function useEmployeeBenefitsCreateYtdBenefitAmountsFromDifferentCompanyMu
 
 export function mutationKeyEmployeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany(): MutationKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "employeeBenefits",
     "createYtdBenefitAmountsFromDifferentCompany",
   ];

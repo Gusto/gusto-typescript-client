@@ -81,7 +81,7 @@ export function queryKeyHolidayPayPoliciesGet(
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "holidayPayPolicies",
     "get",
     companyUuid,

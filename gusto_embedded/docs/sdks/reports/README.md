@@ -30,7 +30,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.reports.createCustom({
     companyUuid: "<id>",
-    requestBody: {
+    createReportBody: {
       columns: [
         "total_time_off_earnings",
         "employer_additional_taxes",
@@ -71,7 +71,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await reportsCreateCustom(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
+    createReportBody: {
       columns: [
         "total_time_off_earnings",
         "employer_additional_taxes",
@@ -128,7 +128,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.reports.createCustom({
     companyUuid: "<id>",
-    requestBody: {
+    createReportBody: {
       columns: [
         "total_time_off_earnings",
         "employer_additional_taxes",
@@ -169,7 +169,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await reportsCreateCustom(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
+    createReportBody: {
       columns: [
         "total_time_off_earnings",
         "employer_additional_taxes",
@@ -226,7 +226,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.reports.createCustom({
     companyUuid: "<id>",
-    requestBody: {
+    createReportBody: {
       columns: [
         "total_time_off_earnings",
         "employer_additional_taxes",
@@ -267,7 +267,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await reportsCreateCustom(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
+    createReportBody: {
       columns: [
         "total_time_off_earnings",
         "employer_additional_taxes",
@@ -324,7 +324,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.reports.createCustom({
     companyUuid: "<id>",
-    requestBody: {
+    createReportBody: {
       columns: [
         "total_time_off_earnings",
         "employer_additional_taxes",
@@ -365,7 +365,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await reportsCreateCustom(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
+    createReportBody: {
       columns: [
         "total_time_off_earnings",
         "employer_additional_taxes",
@@ -424,10 +424,11 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## postPayrollsPayrollUuidReportsGeneralLedger
 
@@ -435,7 +436,7 @@ Create a general ledger report for a payroll. The report can be aggregated by di
 
 Use the `request_uuid` in the response with the [report GET endpoint](../reference/get-reports-request_uuid) to poll for the status and report URL upon completion. The retrieved report will be generated in a JSON format.
 
-scope: `company_reports:write` OR `company_reports:write:general_ledger`
+scope: `company_reports:write`
 
 ### Example Usage: Basic
 
@@ -450,7 +451,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.reports.postPayrollsPayrollUuidReportsGeneralLedger({
     payrollUuid: "<id>",
-    requestBody: {
+    generalLedgerReportBody: {
       aggregation: "default",
     },
   });
@@ -478,7 +479,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await reportsPostPayrollsPayrollUuidReportsGeneralLedger(gustoEmbedded, {
     payrollUuid: "<id>",
-    requestBody: {
+    generalLedgerReportBody: {
       aggregation: "default",
     },
   });
@@ -522,7 +523,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.reports.postPayrollsPayrollUuidReportsGeneralLedger({
     payrollUuid: "<id>",
-    requestBody: {
+    generalLedgerReportBody: {
       aggregation: "default",
     },
   });
@@ -550,7 +551,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await reportsPostPayrollsPayrollUuidReportsGeneralLedger(gustoEmbedded, {
     payrollUuid: "<id>",
-    requestBody: {
+    generalLedgerReportBody: {
       aggregation: "default",
     },
   });
@@ -594,7 +595,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.reports.postPayrollsPayrollUuidReportsGeneralLedger({
     payrollUuid: "<id>",
-    requestBody: {
+    generalLedgerReportBody: {
       aggregation: "default",
     },
   });
@@ -622,7 +623,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await reportsPostPayrollsPayrollUuidReportsGeneralLedger(gustoEmbedded, {
     payrollUuid: "<id>",
-    requestBody: {
+    generalLedgerReportBody: {
       aggregation: "default",
     },
   });
@@ -666,7 +667,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.reports.postPayrollsPayrollUuidReportsGeneralLedger({
     payrollUuid: "<id>",
-    requestBody: {
+    generalLedgerReportBody: {
       aggregation: "default",
     },
   });
@@ -694,7 +695,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await reportsPostPayrollsPayrollUuidReportsGeneralLedger(gustoEmbedded, {
     payrollUuid: "<id>",
-    requestBody: {
+    generalLedgerReportBody: {
       aggregation: "default",
     },
   });
@@ -741,10 +742,11 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## getReportsRequestUuid
 
@@ -847,9 +849,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## getTemplate
 
@@ -952,9 +955,11 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage
 
@@ -1056,8 +1061,8 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.NotFoundErrorObject            | 404                                   | application/json                      |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |

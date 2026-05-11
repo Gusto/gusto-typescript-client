@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest,
   PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse,
@@ -39,7 +40,8 @@ export type CompaniesRetrieveTermsOfServiceMutationData =
   PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse;
 
 export type CompaniesRetrieveTermsOfServiceMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -76,7 +78,11 @@ export function useCompaniesRetrieveTermsOfServiceMutation(
 }
 
 export function mutationKeyCompaniesRetrieveTermsOfService(): MutationKey {
-  return ["@gusto/embedded-api", "Companies", "retrieveTermsOfService"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "Companies",
+    "retrieveTermsOfService",
+  ];
 }
 
 export function buildCompaniesRetrieveTermsOfServiceMutation(

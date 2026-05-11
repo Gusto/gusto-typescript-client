@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1VerifyWebhookSubscriptionUuidRequest,
   PutV1VerifyWebhookSubscriptionUuidResponse,
@@ -41,7 +42,8 @@ export type WebhooksVerifyMutationData =
   PutV1VerifyWebhookSubscriptionUuidResponse;
 
 export type WebhooksVerifyMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -52,16 +54,16 @@ export type WebhooksVerifyMutationError =
   | SDKValidationError;
 
 /**
- * Verify the webhook subscription
+ * Verify a webhook subscription
  *
  * @remarks
  * When a webhook subscription is created, a `verification_token` is POSTed to the registered webhook subscription URL. This `verify` endpoint needs to be called with `verification_token` before webhook events can be sent to the registered webhook URL.
  *
  * Use the /v1/webhook_subscriptions/{webhook_subscription_uuid}/request_verification_token API to resend the `verification_token` to the Subscriber.
  *
- * > 📘 System Access Authentication
- * >
- * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *
  * scope: `webhook_subscriptions:write`
  */
@@ -84,7 +86,7 @@ export function useWebhooksVerifyMutation(
 }
 
 export function mutationKeyWebhooksVerify(): MutationKey {
-  return ["@gusto/embedded-api", "Webhooks", "verify"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Webhooks", "verify"];
 }
 
 export function buildWebhooksVerifyMutation(

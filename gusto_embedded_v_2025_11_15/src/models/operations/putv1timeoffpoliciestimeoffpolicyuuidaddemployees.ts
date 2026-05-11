@@ -22,7 +22,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export const PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesHeaderXGustoAPIVersion =
   {
-    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+    TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
   } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -32,7 +32,7 @@ export type PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesHeaderXGustoAPIVers
     typeof PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesHeaderXGustoAPIVersion
   >;
 
-export type PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees = {
+export type Employees = {
   /**
    * The UUID of the employee
    */
@@ -44,7 +44,7 @@ export type PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees = {
 };
 
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody = {
-  employees: Array<PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees>;
+  employees: Array<Employees>;
 };
 
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest = {
@@ -78,39 +78,29 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesHeaderXGustoAPIVer
   );
 
 /** @internal */
-export type PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees$Outbound =
-  {
-    uuid: string;
-    balance?: string | null | undefined;
-  };
+export type Employees$Outbound = {
+  uuid: string;
+  balance?: string | null | undefined;
+};
 
 /** @internal */
-export const PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees$outboundSchema:
-  z.ZodType<
-    PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees$Outbound,
-    z.ZodTypeDef,
-    PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees
-  > = z.object({
-    uuid: z.string(),
-    balance: z.nullable(z.string()).optional(),
-  });
+export const Employees$outboundSchema: z.ZodType<
+  Employees$Outbound,
+  z.ZodTypeDef,
+  Employees
+> = z.object({
+  uuid: z.string(),
+  balance: z.nullable(z.string()).optional(),
+});
 
-export function putV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployeesToJSON(
-  putV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees:
-    PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees,
-): string {
-  return JSON.stringify(
-    PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees$outboundSchema
-      .parse(putV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees),
-  );
+export function employeesToJSON(employees: Employees): string {
+  return JSON.stringify(Employees$outboundSchema.parse(employees));
 }
 
 /** @internal */
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody$Outbound =
   {
-    employees: Array<
-      PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees$Outbound
-    >;
+    employees: Array<Employees$Outbound>;
   };
 
 /** @internal */
@@ -120,11 +110,7 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody$outbou
     z.ZodTypeDef,
     PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody
   > = z.object({
-    employees: z.array(
-      z.lazy(() =>
-        PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees$outboundSchema
-      ),
-    ),
+    employees: z.array(z.lazy(() => Employees$outboundSchema)),
   });
 
 export function putV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBodyToJSON(
@@ -155,7 +141,7 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest$outboundSc
   > = z.object({
     xGustoAPIVersion:
       PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesHeaderXGustoAPIVersion$outboundSchema
-        .default("2025-06-15"),
+        .default("2025-11-15"),
     timeOffPolicyUuid: z.string(),
     requestBody: z.lazy(() =>
       PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody$outboundSchema

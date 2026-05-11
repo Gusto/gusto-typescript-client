@@ -81,7 +81,7 @@ export function queryKeyI9VerificationGetDocumentOptions(
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "i9Verification",
     "getDocumentOptions",
     employeeId,

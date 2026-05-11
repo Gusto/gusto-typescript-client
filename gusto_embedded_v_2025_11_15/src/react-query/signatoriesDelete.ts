@@ -79,7 +79,7 @@ export function useSignatoriesDeleteMutation(
 }
 
 export function mutationKeySignatoriesDelete(): MutationKey {
-  return ["@gusto/embedded-api", "Signatories", "delete"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Signatories", "delete"];
 }
 
 export function buildSignatoriesDeleteMutation(

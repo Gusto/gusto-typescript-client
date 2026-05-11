@@ -12,118 +12,66 @@ import {
   GeneralLedgerReport$inboundSchema,
 } from "../components/generalledgerreport.js";
 import {
+  GeneralLedgerReportBody,
+  GeneralLedgerReportBody$Outbound,
+  GeneralLedgerReportBody$outboundSchema,
+} from "../components/generalledgerreportbody.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The breakdown of the report. Use 'default' for no split.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const Aggregation = {
-  Default: "default",
-  Job: "job",
-  Department: "department",
-  Integration: "integration",
-} as const;
+export const PostPayrollsPayrollUuidReportsGeneralLedgerHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
+  } as const;
 /**
- * The breakdown of the report. Use 'default' for no split.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type Aggregation = ClosedEnum<typeof Aggregation>;
-
-/**
- * The kind of integration set up for the company. Required when `aggregation` is 'integration'. Must be null if `aggregation` is not 'integration'.
- */
-export const IntegrationType = {
-  Xero: "xero",
-  Qbo: "qbo",
-} as const;
-/**
- * The kind of integration set up for the company. Required when `aggregation` is 'integration'. Must be null if `aggregation` is not 'integration'.
- */
-export type IntegrationType = ClosedEnum<typeof IntegrationType>;
-
-export type PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody = {
-  /**
-   * The breakdown of the report. Use 'default' for no split.
-   */
-  aggregation: Aggregation;
-  /**
-   * The kind of integration set up for the company. Required when `aggregation` is 'integration'. Must be null if `aggregation` is not 'integration'.
-   */
-  integrationType?: IntegrationType | null | undefined;
-};
+export type PostPayrollsPayrollUuidReportsGeneralLedgerHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PostPayrollsPayrollUuidReportsGeneralLedgerHeaderXGustoAPIVersion
+  >;
 
 export type PostPayrollsPayrollUuidReportsGeneralLedgerRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostPayrollsPayrollUuidReportsGeneralLedgerHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the payroll
    */
   payrollUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody;
+  generalLedgerReportBody: GeneralLedgerReportBody;
 };
 
 export type PostPayrollsPayrollUuidReportsGeneralLedgerResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Successful response for general ledger report generation
+   * OK
    */
   generalLedgerReport?: GeneralLedgerReport | undefined;
 };
 
 /** @internal */
-export const Aggregation$outboundSchema: z.ZodNativeEnum<typeof Aggregation> = z
-  .nativeEnum(Aggregation);
-
-/** @internal */
-export const IntegrationType$outboundSchema: z.ZodNativeEnum<
-  typeof IntegrationType
-> = z.nativeEnum(IntegrationType);
-
-/** @internal */
-export type PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$Outbound = {
-  aggregation: string;
-  integration_type?: string | null | undefined;
-};
-
-/** @internal */
-export const PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$outboundSchema:
-  z.ZodType<
-    PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$Outbound,
-    z.ZodTypeDef,
-    PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody
-  > = z.object({
-    aggregation: Aggregation$outboundSchema,
-    integrationType: z.nullable(IntegrationType$outboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      integrationType: "integration_type",
-    });
-  });
-
-export function postPayrollsPayrollUuidReportsGeneralLedgerRequestBodyToJSON(
-  postPayrollsPayrollUuidReportsGeneralLedgerRequestBody:
-    PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody,
-): string {
-  return JSON.stringify(
-    PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$outboundSchema.parse(
-      postPayrollsPayrollUuidReportsGeneralLedgerRequestBody,
-    ),
+export const PostPayrollsPayrollUuidReportsGeneralLedgerHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostPayrollsPayrollUuidReportsGeneralLedgerHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PostPayrollsPayrollUuidReportsGeneralLedgerHeaderXGustoAPIVersion,
   );
-}
 
 /** @internal */
 export type PostPayrollsPayrollUuidReportsGeneralLedgerRequest$Outbound = {
-  payroll_uuid: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$Outbound;
+  payroll_uuid: string;
+  "General-Ledger-Report-Body": GeneralLedgerReportBody$Outbound;
 };
 
 /** @internal */
@@ -133,16 +81,16 @@ export const PostPayrollsPayrollUuidReportsGeneralLedgerRequest$outboundSchema:
     z.ZodTypeDef,
     PostPayrollsPayrollUuidReportsGeneralLedgerRequest
   > = z.object({
+    xGustoAPIVersion:
+      PostPayrollsPayrollUuidReportsGeneralLedgerHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-11-15"),
     payrollUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$outboundSchema
-    ),
+    generalLedgerReportBody: GeneralLedgerReportBody$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      payrollUuid: "payroll_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      payrollUuid: "payroll_uuid",
+      generalLedgerReportBody: "General-Ledger-Report-Body",
     });
   });
 

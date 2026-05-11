@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1SalaryEstimatesIdRequest,
   PutV1SalaryEstimatesIdResponse,
@@ -41,7 +41,7 @@ export type SalaryEstimatesPutV1SalaryEstimatesIdMutationData =
 
 export type SalaryEstimatesPutV1SalaryEstimatesIdMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -80,7 +80,11 @@ export function useSalaryEstimatesPutV1SalaryEstimatesIdMutation(
 }
 
 export function mutationKeySalaryEstimatesPutV1SalaryEstimatesId(): MutationKey {
-  return ["@gusto/embedded-api", "Salary Estimates", "putV1SalaryEstimatesId"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "Salary Estimates",
+    "putV1SalaryEstimatesId",
+  ];
 }
 
 export function buildSalaryEstimatesPutV1SalaryEstimatesIdMutation(

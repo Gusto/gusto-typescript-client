@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   DeleteV1CompensationsCompensationIdRequest,
   DeleteV1CompensationsCompensationIdResponse,
@@ -41,7 +41,7 @@ export type JobsAndCompensationsDeleteCompensationMutationData =
 
 export type JobsAndCompensationsDeleteCompensationMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -56,9 +56,6 @@ export type JobsAndCompensationsDeleteCompensationMutationError =
  *
  * @remarks
  * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. This endpoint deletes a compensation for a job that hasn't been processed on payroll.
- *
- * ### Webhooks
- * - `employee_job_compensation.destroyed`: Fires when a compensation is successfully deleted
  *
  * scope: `compensations:write`
  */
@@ -81,7 +78,11 @@ export function useJobsAndCompensationsDeleteCompensationMutation(
 }
 
 export function mutationKeyJobsAndCompensationsDeleteCompensation(): MutationKey {
-  return ["@gusto/embedded-api", "jobsAndCompensations", "deleteCompensation"];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "jobsAndCompensations",
+    "deleteCompensation",
+  ];
 }
 
 export function buildJobsAndCompensationsDeleteCompensationMutation(

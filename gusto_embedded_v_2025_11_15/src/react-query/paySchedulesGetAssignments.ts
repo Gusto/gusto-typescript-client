@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest } from "../models/operations/getv1companiescompanyidpayschedulesassignments.js";
+import {
+  GetV1CompaniesCompanyIdPaySchedulesAssignmentsHeaderXGustoAPIVersion,
+  GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
+} from "../models/operations/getv1companiescompanyidpayschedulesassignments.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type PaySchedulesGetAssignmentsQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -113,7 +117,11 @@ export function setPaySchedulesGetAssignmentsData(
   client: QueryClient,
   queryKeyBase: [
     companyId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyIdPaySchedulesAssignmentsHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: PaySchedulesGetAssignmentsQueryData,
 ): PaySchedulesGetAssignmentsQueryData | undefined {
@@ -127,7 +135,11 @@ export function invalidatePaySchedulesGetAssignments(
   queryKeyBase: TupleToPrefixes<
     [
       companyId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyIdPaySchedulesAssignmentsHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -135,7 +147,7 @@ export function invalidatePaySchedulesGetAssignments(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "paySchedules",
       "getAssignments",
       ...queryKeyBase,
@@ -149,6 +161,10 @@ export function invalidateAllPaySchedulesGetAssignments(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "paySchedules", "getAssignments"],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "paySchedules",
+      "getAssignments",
+    ],
   });
 }

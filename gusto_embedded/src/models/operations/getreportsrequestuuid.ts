@@ -5,41 +5,56 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import { Report, Report$inboundSchema } from "../components/report.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetReportsRequestUuidHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetReportsRequestUuidHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetReportsRequestUuidHeaderXGustoAPIVersion
+>;
+
 export type GetReportsRequestUuidRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: GetReportsRequestUuidHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the request to generate a document. Generate document endpoints return request_uuids to be used with the GET generated document endpoint.
    */
   requestUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetReportsRequestUuidResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * OK
    */
   report?: Report | undefined;
 };
 
 /** @internal */
+export const GetReportsRequestUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetReportsRequestUuidHeaderXGustoAPIVersion> = z
+    .nativeEnum(GetReportsRequestUuidHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetReportsRequestUuidRequest$Outbound = {
-  request_uuid: string;
   "X-Gusto-API-Version": string;
+  request_uuid: string;
 };
 
 /** @internal */
@@ -48,12 +63,13 @@ export const GetReportsRequestUuidRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetReportsRequestUuidRequest
 > = z.object({
+  xGustoAPIVersion: GetReportsRequestUuidHeaderXGustoAPIVersion$outboundSchema
+    .default("2025-06-15"),
   requestUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
-    requestUuid: "request_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    requestUuid: "request_uuid",
   });
 });
 

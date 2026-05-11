@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeesGetTimeOffActivities } from "../funcs/employeesGetTimeOffActivities.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetVersionEmployeesTimeOffActivitiesHeaderXGustoAPIVersion,
   GetVersionEmployeesTimeOffActivitiesRequest,
   GetVersionEmployeesTimeOffActivitiesResponse,
 } from "../models/operations/getversionemployeestimeoffactivities.js";
@@ -47,8 +47,8 @@ export function buildEmployeesGetTimeOffActivitiesQuery(
 } {
   return {
     queryKey: queryKeyEmployeesGetTimeOffActivities(request.employeeUuid, {
-      timeOffType: request.timeOffType,
       xGustoAPIVersion: request.xGustoAPIVersion,
+      timeOffType: request.timeOffType,
     }),
     queryFn: async function employeesGetTimeOffActivitiesQueryFn(
       ctx,
@@ -76,12 +76,14 @@ export function buildEmployeesGetTimeOffActivitiesQuery(
 export function queryKeyEmployeesGetTimeOffActivities(
   employeeUuid: string,
   parameters: {
+    xGustoAPIVersion?:
+      | GetVersionEmployeesTimeOffActivitiesHeaderXGustoAPIVersion
+      | undefined;
     timeOffType: string;
-    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "Employees",
     "getTimeOffActivities",
     employeeUuid,

@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1ExternalPayrollRequest,
   PostV1ExternalPayrollResponse,
@@ -38,7 +39,8 @@ export type ExternalPayrollsCreateMutationVariables = {
 export type ExternalPayrollsCreateMutationData = PostV1ExternalPayrollResponse;
 
 export type ExternalPayrollsCreateMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -49,10 +51,10 @@ export type ExternalPayrollsCreateMutationError =
   | SDKValidationError;
 
 /**
- * Create a new external payroll for a company
+ * Create an external payroll for a company
  *
  * @remarks
- * Creates a new external payroll for the company.
+ * Creates a new external payroll for a company.
  *
  * scope: `external_payrolls:write`
  */
@@ -75,7 +77,7 @@ export function useExternalPayrollsCreateMutation(
 }
 
 export function mutationKeyExternalPayrollsCreate(): MutationKey {
-  return ["@gusto/embedded-api", "externalPayrolls", "create"];
+  return ["@gusto/embedded-api-v-2025-11-15", "externalPayrolls", "create"];
 }
 
 export function buildExternalPayrollsCreateMutation(

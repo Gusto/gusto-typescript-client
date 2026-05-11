@@ -20,7 +20,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion,
   GetV1SalaryEstimatesOccupationsRequest,
@@ -46,7 +46,7 @@ export {
 };
 
 export type SalaryEstimatesGetV1SalaryEstimatesOccupationsQueryError =
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -166,7 +166,7 @@ export function invalidateSalaryEstimatesGetV1SalaryEstimatesOccupations(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "Salary Estimates",
       "getV1SalaryEstimatesOccupations",
       ...queryKeyBase,
@@ -181,7 +181,7 @@ export function invalidateAllSalaryEstimatesGetV1SalaryEstimatesOccupations(
   return client.invalidateQueries({
     ...filters,
     queryKey: [
-      "@gusto/embedded-api",
+      "@gusto/embedded-api-v-2025-11-15",
       "Salary Estimates",
       "getV1SalaryEstimatesOccupations",
     ],

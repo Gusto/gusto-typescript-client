@@ -12,95 +12,63 @@ import {
   EmployeeBankAccount$inboundSchema,
 } from "../components/employeebankaccount.js";
 import {
+  EmployeeBankAccountRequest,
+  EmployeeBankAccountRequest$Outbound,
+  EmployeeBankAccountRequest$outboundSchema,
+} from "../components/employeebankaccountrequest.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const AccountType = {
-  Checking: "Checking",
-  Savings: "Savings",
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
 } as const;
-export type AccountType = ClosedEnum<typeof AccountType>;
-
-export type PostV1EmployeesEmployeeIdBankAccountsRequestBody = {
-  name: string;
-  routingNumber: string;
-  accountNumber: string;
-  accountType: AccountType;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PostV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion
+  >;
 
 export type PostV1EmployeesEmployeeIdBankAccountsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the employee
    */
   employeeId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostV1EmployeesEmployeeIdBankAccountsRequestBody;
+  employeeBankAccountRequest: EmployeeBankAccountRequest;
 };
 
 export type PostV1EmployeesEmployeeIdBankAccountsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Created
    */
   employeeBankAccount?: EmployeeBankAccount | undefined;
 };
 
 /** @internal */
-export const AccountType$outboundSchema: z.ZodNativeEnum<typeof AccountType> = z
-  .nativeEnum(AccountType);
-
-/** @internal */
-export type PostV1EmployeesEmployeeIdBankAccountsRequestBody$Outbound = {
-  name: string;
-  routing_number: string;
-  account_number: string;
-  account_type: string;
-};
-
-/** @internal */
-export const PostV1EmployeesEmployeeIdBankAccountsRequestBody$outboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdBankAccountsRequestBody$Outbound,
-    z.ZodTypeDef,
-    PostV1EmployeesEmployeeIdBankAccountsRequestBody
-  > = z.object({
-    name: z.string(),
-    routingNumber: z.string(),
-    accountNumber: z.string(),
-    accountType: AccountType$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      routingNumber: "routing_number",
-      accountNumber: "account_number",
-      accountType: "account_type",
-    });
-  });
-
-export function postV1EmployeesEmployeeIdBankAccountsRequestBodyToJSON(
-  postV1EmployeesEmployeeIdBankAccountsRequestBody:
-    PostV1EmployeesEmployeeIdBankAccountsRequestBody,
-): string {
-  return JSON.stringify(
-    PostV1EmployeesEmployeeIdBankAccountsRequestBody$outboundSchema.parse(
-      postV1EmployeesEmployeeIdBankAccountsRequestBody,
-    ),
-  );
-}
+export const PostV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion
+  > = z.nativeEnum(PostV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PostV1EmployeesEmployeeIdBankAccountsRequest$Outbound = {
-  employee_id: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostV1EmployeesEmployeeIdBankAccountsRequestBody$Outbound;
+  employee_id: string;
+  "Employee-Bank-Account-Request": EmployeeBankAccountRequest$Outbound;
 };
 
 /** @internal */
@@ -110,16 +78,16 @@ export const PostV1EmployeesEmployeeIdBankAccountsRequest$outboundSchema:
     z.ZodTypeDef,
     PostV1EmployeesEmployeeIdBankAccountsRequest
   > = z.object({
+    xGustoAPIVersion:
+      PostV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-11-15"),
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PostV1EmployeesEmployeeIdBankAccountsRequestBody$outboundSchema
-    ),
+    employeeBankAccountRequest: EmployeeBankAccountRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      employeeId: "employee_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      employeeId: "employee_id",
+      employeeBankAccountRequest: "Employee-Bank-Account-Request",
     });
   });
 

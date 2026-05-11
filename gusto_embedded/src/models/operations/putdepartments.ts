@@ -5,28 +5,35 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Department,
   Department$inboundSchema,
 } from "../components/department.js";
 import {
+  DepartmentUpdateRequestBody,
+  DepartmentUpdateRequestBody$Outbound,
+  DepartmentUpdateRequestBody$outboundSchema,
+} from "../components/departmentupdaterequestbody.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PutDepartmentsRequestBody = {
-  /**
-   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
-   */
-  version: string;
-  title?: string | undefined;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutDepartmentsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutDepartmentsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PutDepartmentsHeaderXGustoAPIVersion
+>;
 
 export type PutDepartmentsRequest = {
   /**
@@ -36,47 +43,29 @@ export type PutDepartmentsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutDepartmentsRequestBody;
+  xGustoAPIVersion?: PutDepartmentsHeaderXGustoAPIVersion | undefined;
+  departmentUpdateRequestBody: DepartmentUpdateRequestBody;
 };
 
 export type PutDepartmentsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Department Object Example
+   * Success
    */
   department?: Department | undefined;
 };
 
 /** @internal */
-export type PutDepartmentsRequestBody$Outbound = {
-  version: string;
-  title?: string | undefined;
-};
-
-/** @internal */
-export const PutDepartmentsRequestBody$outboundSchema: z.ZodType<
-  PutDepartmentsRequestBody$Outbound,
-  z.ZodTypeDef,
-  PutDepartmentsRequestBody
-> = z.object({
-  version: z.string(),
-  title: z.string().optional(),
-});
-
-export function putDepartmentsRequestBodyToJSON(
-  putDepartmentsRequestBody: PutDepartmentsRequestBody,
-): string {
-  return JSON.stringify(
-    PutDepartmentsRequestBody$outboundSchema.parse(putDepartmentsRequestBody),
+export const PutDepartmentsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PutDepartmentsHeaderXGustoAPIVersion> = z.nativeEnum(
+    PutDepartmentsHeaderXGustoAPIVersion,
   );
-}
 
 /** @internal */
 export type PutDepartmentsRequest$Outbound = {
   department_uuid: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PutDepartmentsRequestBody$Outbound;
+  "Department-Update-Request-Body": DepartmentUpdateRequestBody$Outbound;
 };
 
 /** @internal */
@@ -86,13 +75,15 @@ export const PutDepartmentsRequest$outboundSchema: z.ZodType<
   PutDepartmentsRequest
 > = z.object({
   departmentUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.lazy(() => PutDepartmentsRequestBody$outboundSchema),
+  xGustoAPIVersion: PutDepartmentsHeaderXGustoAPIVersion$outboundSchema.default(
+    "2025-06-15",
+  ),
+  departmentUpdateRequestBody: DepartmentUpdateRequestBody$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     departmentUuid: "department_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    departmentUpdateRequestBody: "Department-Update-Request-Body",
   });
 });
 

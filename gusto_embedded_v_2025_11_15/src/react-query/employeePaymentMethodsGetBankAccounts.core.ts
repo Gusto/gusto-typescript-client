@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeePaymentMethodsGetBankAccounts } from "../funcs/employeePaymentMethodsGetBankAccounts.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdBankAccountsRequest,
   GetV1EmployeesEmployeeIdBankAccountsResponse,
 } from "../models/operations/getv1employeesemployeeidbankaccounts.js";
@@ -49,9 +49,9 @@ export function buildEmployeePaymentMethodsGetBankAccountsQuery(
     queryKey: queryKeyEmployeePaymentMethodsGetBankAccounts(
       request.employeeId,
       {
+        xGustoAPIVersion: request.xGustoAPIVersion,
         page: request.page,
         per: request.per,
-        xGustoAPIVersion: request.xGustoAPIVersion,
       },
     ),
     queryFn: async function employeePaymentMethodsGetBankAccountsQueryFn(
@@ -80,13 +80,15 @@ export function buildEmployeePaymentMethodsGetBankAccountsQuery(
 export function queryKeyEmployeePaymentMethodsGetBankAccounts(
   employeeId: string,
   parameters: {
+    xGustoAPIVersion?:
+      | GetV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion
+      | undefined;
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "employeePaymentMethods",
     "getBankAccounts",
     employeeId,

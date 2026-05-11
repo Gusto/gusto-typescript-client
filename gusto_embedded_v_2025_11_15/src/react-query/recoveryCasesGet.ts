@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetRecoveryCasesRequest } from "../models/operations/getrecoverycases.js";
+import {
+  GetRecoveryCasesHeaderXGustoAPIVersion,
+  GetRecoveryCasesRequest,
+} from "../models/operations/getrecoverycases.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type RecoveryCasesGetQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -110,7 +114,11 @@ export function setRecoveryCasesGetData(
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?: GetRecoveryCasesHeaderXGustoAPIVersion | undefined;
+      page?: number | undefined;
+      per?: number | undefined;
+    },
   ],
   data: RecoveryCasesGetQueryData,
 ): RecoveryCasesGetQueryData | undefined {
@@ -124,14 +132,23 @@ export function invalidateRecoveryCasesGet(
   queryKeyBase: TupleToPrefixes<
     [
       companyUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?: GetRecoveryCasesHeaderXGustoAPIVersion | undefined;
+        page?: number | undefined;
+        per?: number | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "recoveryCases", "get", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "recoveryCases",
+      "get",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -141,6 +158,6 @@ export function invalidateAllRecoveryCasesGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "recoveryCases", "get"],
+    queryKey: ["@gusto/embedded-api-v-2025-11-15", "recoveryCases", "get"],
   });
 }

@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest,
   PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse,
@@ -41,7 +41,7 @@ export type TimeOffPoliciesDeactivateMutationData =
 
 export type TimeOffPoliciesDeactivateMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -78,7 +78,7 @@ export function useTimeOffPoliciesDeactivateMutation(
 }
 
 export function mutationKeyTimeOffPoliciesDeactivate(): MutationKey {
-  return ["@gusto/embedded-api", "timeOffPolicies", "deactivate"];
+  return ["@gusto/embedded-api-v-2025-11-15", "timeOffPolicies", "deactivate"];
 }
 
 export function buildTimeOffPoliciesDeactivateMutation(

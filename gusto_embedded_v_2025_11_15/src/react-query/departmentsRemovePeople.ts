@@ -19,8 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutRemovePeopleFromDepartmentRequest,
   PutRemovePeopleFromDepartmentResponse,
@@ -38,6 +40,8 @@ export type DepartmentsRemovePeopleMutationData =
   PutRemovePeopleFromDepartmentResponse;
 
 export type DepartmentsRemovePeopleMutationError =
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -74,7 +78,7 @@ export function useDepartmentsRemovePeopleMutation(
 }
 
 export function mutationKeyDepartmentsRemovePeople(): MutationKey {
-  return ["@gusto/embedded-api", "Departments", "removePeople"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Departments", "removePeople"];
 }
 
 export function buildDepartmentsRemovePeopleMutation(

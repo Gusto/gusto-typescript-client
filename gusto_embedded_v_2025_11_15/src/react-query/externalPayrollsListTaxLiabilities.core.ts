@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { externalPayrollsListTaxLiabilities } from "../funcs/externalPayrollsListTaxLiabilities.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1TaxLiabilitiesHeaderXGustoAPIVersion,
   GetV1TaxLiabilitiesRequest,
   GetV1TaxLiabilitiesResponse,
 } from "../models/operations/getv1taxliabilities.js";
@@ -74,10 +74,12 @@ export function buildExternalPayrollsListTaxLiabilitiesQuery(
 
 export function queryKeyExternalPayrollsListTaxLiabilities(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?: GetV1TaxLiabilitiesHeaderXGustoAPIVersion | undefined;
+  },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "externalPayrolls",
     "listTaxLiabilities",
     companyUuid,

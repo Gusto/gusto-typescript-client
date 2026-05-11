@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1LocationsLocationIdRequest,
   PutV1LocationsLocationIdResponse,
@@ -40,7 +40,7 @@ export type LocationsUpdateMutationData = PutV1LocationsLocationIdResponse;
 
 export type LocationsUpdateMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -77,7 +77,7 @@ export function useLocationsUpdateMutation(
 }
 
 export function mutationKeyLocationsUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "Locations", "update"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Locations", "update"];
 }
 
 export function buildLocationsUpdateMutation(

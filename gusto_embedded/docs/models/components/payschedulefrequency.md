@@ -1,6 +1,8 @@
 # PayScheduleFrequency
 
-Pay frequency for this schedule. READ-ONLY.
+The frequency that employees on this pay schedule are paid with Gusto.
+
+READ-ONLY in responses. Possible values:
 
 - `Every week`: Employees are paid weekly.
 - `Every other week`: Employees are paid bi-weekly (every two weeks).

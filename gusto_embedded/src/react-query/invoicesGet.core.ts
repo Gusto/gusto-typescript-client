@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { invoicesGet } from "../funcs/invoicesGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetInvoicesInvoicePeriodHeaderXGustoAPIVersion,
   GetInvoicesInvoicePeriodRequest,
   GetInvoicesInvoicePeriodResponse,
   GetInvoicesInvoicePeriodSecurity,
@@ -48,10 +48,10 @@ export function buildInvoicesGetQuery(
 } {
   return {
     queryKey: queryKeyInvoicesGet(request.invoicePeriod, {
+      xGustoAPIVersion: request.xGustoAPIVersion,
       page: request.page,
       per: request.per,
       companyUuids: request.companyUuids,
-      xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function invoicesGetQueryFn(
       ctx,
@@ -80,10 +80,12 @@ export function buildInvoicesGetQuery(
 export function queryKeyInvoicesGet(
   invoicePeriod: string,
   parameters: {
+    xGustoAPIVersion?:
+      | GetInvoicesInvoicePeriodHeaderXGustoAPIVersion
+      | undefined;
     page?: number | undefined;
     per?: number | undefined;
     companyUuids?: string | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return ["@gusto/embedded-api", "Invoices", "get", invoicePeriod, parameters];

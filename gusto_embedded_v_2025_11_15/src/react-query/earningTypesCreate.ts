@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1CompaniesCompanyIdEarningTypesRequest,
   PostV1CompaniesCompanyIdEarningTypesResponse,
@@ -39,7 +40,8 @@ export type EarningTypesCreateMutationData =
   PostV1CompaniesCompanyIdEarningTypesResponse;
 
 export type EarningTypesCreateMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -78,7 +80,7 @@ export function useEarningTypesCreateMutation(
 }
 
 export function mutationKeyEarningTypesCreate(): MutationKey {
-  return ["@gusto/embedded-api", "earningTypes", "create"];
+  return ["@gusto/embedded-api-v-2025-11-15", "earningTypes", "create"];
 }
 
 export function buildEarningTypesCreateMutation(

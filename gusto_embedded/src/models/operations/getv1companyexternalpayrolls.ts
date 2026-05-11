@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ExternalPayrollBasic,
@@ -14,35 +15,61 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompanyExternalPayrollsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompanyExternalPayrollsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1CompanyExternalPayrollsHeaderXGustoAPIVersion
+>;
+
 export type GetV1CompanyExternalPayrollsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompanyExternalPayrollsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
   companyUuid: string;
   /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  page?: number | undefined;
+  /**
+   * Number of objects per page. For majority of endpoints will default to 25
+   */
+  per?: number | undefined;
 };
 
 export type GetV1CompanyExternalPayrollsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
-  externalPayrollList?: Array<ExternalPayrollBasic> | undefined;
+  externalPayrollBasics?: Array<ExternalPayrollBasic> | undefined;
 };
 
 /** @internal */
+export const GetV1CompanyExternalPayrollsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1CompanyExternalPayrollsHeaderXGustoAPIVersion> = z
+    .nativeEnum(GetV1CompanyExternalPayrollsHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetV1CompanyExternalPayrollsRequest$Outbound = {
-  company_uuid: string;
   "X-Gusto-API-Version": string;
+  company_uuid: string;
+  page?: number | undefined;
+  per?: number | undefined;
 };
 
 /** @internal */
@@ -51,12 +78,17 @@ export const GetV1CompanyExternalPayrollsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1CompanyExternalPayrollsRequest
 > = z.object({
+  xGustoAPIVersion:
+    GetV1CompanyExternalPayrollsHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
   companyUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  page: z.number().int().optional(),
+  per: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
-    companyUuid: "company_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    companyUuid: "company_uuid",
   });
 });
 
@@ -77,12 +109,12 @@ export const GetV1CompanyExternalPayrollsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "External-Payroll-List": z.array(ExternalPayrollBasic$inboundSchema)
+  "External-Payroll-Basics": z.array(ExternalPayrollBasic$inboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
-    "External-Payroll-List": "externalPayrollList",
+    "External-Payroll-Basics": "externalPayrollBasics",
   });
 });
 

@@ -12,9 +12,9 @@ import {
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  PaySchedule,
-  PaySchedule$inboundSchema,
-} from "../components/payschedule.js";
+  PayScheduleShow,
+  PayScheduleShow$inboundSchema,
+} from "../components/payscheduleshow.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -22,7 +22,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export const GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdHeaderXGustoAPIVersion =
   {
-    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+    TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
   } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -54,7 +54,7 @@ export type GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse = {
   /**
    * Successful
    */
-  paySchedule?: PaySchedule | undefined;
+  payScheduleShow?: PayScheduleShow | undefined;
 };
 
 /** @internal */
@@ -81,7 +81,7 @@ export const GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$outboundSch
   > = z.object({
     xGustoAPIVersion:
       GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdHeaderXGustoAPIVersion$outboundSchema
-        .default("2025-06-15"),
+        .default("2025-11-15"),
     companyId: z.string(),
     payScheduleId: z.string(),
   }).transform((v) => {
@@ -110,11 +110,11 @@ export const GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSch
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Pay-Schedule": PaySchedule$inboundSchema.optional(),
+    "Pay-Schedule-Show": PayScheduleShow$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Pay-Schedule": "paySchedule",
+      "Pay-Schedule-Show": "payScheduleShow",
     });
   });
 

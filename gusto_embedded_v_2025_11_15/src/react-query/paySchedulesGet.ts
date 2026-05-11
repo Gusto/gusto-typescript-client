@@ -59,7 +59,7 @@ export type PaySchedulesGetQueryError =
  * Get a pay schedule
  *
  * @remarks
- * Returns a single pay schedule by UUID. The pay schedule object captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+ * Returns a single pay schedule by UUID. The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
  *
  * scope: `pay_schedules:read`
  */
@@ -85,7 +85,7 @@ export function usePaySchedulesGet(
  * Get a pay schedule
  *
  * @remarks
- * Returns a single pay schedule by UUID. The pay schedule object captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+ * Returns a single pay schedule by UUID. The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
  *
  * scope: `pay_schedules:read`
  */
@@ -142,7 +142,12 @@ export function invalidatePaySchedulesGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "paySchedules", "get", ...queryKeyBase],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "paySchedules",
+      "get",
+      ...queryKeyBase,
+    ],
   });
 }
 
@@ -152,6 +157,6 @@ export function invalidateAllPaySchedulesGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "paySchedules", "get"],
+    queryKey: ["@gusto/embedded-api-v-2025-11-15", "paySchedules", "get"],
   });
 }

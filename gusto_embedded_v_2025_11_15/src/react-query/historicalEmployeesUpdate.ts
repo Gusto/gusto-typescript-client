@@ -19,8 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1HistoricalEmployeesRequest,
   PutV1HistoricalEmployeesResponse,
@@ -38,6 +40,8 @@ export type HistoricalEmployeesUpdateMutationData =
   PutV1HistoricalEmployeesResponse;
 
 export type HistoricalEmployeesUpdateMutationError =
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -53,7 +57,7 @@ export type HistoricalEmployeesUpdateMutationError =
  * @remarks
  * Update a historical employee, an employee that was previously dismissed from the company in the current year.
  *
- * scope: `employees:manage`
+ * scope: `employees:manage employees:write`
  */
 export function useHistoricalEmployeesUpdateMutation(
   options?: MutationHookOptions<
@@ -74,7 +78,7 @@ export function useHistoricalEmployeesUpdateMutation(
 }
 
 export function mutationKeyHistoricalEmployeesUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "historicalEmployees", "update"];
+  return ["@gusto/embedded-api-v-2025-11-15", "historicalEmployees", "update"];
 }
 
 export function buildHistoricalEmployeesUpdateMutation(

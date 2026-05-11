@@ -1,7 +1,5 @@
 # ContractorPaymentReceipt
 
-Example response
-
 ## Example Usage
 
 ```typescript

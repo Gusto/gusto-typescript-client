@@ -85,7 +85,7 @@ export function queryKeyWebhooksGetV1WebhooksHealthCheck(
   },
 ): QueryKey {
   return [
-    "@gusto/embedded-api",
+    "@gusto/embedded-api-v-2025-11-15",
     "Webhooks",
     "getV1WebhooksHealthCheck",
     parameters,

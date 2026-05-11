@@ -450,11 +450,11 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.NotFoundErrorObject            | 404                                   | application/json                      |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## verify
 
@@ -795,17 +795,15 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.NotFoundErrorObject            | 404                                   | application/json                      |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## createFromPlaidToken
 
 This endpoint creates a new **verified** bank account by using a plaid processor token to retrieve its information.
-
-scope: `plaid_processor:write`
 
 > 📘
 > To create a token please use the [plaid api](https://plaid.com/docs/api/processors/#processortokencreate) and select "gusto" as processor.
@@ -813,6 +811,8 @@ scope: `plaid_processor:write`
 > 🚧 Warning - Company Bank Accounts
 >
 > If a default company bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
+
+scope: `plaid_processor:write`
 
 ### Example Usage: Basic
 
@@ -826,7 +826,7 @@ const gustoEmbedded = new GustoEmbedded({
 
 async function run() {
   const result = await gustoEmbedded.bankAccounts.createFromPlaidToken({
-    requestBody: {
+    plaidProcessorTokenRequest: {
       ownerType: "Company",
       ownerId: "<id>",
       processorToken: "<value>",
@@ -855,7 +855,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 
 async function run() {
   const res = await bankAccountsCreateFromPlaidToken(gustoEmbedded, {
-    requestBody: {
+    plaidProcessorTokenRequest: {
       ownerType: "Company",
       ownerId: "<id>",
       processorToken: "<value>",
@@ -900,7 +900,7 @@ const gustoEmbedded = new GustoEmbedded({
 
 async function run() {
   const result = await gustoEmbedded.bankAccounts.createFromPlaidToken({
-    requestBody: {
+    plaidProcessorTokenRequest: {
       ownerType: "Company",
       ownerId: "ef279fbd-0fc6-4cf1-a977-6939d621c429",
       processorToken: "processor-sandbox-0asd1-a92nc",
@@ -929,7 +929,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 
 async function run() {
   const res = await bankAccountsCreateFromPlaidToken(gustoEmbedded, {
-    requestBody: {
+    plaidProcessorTokenRequest: {
       ownerType: "Company",
       ownerId: "ef279fbd-0fc6-4cf1-a977-6939d621c429",
       processorToken: "processor-sandbox-0asd1-a92nc",
@@ -974,7 +974,7 @@ const gustoEmbedded = new GustoEmbedded({
 
 async function run() {
   const result = await gustoEmbedded.bankAccounts.createFromPlaidToken({
-    requestBody: {
+    plaidProcessorTokenRequest: {
       ownerType: "Company",
       ownerId: "<id>",
       processorToken: "<value>",
@@ -1003,7 +1003,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 
 async function run() {
   const res = await bankAccountsCreateFromPlaidToken(gustoEmbedded, {
-    requestBody: {
+    plaidProcessorTokenRequest: {
       ownerType: "Company",
       ownerId: "<id>",
       processorToken: "<value>",
@@ -1048,7 +1048,7 @@ const gustoEmbedded = new GustoEmbedded({
 
 async function run() {
   const result = await gustoEmbedded.bankAccounts.createFromPlaidToken({
-    requestBody: {
+    plaidProcessorTokenRequest: {
       ownerType: "Company",
       ownerId: "<id>",
       processorToken: "<value>",
@@ -1077,7 +1077,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 
 async function run() {
   const res = await bankAccountsCreateFromPlaidToken(gustoEmbedded, {
-    requestBody: {
+    plaidProcessorTokenRequest: {
       ownerType: "Company",
       ownerId: "<id>",
       processorToken: "<value>",
@@ -1122,7 +1122,7 @@ const gustoEmbedded = new GustoEmbedded({
 
 async function run() {
   const result = await gustoEmbedded.bankAccounts.createFromPlaidToken({
-    requestBody: {
+    plaidProcessorTokenRequest: {
       ownerType: "Company",
       ownerId: "<id>",
       processorToken: "<value>",
@@ -1151,7 +1151,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 
 async function run() {
   const res = await bankAccountsCreateFromPlaidToken(gustoEmbedded, {
-    requestBody: {
+    plaidProcessorTokenRequest: {
       ownerType: "Company",
       ownerId: "<id>",
       processorToken: "<value>",
@@ -1200,10 +1200,11 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## deleteV1CompaniesCompanyIdBankAccountsBankAccountId
 
@@ -1297,8 +1298,8 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.NotFoundErrorObject            | 404                                   | application/json                      |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |

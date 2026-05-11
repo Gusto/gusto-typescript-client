@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1CompanyPaymentConfigsRequest,
   PutV1CompanyPaymentConfigsResponse,
@@ -41,7 +41,7 @@ export type PaymentConfigsUpdateMutationData =
 
 export type PaymentConfigsUpdateMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -84,7 +84,7 @@ export function usePaymentConfigsUpdateMutation(
 }
 
 export function mutationKeyPaymentConfigsUpdate(): MutationKey {
-  return ["@gusto/embedded-api", "paymentConfigs", "update"];
+  return ["@gusto/embedded-api-v-2025-11-15", "paymentConfigs", "update"];
 }
 
 export function buildPaymentConfigsUpdateMutation(

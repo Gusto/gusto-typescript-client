@@ -78,5 +78,11 @@ export function queryKeyBankAccountsGet(
       | undefined;
   },
 ): QueryKey {
-  return ["@gusto/embedded-api", "bankAccounts", "get", companyId, parameters];
+  return [
+    "@gusto/embedded-api-v-2025-11-15",
+    "bankAccounts",
+    "get",
+    companyId,
+    parameters,
+  ];
 }

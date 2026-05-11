@@ -4,16 +4,13 @@
 
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import {
-  CompanySuspensionCreationErrors,
-  CompanySuspensionCreationErrors$inboundSchema,
-} from "../models/errors/companysuspensioncreationerrors.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -24,6 +21,10 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import {
+  UnprocessableEntityError,
+  UnprocessableEntityError$inboundSchema,
+} from "../models/errors/unprocessableentityerror.js";
 import {
   PostCompaniesCompanyUuidSuspensionsRequest,
   PostCompaniesCompanyUuidSuspensionsRequest$outboundSchema,
@@ -50,7 +51,7 @@ export function companiesSuspensionsSuspend(
 ): APIPromise<
   Result<
     PostCompaniesCompanyUuidSuspensionsResponse,
-    | CompanySuspensionCreationErrors
+    | UnprocessableEntityError
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -76,7 +77,7 @@ async function $do(
   [
     Result<
       PostCompaniesCompanyUuidSuspensionsResponse,
-      | CompanySuspensionCreationErrors
+      | UnprocessableEntityError
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -159,7 +160,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["422", "4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -174,7 +176,7 @@ async function $do(
 
   const [result] = await M.match<
     PostCompaniesCompanyUuidSuspensionsResponse,
-    | CompanySuspensionCreationErrors
+    | UnprocessableEntityError
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -187,7 +189,7 @@ async function $do(
     M.json(200, PostCompaniesCompanyUuidSuspensionsResponse$inboundSchema, {
       key: "Company-Suspension",
     }),
-    M.jsonErr(422, CompanySuspensionCreationErrors$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

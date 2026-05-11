@@ -441,7 +441,9 @@ export class Payrolls extends ClientSDK {
    * Get an employee's pay stubs
    *
    * @remarks
-   * Get an employee's pay stubs
+   * Get an employee's pay stubs.
+   *
+   * Results are returned in reverse chronological order (newest first).
    *
    * scope: `pay_stubs:read`
    */

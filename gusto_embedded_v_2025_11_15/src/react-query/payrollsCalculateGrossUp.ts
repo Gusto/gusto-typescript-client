@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostPayrollsGrossUpPayrollUuidRequest,
   PostPayrollsGrossUpPayrollUuidResponse,
@@ -41,7 +41,7 @@ export type PayrollsCalculateGrossUpMutationData =
 
 export type PayrollsCalculateGrossUpMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -80,7 +80,7 @@ export function usePayrollsCalculateGrossUpMutation(
 }
 
 export function mutationKeyPayrollsCalculateGrossUp(): MutationKey {
-  return ["@gusto/embedded-api", "Payrolls", "calculateGrossUp"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Payrolls", "calculateGrossUp"];
 }
 
 export function buildPayrollsCalculateGrossUpMutation(

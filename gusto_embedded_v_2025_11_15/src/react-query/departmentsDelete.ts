@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   DeleteDepartmentRequest,
   DeleteDepartmentResponse,
@@ -38,7 +39,8 @@ export type DepartmentsDeleteMutationVariables = {
 export type DepartmentsDeleteMutationData = DeleteDepartmentResponse;
 
 export type DepartmentsDeleteMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -75,7 +77,7 @@ export function useDepartmentsDeleteMutation(
 }
 
 export function mutationKeyDepartmentsDelete(): MutationKey {
-  return ["@gusto/embedded-api", "Departments", "delete"];
+  return ["@gusto/embedded-api-v-2025-11-15", "Departments", "delete"];
 }
 
 export function buildDepartmentsDeleteMutation(
