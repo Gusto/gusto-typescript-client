@@ -32,7 +32,7 @@ export type PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesHeaderXGustoAPIVers
     typeof PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesHeaderXGustoAPIVersion
   >;
 
-export type PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees = {
+export type Employees = {
   /**
    * The UUID of the employee
    */
@@ -44,7 +44,7 @@ export type PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees = {
 };
 
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody = {
-  employees: Array<PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees>;
+  employees: Array<Employees>;
 };
 
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest = {
@@ -78,39 +78,29 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesHeaderXGustoAPIVer
   );
 
 /** @internal */
-export type PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees$Outbound =
-  {
-    uuid: string;
-    balance?: string | null | undefined;
-  };
+export type Employees$Outbound = {
+  uuid: string;
+  balance?: string | null | undefined;
+};
 
 /** @internal */
-export const PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees$outboundSchema:
-  z.ZodType<
-    PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees$Outbound,
-    z.ZodTypeDef,
-    PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees
-  > = z.object({
-    uuid: z.string(),
-    balance: z.nullable(z.string()).optional(),
-  });
+export const Employees$outboundSchema: z.ZodType<
+  Employees$Outbound,
+  z.ZodTypeDef,
+  Employees
+> = z.object({
+  uuid: z.string(),
+  balance: z.nullable(z.string()).optional(),
+});
 
-export function putV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployeesToJSON(
-  putV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees:
-    PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees,
-): string {
-  return JSON.stringify(
-    PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees$outboundSchema
-      .parse(putV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees),
-  );
+export function employeesToJSON(employees: Employees): string {
+  return JSON.stringify(Employees$outboundSchema.parse(employees));
 }
 
 /** @internal */
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody$Outbound =
   {
-    employees: Array<
-      PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees$Outbound
-    >;
+    employees: Array<Employees$Outbound>;
   };
 
 /** @internal */
@@ -120,11 +110,7 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody$outbou
     z.ZodTypeDef,
     PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody
   > = z.object({
-    employees: z.array(
-      z.lazy(() =>
-        PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees$outboundSchema
-      ),
-    ),
+    employees: z.array(z.lazy(() => Employees$outboundSchema)),
   });
 
 export function putV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBodyToJSON(

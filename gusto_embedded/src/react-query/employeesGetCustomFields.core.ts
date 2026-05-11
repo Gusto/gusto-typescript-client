@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeesGetCustomFields } from "../funcs/employeesGetCustomFields.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdCustomFieldsRequest,
   GetV1EmployeesEmployeeIdCustomFieldsResponse,
 } from "../models/operations/getv1employeesemployeeidcustomfields.js";
@@ -79,7 +79,9 @@ export function queryKeyEmployeesGetCustomFields(
   parameters: {
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
+    xGustoAPIVersion?:
+      | GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion
+      | undefined;
   },
 ): QueryKey {
   return [

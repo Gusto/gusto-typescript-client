@@ -7,6 +7,7 @@ import { contractorPaymentsDelete } from "../funcs/contractorPaymentsDelete.js";
 import { contractorPaymentsFund } from "../funcs/contractorPaymentsFund.js";
 import { contractorPaymentsGet } from "../funcs/contractorPaymentsGet.js";
 import { contractorPaymentsGetReceipt } from "../funcs/contractorPaymentsGetReceipt.js";
+import { contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf } from "../funcs/contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf.js";
 import { contractorPaymentsList } from "../funcs/contractorPaymentsList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import {
@@ -21,6 +22,10 @@ import {
   GetV1CompaniesCompanyIdContractorPaymentsRequest,
   GetV1CompaniesCompanyIdContractorPaymentsResponse,
 } from "../models/operations/getv1companiescompanyidcontractorpayments.js";
+import {
+  GetV1ContractorPaymentsContractorPaymentIdPdfRequest,
+  GetV1ContractorPaymentsContractorPaymentIdPdfResponse,
+} from "../models/operations/getv1contractorpaymentscontractorpaymentidpdf.js";
 import {
   GetV1ContractorPaymentsContractorPaymentUuidFundRequest,
   GetV1ContractorPaymentsContractorPaymentUuidFundResponse,
@@ -110,6 +115,8 @@ export class ContractorPayments extends ClientSDK {
    * @remarks
    * Returns an object containing individual contractor payments, within a given time period, including totals.
    *
+   * Results are returned in reverse chronological order (newest first).
+   *
    * scope: `payrolls:read`
    */
   async list(
@@ -164,5 +171,26 @@ export class ContractorPayments extends ClientSDK {
       request,
       options,
     ));
+  }
+
+  /**
+   * Get a contractor payment PDF
+   *
+   * @remarks
+   * Get a PDF document for a single contractor payment.
+   *
+   * scope: `payrolls:read`
+   */
+  async getV1ContractorPaymentsContractorPaymentIdPdf(
+    request: GetV1ContractorPaymentsContractorPaymentIdPdfRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1ContractorPaymentsContractorPaymentIdPdfResponse> {
+    return unwrapAsync(
+      contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf(
+        this,
+        request,
+        options,
+      ),
+    );
   }
 }

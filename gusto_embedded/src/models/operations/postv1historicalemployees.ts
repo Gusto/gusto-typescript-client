@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { Employee, Employee$inboundSchema } from "../components/employee.js";
 import {
@@ -16,39 +17,52 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostV1HistoricalEmployeesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1HistoricalEmployeesHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PostV1HistoricalEmployeesHeaderXGustoAPIVersion
+>;
 
 export type PostV1HistoricalEmployeesRequest = {
   /**
-   * The UUID of the company
-   */
-  companyUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | PostV1HistoricalEmployeesHeaderXGustoAPIVersion
+    | undefined;
   /**
-   * Create a historical employee.
+   * The UUID of the company that will employ this historical record.
    */
+  companyUuid: string;
   historicalEmployeeBody: HistoricalEmployeeBody;
 };
 
 export type PostV1HistoricalEmployeesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Created
    */
   employee?: Employee | undefined;
 };
 
 /** @internal */
+export const PostV1HistoricalEmployeesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PostV1HistoricalEmployeesHeaderXGustoAPIVersion> = z
+    .nativeEnum(PostV1HistoricalEmployeesHeaderXGustoAPIVersion);
+
+/** @internal */
 export type PostV1HistoricalEmployeesRequest$Outbound = {
-  company_uuid: string;
   "X-Gusto-API-Version": string;
+  company_uuid: string;
   "Historical-Employee-Body": HistoricalEmployeeBody$Outbound;
 };
 
@@ -58,13 +72,16 @@ export const PostV1HistoricalEmployeesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1HistoricalEmployeesRequest
 > = z.object({
+  xGustoAPIVersion:
+    PostV1HistoricalEmployeesHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
   companyUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   historicalEmployeeBody: HistoricalEmployeeBody$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    companyUuid: "company_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    companyUuid: "company_uuid",
     historicalEmployeeBody: "Historical-Employee-Body",
   });
 });

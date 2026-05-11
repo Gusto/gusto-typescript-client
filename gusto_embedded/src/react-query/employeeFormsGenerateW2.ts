@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1SandboxGenerateW2Request,
   PostV1SandboxGenerateW2Response,
@@ -39,7 +40,8 @@ export type EmployeeFormsGenerateW2MutationData =
   PostV1SandboxGenerateW2Response;
 
 export type EmployeeFormsGenerateW2MutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Garnishment,
@@ -14,21 +15,32 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1GarnishmentsGarnishmentIdHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1GarnishmentsGarnishmentIdHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1GarnishmentsGarnishmentIdHeaderXGustoAPIVersion
+>;
+
 export type GetV1GarnishmentsGarnishmentIdRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1GarnishmentsGarnishmentIdHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the garnishment
    */
   garnishmentId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1GarnishmentsGarnishmentIdResponse = {
@@ -40,9 +52,14 @@ export type GetV1GarnishmentsGarnishmentIdResponse = {
 };
 
 /** @internal */
+export const GetV1GarnishmentsGarnishmentIdHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1GarnishmentsGarnishmentIdHeaderXGustoAPIVersion> =
+    z.nativeEnum(GetV1GarnishmentsGarnishmentIdHeaderXGustoAPIVersion);
+
+/** @internal */
 export type GetV1GarnishmentsGarnishmentIdRequest$Outbound = {
-  garnishment_id: string;
   "X-Gusto-API-Version": string;
+  garnishment_id: string;
 };
 
 /** @internal */
@@ -51,12 +68,15 @@ export const GetV1GarnishmentsGarnishmentIdRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1GarnishmentsGarnishmentIdRequest
 > = z.object({
+  xGustoAPIVersion:
+    GetV1GarnishmentsGarnishmentIdHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
   garnishmentId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
-    garnishmentId: "garnishment_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    garnishmentId: "garnishment_id",
   });
 });
 

@@ -4,6 +4,7 @@
 
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -25,9 +26,9 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  UnprocessableEntityErrorObject,
-  UnprocessableEntityErrorObject$inboundSchema,
-} from "../models/errors/unprocessableentityerrorobject.js";
+  UnprocessableEntityError,
+  UnprocessableEntityError$inboundSchema,
+} from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1CompaniesCompanyIdPaySchedulesRequest,
   PostV1CompaniesCompanyIdPaySchedulesRequest$outboundSchema,
@@ -41,11 +42,13 @@ import { Result } from "../types/fp.js";
  * Create a new pay schedule
  *
  * @remarks
- * If a company does not have any pay schedules, this endpoint creates a single pay schedule and assigns it to all employees (common during company onboarding).
+ * If a company does not have any pay schedules, this endpoint will create a single pay schedule and assign it to all employees. This is a common use case during company onboarding.
  *
- * If a company already has an active pay schedule and wants multiple pay schedules, this endpoint creates a pay schedule that is not assigned to any employee.
+ * If a company has an existing active pay schedule and want to support multiple pay schedules, this endpoint will create a pay schedule that is not assigned to any employee.
  *
- * Be sure to [check state laws](https://www.dol.gov/agencies/whd/state/payday) to know what schedule is right for your customers. If an onboarded company misses their first pay date, the pay schedule may be automatically adjusted.
+ * Be sure to **[check state laws](https://www.dol.gov/agencies/whd/state/payday)** to know what schedule is right for your customers.
+ *
+ * > If an onboarded company misses their first pay date, Gusto will automatically adjust the pay schedule to the next available pay date.
  *
  * ### Webhooks
  * - `pay_schedule.created`: Fires when a pay schedule is successfully created.
@@ -67,7 +70,7 @@ export function paySchedulesCreate(
   Result<
     PostV1CompaniesCompanyIdPaySchedulesResponse,
     | NotFoundErrorObject
-    | UnprocessableEntityErrorObject
+    | UnprocessableEntityError
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -94,7 +97,7 @@ async function $do(
     Result<
       PostV1CompaniesCompanyIdPaySchedulesResponse,
       | NotFoundErrorObject
-      | UnprocessableEntityErrorObject
+      | UnprocessableEntityError
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -179,7 +182,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -195,7 +199,7 @@ async function $do(
   const [result] = await M.match<
     PostV1CompaniesCompanyIdPaySchedulesResponse,
     | NotFoundErrorObject
-    | UnprocessableEntityErrorObject
+    | UnprocessableEntityError
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -206,10 +210,10 @@ async function $do(
     | SDKValidationError
   >(
     M.json(201, PostV1CompaniesCompanyIdPaySchedulesResponse$inboundSchema, {
-      key: "Pay-Schedule",
+      key: "Pay-Schedule-Show",
     }),
     M.jsonErr(404, NotFoundErrorObject$inboundSchema),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

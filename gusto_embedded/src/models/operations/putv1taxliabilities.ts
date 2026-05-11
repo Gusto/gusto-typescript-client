@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -15,116 +16,55 @@ import {
   TaxLiabilitiesSelections$inboundSchema,
 } from "../components/taxliabilitiesselections.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  TaxLiabilitySelectionsRequest,
+  TaxLiabilitySelectionsRequest$Outbound,
+  TaxLiabilitySelectionsRequest$outboundSchema,
+} from "../components/taxliabilityselectionsrequest.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type LiabilitySelections = {
-  /**
-   * The ID of the tax.
-   */
-  taxId: number;
-  /**
-   * The UUID of the last unpaid external payroll uuid. It should be null when the full amount of tax liability has been paid.
-   */
-  lastUnpaidExternalPayrollUuid: string | null;
-  /**
-   * A selection of unpaid liability amount.
-   */
-  unpaidLiabilityAmount: number;
-};
-
-export type PutV1TaxLiabilitiesRequestBody = {
-  liabilitySelections?: Array<LiabilitySelections> | undefined;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1TaxLiabilitiesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1TaxLiabilitiesHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PutV1TaxLiabilitiesHeaderXGustoAPIVersion
+>;
 
 export type PutV1TaxLiabilitiesRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: PutV1TaxLiabilitiesHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the company
    */
   companyUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutV1TaxLiabilitiesRequestBody;
+  taxLiabilitySelectionsRequest: TaxLiabilitySelectionsRequest;
 };
 
 export type PutV1TaxLiabilitiesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
-  taxLiabilitiesList?: Array<TaxLiabilitiesSelections> | undefined;
+  taxLiabilitiesSelections?: Array<TaxLiabilitiesSelections> | undefined;
 };
 
 /** @internal */
-export type LiabilitySelections$Outbound = {
-  tax_id: number;
-  last_unpaid_external_payroll_uuid: string | null;
-  unpaid_liability_amount: number;
-};
-
-/** @internal */
-export const LiabilitySelections$outboundSchema: z.ZodType<
-  LiabilitySelections$Outbound,
-  z.ZodTypeDef,
-  LiabilitySelections
-> = z.object({
-  taxId: z.number().int(),
-  lastUnpaidExternalPayrollUuid: z.nullable(z.string()),
-  unpaidLiabilityAmount: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    taxId: "tax_id",
-    lastUnpaidExternalPayrollUuid: "last_unpaid_external_payroll_uuid",
-    unpaidLiabilityAmount: "unpaid_liability_amount",
-  });
-});
-
-export function liabilitySelectionsToJSON(
-  liabilitySelections: LiabilitySelections,
-): string {
-  return JSON.stringify(
-    LiabilitySelections$outboundSchema.parse(liabilitySelections),
-  );
-}
-
-/** @internal */
-export type PutV1TaxLiabilitiesRequestBody$Outbound = {
-  liability_selections?: Array<LiabilitySelections$Outbound> | undefined;
-};
-
-/** @internal */
-export const PutV1TaxLiabilitiesRequestBody$outboundSchema: z.ZodType<
-  PutV1TaxLiabilitiesRequestBody$Outbound,
-  z.ZodTypeDef,
-  PutV1TaxLiabilitiesRequestBody
-> = z.object({
-  liabilitySelections: z.array(z.lazy(() => LiabilitySelections$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    liabilitySelections: "liability_selections",
-  });
-});
-
-export function putV1TaxLiabilitiesRequestBodyToJSON(
-  putV1TaxLiabilitiesRequestBody: PutV1TaxLiabilitiesRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1TaxLiabilitiesRequestBody$outboundSchema.parse(
-      putV1TaxLiabilitiesRequestBody,
-    ),
-  );
-}
+export const PutV1TaxLiabilitiesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1TaxLiabilitiesHeaderXGustoAPIVersion> = z
+    .nativeEnum(PutV1TaxLiabilitiesHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PutV1TaxLiabilitiesRequest$Outbound = {
-  company_uuid: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PutV1TaxLiabilitiesRequestBody$Outbound;
+  company_uuid: string;
+  "Tax-Liability-Selections-Request": TaxLiabilitySelectionsRequest$Outbound;
 };
 
 /** @internal */
@@ -133,14 +73,15 @@ export const PutV1TaxLiabilitiesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1TaxLiabilitiesRequest
 > = z.object({
+  xGustoAPIVersion: PutV1TaxLiabilitiesHeaderXGustoAPIVersion$outboundSchema
+    .default("2025-06-15"),
   companyUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.lazy(() => PutV1TaxLiabilitiesRequestBody$outboundSchema),
+  taxLiabilitySelectionsRequest: TaxLiabilitySelectionsRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    companyUuid: "company_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    companyUuid: "company_uuid",
+    taxLiabilitySelectionsRequest: "Tax-Liability-Selections-Request",
   });
 });
 
@@ -159,12 +100,12 @@ export const PutV1TaxLiabilitiesResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Tax-Liabilities-List": z.array(TaxLiabilitiesSelections$inboundSchema)
+  "Tax-Liabilities-Selections": z.array(TaxLiabilitiesSelections$inboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
-    "Tax-Liabilities-List": "taxLiabilitiesList",
+    "Tax-Liabilities-Selections": "taxLiabilitiesSelections",
   });
 });
 

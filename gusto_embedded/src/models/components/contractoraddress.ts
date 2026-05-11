@@ -10,9 +10,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ContractorAddress = {
   /**
-   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
+   * The UUID of the contractor
    */
-  version?: string | undefined;
+  contractorUuid?: string | undefined;
   street1?: string | null | undefined;
   street2?: string | null | undefined;
   city?: string | null | undefined;
@@ -24,9 +24,9 @@ export type ContractorAddress = {
    */
   active?: boolean | undefined;
   /**
-   * The UUID of the contractor
+   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
    */
-  contractorUuid?: string | undefined;
+  version?: string | undefined;
 };
 
 /** @internal */
@@ -35,7 +35,7 @@ export const ContractorAddress$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  version: z.string().optional(),
+  contractor_uuid: z.string().optional(),
   street_1: z.nullable(z.string()).optional(),
   street_2: z.nullable(z.string()).optional(),
   city: z.nullable(z.string()).optional(),
@@ -43,12 +43,12 @@ export const ContractorAddress$inboundSchema: z.ZodType<
   zip: z.nullable(z.string()).optional(),
   country: z.nullable(z.string().default("USA")),
   active: z.boolean().optional(),
-  contractor_uuid: z.string().optional(),
+  version: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    "contractor_uuid": "contractorUuid",
     "street_1": "street1",
     "street_2": "street2",
-    "contractor_uuid": "contractorUuid",
   });
 });
 

@@ -134,6 +134,15 @@ export type CompanyBankAccount = {
    * Name of bank account
    */
   name?: string | undefined;
+  /**
+   * Whether the company has at least one bank account with active reverse-wire
+   *
+   * @remarks
+   * funding. The same value is returned on every bank-account row in this
+   * response. Only present when the emb_reverse_wire_enabled_field feature is
+   * enabled for the partner.
+   */
+  reverseWireEnabled?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -171,6 +180,7 @@ export const CompanyBankAccount$inboundSchema: z.ZodType<
   last_cached_balance: z.nullable(z.string()).optional(),
   balance_fetched_date: z.nullable(z.string()).optional(),
   name: z.string().optional(),
+  reverse_wire_enabled: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -182,6 +192,7 @@ export const CompanyBankAccount$inboundSchema: z.ZodType<
     "plaid_status": "plaidStatus",
     "last_cached_balance": "lastCachedBalance",
     "balance_fetched_date": "balanceFetchedDate",
+    "reverse_wire_enabled": "reverseWireEnabled",
   });
 });
 

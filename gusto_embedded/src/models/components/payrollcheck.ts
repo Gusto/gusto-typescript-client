@@ -19,9 +19,6 @@ export type EmployeeCheckNumberMapping = {
   checkNumber?: number | undefined;
 };
 
-/**
- * Example response
- */
 export type PayrollCheck = {
   /**
    * A unique identifier of the payroll.

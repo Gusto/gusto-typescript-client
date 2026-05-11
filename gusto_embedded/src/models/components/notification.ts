@@ -60,9 +60,6 @@ export type Resources = {
   referenceUuid?: string | undefined;
 };
 
-/**
- * Example response
- */
 export type Notification = {
   /**
    * Unique identifier of a notification.

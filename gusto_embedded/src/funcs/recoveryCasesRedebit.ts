@@ -4,6 +4,7 @@
 
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -18,12 +19,16 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  UnprocessableEntityErrorObject,
-  UnprocessableEntityErrorObject$inboundSchema,
-} from "../models/errors/unprocessableentityerrorobject.js";
+  UnprocessableEntityError,
+  UnprocessableEntityError$inboundSchema,
+} from "../models/errors/unprocessableentityerror.js";
 import {
   RedebitRecoveryCaseRequest,
   RedebitRecoveryCaseRequest$outboundSchema,
@@ -44,6 +49,8 @@ import { Result } from "../types/fp.js";
  * If the company has exceeded maximum redebit attempts, or if the recovery case is not in a redebitable state, the response will be 422 Unprocessable Entity.
  *
  * scope: `recovery_cases:write`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function recoveryCasesRedebit(
   client: GustoEmbeddedCore,
@@ -52,7 +59,8 @@ export function recoveryCasesRedebit(
 ): APIPromise<
   Result<
     RedebitRecoveryCaseResponse,
-    | UnprocessableEntityErrorObject
+    | NotFoundErrorObject
+    | UnprocessableEntityError
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -78,7 +86,8 @@ async function $do(
   [
     Result<
       RedebitRecoveryCaseResponse,
-      | UnprocessableEntityErrorObject
+      | NotFoundErrorObject
+      | UnprocessableEntityError
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -126,7 +135,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -160,7 +169,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -175,7 +185,8 @@ async function $do(
 
   const [result] = await M.match<
     RedebitRecoveryCaseResponse,
-    | UnprocessableEntityErrorObject
+    | NotFoundErrorObject
+    | UnprocessableEntityError
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -186,8 +197,9 @@ async function $do(
     | SDKValidationError
   >(
     M.nil(202, RedebitRecoveryCaseResponse$inboundSchema),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityError$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

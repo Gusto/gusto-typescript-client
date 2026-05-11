@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeEmploymentsGetTerminations } from "../funcs/employeeEmploymentsGetTerminations.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdTerminationsRequest,
   GetV1EmployeesEmployeeIdTerminationsResponse,
 } from "../models/operations/getv1employeesemployeeidterminations.js";
@@ -74,7 +74,11 @@ export function buildEmployeeEmploymentsGetTerminationsQuery(
 
 export function queryKeyEmployeeEmploymentsGetTerminations(
   employeeId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

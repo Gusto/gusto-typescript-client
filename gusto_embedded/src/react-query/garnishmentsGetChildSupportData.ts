@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -21,7 +20,10 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1GarnishmentsChildSupportRequest } from "../models/operations/getv1garnishmentschildsupport.js";
+import {
+  GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion,
+  GetV1GarnishmentsChildSupportRequest,
+} from "../models/operations/getv1garnishmentschildsupport.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -111,7 +113,13 @@ export function useGarnishmentsGetChildSupportDataSuspense(
 
 export function setGarnishmentsGetChildSupportDataData(
   client: QueryClient,
-  queryKeyBase: [parameters: { xGustoAPIVersion?: VersionHeader | undefined }],
+  queryKeyBase: [
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion
+        | undefined;
+    },
+  ],
   data: GarnishmentsGetChildSupportDataQueryData,
 ): GarnishmentsGetChildSupportDataQueryData | undefined {
   const key = queryKeyGarnishmentsGetChildSupportData(...queryKeyBase);
@@ -125,7 +133,11 @@ export function setGarnishmentsGetChildSupportDataData(
 export function invalidateGarnishmentsGetChildSupportData(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
-    [parameters: { xGustoAPIVersion?: VersionHeader | undefined }]
+    [parameters: {
+      xGustoAPIVersion?:
+        | GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion
+        | undefined;
+    }]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
 ): Promise<void> {

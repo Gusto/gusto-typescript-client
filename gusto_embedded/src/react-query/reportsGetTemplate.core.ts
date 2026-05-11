@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { reportsGetTemplate } from "../funcs/reportsGetTemplate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetCompaniesCompanyUuidReportTemplatesReportTypeHeaderXGustoAPIVersion,
   GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
   GetCompaniesCompanyUuidReportTemplatesReportTypeResponse,
 } from "../models/operations/getcompaniescompanyuuidreporttemplatesreporttype.js";
@@ -77,7 +77,11 @@ export function buildReportsGetTemplateQuery(
 export function queryKeyReportsGetTemplate(
   companyUuid: string,
   reportType: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetCompaniesCompanyUuidReportTemplatesReportTypeHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest,
   PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse,
@@ -39,7 +40,8 @@ export type PaySchedulesPreviewAssignmentMutationData =
   PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse;
 
 export type PaySchedulesPreviewAssignmentMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

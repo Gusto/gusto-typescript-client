@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { notificationsGetDetails } from "../funcs/notificationsGetDetails.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetNotificationsNotificationUuidHeaderXGustoAPIVersion,
   GetNotificationsNotificationUuidRequest,
   GetNotificationsNotificationUuidResponse,
 } from "../models/operations/getnotificationsnotificationuuid.js";
@@ -74,7 +74,11 @@ export function buildNotificationsGetDetailsQuery(
 
 export function queryKeyNotificationsGetDetails(
   notificationUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetNotificationsNotificationUuidHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

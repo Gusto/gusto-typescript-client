@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PutV1WebhookSubscriptionUuidRequest,
   PutV1WebhookSubscriptionUuidResponse,
@@ -41,7 +42,8 @@ export type WebhooksUpdateSubscriptionMutationData =
   PutV1WebhookSubscriptionUuidResponse;
 
 export type WebhooksUpdateSubscriptionMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -57,9 +59,9 @@ export type WebhooksUpdateSubscriptionMutationError =
  * @remarks
  * Updates the Webhook Subscription associated with the provided UUID.
  *
- * > 📘 System Access Authentication
- * >
- * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *
  * scope: `webhook_subscriptions:write`
  */

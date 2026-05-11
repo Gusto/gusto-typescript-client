@@ -12,14 +12,14 @@ import {
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  PaySchedule,
-  PaySchedule$inboundSchema,
-} from "../components/payschedule.js";
-import {
   PayScheduleCreateRequest,
   PayScheduleCreateRequest$Outbound,
   PayScheduleCreateRequest$outboundSchema,
 } from "../components/payschedulecreaterequest.js";
+import {
+  PayScheduleShow,
+  PayScheduleShow$inboundSchema,
+} from "../components/payscheduleshow.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -53,7 +53,7 @@ export type PostV1CompaniesCompanyIdPaySchedulesResponse = {
   /**
    * Created
    */
-  paySchedule?: PaySchedule | undefined;
+  payScheduleShow?: PayScheduleShow | undefined;
 };
 
 /** @internal */
@@ -108,11 +108,11 @@ export const PostV1CompaniesCompanyIdPaySchedulesResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Pay-Schedule": PaySchedule$inboundSchema.optional(),
+    "Pay-Schedule-Show": PayScheduleShow$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Pay-Schedule": "paySchedule",
+      "Pay-Schedule-Show": "payScheduleShow",
     });
   });
 

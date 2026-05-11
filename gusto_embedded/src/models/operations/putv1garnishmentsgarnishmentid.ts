@@ -5,87 +5,48 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Garnishment,
   Garnishment$inboundSchema,
 } from "../components/garnishment.js";
 import {
-  GarnishmentChildSupport,
-  GarnishmentChildSupport$Outbound,
-  GarnishmentChildSupport$outboundSchema,
-} from "../components/garnishmentchildsupport.js";
-import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  UpdateGarnishmentRequest,
+  UpdateGarnishmentRequest$Outbound,
+  UpdateGarnishmentRequest$outboundSchema,
+} from "../components/updategarnishmentrequest.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PutV1GarnishmentsGarnishmentIdRequestBody = {
-  /**
-   * Whether or not this garnishment is currently active.
-   */
-  active?: boolean | undefined;
-  /**
-   * The amount of the garnishment. Either a percentage or a fixed dollar amount. Represented as a float, e.g. "8.00".
-   */
-  amount?: string | undefined;
-  /**
-   * The description of the garnishment.
-   */
-  description?: string | undefined;
-  /**
-   * Whether the garnishment is court ordered.
-   */
-  courtOrdered?: boolean | undefined;
-  /**
-   * The number of times to apply the garnishment. Ignored if recurring is true.
-   */
-  times?: number | null | undefined;
-  /**
-   * Whether the garnishment should recur indefinitely.
-   */
-  recurring?: boolean | undefined;
-  /**
-   * The maximum deduction per annum. A null value indicates no maximum. Represented as a float, e.g. "200.00".
-   */
-  annualMaximum?: string | null | undefined;
-  /**
-   * The maximum deduction per pay period. A null value indicates no maximum. Represented as a float, e.g. "16.00".
-   */
-  payPeriodMaximum?: string | null | undefined;
-  /**
-   * Whether the amount should be treated as a percentage to be deducted per pay period.
-   */
-  deductAsPercentage?: boolean | undefined;
-  /**
-   * A maximum total deduction for the lifetime of this garnishment. A null value indicates no maximum.
-   */
-  totalAmount?: string | null | undefined;
-  /**
-   * Additional child support order details
-   */
-  childSupport?: GarnishmentChildSupport | null | undefined;
-  /**
-   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
-   */
-  version: string;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1GarnishmentsGarnishmentIdHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1GarnishmentsGarnishmentIdHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PutV1GarnishmentsGarnishmentIdHeaderXGustoAPIVersion
+>;
 
 export type PutV1GarnishmentsGarnishmentIdRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1GarnishmentsGarnishmentIdHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the garnishment
    */
   garnishmentId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutV1GarnishmentsGarnishmentIdRequestBody;
+  updateGarnishmentRequest: UpdateGarnishmentRequest;
 };
 
 export type PutV1GarnishmentsGarnishmentIdResponse = {
@@ -97,67 +58,15 @@ export type PutV1GarnishmentsGarnishmentIdResponse = {
 };
 
 /** @internal */
-export type PutV1GarnishmentsGarnishmentIdRequestBody$Outbound = {
-  active: boolean;
-  amount?: string | undefined;
-  description?: string | undefined;
-  court_ordered?: boolean | undefined;
-  times: number | null;
-  recurring: boolean;
-  annual_maximum: string | null;
-  pay_period_maximum: string | null;
-  deduct_as_percentage: boolean;
-  total_amount?: string | null | undefined;
-  child_support?: GarnishmentChildSupport$Outbound | null | undefined;
-  version: string;
-};
-
-/** @internal */
-export const PutV1GarnishmentsGarnishmentIdRequestBody$outboundSchema:
-  z.ZodType<
-    PutV1GarnishmentsGarnishmentIdRequestBody$Outbound,
-    z.ZodTypeDef,
-    PutV1GarnishmentsGarnishmentIdRequestBody
-  > = z.object({
-    active: z.boolean().default(true),
-    amount: z.string().optional(),
-    description: z.string().optional(),
-    courtOrdered: z.boolean().optional(),
-    times: z.nullable(z.number().int()).default(null),
-    recurring: z.boolean().default(false),
-    annualMaximum: z.nullable(z.string()).default(null),
-    payPeriodMaximum: z.nullable(z.string()).default(null),
-    deductAsPercentage: z.boolean().default(false),
-    totalAmount: z.nullable(z.string()).optional(),
-    childSupport: z.nullable(GarnishmentChildSupport$outboundSchema).optional(),
-    version: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      courtOrdered: "court_ordered",
-      annualMaximum: "annual_maximum",
-      payPeriodMaximum: "pay_period_maximum",
-      deductAsPercentage: "deduct_as_percentage",
-      totalAmount: "total_amount",
-      childSupport: "child_support",
-    });
-  });
-
-export function putV1GarnishmentsGarnishmentIdRequestBodyToJSON(
-  putV1GarnishmentsGarnishmentIdRequestBody:
-    PutV1GarnishmentsGarnishmentIdRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1GarnishmentsGarnishmentIdRequestBody$outboundSchema.parse(
-      putV1GarnishmentsGarnishmentIdRequestBody,
-    ),
-  );
-}
+export const PutV1GarnishmentsGarnishmentIdHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1GarnishmentsGarnishmentIdHeaderXGustoAPIVersion> =
+    z.nativeEnum(PutV1GarnishmentsGarnishmentIdHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PutV1GarnishmentsGarnishmentIdRequest$Outbound = {
-  garnishment_id: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PutV1GarnishmentsGarnishmentIdRequestBody$Outbound;
+  garnishment_id: string;
+  "Update-Garnishment-Request": UpdateGarnishmentRequest$Outbound;
 };
 
 /** @internal */
@@ -166,16 +75,17 @@ export const PutV1GarnishmentsGarnishmentIdRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1GarnishmentsGarnishmentIdRequest
 > = z.object({
+  xGustoAPIVersion:
+    PutV1GarnishmentsGarnishmentIdHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
   garnishmentId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.lazy(() =>
-    PutV1GarnishmentsGarnishmentIdRequestBody$outboundSchema
-  ),
+  updateGarnishmentRequest: UpdateGarnishmentRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    garnishmentId: "garnishment_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    garnishmentId: "garnishment_id",
+    updateGarnishmentRequest: "Update-Garnishment-Request",
   });
 });
 

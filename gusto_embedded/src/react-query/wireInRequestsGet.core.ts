@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { wireInRequestsGet } from "../funcs/wireInRequestsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion,
   GetWireInRequestsWireInRequestUuidRequest,
   GetWireInRequestsWireInRequestUuidResponse,
 } from "../models/operations/getwireinrequestswireinrequestuuid.js";
@@ -74,7 +74,11 @@ export function buildWireInRequestsGetQuery(
 
 export function queryKeyWireInRequestsGet(
   wireInRequestUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

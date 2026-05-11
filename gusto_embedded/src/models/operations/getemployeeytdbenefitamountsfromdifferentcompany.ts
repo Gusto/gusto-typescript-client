@@ -5,22 +5,40 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
-import {
   YtdBenefitAmountsFromDifferentCompany,
   YtdBenefitAmountsFromDifferentCompany$inboundSchema,
 } from "../components/ytdbenefitamountsfromdifferentcompany.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion
+  >;
+
 export type GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the employee
    */
@@ -29,27 +47,31 @@ export type GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest = {
    * The tax year for which to retrieve YTD benefit amounts. Defaults to current year if not specified.
    */
   taxYear?: number | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * List of Ytd Benefit Amounts From Different Company List
+   * OK
    */
-  ytdBenefitAmountsFromDifferentCompanyList?:
+  ytdBenefitAmountsFromDifferentCompanies?:
     | Array<YtdBenefitAmountsFromDifferentCompany>
     | undefined;
 };
 
 /** @internal */
+export const GetEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    GetEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export type GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   employee_id: string;
   tax_year?: number | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -59,14 +81,16 @@ export const GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$outboundSch
     z.ZodTypeDef,
     GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     employeeId: z.string(),
     taxYear: z.number().int().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       employeeId: "employee_id",
       taxYear: "tax_year",
-      xGustoAPIVersion: "X-Gusto-API-Version",
     });
   });
 
@@ -88,14 +112,14 @@ export const GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$inboundSch
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Ytd-Benefit-Amounts-From-Different-Company-List": z.array(
+    "Ytd-Benefit-Amounts-From-Different-Companies": z.array(
       YtdBenefitAmountsFromDifferentCompany$inboundSchema,
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Ytd-Benefit-Amounts-From-Different-Company-List":
-        "ytdBenefitAmountsFromDifferentCompanyList",
+      "Ytd-Benefit-Amounts-From-Different-Companies":
+        "ytdBenefitAmountsFromDifferentCompanies",
     });
   });
 

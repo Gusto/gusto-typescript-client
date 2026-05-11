@@ -52,9 +52,9 @@ export type PeopleBatchResultsResultsStatus = ClosedEnum<
   typeof PeopleBatchResultsResultsStatus
 >;
 
-export type PeopleBatchResultsErrors = {};
+export type PeopleBatchResultsResultsErrors = {};
 
-export type Errors = {
+export type PeopleBatchResultsErrors = {
   /**
    * The key identifying the error source.
    */
@@ -70,7 +70,7 @@ export type Errors = {
   /**
    * Nested errors for sub-operations.
    */
-  errors?: Array<PeopleBatchResultsErrors> | null | undefined;
+  errors?: Array<PeopleBatchResultsResultsErrors> | null | undefined;
 };
 
 export type Results = {
@@ -101,7 +101,7 @@ export type Results = {
   /**
    * Errors encountered while processing this batch item.
    */
-  errors?: Array<Errors> | null | undefined;
+  errors?: Array<PeopleBatchResultsErrors> | null | undefined;
 };
 
 export type Exclusions = {
@@ -185,11 +185,39 @@ export const PeopleBatchResultsResultsStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(PeopleBatchResultsResultsStatus);
 
 /** @internal */
+export const PeopleBatchResultsResultsErrors$inboundSchema: z.ZodType<
+  PeopleBatchResultsResultsErrors,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+
+export function peopleBatchResultsResultsErrorsFromJSON(
+  jsonString: string,
+): SafeParseResult<PeopleBatchResultsResultsErrors, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PeopleBatchResultsResultsErrors$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PeopleBatchResultsResultsErrors' from JSON`,
+  );
+}
+
+/** @internal */
 export const PeopleBatchResultsErrors$inboundSchema: z.ZodType<
   PeopleBatchResultsErrors,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = z.object({
+  error_key: z.string().optional(),
+  category: z.string().optional(),
+  message: z.nullable(z.string()).optional(),
+  errors: z.nullable(
+    z.array(z.lazy(() => PeopleBatchResultsResultsErrors$inboundSchema)),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "error_key": "errorKey",
+  });
+});
 
 export function peopleBatchResultsErrorsFromJSON(
   jsonString: string,
@@ -202,31 +230,6 @@ export function peopleBatchResultsErrorsFromJSON(
 }
 
 /** @internal */
-export const Errors$inboundSchema: z.ZodType<Errors, z.ZodTypeDef, unknown> = z
-  .object({
-    error_key: z.string().optional(),
-    category: z.string().optional(),
-    message: z.nullable(z.string()).optional(),
-    errors: z.nullable(
-      z.array(z.lazy(() => PeopleBatchResultsErrors$inboundSchema)),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "error_key": "errorKey",
-    });
-  });
-
-export function errorsFromJSON(
-  jsonString: string,
-): SafeParseResult<Errors, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Errors$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Errors' from JSON`,
-  );
-}
-
-/** @internal */
 export const Results$inboundSchema: z.ZodType<Results, z.ZodTypeDef, unknown> =
   z.object({
     external_id: z.string().optional(),
@@ -235,7 +238,9 @@ export const Results$inboundSchema: z.ZodType<Results, z.ZodTypeDef, unknown> =
     idx: z.number().int().optional(),
     uuid: z.string().optional(),
     employee_uuid: z.string().optional(),
-    errors: z.nullable(z.array(z.lazy(() => Errors$inboundSchema))).optional(),
+    errors: z.nullable(
+      z.array(z.lazy(() => PeopleBatchResultsErrors$inboundSchema)),
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       "external_id": "externalId",

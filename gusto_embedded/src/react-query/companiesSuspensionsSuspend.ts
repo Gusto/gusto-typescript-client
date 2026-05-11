@@ -11,7 +11,6 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesSuspensionsSuspend } from "../funcs/companiesSuspensionsSuspend.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { CompanySuspensionCreationErrors } from "../models/errors/companysuspensioncreationerrors.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -22,6 +21,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostCompaniesCompanyUuidSuspensionsRequest,
   PostCompaniesCompanyUuidSuspensionsResponse,
@@ -39,7 +39,7 @@ export type CompaniesSuspensionsSuspendMutationData =
   PostCompaniesCompanyUuidSuspensionsResponse;
 
 export type CompaniesSuspensionsSuspendMutationError =
-  | CompanySuspensionCreationErrors
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

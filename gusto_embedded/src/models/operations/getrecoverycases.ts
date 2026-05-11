@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -14,35 +15,60 @@ import {
   RecoveryCase,
   RecoveryCase$inboundSchema,
 } from "../components/recoverycase.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetRecoveryCasesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetRecoveryCasesHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetRecoveryCasesHeaderXGustoAPIVersion
+>;
+
 export type GetRecoveryCasesRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: GetRecoveryCasesHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the company
    */
   companyUuid: string;
   /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  page?: number | undefined;
+  /**
+   * Number of objects per page. For majority of endpoints will default to 25
+   */
+  per?: number | undefined;
 };
 
 export type GetRecoveryCasesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
-  recoveryCaseList?: Array<RecoveryCase> | undefined;
+  recoveryCases?: Array<RecoveryCase> | undefined;
 };
 
 /** @internal */
+export const GetRecoveryCasesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetRecoveryCasesHeaderXGustoAPIVersion> = z.nativeEnum(
+    GetRecoveryCasesHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export type GetRecoveryCasesRequest$Outbound = {
-  company_uuid: string;
   "X-Gusto-API-Version": string;
+  company_uuid: string;
+  page?: number | undefined;
+  per?: number | undefined;
 };
 
 /** @internal */
@@ -51,12 +77,15 @@ export const GetRecoveryCasesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetRecoveryCasesRequest
 > = z.object({
+  xGustoAPIVersion: GetRecoveryCasesHeaderXGustoAPIVersion$outboundSchema
+    .default("2025-06-15"),
   companyUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  page: z.number().int().optional(),
+  per: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
-    companyUuid: "company_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    companyUuid: "company_uuid",
   });
 });
 
@@ -75,11 +104,11 @@ export const GetRecoveryCasesResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Recovery-Case-List": z.array(RecoveryCase$inboundSchema).optional(),
+  "Recovery-Cases": z.array(RecoveryCase$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
-    "Recovery-Case-List": "recoveryCaseList",
+    "Recovery-Cases": "recoveryCases",
   });
 });
 

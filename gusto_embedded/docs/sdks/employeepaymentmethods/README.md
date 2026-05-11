@@ -4,7 +4,7 @@
 
 ### Available Operations
 
-* [getBankAccounts](#getbankaccounts) - Get all employee bank accounts
+* [getBankAccounts](#getbankaccounts) - List employee bank accounts
 
 ## getBankAccounts
 
@@ -105,6 +105,7 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
