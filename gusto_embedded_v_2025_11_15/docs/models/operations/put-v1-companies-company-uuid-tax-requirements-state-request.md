@@ -1,0 +1,36 @@
+# PutV1CompaniesCompanyUuidTaxRequirementsStateRequest
+
+## Example Usage
+
+```typescript
+import { PutV1CompaniesCompanyUuidTaxRequirementsStateRequest } from "openapi/models/operations";
+
+let value: PutV1CompaniesCompanyUuidTaxRequirementsStateRequest = {
+  companyUuid: "<id>",
+  state: "CA",
+  body: {
+    requirementSets: [
+      {
+        key: "registrations",
+        state: "GA",
+        effectiveFrom: "2022-01-01",
+        requirements: [
+          {
+            key: "71653ec0-00b5-4c66-a58b-22ecf21704c5",
+            value: "1233214-AB",
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  | Example                                                                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `companyUuid`                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |                                                                                                                                                                                                                              |
+| `state`                                                                                                                                                                                                                      | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The two-letter state abbreviation                                                                                                                                                                                            | CA                                                                                                                                                                                                                           |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PutV1CompaniesCompanyUuidTaxRequirementsStateXGustoAPIVersion](../../models/operations/put-v1-companies-company-uuid-tax-requirements-state-x-gusto-api-version.md)                                              | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |                                                                                                                                                                                                                              |
+| `body`                                                                                                                                                                                                                       | [operations.PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody](../../models/operations/put-v1-companies-company-uuid-tax-requirements-state-request-body.md)                                                          | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |                                                                                                                                                                                                                              |

@@ -1,0 +1,24 @@
+# PostV1CompaniesCompanyIdAdminsRequest
+
+## Example Usage
+
+```typescript
+import { PostV1CompaniesCompanyIdAdminsRequest } from "openapi/models/operations";
+
+let value: PostV1CompaniesCompanyIdAdminsRequest = {
+  companyId: "<id>",
+  body: {
+    firstName: "John",
+    lastName: "Smith",
+    email: "jsmith99@gmail.com",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PostV1CompaniesCompanyIdAdminsXGustoAPIVersion](../../models/operations/post-v1-companies-company-id-admins-x-gusto-api-version.md)                                                                              | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyId`                                                                                                                                                                                                                  | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `body`                                                                                                                                                                                                                       | [models.AdminCreateRequest](../../models/admin-create-request.md)                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

@@ -1,0 +1,18 @@
+# PayrollUpdatePaidTimeOff
+
+## Example Usage
+
+```typescript
+import { PayrollUpdatePaidTimeOff } from "openapi/models";
+
+let value: PayrollUpdatePaidTimeOff = {};
+```
+
+## Fields
+
+| Field                                                                                                                                 | Type                                                                                                                                  | Required                                                                                                                              | Description                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                                                                                                                                | *string*                                                                                                                              | :heavy_minus_sign:                                                                                                                    | The name of the PTO. This also serves as the unique, immutable identifier for the PTO. Must pass in name or policy_uuid but not both. |
+| `hours`                                                                                                                               | *string*                                                                                                                              | :heavy_minus_sign:                                                                                                                    | The hours of this PTO taken during the pay period.                                                                                    |
+| `policyUuid`                                                                                                                          | *string*                                                                                                                              | :heavy_minus_sign:                                                                                                                    | The uuid of the PTO policy. Must pass in name or policy_uuid but not both.                                                            |
+| `finalPayoutUnusedHoursInput`                                                                                                         | *string*                                                                                                                              | :heavy_minus_sign:                                                                                                                    | The outstanding hours paid upon termination. This field is only applicable for termination payrolls.                                  |

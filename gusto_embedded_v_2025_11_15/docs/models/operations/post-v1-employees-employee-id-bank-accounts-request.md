@@ -1,0 +1,25 @@
+# PostV1EmployeesEmployeeIdBankAccountsRequest
+
+## Example Usage
+
+```typescript
+import { PostV1EmployeesEmployeeIdBankAccountsRequest } from "openapi/models/operations";
+
+let value: PostV1EmployeesEmployeeIdBankAccountsRequest = {
+  employeeId: "<id>",
+  body: {
+    routingNumber: "266905059",
+    accountNumber: "5809431207",
+    accountType: "Checking",
+    name: "BoA Checking Account",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PostV1EmployeesEmployeeIdBankAccountsXGustoAPIVersion](../../models/operations/post-v1-employees-employee-id-bank-accounts-x-gusto-api-version.md)                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `employeeId`                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
+| `body`                                                                                                                                                                                                                       | [models.EmployeeBankAccountRequest](../../models/employee-bank-account-request.md)                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

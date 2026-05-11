@@ -1,0 +1,24 @@
+# PutV1EmployeesEmployeeIdFederalTaxesRequest
+
+## Example Usage
+
+```typescript
+import { PutV1EmployeesEmployeeIdFederalTaxesRequest } from "openapi/models/operations";
+
+let value: PutV1EmployeesEmployeeIdFederalTaxesRequest = {
+  employeeUuid: "<id>",
+  body: {
+    version: "56a489ce86ed6c1b0f0cecc4050a0b01",
+    filingStatus: "Single",
+    w4DataType: "rev_2020_w4",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PutV1EmployeesEmployeeIdFederalTaxesXGustoAPIVersion](../../models/operations/put-v1-employees-employee-id-federal-taxes-x-gusto-api-version.md)                                                                 | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `employeeUuid`                                                                                                                                                                                                               | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
+| `body`                                                                                                                                                                                                                       | [operations.PutV1EmployeesEmployeeIdFederalTaxesRequestBody](../../models/operations/put-v1-employees-employee-id-federal-taxes-request-body.md)                                                                             | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

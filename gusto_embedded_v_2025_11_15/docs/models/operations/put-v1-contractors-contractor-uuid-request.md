@@ -1,0 +1,24 @@
+# PutV1ContractorsContractorUuidRequest
+
+## Example Usage
+
+```typescript
+import { PutV1ContractorsContractorUuidRequest } from "openapi/models/operations";
+
+let value: PutV1ContractorsContractorUuidRequest = {
+  contractorUuid: "<id>",
+  body: {
+    version: "56d00c178bc7393b2a206ed6a86afcb4",
+    startDate: "2020-01-11",
+    hourlyRate: "40.0",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PutV1ContractorsContractorUuidXGustoAPIVersion](../../models/operations/put-v1-contractors-contractor-uuid-x-gusto-api-version.md)                                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `contractorUuid`                                                                                                                                                                                                             | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the contractor                                                                                                                                                                                                   |
+| `body`                                                                                                                                                                                                                       | [models.ContractorUpdateRequestBody](../../models/contractor-update-request-body.md)                                                                                                                                         | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

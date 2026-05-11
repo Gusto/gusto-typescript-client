@@ -1,0 +1,24 @@
+# PutV1WorkAddressesWorkAddressUuidRequest
+
+## Example Usage
+
+```typescript
+import { PutV1WorkAddressesWorkAddressUuidRequest } from "openapi/models/operations";
+
+let value: PutV1WorkAddressesWorkAddressUuidRequest = {
+  workAddressUuid: "<id>",
+  body: {
+    version: "56d00c178bc7393b2a206ed6a86afcb4",
+    locationUuid: "6a119be7-b4b0-4e27-aaa0-89d5f2524635",
+    effectiveDate: new Date("2023-05-15"),
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `workAddressUuid`                                                                                                                                                                                                            | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the work address                                                                                                                                                                                                 |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PutV1WorkAddressesWorkAddressUuidXGustoAPIVersion](../../models/operations/put-v1-work-addresses-work-address-uuid-x-gusto-api-version.md)                                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `body`                                                                                                                                                                                                                       | [operations.PutV1WorkAddressesWorkAddressUuidRequestBody](../../models/operations/put-v1-work-addresses-work-address-uuid-request-body.md)                                                                                   | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

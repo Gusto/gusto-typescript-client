@@ -1,0 +1,18 @@
+# PartnerManagedCompanyMigrationReadinessResponse
+
+## Example Usage
+
+```typescript
+import { PartnerManagedCompanyMigrationReadinessResponse } from "openapi/models";
+
+let value: PartnerManagedCompanyMigrationReadinessResponse = {};
+```
+
+## Fields
+
+| Field                                                                                                                                    | Type                                                                                                                                     | Required                                                                                                                                 | Description                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `readyToMigrate`                                                                                                                         | *boolean*                                                                                                                                | :heavy_minus_sign:                                                                                                                       | Indicates if the company is ready to be migrated.                                                                                        |
+| `companyUuid`                                                                                                                            | *string*                                                                                                                                 | :heavy_minus_sign:                                                                                                                       | The company UUID                                                                                                                         |
+| `errors`                                                                                                                                 | [models.PartnerManagedCompanyMigrationReadinessResponseError](../models/partner-managed-company-migration-readiness-response-error.md)[] | :heavy_minus_sign:                                                                                                                       | N/A                                                                                                                                      |
+| `warnings`                                                                                                                               | [models.Warning](../models/warning.md)[]                                                                                                 | :heavy_minus_sign:                                                                                                                       | N/A                                                                                                                                      |

@@ -1,0 +1,24 @@
+# PostV1ExternalPayrollRequest
+
+## Example Usage
+
+```typescript
+import { PostV1ExternalPayrollRequest } from "openapi/models/operations";
+
+let value: PostV1ExternalPayrollRequest = {
+  companyUuid: "<id>",
+  body: {
+    checkDate: new Date("2022-06-03"),
+    paymentPeriodStartDate: new Date("2022-05-15"),
+    paymentPeriodEndDate: new Date("2022-05-30"),
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PostV1ExternalPayrollXGustoAPIVersion](../../models/operations/post-v1-external-payroll-x-gusto-api-version.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyUuid`                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `body`                                                                                                                                                                                                                       | [models.ExternalPayrollCreateRequest](../../models/external-payroll-create-request.md)                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
