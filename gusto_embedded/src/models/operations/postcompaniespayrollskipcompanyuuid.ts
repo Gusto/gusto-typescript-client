@@ -11,11 +11,19 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostCompaniesPayrollSkipCompanyUuidHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostCompaniesPayrollSkipCompanyUuidHeaderXGustoAPIVersion =
+  ClosedEnum<typeof PostCompaniesPayrollSkipCompanyUuidHeaderXGustoAPIVersion>;
 
 /**
  * Payroll type
@@ -56,19 +64,27 @@ export type PostCompaniesPayrollSkipCompanyUuidRequestBody = {
 
 export type PostCompaniesPayrollSkipCompanyUuidRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostCompaniesPayrollSkipCompanyUuidHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the company
    */
   companyUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PostCompaniesPayrollSkipCompanyUuidRequestBody;
 };
 
 export type PostCompaniesPayrollSkipCompanyUuidResponse = {
   httpMeta: HTTPMetadata;
 };
+
+/** @internal */
+export const PostCompaniesPayrollSkipCompanyUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostCompaniesPayrollSkipCompanyUuidHeaderXGustoAPIVersion
+  > = z.nativeEnum(PostCompaniesPayrollSkipCompanyUuidHeaderXGustoAPIVersion);
 
 /** @internal */
 export const PayrollType$outboundSchema: z.ZodNativeEnum<typeof PayrollType> = z
@@ -118,8 +134,8 @@ export function postCompaniesPayrollSkipCompanyUuidRequestBodyToJSON(
 
 /** @internal */
 export type PostCompaniesPayrollSkipCompanyUuidRequest$Outbound = {
-  company_uuid: string;
   "X-Gusto-API-Version": string;
+  company_uuid: string;
   RequestBody: PostCompaniesPayrollSkipCompanyUuidRequestBody$Outbound;
 };
 
@@ -130,15 +146,17 @@ export const PostCompaniesPayrollSkipCompanyUuidRequest$outboundSchema:
     z.ZodTypeDef,
     PostCompaniesPayrollSkipCompanyUuidRequest
   > = z.object({
+    xGustoAPIVersion:
+      PostCompaniesPayrollSkipCompanyUuidHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PostCompaniesPayrollSkipCompanyUuidRequestBody$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      companyUuid: "company_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyUuid: "company_uuid",
       requestBody: "RequestBody",
     });
   });

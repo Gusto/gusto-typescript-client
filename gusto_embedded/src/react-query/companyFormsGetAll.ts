@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,14 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompanyFormsRequest } from "../models/operations/getv1companyforms.js";
+import {
+  GetV1CompanyFormsHeaderXGustoAPIVersion,
+  GetV1CompanyFormsQueryParamSortBy,
+  GetV1CompanyFormsRequest,
+} from "../models/operations/getv1companyforms.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +46,7 @@ export {
 };
 
 export type CompanyFormsGetAllQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -56,6 +61,9 @@ export type CompanyFormsGetAllQueryError =
  *
  * @remarks
  * Get a list of all company's forms
+ *
+ * ### Related guides
+ * - [Company Forms](doc:company-form)
  *
  * scope: `company_forms:read`
  */
@@ -82,6 +90,9 @@ export function useCompanyFormsGetAll(
  *
  * @remarks
  * Get a list of all company's forms
+ *
+ * ### Related guides
+ * - [Company Forms](doc:company-form)
  *
  * scope: `company_forms:read`
  */
@@ -111,8 +122,10 @@ export function setCompanyFormsGetAllData(
   queryKeyBase: [
     companyId: string,
     parameters: {
-      sortBy?: string | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
+      xGustoAPIVersion?: GetV1CompanyFormsHeaderXGustoAPIVersion | undefined;
+      sortBy?: GetV1CompanyFormsQueryParamSortBy | undefined;
+      page?: number | undefined;
+      per?: number | undefined;
     },
   ],
   data: CompanyFormsGetAllQueryData,
@@ -128,8 +141,10 @@ export function invalidateCompanyFormsGetAll(
     [
       companyId: string,
       parameters: {
-        sortBy?: string | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
+        xGustoAPIVersion?: GetV1CompanyFormsHeaderXGustoAPIVersion | undefined;
+        sortBy?: GetV1CompanyFormsQueryParamSortBy | undefined;
+        page?: number | undefined;
+        per?: number | undefined;
       },
     ]
   >,

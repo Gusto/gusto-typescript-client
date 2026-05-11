@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { informationRequestsGetInformationRequests } from "../funcs/informationRequestsGetInformationRequests.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetInformationRequestsHeaderXGustoAPIVersion,
   GetInformationRequestsRequest,
   GetInformationRequestsResponse,
 } from "../models/operations/getinformationrequests.js";
@@ -75,7 +75,9 @@ export function buildInformationRequestsGetInformationRequestsQuery(
 
 export function queryKeyInformationRequestsGetInformationRequests(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?: GetInformationRequestsHeaderXGustoAPIVersion | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

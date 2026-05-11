@@ -1,7 +1,8 @@
 {
   "name": "@gusto/embedded-api",
-  "version": "0.12.5",
+  "version": "0.13.0",
   "author": "Speakeasy",
+  "license": "MIT",
   "type": "module",
   "main": "./esm/index.js",
   "exports": {

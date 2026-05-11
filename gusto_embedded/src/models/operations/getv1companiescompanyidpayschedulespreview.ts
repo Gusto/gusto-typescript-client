@@ -34,7 +34,7 @@ export type GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion =
   >;
 
 /**
- * The frequency that employees on this pay schedule are paid.
+ * The frequency that employees on this pay schedule are paid with Gusto.
  */
 export const Frequency = {
   EveryWeek: "Every week",
@@ -43,7 +43,7 @@ export const Frequency = {
   Monthly: "Monthly",
 } as const;
 /**
- * The frequency that employees on this pay schedule are paid.
+ * The frequency that employees on this pay schedule are paid with Gusto.
  */
 export type Frequency = ClosedEnum<typeof Frequency>;
 
@@ -59,11 +59,11 @@ export type GetV1CompaniesCompanyIdPaySchedulesPreviewRequest = {
    */
   companyId: string;
   /**
-   * The frequency that employees on this pay schedule are paid.
+   * The frequency that employees on this pay schedule are paid with Gusto.
    */
   frequency: Frequency;
   /**
-   * The first date that employees on this pay schedule are paid.
+   * The first date that employees on this pay schedule are paid with Gusto.
    */
   anchorPayDate: RFCDate;
   /**
@@ -71,19 +71,11 @@ export type GetV1CompaniesCompanyIdPaySchedulesPreviewRequest = {
    */
   anchorEndOfPayPeriod: RFCDate;
   /**
-   * First pay day of the month (1-31).
-   *
-   * @remarks
-   * - **Twice per month, Monthly:** required.
-   * - **Every week, Every other week:** omit or null.
+   * An integer between 1 and 31 indicating the first day of the month that employees are paid. This field is only relevant for pay schedules with the "Twice per month" and "Monthly" frequencies. It will be null for pay schedules with other frequencies.
    */
   day1?: number | undefined;
   /**
-   * Second pay day of the month (1-31); only for **Twice per month**.
-   *
-   * @remarks
-   * - Use 31 for last day of month (shorter months use the actual last day).
-   * - **Other frequencies:** omit or null.
+   * An integer between 1 and 31 indicating the second day of the month that employees are paid. This field is the second pay date for pay schedules with the "Twice per month" frequency. For semi-monthly pay schedules, set this field to 31. For months shorter than 31 days, the second pay date is set to the last day of the month. It will be null for pay schedules with other frequencies.
    */
   day2?: number | undefined;
   /**

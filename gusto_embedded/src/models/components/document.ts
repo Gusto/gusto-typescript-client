@@ -35,33 +35,33 @@ export type Pages = {
 
 export type Fields = {
   /**
-   * Unique identifier of the field
+   * Unique identifier of the field. May be null for custom fields that do not correspond to a known Gusto-managed key mapping.
    */
-  key?: string | undefined;
+  key?: string | null | undefined;
   /**
    * Auto-filled value of the field
    */
   value?: string | null | undefined;
   /**
-   * X-coordinate location of the field on the page
+   * X-coordinate location of the field on the page. May be null when the field has no positioning information.
    */
-  x?: number | undefined;
+  x?: number | null | undefined;
   /**
-   * Y-coordinate location of the field on the page
+   * Y-coordinate location of the field on the page. May be null when the field has no positioning information.
    */
-  y?: number | undefined;
+  y?: number | null | undefined;
   /**
-   * Width of the field
+   * Width of the field. May be null when the field has no positioning information.
    */
-  width?: number | undefined;
+  width?: number | null | undefined;
   /**
-   * Height of the field
+   * Height of the field. May be null when the field has no positioning information.
    */
-  height?: number | undefined;
+  height?: number | null | undefined;
   /**
-   * Page number of the field
+   * Page number of the field. May be null when the field has no positioning information.
    */
-  pageNumber?: number | undefined;
+  pageNumber?: number | null | undefined;
   /**
    * The field's data type
    */
@@ -157,13 +157,13 @@ export function pagesFromJSON(
 /** @internal */
 export const Fields$inboundSchema: z.ZodType<Fields, z.ZodTypeDef, unknown> = z
   .object({
-    key: z.string().optional(),
+    key: z.nullable(z.string()).optional(),
     value: z.nullable(z.string()).optional(),
-    x: z.number().int().optional(),
-    y: z.number().int().optional(),
-    width: z.number().int().optional(),
-    height: z.number().int().optional(),
-    page_number: z.number().int().optional(),
+    x: z.nullable(z.number().int()).optional(),
+    y: z.nullable(z.number().int()).optional(),
+    width: z.nullable(z.number().int()).optional(),
+    height: z.nullable(z.number().int()).optional(),
+    page_number: z.nullable(z.number().int()).optional(),
     data_type: z.string().optional(),
     required: z.boolean().optional(),
   }).transform((v) => {

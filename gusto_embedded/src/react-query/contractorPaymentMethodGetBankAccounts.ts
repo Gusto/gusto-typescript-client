@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1ContractorsContractorUuidBankAccountsRequest } from "../models/operations/getv1contractorscontractoruuidbankaccounts.js";
+import {
+  GetV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion,
+  GetV1ContractorsContractorUuidBankAccountsRequest,
+} from "../models/operations/getv1contractorscontractoruuidbankaccounts.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type ContractorPaymentMethodGetBankAccountsQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -113,7 +117,11 @@ export function setContractorPaymentMethodGetBankAccountsData(
   client: QueryClient,
   queryKeyBase: [
     contractorUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: ContractorPaymentMethodGetBankAccountsQueryData,
 ): ContractorPaymentMethodGetBankAccountsQueryData | undefined {
@@ -130,7 +138,11 @@ export function invalidateContractorPaymentMethodGetBankAccounts(
   queryKeyBase: TupleToPrefixes<
     [
       contractorUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

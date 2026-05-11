@@ -21,7 +21,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   SubmitInformationRequestRequest,
   SubmitInformationRequestResponse,
@@ -39,7 +39,7 @@ export type InformationRequestsSubmitMutationData =
   SubmitInformationRequestResponse;
 
 export type InformationRequestsSubmitMutationError =
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

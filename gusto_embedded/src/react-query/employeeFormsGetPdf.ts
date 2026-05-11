@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1EmployeeFormPdfRequest } from "../models/operations/getv1employeeformpdf.js";
+import {
+  GetV1EmployeeFormPdfHeaderXGustoAPIVersion,
+  GetV1EmployeeFormPdfRequest,
+} from "../models/operations/getv1employeeformpdf.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type EmployeeFormsGetPdfQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -111,7 +115,9 @@ export function setEmployeeFormsGetPdfData(
   queryKeyBase: [
     employeeId: string,
     formId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?: GetV1EmployeeFormPdfHeaderXGustoAPIVersion | undefined;
+    },
   ],
   data: EmployeeFormsGetPdfQueryData,
 ): EmployeeFormsGetPdfQueryData | undefined {
@@ -126,7 +132,11 @@ export function invalidateEmployeeFormsGetPdf(
     [
       employeeId: string,
       formId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1EmployeeFormPdfHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

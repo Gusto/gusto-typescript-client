@@ -5,13 +5,11 @@
 ```typescript
 import { PostV1CompaniesCompanyIdEarningTypesRequestBody } from "@gusto/embedded-api/models/operations/postv1companiescompanyidearningtypes.js";
 
-let value: PostV1CompaniesCompanyIdEarningTypesRequestBody = {
-  name: "<value>",
-};
+let value: PostV1CompaniesCompanyIdEarningTypesRequestBody = {};
 ```
 
 ## Fields
 
 | Field                                | Type                                 | Required                             | Description                          |
 | ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| `name`                               | *string*                             | :heavy_check_mark:                   | The name of the custom earning type. |
+| `name`                               | *string*                             | :heavy_minus_sign:                   | The name of the custom earning type. |

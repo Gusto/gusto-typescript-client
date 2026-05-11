@@ -229,16 +229,14 @@ export type Compensation = {
 /**
  * Type of bank account
  */
-export const PostV1CompaniesCompanyIdPeopleBatchesAccountType = {
+export const AccountType = {
   Checking: "Checking",
   Savings: "Savings",
 } as const;
 /**
  * Type of bank account
  */
-export type PostV1CompaniesCompanyIdPeopleBatchesAccountType = ClosedEnum<
-  typeof PostV1CompaniesCompanyIdPeopleBatchesAccountType
->;
+export type AccountType = ClosedEnum<typeof AccountType>;
 
 /**
  * Payment type (must be Direct Deposit)
@@ -275,7 +273,7 @@ export type BankAccounts = {
   /**
    * Type of bank account
    */
-  accountType: PostV1CompaniesCompanyIdPeopleBatchesAccountType;
+  accountType: AccountType;
   /**
    * Bank routing number
    */
@@ -604,9 +602,8 @@ export function compensationToJSON(compensation: Compensation): string {
 }
 
 /** @internal */
-export const PostV1CompaniesCompanyIdPeopleBatchesAccountType$outboundSchema:
-  z.ZodNativeEnum<typeof PostV1CompaniesCompanyIdPeopleBatchesAccountType> = z
-    .nativeEnum(PostV1CompaniesCompanyIdPeopleBatchesAccountType);
+export const AccountType$outboundSchema: z.ZodNativeEnum<typeof AccountType> = z
+  .nativeEnum(AccountType);
 
 /** @internal */
 export const PostV1CompaniesCompanyIdPeopleBatchesType$outboundSchema:
@@ -636,7 +633,7 @@ export const BankAccounts$outboundSchema: z.ZodType<
   BankAccounts
 > = z.object({
   name: z.nullable(z.string()).optional(),
-  accountType: PostV1CompaniesCompanyIdPeopleBatchesAccountType$outboundSchema,
+  accountType: AccountType$outboundSchema,
   routingNumber: z.string(),
   accountNumber: z.string(),
   type: PostV1CompaniesCompanyIdPeopleBatchesType$outboundSchema,

@@ -1,6 +1,6 @@
 # EarningType
 
-Example response
+The representation of an earning type in Gusto.
 
 ## Example Usage
 
@@ -14,7 +14,8 @@ let value: EarningType = {
 
 ## Fields
 
-| Field                         | Type                          | Required                      | Description                   |
-| ----------------------------- | ----------------------------- | ----------------------------- | ----------------------------- |
-| `name`                        | *string*                      | :heavy_minus_sign:            | The name of the earning type. |
-| `uuid`                        | *string*                      | :heavy_check_mark:            | The ID of the earning type.   |
+| Field                               | Type                                | Required                            | Description                         |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| `name`                              | *string*                            | :heavy_minus_sign:                  | The name of the earning type.       |
+| `uuid`                              | *string*                            | :heavy_check_mark:                  | The ID of the earning type.         |
+| `active`                            | *boolean*                           | :heavy_minus_sign:                  | Whether the earning type is active. |

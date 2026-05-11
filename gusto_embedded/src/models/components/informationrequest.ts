@@ -56,15 +56,15 @@ export type RequiredQuestions = {
   /**
    * The UUID of the question
    */
-  questionUuid?: string | undefined;
+  questionUuid: string;
   /**
    * The text of the question
    */
-  questionText?: string | undefined;
+  questionText: string;
   /**
    * The type of response to the question
    */
-  responseType?: ResponseType | undefined;
+  responseType: ResponseType;
 };
 
 /**
@@ -117,9 +117,9 @@ export const RequiredQuestions$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  question_uuid: z.string().optional(),
-  question_text: z.string().optional(),
-  response_type: ResponseType$inboundSchema.optional(),
+  question_uuid: z.string(),
+  question_text: z.string(),
+  response_type: ResponseType$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "question_uuid": "questionUuid",

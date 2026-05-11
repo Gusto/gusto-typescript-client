@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -22,6 +21,7 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  GetV1WebhookSubscriptionsHeaderXGustoAPIVersion,
   GetV1WebhookSubscriptionsRequest,
   GetV1WebhookSubscriptionsSecurity,
 } from "../models/operations/getv1webhooksubscriptions.js";
@@ -60,9 +60,9 @@ export type WebhooksListSubscriptionsQueryError =
  * @remarks
  * Returns all webhook subscriptions associated with the provided Partner API token.
  *
- * > 📘 System Access Authentication
- * >
- * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *
  * scope: `webhook_subscriptions:read`
  */
@@ -95,9 +95,9 @@ export function useWebhooksListSubscriptions(
  * @remarks
  * Returns all webhook subscriptions associated with the provided Partner API token.
  *
- * > 📘 System Access Authentication
- * >
- * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *
  * scope: `webhook_subscriptions:read`
  */
@@ -126,7 +126,13 @@ export function useWebhooksListSubscriptionsSuspense(
 
 export function setWebhooksListSubscriptionsData(
   client: QueryClient,
-  queryKeyBase: [parameters: { xGustoAPIVersion?: VersionHeader | undefined }],
+  queryKeyBase: [
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1WebhookSubscriptionsHeaderXGustoAPIVersion
+        | undefined;
+    },
+  ],
   data: WebhooksListSubscriptionsQueryData,
 ): WebhooksListSubscriptionsQueryData | undefined {
   const key = queryKeyWebhooksListSubscriptions(...queryKeyBase);
@@ -137,7 +143,11 @@ export function setWebhooksListSubscriptionsData(
 export function invalidateWebhooksListSubscriptions(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
-    [parameters: { xGustoAPIVersion?: VersionHeader | undefined }]
+    [parameters: {
+      xGustoAPIVersion?:
+        | GetV1WebhookSubscriptionsHeaderXGustoAPIVersion
+        | undefined;
+    }]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
 ): Promise<void> {

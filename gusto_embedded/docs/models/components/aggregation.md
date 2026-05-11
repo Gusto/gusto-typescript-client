@@ -1,11 +1,11 @@
 # Aggregation
 
-The breakdown level used for the report
+The breakdown of the report. Use 'default' for no split.
 
 ## Example Usage
 
 ```typescript
-import { Aggregation } from "@gusto/embedded-api/models/components/generalledgerreport.js";
+import { Aggregation } from "@gusto/embedded-api/models/components/generalledgerreportbody.js";
 
 let value: Aggregation = "department";
 ```

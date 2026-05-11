@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompanyFormRequest } from "../models/operations/getv1companyform.js";
+import {
+  GetV1CompanyFormHeaderXGustoAPIVersion,
+  GetV1CompanyFormRequest,
+} from "../models/operations/getv1companyform.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type CompanyFormsGetQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -107,7 +111,9 @@ export function setCompanyFormsGetData(
   client: QueryClient,
   queryKeyBase: [
     formId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?: GetV1CompanyFormHeaderXGustoAPIVersion | undefined;
+    },
   ],
   data: CompanyFormsGetQueryData,
 ): CompanyFormsGetQueryData | undefined {
@@ -121,7 +127,9 @@ export function invalidateCompanyFormsGet(
   queryKeyBase: TupleToPrefixes<
     [
       formId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?: GetV1CompanyFormHeaderXGustoAPIVersion | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

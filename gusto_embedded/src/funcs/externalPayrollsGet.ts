@@ -3,7 +3,8 @@
  */
 
 import { GustoEmbeddedCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -18,6 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -33,9 +38,11 @@ import { Result } from "../types/fp.js";
  * Get external payrolls for a company
  *
  * @remarks
- * Get an external payroll for a given company.
+ * Get external payrolls for a company.
  *
  * scope: `external_payrolls:read`
+ *
+ * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function externalPayrollsGet(
   client: GustoEmbeddedCore,
@@ -44,6 +51,7 @@ export function externalPayrollsGet(
 ): APIPromise<
   Result<
     GetV1CompanyExternalPayrollsResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -69,6 +77,7 @@ async function $do(
   [
     Result<
       GetV1CompanyExternalPayrollsResponse,
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -102,6 +111,11 @@ async function $do(
     pathParams,
   );
 
+  const query = encodeFormQuery({
+    "page": payload.page,
+    "per": payload.per,
+  });
+
   const headers = new Headers(compactMap({
     Accept: "application/json",
     "X-Gusto-API-Version": encodeSimple(
@@ -115,7 +129,7 @@ async function $do(
   const securityInput = secConfig == null
     ? {}
     : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -138,6 +152,7 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
@@ -149,7 +164,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -164,6 +180,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1CompanyExternalPayrollsResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -174,9 +191,10 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, GetV1CompanyExternalPayrollsResponse$inboundSchema, {
-      key: "External-Payroll-List",
+      key: "External-Payroll-Basics",
     }),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

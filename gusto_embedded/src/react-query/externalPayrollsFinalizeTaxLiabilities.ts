@@ -21,7 +21,6 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1TaxLiabilitiesFinishRequest,
   PutV1TaxLiabilitiesFinishResponse,
@@ -39,7 +38,6 @@ export type ExternalPayrollsFinalizeTaxLiabilitiesMutationData =
   PutV1TaxLiabilitiesFinishResponse;
 
 export type ExternalPayrollsFinalizeTaxLiabilitiesMutationError =
-  | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -54,6 +52,9 @@ export type ExternalPayrollsFinalizeTaxLiabilitiesMutationError =
  *
  * @remarks
  * Finalizes tax liabilities for a company. All external payrolls edit action will be disabled.
+ *
+ * ### Asynchronous processing
+ * This endpoint triggers an asynchronous operation. The external payrolls will be processed in the background after finalization.
  *
  * scope: `external_payrolls:write`
  */

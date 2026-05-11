@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { recoveryCasesGet } from "../funcs/recoveryCasesGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetRecoveryCasesHeaderXGustoAPIVersion,
   GetRecoveryCasesRequest,
   GetRecoveryCasesResponse,
 } from "../models/operations/getrecoverycases.js";
@@ -47,6 +47,8 @@ export function buildRecoveryCasesGetQuery(
   return {
     queryKey: queryKeyRecoveryCasesGet(request.companyUuid, {
       xGustoAPIVersion: request.xGustoAPIVersion,
+      page: request.page,
+      per: request.per,
     }),
     queryFn: async function recoveryCasesGetQueryFn(
       ctx,
@@ -73,7 +75,11 @@ export function buildRecoveryCasesGetQuery(
 
 export function queryKeyRecoveryCasesGet(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?: GetRecoveryCasesHeaderXGustoAPIVersion | undefined;
+    page?: number | undefined;
+    per?: number | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

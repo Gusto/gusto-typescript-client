@@ -52,10 +52,10 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class ExternalPayrolls extends ClientSDK {
   /**
-   * Create a new external payroll for a company
+   * Create an external payroll for a company
    *
    * @remarks
-   * Creates a new external payroll for the company.
+   * Creates a new external payroll for a company.
    *
    * scope: `external_payrolls:write`
    */
@@ -74,7 +74,7 @@ export class ExternalPayrolls extends ClientSDK {
    * Get external payrolls for a company
    *
    * @remarks
-   * Get an external payroll for a given company.
+   * Get external payrolls for a company.
    *
    * scope: `external_payrolls:read`
    */
@@ -131,7 +131,7 @@ export class ExternalPayrolls extends ClientSDK {
    * Update an external payroll
    *
    * @remarks
-   * Update an external payroll with a list of external payroll items
+   * Update an external payroll with a list of external payroll items.
    *
    * scope: `external_payrolls:write`
    */
@@ -150,9 +150,7 @@ export class ExternalPayrolls extends ClientSDK {
    * Get tax suggestions for an external payroll
    *
    * @remarks
-   * Get tax suggestions for an external payroll. Earnings and/or benefits
-   * data must be saved prior to the calculation in order to retrieve accurate
-   * tax calculation.
+   * Get tax suggestions for an external payroll. Earnings and/or benefits data must be saved prior to the calculation in order to retrieve accurate tax calculation.
    *
    * scope: `external_payrolls:read`
    */
@@ -210,6 +208,9 @@ export class ExternalPayrolls extends ClientSDK {
    *
    * @remarks
    * Finalizes tax liabilities for a company. All external payrolls edit action will be disabled.
+   *
+   * ### Asynchronous processing
+   * This endpoint triggers an asynchronous operation. The external payrolls will be processed in the background after finalization.
    *
    * scope: `external_payrolls:write`
    */

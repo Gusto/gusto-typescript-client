@@ -21,7 +21,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdPayPeriodsRequest,
@@ -49,7 +49,7 @@ export {
 
 export type PaySchedulesGetPayPeriodsQueryError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

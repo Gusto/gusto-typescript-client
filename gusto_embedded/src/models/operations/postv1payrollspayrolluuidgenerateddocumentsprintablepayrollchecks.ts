@@ -16,47 +16,40 @@ import {
   PayrollCheck$inboundSchema,
 } from "../components/payrollcheck.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  PrintablePayrollChecksBody,
+  PrintablePayrollChecksBody$Outbound,
+  PrintablePayrollChecksBody$outboundSchema,
+} from "../components/printablepayrollchecksbody.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The type of check stock being printed. Check the "Types of check stock" section in this [link](https://support.gusto.com/article/999877761000000/Pay-your-team-by-check) for more info on check types
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const PrintingFormat = {
-  Top: "top",
-  Bottom: "bottom",
-} as const;
-/**
- * The type of check stock being printed. Check the "Types of check stock" section in this [link](https://support.gusto.com/article/999877761000000/Pay-your-team-by-check) for more info on check types
- */
-export type PrintingFormat = ClosedEnum<typeof PrintingFormat>;
-
-export type PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody =
+export const PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion =
   {
-    /**
-     * The type of check stock being printed. Check the "Types of check stock" section in this [link](https://support.gusto.com/article/999877761000000/Pay-your-team-by-check) for more info on check types
-     */
-    printingFormat: PrintingFormat;
-    /**
-     * The starting check number we will start generating checks from. Use to override the sequence that will be used to generate check numbers.
-     */
-    startingCheckNumber?: number | undefined;
-  };
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion
+  >;
 
 export type PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest =
   {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    xGustoAPIVersion?:
+      | PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion
+      | undefined;
+    /**
      * The UUID of the payroll
      */
     payrollUuid: string;
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    xGustoAPIVersion?: VersionHeader | undefined;
-    requestBody:
-      PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody;
+    printablePayrollChecksBody: PrintablePayrollChecksBody;
   };
 
 export type PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse =
@@ -69,52 +62,19 @@ export type PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRes
   };
 
 /** @internal */
-export const PrintingFormat$outboundSchema: z.ZodNativeEnum<
-  typeof PrintingFormat
-> = z.nativeEnum(PrintingFormat);
-
-/** @internal */
-export type PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody$Outbound =
-  {
-    printing_format: string;
-    starting_check_number?: number | undefined;
-  };
-
-/** @internal */
-export const PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody$outboundSchema:
-  z.ZodType<
-    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody$Outbound,
-    z.ZodTypeDef,
-    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody
-  > = z.object({
-    printingFormat: PrintingFormat$outboundSchema,
-    startingCheckNumber: z.number().int().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      printingFormat: "printing_format",
-      startingCheckNumber: "starting_check_number",
-    });
-  });
-
-export function postV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBodyToJSON(
-  postV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody:
-    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody,
-): string {
-  return JSON.stringify(
-    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody$outboundSchema
-      .parse(
-        postV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody,
-      ),
+export const PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion,
   );
-}
 
 /** @internal */
 export type PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest$Outbound =
   {
-    payroll_uuid: string;
     "X-Gusto-API-Version": string;
-    RequestBody:
-      PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody$Outbound;
+    payroll_uuid: string;
+    "Printable-Payroll-Checks-Body": PrintablePayrollChecksBody$Outbound;
   };
 
 /** @internal */
@@ -124,16 +84,16 @@ export const PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRe
     z.ZodTypeDef,
     PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest
   > = z.object({
+    xGustoAPIVersion:
+      PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     payrollUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody$outboundSchema
-    ),
+    printablePayrollChecksBody: PrintablePayrollChecksBody$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      payrollUuid: "payroll_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      payrollUuid: "payroll_uuid",
+      printablePayrollChecksBody: "Printable-Payroll-Checks-Body",
     });
   });
 

@@ -35,9 +35,7 @@ export class EmployeePaymentMethod extends ClientSDK {
    * Create an employee bank account
    *
    * @remarks
-   * Creates an employee bank account. An employee can have multiple
-   * bank accounts. Note that creating an employee bank account will also update
-   * the employee's payment method.
+   * Creates an employee bank account. An employee can have multiple bank accounts. Note that creating an employee bank account will also update the employee's payment method.
    *
    * scope: `employee_payment_methods:write`
    */
@@ -56,8 +54,7 @@ export class EmployeePaymentMethod extends ClientSDK {
    * Delete an employee bank account
    *
    * @remarks
-   * Deletes an employee bank account. To update an employee's bank
-   * account details, delete the bank account first and create a new one.
+   * Deletes an employee bank account. To update an employee's bank account details, delete the bank account first and create a new one.
    *
    * scope: `employee_payment_methods:write`
    */

@@ -22,7 +22,7 @@ import {
 import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   DeleteV1EmployeeRequest,
   DeleteV1EmployeeResponse,
@@ -40,7 +40,7 @@ export type EmployeesDeleteMutationData = DeleteV1EmployeeResponse;
 
 export type EmployeesDeleteMutationError =
   | NotFoundErrorObject
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

@@ -16,100 +16,52 @@ import {
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  PlaidProcessorTokenRequest,
+  PlaidProcessorTokenRequest$Outbound,
+  PlaidProcessorTokenRequest$outboundSchema,
+} from "../components/plaidprocessortokenrequest.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The owner type of the bank account
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const OwnerType = {
-  Company: "Company",
+export const PostV1PlaidProcessorTokenHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
- * The owner type of the bank account
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type OwnerType = ClosedEnum<typeof OwnerType>;
-
-export type PostV1PlaidProcessorTokenRequestBody = {
-  /**
-   * The owner type of the bank account
-   */
-  ownerType: OwnerType;
-  /**
-   * The owner UUID of the bank account
-   */
-  ownerId: string;
-  /**
-   * The Plaid processor token
-   */
-  processorToken: string;
-};
+export type PostV1PlaidProcessorTokenHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PostV1PlaidProcessorTokenHeaderXGustoAPIVersion
+>;
 
 export type PostV1PlaidProcessorTokenRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostV1PlaidProcessorTokenRequestBody;
+  xGustoAPIVersion?:
+    | PostV1PlaidProcessorTokenHeaderXGustoAPIVersion
+    | undefined;
+  plaidProcessorTokenRequest: PlaidProcessorTokenRequest;
 };
-
-/**
- * A JSON object containing bank information
- */
-export type PostV1PlaidProcessorTokenResponseBody = CompanyBankAccount;
 
 export type PostV1PlaidProcessorTokenResponse = {
   httpMeta: HTTPMetadata;
   /**
    * A JSON object containing bank information
    */
-  oneOf?: CompanyBankAccount | undefined;
+  companyBankAccount?: CompanyBankAccount | undefined;
 };
 
 /** @internal */
-export const OwnerType$outboundSchema: z.ZodNativeEnum<typeof OwnerType> = z
-  .nativeEnum(OwnerType);
-
-/** @internal */
-export type PostV1PlaidProcessorTokenRequestBody$Outbound = {
-  owner_type: string;
-  owner_id: string;
-  processor_token: string;
-};
-
-/** @internal */
-export const PostV1PlaidProcessorTokenRequestBody$outboundSchema: z.ZodType<
-  PostV1PlaidProcessorTokenRequestBody$Outbound,
-  z.ZodTypeDef,
-  PostV1PlaidProcessorTokenRequestBody
-> = z.object({
-  ownerType: OwnerType$outboundSchema,
-  ownerId: z.string(),
-  processorToken: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    ownerType: "owner_type",
-    ownerId: "owner_id",
-    processorToken: "processor_token",
-  });
-});
-
-export function postV1PlaidProcessorTokenRequestBodyToJSON(
-  postV1PlaidProcessorTokenRequestBody: PostV1PlaidProcessorTokenRequestBody,
-): string {
-  return JSON.stringify(
-    PostV1PlaidProcessorTokenRequestBody$outboundSchema.parse(
-      postV1PlaidProcessorTokenRequestBody,
-    ),
-  );
-}
+export const PostV1PlaidProcessorTokenHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PostV1PlaidProcessorTokenHeaderXGustoAPIVersion> = z
+    .nativeEnum(PostV1PlaidProcessorTokenHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PostV1PlaidProcessorTokenRequest$Outbound = {
   "X-Gusto-API-Version": string;
-  RequestBody: PostV1PlaidProcessorTokenRequestBody$Outbound;
+  "Plaid-Processor-Token-Request": PlaidProcessorTokenRequest$Outbound;
 };
 
 /** @internal */
@@ -118,14 +70,15 @@ export const PostV1PlaidProcessorTokenRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1PlaidProcessorTokenRequest
 > = z.object({
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.lazy(() =>
-    PostV1PlaidProcessorTokenRequestBody$outboundSchema
-  ),
+  xGustoAPIVersion:
+    PostV1PlaidProcessorTokenHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
+  plaidProcessorTokenRequest: PlaidProcessorTokenRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    plaidProcessorTokenRequest: "Plaid-Processor-Token-Request",
   });
 });
 
@@ -140,34 +93,17 @@ export function postV1PlaidProcessorTokenRequestToJSON(
 }
 
 /** @internal */
-export const PostV1PlaidProcessorTokenResponseBody$inboundSchema: z.ZodType<
-  PostV1PlaidProcessorTokenResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = CompanyBankAccount$inboundSchema;
-
-export function postV1PlaidProcessorTokenResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PostV1PlaidProcessorTokenResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1PlaidProcessorTokenResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV1PlaidProcessorTokenResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
 export const PostV1PlaidProcessorTokenResponse$inboundSchema: z.ZodType<
   PostV1PlaidProcessorTokenResponse,
   z.ZodTypeDef,
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  oneOf: CompanyBankAccount$inboundSchema.optional(),
+  "Company-Bank-Account": CompanyBankAccount$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
+    "Company-Bank-Account": "companyBankAccount",
   });
 });
 

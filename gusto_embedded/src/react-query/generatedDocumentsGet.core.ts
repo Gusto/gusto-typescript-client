@@ -11,9 +11,9 @@ import { GustoEmbeddedCore } from "../core.js";
 import { generatedDocumentsGet } from "../funcs/generatedDocumentsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { DocumentType } from "../models/components/documenttype.js";
 import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  DocumentType,
   GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
   GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse,
 } from "../models/operations/getv1generateddocumentsdocumenttyperequestuuid.js";

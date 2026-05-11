@@ -59,7 +59,7 @@ export type PaySchedulesGetQueryError =
  * Get a pay schedule
  *
  * @remarks
- * Returns a single pay schedule by UUID. The pay schedule object captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+ * Returns a single pay schedule by UUID. The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
  *
  * scope: `pay_schedules:read`
  */
@@ -85,7 +85,7 @@ export function usePaySchedulesGet(
  * Get a pay schedule
  *
  * @remarks
- * Returns a single pay schedule by UUID. The pay schedule object captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+ * Returns a single pay schedule by UUID. The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
  *
  * scope: `pay_schedules:read`
  */

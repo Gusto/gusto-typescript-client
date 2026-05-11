@@ -5,17 +5,27 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { Form1099, Form1099$inboundSchema } from "../components/form1099.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostV1SandboxGenerate1099HeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1SandboxGenerate1099HeaderXGustoAPIVersion = ClosedEnum<
+  typeof PostV1SandboxGenerate1099HeaderXGustoAPIVersion
+>;
 
 export type PostV1SandboxGenerate1099RequestBody = {
   /**
@@ -34,17 +44,24 @@ export type PostV1SandboxGenerate1099Request = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | PostV1SandboxGenerate1099HeaderXGustoAPIVersion
+    | undefined;
   requestBody: PostV1SandboxGenerate1099RequestBody;
 };
 
 export type PostV1SandboxGenerate1099Response = {
   httpMeta: HTTPMetadata;
   /**
-   * OK
+   * Created
    */
   form1099?: Form1099 | undefined;
 };
+
+/** @internal */
+export const PostV1SandboxGenerate1099HeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PostV1SandboxGenerate1099HeaderXGustoAPIVersion> = z
+    .nativeEnum(PostV1SandboxGenerate1099HeaderXGustoAPIVersion);
 
 /** @internal */
 export type PostV1SandboxGenerate1099RequestBody$Outbound = {
@@ -88,7 +105,10 @@ export const PostV1SandboxGenerate1099Request$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1SandboxGenerate1099Request
 > = z.object({
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion:
+    PostV1SandboxGenerate1099HeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
   requestBody: z.lazy(() =>
     PostV1SandboxGenerate1099RequestBody$outboundSchema
   ),

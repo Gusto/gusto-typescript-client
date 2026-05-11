@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyFormsGet } from "../funcs/companyFormsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompanyFormHeaderXGustoAPIVersion,
   GetV1CompanyFormRequest,
   GetV1CompanyFormResponse,
 } from "../models/operations/getv1companyform.js";
@@ -71,7 +71,9 @@ export function buildCompanyFormsGetQuery(
 
 export function queryKeyCompanyFormsGet(
   formId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?: GetV1CompanyFormHeaderXGustoAPIVersion | undefined;
+  },
 ): QueryKey {
   return ["@gusto/embedded-api", "companyForms", "get", formId, parameters];
 }

@@ -5,32 +5,37 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  PartnerManagedCompanyAcceptTermsOfServiceRequest,
+  PartnerManagedCompanyAcceptTermsOfServiceRequest$Outbound,
+  PartnerManagedCompanyAcceptTermsOfServiceRequest$outboundSchema,
+} from "../components/partnermanagedcompanyaccepttermsofservicerequest.js";
+import {
+  PartnerManagedCompanyTermsOfServiceResponse,
+  PartnerManagedCompanyTermsOfServiceResponse$inboundSchema,
+} from "../components/partnermanagedcompanytermsofserviceresponse.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody =
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion =
   {
-    /**
-     * The user's email address on Gusto. You can retrieve the user's email via company's `/admins`, `/employees`, `/signatories`, and `/contractors` endpoints.
-     */
-    email: string;
-    /**
-     * The IP address of the user who viewed and accepted the Terms of Service.
-     */
-    ipAddress: string;
-    /**
-     * The user ID on your platform.
-     */
-    externalUserId: string;
-  };
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion
+  >;
 
 export type PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest =
   {
@@ -41,20 +46,11 @@ export type PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest =
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    xGustoAPIVersion?: VersionHeader | undefined;
-    requestBody:
-      PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody;
-  };
-
-/**
- * Example response
- */
-export type PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody =
-  {
-    /**
-     * Whether the latest terms have been accepted by the user.
-     */
-    latestTermsAccepted?: boolean | undefined;
+    xGustoAPIVersion?:
+      | PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion
+      | undefined;
+    partnerManagedCompanyAcceptTermsOfServiceRequest:
+      PartnerManagedCompanyAcceptTermsOfServiceRequest;
   };
 
 export type PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse =
@@ -63,55 +59,26 @@ export type PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse =
     /**
      * Example response
      */
-    object?:
-      | PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody
+    partnerManagedCompanyTermsOfServiceResponse?:
+      | PartnerManagedCompanyTermsOfServiceResponse
       | undefined;
   };
 
 /** @internal */
-export type PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody$Outbound =
-  {
-    email: string;
-    ip_address: string;
-    external_user_id: string;
-  };
-
-/** @internal */
-export const PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody$outboundSchema:
-  z.ZodType<
-    PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody$Outbound,
-    z.ZodTypeDef,
-    PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody
-  > = z.object({
-    email: z.string(),
-    ipAddress: z.string(),
-    externalUserId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      ipAddress: "ip_address",
-      externalUserId: "external_user_id",
-    });
-  });
-
-export function postPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBodyToJSON(
-  postPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody:
-    PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody,
-): string {
-  return JSON.stringify(
-    PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody$outboundSchema
-      .parse(
-        postPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody,
-      ),
+export const PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion,
   );
-}
 
 /** @internal */
 export type PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest$Outbound =
   {
     company_uuid: string;
     "X-Gusto-API-Version": string;
-    RequestBody:
-      PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody$Outbound;
+    "Partner-Managed-Company-Accept-Terms-Of-Service-Request":
+      PartnerManagedCompanyAcceptTermsOfServiceRequest$Outbound;
   };
 
 /** @internal */
@@ -122,15 +89,17 @@ export const PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest$o
     PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest
   > = z.object({
     companyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody$outboundSchema
-    ),
+    xGustoAPIVersion:
+      PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
+    partnerManagedCompanyAcceptTermsOfServiceRequest:
+      PartnerManagedCompanyAcceptTermsOfServiceRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      partnerManagedCompanyAcceptTermsOfServiceRequest:
+        "Partner-Managed-Company-Accept-Terms-Of-Service-Request",
     });
   });
 
@@ -145,35 +114,6 @@ export function postPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceReques
 }
 
 /** @internal */
-export const PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody$inboundSchema:
-  z.ZodType<
-    PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    latest_terms_accepted: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "latest_terms_accepted": "latestTermsAccepted",
-    });
-  });
-
-export function postPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
 export const PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse$inboundSchema:
   z.ZodType<
     PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse,
@@ -181,12 +121,13 @@ export const PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse$
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    object: z.lazy(() =>
-      PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody$inboundSchema
-    ).optional(),
+    "Partner-Managed-Company-Terms-Of-Service-Response":
+      PartnerManagedCompanyTermsOfServiceResponse$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
+      "Partner-Managed-Company-Terms-Of-Service-Response":
+        "partnerManagedCompanyTermsOfServiceResponse",
     });
   });
 
