@@ -3,7 +3,7 @@ configVersion: 2.0.0
 generation:
   devContainers:
     enabled: true
-    schemaPath: https://raw.githubusercontent.com/api/v3/repos/Gusto/Gusto-Partner-API/contents/generated/embedded/api.v2024-04-01.embedded.yaml?ref=ar/add-speakeasy-github-action
+    schemaPath: https://raw.githubusercontent.com/api/v3/repos/Gusto/Gusto-Partner-API/contents/generated/embedded/api.v2025-11-15.embedded.yaml
   sdkClassName: GustoEmbedded
   maintainOpenAPIOrder: true
   usageSnippets:
