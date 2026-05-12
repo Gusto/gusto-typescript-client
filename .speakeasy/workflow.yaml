@@ -23,7 +23,7 @@ sources:
       authHeader: Authorization
       authSecret: "$openapi_doc_auth_token"
     registry:
-      location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas
+      location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-v2025-11-15
 targets:
   gusto-embedded:
     target: typescript
@@ -46,6 +46,6 @@ targets:
         token: "$npm_token"
     codeSamples:
       registry:
-        location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-typescript-code-samples
+        location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-typescript-code-samples-v2025-11-15
       labelOverride:
         fixedValue: Typescript (SDK)
