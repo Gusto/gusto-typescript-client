@@ -1,0 +1,25 @@
+# PutWireInRequestsWireInRequestUuidRequest
+
+## Example Usage
+
+```typescript
+import { PutWireInRequestsWireInRequestUuidRequest } from "@gusto/embedded-api-v-2025-11-15/models/operations/putwireinrequestswireinrequestuuid.js";
+
+let value: PutWireInRequestsWireInRequestUuidRequest = {
+  wireInRequestUuid: "<id>",
+  wireInRequestUpdateRequestBody: {
+    dateSent: "2024-06-10",
+    bankName: "Chase",
+    amountSent: "314500.00",
+    additionalNotes: "Wire for 2024-06-15 payroll.",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `wireInRequestUuid`                                                                                                                                                                                                          | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the Wire In Request                                                                                                                                                                                              |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PutWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion](../../models/operations/putwireinrequestswireinrequestuuidheaderxgustoapiversion.md)                                                                   | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `wireInRequestUpdateRequestBody`                                                                                                                                                                                             | [components.WireInRequestUpdateRequestBody](../../models/components/wireinrequestupdaterequestbody.md)                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
