@@ -8364,6 +8364,7 @@ paths:
                       - Payroll
                       - PayrollSync
                       - PaySchedule
+                      - PeopleBatch
                       - Signatory
               required:
                 - url
@@ -8481,6 +8482,7 @@ paths:
                       - Payroll
                       - PayrollSync
                       - PaySchedule
+                      - PeopleBatch
                       - Signatory
               required:
                 - subscription_types
@@ -26128,6 +26130,7 @@ components:
           verification_status: verified
           verification_type: bank_deposits
           name: Employer Funding Account
+          reverse_wire_enabled: false
         plaid_external_status:
           uuid: 1263eae5-4411-48d9-bd6d-18ed93082e65
           company_uuid: e2c4c0ce-2986-48b9-86cf-ec27f6ed9a36
@@ -26137,6 +26140,7 @@ components:
           verification_status: verified
           verification_type: plaid_external
           name: Employer Funding Account
+          reverse_wire_enabled: true
       x-tags:
         - Company Bank Accounts
       properties:
@@ -26209,8 +26213,7 @@ components:
           description: |-
             Whether the company has at least one bank account with active reverse-wire
             funding. The same value is returned on every bank-account row in this
-            response. Only present when the emb_reverse_wire_enabled_field feature is
-            enabled for the partner.
+            response.
       required:
         - uuid
     Benefit-Type-Requirements:
@@ -35040,9 +35043,9 @@ components:
               external_id:
                 type: string
                 description: The external ID of the excluded item(s).
-              reason_code:
+              category:
                 type: string
-                description: The reason code for exclusion.
+                description: The exclusion category.
               message:
                 type: string
                 description: Human-readable explanation for exclusion.

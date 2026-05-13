@@ -25,11 +25,11 @@ The speakeasy CLI allows you to generate more usage snippets. Here's how:
 - To generate a sample for a specific operation by providing an operation ID, use:
 
 ```
-speakeasy generate usage -s https://raw.githubusercontent.com/api/v3/repos/Gusto/Gusto-Partner-API/contents/generated/embedded/api.v2024-04-01.embedded.yaml?ref=ar/add-speakeasy-github-action -l typescript -i {INPUT_OPERATION_ID} -o ./samples
+speakeasy generate usage -s https://raw.githubusercontent.com/api/v3/repos/Gusto/Gusto-Partner-API/contents/generated/embedded/api.v2025-06-15.embedded.yaml -l typescript -i {INPUT_OPERATION_ID} -o ./samples
 ```
 
 - To generate samples for an entire namespace (like a tag or group name), use:
 
 ```
-speakeasy generate usage -s https://raw.githubusercontent.com/api/v3/repos/Gusto/Gusto-Partner-API/contents/generated/embedded/api.v2024-04-01.embedded.yaml?ref=ar/add-speakeasy-github-action -l typescript -n {INPUT_TAG_NAME} -o ./samples
+speakeasy generate usage -s https://raw.githubusercontent.com/api/v3/repos/Gusto/Gusto-Partner-API/contents/generated/embedded/api.v2025-06-15.embedded.yaml -l typescript -n {INPUT_TAG_NAME} -o ./samples
 ```

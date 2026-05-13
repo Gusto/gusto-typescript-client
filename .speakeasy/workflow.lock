@@ -1,20 +1,34 @@
-speakeasyVersion: 1.762.0
+speakeasyVersion: 1.763.0
 sources:
     GustoEmbedded-OAS:
         sourceNamespace: gusto-embedded-oas
-        sourceRevisionDigest: sha256:eaa37ad8b24f732c8e599cf31aa6fa36ce97609af61dd5e2a4b880e41ee53da4
-        sourceBlobDigest: sha256:625b2665033693aa7ed6f7ee8da77979da4ffcc65978428a7f669856d5c57b99
+        sourceRevisionDigest: sha256:c501dccf61b8eedf5d5d0e38bfdf6082a253df7cd6b43f581f2b8f0a81e6c05e
+        sourceBlobDigest: sha256:a47d1591bcee9991a209ab0f812ff4455e5d6d1b1cabfd50db096d2217140f2b
         tags:
             - latest
             - "2025-06-15"
+    GustoEmbedded-OAS-v2025-11-15:
+        sourceNamespace: gusto-embedded-oas-v2025-11-15
+        sourceRevisionDigest: sha256:04cf920bc9a9741602177f6ef517514f3b7da0f5b59e0e96e2339f6a2a573174
+        sourceBlobDigest: sha256:15e21205dfb7479af6670892294e3030e6e4dbc8584a8fdc1bc1707d74e87bf3
+        tags:
+            - latest
+            - "2025-11-15"
 targets:
     gusto-embedded:
         source: GustoEmbedded-OAS
         sourceNamespace: gusto-embedded-oas
-        sourceRevisionDigest: sha256:eaa37ad8b24f732c8e599cf31aa6fa36ce97609af61dd5e2a4b880e41ee53da4
-        sourceBlobDigest: sha256:625b2665033693aa7ed6f7ee8da77979da4ffcc65978428a7f669856d5c57b99
+        sourceRevisionDigest: sha256:c501dccf61b8eedf5d5d0e38bfdf6082a253df7cd6b43f581f2b8f0a81e6c05e
+        sourceBlobDigest: sha256:a47d1591bcee9991a209ab0f812ff4455e5d6d1b1cabfd50db096d2217140f2b
         codeSamplesNamespace: gusto-embedded-oas-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:16febf51ba1255143a42096dbd3f3772773a6bf554609e1282c0f2f58885a33f
+        codeSamplesRevisionDigest: sha256:1c3e2d13aac40420309e13e767a651866303e86e35bd8ac16595a8778646a5bf
+    gusto-embedded-v2025-11-15:
+        source: GustoEmbedded-OAS-v2025-11-15
+        sourceNamespace: gusto-embedded-oas-v2025-11-15
+        sourceRevisionDigest: sha256:04cf920bc9a9741602177f6ef517514f3b7da0f5b59e0e96e2339f6a2a573174
+        sourceBlobDigest: sha256:15e21205dfb7479af6670892294e3030e6e4dbc8584a8fdc1bc1707d74e87bf3
+        codeSamplesNamespace: gusto-embedded-oas-typescript-code-samples-v2025-11-15
+        codeSamplesRevisionDigest: sha256:14ca800da8c87266982a76f135cc4085bf47f6fe46e209592aba80f544cf0246
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -30,6 +44,17 @@ workflow:
                   authSecret: $openapi_doc_auth_token
             registry:
                 location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas
+        GustoEmbedded-OAS-v2025-11-15:
+            inputs:
+                - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/generated/embedded/api.v2025-11-15.embedded.yaml
+                  authHeader: Authorization
+                  authSecret: $openapi_doc_auth_token
+            overlays:
+                - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/.speakeasy/speakeasy-modifications-overlay.yaml
+                  authHeader: Authorization
+                  authSecret: $openapi_doc_auth_token
+            registry:
+                location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-v2025-11-15
     targets:
         gusto-embedded:
             target: typescript
@@ -41,5 +66,17 @@ workflow:
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-typescript-code-samples
+                labelOverride:
+                    fixedValue: Typescript (SDK)
+        gusto-embedded-v2025-11-15:
+            target: typescript
+            source: GustoEmbedded-OAS-v2025-11-15
+            output: ./gusto_embedded_v_2025_11_15
+            publish:
+                npm:
+                    token: $npm_token
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-typescript-code-samples-v2025-11-15
                 labelOverride:
                     fixedValue: Typescript (SDK)

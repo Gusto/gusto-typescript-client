@@ -50,6 +50,7 @@ export const PutV1WebhookSubscriptionUuidSubscriptionTypes = {
   Payroll: "Payroll",
   PayrollSync: "PayrollSync",
   PaySchedule: "PaySchedule",
+  PeopleBatch: "PeopleBatch",
   Signatory: "Signatory",
 } as const;
 export type PutV1WebhookSubscriptionUuidSubscriptionTypes = ClosedEnum<
