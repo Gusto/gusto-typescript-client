@@ -1,0 +1,20 @@
+# SignatoryUpdateRequestHomeAddress
+
+## Example Usage
+
+```typescript
+import { SignatoryUpdateRequestHomeAddress } from "@gusto/embedded-api-v-2025-11-15/models/components/signatoryupdaterequest.js";
+
+let value: SignatoryUpdateRequestHomeAddress = {};
+```
+
+## Fields
+
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `street1`          | *string*           | :heavy_minus_sign: | N/A                |
+| `street2`          | *string*           | :heavy_minus_sign: | N/A                |
+| `city`             | *string*           | :heavy_minus_sign: | N/A                |
+| `state`            | *string*           | :heavy_minus_sign: | N/A                |
+| `zip`              | *string*           | :heavy_minus_sign: | N/A                |
+| `country`          | *string*           | :heavy_minus_sign: | N/A                |

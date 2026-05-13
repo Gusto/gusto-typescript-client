@@ -50,6 +50,7 @@ export const SubscriptionTypes = {
   Payroll: "Payroll",
   PayrollSync: "PayrollSync",
   PaySchedule: "PaySchedule",
+  PeopleBatch: "PeopleBatch",
   Signatory: "Signatory",
 } as const;
 export type SubscriptionTypes = ClosedEnum<typeof SubscriptionTypes>;

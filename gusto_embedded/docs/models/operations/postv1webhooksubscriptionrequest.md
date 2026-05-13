@@ -9,7 +9,7 @@ let value: PostV1WebhookSubscriptionRequest = {
   requestBody: {
     url: "https://tight-allocation.name/",
     subscriptionTypes: [
-      "Payroll",
+      "PayrollSync",
     ],
   },
 };

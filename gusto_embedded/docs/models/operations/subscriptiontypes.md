@@ -5,11 +5,11 @@
 ```typescript
 import { SubscriptionTypes } from "@gusto/embedded-api/models/operations/postv1webhooksubscription.js";
 
-let value: SubscriptionTypes = "CompanyBenefit";
+let value: SubscriptionTypes = "Contractor";
 ```
 
 ## Values
 
 ```typescript
-"BankAccount" | "Company" | "CompanyBenefit" | "Contractor" | "ContractorPayment" | "Employee" | "EmployeeBenefit" | "EmployeeJobCompensation" | "ExternalPayroll" | "Form" | "Location" | "Notification" | "Payroll" | "PayrollSync" | "PaySchedule" | "Signatory"
+"BankAccount" | "Company" | "CompanyBenefit" | "Contractor" | "ContractorPayment" | "Employee" | "EmployeeBenefit" | "EmployeeJobCompensation" | "ExternalPayroll" | "Form" | "Location" | "Notification" | "Payroll" | "PayrollSync" | "PaySchedule" | "PeopleBatch" | "Signatory"
 ```

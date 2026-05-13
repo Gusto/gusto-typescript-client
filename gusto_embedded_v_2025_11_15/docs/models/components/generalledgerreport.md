@@ -1,0 +1,20 @@
+# GeneralLedgerReport
+
+A request for a general ledger report. The report is generated asynchronously and the URL is available via the report GET endpoint using the returned `request_uuid`.
+
+## Example Usage
+
+```typescript
+import { GeneralLedgerReport } from "@gusto/embedded-api-v-2025-11-15/models/components/generalledgerreport.js";
+
+let value: GeneralLedgerReport = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                  | Type                                                                                                                                                   | Required                                                                                                                                               | Description                                                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `payrollUuid`                                                                                                                                          | *string*                                                                                                                                               | :heavy_minus_sign:                                                                                                                                     | The UUID of the payroll record for which the report was generated.                                                                                     |
+| `aggregation`                                                                                                                                          | [components.GeneralLedgerReportAggregation](../../models/components/generalledgerreportaggregation.md)                                                 | :heavy_minus_sign:                                                                                                                                     | The breakdown level used for the report.                                                                                                               |
+| `integrationType`                                                                                                                                      | *string*                                                                                                                                               | :heavy_minus_sign:                                                                                                                                     | The `integration_type` used for the report when `aggregation` is 'integration' (e.g., `xero`, `qbo`). Otherwise, this will be null or an empty string. |
+| `requestUuid`                                                                                                                                          | *string*                                                                                                                                               | :heavy_minus_sign:                                                                                                                                     | UUID to use for polling the report status.                                                                                                             |

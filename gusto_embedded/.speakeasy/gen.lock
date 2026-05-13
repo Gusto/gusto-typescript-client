@@ -1,20 +1,20 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: d9e86bf0402a692166117c79f987e915
+  docChecksum: 29c7f6742c803f32cdd0682b22e59da0
   docVersion: "2025-06-15"
-  speakeasyVersion: 1.762.0
-  generationVersion: 2.882.0
-  releaseVersion: 0.13.0
-  configChecksum: bf3844d247fb1a69cc6ebfd604ade40b
+  speakeasyVersion: 1.763.0
+  generationVersion: 2.884.0
+  releaseVersion: 0.13.1
+  configChecksum: 03e99fe9264a75ed54ea9ac3c562349b
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://github.com/Gusto/gusto-typescript-client
   published: true
 persistentEdits:
-  generation_id: 651612de-a3df-422c-a480-31d2280e30fd
-  pristine_commit_hash: 2c229af593d8640d8ca8966a0d7cea14291dc28e
-  pristine_tree_hash: d70bd50875a063b45b67027ea7e2ce74e9ac986a
+  generation_id: 9b6be591-0356-4f65-8fec-01ece02ace0f
+  pristine_commit_hash: bbc4201b00ba30eb47611a5f051540cc175edd3f
+  pristine_tree_hash: b128a80085bc36458467bd2f6ae420da82700979
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -46,16 +46,16 @@ features:
 trackedFiles:
   .devcontainer/README.md:
     id: b170c0f184ac
-    last_write_checksum: sha1:5eb14b8f3b1432107926cef57d743613f7fed206
-    pristine_git_object: 609bdc5aef7f7f8e1a5d491b7d6723f7ced97eba
+    last_write_checksum: sha1:e820c6ad0f48baef3749e163263b4394d0571ae9
+    pristine_git_object: ad8afa578071e9fc518492963b150a401f78452e
   .devcontainer/devcontainer.json:
     id: b34062a34eb1
     last_write_checksum: sha1:d0b15193202c961e7d1875864ddb15f9d17c84dd
     pristine_git_object: 4d560dd5f40afaf10d96eb75b1f02cd48bbd640c
   .devcontainer/setup.sh:
     id: 5f1dfbfeb8eb
-    last_write_checksum: sha1:b2a03d4d6a66e91f3e834d39b635037dd8c03812
-    pristine_git_object: 98f0f3f3fa651134b1304d622ae6b6f32ba49a0f
+    last_write_checksum: sha1:c812c70c090f7d43edc3d1de15996435a46a7650
+    pristine_git_object: d147a10ef12101e939140e964cfc0b9d0b4c1224
   .gitattributes:
     id: 24139dae6567
     last_write_checksum: sha1:26d16d8297b104945139da8c25bd38feeaad3e25
@@ -290,8 +290,8 @@ trackedFiles:
     pristine_git_object: 2abec351ea9f0e5c0a8174c48f87a4728cb47d67
   docs/models/components/companybankaccount.md:
     id: 4341cca9f030
-    last_write_checksum: sha1:f9231c9a8a94f1b8563313b13dd16ed0d2992d4e
-    pristine_git_object: f49dde1339a4a41630a5d082b5e7b0c94a173458
+    last_write_checksum: sha1:55ec83950cf4cdf6c2705199cd3f86ee623c3ce7
+    pristine_git_object: 4c82f27ce807d13b66a4f65a0fc97a80a310c674
   docs/models/components/companybankaccountrequest.md:
     id: de54e3b32197
     last_write_checksum: sha1:8ff1bf05fbbd55679d17c73c4ebbf0fd219f2f2e
@@ -1178,8 +1178,8 @@ trackedFiles:
     pristine_git_object: cab7948cc74775ce4435382efcd514051cdd7e8f
   docs/models/components/exclusions.md:
     id: 66b1c8cf47d3
-    last_write_checksum: sha1:c447ee4af5dd0e823fa343485f4476b084d7ce92
-    pristine_git_object: 76af9ddef429bef9387921f35529047ea66c9af9
+    last_write_checksum: sha1:c7132d021e04135fa34cfc14fbf6ab5038d36124
+    pristine_git_object: 75cbb85ee075e01261029ad3e7375861b397937c
   docs/models/components/experiencelevel.md:
     id: 0d8a7decaccc
     last_write_checksum: sha1:4ede4ac39eeea06072ce990dc0bc7d5100e3b365
@@ -5786,8 +5786,8 @@ trackedFiles:
     pristine_git_object: 4631297dc6a034b19da5a4a1452293c661c635ba
   docs/models/operations/postv1webhooksubscriptionrequest.md:
     id: 31cc09d34d46
-    last_write_checksum: sha1:eac4638bae4be5618daf08a42c3ec37ec5b30b96
-    pristine_git_object: 812291ffc7c3001013d63da759f99b749f170488
+    last_write_checksum: sha1:af8b33dee5cbf652a1a116be4122e9abceb0cb5c
+    pristine_git_object: 09e9c1d4c047e0dd40b6aa1f342a9b32592a4c3f
   docs/models/operations/postv1webhooksubscriptionrequestbody.md:
     id: fdebc0bea558
     last_write_checksum: sha1:ef7204149141e1002ab9949244a7322cc6581286
@@ -6746,8 +6746,8 @@ trackedFiles:
     pristine_git_object: 6640c4e280d39b8773b02aa2e781852b34586822
   docs/models/operations/putv1webhooksubscriptionuuidsubscriptiontypes.md:
     id: 7aae55eca325
-    last_write_checksum: sha1:f31a4c77aa2d64b4e67dc30e05dd3dabb36731c7
-    pristine_git_object: 3c6e3afc1d75c4a77995a04742de768910cddf06
+    last_write_checksum: sha1:2dd71729219dc967ddcea13e4bf6896e22e0000a
+    pristine_git_object: 0886e0772dcc5734cb65ff733e0e58f6eeaa7e05
   docs/models/operations/putv1workaddressesworkaddressuuidheaderxgustoapiversion.md:
     id: fdf53d64f194
     last_write_checksum: sha1:913a7fbc39592c6fe17b84e46a6e673d1a51371e
@@ -6862,8 +6862,8 @@ trackedFiles:
     pristine_git_object: 1804fc8a21ed8915b7f811372e033eb3fee45267
   docs/models/operations/subscriptiontypes.md:
     id: 69c7314091c8
-    last_write_checksum: sha1:ab3f45f1c13e48272aba3a2f418d7e3d19db1eb4
-    pristine_git_object: 22362856879341c26e221560d9ad2f5fa05b0725
+    last_write_checksum: sha1:ae531a138f946c0f562401c4ea07bc17a1d8acb3
+    pristine_git_object: b17e44185b90f2f3f0a785047b6b4ecfb978a993
   docs/models/operations/systemaccesstokenrequest.md:
     id: 8ab746ea3ab3
     last_write_checksum: sha1:1dc96ba1bc15ece2f5509a9b7cf9015f02385efe
@@ -7146,12 +7146,12 @@ trackedFiles:
     pristine_git_object: 49ec91383b0e63e6ed79f53f5bd1b278a8ef84eb
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:1a3298be80226143c727b28124287f2d5436e109
-    pristine_git_object: cf0b527c889bd1e7ceee69b23fc2bf592d531192
+    last_write_checksum: sha1:5717c62e52e502b04d47ba2c009077ef1d47c760
+    pristine_git_object: 31050578163077cb08211168c05144d46956245c
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:c265fda8b1ff4166157be72fa81eb13c761d40c5
-    pristine_git_object: 699160092dec931dcb584126a00ba12bacd39ed0
+    last_write_checksum: sha1:40110a5688b9abc1dcb111d60c3d52c2d6766bd0
+    pristine_git_object: f8a1e532044a77aa746a62b32ce0f58df428fba0
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:3a89ce46214a969ac38e8f08dfbe693a1a2416f7
@@ -8358,8 +8358,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:3f20731d5b063e8bcbfa85bafde89037cfa17a18
-    pristine_git_object: 87eb7f341dc1898d30948317a312d57711f01211
+    last_write_checksum: sha1:cba925981ebafbfdffbada383c4487374f519144
+    pristine_git_object: f6b1b228fb98e7d2e698fc04315bbc2df53eb722
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -8470,8 +8470,8 @@ trackedFiles:
     pristine_git_object: 35576b15940cd9fa5d74fce51061acdf5e88cc30
   src/models/components/companybankaccount.ts:
     id: ed48a2cd0ab9
-    last_write_checksum: sha1:a53301d8e9d6afb8de8f1dd28c6aa3908e84f369
-    pristine_git_object: ad0fec34f47e9235bb6639c75c2b57276ce4c4ac
+    last_write_checksum: sha1:ea40be2e8d3b1ed8e4dc2b0470a56ef4dc12bc34
+    pristine_git_object: 05f432d159d1dc43a09d16466096d5e7a8f82d36
   src/models/components/companybankaccountrequest.ts:
     id: 3bd1b6fd562c
     last_write_checksum: sha1:9924cabee095a2136b145c16c01f9eadf1626b08
@@ -9218,8 +9218,8 @@ trackedFiles:
     pristine_git_object: 2ceaba8eb5e5c2c565e85311ad91e650e2d7b362
   src/models/components/peoplebatchresults.ts:
     id: 7c539164f70e
-    last_write_checksum: sha1:3ac0fd49da81260f83d9cfa8ed01def9173e8c96
-    pristine_git_object: bdff20d1f60bb8ea8b75b244deb39d784c93aeb0
+    last_write_checksum: sha1:e55bcee03b5ce00569bcf4305a29fc29b8286154
+    pristine_git_object: 6e94f33d01c0040a004e3fd78ff7fe77d9401bbf
   src/models/components/plaidprocessortokenrequest.ts:
     id: ff882425aad5
     last_write_checksum: sha1:c042c705595bace974c9ecb522f188acff5bb89a
@@ -10334,8 +10334,8 @@ trackedFiles:
     pristine_git_object: f757ec80765ac40b78bc454f357aab4c5610a84c
   src/models/operations/postv1webhooksubscription.ts:
     id: 083bfb803f8a
-    last_write_checksum: sha1:966ba679bd5c87fa6848b3a019d073a56248aa39
-    pristine_git_object: e1c89b85e2a90128cef987e76a1b400e74ba36d6
+    last_write_checksum: sha1:b21e3b2b69d8e1938a4eef39300b50b10e96af9c
+    pristine_git_object: 33dec3700cdc06c35db36065e9b95066ea263002
   src/models/operations/putaddpeopletodepartment.ts:
     id: f9f90b0b6558
     last_write_checksum: sha1:1088d9cd42519b8a37196d9b881ff72e141ddf89
@@ -10594,8 +10594,8 @@ trackedFiles:
     pristine_git_object: 0a200e24276d988b136b7d80404bfccf11b6c18b
   src/models/operations/putv1webhooksubscriptionuuid.ts:
     id: 0fddc0551bed
-    last_write_checksum: sha1:bfb23de00723695f8d97751acc6384edf034cb64
-    pristine_git_object: 48bd78b85898151d43bcb75d4fc54474836e1aa7
+    last_write_checksum: sha1:d49430004b0d9e7034ac866aff19de7cd19c1bff
+    pristine_git_object: 9c80241e420daefaf0b8a9acd1ca8aa5352feed7
   src/models/operations/putv1workaddressesworkaddressuuid.ts:
     id: 30278b240b18
     last_write_checksum: sha1:5f2f06e1009784322fed8d1c458f5284daf71fd3
@@ -23421,7 +23421,7 @@ examples:
           application/json: {"errors": []}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `gustoembedded.departments.update()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `gustoembedded.wireInRequests.submit()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.achTransactions.getAll()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.[].errorCode` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.recoveryCases.get()`: \n  *  `request` **Changed**\n  *  `response.[].payrollUuid` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.garnishments.getChildSupportData()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Removed** (Breaking ⚠️)\n* `gustoembedded.garnishments.update()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.garnishments.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.employeeBenefits.createYtdBenefitAmountsFromDifferentCompany()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.employeeBenefits.delete()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[422]` **Removed** (Breaking ⚠️)\n* `gustoembedded.employeeBenefits.update()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.employeeBenefits.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.reports.postPayrollsPayrollUuidReportsGeneralLedger()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.integrationType` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.reports.createCustom()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.companyForms.getAll()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.[].employeeUuid` **Added**\n  *  `error.status[404]` **Added**\n* `gustoembedded.payrolls.generatePrintableChecks()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.payrolls.skip()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error` **Changed** (Breaking ⚠️)\n* `gustoembedded.companies.createPartnerManaged()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Removed** (Breaking ⚠️)\n* `gustoembedded.companies.migrate()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error` **Changed** (Breaking ⚠️)\n* `gustoembedded.payrolls.getApprovedReversals()`: \n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.companies.acceptTermsOfService()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.companies.retrieveTermsOfService()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.employeeForms.generateW2()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.invoices.get()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Removed** (Breaking ⚠️)\n* `gustoembedded.contractorDocuments.get()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.fields[]` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `gustoembedded.contractorDocuments.getAll()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.[].fields[]` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.contractorForms.generate1099()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.bankAccounts.createFromPlaidToken()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.externalPayrolls.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.webhooks.listSubscriptions()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Removed** (Breaking ⚠️)\n* `gustoembedded.webhooks.createSubscription()`: \n  *  `request` **Changed**\n  *  `error.status[404]` **Removed** (Breaking ⚠️)\n* `gustoembedded.externalPayrolls.delete()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[422]` **Removed** (Breaking ⚠️)\n* `gustoembedded.externalPayrolls.update()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.contractorPaymentMethods.createBankAccount()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.contractors.updateAddress()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.externalPayrolls.updateTaxLiabilities()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.[].description` **Added**\n  *  `error` **Changed** (Breaking ⚠️)\n* `gustoembedded.externalPayrolls.finalizeTaxLiabilities()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[422]` **Removed** (Breaking ⚠️)\n* `gustoembedded.contractors.updateOnboardingStatus()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.employeePaymentMethod.updateBankAccount()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.employeePaymentMethod.deleteBankAccount()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[422]` **Removed** (Breaking ⚠️)\n* `gustoembedded.employeePaymentMethod.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.employeeEmployments.updateTermination()`: \n  *  `request` **Changed**\n  *  `errors[]` **Changed** (Breaking ⚠️)\n* `gustoembedded.employeeEmployments.deleteTermination()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `errors[]` **Changed** (Breaking ⚠️)\n* `gustoembedded.departments.removePeople()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `gustoembedded.departments.addPeople()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `gustoembedded.employees.list()`:  `response.[].customFields[].description` **Changed** (Breaking ⚠️)\n* `gustoembedded.employees.create()`:  `response.customFields[].description` **Changed** (Breaking ⚠️)\n* `gustoembedded.employees.getV1CompaniesCompanyIdEmployeesPaymentDetails()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.[]` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `gustoembedded.employees.createHistorical()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.customFields[].description` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.employees.get()`:  `response.customFields[].description` **Changed** (Breaking ⚠️)\n* `gustoembedded.employees.update()`:  `response.customFields[].description` **Changed** (Breaking ⚠️)\n* `gustoembedded.employees.getCustomFields()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.customFields[].description` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.employees.getTimeOffActivities()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `gustoembedded.historicalEmployees.update()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.customFields[].description` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `gustoembedded.departments.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[404]` **Added**\n* `gustoembedded.earningTypes.create()`: \n  *  `request` **Changed**\n  *  `response.active` **Added**\n  *  `error.status[404]` **Added**\n* `gustoembedded.employeeForms.list()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.[].employeeUuid` **Added**\n  *  `error.status[404]` **Added**\n* `gustoembedded.departments.getAll()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.departments.delete()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.paySchedules.assign()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.paySchedules.previewAssignment()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.employeeEmployments.createTermination()`: \n  *  `request` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.employeeEmployments.getTerminations()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.paySchedules.getAssignments()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.paySchedules.getUnprocessedTerminationPeriods()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.paySchedules.update()`:  `response.version` **Changed**\n* `gustoembedded.paySchedules.get()`:  `response.version` **Changed**\n* `gustoembedded.paySchedules.getAll()`:  `response.[].version` **Changed**\n* `gustoembedded.employeePaymentMethods.getBankAccounts()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.employeeEmployments.getV1TerminationsEmployeeId()`: **Added**\n* `gustoembedded.earningTypes.list()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.default[].active` **Added**\n  *  `error.status[404]` **Added**\n* `gustoembedded.earningTypes.update()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.active` **Added**\n  *  `error.status[404]` **Added**\n* `gustoembedded.earningTypes.delete()`: \n  *  `request.xGustoApiVersion` **Changed**\n* `gustoembedded.contractors.update()`:  `error.status[409]` **Added**\n* `gustoembedded.contractors.getOnboardingStatus()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.paySchedules.create()`:  `response.version` **Changed**\n* `gustoembedded.contractors.getAddress()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.externalPayrolls.listTaxLiabilities()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.[].description` **Added**\n  *  `error.status[404]` **Added**\n* `gustoembedded.externalPayrolls.calculateTaxes()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.contractorPaymentMethod.getBankAccounts()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.[]` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.contractorPaymentMethod.get()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.contractorPaymentMethod.update()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error` **Changed**\n* `gustoembedded.externalPayrolls.retrieve()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.externalPayrolls.get()`: \n  *  `request` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.webhooks.updateSubscription()`: \n  *  `request` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.webhooks.getSubscription()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.webhooks.deleteSubscription()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.webhooks.verify()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.webhooks.requestVerificationToken()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.status[200]` **Added**\n  *  `error.status[404]` **Added**\n* `gustoembedded.contractorForms.list()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.contractorForms.get()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.contractorForms.getPdf()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.bankAccounts.verify()`:  `response.reverseWireEnabled` **Added**\n* `gustoembedded.bankAccounts.create()`:  `response.reverseWireEnabled` **Added**\n* `gustoembedded.bankAccounts.get()`:  `response.[].reverseWireEnabled` **Added**\n* `gustoembedded.contractorDocuments.getPdf()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error` **Changed**\n* `gustoembedded.contractorDocuments.sign()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.companies.getCustomFields()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.departments.get()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.employeeForms.get()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.employeeUuid` **Added**\n  *  `error.status[404]` **Added**\n* `gustoembedded.employeeForms.getPdf()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.employeeForms.sign()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.employeeUuid` **Added**\n  *  `error.status[404]` **Added**\n* `gustoembedded.companies.getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.payrolls.get()`:  `response.employeeCompensations[].deductions[].updatableViaPayroll` **Added**\n* `gustoembedded.payrolls.update()`:  `response.employeeCompensations[].deductions[].updatableViaPayroll` **Added**\n* `gustoembedded.payrolls.prepare()`:  `response.employeeCompensations[].deductions[].updatableViaPayroll` **Added**\n* `gustoembedded.timeOffRequests.putV1TimeOffRequestsTimeOffRequestUuidDecline()`: **Added**\n* `gustoembedded.timeOffRequests.putV1TimeOffRequestsTimeOffRequestUuidApprove()`: **Added**\n* `gustoembedded.contractorPayments.getReceipt()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.contractorPayments.fund()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.timeOffRequests.deleteV1TimeOffRequestsTimeOffRequestUuid()`: **Added**\n* `gustoembedded.companyForms.get()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.employeeUuid` **Added**\n  *  `error.status[404]` **Added**\n* `gustoembedded.companyForms.getPdf()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.companyForms.sign()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.employeeUuid` **Added**\n  *  `error.status[404]` **Added**\n* `gustoembedded.generatedDocuments.get()`: \n  *  `request.documentType` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.timeOffRequests.getV1TimeOffRequestsTimeOffRequestUuid()`: **Added**\n* `gustoembedded.timeOffRequests.postV1CompaniesCompanyUuidTimeOffRequestsPreview()`: **Added**\n* `gustoembedded.reports.getReportsRequestUuid()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.reports.getTemplate()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error` **Changed**\n* `gustoembedded.timeOffRequests.postV1CompaniesCompanyUuidTimeOffRequests()`: **Added**\n* `gustoembedded.employeeBenefits.get()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.employeeBenefits.retrieve()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.timeOffRequests.getV1CompaniesCompanyUuidTimeOffRequests()`: **Added**\n* `gustoembedded.timeOffRequests.getV1CompaniesCompanyUuidTimeOffBalances()`: **Added**\n* `gustoembedded.employeeBenefits.getYtdBenefitAmountsFromDifferentCompany()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.timeOffRequests.postV1CompaniesCompanyUuidTimeOffAdminApprovedRequests()`: **Added**\n* `gustoembedded.holidayPayPolicies.previewPaidHolidays()`: **Added**\n* `gustoembedded.garnishments.list()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.garnishments.get()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.contractorPayments.getV1ContractorPaymentsContractorPaymentIdPdf()`: **Added**\n* `gustoembedded.contractors.deleteV1ContractorsContractorUuidTermination()`: **Added**\n* `gustoembedded.notifications.getDetails()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.informationRequests.getInformationRequests()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `response.[].requiredQuestions[]` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.informationRequests.submit()`:  `response.requiredQuestions[]` **Changed**\n* `gustoembedded.contractors.postV1ContractorsContractorUuidTermination()`: **Added**\n* `gustoembedded.recoveryCases.redebit()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.contractors.deleteV1ContractorsContractorUuidRehire()`: **Added**\n* `gustoembedded.wireInRequests.get()`: \n  *  `request.xGustoApiVersion` **Changed**\n  *  `error.status[404]` **Added**\n* `gustoembedded.contractors.postV1ContractorsContractorUuidRehire()`: **Added**\n* `gustoembedded.wireInRequests.list()`:  `request` **Changed**\n"
+releaseNotes: "## Typescript SDK Changes:\n* `gustoembedded.peopleBatches.getV1PeopleBatchesPeopleBatchUuid()`:  `response.exclusions[]` **Changed** (Breaking ⚠️)\n* `gustoembedded.webhooks.createSubscription()`: \n  *  `request.requestBody.subscriptionTypes[].enum(peopleBatch)` **Added**\n* `gustoembedded.webhooks.updateSubscription()`: \n  *  `request.requestBody.subscriptionTypes[].enum(peopleBatch)` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
