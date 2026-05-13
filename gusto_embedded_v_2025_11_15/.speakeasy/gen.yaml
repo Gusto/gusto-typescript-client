@@ -1,8 +1,9 @@
+---
 configVersion: 2.0.0
 generation:
   devContainers:
     enabled: true
-    schemaPath: https://raw.githubusercontent.com/api/v3/repos/Gusto/Gusto-Partner-API/contents/generated/embedded/api.v2025-06-15.embedded.yaml
+    schemaPath: https://raw.githubusercontent.com/api/v3/repos/Gusto/Gusto-Partner-API/contents/generated/embedded/api.v2025-11-15.embedded.yaml
   sdkClassName: GustoEmbedded
   maintainOpenAPIOrder: true
   usageSnippets:
@@ -24,7 +25,7 @@ generation:
     hoistGlobalSecurity: true
   schemas:
     allOfMergeStrategy: shallowMerge
-  requestBodyFieldName: ""
+  requestBodyFieldName: ''
   versioningStrategy: automatic
   persistentEdits: {}
   tests:
@@ -32,7 +33,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.13.0
+  version: 0.0.1
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
@@ -59,7 +60,7 @@ typescript:
   flatteningOrder: parameters-first
   formStringArrayEncodeMode: encoded-string
   forwardCompatibleEnumsByDefault: false
-  forwardCompatibleUnionsByDefault: "false"
+  forwardCompatibleUnionsByDefault: 'false'
   generateExamples: true
   imports:
     option: openapi
@@ -80,7 +81,7 @@ typescript:
   moduleFormat: esm
   multipartArrayFormat: legacy
   outputModelSuffix: output
-  packageName: '@gusto/embedded-api'
+  packageName: "@gusto/embedded-api-v-2025-11-15"
   preApplyUnionDiscriminators: true
   preserveModelFieldNames: false
   responseFormat: envelope-http
