@@ -77,25 +77,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Contractors extends ClientSDK {
   /**
-   * Create a contractor
-   *
-   * @remarks
-   * Create an individual or business contractor.
-   *
-   * scope: `contractors:manage`
-   */
-  async create(
-    request: PostV1CompaniesCompanyUuidContractorsRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1CompaniesCompanyUuidContractorsResponse> {
-    return unwrapAsync(contractorsCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get contractors of a company
    *
    * @remarks
@@ -108,6 +89,25 @@ export class Contractors extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetV1CompaniesCompanyUuidContractorsResponse> {
     return unwrapAsync(contractorsList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a contractor
+   *
+   * @remarks
+   * Create an individual or business contractor.
+   *
+   * scope: `contractors:manage`
+   */
+  async create(
+    request: PostV1CompaniesCompanyUuidContractorsRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1CompaniesCompanyUuidContractorsResponse> {
+    return unwrapAsync(contractorsCreate(
       this,
       request,
       options,

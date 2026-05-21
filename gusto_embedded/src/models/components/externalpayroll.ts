@@ -12,14 +12,14 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The status of the external payroll. The status will be `unprocessed` when the external payroll is created and transition to `processed` once tax liabilities are entered and finalized.  Once in the `processed` status all actions that can edit an external payroll will be disabled.
  */
-export const Status = {
+export const ExternalPayrollStatus = {
   Unprocessed: "unprocessed",
   Processed: "processed",
 } as const;
 /**
  * The status of the external payroll. The status will be `unprocessed` when the external payroll is created and transition to `processed` once tax liabilities are entered and finalized.  Once in the `processed` status all actions that can edit an external payroll will be disabled.
  */
-export type Status = ClosedEnum<typeof Status>;
+export type ExternalPayrollStatus = ClosedEnum<typeof ExternalPayrollStatus>;
 
 export type Earnings = {
   amount?: string | undefined;
@@ -110,7 +110,7 @@ export type ExternalPayroll = {
   /**
    * The status of the external payroll. The status will be `unprocessed` when the external payroll is created and transition to `processed` once tax liabilities are entered and finalized.  Once in the `processed` status all actions that can edit an external payroll will be disabled.
    */
-  status?: Status | undefined;
+  status?: ExternalPayrollStatus | undefined;
   /**
    * External payroll items for employees
    */
@@ -134,8 +134,9 @@ export type ExternalPayroll = {
 };
 
 /** @internal */
-export const Status$inboundSchema: z.ZodNativeEnum<typeof Status> = z
-  .nativeEnum(Status);
+export const ExternalPayrollStatus$inboundSchema: z.ZodNativeEnum<
+  typeof ExternalPayrollStatus
+> = z.nativeEnum(ExternalPayrollStatus);
 
 /** @internal */
 export const Earnings$inboundSchema: z.ZodType<
@@ -348,7 +349,7 @@ export const ExternalPayroll$inboundSchema: z.ZodType<
   check_date: z.string().optional(),
   payment_period_start_date: z.string().optional(),
   payment_period_end_date: z.string().optional(),
-  status: Status$inboundSchema.optional(),
+  status: ExternalPayrollStatus$inboundSchema.optional(),
   external_payroll_items: z.array(
     z.lazy(() => ExternalPayrollItems$inboundSchema),
   ).optional(),

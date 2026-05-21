@@ -1126,9 +1126,9 @@ async function run() {
       middleInitial: "F",
       lastName: "Baby",
       email: "tunechi@cashmoneyrecords.com",
+      workEmail: "new.partner.work@example.com",
       dateOfBirth: "1991-01-31",
       ssn: "824920233",
-      workEmail: "new.partner.work@example.com",
     },
   });
 
@@ -1161,9 +1161,9 @@ async function run() {
       middleInitial: "F",
       lastName: "Baby",
       email: "tunechi@cashmoneyrecords.com",
+      workEmail: "new.partner.work@example.com",
       dateOfBirth: "1991-01-31",
       ssn: "824920233",
-      workEmail: "new.partner.work@example.com",
     },
   });
   if (res.ok) {

@@ -23,6 +23,13 @@ sources:
               authSecret: $openapi_doc_auth_token
         registry:
             location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-v2025-11-15
+    GustoEmbedded-local:
+        inputs:
+            - location: ../Gusto-Partner-API/generated/embedded/api.v2025-06-15.embedded.yaml
+        overlays:
+            - location: ../Gusto-Partner-API/.speakeasy/speakeasy-modifications-overlay.yaml
+        registry:
+            location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-local
 targets:
     gusto-embedded:
         target: typescript
@@ -48,3 +55,7 @@ targets:
                 location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-typescript-code-samples-v2025-11-15
             labelOverride:
                 fixedValue: Typescript (SDK)
+    local:
+        target: typescript
+        source: GustoEmbedded-local
+        output: ./gusto_embedded

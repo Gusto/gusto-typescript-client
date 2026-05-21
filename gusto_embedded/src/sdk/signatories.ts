@@ -32,6 +32,28 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Signatories extends ClientSDK {
   /**
+   * Get the signatories for a company
+   *
+   * @remarks
+   * Returns the signatories for a company. A company has at most one signatory.
+   *
+   * ## Related guides
+   * - [Signatory Events](doc:signatory-events)
+   *
+   * scope: `signatories:read`
+   */
+  async list(
+    request: GetV1CompaniesCompanyUuidSignatoriesRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyUuidSignatoriesResponse> {
+    return unwrapAsync(signatoriesList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Create a signatory
    *
    * @remarks
@@ -52,28 +74,6 @@ export class Signatories extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PostV1CompanySignatoriesResponse> {
     return unwrapAsync(signatoriesCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get the signatories for a company
-   *
-   * @remarks
-   * Returns the signatories for a company. A company has at most one signatory.
-   *
-   * ## Related guides
-   * - [Signatory Events](doc:signatory-events)
-   *
-   * scope: `signatories:read`
-   */
-  async list(
-    request: GetV1CompaniesCompanyUuidSignatoriesRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyUuidSignatoriesResponse> {
-    return unwrapAsync(signatoriesList(
       this,
       request,
       options,

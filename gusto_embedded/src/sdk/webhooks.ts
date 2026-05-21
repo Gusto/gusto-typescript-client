@@ -55,31 +55,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Webhooks extends ClientSDK {
   /**
-   * Create a webhook subscription
-   *
-   * @remarks
-   * Create a webhook subscription to receive events of the specified subscription_types whenever there is a state change.
-   *
-   * 📘 System Access Authentication
-   *
-   * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
-   *
-   * scope: `webhook_subscriptions:write`
-   */
-  async createSubscription(
-    security: PostV1WebhookSubscriptionSecurity,
-    request: PostV1WebhookSubscriptionRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1WebhookSubscriptionResponse> {
-    return unwrapAsync(webhooksCreateSubscription(
-      this,
-      security,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * List webhook subscriptions
    *
    * @remarks
@@ -105,10 +80,10 @@ export class Webhooks extends ClientSDK {
   }
 
   /**
-   * Update a webhook subscription
+   * Create a webhook subscription
    *
    * @remarks
-   * Updates the Webhook Subscription associated with the provided UUID.
+   * Create a webhook subscription to receive events of the specified subscription_types whenever there is a state change.
    *
    * 📘 System Access Authentication
    *
@@ -116,12 +91,12 @@ export class Webhooks extends ClientSDK {
    *
    * scope: `webhook_subscriptions:write`
    */
-  async updateSubscription(
-    security: PutV1WebhookSubscriptionUuidSecurity,
-    request: PutV1WebhookSubscriptionUuidRequest,
+  async createSubscription(
+    security: PostV1WebhookSubscriptionSecurity,
+    request: PostV1WebhookSubscriptionRequest,
     options?: RequestOptions,
-  ): Promise<PutV1WebhookSubscriptionUuidResponse> {
-    return unwrapAsync(webhooksUpdateSubscription(
+  ): Promise<PostV1WebhookSubscriptionResponse> {
+    return unwrapAsync(webhooksCreateSubscription(
       this,
       security,
       request,
@@ -147,6 +122,31 @@ export class Webhooks extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetV1WebhookSubscriptionUuidResponse> {
     return unwrapAsync(webhooksGetSubscription(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update a webhook subscription
+   *
+   * @remarks
+   * Updates the Webhook Subscription associated with the provided UUID.
+   *
+   * 📘 System Access Authentication
+   *
+   * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+   *
+   * scope: `webhook_subscriptions:write`
+   */
+  async updateSubscription(
+    security: PutV1WebhookSubscriptionUuidSecurity,
+    request: PutV1WebhookSubscriptionUuidRequest,
+    options?: RequestOptions,
+  ): Promise<PutV1WebhookSubscriptionUuidResponse> {
+    return unwrapAsync(webhooksUpdateSubscription(
       this,
       security,
       request,

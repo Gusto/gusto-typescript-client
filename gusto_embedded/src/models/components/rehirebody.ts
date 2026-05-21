@@ -9,7 +9,7 @@ import { ClosedEnum } from "../../types/enums.js";
 /**
  * The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
  */
-export const EmploymentStatus = {
+export const RehireBodyEmploymentStatus = {
   PartTime: "part_time",
   FullTime: "full_time",
   PartTimeEligible: "part_time_eligible",
@@ -20,7 +20,9 @@ export const EmploymentStatus = {
 /**
  * The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
  */
-export type EmploymentStatus = ClosedEnum<typeof EmploymentStatus>;
+export type RehireBodyEmploymentStatus = ClosedEnum<
+  typeof RehireBodyEmploymentStatus
+>;
 
 export type RehireBody = {
   /**
@@ -38,7 +40,7 @@ export type RehireBody = {
   /**
    * The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
    */
-  employmentStatus?: EmploymentStatus | undefined;
+  employmentStatus?: RehireBodyEmploymentStatus | undefined;
   /**
    * Whether the employee is a two percent shareholder of the company. This field only applies to companies with an S-Corp entity type.
    */
@@ -46,9 +48,9 @@ export type RehireBody = {
 };
 
 /** @internal */
-export const EmploymentStatus$outboundSchema: z.ZodNativeEnum<
-  typeof EmploymentStatus
-> = z.nativeEnum(EmploymentStatus);
+export const RehireBodyEmploymentStatus$outboundSchema: z.ZodNativeEnum<
+  typeof RehireBodyEmploymentStatus
+> = z.nativeEnum(RehireBodyEmploymentStatus);
 
 /** @internal */
 export type RehireBody$Outbound = {
@@ -68,7 +70,7 @@ export const RehireBody$outboundSchema: z.ZodType<
   effectiveDate: z.string(),
   fileNewHireReport: z.boolean(),
   workLocationUuid: z.string(),
-  employmentStatus: EmploymentStatus$outboundSchema.optional(),
+  employmentStatus: RehireBodyEmploymentStatus$outboundSchema.optional(),
   twoPercentShareholder: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {

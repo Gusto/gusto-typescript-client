@@ -25,7 +25,6 @@ import {
   GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude,
   GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
-  SortBy,
 } from "../models/operations/getv1companiescompanyidpayrollspayrollid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -61,12 +60,14 @@ export type PayrollsGetQueryError =
  * Get a single payroll
  *
  * @remarks
- * Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals. Results are paginated, with a maximum page size of 100 employee_compensations.
+ * Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals.
+ *
+ * Results are paginated, with a maximum page size of 100 employee_compensations.
  *
  * Notes:
  * * Hour and dollar amounts are returned as string representations of numeric decimals.
  * * Hours are represented to the thousands place; dollar amounts are represented to the cent.
- * * Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts) or “0.000” (for hours ).
+ * * Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts) or "0.000" (for hours ).
  * * When include parameter with benefits value is passed, employee_benefits:read scope is required to return benefits
  *   * Benefits containing PHI are only visible with the `employee_benefits:read:phi` scope
  *
@@ -91,12 +92,14 @@ export function usePayrollsGet(
  * Get a single payroll
  *
  * @remarks
- * Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals. Results are paginated, with a maximum page size of 100 employee_compensations.
+ * Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals.
+ *
+ * Results are paginated, with a maximum page size of 100 employee_compensations.
  *
  * Notes:
  * * Hour and dollar amounts are returned as string representations of numeric decimals.
  * * Hours are represented to the thousands place; dollar amounts are represented to the cent.
- * * Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts) or “0.000” (for hours ).
+ * * Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts) or "0.000" (for hours ).
  * * When include parameter with benefits value is passed, employee_benefits:read scope is required to return benefits
  *   * Benefits containing PHI are only visible with the `employee_benefits:read:phi` scope
  *
@@ -134,7 +137,7 @@ export function setPayrollsGetData(
         | undefined;
       page?: number | undefined;
       per?: number | undefined;
-      sortBy?: SortBy | undefined;
+      sortBy?: string | undefined;
     },
   ],
   data: PayrollsGetQueryData,
@@ -159,7 +162,7 @@ export function invalidatePayrollsGet(
           | undefined;
         page?: number | undefined;
         per?: number | undefined;
-        sortBy?: SortBy | undefined;
+        sortBy?: string | undefined;
       },
     ]
   >,

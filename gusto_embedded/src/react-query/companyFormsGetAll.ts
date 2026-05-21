@@ -23,7 +23,6 @@ import { ResponseValidationError } from "../models/errors/responsevalidationerro
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   GetV1CompanyFormsHeaderXGustoAPIVersion,
-  GetV1CompanyFormsQueryParamSortBy,
   GetV1CompanyFormsRequest,
 } from "../models/operations/getv1companyforms.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -123,7 +122,7 @@ export function setCompanyFormsGetAllData(
     companyId: string,
     parameters: {
       xGustoAPIVersion?: GetV1CompanyFormsHeaderXGustoAPIVersion | undefined;
-      sortBy?: GetV1CompanyFormsQueryParamSortBy | undefined;
+      sortBy?: string | undefined;
       page?: number | undefined;
       per?: number | undefined;
     },
@@ -142,7 +141,7 @@ export function invalidateCompanyFormsGetAll(
       companyId: string,
       parameters: {
         xGustoAPIVersion?: GetV1CompanyFormsHeaderXGustoAPIVersion | undefined;
-        sortBy?: GetV1CompanyFormsQueryParamSortBy | undefined;
+        sortBy?: string | undefined;
         page?: number | undefined;
         per?: number | undefined;
       },

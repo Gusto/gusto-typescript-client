@@ -42,25 +42,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Departments extends ClientSDK {
   /**
-   * Create a department
-   *
-   * @remarks
-   * Create a department
-   *
-   * scope: `departments:write`
-   */
-  async create(
-    request: PostDepartmentsRequest,
-    options?: RequestOptions,
-  ): Promise<PostDepartmentsResponse> {
-    return unwrapAsync(departmentsCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get all departments of a company
    *
    * @remarks
@@ -73,6 +54,25 @@ export class Departments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetCompaniesDepartmentsResponse> {
     return unwrapAsync(departmentsGetAll(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a department
+   *
+   * @remarks
+   * Create a department
+   *
+   * scope: `departments:write`
+   */
+  async create(
+    request: PostDepartmentsRequest,
+    options?: RequestOptions,
+  ): Promise<PostDepartmentsResponse> {
+    return unwrapAsync(departmentsCreate(
       this,
       request,
       options,

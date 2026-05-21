@@ -32,29 +32,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Locations extends ClientSDK {
   /**
-   * Create a company location
-   *
-   * @remarks
-   * Create a company location, which represents any address associated with a company: mailing
-   * addresses, filing addresses, or work locations. A single address may serve multiple, or all, purposes.
-   *
-   * Since all company locations are subsets of locations, use the Locations endpoints to
-   * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
-   *
-   * scope: `companies:write`
-   */
-  async create(
-    request: PostV1CompaniesCompanyIdLocationsRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1CompaniesCompanyIdLocationsResponse> {
-    return unwrapAsync(locationsCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get all company locations
    *
    * @remarks
@@ -71,6 +48,29 @@ export class Locations extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetV1CompaniesCompanyIdLocationsResponse> {
     return unwrapAsync(locationsGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a company location
+   *
+   * @remarks
+   * Create a company location, which represents any address associated with a company: mailing
+   * addresses, filing addresses, or work locations. A single address may serve multiple, or all, purposes.
+   *
+   * Since all company locations are subsets of locations, use the Locations endpoints to
+   * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
+   *
+   * scope: `companies:write`
+   */
+  async create(
+    request: PostV1CompaniesCompanyIdLocationsRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1CompaniesCompanyIdLocationsResponse> {
+    return unwrapAsync(locationsCreate(
       this,
       request,
       options,

@@ -48,7 +48,7 @@ export function buildInformationRequestsGetInformationRequestsQuery(
   return {
     queryKey: queryKeyInformationRequestsGetInformationRequests(
       request.companyUuid,
-      { xGustoAPIVersion: request.xGustoAPIVersion },
+      { xGustoAPIVersion: request.xGustoAPIVersion, sortBy: request.sortBy },
     ),
     queryFn: async function informationRequestsGetInformationRequestsQueryFn(
       ctx,
@@ -77,6 +77,7 @@ export function queryKeyInformationRequestsGetInformationRequests(
   companyUuid: string,
   parameters: {
     xGustoAPIVersion?: GetInformationRequestsHeaderXGustoAPIVersion | undefined;
+    sortBy?: string | undefined;
   },
 ): QueryKey {
   return [

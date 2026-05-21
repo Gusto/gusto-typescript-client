@@ -1,13 +1,13 @@
-# RehireEmploymentStatus
+# RehireBodyEmploymentStatus
 
 The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
 
 ## Example Usage
 
 ```typescript
-import { RehireEmploymentStatus } from "@gusto/embedded-api/models/components/rehire.js";
+import { RehireBodyEmploymentStatus } from "@gusto/embedded-api/models/components/rehirebody.js";
 
-let value: RehireEmploymentStatus = "full_time";
+let value: RehireBodyEmploymentStatus = "full_time";
 ```
 
 ## Values

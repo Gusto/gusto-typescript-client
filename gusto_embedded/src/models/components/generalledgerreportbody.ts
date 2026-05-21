@@ -20,16 +20,10 @@ export const Aggregation = {
  */
 export type Aggregation = ClosedEnum<typeof Aggregation>;
 
-/**
- * The kind of integration set up for the company. Required when `aggregation` is 'integration'. Must be null if `aggregation` is not 'integration'.
- */
 export const IntegrationType = {
   Xero: "xero",
   Qbo: "qbo",
 } as const;
-/**
- * The kind of integration set up for the company. Required when `aggregation` is 'integration'. Must be null if `aggregation` is not 'integration'.
- */
 export type IntegrationType = ClosedEnum<typeof IntegrationType>;
 
 /**

@@ -27,27 +27,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class EarningTypes extends ClientSDK {
   /**
-   * Create a custom earning type
-   *
-   * @remarks
-   * Create a custom earning type.
-   *
-   * If an inactive earning type exists with the same name, this will reactivate it instead of creating a new one.
-   *
-   * scope: `payrolls:write`
-   */
-  async create(
-    request: PostV1CompaniesCompanyIdEarningTypesRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1CompaniesCompanyIdEarningTypesResponse> {
-    return unwrapAsync(earningTypesCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get all earning types for a company
    *
    * @remarks
@@ -66,6 +45,27 @@ export class EarningTypes extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetV1CompaniesCompanyIdEarningTypesResponse> {
     return unwrapAsync(earningTypesList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a custom earning type
+   *
+   * @remarks
+   * Create a custom earning type.
+   *
+   * If an inactive earning type exists with the same name, this will reactivate it instead of creating a new one.
+   *
+   * scope: `payrolls:write`
+   */
+  async create(
+    request: PostV1CompaniesCompanyIdEarningTypesRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1CompaniesCompanyIdEarningTypesResponse> {
+    return unwrapAsync(earningTypesCreate(
       this,
       request,
       options,

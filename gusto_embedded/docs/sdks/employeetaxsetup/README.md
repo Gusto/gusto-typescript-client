@@ -206,13 +206,13 @@ async function run() {
     employeeUuid: "<id>",
     requestBody: {
       version: "56a489ce86ed6c1b0f0cecc4050a0b01",
+      w4DataType: "rev_2020_w4",
       filingStatus: "Single",
-      extraWithholding: 0.0,
       twoJobs: true,
       dependentsAmount: 0.0,
       otherIncome: 0.0,
       deductions: 0.0,
-      w4DataType: "rev_2020_w4",
+      extraWithholding: 0.0,
     },
   });
 
@@ -241,13 +241,13 @@ async function run() {
     employeeUuid: "<id>",
     requestBody: {
       version: "56a489ce86ed6c1b0f0cecc4050a0b01",
+      w4DataType: "rev_2020_w4",
       filingStatus: "Single",
-      extraWithholding: 0.0,
       twoJobs: true,
       dependentsAmount: 0.0,
       otherIncome: 0.0,
       deductions: 0.0,
-      w4DataType: "rev_2020_w4",
+      extraWithholding: 0.0,
     },
   });
   if (res.ok) {
