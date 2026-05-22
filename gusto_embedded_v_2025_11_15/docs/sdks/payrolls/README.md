@@ -33,6 +33,7 @@ By default, will return processed, regular payrolls for the past 6 months.
 Notes:
 * Dollar amounts are returned as string representations of numeric decimals, are represented to the cent.
 * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1 year apart.
+* Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
 
 scope: `payrolls:read`
 
@@ -349,17 +350,18 @@ import {
 
 ## get
 
-Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals. Results are paginated, with a maximum page size of 100 employee_compensations.
+Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals.
+
+Results are paginated, with a maximum page size of 100 employee_compensations.
 
 Notes:
 * Hour and dollar amounts are returned as string representations of numeric decimals.
 * Hours are represented to the thousands place; dollar amounts are represented to the cent.
-* Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts) or “0.000” (for hours ).
+* Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts) or "0.000" (for hours ).
 * When include parameter with benefits value is passed, employee_benefits:read scope is required to return benefits
   * Benefits containing PHI are only visible with the `employee_benefits:read:phi` scope
 
 scope: `payrolls:read`
-
 
 ### Example Usage
 
@@ -470,7 +472,6 @@ will not be removed from the payroll. A maximum of 100 employee_compensations ca
 inputted will be returned.
 
 scope: `payrolls:write`
-
 
 ### Example Usage
 
@@ -671,14 +672,19 @@ import {
 
 ## prepare
 
-This endpoint will build the payroll and get it ready for making updates. This includes adding/removing eligible employees from the Payroll and updating the check_date, payroll_deadline, and payroll_status_meta dates & times.
-Results are paginated, with a maximum page size of 100 employee_compensations.
+Prepares an unprocessed payroll for update, including: adding or removing eligible employees from the payroll,
+and updating `check_date`, `payroll_deadline`, and `payroll_status_meta` dates and times.
 
-Notes:
- * Will null out calculated_at & totals if a payroll has already been calculated.
- * Will return the version param used for updating the payroll
+Use this endpoint before calling [PUT /v1/companies/{company_id}/payrolls/{payroll_id}](ref:put-v1-companies-company_id-payrolls).
 
-scope: `payrolls:write`
+### Notes
+
+* Nullifies `calculated_at` and `totals` if the payroll was previously calculated
+* Returns the `version` parameter required for [updating the payroll](ref:put-v1-companies-company_id-payrolls)
+* `employees:read` scope is required to include employee compensations data in the response.
+* Results are paginated, with a maximum page size of 100 employee compensations.
+
+scope: `payrolls:write employees:read`
 
 ### Example Usage
 
@@ -1197,6 +1203,8 @@ This calculation is asynchronous and a successful request responds with a 202 HT
 
 If the company is blocked from running payroll due to issues like incomplete setup, missing information or other compliance issues, the response will be 422 Unprocessable Entity with a categorization of the blockers as described in the error responses.
 
+scope: `payrolls:run`
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_id-payrolls-payroll_id-calculate" method="put" path="/v1/companies/{company_id}/payrolls/{payroll_id}/calculate" -->
@@ -1390,11 +1398,11 @@ import {
 ## cancel
 
 Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it meets both criteria:
-- `processed` is true
-- Current time is earlier than 3:30pm PT on the payroll_deadline
+
+- `processed` is `true`
+- Current time is earlier than 4pm PT on the `payroll_deadline`
 
 scope: `payrolls:run`
-
 
 ### Example Usage
 

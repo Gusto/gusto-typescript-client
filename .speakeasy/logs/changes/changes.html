@@ -98,22 +98,42 @@
 <body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
 
 <ul>
-<li><code>gustoembedded.peopleBatches.getV1PeopleBatchesPeopleBatchUuid()</code>: <code>response.exclusions[]</code> <strong>Changed</strong> (Breaking ⚠️)
+<li><code>gustoembedded.paySchedules.create()</code>:  <code>response.autoPilot</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.paySchedules.getAll()</code>:  <code>response.[].autoPilot</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.paySchedules.get()</code>:  <code>response.autoPilot</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.paySchedules.update()</code>:  <code>response.autoPilot</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.payrolls.createOffCycle()</code>: <code>response</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>category</code> <strong>Added</strong></li>
-<li><code>reasonCode</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>autoPayroll</code> <strong>Added</strong></li>
+<li><code>autoPilot</code> <strong>Removed</strong> (Breaking ⚠️)</li>
 </ul></li>
-<li><code>gustoembedded.webhooks.createSubscription()</code>:
+<li><code>gustoembedded.wireInRequests.get()</code>: <code>response.paymentType</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>request.requestBody.subscriptionTypes[].enum(peopleBatch)</code> <strong>Added</strong></li>
+<li><code>enum(payroll)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(payroll)</code> <strong>Removed</strong> (Breaking ⚠️)</li>
 </ul></li>
-<li><code>gustoembedded.webhooks.updateSubscription()</code>:
+<li><code>gustoembedded.wireInRequests.submit()</code>: <code>response.paymentType</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>request.requestBody.subscriptionTypes[].enum(peopleBatch)</code> <strong>Added</strong></li>
+<li><code>enum(payroll)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(payroll)</code> <strong>Removed</strong> (Breaking ⚠️)</li>
 </ul></li>
+<li><code>gustoembedded.wireInRequests.list()</code>: <code>response.[].paymentType</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>enum(payroll)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(payroll)</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.externalPayrolls.delete()</code>:  <code>error.status[422]</code> <strong>Added</strong></li>
+<li><code>gustoembedded.externalPayrolls.update()</code>:
+
+<ul>
+<li><code>request.externalPayrollUpdateRequest.replaceFields</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.employees.list()</code>:  <code>response.[].allHomeAddresses[].effectiveDate</code> <strong>Added</strong></li>
+<li><code>gustoembedded.employeePaymentMethod.deleteBankAccount()</code>:  <code>error.status[422]</code> <strong>Added</strong></li>
 </ul>
 </body>
 </html>

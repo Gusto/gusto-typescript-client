@@ -94,7 +94,7 @@ export type GetV1CompaniesCompanyIdPayrollsPayrollIdRequest = {
 export type GetV1CompaniesCompanyIdPayrollsPayrollIdResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * successful
+   * successful with wait_for_reverse_wire credit blocker
    */
   payrollShow?: PayrollShow | undefined;
 };

@@ -100,7 +100,7 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody = {
    */
   checkDate: RFCDate;
   /**
-   * Required token used to make contractor payment group creation idempotent. String must be unique for each group you intend to create.
+   * A token used to make contractor payment group creation idempotent. The string must be unique for each group you intend to create.
    */
   creationToken: string;
   /**

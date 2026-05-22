@@ -89,6 +89,10 @@ export type ExternalPayrollUpdateRequestExternalPayrollItems = {
  */
 export type ExternalPayrollUpdateRequest = {
   /**
+   * Patch update external payroll items when set to true, otherwise it will overwrite the previous changes.
+   */
+  replaceFields?: boolean | undefined;
+  /**
    * Payroll items for each employee in the external payroll.
    */
   externalPayrollItems: Array<ExternalPayrollUpdateRequestExternalPayrollItems>;
@@ -243,6 +247,7 @@ export function externalPayrollUpdateRequestExternalPayrollItemsToJSON(
 
 /** @internal */
 export type ExternalPayrollUpdateRequest$Outbound = {
+  replace_fields?: boolean | undefined;
   external_payroll_items: Array<
     ExternalPayrollUpdateRequestExternalPayrollItems$Outbound
   >;
@@ -254,6 +259,7 @@ export const ExternalPayrollUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ExternalPayrollUpdateRequest
 > = z.object({
+  replaceFields: z.boolean().optional(),
   externalPayrollItems: z.array(
     z.lazy(() =>
       ExternalPayrollUpdateRequestExternalPayrollItems$outboundSchema
@@ -261,6 +267,7 @@ export const ExternalPayrollUpdateRequest$outboundSchema: z.ZodType<
   ),
 }).transform((v) => {
   return remap$(v, {
+    replaceFields: "replace_fields",
     externalPayrollItems: "external_payroll_items",
   });
 });

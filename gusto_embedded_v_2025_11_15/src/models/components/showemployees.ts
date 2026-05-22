@@ -21,6 +21,10 @@ import {
   EmployeeHomeAddress$inboundSchema,
 } from "./employeehomeaddress.js";
 import {
+  EmployeeHomeAddressHistoryEntry,
+  EmployeeHomeAddressHistoryEntry$inboundSchema,
+} from "./employeehomeaddresshistoryentry.js";
+import {
   FlsaStatusType,
   FlsaStatusType$inboundSchema,
 } from "./flsastatustype.js";
@@ -229,7 +233,7 @@ export type ShowEmployees = {
    */
   partnerPortalInvitationSent?: boolean | null | undefined;
   currentHomeAddress?: EmployeeHomeAddress | undefined;
-  allHomeAddresses?: Array<EmployeeHomeAddress> | undefined;
+  allHomeAddresses?: Array<EmployeeHomeAddressHistoryEntry> | undefined;
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
@@ -359,7 +363,8 @@ export const ShowEmployees$inboundSchema: z.ZodType<
     ).optional(),
     partner_portal_invitation_sent: z.nullable(z.boolean()).optional(),
     current_home_address: EmployeeHomeAddress$inboundSchema.optional(),
-    all_home_addresses: z.array(EmployeeHomeAddress$inboundSchema).optional(),
+    all_home_addresses: z.array(EmployeeHomeAddressHistoryEntry$inboundSchema)
+      .optional(),
   }).catchall(z.any()),
   "additionalProperties",
   true,

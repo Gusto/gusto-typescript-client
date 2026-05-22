@@ -51,25 +51,6 @@ export class EmployeePaymentMethod extends ClientSDK {
   }
 
   /**
-   * Delete an employee bank account
-   *
-   * @remarks
-   * Deletes an employee bank account. To update an employee's bank account details, delete the bank account first and create a new one.
-   *
-   * scope: `employee_payment_methods:write`
-   */
-  async deleteBankAccount(
-    request: DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest,
-    options?: RequestOptions,
-  ): Promise<DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse> {
-    return unwrapAsync(employeePaymentMethodDeleteBankAccount(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Update an employee bank account
    *
    * @remarks
@@ -82,6 +63,25 @@ export class EmployeePaymentMethod extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PutV1EmployeesEmployeeIdBankAccountsResponse> {
     return unwrapAsync(employeePaymentMethodUpdateBankAccount(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete an employee bank account
+   *
+   * @remarks
+   * Deletes an employee bank account. To update an employee's bank account details, delete the bank account first and create a new one.
+   *
+   * scope: `employee_payment_methods:write`
+   */
+  async deleteBankAccount(
+    request: DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest,
+    options?: RequestOptions,
+  ): Promise<DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse> {
+    return unwrapAsync(employeePaymentMethodDeleteBankAccount(
       this,
       request,
       options,

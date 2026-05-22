@@ -49,11 +49,11 @@ export type PostCompaniesPayrollSkipCompanyUuidRequestBody = {
    */
   startDate?: string | undefined;
   /**
-   * Pay period end date. If left empty, defaults to today's date.
+   * Pay period end date. If left empty, defaults to today's date. Required when skipping a termination payroll (`payroll_type` = `Dismissed employee`).
    */
   endDate?: string | undefined;
   /**
-   * The UUID of the pay schedule
+   * The UUID of the pay schedule. Required when skipping a termination payroll (`payroll_type` = `Dismissed employee`).
    */
   payScheduleUuid?: string | undefined;
   /**

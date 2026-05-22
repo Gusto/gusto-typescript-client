@@ -240,14 +240,6 @@ export type Company = {
    */
   companyStatus?: CompanyStatus | undefined;
   /**
-   * Whether or not Gusto has identified the company as representing a high fraud risk.
-   */
-  isHighRiskBusiness?: boolean | undefined;
-  /**
-   * Whether or not the company is a marijuana-related business.
-   */
-  isMarijuanaBusiness?: boolean | undefined;
-  /**
    * A unique identifier of the company in Gusto.
    */
   uuid: string;
@@ -267,6 +259,14 @@ export type Company = {
    * Whether the company is fully managed by a partner via the API
    */
   isPartnerManaged?: boolean | undefined;
+  /**
+   * Whether or not Gusto has identified the company as representing a high fraud risk.
+   */
+  isHighRiskBusiness?: boolean | undefined;
+  /**
+   * Whether or not the company is a marijuana-related business.
+   */
+  isMarijuanaBusiness?: boolean | undefined;
   /**
    * The pay schedule assignment type.
    */
@@ -498,13 +498,13 @@ export const Company$inboundSchema: z.ZodType<Company, z.ZodTypeDef, unknown> =
     tier: z.nullable(Tier$inboundSchema).optional(),
     is_suspended: z.boolean().optional(),
     company_status: CompanyStatus$inboundSchema.optional(),
-    is_high_risk_business: z.boolean().optional(),
-    is_marijuana_business: z.boolean().optional(),
     uuid: z.string(),
     name: z.string().optional(),
     slug: z.string().optional(),
     trade_name: z.nullable(z.string()).optional(),
     is_partner_managed: z.boolean().optional(),
+    is_high_risk_business: z.boolean().optional(),
+    is_marijuana_business: z.boolean().optional(),
     pay_schedule_type: z.nullable(PayScheduleType$inboundSchema).optional(),
     join_date: z.nullable(z.string()).optional(),
     funding_type: z.nullable(FundingType$inboundSchema).optional(),
@@ -520,10 +520,10 @@ export const Company$inboundSchema: z.ZodType<Company, z.ZodTypeDef, unknown> =
       "contractor_only": "contractorOnly",
       "is_suspended": "isSuspended",
       "company_status": "companyStatus",
-      "is_high_risk_business": "isHighRiskBusiness",
-      "is_marijuana_business": "isMarijuanaBusiness",
       "trade_name": "tradeName",
       "is_partner_managed": "isPartnerManaged",
+      "is_high_risk_business": "isHighRiskBusiness",
+      "is_marijuana_business": "isMarijuanaBusiness",
       "pay_schedule_type": "payScheduleType",
       "join_date": "joinDate",
       "funding_type": "fundingType",

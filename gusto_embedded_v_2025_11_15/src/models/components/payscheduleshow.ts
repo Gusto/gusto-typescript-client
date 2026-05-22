@@ -84,13 +84,6 @@ export type PayScheduleShow = {
    * With automatic payroll enabled, payroll runs automatically one day before payroll deadlines. When false, payroll does not run automatically.
    *
    * @remarks
-   * For API version 2025-11-15 and later the response uses auto_payroll (Autopayroll) instead.
-   */
-  autoPilot?: boolean | undefined;
-  /**
-   * With automatic payroll enabled, payroll runs automatically one day before payroll deadlines. When false, payroll does not run automatically.
-   *
-   * @remarks
    * Returned for API version 2025-11-15 and later; for earlier versions the response uses auto_pilot instead.
    */
   autoPayroll?: boolean | undefined;
@@ -123,7 +116,6 @@ export const PayScheduleShow$inboundSchema: z.ZodType<
   day_2: z.nullable(z.number().int()).optional(),
   name: z.nullable(z.string()).optional(),
   custom_name: z.string().optional(),
-  auto_pilot: z.boolean().optional(),
   auto_payroll: z.boolean().optional(),
   active: z.boolean().optional(),
   auto_payroll_enablement_blockers: z.nullable(
@@ -136,7 +128,6 @@ export const PayScheduleShow$inboundSchema: z.ZodType<
     "day_1": "day1",
     "day_2": "day2",
     "custom_name": "customName",
-    "auto_pilot": "autoPilot",
     "auto_payroll": "autoPayroll",
     "auto_payroll_enablement_blockers": "autoPayrollEnablementBlockers",
   });

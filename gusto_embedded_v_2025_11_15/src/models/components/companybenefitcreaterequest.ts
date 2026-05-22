@@ -6,11 +6,13 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 
-export const CatchUpType = {
+export const CompanyBenefitCreateRequestCatchUpType = {
   Elective: "elective",
   Deemed: "deemed",
 } as const;
-export type CatchUpType = ClosedEnum<typeof CatchUpType>;
+export type CompanyBenefitCreateRequestCatchUpType = ClosedEnum<
+  typeof CompanyBenefitCreateRequestCatchUpType
+>;
 
 export type CompanyBenefitCreateRequest = {
   /**
@@ -36,12 +38,14 @@ export type CompanyBenefitCreateRequest = {
   /**
    * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0 Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
    */
-  catchUpType?: CatchUpType | null | undefined;
+  catchUpType?: CompanyBenefitCreateRequestCatchUpType | null | undefined;
 };
 
 /** @internal */
-export const CatchUpType$outboundSchema: z.ZodNativeEnum<typeof CatchUpType> = z
-  .nativeEnum(CatchUpType);
+export const CompanyBenefitCreateRequestCatchUpType$outboundSchema:
+  z.ZodNativeEnum<typeof CompanyBenefitCreateRequestCatchUpType> = z.nativeEnum(
+    CompanyBenefitCreateRequestCatchUpType,
+  );
 
 /** @internal */
 export type CompanyBenefitCreateRequest$Outbound = {
@@ -64,7 +68,8 @@ export const CompanyBenefitCreateRequest$outboundSchema: z.ZodType<
   description: z.string(),
   responsibleForEmployerTaxes: z.boolean().optional(),
   responsibleForEmployeeW2: z.boolean().optional(),
-  catchUpType: z.nullable(CatchUpType$outboundSchema).optional(),
+  catchUpType: z.nullable(CompanyBenefitCreateRequestCatchUpType$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     benefitType: "benefit_type",

@@ -61,8 +61,9 @@ export type JobsAndCompensationsGetJobsQueryError =
  *
  * @remarks
  * Get all of the jobs that an employee holds.
+ * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
  *
- * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. These fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are returned only when the `compensations:read` scope is included.
+ * Compensation data in the response requires the `compensations:read` scope.
  *
  * scope: `jobs:read`
  */
@@ -92,8 +93,9 @@ export function useJobsAndCompensationsGetJobs(
  *
  * @remarks
  * Get all of the jobs that an employee holds.
+ * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
  *
- * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. These fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are returned only when the `compensations:read` scope is included.
+ * Compensation data in the response requires the `compensations:read` scope.
  *
  * scope: `jobs:read`
  */

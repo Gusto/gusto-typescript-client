@@ -21,10 +21,9 @@
 
 Get all of the employees, onboarding, active and terminated, for a given company.
 
-Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are returned only when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
+Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
 
 scope: `employees:read`
-
 
 ### Example Usage
 
@@ -39,6 +38,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employees.list({
     companyId: "<id>",
+    sortBy: "name:desc",
   });
 
   console.log(result);
@@ -64,6 +64,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeesList(gustoEmbedded, {
     companyId: "<id>",
+    sortBy: "name:desc",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -488,10 +489,9 @@ import {
 
 Get an employee.
 
-Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are returned only when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
+Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
 
 scope: `employees:read`
-
 
 ### Example Usage
 
@@ -616,9 +616,9 @@ async function run() {
       middleInitial: "F",
       lastName: "Baby",
       email: "tunechi@cashmoneyrecords.com",
+      workEmail: "new.partner.work@example.com",
       dateOfBirth: "1991-01-31",
       ssn: "824920233",
-      workEmail: "new.partner.work@example.com",
     },
   });
 
@@ -651,9 +651,9 @@ async function run() {
       middleInitial: "F",
       lastName: "Baby",
       email: "tunechi@cashmoneyrecords.com",
+      workEmail: "new.partner.work@example.com",
       dateOfBirth: "1991-01-31",
       ssn: "824920233",
-      workEmail: "new.partner.work@example.com",
     },
   });
   if (res.ok) {

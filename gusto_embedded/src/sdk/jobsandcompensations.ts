@@ -57,25 +57,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class JobsAndCompensations extends ClientSDK {
   /**
-   * Create a job
-   *
-   * @remarks
-   * Create a job.
-   *
-   * scope: `jobs:write`
-   */
-  async createJob(
-    request: PostV1EmployeesEmployeeIdJobsRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1EmployeesEmployeeIdJobsResponse> {
-    return unwrapAsync(jobsAndCompensationsCreateJob(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get jobs for an employee
    *
    * @remarks
@@ -91,6 +72,25 @@ export class JobsAndCompensations extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetV1EmployeesEmployeeIdJobsResponse> {
     return unwrapAsync(jobsAndCompensationsGetJobs(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a job
+   *
+   * @remarks
+   * Create a job.
+   *
+   * scope: `jobs:write`
+   */
+  async createJob(
+    request: PostV1EmployeesEmployeeIdJobsRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1EmployeesEmployeeIdJobsResponse> {
+    return unwrapAsync(jobsAndCompensationsCreateJob(
       this,
       request,
       options,
