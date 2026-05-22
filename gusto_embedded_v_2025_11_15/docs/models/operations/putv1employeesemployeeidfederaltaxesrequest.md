@@ -9,8 +9,8 @@ let value: PutV1EmployeesEmployeeIdFederalTaxesRequest = {
   employeeUuid: "<id>",
   requestBody: {
     version: "56a489ce86ed6c1b0f0cecc4050a0b01",
-    filingStatus: "Single",
     w4DataType: "rev_2020_w4",
+    filingStatus: "Single",
   },
 };
 ```

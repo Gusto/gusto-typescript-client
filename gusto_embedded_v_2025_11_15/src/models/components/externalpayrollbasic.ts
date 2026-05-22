@@ -12,16 +12,14 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The status of the external payroll. The status will be `unprocessed` when the external payroll is created and transition to `processed` once tax liabilities are entered and finalized.  Once in the `processed` status all actions that can edit an external payroll will be disabled.
  */
-export const ExternalPayrollBasicStatus = {
+export const Status = {
   Unprocessed: "unprocessed",
   Processed: "processed",
 } as const;
 /**
  * The status of the external payroll. The status will be `unprocessed` when the external payroll is created and transition to `processed` once tax liabilities are entered and finalized.  Once in the `processed` status all actions that can edit an external payroll will be disabled.
  */
-export type ExternalPayrollBasicStatus = ClosedEnum<
-  typeof ExternalPayrollBasicStatus
->;
+export type Status = ClosedEnum<typeof Status>;
 
 /**
  * The representation of an external payroll with minimal information.
@@ -50,13 +48,12 @@ export type ExternalPayrollBasic = {
   /**
    * The status of the external payroll. The status will be `unprocessed` when the external payroll is created and transition to `processed` once tax liabilities are entered and finalized.  Once in the `processed` status all actions that can edit an external payroll will be disabled.
    */
-  status?: ExternalPayrollBasicStatus | undefined;
+  status?: Status | undefined;
 };
 
 /** @internal */
-export const ExternalPayrollBasicStatus$inboundSchema: z.ZodNativeEnum<
-  typeof ExternalPayrollBasicStatus
-> = z.nativeEnum(ExternalPayrollBasicStatus);
+export const Status$inboundSchema: z.ZodNativeEnum<typeof Status> = z
+  .nativeEnum(Status);
 
 /** @internal */
 export const ExternalPayrollBasic$inboundSchema: z.ZodType<
@@ -69,7 +66,7 @@ export const ExternalPayrollBasic$inboundSchema: z.ZodType<
   check_date: z.string().optional(),
   payment_period_start_date: z.string().optional(),
   payment_period_end_date: z.string().optional(),
-  status: ExternalPayrollBasicStatus$inboundSchema.optional(),
+  status: Status$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

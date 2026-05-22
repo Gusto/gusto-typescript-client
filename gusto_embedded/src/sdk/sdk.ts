@@ -163,16 +163,16 @@ export class GustoEmbedded extends ClientSDK {
     return (this._employeeTaxSetup ??= new EmployeeTaxSetup(this._options));
   }
 
-  private _employeePaymentMethod?: EmployeePaymentMethod;
-  get employeePaymentMethod(): EmployeePaymentMethod {
-    return (this._employeePaymentMethod ??= new EmployeePaymentMethod(
+  private _employeePaymentMethods?: EmployeePaymentMethods;
+  get employeePaymentMethods(): EmployeePaymentMethods {
+    return (this._employeePaymentMethods ??= new EmployeePaymentMethods(
       this._options,
     ));
   }
 
-  private _employeePaymentMethods?: EmployeePaymentMethods;
-  get employeePaymentMethods(): EmployeePaymentMethods {
-    return (this._employeePaymentMethods ??= new EmployeePaymentMethods(
+  private _employeePaymentMethod?: EmployeePaymentMethod;
+  get employeePaymentMethod(): EmployeePaymentMethod {
+    return (this._employeePaymentMethod ??= new EmployeePaymentMethod(
       this._options,
     ));
   }
@@ -194,16 +194,16 @@ export class GustoEmbedded extends ClientSDK {
     return (this._contractors ??= new Contractors(this._options));
   }
 
-  private _contractorPaymentMethods?: ContractorPaymentMethods;
-  get contractorPaymentMethods(): ContractorPaymentMethods {
-    return (this._contractorPaymentMethods ??= new ContractorPaymentMethods(
+  private _contractorPaymentMethod?: ContractorPaymentMethod;
+  get contractorPaymentMethod(): ContractorPaymentMethod {
+    return (this._contractorPaymentMethod ??= new ContractorPaymentMethod(
       this._options,
     ));
   }
 
-  private _contractorPaymentMethod?: ContractorPaymentMethod;
-  get contractorPaymentMethod(): ContractorPaymentMethod {
-    return (this._contractorPaymentMethod ??= new ContractorPaymentMethod(
+  private _contractorPaymentMethods?: ContractorPaymentMethods;
+  get contractorPaymentMethods(): ContractorPaymentMethods {
+    return (this._contractorPaymentMethods ??= new ContractorPaymentMethods(
       this._options,
     ));
   }

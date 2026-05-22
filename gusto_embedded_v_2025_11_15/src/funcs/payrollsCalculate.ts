@@ -48,6 +48,8 @@ import { Result } from "../types/fp.js";
  *
  * If the company is blocked from running payroll due to issues like incomplete setup, missing information or other compliance issues, the response will be 422 Unprocessable Entity with a categorization of the blockers as described in the error responses.
  *
+ * scope: `payrolls:run`
+ *
  * If set, this operation will use {@link Security.companyAccessAuth} from the global security.
  */
 export function payrollsCalculate(

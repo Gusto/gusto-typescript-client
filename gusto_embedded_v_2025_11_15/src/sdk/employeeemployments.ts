@@ -57,27 +57,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class EmployeeEmployments extends ClientSDK {
   /**
-   * Create an employee termination
-   *
-   * @remarks
-   * Create a termination for an employee. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
-   *
-   * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
-   *
-   * scope: `employments:write`
-   */
-  async createTermination(
-    request: PostV1EmployeesEmployeeIdTerminationsRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1EmployeesEmployeeIdTerminationsResponse> {
-    return unwrapAsync(employeeEmploymentsCreateTermination(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get terminations for an employee
    *
    * @remarks
@@ -92,6 +71,27 @@ export class EmployeeEmployments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetV1EmployeesEmployeeIdTerminationsResponse> {
     return unwrapAsync(employeeEmploymentsGetTerminations(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create an employee termination
+   *
+   * @remarks
+   * Create a termination for an employee. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
+   *
+   * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+   *
+   * scope: `employments:write`
+   */
+  async createTermination(
+    request: PostV1EmployeesEmployeeIdTerminationsRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1EmployeesEmployeeIdTerminationsResponse> {
+    return unwrapAsync(employeeEmploymentsCreateTermination(
       this,
       request,
       options,
@@ -139,6 +139,25 @@ export class EmployeeEmployments extends ClientSDK {
   }
 
   /**
+   * Get an employee rehire
+   *
+   * @remarks
+   * Retrieve an employee's rehire, which contains information on when the employee returns to work.
+   *
+   * scope: `employments:read`
+   */
+  async getRehire(
+    request: GetV1EmployeesEmployeeIdRehireRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1EmployeesEmployeeIdRehireResponse> {
+    return unwrapAsync(employeeEmploymentsGetRehire(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Create an employee rehire
    *
    * @remarks
@@ -170,25 +189,6 @@ export class EmployeeEmployments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PutV1EmployeesEmployeeIdRehireResponse> {
     return unwrapAsync(employeeEmploymentsRehire(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get an employee rehire
-   *
-   * @remarks
-   * Retrieve an employee's rehire, which contains information on when the employee returns to work.
-   *
-   * scope: `employments:read`
-   */
-  async getRehire(
-    request: GetV1EmployeesEmployeeIdRehireRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1EmployeesEmployeeIdRehireResponse> {
-    return unwrapAsync(employeeEmploymentsGetRehire(
       this,
       request,
       options,

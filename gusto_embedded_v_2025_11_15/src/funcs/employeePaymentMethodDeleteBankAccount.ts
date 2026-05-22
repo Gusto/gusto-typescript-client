@@ -189,7 +189,7 @@ async function $do(
       204,
       DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$inboundSchema,
     ),
-    M.fail([404, "4XX"]),
+    M.fail([404, 422, "4XX"]),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

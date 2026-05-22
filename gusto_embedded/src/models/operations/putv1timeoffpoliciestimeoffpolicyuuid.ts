@@ -86,7 +86,7 @@ export type PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody = {
    */
   accrualRateUnit?: string | null | undefined;
   /**
-   * Boolean representing if an employee's accrued time off hours will be paid out on termination
+   * Boolean representing if an employee's accrued time off hours will be paid out on termination. If accrual_method is unlimited, then paid_out_on_termination must be `false`.
    */
   paidOutOnTermination?: boolean | undefined;
   /**

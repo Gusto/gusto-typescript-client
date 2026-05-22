@@ -57,6 +57,25 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class PaySchedules extends ClientSDK {
   /**
+   * Get the pay schedules for a company
+   *
+   * @remarks
+   * Returns all pay schedules for a company. The pay schedule object captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+   *
+   * scope: `pay_schedules:read`
+   */
+  async getAll(
+    request: GetV1CompaniesCompanyIdPaySchedulesRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyIdPaySchedulesResponse> {
+    return unwrapAsync(paySchedulesGetAll(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Create a new pay schedule
    *
    * @remarks
@@ -83,25 +102,6 @@ export class PaySchedules extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PostV1CompaniesCompanyIdPaySchedulesResponse> {
     return unwrapAsync(paySchedulesCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get the pay schedules for a company
-   *
-   * @remarks
-   * Returns all pay schedules for a company. The pay schedule object captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
-   *
-   * scope: `pay_schedules:read`
-   */
-  async getAll(
-    request: GetV1CompaniesCompanyIdPaySchedulesRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyIdPaySchedulesResponse> {
-    return unwrapAsync(paySchedulesGetAll(
       this,
       request,
       options,

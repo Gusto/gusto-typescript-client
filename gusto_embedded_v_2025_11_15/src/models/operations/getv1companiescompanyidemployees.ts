@@ -64,7 +64,7 @@ export type GetV1CompaniesCompanyIdEmployeesRequest = {
    */
   searchTerm?: string | undefined;
   /**
-   * Sort employees by field. Cannot be used with search_term. Options: created_at, name, onboarding_status
+   * Sort employees by a given field. Cannot be used with search_term. Append `:asc` or `:desc` to specify direction (e.g., `name:desc`). Defaults to ascending.
    */
   sortBy?: string | undefined;
   /**

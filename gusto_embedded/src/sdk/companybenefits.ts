@@ -72,29 +72,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class CompanyBenefits extends ClientSDK {
   /**
-   * Create a company benefit
-   *
-   * @remarks
-   * Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
-   *
-   * Note that company benefits can be deactivated only when no employees are enrolled.
-   *
-   * When the application has the `company_benefits:write:benefit_type_limited` data scope, the application can only create company benefits for benefit types that are permitted for the application.
-   *
-   * scope: `company_benefits:write`
-   */
-  async create(
-    request: PostV1CompaniesCompanyIdCompanyBenefitsRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1CompaniesCompanyIdCompanyBenefitsResponse> {
-    return unwrapAsync(companyBenefitsCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get benefits for a company
    *
    * @remarks
@@ -111,6 +88,29 @@ export class CompanyBenefits extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetV1CompaniesCompanyIdCompanyBenefitsResponse> {
     return unwrapAsync(companyBenefitsList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a company benefit
+   *
+   * @remarks
+   * Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
+   *
+   * Note that company benefits can be deactivated only when no employees are enrolled.
+   *
+   * When the application has the `company_benefits:write:benefit_type_limited` data scope, the application can only create company benefits for benefit types that are permitted for the application.
+   *
+   * scope: `company_benefits:write`
+   */
+  async create(
+    request: PostV1CompaniesCompanyIdCompanyBenefitsRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1CompaniesCompanyIdCompanyBenefitsResponse> {
+    return unwrapAsync(companyBenefitsCreate(
       this,
       request,
       options,

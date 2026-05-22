@@ -198,8 +198,8 @@ run();
 * [getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness](docs/sdks/companies/README.md#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
 * [acceptTermsOfService](docs/sdks/companies/README.md#accepttermsofservice) - Accept terms of service for a company user
 * [retrieveTermsOfService](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for a company user
-* [createAdmin](docs/sdks/companies/README.md#createadmin) - Create an admin for the company
 * [listAdmins](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
+* [createAdmin](docs/sdks/companies/README.md#createadmin) - Create an admin for the company
 * [getOnboardingStatus](docs/sdks/companies/README.md#getonboardingstatus) - Get company onboarding status
 * [finishOnboarding](docs/sdks/companies/README.md#finishonboarding) - Finish company onboarding
 * [getCustomFields](docs/sdks/companies/README.md#getcustomfields) - Get the custom fields of a company
@@ -221,8 +221,8 @@ run();
 
 ### [CompanyBenefits](docs/sdks/companybenefits/README.md)
 
-* [create](docs/sdks/companybenefits/README.md#create) - Create a company benefit
 * [list](docs/sdks/companybenefits/README.md#list) - Get benefits for a company
+* [create](docs/sdks/companybenefits/README.md#create) - Create a company benefit
 * [get](docs/sdks/companybenefits/README.md#get) - Get a company benefit
 * [update](docs/sdks/companybenefits/README.md#update) - Update a company benefit
 * [delete](docs/sdks/companybenefits/README.md#delete) - Delete a company benefit
@@ -281,16 +281,16 @@ run();
 
 * [getReceipt](docs/sdks/contractorpayments/README.md#getreceipt) - Get a single contractor payment receipt
 * [fund](docs/sdks/contractorpayments/README.md#fund) - Fund a contractor payment [DEMO]
-* [create](docs/sdks/contractorpayments/README.md#create) - Create a contractor payment
 * [list](docs/sdks/contractorpayments/README.md#list) - Get contractor payments for a company
+* [create](docs/sdks/contractorpayments/README.md#create) - Create a contractor payment
 * [get](docs/sdks/contractorpayments/README.md#get) - Get a single contractor payment
 * [delete](docs/sdks/contractorpayments/README.md#delete) - Cancel a contractor payment
 * [getV1ContractorPaymentsContractorPaymentIdPdf](docs/sdks/contractorpayments/README.md#getv1contractorpaymentscontractorpaymentidpdf) - Get a contractor payment PDF
 
 ### [Contractors](docs/sdks/contractors/README.md)
 
-* [create](docs/sdks/contractors/README.md#create) - Create a contractor
 * [list](docs/sdks/contractors/README.md#list) - Get contractors of a company
+* [create](docs/sdks/contractors/README.md#create) - Create a contractor
 * [get](docs/sdks/contractors/README.md#get) - Get a contractor
 * [update](docs/sdks/contractors/README.md#update) - Update a contractor
 * [delete](docs/sdks/contractors/README.md#delete) - Delete a contractor
@@ -306,8 +306,8 @@ run();
 
 ### [Departments](docs/sdks/departments/README.md)
 
-* [create](docs/sdks/departments/README.md#create) - Create a department
 * [getAll](docs/sdks/departments/README.md#getall) - Get all departments of a company
+* [create](docs/sdks/departments/README.md#create) - Create a department
 * [get](docs/sdks/departments/README.md#get) - Get a department
 * [update](docs/sdks/departments/README.md#update) - Update a department
 * [delete](docs/sdks/departments/README.md#delete) - Delete a department
@@ -316,8 +316,8 @@ run();
 
 ### [EarningTypes](docs/sdks/earningtypes/README.md)
 
-* [create](docs/sdks/earningtypes/README.md#create) - Create a custom earning type
 * [list](docs/sdks/earningtypes/README.md#list) - Get all earning types for a company
+* [create](docs/sdks/earningtypes/README.md#create) - Create a custom earning type
 * [update](docs/sdks/earningtypes/README.md#update) - Update an earning type
 * [delete](docs/sdks/earningtypes/README.md#delete) - Deactivate an earning type
 
@@ -336,8 +336,8 @@ run();
 
 ### [EmployeeBenefits](docs/sdks/employeebenefits/README.md)
 
-* [create](docs/sdks/employeebenefits/README.md#create) - Create an employee benefit
 * [get](docs/sdks/employeebenefits/README.md#get) - Get all benefits for an employee
+* [create](docs/sdks/employeebenefits/README.md#create) - Create an employee benefit
 * [retrieve](docs/sdks/employeebenefits/README.md#retrieve) - Get an employee benefit
 * [update](docs/sdks/employeebenefits/README.md#update) - Update an employee benefit
 * [delete](docs/sdks/employeebenefits/README.md#delete) - Delete an employee benefit
@@ -350,13 +350,13 @@ run();
 
 ### [EmployeeEmployments](docs/sdks/employeeemployments/README.md)
 
-* [createTermination](docs/sdks/employeeemployments/README.md#createtermination) - Create an employee termination
 * [getTerminations](docs/sdks/employeeemployments/README.md#getterminations) - Get terminations for an employee
+* [createTermination](docs/sdks/employeeemployments/README.md#createtermination) - Create an employee termination
 * [deleteTermination](docs/sdks/employeeemployments/README.md#deletetermination) - Delete an employee termination
 * [updateTermination](docs/sdks/employeeemployments/README.md#updatetermination) - Update an employee termination
+* [getRehire](docs/sdks/employeeemployments/README.md#getrehire) - Get an employee rehire
 * [createRehire](docs/sdks/employeeemployments/README.md#createrehire) - Create an employee rehire
 * [rehire](docs/sdks/employeeemployments/README.md#rehire) - Update an employee rehire
-* [getRehire](docs/sdks/employeeemployments/README.md#getrehire) - Get an employee rehire
 * [deleteRehire](docs/sdks/employeeemployments/README.md#deleterehire) - Delete an employee rehire
 * [getHistory](docs/sdks/employeeemployments/README.md#gethistory) - Get employment history for an employee
 * [getV1TerminationsEmployeeId](docs/sdks/employeeemployments/README.md#getv1terminationsemployeeid) - Get an employee termination
@@ -372,8 +372,8 @@ run();
 ### [EmployeePaymentMethod](docs/sdks/employeepaymentmethod/README.md)
 
 * [create](docs/sdks/employeepaymentmethod/README.md#create) - Create an employee bank account
-* [deleteBankAccount](docs/sdks/employeepaymentmethod/README.md#deletebankaccount) - Delete an employee bank account
 * [updateBankAccount](docs/sdks/employeepaymentmethod/README.md#updatebankaccount) - Update an employee bank account
+* [deleteBankAccount](docs/sdks/employeepaymentmethod/README.md#deletebankaccount) - Delete an employee bank account
 * [get](docs/sdks/employeepaymentmethod/README.md#get) - Get payment method for an employee
 * [update](docs/sdks/employeepaymentmethod/README.md#update) - Update payment method for an employee
 
@@ -409,11 +409,11 @@ run();
 
 ### [ExternalPayrolls](docs/sdks/externalpayrolls/README.md)
 
-* [create](docs/sdks/externalpayrolls/README.md#create) - Create an external payroll for a company
 * [get](docs/sdks/externalpayrolls/README.md#get) - Get external payrolls for a company
+* [create](docs/sdks/externalpayrolls/README.md#create) - Create an external payroll for a company
 * [retrieve](docs/sdks/externalpayrolls/README.md#retrieve) - Get an external payroll
-* [delete](docs/sdks/externalpayrolls/README.md#delete) - Delete an external payroll
 * [update](docs/sdks/externalpayrolls/README.md#update) - Update an external payroll
+* [delete](docs/sdks/externalpayrolls/README.md#delete) - Delete an external payroll
 * [calculateTaxes](docs/sdks/externalpayrolls/README.md#calculatetaxes) - Get tax suggestions for an external payroll
 * [listTaxLiabilities](docs/sdks/externalpayrolls/README.md#listtaxliabilities) - Get tax liabilities
 * [updateTaxLiabilities](docs/sdks/externalpayrolls/README.md#updatetaxliabilities) - Update tax liabilities
@@ -430,8 +430,8 @@ run();
 
 ### [Garnishments](docs/sdks/garnishments/README.md)
 
-* [create](docs/sdks/garnishments/README.md#create) - Create a garnishment
 * [list](docs/sdks/garnishments/README.md#list) - Get garnishments for an employee
+* [create](docs/sdks/garnishments/README.md#create) - Create a garnishment
 * [get](docs/sdks/garnishments/README.md#get) - Get a garnishment
 * [update](docs/sdks/garnishments/README.md#update) - Update a garnishment
 * [getChildSupportData](docs/sdks/garnishments/README.md#getchildsupportdata) - Get child support garnishment data
@@ -485,8 +485,8 @@ run();
 
 ### [JobsAndCompensations](docs/sdks/jobsandcompensations/README.md)
 
-* [createJob](docs/sdks/jobsandcompensations/README.md#createjob) - Create a job
 * [getJobs](docs/sdks/jobsandcompensations/README.md#getjobs) - Get jobs for an employee
+* [createJob](docs/sdks/jobsandcompensations/README.md#createjob) - Create a job
 * [getJob](docs/sdks/jobsandcompensations/README.md#getjob) - Get a job
 * [update](docs/sdks/jobsandcompensations/README.md#update) - Update a job
 * [delete](docs/sdks/jobsandcompensations/README.md#delete) - Delete an individual job
@@ -498,8 +498,8 @@ run();
 
 ### [Locations](docs/sdks/locations/README.md)
 
-* [create](docs/sdks/locations/README.md#create) - Create a company location
 * [get](docs/sdks/locations/README.md#get) - Get all company locations
+* [create](docs/sdks/locations/README.md#create) - Create a company location
 * [retrieve](docs/sdks/locations/README.md#retrieve) - Get a location
 * [update](docs/sdks/locations/README.md#update) - Update a location
 * [getMinimumWages](docs/sdks/locations/README.md#getminimumwages) - Get minimum wages for a location
@@ -538,8 +538,8 @@ run();
 
 ### [PaySchedules](docs/sdks/payschedules/README.md)
 
-* [create](docs/sdks/payschedules/README.md#create) - Create a new pay schedule
 * [getAll](docs/sdks/payschedules/README.md#getall) - Get the pay schedules for a company
+* [create](docs/sdks/payschedules/README.md#create) - Create a new pay schedule
 * [getPreview](docs/sdks/payschedules/README.md#getpreview) - Preview pay schedule dates
 * [get](docs/sdks/payschedules/README.md#get) - Get a pay schedule
 * [update](docs/sdks/payschedules/README.md#update) - Update a pay schedule
@@ -585,8 +585,8 @@ run();
 
 ### [Signatories](docs/sdks/signatories/README.md)
 
-* [create](docs/sdks/signatories/README.md#create) - Create a signatory
 * [list](docs/sdks/signatories/README.md#list) - Get the signatories for a company
+* [create](docs/sdks/signatories/README.md#create) - Create a signatory
 * [invite](docs/sdks/signatories/README.md#invite) - Invite a signatory
 * [update](docs/sdks/signatories/README.md#update) - Update a signatory
 * [delete](docs/sdks/signatories/README.md#delete) - Delete a signatory
@@ -623,10 +623,10 @@ run();
 
 ### [Webhooks](docs/sdks/webhooks/README.md)
 
-* [createSubscription](docs/sdks/webhooks/README.md#createsubscription) - Create a webhook subscription
 * [listSubscriptions](docs/sdks/webhooks/README.md#listsubscriptions) - List webhook subscriptions
-* [updateSubscription](docs/sdks/webhooks/README.md#updatesubscription) - Update a webhook subscription
+* [createSubscription](docs/sdks/webhooks/README.md#createsubscription) - Create a webhook subscription
 * [getSubscription](docs/sdks/webhooks/README.md#getsubscription) - Get a webhook subscription
+* [updateSubscription](docs/sdks/webhooks/README.md#updatesubscription) - Update a webhook subscription
 * [deleteSubscription](docs/sdks/webhooks/README.md#deletesubscription) - Delete a webhook subscription
 * [verify](docs/sdks/webhooks/README.md#verify) - Verify a webhook subscription
 * [requestVerificationToken](docs/sdks/webhooks/README.md#requestverificationtoken) - Request a verification token for a webhook subscription

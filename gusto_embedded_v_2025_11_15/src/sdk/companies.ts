@@ -242,6 +242,25 @@ export class Companies extends ClientSDK {
   }
 
   /**
+   * Get all the admins at a company
+   *
+   * @remarks
+   * Returns a list of all the admins at a company
+   *
+   * scope: `company_admin:read`
+   */
+  async listAdmins(
+    request: GetV1CompaniesCompanyIdAdminsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyIdAdminsResponse> {
+    return unwrapAsync(companiesListAdmins(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Create an admin for the company
    *
    * @remarks
@@ -255,25 +274,6 @@ export class Companies extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PostV1CompaniesCompanyIdAdminsResponse> {
     return unwrapAsync(companiesCreateAdmin(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get all the admins at a company
-   *
-   * @remarks
-   * Returns a list of all the admins at a company
-   *
-   * scope: `company_admin:read`
-   */
-  async listAdmins(
-    request: GetV1CompaniesCompanyIdAdminsRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyIdAdminsResponse> {
-    return unwrapAsync(companiesListAdmins(
       this,
       request,
       options,

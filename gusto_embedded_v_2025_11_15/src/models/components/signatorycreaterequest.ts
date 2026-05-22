@@ -9,7 +9,7 @@ import { RFCDate } from "../../types/rfcdate.js";
 /**
  * The signatory's home address.
  */
-export type HomeAddress = {
+export type SignatoryCreateRequestHomeAddress = {
   street1: string;
   street2?: string | undefined;
   city: string;
@@ -54,11 +54,11 @@ export type SignatoryCreateRequest = {
   /**
    * The signatory's home address.
    */
-  homeAddress: HomeAddress;
+  homeAddress: SignatoryCreateRequestHomeAddress;
 };
 
 /** @internal */
-export type HomeAddress$Outbound = {
+export type SignatoryCreateRequestHomeAddress$Outbound = {
   street_1: string;
   street_2?: string | undefined;
   city: string;
@@ -68,10 +68,10 @@ export type HomeAddress$Outbound = {
 };
 
 /** @internal */
-export const HomeAddress$outboundSchema: z.ZodType<
-  HomeAddress$Outbound,
+export const SignatoryCreateRequestHomeAddress$outboundSchema: z.ZodType<
+  SignatoryCreateRequestHomeAddress$Outbound,
   z.ZodTypeDef,
-  HomeAddress
+  SignatoryCreateRequestHomeAddress
 > = z.object({
   street1: z.string(),
   street2: z.string().optional(),
@@ -86,8 +86,14 @@ export const HomeAddress$outboundSchema: z.ZodType<
   });
 });
 
-export function homeAddressToJSON(homeAddress: HomeAddress): string {
-  return JSON.stringify(HomeAddress$outboundSchema.parse(homeAddress));
+export function signatoryCreateRequestHomeAddressToJSON(
+  signatoryCreateRequestHomeAddress: SignatoryCreateRequestHomeAddress,
+): string {
+  return JSON.stringify(
+    SignatoryCreateRequestHomeAddress$outboundSchema.parse(
+      signatoryCreateRequestHomeAddress,
+    ),
+  );
 }
 
 /** @internal */
@@ -100,7 +106,7 @@ export type SignatoryCreateRequest$Outbound = {
   birthday: string;
   email: string;
   ssn: string;
-  home_address: HomeAddress$Outbound;
+  home_address: SignatoryCreateRequestHomeAddress$Outbound;
 };
 
 /** @internal */
@@ -117,7 +123,7 @@ export const SignatoryCreateRequest$outboundSchema: z.ZodType<
   birthday: z.instanceof(RFCDate).transform(v => v.toString()),
   email: z.string(),
   ssn: z.string(),
-  homeAddress: z.lazy(() => HomeAddress$outboundSchema),
+  homeAddress: z.lazy(() => SignatoryCreateRequestHomeAddress$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     firstName: "first_name",

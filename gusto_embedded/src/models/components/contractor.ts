@@ -12,14 +12,14 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The contractor's wage type, either "Fixed" or "Hourly".
  */
-export const ContractorWageType = {
+export const WageType = {
   Fixed: "Fixed",
   Hourly: "Hourly",
 } as const;
 /**
  * The contractor's wage type, either "Fixed" or "Hourly".
  */
-export type ContractorWageType = ClosedEnum<typeof ContractorWageType>;
+export type WageType = ClosedEnum<typeof WageType>;
 
 /**
  * The contractor's type, either "Individual" or "Business".
@@ -138,7 +138,7 @@ export type Contractor = {
   /**
    * The contractor's wage type, either "Fixed" or "Hourly".
    */
-  wageType?: ContractorWageType | undefined;
+  wageType?: WageType | undefined;
   /**
    * The status of the contractor with the company.
    */
@@ -260,9 +260,8 @@ export type Contractor = {
 };
 
 /** @internal */
-export const ContractorWageType$inboundSchema: z.ZodNativeEnum<
-  typeof ContractorWageType
-> = z.nativeEnum(ContractorWageType);
+export const WageType$inboundSchema: z.ZodNativeEnum<typeof WageType> = z
+  .nativeEnum(WageType);
 
 /** @internal */
 export const ContractorType$inboundSchema: z.ZodNativeEnum<
@@ -376,7 +375,7 @@ export const Contractor$inboundSchema: z.ZodType<
 > = z.object({
   uuid: z.string(),
   company_uuid: z.string().optional(),
-  wage_type: ContractorWageType$inboundSchema.optional(),
+  wage_type: WageType$inboundSchema.optional(),
   is_active: z.boolean().default(true),
   version: z.string().optional(),
   type: ContractorType$inboundSchema.optional(),

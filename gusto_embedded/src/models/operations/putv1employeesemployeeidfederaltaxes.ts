@@ -30,6 +30,17 @@ export type PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion =
   ClosedEnum<typeof PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion>;
 
 /**
+ * The version of the W4 form. Only rev_2020_w4 is accepted for updates.
+ */
+export const W4DataType = {
+  Rev2020W4: "rev_2020_w4",
+} as const;
+/**
+ * The version of the W4 form. Only rev_2020_w4 is accepted for updates.
+ */
+export type W4DataType = ClosedEnum<typeof W4DataType>;
+
+/**
  * Determines which tax return form an individual will use. One of: Single, Married, Head of Household, Exempt from withholding.
  */
 export const FilingStatus = {
@@ -43,30 +54,19 @@ export const FilingStatus = {
  */
 export type FilingStatus = ClosedEnum<typeof FilingStatus>;
 
-/**
- * The version of the W4 form. Only rev_2020_w4 is accepted for updates.
- */
-export const W4DataType = {
-  Rev2020W4: "rev_2020_w4",
-} as const;
-/**
- * The version of the W4 form. Only rev_2020_w4 is accepted for updates.
- */
-export type W4DataType = ClosedEnum<typeof W4DataType>;
-
 export type PutV1EmployeesEmployeeIdFederalTaxesRequestBody = {
   /**
    * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
    */
   version: string;
   /**
+   * The version of the W4 form. Only rev_2020_w4 is accepted for updates.
+   */
+  w4DataType: W4DataType;
+  /**
    * Determines which tax return form an individual will use. One of: Single, Married, Head of Household, Exempt from withholding.
    */
   filingStatus: FilingStatus;
-  /**
-   * Additional amount to be withheld from each paycheck.
-   */
-  extraWithholding?: number | undefined;
   /**
    * If there are only two jobs (e.g., you and your spouse each have a job), set to true.
    */
@@ -84,9 +84,9 @@ export type PutV1EmployeesEmployeeIdFederalTaxesRequestBody = {
    */
   deductions?: number | undefined;
   /**
-   * The version of the W4 form. Only rev_2020_w4 is accepted for updates.
+   * Additional amount to be withheld from each paycheck.
    */
-  w4DataType: W4DataType;
+  extraWithholding?: number | undefined;
   /**
    * Only applicable when w4_data_type is 'pre_2020_w4' (pre-2020 W4 forms are deprecated for updates).
    */
@@ -126,23 +126,23 @@ export const PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion$outbound
   > = z.nativeEnum(PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion);
 
 /** @internal */
-export const FilingStatus$outboundSchema: z.ZodNativeEnum<typeof FilingStatus> =
-  z.nativeEnum(FilingStatus);
-
-/** @internal */
 export const W4DataType$outboundSchema: z.ZodNativeEnum<typeof W4DataType> = z
   .nativeEnum(W4DataType);
 
 /** @internal */
+export const FilingStatus$outboundSchema: z.ZodNativeEnum<typeof FilingStatus> =
+  z.nativeEnum(FilingStatus);
+
+/** @internal */
 export type PutV1EmployeesEmployeeIdFederalTaxesRequestBody$Outbound = {
   version: string;
+  w4_data_type: string;
   filing_status: string;
-  extra_withholding?: number | undefined;
   two_jobs?: boolean | undefined;
   dependents_amount?: number | undefined;
   other_income?: number | undefined;
   deductions?: number | undefined;
-  w4_data_type: string;
+  extra_withholding?: number | undefined;
   federal_withholding_allowance?: number | undefined;
   additional_withholding?: number | undefined;
 };
@@ -155,23 +155,23 @@ export const PutV1EmployeesEmployeeIdFederalTaxesRequestBody$outboundSchema:
     PutV1EmployeesEmployeeIdFederalTaxesRequestBody
   > = z.object({
     version: z.string(),
+    w4DataType: W4DataType$outboundSchema,
     filingStatus: FilingStatus$outboundSchema,
-    extraWithholding: z.number().optional(),
     twoJobs: z.boolean().optional(),
     dependentsAmount: z.number().optional(),
     otherIncome: z.number().optional(),
     deductions: z.number().optional(),
-    w4DataType: W4DataType$outboundSchema,
+    extraWithholding: z.number().optional(),
     federalWithholdingAllowance: z.number().int().optional(),
     additionalWithholding: z.number().optional(),
   }).transform((v) => {
     return remap$(v, {
+      w4DataType: "w4_data_type",
       filingStatus: "filing_status",
-      extraWithholding: "extra_withholding",
       twoJobs: "two_jobs",
       dependentsAmount: "dependents_amount",
       otherIncome: "other_income",
-      w4DataType: "w4_data_type",
+      extraWithholding: "extra_withholding",
       federalWithholdingAllowance: "federal_withholding_allowance",
       additionalWithholding: "additional_withholding",
     });

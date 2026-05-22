@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { CatchUpType } from "@gusto/embedded-api/models/components/companybenefitcreaterequest.js";
+import { CatchUpType } from "@gusto/embedded-api/models/components/companybenefit.js";
 
 let value: CatchUpType = "deemed";
 ```

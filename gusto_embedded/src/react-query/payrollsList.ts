@@ -71,6 +71,7 @@ export type PayrollsListQueryError =
  * Notes:
  * * Dollar amounts are returned as string representations of numeric decimals, are represented to the cent.
  * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1 year apart.
+ * * Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
  *
  * scope: `payrolls:read`
  */
@@ -100,6 +101,7 @@ export function usePayrollsList(
  * Notes:
  * * Dollar amounts are returned as string representations of numeric decimals, are represented to the cent.
  * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1 year apart.
+ * * Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
  *
  * scope: `payrolls:read`
  */

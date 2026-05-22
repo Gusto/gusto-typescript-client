@@ -25,7 +25,7 @@ export type ContractorCreateRequestBodyType = ClosedEnum<
  *
  * @remarks
  */
-export const WageType = {
+export const ContractorCreateRequestBodyWageType = {
   Fixed: "Fixed",
   Hourly: "Hourly",
 } as const;
@@ -34,7 +34,9 @@ export const WageType = {
  *
  * @remarks
  */
-export type WageType = ClosedEnum<typeof WageType>;
+export type ContractorCreateRequestBodyWageType = ClosedEnum<
+  typeof ContractorCreateRequestBodyWageType
+>;
 
 /**
  * Request body for creating a contractor.
@@ -49,7 +51,7 @@ export type ContractorCreateRequestBody = {
    *
    * @remarks
    */
-  wageType: WageType;
+  wageType: ContractorCreateRequestBodyWageType;
   /**
    * The day when the contractor will start working for the company.
    *
@@ -138,8 +140,10 @@ export const ContractorCreateRequestBodyType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ContractorCreateRequestBodyType);
 
 /** @internal */
-export const WageType$outboundSchema: z.ZodNativeEnum<typeof WageType> = z
-  .nativeEnum(WageType);
+export const ContractorCreateRequestBodyWageType$outboundSchema:
+  z.ZodNativeEnum<typeof ContractorCreateRequestBodyWageType> = z.nativeEnum(
+    ContractorCreateRequestBodyWageType,
+  );
 
 /** @internal */
 export type ContractorCreateRequestBody$Outbound = {
@@ -167,7 +171,7 @@ export const ContractorCreateRequestBody$outboundSchema: z.ZodType<
   ContractorCreateRequestBody
 > = z.object({
   type: ContractorCreateRequestBodyType$outboundSchema.default("Individual"),
-  wageType: WageType$outboundSchema,
+  wageType: ContractorCreateRequestBodyWageType$outboundSchema,
   startDate: z.string(),
   hourlyRate: z.string().optional(),
   selfOnboarding: z.boolean().default(false),

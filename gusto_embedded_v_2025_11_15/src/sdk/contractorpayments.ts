@@ -91,25 +91,6 @@ export class ContractorPayments extends ClientSDK {
   }
 
   /**
-   * Create a contractor payment
-   *
-   * @remarks
-   * Pay a contractor. Information needed depends on the contractor's wage type (hourly vs fixed)
-   *
-   * scope: `payrolls:run`
-   */
-  async create(
-    request: PostV1CompaniesCompanyIdContractorPaymentsRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1CompaniesCompanyIdContractorPaymentsResponse> {
-    return unwrapAsync(contractorPaymentsCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get contractor payments for a company
    *
    * @remarks
@@ -124,6 +105,25 @@ export class ContractorPayments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetV1CompaniesCompanyIdContractorPaymentsResponse> {
     return unwrapAsync(contractorPaymentsList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a contractor payment
+   *
+   * @remarks
+   * Pay a contractor. Information needed depends on the contractor's wage type (hourly vs fixed)
+   *
+   * scope: `payrolls:run`
+   */
+  async create(
+    request: PostV1CompaniesCompanyIdContractorPaymentsRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1CompaniesCompanyIdContractorPaymentsResponse> {
+    return unwrapAsync(contractorPaymentsCreate(
       this,
       request,
       options,

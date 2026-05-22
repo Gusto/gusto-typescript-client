@@ -32,25 +32,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Garnishments extends ClientSDK {
   /**
-   * Create a garnishment
-   *
-   * @remarks
-   * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
-   *
-   * scope: `garnishments:write`
-   */
-  async create(
-    request: PostV1EmployeesEmployeeIdGarnishmentsRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1EmployeesEmployeeIdGarnishmentsResponse> {
-    return unwrapAsync(garnishmentsCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get garnishments for an employee
    *
    * @remarks
@@ -63,6 +44,25 @@ export class Garnishments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetV1EmployeesEmployeeIdGarnishmentsResponse> {
     return unwrapAsync(garnishmentsList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a garnishment
+   *
+   * @remarks
+   * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
+   *
+   * scope: `garnishments:write`
+   */
+  async create(
+    request: PostV1EmployeesEmployeeIdGarnishmentsRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1EmployeesEmployeeIdGarnishmentsResponse> {
+    return unwrapAsync(garnishmentsCreate(
       this,
       request,
       options,

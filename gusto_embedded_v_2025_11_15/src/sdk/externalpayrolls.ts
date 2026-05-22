@@ -52,25 +52,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class ExternalPayrolls extends ClientSDK {
   /**
-   * Create an external payroll for a company
-   *
-   * @remarks
-   * Creates a new external payroll for a company.
-   *
-   * scope: `external_payrolls:write`
-   */
-  async create(
-    request: PostV1ExternalPayrollRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1ExternalPayrollResponse> {
-    return unwrapAsync(externalPayrollsCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get external payrolls for a company
    *
    * @remarks
@@ -83,6 +64,25 @@ export class ExternalPayrolls extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetV1CompanyExternalPayrollsResponse> {
     return unwrapAsync(externalPayrollsGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create an external payroll for a company
+   *
+   * @remarks
+   * Creates a new external payroll for a company.
+   *
+   * scope: `external_payrolls:write`
+   */
+  async create(
+    request: PostV1ExternalPayrollRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1ExternalPayrollResponse> {
+    return unwrapAsync(externalPayrollsCreate(
       this,
       request,
       options,
@@ -109,25 +109,6 @@ export class ExternalPayrolls extends ClientSDK {
   }
 
   /**
-   * Delete an external payroll
-   *
-   * @remarks
-   * Delete an external payroll.
-   *
-   * scope: `external_payrolls:write`
-   */
-  async delete(
-    request: DeleteV1ExternalPayrollRequest,
-    options?: RequestOptions,
-  ): Promise<DeleteV1ExternalPayrollResponse> {
-    return unwrapAsync(externalPayrollsDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Update an external payroll
    *
    * @remarks
@@ -140,6 +121,25 @@ export class ExternalPayrolls extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PutV1ExternalPayrollResponse> {
     return unwrapAsync(externalPayrollsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete an external payroll
+   *
+   * @remarks
+   * Delete an external payroll.
+   *
+   * scope: `external_payrolls:write`
+   */
+  async delete(
+    request: DeleteV1ExternalPayrollRequest,
+    options?: RequestOptions,
+  ): Promise<DeleteV1ExternalPayrollResponse> {
+    return unwrapAsync(externalPayrollsDelete(
       this,
       request,
       options,

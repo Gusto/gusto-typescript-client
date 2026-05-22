@@ -76,13 +76,13 @@ export type Compensation = {
    */
   flsaStatus?: FlsaStatusType | undefined;
   /**
-   * The effective date for this compensation. For the first compensation, this defaults to the job's hire date.
-   */
-  effectiveDate?: string | undefined;
-  /**
    * The job title for this compensation.
    */
   title?: string | undefined;
+  /**
+   * The effective date for this compensation. For the first compensation, this defaults to the job's hire date.
+   */
+  effectiveDate?: string | undefined;
   /**
    * Indicates if the compensation could be adjusted to minimum wage during payroll calculation.
    */
@@ -135,8 +135,8 @@ export const Compensation$inboundSchema: z.ZodType<
   rate: z.string().optional(),
   payment_unit: PaymentUnit$inboundSchema.optional(),
   flsa_status: FlsaStatusType$inboundSchema.optional(),
-  effective_date: z.string().optional(),
   title: z.string().optional(),
+  effective_date: z.string().optional(),
   adjust_for_minimum_wage: z.boolean().optional(),
   minimum_wages: z.array(z.lazy(() => MinimumWages$inboundSchema)).optional(),
 }).transform((v) => {

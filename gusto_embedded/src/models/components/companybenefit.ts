@@ -22,13 +22,11 @@ export const Source = {
  */
 export type Source = ClosedEnum<typeof Source>;
 
-export const CompanyBenefitCatchUpType = {
+export const CatchUpType = {
   Elective: "elective",
   Deemed: "deemed",
 } as const;
-export type CompanyBenefitCatchUpType = ClosedEnum<
-  typeof CompanyBenefitCatchUpType
->;
+export type CatchUpType = ClosedEnum<typeof CatchUpType>;
 
 /**
  * The representation of a company benefit.
@@ -89,7 +87,7 @@ export type CompanyBenefit = {
   /**
    * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0 Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
    */
-  catchUpType?: CompanyBenefitCatchUpType | null | undefined;
+  catchUpType?: CatchUpType | null | undefined;
 };
 
 /** @internal */
@@ -97,9 +95,8 @@ export const Source$inboundSchema: z.ZodNativeEnum<typeof Source> = z
   .nativeEnum(Source);
 
 /** @internal */
-export const CompanyBenefitCatchUpType$inboundSchema: z.ZodNativeEnum<
-  typeof CompanyBenefitCatchUpType
-> = z.nativeEnum(CompanyBenefitCatchUpType);
+export const CatchUpType$inboundSchema: z.ZodNativeEnum<typeof CatchUpType> = z
+  .nativeEnum(CatchUpType);
 
 /** @internal */
 export const CompanyBenefit$inboundSchema: z.ZodType<
@@ -120,7 +117,7 @@ export const CompanyBenefit$inboundSchema: z.ZodType<
   supports_percentage_amounts: z.boolean().optional(),
   responsible_for_employer_taxes: z.boolean().optional(),
   responsible_for_employee_w2: z.boolean().optional(),
-  catch_up_type: z.nullable(CompanyBenefitCatchUpType$inboundSchema).optional(),
+  catch_up_type: z.nullable(CatchUpType$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "enrollment_count": "enrollmentCount",
