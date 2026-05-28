@@ -1,7 +1,5 @@
 # EntityType
 
-The tax payer type of the company.
-
 ## Example Usage
 
 ```typescript

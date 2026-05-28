@@ -9,18 +9,12 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * The type of information request
- */
 export const InformationRequestType = {
   CompanyOnboarding: "company_onboarding",
   AccountProtection: "account_protection",
   PaymentRequest: "payment_request",
   PaymentError: "payment_error",
 } as const;
-/**
- * The type of information request
- */
 export type InformationRequestType = ClosedEnum<typeof InformationRequestType>;
 
 /**

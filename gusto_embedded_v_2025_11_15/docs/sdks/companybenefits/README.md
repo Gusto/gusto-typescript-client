@@ -988,6 +988,7 @@ async function run() {
     employeeBenefitBulkUpdateRequest: {
       employeeBenefits: [
         {
+          deductionReducesTaxableIncome: "unset",
           employeeUuid: "<id>",
         },
       ],
@@ -1020,6 +1021,7 @@ async function run() {
     employeeBenefitBulkUpdateRequest: {
       employeeBenefits: [
         {
+          deductionReducesTaxableIncome: "unset",
           employeeUuid: "<id>",
         },
       ],

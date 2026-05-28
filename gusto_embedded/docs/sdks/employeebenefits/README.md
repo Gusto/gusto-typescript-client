@@ -730,6 +730,7 @@ async function run() {
     employeeBenefitId: "<id>",
     employeeBenefitUpdateRequest: {
       version: "<value>",
+      deductionReducesTaxableIncome: "unset",
     },
   });
 
@@ -758,6 +759,7 @@ async function run() {
     employeeBenefitId: "<id>",
     employeeBenefitUpdateRequest: {
       version: "<value>",
+      deductionReducesTaxableIncome: "unset",
     },
   });
   if (res.ok) {
@@ -803,6 +805,7 @@ async function run() {
     employeeBenefitUpdateRequest: {
       version: "09j3d29jqdpj92109j9j2d90dq",
       employeeDeduction: "250.00",
+      deductionReducesTaxableIncome: "unset",
     },
   });
 
@@ -832,6 +835,7 @@ async function run() {
     employeeBenefitUpdateRequest: {
       version: "09j3d29jqdpj92109j9j2d90dq",
       employeeDeduction: "250.00",
+      deductionReducesTaxableIncome: "unset",
     },
   });
   if (res.ok) {
@@ -876,6 +880,7 @@ async function run() {
     employeeBenefitId: "<id>",
     employeeBenefitUpdateRequest: {
       version: "<value>",
+      deductionReducesTaxableIncome: "unset",
     },
   });
 
@@ -904,6 +909,7 @@ async function run() {
     employeeBenefitId: "<id>",
     employeeBenefitUpdateRequest: {
       version: "<value>",
+      deductionReducesTaxableIncome: "unset",
     },
   });
   if (res.ok) {
@@ -948,6 +954,7 @@ async function run() {
     employeeBenefitId: "<id>",
     employeeBenefitUpdateRequest: {
       version: "<value>",
+      deductionReducesTaxableIncome: "unset",
     },
   });
 
@@ -976,6 +983,7 @@ async function run() {
     employeeBenefitId: "<id>",
     employeeBenefitUpdateRequest: {
       version: "<value>",
+      deductionReducesTaxableIncome: "unset",
     },
   });
   if (res.ok) {
@@ -1020,6 +1028,7 @@ async function run() {
     employeeBenefitId: "<id>",
     employeeBenefitUpdateRequest: {
       version: "<value>",
+      deductionReducesTaxableIncome: "unset",
     },
   });
 
@@ -1048,6 +1057,7 @@ async function run() {
     employeeBenefitId: "<id>",
     employeeBenefitUpdateRequest: {
       version: "<value>",
+      deductionReducesTaxableIncome: "unset",
     },
   });
   if (res.ok) {

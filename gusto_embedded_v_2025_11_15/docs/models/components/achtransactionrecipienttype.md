@@ -1,7 +1,5 @@
 # AchTransactionRecipientType
 
-The type of recipient associated with the ACH transaction
-
 ## Example Usage
 
 ```typescript

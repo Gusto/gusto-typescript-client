@@ -9,17 +9,11 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * The name of the paid time off type.
- */
 export const Name = {
   VacationHours: "Vacation Hours",
   SickHours: "Sick Hours",
   HolidayHours: "Holiday Hours",
 } as const;
-/**
- * The name of the paid time off type.
- */
 export type Name = ClosedEnum<typeof Name>;
 
 /**

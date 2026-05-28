@@ -51,6 +51,7 @@ tags:
   - name: Salary Estimates
   - name: Reimbursements
   - name: People Batches
+  - name: Payroll Digests
 info:
   title: Gusto API
   version: '2025-11-15'
@@ -6870,13 +6871,12 @@ paths:
                     - Direct Deposit
                   description: The payment method type. If type is Check, split_by and splits do not need to be populated. If type is Direct Deposit, split_by and splits are required.
                 split_by:
-                  type:
-                    - string
-                    - 'null'
-                  enum:
-                    - Percentage
-                    - Amount
-                    -
+                  anyOf:
+                    - type: string
+                      enum:
+                        - Percentage
+                        - Amount
+                    - type: 'null'
                   description: How the payment will be split. If Percentage, split amounts must add up to exactly 100. If Amount, values are in cents and the last split amount must be null to capture the remainder.
                 splits:
                   type:
@@ -19230,6 +19230,135 @@ paths:
               required:
                 - employer_note
         required: true
+  "/v1/payroll_digests":
+    post:
+      summary: Create a payroll digest batch
+      operationId: post-v1-payroll_digests
+      security:
+        - SystemAccessAuth: []
+      description: "Triggers an asynchronous computation of payroll digest data (statuses, blockers, pay periods, totals) across up to 25 companies that the partner is mapped to.\n\nThe batch is processed asynchronously. Use the returned batch UUID to poll `GET /v1/payroll_digests/{payroll_digest_uuid}` for status and results.\n\nIdempotency is scoped per `(partner, idempotency_key)`. A duplicate POST with the same `idempotency_key` returns a 409 Conflict referencing the existing batch UUID — no duplicate computation occurs.\n\n\U0001F4D8 System Access Authentication\n\nThis endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)\n\nscope: `payroll_digests:write`"
+      tags:
+        - Payroll Digests
+      x-gusto-integration-type:
+        - embedded
+      parameters:
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-11-15'
+            default: '2025-11-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+      x-gusto-rswag: true
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Payroll-Digest"
+        '409':
+          description: conflict - idempotency key already used by this partner
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Payroll-Digest-Conflict-Error"
+        '422':
+          description: unprocessable entity - validation errors
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - idempotency_key
+                - batch_action
+                - batch
+              properties:
+                idempotency_key:
+                  type: string
+                  format: uuid
+                  description: A partner-generated unique identifier to ensure idempotency of the batch request. Scoped per partner.
+                  example: 80a74f8b-2c16-45e5-9038-aa108849c6e6
+                batch_action:
+                  type: string
+                  enum:
+                    - create
+                  description: The action to perform on the batch.
+                  example: create
+                batch:
+                  type: array
+                  description: Array of companies to fetch payroll digest data for. Maximum 25 companies per request.
+                  minItems: 1
+                  maxItems: 25
+                  items:
+                    type: object
+                    required:
+                      - entity_type
+                      - uuid
+                    properties:
+                      entity_type:
+                        type: string
+                        enum:
+                          - company
+                        description: The type of entity to look up.
+                        example: company
+                      uuid:
+                        type: string
+                        format: uuid
+                        description: The UUID of a company that the partner is mapped to. Companies that the partner is not authorized to access will appear in the response's `exclusions` array.
+        required: true
+  "/v1/payroll_digests/{payroll_digest_uuid}":
+    get:
+      summary: Get a payroll digest batch
+      operationId: get-v1-payroll_digests-payroll_digest_uuid
+      security:
+        - SystemAccessAuth: []
+      description: "Returns the status and results of a payroll digest batch.\n\nPoll this endpoint until the batch `status` reaches a terminal value (`completed` or `failed`). Once terminal, the response includes the full `results` array (one entry per attempted company, each with its own per-company `status` — `success`, `partial_success`, or `failed`) and the `exclusions` array (one entry per company that could not be looked up or processed).\n\nNote that the top-level batch `status` (`pending` / `processing` / `completed` / `failed`) is distinct from the per-company `status` returned inside `results[]` and `exclusions[]`. A `completed` batch does not imply every company succeeded — inspect the arrays for per-company outcomes.\n\nResults are stored in Redis with a short TTL after completion. If the partner polls after results have expired, this endpoint returns 410 Gone — partners should re-submit a new batch to fetch fresh data.\n\n\U0001F4D8 System Access Authentication\n\nThis endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)\n\nscope: `payroll_digests:read`"
+      tags:
+        - Payroll Digests
+      x-gusto-integration-type:
+        - embedded
+      parameters:
+        - name: payroll_digest_uuid
+          in: path
+          description: The UUID of the payroll digest batch returned by `POST /v1/payroll_digests`.
+          required: true
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-11-15'
+            default: '2025-11-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+      x-gusto-rswag: true
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Payroll-Digest-Results"
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+        '410':
+          description: Gone - results have expired from Redis
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
   "/v1/information_requests/{information_request_uuid}/submit":
     put:
       x-gusto-integration-type:
@@ -20668,14 +20797,14 @@ components:
       description: The representation of paid time off in Gusto.
       properties:
         name:
-          type:
-            - string
-            - 'null'
           description: The name of the paid time off type.
-          enum:
-            - Vacation Hours
-            - Sick Hours
-            - Holiday Hours
+          anyOf:
+            - type: string
+              enum:
+                - Vacation Hours
+                - Sick Hours
+                - Holiday Hours
+            - type: 'null'
           readOnly: true
         policy_name:
           type:
@@ -22828,23 +22957,23 @@ components:
           description: The Federal Employer Identification Number of the company.
           readOnly: true
         entity_type:
-          type:
-            - string
-            - 'null'
           description: The tax payer type of the company.
-          enum:
-            - C-Corporation
-            - S-Corporation
-            - Sole proprietor
-            - LLC
-            - LLP
-            - Limited partnership
-            - Co-ownership
-            - Association
-            - Trusteeship
-            - General partnership
-            - Joint venture
-            - Non-Profit
+          anyOf:
+            - type: string
+              enum:
+                - C-Corporation
+                - S-Corporation
+                - Sole proprietor
+                - LLC
+                - LLP
+                - Limited partnership
+                - Co-ownership
+                - Association
+                - Trusteeship
+                - General partnership
+                - Joint venture
+                - Non-Profit
+            - type: 'null'
           readOnly: true
         contractor_only:
           type: boolean
@@ -22923,15 +23052,17 @@ components:
           description: Company's first invoiceable event date
           readOnly: true
         funding_type:
-          type:
-            - string
-            - 'null'
           description: Company's default funding type
-          enum:
-            - ach
-            - reverse_wire
-            - wire_in
-            - brex
+          anyOf:
+            - type: string
+              enum:
+                - ach
+                - reverse_wire
+                - wire_in
+                - partner_disbursement
+                - rtp
+                - line_of_credit
+            - type: 'null'
         locations:
           type: array
           uniqueItems: false
@@ -27572,15 +27703,15 @@ components:
             - 'null'
           description: 'The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.'
         deduction_reduces_taxable_income:
-          type:
-            - string
-            - 'null'
-          default: unset
-          enum:
-            - unset
-            - reduces_taxable_income
-            - does_not_reduce_taxable_income
           description: 'Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.'
+          anyOf:
+            - type: string
+              enum:
+                - unset
+                - reduces_taxable_income
+                - does_not_reduce_taxable_income
+            - type: 'null'
+          default: unset
         coverage_salary_multiplier:
           type:
             - string
@@ -31171,15 +31302,15 @@ components:
           type: string
           description: Unique identifier of the company to which the information requests belongs
         type:
-          type:
-            - string
-            - 'null'
           description: The type of information request
-          enum:
-            - company_onboarding
-            - account_protection
-            - payment_request
-            - payment_error
+          anyOf:
+            - type: string
+              enum:
+                - company_onboarding
+                - account_protection
+                - payment_request
+                - payment_error
+            - type: 'null'
         status:
           type: string
           description: The status of the information request
@@ -31325,13 +31456,13 @@ components:
           type: string
           description: Unique identifier for the payment event associated with the ACH transaction
         recipient_type:
-          type:
-            - string
-            - 'null'
           description: The type of recipient associated with the ACH transaction
-          enum:
-            - Employee
-            - Contractor
+          anyOf:
+            - type: string
+              enum:
+                - Employee
+                - Contractor
+            - type: 'null'
         recipient_uuid:
           type: string
           description: Unique identifier for the recipient associated with the ACH transaction
@@ -34841,14 +34972,14 @@ components:
           description: The employee's check amount, equal to net_pay + reimbursements. This value is only available for processed payrolls.
           readOnly: true
         payment_method:
-          type:
-            - string
-            - 'null'
           description: The employee's compensation payment method. Is *only* `Historical` when retrieving external payrolls initially run outside of Gusto, then put into Gusto.
-          enum:
-            - Direct Deposit
-            - Check
-            - Historical
+          anyOf:
+            - type: string
+              enum:
+                - Direct Deposit
+                - Check
+                - Historical
+            - type: 'null'
         memo:
           type:
             - string
@@ -36984,19 +37115,19 @@ components:
           readOnly: false
           description: Whether the garnishment is court ordered.
         garnishment_type:
-          type:
-            - string
-            - 'null'
-          readOnly: false
           description: The specific type of garnishment for court ordered garnishments.
-          enum:
-            - child_support
-            - federal_tax_lien
-            - state_tax_lien
-            - student_loan
-            - creditor_garnishment
-            - federal_loan
-            - other_garnishment
+          anyOf:
+            - type: string
+              enum:
+                - child_support
+                - federal_tax_lien
+                - state_tax_lien
+                - student_loan
+                - creditor_garnishment
+                - federal_loan
+                - other_garnishment
+            - type: 'null'
+          readOnly: false
         times:
           type:
             - integer
@@ -37302,14 +37433,6 @@ components:
             - 'null'
           description: The maximum company contribution amount per year. A null value signifies no limit.
         limit_option:
-          type:
-            - string
-            - 'null'
-          enum:
-            - Family
-            - Individual
-            - Joint Filing or Single
-            - Married and Filing Separately
           description: |-
             Some benefits require additional information to determine
             their limit.
@@ -37317,6 +37440,14 @@ components:
             `Family` or `Individual`: Applicable to HSA benefit.
 
             `Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
+          anyOf:
+            - type: string
+              enum:
+                - Family
+                - Individual
+                - Joint Filing or Single
+                - Married and Filing Separately
+            - type: 'null'
         catch_up:
           type: boolean
           default: false
@@ -37331,14 +37462,14 @@ components:
           default: '0.00'
           description: 'The coverage amount as a multiple of the employee''s salary. Only applicable for Group Term Life benefits. Note: cannot be set if coverage amount is also set.'
         deduction_reduces_taxable_income:
-          type:
-            - string
-            - 'null'
-          enum:
-            - unset
-            - reduces_taxable_income
-            - does_not_reduce_taxable_income
           description: 'Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.'
+          anyOf:
+            - type: string
+              enum:
+                - unset
+                - reduces_taxable_income
+                - does_not_reduce_taxable_income
+            - type: 'null'
         company_contribution:
           type: string
           default: '0.00'
@@ -37460,14 +37591,6 @@ components:
             - 'null'
           description: The maximum company contribution amount per year. A null value signifies no limit.
         limit_option:
-          type:
-            - string
-            - 'null'
-          enum:
-            - Family
-            - Individual
-            - Joint Filing or Single
-            - Married and Filing Separately
           description: |-
             Some benefits require additional information to determine
             their limit.
@@ -37475,6 +37598,14 @@ components:
             `Family` or `Individual`: Applicable to HSA benefit.
 
             `Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
+          anyOf:
+            - type: string
+              enum:
+                - Family
+                - Individual
+                - Joint Filing or Single
+                - Married and Filing Separately
+            - type: 'null'
         catch_up:
           type: boolean
           default: false
@@ -37485,15 +37616,15 @@ components:
             - 'null'
           description: 'The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.'
         deduction_reduces_taxable_income:
-          type:
-            - string
-            - 'null'
-          default: unset
-          enum:
-            - unset
-            - reduces_taxable_income
-            - does_not_reduce_taxable_income
           description: 'Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.'
+          anyOf:
+            - type: string
+              enum:
+                - unset
+                - reduces_taxable_income
+                - does_not_reduce_taxable_income
+            - type: 'null'
+          default: unset
         coverage_salary_multiplier:
           type: string
           default: '0.00'
@@ -38264,14 +38395,13 @@ components:
             - integration
           description: The breakdown of the report. Use 'default' for no split.
         integration_type:
-          type:
-            - string
-            - 'null'
-          enum:
-            - xero
-            - qbo
-            -
           description: The kind of integration set up for the company. Required when `aggregation` is 'integration'. Must be null if `aggregation` is not 'integration'.
+          anyOf:
+            - type: string
+              enum:
+                - xero
+                - qbo
+            - type: 'null'
       x-tags:
         - Reports
     General-Ledger-Report:
@@ -38741,6 +38871,353 @@ components:
         active: true
         uud: sample-uuid-123231
         effective_date: '2024-01-01'
+    Payroll-Digest:
+      type: object
+      description: A payroll digest batch request.
+      x-examples:
+        success_status:
+          uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          idempotency_key: 80a74f8b-2c16-45e5-9038-aa108849c6e6
+          batch_action: create
+          status: pending
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: The unique identifier of the payroll digest batch.
+          readOnly: true
+        idempotency_key:
+          type: string
+          format: uuid
+          description: The idempotency key provided when creating the batch.
+        batch_action:
+          type: string
+          enum:
+            - create
+          description: The action being performed on the batch.
+        status:
+          type: string
+          enum:
+            - pending
+            - processing
+            - completed
+            - failed
+          description: The lifecycle status of the batch request itself. Terminal values are `completed` (processing finished — inspect `results` and `exclusions` for per-company outcomes) and `failed` (request failed; can be retried). This is distinct from the per-company `status` returned inside `results[]` and `exclusions[]`.
+      required:
+        - uuid
+        - idempotency_key
+        - batch_action
+        - status
+    Payroll-Digest-Results:
+      type: object
+      description: A payroll digest batch with processing results.
+      x-examples:
+        success_status:
+          uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          idempotency_key: 80a74f8b-2c16-45e5-9038-aa108849c6e6
+          status: completed
+          submitted_at: '2026-04-01T14:30:00Z'
+          completed_at: '2026-04-01T14:30:12Z'
+          submitted_items: 4
+          processed_items: 2
+          excluded_items: 2
+          results:
+            - idx: 0
+              entity_type: company
+              uuid: c1111111-1111-1111-1111-111111111111
+              name: Acme Corporation
+              status: success
+              payrolls:
+                - payroll_uuid:
+                  payroll_type: regular
+                  display_title: Run biweekly payroll
+                  auto_pilot: false
+                  status: ready_to_start
+                  blockers:
+                    - type: missing_bank_account
+                      description: Company bank account not set up
+                  pay_period:
+                    start_date: '2026-03-16'
+                    end_date: '2026-03-29'
+                    check_date: '2026-04-03'
+                    run_payroll_by: '2026-03-31'
+                  pay_schedule:
+                    uuid: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+                    frequency: Every other week
+                    custom_name: Custom - every 1st and 15th
+                  totals:
+                - payroll_uuid: 11111111-2222-3333-4444-555555555555
+                  payroll_type: regular
+                  display_title: Run biweekly payroll
+                  auto_pilot: true
+                  status: submitted
+                  blockers: []
+                  pay_period:
+                    start_date: '2026-03-02'
+                    end_date: '2026-03-15'
+                    check_date: '2026-03-20'
+                    run_payroll_by: '2026-03-17'
+                  pay_schedule:
+                    uuid: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+                    frequency: Every other week
+                    custom_name: Custom - every 1st and 15th
+                  totals:
+                    total_debit_amount: '15234.56'
+                    net_pay: '11456.78'
+                    total_employer_cost: '16890.12'
+            - idx: 3
+              entity_type: company
+              uuid: c2222222-2222-2222-2222-222222222222
+              name: Widget Inc
+              status: success
+              payrolls: []
+          exclusions:
+            - idx: 1
+              entity_type: company
+              uuid: c3333333-3333-3333-3333-333333333333
+              status: failed
+              category: not_found
+              message: Company not found.
+            - idx: 2
+              entity_type: company
+              uuid: c4444444-4444-4444-4444-444444444444
+              status: failed
+              category: company_inactive
+              message: Company is inactive or not fully onboarded.
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: The unique identifier of the payroll digest batch.
+          readOnly: true
+        idempotency_key:
+          type: string
+          format: uuid
+          description: The idempotency key provided when creating the batch.
+        status:
+          type: string
+          enum:
+            - pending
+            - processing
+            - completed
+            - failed
+          description: The lifecycle status of the batch request itself. Terminal values are `completed` (processing finished — inspect `results` and `exclusions` for per-company outcomes) and `failed` (request failed; can be retried). This is distinct from the per-company `status` returned inside `results[]` and `exclusions[]`.
+        submitted_at:
+          type: string
+          format: date-time
+          description: The timestamp when the batch was submitted.
+        completed_at:
+          type:
+            - string
+            - 'null'
+          format: date-time
+          description: The timestamp when the batch processing completed.
+        submitted_items:
+          type:
+            - integer
+            - 'null'
+          description: The number of companies submitted in the batch.
+        processed_items:
+          type: integer
+          description: The number of companies successfully processed. Only present once the batch reaches a terminal status.
+        excluded_items:
+          type: integer
+          description: The number of companies excluded from processing. Only present once the batch reaches a terminal status.
+        results:
+          type: array
+          description: Per-company results. Only present once the batch reaches a terminal status. Includes successfully processed companies (with their `payrolls` array, which may be empty when the company has no payrolls in the date window).
+          items:
+            type: object
+            properties:
+              idx:
+                type: integer
+                description: The index of this company in the original POST batch array.
+              entity_type:
+                type: string
+                enum:
+                  - company
+                description: The type of entity this result represents.
+              uuid:
+                type: string
+                format: uuid
+                description: The UUID of the company.
+              name:
+                type: string
+                description: The legal/display name of the company.
+              status:
+                type: string
+                enum:
+                  - success
+                  - partial_success
+                  - failed
+                description: The status of this company's digest computation.
+              payrolls:
+                type: array
+                description: Payrolls for this company within the digest date window (7 days past, 30–60 days future). May be empty.
+                items:
+                  type: object
+                  properties:
+                    payroll_uuid:
+                      type:
+                        - string
+                        - 'null'
+                      format: uuid
+                      description: UUID of the payroll. `null` for upcoming pay periods that have not been started yet (the `payrolls` API has not yet created a payroll record). Once a payroll is created, subsequent digest requests will include the real `payroll_uuid`.
+                    payroll_type:
+                      type: string
+                      description: The type of payroll (e.g. `regular`, `new_hire`, `termination`, `transition`, `bonus`, `correction`).
+                    display_title:
+                      type: string
+                      description: Partner-facing display title for this payroll (e.g. "Run biweekly payroll").
+                    auto_pilot:
+                      type: boolean
+                      description: Whether the company has auto-payroll enabled for this pay schedule.
+                    status:
+                      type: string
+                      description: The lifecycle status of the payroll (e.g. `ready_to_start`, `in_progress`, `submitted`, `completed`, `failed`).
+                    blockers:
+                      type: array
+                      description: Reasons the payroll cannot currently be submitted. Empty when there are no blockers.
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            description: A machine-readable blocker key (e.g. `missing_bank_account`).
+                          description:
+                            type: string
+                            description: Human-readable description of the blocker.
+                    pay_period:
+                      type: object
+                      properties:
+                        start_date:
+                          type:
+                            - string
+                            - 'null'
+                          format: date
+                          description: First day of the pay period.
+                        end_date:
+                          type:
+                            - string
+                            - 'null'
+                          format: date
+                          description: Last day of the pay period.
+                        check_date:
+                          type:
+                            - string
+                            - 'null'
+                          format: date
+                          description: The date employees get paid.
+                        run_payroll_by:
+                          type:
+                            - string
+                            - 'null'
+                          format: date
+                          description: The deadline to run payroll for this pay period.
+                    pay_schedule:
+                      type:
+                        - object
+                        - 'null'
+                      properties:
+                        uuid:
+                          type: string
+                          format: uuid
+                          description: UUID of the pay schedule.
+                        frequency:
+                          type: string
+                          description: Human-friendly pay frequency (e.g. "Every other week").
+                        custom_name:
+                          type:
+                            - string
+                            - 'null'
+                          description: Custom name for the pay schedule, when set.
+                    totals:
+                      type:
+                        - object
+                        - 'null'
+                      description: Pay totals. `null` when the payroll has not been calculated, or when the calculation is stale (the partner edited hours/earnings after the last calculation).
+                      properties:
+                        total_debit_amount:
+                          type: string
+                          description: Total amount debited from the company bank account (string-formatted decimal).
+                        net_pay:
+                          type: string
+                          description: Total net pay across all employees on this payroll (string-formatted decimal).
+                        total_employer_cost:
+                          type: string
+                          description: Total employer cost including taxes and benefits (string-formatted decimal).
+        exclusions:
+          type: array
+          description: Companies that could not be processed. Only present once the batch reaches a terminal status. Every UUID submitted in the POST batch appears in exactly one of `results` or `exclusions`.
+          items:
+            type: object
+            properties:
+              idx:
+                type: integer
+                description: The index of this company in the original POST batch array.
+              entity_type:
+                type: string
+                enum:
+                  - company
+                description: The type of entity this exclusion represents.
+              uuid:
+                type: string
+                format: uuid
+                description: The UUID of the excluded company.
+              status:
+                type: string
+                enum:
+                  - failed
+                description: The status of this company's digest computation.
+              category:
+                type: string
+                enum:
+                  - not_found
+                  - company_inactive
+                  - duplicate
+                  - internal_error
+                description: Machine-readable category for why the company was excluded.
+              message:
+                type: string
+                description: Human-readable explanation for the exclusion.
+      required:
+        - uuid
+        - idempotency_key
+        - status
+        - submitted_at
+    Payroll-Digest-Conflict-Error:
+      type: object
+      description: Error response when a payroll digest idempotency key has already been used by the same partner.
+      x-examples:
+        conflict:
+          errors:
+            - error_key: idempotency_key
+              category: invalid_attribute_value
+              message: Idempotency key has already been used
+              metadata:
+                request_uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error_key:
+                type: string
+                description: The key identifying the error source.
+              category:
+                type: string
+                description: The error category.
+              message:
+                type: string
+                description: Human-readable error message.
+              metadata:
+                type: object
+                properties:
+                  request_uuid:
+                    type: string
+                    format: uuid
+                    description: The UUID of the existing payroll digest batch that already used this idempotency key.
   securitySchemes:
     CompanyAccessAuth:
       type: http

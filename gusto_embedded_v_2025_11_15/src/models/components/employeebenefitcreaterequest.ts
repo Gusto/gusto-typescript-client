@@ -99,47 +99,21 @@ export type EmployeeBenefitCreateRequestContribution = {
   value?: string | Array<EmployeeBenefitCreateRequestValue2> | undefined;
 };
 
-/**
- * Some benefits require additional information to determine
- *
- * @remarks
- * their limit.
- *
- * `Family` or `Individual`: Applicable to HSA benefit.
- *
- * `Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
- */
 export const EmployeeBenefitCreateRequestLimitOption = {
   Family: "Family",
   Individual: "Individual",
   JointFilingOrSingle: "Joint Filing or Single",
   MarriedAndFilingSeparately: "Married and Filing Separately",
 } as const;
-/**
- * Some benefits require additional information to determine
- *
- * @remarks
- * their limit.
- *
- * `Family` or `Individual`: Applicable to HSA benefit.
- *
- * `Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
- */
 export type EmployeeBenefitCreateRequestLimitOption = ClosedEnum<
   typeof EmployeeBenefitCreateRequestLimitOption
 >;
 
-/**
- * Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.
- */
 export const EmployeeBenefitCreateRequestDeductionReducesTaxableIncome = {
   Unset: "unset",
   ReducesTaxableIncome: "reduces_taxable_income",
   DoesNotReduceTaxableIncome: "does_not_reduce_taxable_income",
 } as const;
-/**
- * Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.
- */
 export type EmployeeBenefitCreateRequestDeductionReducesTaxableIncome =
   ClosedEnum<typeof EmployeeBenefitCreateRequestDeductionReducesTaxableIncome>;
 

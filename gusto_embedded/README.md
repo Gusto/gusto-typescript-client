@@ -522,6 +522,11 @@ run();
 * [get](docs/sdks/paymentconfigs/README.md#get) - Get a company's payment configs
 * [update](docs/sdks/paymentconfigs/README.md#update) - Update a company's payment configs
 
+### [PayrollDigests](docs/sdks/payrolldigests/README.md)
+
+* [postV1PayrollDigests](docs/sdks/payrolldigests/README.md#postv1payrolldigests) - Create a payroll digest batch
+* [getV1PayrollDigestsPayrollDigestUuid](docs/sdks/payrolldigests/README.md#getv1payrolldigestspayrolldigestuuid) - Get a payroll digest batch
+
 ### [Payrolls](docs/sdks/payrolls/README.md)
 
 * [list](docs/sdks/payrolls/README.md#list) - Get all payrolls for a company
@@ -875,6 +880,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`notificationsGetDetails`](docs/sdks/notifications/README.md#getdetails) - Get a notification's details
 - [`paymentConfigsGet`](docs/sdks/paymentconfigs/README.md#get) - Get a company's payment configs
 - [`paymentConfigsUpdate`](docs/sdks/paymentconfigs/README.md#update) - Update a company's payment configs
+- [`payrollDigestsGetV1PayrollDigestsPayrollDigestUuid`](docs/sdks/payrolldigests/README.md#getv1payrolldigestspayrolldigestuuid) - Get a payroll digest batch
+- [`payrollDigestsPostV1PayrollDigests`](docs/sdks/payrolldigests/README.md#postv1payrolldigests) - Create a payroll digest batch
 - [`payrollsCalculate`](docs/sdks/payrolls/README.md#calculate) - Calculate a payroll
 - [`payrollsCalculateGrossUp`](docs/sdks/payrolls/README.md#calculategrossup) - Calculate gross up for a payroll
 - [`payrollsCancel`](docs/sdks/payrolls/README.md#cancel) - Cancel a payroll
@@ -1197,6 +1204,8 @@ To learn about this feature and how to get started, check
 - [`useNotificationsGetDetails`](docs/sdks/notifications/README.md#getdetails) - Get a notification's details
 - [`usePaymentConfigsGet`](docs/sdks/paymentconfigs/README.md#get) - Get a company's payment configs
 - [`usePaymentConfigsUpdateMutation`](docs/sdks/paymentconfigs/README.md#update) - Update a company's payment configs
+- [`usePayrollDigestsGetV1PayrollDigestsPayrollDigestUuid`](docs/sdks/payrolldigests/README.md#getv1payrolldigestspayrolldigestuuid) - Get a payroll digest batch
+- [`usePayrollDigestsPostV1PayrollDigestsMutation`](docs/sdks/payrolldigests/README.md#postv1payrolldigests) - Create a payroll digest batch
 - [`usePayrollsCalculateGrossUpMutation`](docs/sdks/payrolls/README.md#calculategrossup) - Calculate gross up for a payroll
 - [`usePayrollsCalculateMutation`](docs/sdks/payrolls/README.md#calculate) - Calculate a payroll
 - [`usePayrollsCancelMutation`](docs/sdks/payrolls/README.md#cancel) - Cancel a payroll
@@ -1455,7 +1464,7 @@ run();
 * [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts): The base class for HTTP error responses.
   * [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. *
 
-<details><summary>Less common errors (10)</summary>
+<details><summary>Less common errors (11)</summary>
 
 <br />
 
@@ -1468,10 +1477,11 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityError`](./src/models/errors/unprocessableentityerror.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 151 of 296 methods.*
-* [`ConflictErrorObject`](./src/models/errors/conflicterrorobject.ts): Conflict    This error occurs when the resource version provided does not match the current version. Retrieve the latest version and retry. Status code `409`. Applicable to 2 of 296 methods.*
-* [`PeopleBatchConflictError`](./src/models/errors/peoplebatchconflicterror.ts): Error response when a people batch idempotency key conflict occurs. Status code `409`. Applicable to 1 of 296 methods.*
-* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 1 of 296 methods.*
+* [`UnprocessableEntityError`](./src/models/errors/unprocessableentityerror.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 152 of 298 methods.*
+* [`ConflictErrorObject`](./src/models/errors/conflicterrorobject.ts): Conflict    This error occurs when the resource version provided does not match the current version. Retrieve the latest version and retry. Status code `409`. Applicable to 2 of 298 methods.*
+* [`PeopleBatchConflictError`](./src/models/errors/peoplebatchconflicterror.ts): Error response when a people batch idempotency key conflict occurs. Status code `409`. Applicable to 1 of 298 methods.*
+* [`PayrollDigestConflictError`](./src/models/errors/payrolldigestconflicterror.ts): Error response when a payroll digest idempotency key has already been used by the same partner. Status code `409`. Applicable to 1 of 298 methods.*
+* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 1 of 298 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

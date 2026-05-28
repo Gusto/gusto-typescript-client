@@ -74,17 +74,11 @@ export type EmployeeBenefitForCompanyBenefitContribution = {
   value?: string | Value2 | undefined;
 };
 
-/**
- * Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.
- */
 export const EmployeeBenefitForCompanyBenefitDeductionReducesTaxableIncome = {
   Unset: "unset",
   ReducesTaxableIncome: "reduces_taxable_income",
   DoesNotReduceTaxableIncome: "does_not_reduce_taxable_income",
 } as const;
-/**
- * Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.
- */
 export type EmployeeBenefitForCompanyBenefitDeductionReducesTaxableIncome =
   ClosedEnum<
     typeof EmployeeBenefitForCompanyBenefitDeductionReducesTaxableIncome
@@ -329,7 +323,7 @@ export type EmployeeBenefitForCompanyBenefit$Outbound = {
   catch_up: boolean | null;
   retirement_loan_identifier?: string | null | undefined;
   coverage_amount?: string | null | undefined;
-  deduction_reduces_taxable_income: string | null;
+  deduction_reduces_taxable_income?: string | null | undefined;
   coverage_salary_multiplier: string | null;
   company_contribution: string;
   contribute_as_percentage: boolean;
@@ -362,9 +356,8 @@ export const EmployeeBenefitForCompanyBenefit$outboundSchema: z.ZodType<
   retirementLoanIdentifier: z.nullable(z.string()).optional(),
   coverageAmount: z.nullable(z.string()).optional(),
   deductionReducesTaxableIncome: z.nullable(
-    EmployeeBenefitForCompanyBenefitDeductionReducesTaxableIncome$outboundSchema
-      .default("unset"),
-  ),
+    EmployeeBenefitForCompanyBenefitDeductionReducesTaxableIncome$outboundSchema,
+  ).optional(),
   coverageSalaryMultiplier: z.nullable(z.string().default("0.00")),
   companyContribution: z.string().default("0.00"),
   contributeAsPercentage: z.boolean().default(false),
