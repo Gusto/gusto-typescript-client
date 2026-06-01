@@ -44,6 +44,7 @@ import { JobsAndCompensations } from "./jobsandcompensations.js";
 import { Locations } from "./locations.js";
 import { Notifications } from "./notifications.js";
 import { PaymentConfigs } from "./paymentconfigs.js";
+import { PayrollDigests } from "./payrolldigests.js";
 import { Payrolls } from "./payrolls.js";
 import { PaySchedules } from "./payschedules.js";
 import { PeopleBatches } from "./peoplebatches.js";
@@ -347,5 +348,10 @@ export class GustoEmbedded extends ClientSDK {
   private _timeOffRequests?: TimeOffRequests;
   get timeOffRequests(): TimeOffRequests {
     return (this._timeOffRequests ??= new TimeOffRequests(this._options));
+  }
+
+  private _payrollDigests?: PayrollDigests;
+  get payrollDigests(): PayrollDigests {
+    return (this._payrollDigests ??= new PayrollDigests(this._options));
   }
 }

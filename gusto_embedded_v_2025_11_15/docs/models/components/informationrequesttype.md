@@ -1,7 +1,5 @@
 # InformationRequestType
 
-The type of information request
-
 ## Example Usage
 
 ```typescript

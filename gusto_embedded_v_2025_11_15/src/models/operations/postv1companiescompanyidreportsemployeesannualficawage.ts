@@ -8,6 +8,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
+  EmployeesAnnualFicaWageReportAcceptance,
+  EmployeesAnnualFicaWageReportAcceptance$inboundSchema,
+} from "../components/employeesannualficawagereportacceptance.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
@@ -55,36 +59,13 @@ export type PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest = {
     PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBody;
 };
 
-/**
- * accepted
- */
-export type PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponseBody =
-  {
-    /**
-     * The UUID of the report request. Use this to poll for report completion.
-     */
-    requestUuid: string;
-    /**
-     * The UUID of the company
-     */
-    companyUuid: string;
-    /**
-     * The start year for the report
-     */
-    startYear: number;
-    /**
-     * The end year for the report
-     */
-    endYear: number;
-  };
-
 export type PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse = {
   httpMeta: HTTPMetadata;
   /**
    * accepted
    */
-  object?:
-    | PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponseBody
+  employeesAnnualFicaWageReportAcceptance?:
+    | EmployeesAnnualFicaWageReportAcceptance
     | undefined;
 };
 
@@ -171,41 +152,6 @@ export function postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestToJ
 }
 
 /** @internal */
-export const PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponseBody$inboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    request_uuid: z.string(),
-    company_uuid: z.string(),
-    start_year: z.number().int(),
-    end_year: z.number().int(),
-  }).transform((v) => {
-    return remap$(v, {
-      "request_uuid": "requestUuid",
-      "company_uuid": "companyUuid",
-      "start_year": "startYear",
-      "end_year": "endYear",
-    });
-  });
-
-export function postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponseBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponseBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
 export const PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse$inboundSchema:
   z.ZodType<
     PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse,
@@ -213,12 +159,13 @@ export const PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse$inbo
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    object: z.lazy(() =>
-      PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponseBody$inboundSchema
-    ).optional(),
+    "Employees-Annual-Fica-Wage-Report-Acceptance":
+      EmployeesAnnualFicaWageReportAcceptance$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
+      "Employees-Annual-Fica-Wage-Report-Acceptance":
+        "employeesAnnualFicaWageReportAcceptance",
     });
   });
 

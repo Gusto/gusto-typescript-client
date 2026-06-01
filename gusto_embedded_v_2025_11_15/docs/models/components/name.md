@@ -1,7 +1,5 @@
 # Name
 
-The name of the paid time off type.
-
 ## Example Usage
 
 ```typescript

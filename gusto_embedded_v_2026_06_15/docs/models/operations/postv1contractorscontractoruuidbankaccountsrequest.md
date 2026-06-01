@@ -1,0 +1,25 @@
+# PostV1ContractorsContractorUuidBankAccountsRequest
+
+## Example Usage
+
+```typescript
+import { PostV1ContractorsContractorUuidBankAccountsRequest } from "@gusto/embedded-api-v-2026-06-15/models/operations/postv1contractorscontractoruuidbankaccounts.js";
+
+let value: PostV1ContractorsContractorUuidBankAccountsRequest = {
+  contractorUuid: "<id>",
+  contractorBankAccountCreateRequestBody: {
+    name: "<value>",
+    routingNumber: "<value>",
+    accountNumber: "<value>",
+    accountType: "Checking",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PostV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion](../../models/operations/postv1contractorscontractoruuidbankaccountsheaderxgustoapiversion.md)                                                 | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `contractorUuid`                                                                                                                                                                                                             | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the contractor                                                                                                                                                                                                   |
+| `contractorBankAccountCreateRequestBody`                                                                                                                                                                                     | [components.ContractorBankAccountCreateRequestBody](../../models/components/contractorbankaccountcreaterequestbody.md)                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

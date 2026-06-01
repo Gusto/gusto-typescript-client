@@ -38,6 +38,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractors.list({
     companyUuid: "<id>",
+    sortBy: "created_at:asc",
   });
 
   console.log(result);
@@ -63,6 +64,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorsList(gustoEmbedded, {
     companyUuid: "<id>",
+    sortBy: "created_at:asc",
   });
   if (res.ok) {
     const { value: result } = res;

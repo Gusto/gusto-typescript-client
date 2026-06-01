@@ -970,9 +970,11 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## getAll
 
@@ -1422,9 +1424,11 @@ async function run() {
     employeeBenefitBulkUpdateRequest: {
       employeeBenefits: [
         {
+          deductionReducesTaxableIncome: "unset",
           employeeUuid: "<id>",
         },
         {
+          deductionReducesTaxableIncome: "unset",
           employeeUuid: "<id>",
         },
       ],
@@ -1457,9 +1461,11 @@ async function run() {
     employeeBenefitBulkUpdateRequest: {
       employeeBenefits: [
         {
+          deductionReducesTaxableIncome: "unset",
           employeeUuid: "<id>",
         },
         {
+          deductionReducesTaxableIncome: "unset",
           employeeUuid: "<id>",
         },
       ],
@@ -1510,6 +1516,7 @@ async function run() {
         {
           version: "09j3d29jqdpj92109j9j2d90dq",
           employeeDeduction: "250.00",
+          deductionReducesTaxableIncome: "unset",
           employeeUuid: "8f9f3f68-8fd3-499d-ade7-4a052e56494e",
         },
       ],
@@ -1544,6 +1551,7 @@ async function run() {
         {
           version: "09j3d29jqdpj92109j9j2d90dq",
           employeeDeduction: "250.00",
+          deductionReducesTaxableIncome: "unset",
           employeeUuid: "8f9f3f68-8fd3-499d-ade7-4a052e56494e",
         },
       ],
@@ -1592,9 +1600,11 @@ async function run() {
     employeeBenefitBulkUpdateRequest: {
       employeeBenefits: [
         {
+          deductionReducesTaxableIncome: "unset",
           employeeUuid: "<id>",
         },
         {
+          deductionReducesTaxableIncome: "unset",
           employeeUuid: "<id>",
         },
       ],
@@ -1627,9 +1637,11 @@ async function run() {
     employeeBenefitBulkUpdateRequest: {
       employeeBenefits: [
         {
+          deductionReducesTaxableIncome: "unset",
           employeeUuid: "<id>",
         },
         {
+          deductionReducesTaxableIncome: "unset",
           employeeUuid: "<id>",
         },
       ],
@@ -1678,9 +1690,11 @@ async function run() {
     employeeBenefitBulkUpdateRequest: {
       employeeBenefits: [
         {
+          deductionReducesTaxableIncome: "unset",
           employeeUuid: "<id>",
         },
         {
+          deductionReducesTaxableIncome: "unset",
           employeeUuid: "<id>",
         },
       ],
@@ -1713,9 +1727,11 @@ async function run() {
     employeeBenefitBulkUpdateRequest: {
       employeeBenefits: [
         {
+          deductionReducesTaxableIncome: "unset",
           employeeUuid: "<id>",
         },
         {
+          deductionReducesTaxableIncome: "unset",
           employeeUuid: "<id>",
         },
       ],

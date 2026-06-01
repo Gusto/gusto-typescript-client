@@ -14,6 +14,10 @@ import {
 
 export type EmployeeStateTaxesList = {
   /**
+   * The uuid of the employee state field.
+   */
+  uuid?: string | undefined;
+  /**
    * The employee's uuid
    */
   employeeUuid?: string | undefined;
@@ -32,6 +36,7 @@ export const EmployeeStateTaxesList$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  uuid: z.string().optional(),
   employee_uuid: z.string().optional(),
   state: z.string().optional(),
   file_new_hire_report: z.nullable(z.boolean()).optional(),

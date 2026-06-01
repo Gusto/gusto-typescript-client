@@ -34,7 +34,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.0.2
+  version: 0.1.0
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
@@ -85,6 +85,7 @@ typescript:
   packageName: '@gusto/embedded-api-v-2025-11-15'
   preApplyUnionDiscriminators: true
   preserveModelFieldNames: false
+  privateIdentifierPrefix: '#'
   responseFormat: envelope-http
   sseFlatResponse: false
   templateVersion: v2

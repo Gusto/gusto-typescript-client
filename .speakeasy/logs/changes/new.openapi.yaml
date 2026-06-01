@@ -51,6 +51,7 @@ tags:
   - name: Salary Estimates
   - name: Reimbursements
   - name: People Batches
+  - name: Payroll Digests
 info:
   title: Gusto API
   version: '2025-11-15'
@@ -2598,14 +2599,18 @@ paths:
 
             The requested resource does not exist. Make sure the provided UUID is valid.
           content:
-            application/json: {}
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
         '422':
           description: |
             Unprocessable Entity
 
             This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
           content:
-            application/json: {}
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
       x-speakeasy-group: externalPayrolls
       x-speakeasy-name-override: delete
   "/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}/calculate_taxes":
@@ -2831,14 +2836,18 @@ paths:
 
             The requested resource does not exist. Make sure the provided UUID is valid.
           content:
-            application/json: {}
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
         '422':
           description: |
             Unprocessable Entity
 
             This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
           content:
-            application/json: {}
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
       x-speakeasy-group: externalPayrolls
       x-speakeasy-name-override: finalizeTaxLiabilities
   "/v1/companies/{company_uuid}/payment_configs":
@@ -3720,7 +3729,7 @@ paths:
           schema:
             type: string
             pattern: "^(created_at|name|onboarding_status)(:(asc|desc))?(,(created_at|name|onboarding_status)(:(asc|desc))?)*$"
-            example: name:desc
+            example: created_at:asc
           description: Sort employees by a given field. Cannot be used with search_term. Append `:asc` or `:desc` to specify direction (e.g., `name:desc`). Defaults to ascending.
         - name: include
           in: query
@@ -6732,14 +6741,18 @@ paths:
 
             The requested resource does not exist. Make sure the provided UUID is valid.
           content:
-            application/json: {}
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
         '422':
           description: |
             Unprocessable Entity
 
             This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
           content:
-            application/json: {}
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
       x-speakeasy-group: employeePaymentMethod
       x-speakeasy-name-override: deleteBankAccount
   "/v1/employees/{employee_id}/payment_method":
@@ -6870,13 +6883,12 @@ paths:
                     - Direct Deposit
                   description: The payment method type. If type is Check, split_by and splits do not need to be populated. If type is Direct Deposit, split_by and splits are required.
                 split_by:
-                  type:
-                    - string
-                    - 'null'
-                  enum:
-                    - Percentage
-                    - Amount
-                    -
+                  anyOf:
+                    - type: string
+                      enum:
+                        - Percentage
+                        - Amount
+                    - type: 'null'
                   description: How the payment will be split. If Percentage, split amounts must add up to exactly 100. If Amount, values are in cents and the last split amount must be null to capture the remainder.
                 splits:
                   type:
@@ -7844,7 +7856,9 @@ paths:
 
             The requested resource does not exist. Make sure the provided UUID is valid.
           content:
-            application/json: {}
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       x-speakeasy-group: earningTypes
       x-speakeasy-name-override: delete
   "/v1/companies/{company_uuid}/contractors":
@@ -7888,8 +7902,9 @@ paths:
           required: false
           schema:
             type: string
-            pattern: "^(type|onboarding_status|name|created_at)(:(asc|desc))?$"
-          description: 'Sort contractors. Options: type, onboarding_status, name, created_at'
+            pattern: "^(created_at|type|onboarding_status|name)(:(asc|desc))?(,(created_at|type|onboarding_status|name)(:(asc|desc))?)*$"
+            example: created_at:asc
+          description: 'Sort by one or more fields. Options: created_at, type, onboarding_status, name. Append `:asc` or `:desc` to specify direction (e.g., `created_at:asc`). Defaults to ascending.'
         - name: onboarded
           in: query
           required: false
@@ -10036,10 +10051,9 @@ paths:
           required: false
           schema:
             type: string
-            enum:
-              - first_name
-              - last_name
-          description: Field to sort employee compensations by
+            pattern: "^(first_name|last_name)(:(asc|desc))?(,(first_name|last_name)(:(asc|desc))?)*$"
+            example: first_name:asc
+          description: 'Sort employee compensations by one or more fields. Options: first_name, last_name. Append `:asc` or `:desc` to specify direction (e.g., `last_name:asc` or `last_name:asc,first_name:asc`). Defaults to ascending.'
       x-gusto-rswag: true
       responses:
         '200':
@@ -10241,10 +10255,9 @@ paths:
           required: false
           schema:
             type: string
-            enum:
-              - first_name
-              - last_name
-          description: Sort employee compensations by name
+            pattern: "^(first_name|last_name)(:(asc|desc))?(,(first_name|last_name)(:(asc|desc))?)*$"
+            example: first_name:asc
+          description: 'Sort employee compensations by one or more fields. Options: first_name, last_name. Append `:asc` or `:desc` to specify direction (e.g., `last_name:asc` or `last_name:asc,first_name:asc`). Defaults to ascending.'
       x-gusto-rswag: true
       responses:
         '200':
@@ -11681,16 +11694,11 @@ paths:
         - name: sort_by
           in: query
           required: false
-          description: Sort company forms by a given field. Append `:asc` or `:desc` to specify direction (e.g., `name:asc`). Defaults to ascending.
           schema:
             type: string
-            enum:
-              - name
-              - year
-              - quarter
-              - draft
-              - document_content_type
-              - created_at
+            pattern: "^(created_at|name|year|quarter|draft|document_content_type)(:(asc|desc))?(,(created_at|name|year|quarter|draft|document_content_type)(:(asc|desc))?)*$"
+            example: created_at:asc
+          description: 'Sort by one or more fields. Options: created_at, name, year, quarter, draft, document_content_type. Append `:asc` or `:desc` to specify direction (e.g., `created_at:asc`). Defaults to ascending.'
         - name: page
           in: query
           required: false
@@ -13009,14 +13017,18 @@ paths:
 
             The requested resource does not exist. Make sure the provided UUID is valid.
           content:
-            application/json: {}
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
         '422':
           description: |
             Unprocessable Entity
 
             This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
           content:
-            application/json: {}
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
       x-speakeasy-name-override: delete
       x-speakeasy-group: companyBenefits
   "/v1/benefits":
@@ -13778,14 +13790,18 @@ paths:
 
             The requested resource does not exist. Make sure the provided UUID is valid.
           content:
-            application/json: {}
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
         '422':
           description: |
             Unprocessable Entity
 
             This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
           content:
-            application/json: {}
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
       x-speakeasy-group: employeeBenefits
       x-speakeasy-name-override: delete
   "/v1/employees/{employee_id}/ytd_benefit_amounts_from_different_company":
@@ -16141,6 +16157,14 @@ paths:
           required: true
           schema:
             type: string
+        - name: sort_by
+          in: query
+          required: false
+          schema:
+            type: string
+            pattern: "^(payroll_blocker|status|type)(:(asc|desc))?(,(payroll_blocker|status|type)(:(asc|desc))?)*$"
+            example: payroll_blocker:asc
+          description: 'Sort by one or more fields. Options: payroll_blocker, status, type. Append `:asc` or `:desc` to specify direction (e.g., `payroll_blocker:asc`). Defaults to ascending.'
       x-gusto-rswag: true
       responses:
         '200':
@@ -17118,7 +17142,7 @@ paths:
                         description: Percentage of time spent in this occupation (as decimal, e.g., 1.0 = 100%)
                         minimum: 0
                         maximum: 1
-                        example: 1.0
+                        example: '1.0'
                       primary:
                         type: boolean
                         description: Whether this is the primary occupation
@@ -17270,7 +17294,7 @@ paths:
                         description: Percentage of time spent in this occupation (as decimal, e.g., 0.5 = 50%)
                         minimum: 0
                         maximum: 1
-                        example: 0.6
+                        example: '0.6'
                       primary:
                         type: boolean
                         description: Whether this is the primary occupation
@@ -18283,32 +18307,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - request_uuid
-                  - company_uuid
-                  - start_year
-                  - end_year
-                properties:
-                  request_uuid:
-                    type: string
-                    format: uuid
-                    description: The UUID of the report request. Use this to poll for report completion.
-                  company_uuid:
-                    type: string
-                    format: uuid
-                    description: The UUID of the company
-                  start_year:
-                    type: integer
-                    description: The start year for the report
-                  end_year:
-                    type: integer
-                    description: The end year for the report
-                example:
-                  request_uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-                  company_uuid: 12345678-abcd-ef12-3456-7890abcdef12
-                  start_year: 2023
-                  end_year: 2024
+                "$ref": "#/components/schemas/Employees-Annual-Fica-Wage-Report-Acceptance"
         '422':
           description: unprocessable entity - start year before minimum
           content:
@@ -18378,8 +18377,7 @@ paths:
 
             The requested resource does not exist. Make sure the provided ID/UUID is valid.
           content:
-            application/json: {}
-            application/pdf:
+            application/json:
               schema:
                 "$ref": "#/components/schemas/Not-Found-Error-Object"
   "/v1/contractors/{contractor_uuid}/rehire":
@@ -18430,7 +18428,8 @@ paths:
 
             This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
           content:
-            application/json: {}
+            application/json:
+              schema: {}
       requestBody:
         content:
           application/json:
@@ -18491,7 +18490,8 @@ paths:
 
             This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
           content:
-            application/json: {}
+            application/json:
+              schema: {}
   "/v1/contractors/{contractor_uuid}/termination":
     post:
       summary: Schedule a contractor termination
@@ -18540,7 +18540,8 @@ paths:
 
             This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
           content:
-            application/json: {}
+            application/json:
+              schema: {}
       requestBody:
         content:
           application/json:
@@ -18601,7 +18602,8 @@ paths:
 
             This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
           content:
-            application/json: {}
+            application/json:
+              schema: {}
   "/v1/companies/{company_uuid}/time_off/admin_approved_requests":
     post:
       summary: Create an admin-approved time off request
@@ -19084,14 +19086,18 @@ paths:
         '404':
           description: Not Found
           content:
-            application/json: {}
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
         '422':
           description: |
             Unprocessable Entity
 
             This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
           content:
-            application/json: {}
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
   "/v1/time_off/requests/{time_off_request_uuid}/approve":
     put:
       summary: Approve a time off request
@@ -19230,6 +19236,135 @@ paths:
               required:
                 - employer_note
         required: true
+  "/v1/payroll_digests":
+    post:
+      summary: Create a payroll digest batch
+      operationId: post-v1-payroll_digests
+      security:
+        - SystemAccessAuth: []
+      description: "Triggers an asynchronous computation of payroll digest data (statuses, blockers, pay periods, totals) across up to 25 companies that the partner is mapped to.\n\nThe batch is processed asynchronously. Use the returned batch UUID to poll `GET /v1/payroll_digests/{payroll_digest_uuid}` for status and results.\n\nIdempotency is scoped per `(partner, idempotency_key)`. A duplicate POST with the same `idempotency_key` returns a 409 Conflict referencing the existing batch UUID — no duplicate computation occurs.\n\n\U0001F4D8 System Access Authentication\n\nThis endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)\n\nscope: `payroll_digests:write`"
+      tags:
+        - Payroll Digests
+      x-gusto-integration-type:
+        - embedded
+      parameters:
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-11-15'
+            default: '2025-11-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+      x-gusto-rswag: true
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Payroll-Digest"
+        '409':
+          description: conflict - idempotency key already used by this partner
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Payroll-Digest-Conflict-Error"
+        '422':
+          description: unprocessable entity - validation errors
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - idempotency_key
+                - batch_action
+                - batch
+              properties:
+                idempotency_key:
+                  type: string
+                  format: uuid
+                  description: A partner-generated unique identifier to ensure idempotency of the batch request. Scoped per partner.
+                  example: 80a74f8b-2c16-45e5-9038-aa108849c6e6
+                batch_action:
+                  type: string
+                  enum:
+                    - create
+                  description: The action to perform on the batch.
+                  example: create
+                batch:
+                  type: array
+                  description: Array of companies to fetch payroll digest data for. Maximum 25 companies per request.
+                  minItems: 1
+                  maxItems: 25
+                  items:
+                    type: object
+                    required:
+                      - entity_type
+                      - uuid
+                    properties:
+                      entity_type:
+                        type: string
+                        enum:
+                          - company
+                        description: The type of entity to look up.
+                        example: company
+                      uuid:
+                        type: string
+                        format: uuid
+                        description: The UUID of a company that the partner is mapped to. Companies that the partner is not authorized to access will appear in the response's `exclusions` array.
+        required: true
+  "/v1/payroll_digests/{payroll_digest_uuid}":
+    get:
+      summary: Get a payroll digest batch
+      operationId: get-v1-payroll_digests-payroll_digest_uuid
+      security:
+        - SystemAccessAuth: []
+      description: "Returns the status and results of a payroll digest batch.\n\nPoll this endpoint until the batch `status` reaches a terminal value (`completed` or `failed`). Once terminal, the response includes the full `results` array (one entry per attempted company, each with its own per-company `status` — `success`, `partial_success`, or `failed`) and the `exclusions` array (one entry per company that could not be looked up or processed).\n\nNote that the top-level batch `status` (`pending` / `processing` / `completed` / `failed`) is distinct from the per-company `status` returned inside `results[]` and `exclusions[]`. A `completed` batch does not imply every company succeeded — inspect the arrays for per-company outcomes.\n\nResults are stored in Redis with a short TTL after completion. If the partner polls after results have expired, this endpoint returns 410 Gone — partners should re-submit a new batch to fetch fresh data.\n\n\U0001F4D8 System Access Authentication\n\nThis endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)\n\nscope: `payroll_digests:read`"
+      tags:
+        - Payroll Digests
+      x-gusto-integration-type:
+        - embedded
+      parameters:
+        - name: payroll_digest_uuid
+          in: path
+          description: The UUID of the payroll digest batch returned by `POST /v1/payroll_digests`.
+          required: true
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-11-15'
+            default: '2025-11-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+      x-gusto-rswag: true
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Payroll-Digest-Results"
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+        '410':
+          description: Gone - results have expired from Redis
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
   "/v1/information_requests/{information_request_uuid}/submit":
     put:
       x-gusto-integration-type:
@@ -20668,14 +20803,14 @@ components:
       description: The representation of paid time off in Gusto.
       properties:
         name:
-          type:
-            - string
-            - 'null'
           description: The name of the paid time off type.
-          enum:
-            - Vacation Hours
-            - Sick Hours
-            - Holiday Hours
+          anyOf:
+            - type: string
+              enum:
+                - Vacation Hours
+                - Sick Hours
+                - Holiday Hours
+            - type: 'null'
           readOnly: true
         policy_name:
           type:
@@ -22216,14 +22351,14 @@ components:
           type:
             - string
             - 'null'
-          example: 611420
+          example: '611420'
           description: North American Industry Classification System (NAICS) is used to classify businesses with a six digit number based on the primary type of work the business performs.
         sic_codes:
           type: array
           description: A list of Standard Industrial Classification (SIC) codes, which are four digit numbers that categorize the industries that companies belong to based on their business activities. If sic_codes is not passed in, we will perform an internal lookup with `naics_code`.
           items:
             type: string
-            example: 8243
+            example: '8243'
       x-examples:
         Example:
           company_uuid: 423dd616-6dbc-4724-938a-403f6217a933
@@ -22513,26 +22648,26 @@ components:
           external_payroll_items:
             - employee_uuid: 44f7cba9-7a3d-4f08-b7bd-6fcf5211f8ca
               earnings:
-                - amount: 10000.0
-                  hours: 0.0
+                - amount: '10000.0'
+                  hours: '0.0'
                   earning_type: CompanyPayType
                   earning_id: 1
-                - amount: 500.0
-                  hours: 0.0
+                - amount: '500.0'
+                  hours: '0.0'
                   earning_type: CompanyEarningType
                   earning_id: 4
               benefits:
                 - benefit_id: 22
-                  company_contribution_amount: 100.0
-                  employee_deduction_amount: 50.0
+                  company_contribution_amount: '100.0'
+                  employee_deduction_amount: '50.0'
                 - benefit_id: 25
-                  company_contribution_amount: 0.0
-                  employee_deduction_amount: 300.0
+                  company_contribution_amount: '0.0'
+                  employee_deduction_amount: '300.0'
               taxes:
                 - tax_id: 1
-                  amount: 400.0
+                  amount: '400.0'
                 - tax_id: 2
-                  amount: 60.0
+                  amount: '60.0'
           applicable_earnings:
             - earning_type: CompanyPayType
               earning_id: 1
@@ -22828,23 +22963,23 @@ components:
           description: The Federal Employer Identification Number of the company.
           readOnly: true
         entity_type:
-          type:
-            - string
-            - 'null'
           description: The tax payer type of the company.
-          enum:
-            - C-Corporation
-            - S-Corporation
-            - Sole proprietor
-            - LLC
-            - LLP
-            - Limited partnership
-            - Co-ownership
-            - Association
-            - Trusteeship
-            - General partnership
-            - Joint venture
-            - Non-Profit
+          anyOf:
+            - type: string
+              enum:
+                - C-Corporation
+                - S-Corporation
+                - Sole proprietor
+                - LLC
+                - LLP
+                - Limited partnership
+                - Co-ownership
+                - Association
+                - Trusteeship
+                - General partnership
+                - Joint venture
+                - Non-Profit
+            - type: 'null'
           readOnly: true
         contractor_only:
           type: boolean
@@ -22923,15 +23058,17 @@ components:
           description: Company's first invoiceable event date
           readOnly: true
         funding_type:
-          type:
-            - string
-            - 'null'
           description: Company's default funding type
-          enum:
-            - ach
-            - reverse_wire
-            - wire_in
-            - brex
+          anyOf:
+            - type: string
+              enum:
+                - ach
+                - reverse_wire
+                - wire_in
+                - partner_disbursement
+                - rtp
+                - line_of_credit
+            - type: 'null'
         locations:
           type: array
           uniqueItems: false
@@ -24434,6 +24571,11 @@ components:
       title: Contractor-Payment-Method
       type: object
       x-examples:
+        check_method:
+          version: 63859768485e218ccf8a449bb60f14ed
+          type: Check
+          split_by:
+          splits:
         Example-1:
           value:
             version: 63859768485e218ccf8a449bb60f14ed
@@ -24511,6 +24653,27 @@ components:
           items:
             "$ref": "#/components/schemas/Entity-Error-Object"
       x-examples:
+        nested_disbursement_errors:
+          errors:
+            - error_key: disbursements
+              category: nested_errors
+              metadata:
+                employee_uuid: invalid-uuid-1
+              errors:
+                - error_key: employee_uuid
+                  category: not_found
+                  message: Disbursement not found.
+            - error_key: disbursements
+              category: nested_errors
+              metadata:
+                employee_uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+              errors:
+                - error_key: payment_method
+                  category: invalid_attribute_value
+                  message: 'Payment method must be one of: Direct Deposit, Check.'
+                - error_key: payment_status
+                  category: invalid_attribute_value
+                  message: Payment status is not valid for payment method 'InvalidMethod'.
         invalid_token:
           errors:
             - error_key: base
@@ -24747,11 +24910,18 @@ components:
           errors:
             - error_key: employee_compensations
               category: nested_errors
-              message:
               errors:
                 - error_key: payment_method
                   category: invalid_attribute_value
                   message: Payment method cannot be changed for check-only payrolls. All employees must be paid by check.
+        payroll_update_recurring_reimbursement_error:
+          errors:
+            - error_key: employee_compensations
+              category: nested_errors
+              errors:
+                - error_key: reimbursements
+                  category: invalid_attribute_value
+                  message: Cannot update recurring reimbursements through payroll updates. Update the recurring reimbursement directly.
         migrate_company_invalid_ip:
           errors:
             - error_key: ip_address
@@ -24912,7 +25082,6 @@ components:
           errors:
             - error_key: requirement_sets
               category: nested_errors
-              message:
               metadata:
                 key: misc
                 effective_from:
@@ -24920,7 +25089,6 @@ components:
               errors:
                 - error_key: requirements
                   category: nested_errors
-                  message:
                   metadata:
                     key: 1-2-3-4
                   errors:
@@ -24931,7 +25099,6 @@ components:
           errors:
             - error_key: requirement_sets
               category: nested_errors
-              message:
               metadata:
                 key: misc
                 effective_from:
@@ -24939,7 +25106,6 @@ components:
               errors:
                 - error_key: requirements
                   category: nested_errors
-                  message:
                   metadata:
                     key: 71653ec0-00b5-4c66-a58b-22ecf21704c5
                   errors:
@@ -24950,7 +25116,6 @@ components:
           errors:
             - error_key: requirement_sets
               category: nested_errors
-              message:
               metadata:
                 key: taxrates
                 effective_from: '2026-01-01'
@@ -24958,7 +25123,6 @@ components:
               errors:
                 - error_key: requirements
                   category: nested_errors
-                  message:
                   metadata:
                     key: e0ac2284-8d30-4100-ae23-f85f9574868b
                   errors:
@@ -25031,9 +25195,8 @@ components:
               category: invalid_attribute_value
               message: Invalid Employee UUID(s).
               metadata:
-                entities:
-                  - entity_type: Employee
-                    entity_uuid: invalid-uuid-123
+                entity_type: Employee
+                entity_uuid: invalid-uuid-123
         payroll_blocker_missing_bank_info:
           errors:
             - error_key: base
@@ -25884,6 +26047,7 @@ components:
           token_type: Bearer
           created_at: 1767644464
           expires_in: 7200
+          refresh_token:
         refresh_token:
           access_token: As8qKfNObHbwe7abbJqF0WUF6iCQoIW2R664TFzXd-A
           refresh_token: As8qKfNObHbwe7abbJqF0WUF6iCQoIW2R664TFzXd-A
@@ -26864,326 +27028,16 @@ components:
           yearly_limit: false
           category: Health
         Supported-Benefits-List:
-          - benefit_type: 1
-            name: Medical Insurance
-            description: Deductions and contributions for Medical Insurance
-            pretax: true
-            posttax: false
-            imputed: false
-            healthcare: true
-            retirement: false
-            yearly_limit: false
-            category: Health
-          - benefit_type: 2
-            name: Dental Insurance
-            description: Deductions and contributions for Dental Insurance
-            pretax: true
-            posttax: false
-            imputed: false
-            healthcare: true
-            retirement: false
-            yearly_limit: false
-            category: Health
-          - benefit_type: 3
-            name: Vision Insurance
-            description: Deductions and contributions for Vision Insurance
-            pretax: true
-            posttax: false
-            imputed: false
-            healthcare: true
-            retirement: false
-            yearly_limit: false
-            category: Health
-          - benefit_type: 6
-            name: Health Savings Account
-            description: Health Savings Accounts (HSA) allow employees to be reimbursed for qualified medical expenses. Contributions are pre-tax and lower the total amount of tax paid by employees and the employer. Employers may also make tax-free contributions to employees' HSA. Remaining balances are carried over in next year.
-            pretax: true
-            posttax: false
-            imputed: false
-            healthcare: false
-            retirement: false
-            yearly_limit: true
-            category: Health
-          - benefit_type: 7
-            name: Health FSA
-            description: Flexible Spending Accounts (FSA) allow employees to be reimbursed for qualified medical expenses. Contributions are pre-tax and lower the total amount of tax paid by employees and the employer. Employers may also make tax-free contributions to employees' FSA. Remaining balances are not carried over in next year.
-            pretax: true
-            posttax: false
-            imputed: false
-            healthcare: false
-            retirement: false
-            yearly_limit: true
-            category: Health
-          - benefit_type: 11
-            name: Dependent Care FSA
-            description: Dependent Care FSA reimburses employees for expenses to care for dependents while the employee is at work (e.g. Daycares). Contributions are pre-tax and lower the total amount of tax paid by employees and the employer. Employers may also make tax-free contributions to employee FSA. Remaining balances are not carried over to the next year.
-            pretax: true
-            posttax: false
-            imputed: false
-            healthcare: false
-            retirement: false
-            yearly_limit: true
-            category: Health
-          - benefit_type: 8
-            name: SIMPLE IRA
-            description: The SIMPLE IRA is a tax-deferred retirement savings plan for employees. It is often used by small businesses as an alternative to 401(k) due to its relatively low operating cost. Employers are required to contribute a specific percentage to an employee's SIMPLE IRA.
-            pretax: true
-            posttax: false
-            imputed: false
-            healthcare: false
-            retirement: true
-            yearly_limit: true
-            category: Savings and Retirement
-          - benefit_type: 105
-            name: Roth 401(k)
-            description: Roth 401(k) is an after-tax savings plan for employees. The standard maximum is $18,000, or $24,000 for employees over 50 years old.
-            pretax: false
-            posttax: true
-            imputed: false
-            healthcare: false
-            retirement: true
-            yearly_limit: true
-            category: Savings and Retirement
-          - benefit_type: 110
-            name: Roth 403(b)
-            description: Roth 403(b) is an after-tax savings plan for certain clerics, employees of public schools, and employees of other types of tax-exempt organizations. Contributions made by employees are taxable for federal and state withholding. Often, employers contribute additional pre-tax dollars to the employee's Roth account to encourage saving for retirement.
-            pretax: false
-            posttax: true
-            imputed: false
-            healthcare: false
-            retirement: true
-            yearly_limit: true
-            category: Savings and Retirement
-          - benefit_type: 5
-            name: 401(k)
-            description: 401(k) is tax-deferred retirement savings plan for employees. The standard maximum is $18,000, or $24,000 for employees over 50 years old.
-            pretax: true
-            posttax: false
-            imputed: false
-            healthcare: false
-            retirement: true
-            yearly_limit: true
-            category: Savings and Retirement
-          - benefit_type: 9
-            name: 403(b)
-            description: 403(b) is tax-deferred retirement savings plan for certain clerics, employees of public schools, and employees of other types of tax-exempt organizations.
-            pretax: true
-            posttax: false
-            imputed: false
-            healthcare: false
-            retirement: true
-            yearly_limit: true
-            category: Savings and Retirement
-          - benefit_type: 108
-            name: SEP-IRA
-            description: A SEP-IRA is a pre-tax retirement savings plan where only the employer contributes. It is often used by small businesses as an alternative to 401(k) due to its relatively low operating cost. Employers are required to contribute the same percentage to all enrolled employees, with a maximum contribution of 25% of the employee's compensation.
-            pretax: true
-            posttax: false
-            imputed: false
-            healthcare: false
-            retirement: true
-            yearly_limit: true
-            category: Savings and Retirement
-          - benefit_type: 109
-            name: SARSEP
-            description: A SARSEP is a pre-tax retirement savings plan used by small businesses as an alternative to 401(k) due to its relatively low operating cost. While new SARSEP plans are not available, there are still some companies that are grandfathered into the plan. Employers are required to contribute the same percentage to all enrolled employees, with a maximum contribution of 25% of the employee's compensation.
-            pretax: true
-            posttax: false
-            imputed: false
-            healthcare: false
-            retirement: true
-            yearly_limit: true
-            category: Savings and Retirement
-          - benefit_type: 107
-            name: Group-Term Life Insurance
-            description: Group-Term Life Insurance for coverage in excess of $50,000 per employee is a taxable fringe benefit. See IRS Publication 15-B to determine the dollar value of the excess coverage.
-            pretax: false
-            posttax: true
-            imputed: true
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Health
-          - benefit_type: 10
-            name: Commuter Benefits (pre-tax)
-            description: Tax-free commuter benefits for transit, vanpooling, bicycling, and work-related parking costs. The annual maximum contribution for this pre-tax benefit is in the IRS publication 15-B.
-            pretax: true
-            posttax: false
-            imputed: false
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Transportation
-          - benefit_type: 106
-            name: Personal Use of Company Car
-            description: When an employee uses a company-owned car for personal matters, it is considered taxable benefit provided in-kind.
-            pretax: false
-            posttax: true
-            imputed: true
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Transportation
-          - benefit_type: 111
-            name: 529 College Savings
-            description: 529 College Savings is an after-tax savings plan for employees designed to encourage saving for future college costs. This benefit should be reported as a taxable benefit and will therefore be taxed.
-            pretax: false
-            posttax: true
-            imputed: true
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Other
-          - benefit_type: 112
-            name: Student Loan Repayment
-            description: Student Loan Repayment is an after-tax savings plan for employees to pay towards their outstanding student loans. An employee can choose to set aside after-tax dollars towards this benefit. These benefits should be reported as a taxable benefit and will therefore be taxed.
-            pretax: false
-            posttax: true
-            imputed: true
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Other
-          - benefit_type: 998
-            name: Short Term Disability (post-tax)
-            description: Third Party Disability or Third Party Leave are policies offered by employers that pay an employee for a specific life event (maternity leave, injury). All payments made to employees come from a third-party, such as an insurer. For more information on the taxation of these plans, please refer to publication 15-A for more details.
-            pretax: false
-            posttax: true
-            imputed: false
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Health
-          - benefit_type: 999
-            name: Long Term Disability (post-tax)
-            description: Third Party Disability or Third Party Leave are policies offered by employers that pay an employee for a specific life event (maternity leave, injury). All payments made to employees come from a third-party, such as an insurer. For more information on the taxation of these plans, please refer to publication 15-A for more details.
-            pretax: false
-            posttax: true
-            imputed: false
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Health
-          - benefit_type: 996
-            name: Short Term Disability (pre-tax)
-            description: Third Party Disability or Third Party Leave are policies offered by employers that pay an employee for a specific life event (maternity leave, injury). All payments made to employees come from a third-party, such as an insurer. For more information on the taxation of these plans, please refer to publication 15-A for more details.
-            pretax: true
-            posttax: false
-            imputed: false
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Health
-          - benefit_type: 997
-            name: Long Term Disability (pre-tax)
-            description: Third Party Disability or Third Party Leave are policies offered by employers that pay an employee for a specific life event (maternity leave, injury). All payments made to employees come from a third-party, such as an insurer. For more information on the taxation of these plans, please refer to publication 15-A for more details.
-            pretax: true
-            posttax: false
-            imputed: false
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Health
-          - benefit_type: 991
-            name: Voluntary Short Term Disability (post-tax)
-            description: Third Party Disability or Third Party Leave are policies offered by employers that pay an employee for a specific life event (maternity leave, injury). All payments made to employees come from a third-party, such as an insurer. For more information on the taxation of these plans, please refer to publication 15-A for more details.
-            pretax: false
-            posttax: true
-            imputed: false
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Health
-          - benefit_type: 992
-            name: Voluntary Long Term Disability (post-tax)
-            description: Third Party Disability or Third Party Leave are policies offered by employers that pay an employee for a specific life event (maternity leave, injury). All payments made to employees come from a third-party, such as an insurer. For more information on the taxation of these plans, please refer to publication 15-A for more details.
-            pretax: false
-            posttax: true
-            imputed: false
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Health
-          - benefit_type: 993
-            name: Voluntary Life (post-tax)
-            description: Third Party Disability or Third Party Leave are policies offered by employers that pay an employee for a specific life event (maternity leave, injury). All payments made to employees come from a third-party, such as an insurer. For more information on the taxation of these plans, please refer to publication 15-A for more details.
-            pretax: false
-            posttax: true
-            imputed: false
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Health
-          - benefit_type: 113
-            name: Commuter Parking
-            description: Tax-free commuter benefits allow employees to reduce their monthly commuting expenses for transit, carpooling, bicycling, and work-related parking costs. Please note that there is an annual maximum for this pre-tax benefit. The maximum dollar amount is found in IRS Publication 15-B.
-            pretax: true
-            posttax: false
-            imputed: false
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Transportation
-          - benefit_type: 114
-            name: Commuter Transit
-            description: Tax-free commuter benefits allow employees to reduce their monthly commuting expenses for transit, carpooling, bicycling, and work-related parking costs. Please note that there is an annual maximum for this pre-tax benefit. The maximum dollar amount is found in IRS Publication 15-B.
-            pretax: true
-            posttax: false
-            imputed: false
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Transportation
-          - benefit_type: 100
-            name: Other (taxable)
-            description: Other taxable benefit
-            pretax: false
-            posttax: true
-            imputed: true
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Other
-          - benefit_type: 201
-            name: Cell Phone (taxable)
-            description: Employer-sponsored benefits like this are called fringe benefits, and they don't get special tax treatment—they'll be reported as taxable wages on your employees' paystubs.
-            pretax: false
-            posttax: true
-            imputed: true
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Transportation
-          - benefit_type: 202
-            name: Gym & Fitness (taxable)
-            description: Employer-sponsored benefits like this are called fringe benefits, and they don't get special tax treatment—they'll be reported as taxable wages on your employees' paystubs.
-            pretax: false
-            posttax: true
-            imputed: true
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Transportation
-          - benefit_type: 203
-            name: Housing (taxable)
-            description: Employer-sponsored benefits like this are called fringe benefits, and they don't get special tax treatment—they'll be reported as taxable wages on your employees' paystubs.
-            pretax: false
-            posttax: true
-            imputed: true
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Transportation
-          - benefit_type: 204
-            name: Wellness (taxable)
-            description: Employer-sponsored benefits like this are called fringe benefits, and they don't get special tax treatment—they'll be reported as taxable wages on your employees' paystubs.
-            pretax: false
-            posttax: true
-            imputed: true
-            healthcare: false
-            retirement: false
-            yearly_limit: false
-            category: Transportation
+          benefit_type: 1
+          name: Medical Insurance
+          description: Deductions and contributions for Medical Insurance
+          pretax: true
+          posttax: false
+          imputed: false
+          healthcare: true
+          retirement: false
+          yearly_limit: false
+          category: Health
     Company-Benefit-With-Employee-Benefits:
       description: The representation of a company benefit.
       type: object
@@ -27205,12 +27059,12 @@ components:
               company_benefit_uuid: d2cec746-caee-464a-bcaf-00d93f7049c9
               active: true
               deduct_as_percentage: false
-              employee_deduction: 3
-              company_contribution: 0
+              employee_deduction: '3'
+              company_contribution: '0'
               uuid: 9988f241-9aee-4383-bfca-eac79cf58135
               contribution:
                 type: amount
-                value: 0
+                value: '0'
       properties:
         version:
           type: string
@@ -27572,15 +27426,15 @@ components:
             - 'null'
           description: 'The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.'
         deduction_reduces_taxable_income:
-          type:
-            - string
-            - 'null'
-          default: unset
-          enum:
-            - unset
-            - reduces_taxable_income
-            - does_not_reduce_taxable_income
           description: 'Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.'
+          anyOf:
+            - type: string
+              enum:
+                - unset
+                - reduces_taxable_income
+                - does_not_reduce_taxable_income
+            - type: 'null'
+          default: unset
         coverage_salary_multiplier:
           type:
             - string
@@ -28511,10 +28365,8 @@ components:
           example: Company needs to be approved to run payroll.
       x-examples:
         blockers_list:
-          - key: needs_approval
-            message: Company needs to be approved to run payroll.
-          - key: missing_bank_info
-            message: Company must have a bank account in order to run payroll.
+          key: needs_approval
+          message: Company needs to be approved to run payroll.
         empty_blockers_list: []
     Payroll-Check:
       type: object
@@ -29318,8 +29170,8 @@ components:
         example:
           type: by_employee
           employees:
-            employee_uuid: f0238368-f2cf-43e2-9a07-b0265f2cec69
-            pay_schedule_uuid: c277ac52-9871-4a96-a1e6-0c449684602a
+            - employee_uuid: f0238368-f2cf-43e2-9a07-b0265f2cec69
+              pay_schedule_uuid: c277ac52-9871-4a96-a1e6-0c449684602a
       properties:
         type:
           anyOf:
@@ -29407,18 +29259,18 @@ components:
         example:
           type: hourly_salaried
           employee_changes:
-            employee_uuid: 43b39ada-dc49-4879-9594-fe95f67ae434
-            first_name: Penny
-            last_name: Parker
-            pay_frequency: Twice per month — Salaried pay schedule
-            first_pay_period:
-              pay_schedule_uuid: 3f029a58-155d-4c30-8361-cc266b2c1f11
-              start_date: '2023-07-01'
-              end_date: '2023-08-01'
-              check_date: '2023-08-02'
-            transition_pay_period:
-              start_date: '2023-06-20'
-              end_date: '2023-06-30'
+            - employee_uuid: 43b39ada-dc49-4879-9594-fe95f67ae434
+              first_name: Penny
+              last_name: Parker
+              pay_frequency: Twice per month — Salaried pay schedule
+              first_pay_period:
+                pay_schedule_uuid: 3f029a58-155d-4c30-8361-cc266b2c1f11
+                start_date: '2023-07-01'
+                end_date: '2023-08-01'
+                check_date: '2023-08-02'
+              transition_pay_period:
+                start_date: '2023-06-20'
+                end_date: '2023-06-30'
       properties:
         type:
           anyOf:
@@ -29541,28 +29393,29 @@ components:
           rev_2020_w4: "#/components/schemas/Employee-Federal-Tax-Rev2020"
       x-examples:
         rev_2020_w4:
-          value:
-            version: 56a489ce86ed6c1b0f0cecc4050a0b01
-            filing_status: Single
-            extra_withholding: '0.0'
-            two_jobs: true
-            dependents_amount: '0.0'
-            other_income: '0.0'
-            deductions: '0.0'
-            w4_data_type: rev_2020_w4
-            employee_uuid: fa0dce23-e08d-427b-9b63-5c84dc0e3673
-            employee_id: 12345
-            company_id: 67890
-        pre_2020_w4:
-          value:
-            version: f642dbbd8e13487d589a00f4f81a2199
-            filing_status: Married
-            federal_withholding_allowance: 2
-            additional_withholding: '3.3'
-            w4_data_type: pre_2020_w4
-            employee_uuid: a2ce2b73-73d6-4e44-a260-e5396a24385b
-            employee_id: 12345
-            company_id: 67890
+          version: 56a489ce86ed6c1b0f0cecc4050a0b01
+          filing_status: Single
+          two_jobs: false
+          dependents_amount: '1000.0'
+          other_income: '10.0'
+          deductions: '11.0'
+          extra_withholding: '9.0'
+          w4_data_type: rev_2020_w4
+          employee_uuid: 7d70e6b0-9889-4060-9eef-aafabc14e2f2
+          employee_id: 1
+          company_id: 1
+        rev_2020_w4_married_two_jobs:
+          version: 63859768485e218ccf8a449bb60f14ed
+          w4_data_type: rev_2020_w4
+          filing_status: Married
+          two_jobs: true
+          dependents_amount: '2000.0'
+          other_income: '20.0'
+          deductions: '11.0'
+          extra_withholding: '9.0'
+          employee_uuid: 8d70e6b0-9889-4060-9eef-aafabc14e2f2
+          employee_id: 2
+          company_id: 1
       x-tags:
         - Employee Tax Setup
     Employee-State-Tax:
@@ -29570,6 +29423,7 @@ components:
       type: object
       x-examples:
         example-1:
+          uuid: 287d2c61-1d18-4126-8a4a-9cb29bbb6dac
           employee_uuid: 2005e601-3c78-410a-9d40-b960ae130383
           state: CA
           questions:
@@ -29632,6 +29486,9 @@ components:
       x-tags:
         - Employee Tax Setup
       properties:
+        uuid:
+          type: string
+          description: The uuid of the employee state field.
         employee_uuid:
           type: string
           description: The employee's uuid
@@ -29649,6 +29506,7 @@ components:
           items:
             "$ref": "#/components/schemas/Employee-State-Tax-Question"
       required:
+        - uuid
         - employee_uuid
         - state
         - questions
@@ -30008,6 +29866,16 @@ components:
       title: Employee-Payment-Method
       type: object
       x-examples:
+        direct_deposit_percentage:
+          version: 63859768485e218ccf8a449bb60f14ed
+          type: Direct Deposit
+          split_by: Percentage
+          splits:
+            - uuid: 4b35bebe-3445-4014-a748-1e264647d601
+              name: Cayman Island Checking
+              hidden_account_number: XXXX1234
+              priority: 1
+              split_amount: 100
         Example-1:
           value:
             version: 63859768485e218ccf8a449bb60f14ed
@@ -30543,13 +30411,13 @@ components:
           name: test policy
           policy_type: vacation
           accrual_method: per_hour_worked
-          accrual_rate: 40.0
-          accrual_rate_unit: 40.0
+          accrual_rate: '40.0'
+          accrual_rate_unit: '40.0'
           paid_out_on_termination: true
           accrual_waiting_period_days: 10
-          carryover_limit_hours: 100.0
-          max_accrual_hours_per_year: 100.0
-          max_hours: 100.0
+          carryover_limit_hours: '100.0'
+          max_accrual_hours_per_year: '100.0'
+          max_hours: '100.0'
           complete: true
           version: f5556bce3d75ec2b62bd11990aa7993a
           is_active: true
@@ -30565,13 +30433,13 @@ components:
           name: test policy
           policy_type: vacation
           accrual_method: per_hour_worked
-          accrual_rate: 40.0
-          accrual_rate_unit: 40.0
+          accrual_rate: '40.0'
+          accrual_rate_unit: '40.0'
           paid_out_on_termination: true
           accrual_waiting_period_days: 10
-          carryover_limit_hours: 100.0
-          max_accrual_hours_per_year: 100.0
-          max_hours: 100.0
+          carryover_limit_hours: '100.0'
+          max_accrual_hours_per_year: '100.0'
+          max_hours: '100.0'
           complete: true
           version: f5556bce3d75ec2b62bd11990aa7993a
           is_active: true
@@ -30583,13 +30451,13 @@ components:
           name: test policy
           policy_type: vacation
           accrual_method: per_hour_worked
-          accrual_rate: 40.0
-          accrual_rate_unit: 40.0
+          accrual_rate: '40.0'
+          accrual_rate_unit: '40.0'
           paid_out_on_termination: true
           accrual_waiting_period_days: 10
-          carryover_limit_hours: 100.0
-          max_accrual_hours_per_year: 100.0
-          max_hours: 100.0
+          carryover_limit_hours: '100.0'
+          max_accrual_hours_per_year: '100.0'
+          max_hours: '100.0'
           complete: true
           version:
           is_active: false
@@ -31171,15 +31039,15 @@ components:
           type: string
           description: Unique identifier of the company to which the information requests belongs
         type:
-          type:
-            - string
-            - 'null'
           description: The type of information request
-          enum:
-            - company_onboarding
-            - account_protection
-            - payment_request
-            - payment_error
+          anyOf:
+            - type: string
+              enum:
+                - company_onboarding
+                - account_protection
+                - payment_request
+                - payment_error
+            - type: 'null'
         status:
           type: string
           description: The status of the information request
@@ -31325,13 +31193,13 @@ components:
           type: string
           description: Unique identifier for the payment event associated with the ACH transaction
         recipient_type:
-          type:
-            - string
-            - 'null'
           description: The type of recipient associated with the ACH transaction
-          enum:
-            - Employee
-            - Contractor
+          anyOf:
+            - type: string
+              enum:
+                - Employee
+                - Contractor
+            - type: 'null'
         recipient_uuid:
           type: string
           description: Unique identifier for the recipient associated with the ACH transaction
@@ -31381,8 +31249,8 @@ components:
           origination_bank_address: 1 Chase Plaza, New York, NY 10081
           recipient_name: Gusto, Inc
           recipient_address: 525 20th Street, San Francisco, CA 94107
-          recipient_account_number: 21911761
-          recipient_routing_number: 123454321
+          recipient_account_number: '21911761'
+          recipient_routing_number: '123454321'
           additional_notes: Additional Notes
           bank_name: JP Morgan Chase
           date_sent: '2024-06-10'
@@ -31724,10 +31592,10 @@ components:
         success_status:
           - uuid: d2cec746-caee-464a-bcaf-00d93f7049c9
             check_date: '2023-11-24'
-            gross_pay: 880.0
-            net_pay: 541.02
+            gross_pay: '880.0'
+            net_pay: '541.02'
             payroll_uuid: a039cafb-745e-4af4-bf1e-935a86fc18e0
-            check_amount: 500.2
+            check_amount: '500.2'
             payment_method: Direct Deposit
       items:
         description: The representation of an employee pay stub information.
@@ -31856,7 +31724,8 @@ components:
       type: array
       x-examples:
         success_status:
-          - employee_uuid: c963cb99-fe1c-4aa8-9d48-1ad211ad396f
+          - uuid: 287d2c61-1d18-4126-8a4a-9cb29bbb6dac
+            employee_uuid: c963cb99-fe1c-4aa8-9d48-1ad211ad396f
             state: CA
             file_new_hire_report: false
             is_work_state: true
@@ -31924,6 +31793,9 @@ components:
       items:
         type: object
         properties:
+          uuid:
+            type: string
+            description: The uuid of the employee state field.
           employee_uuid:
             type: string
             description: The employee's uuid
@@ -31941,6 +31813,7 @@ components:
             items:
               "$ref": "#/components/schemas/Employee-State-Tax-Question"
       required:
+        - uuid
         - employee_uuid
         - state
         - questions
@@ -33466,46 +33339,46 @@ components:
               readOnly: true
       x-examples:
         success:
-          - uuid: 94d9698e-9c95-45d6-b66e-d208258666ab
-            company_uuid: 5f5aaa38-f517-4f56-85e4-afdb83321663
-            check_date: '2025-09-22'
-            debit_date: '2025-09-18'
-            status: Unfunded
-            creation_token: 94d9698e-9c95-45d6-b66e-d208258666ab
-            partner_owned_disbursement: false
-            submission_blockers:
-              - blocker_type: fast_ach_threshold_exceeded
-                blocker_name: Fast ACH Threshold Exceeded
-                selected_option: wire_in
-                status: resolved
-                unblock_options:
-                  - unblock_type: wire_in
-                    check_date: '2025-09-22'
-                    metadata:
-                      wire_in_deadline: '2025-09-22T18:00:00Z'
-                      wire_in_amount: '760000.0'
-                  - unblock_type: move_to_four_day
-                    check_date: '2025-09-22'
-                    metadata:
-                      debit_date: '2025-09-16'
-            credit_blockers:
-              - blocker_type: waiting_for_wire_in
-                blocker_name: Waiting for Wire In
-                selected_option: submit_wire
-                status: unresolved
-                unblock_options:
-                  - unblock_type: submit_wire
-                    check_date: '2025-09-22'
-                    metadata:
-                      wire_in_deadline: '2025-09-22T18:00:00Z'
-                      wire_in_amount: '760000.0'
-                      wire_in_request_uuid: 96ea4784-979a-45aa-9ccb-83be86b6dcea
-            totals:
-              amount: '760000.00'
-              debit_amount: '760000.00'
-              wage_amount: '10000.00'
-              reimbursement_amount: '750000.00'
-              check_amount: '0.00'
+          uuid: 94d9698e-9c95-45d6-b66e-d208258666ab
+          company_uuid: 5f5aaa38-f517-4f56-85e4-afdb83321663
+          check_date: '2025-09-22'
+          debit_date: '2025-09-18'
+          status: Unfunded
+          creation_token: 94d9698e-9c95-45d6-b66e-d208258666ab
+          partner_owned_disbursement: false
+          submission_blockers:
+            - blocker_type: fast_ach_threshold_exceeded
+              blocker_name: Fast ACH Threshold Exceeded
+              selected_option: wire_in
+              status: resolved
+              unblock_options:
+                - unblock_type: wire_in
+                  check_date: '2025-09-22'
+                  metadata:
+                    wire_in_deadline: '2025-09-22T18:00:00Z'
+                    wire_in_amount: '760000.0'
+                - unblock_type: move_to_four_day
+                  check_date: '2025-09-22'
+                  metadata:
+                    debit_date: '2025-09-16'
+          credit_blockers:
+            - blocker_type: waiting_for_wire_in
+              blocker_name: Waiting for Wire In
+              selected_option: submit_wire
+              status: unresolved
+              unblock_options:
+                - unblock_type: submit_wire
+                  check_date: '2025-09-22'
+                  metadata:
+                    wire_in_deadline: '2025-09-22T18:00:00Z'
+                    wire_in_amount: '760000.0'
+                    wire_in_request_uuid: 96ea4784-979a-45aa-9ccb-83be86b6dcea
+          totals:
+            amount: '760000.00'
+            debit_amount: '760000.00'
+            wage_amount: '10000.00'
+            reimbursement_amount: '750000.00'
+            check_amount: '0.00'
       x-tags:
         - Contractor Payment Groups
     Payroll-List:
@@ -33691,12 +33564,9 @@ components:
         - title
       x-examples:
         success_status:
-          - code: 15-1252
-            title: Software Developers
-            description: Research, design, and develop computer and network software or specialized utility programs.
-          - code: 15-1256
-            title: Software Quality Assurance Analysts and Testers
-            description: Develop and execute software tests to identify software problems and their causes.
+          code: 15-1252
+          title: Software Developers
+          description: Research, design, and develop computer and network software or specialized utility programs.
     Payroll-Credit-Blocker-Unblock-Option-Submit-Wire:
       type: object
       description: Unblock option to resolve a credit blocker by submitting a wire transfer
@@ -34495,7 +34365,7 @@ components:
         naics_code:
           type: string
           pattern: "^\\d{6}$"
-          example: 611420
+          example: '611420'
           description: North American Industry Classification System (NAICS) is used to classify businesses with a six digit number based on the primary type of work the business performs.
         sic_codes:
           type: array
@@ -34503,7 +34373,7 @@ components:
           items:
             type: string
             pattern: "^\\d{4}$"
-            example: 8243
+            example: '8243'
       required:
         - naics_code
     Create-Flow-Request:
@@ -34629,34 +34499,32 @@ components:
           - uuid: 04552eb9-7829-4b18-ae96-6983552948df
             version: 7d9753112507b9dda4fb97910f39b06e
             company_uuid: 6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb
-            phone_number: 5825710808
+            phone_number: '5825710808'
             street_1: 412 Kiera Stravenue
             street_2: Suite 391
             city: San Francisco
             state: CA
-            zip: 94107
+            zip: '94107'
             country: USA
             mailing_address: false
             filing_address: false
-            created_at:
-              "$ref": "#/components/schemas/Created-At-Type"
+            created_at: '2023-09-12T16:42:25.000-07:00'
             updated_at: '2023-09-12T16:42:25.000-07:00'
             active: true
             inactive: false
           - uuid: fa94a2fd-11a8-4024-87ff-85c587d9d2b4
             version: 15e6b9680e00f3122729e64e3cef3224
             company_uuid: 6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb
-            phone_number: 2866070827
+            phone_number: '2866070827'
             street_1: 644 Fay Vista
             street_2: Suite 842
             city: Richmond
             state: VA
-            zip: 23218
-            country: USA,
+            zip: '23218'
+            country: USA
             mailing_address: true
             filing_address: false
-            created_at:
-              "$ref": "#/components/schemas/Created-At-Type"
+            created_at: '2023-09-12T16:42:25.000-07:00'
             updated_at: '2023-09-12T16:42:25.000-07:00'
             active: true
             inactive: false
@@ -34841,14 +34709,14 @@ components:
           description: The employee's check amount, equal to net_pay + reimbursements. This value is only available for processed payrolls.
           readOnly: true
         payment_method:
-          type:
-            - string
-            - 'null'
           description: The employee's compensation payment method. Is *only* `Historical` when retrieving external payrolls initially run outside of Gusto, then put into Gusto.
-          enum:
-            - Direct Deposit
-            - Check
-            - Historical
+          anyOf:
+            - type: string
+              enum:
+                - Direct Deposit
+                - Check
+                - Historical
+            - type: 'null'
         memo:
           type:
             - string
@@ -36984,19 +36852,19 @@ components:
           readOnly: false
           description: Whether the garnishment is court ordered.
         garnishment_type:
-          type:
-            - string
-            - 'null'
-          readOnly: false
           description: The specific type of garnishment for court ordered garnishments.
-          enum:
-            - child_support
-            - federal_tax_lien
-            - state_tax_lien
-            - student_loan
-            - creditor_garnishment
-            - federal_loan
-            - other_garnishment
+          anyOf:
+            - type: string
+              enum:
+                - child_support
+                - federal_tax_lien
+                - state_tax_lien
+                - student_loan
+                - creditor_garnishment
+                - federal_loan
+                - other_garnishment
+            - type: 'null'
+          readOnly: false
         times:
           type:
             - integer
@@ -37302,14 +37170,6 @@ components:
             - 'null'
           description: The maximum company contribution amount per year. A null value signifies no limit.
         limit_option:
-          type:
-            - string
-            - 'null'
-          enum:
-            - Family
-            - Individual
-            - Joint Filing or Single
-            - Married and Filing Separately
           description: |-
             Some benefits require additional information to determine
             their limit.
@@ -37317,6 +37177,14 @@ components:
             `Family` or `Individual`: Applicable to HSA benefit.
 
             `Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
+          anyOf:
+            - type: string
+              enum:
+                - Family
+                - Individual
+                - Joint Filing or Single
+                - Married and Filing Separately
+            - type: 'null'
         catch_up:
           type: boolean
           default: false
@@ -37331,14 +37199,14 @@ components:
           default: '0.00'
           description: 'The coverage amount as a multiple of the employee''s salary. Only applicable for Group Term Life benefits. Note: cannot be set if coverage amount is also set.'
         deduction_reduces_taxable_income:
-          type:
-            - string
-            - 'null'
-          enum:
-            - unset
-            - reduces_taxable_income
-            - does_not_reduce_taxable_income
           description: 'Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.'
+          anyOf:
+            - type: string
+              enum:
+                - unset
+                - reduces_taxable_income
+                - does_not_reduce_taxable_income
+            - type: 'null'
         company_contribution:
           type: string
           default: '0.00'
@@ -37460,14 +37328,6 @@ components:
             - 'null'
           description: The maximum company contribution amount per year. A null value signifies no limit.
         limit_option:
-          type:
-            - string
-            - 'null'
-          enum:
-            - Family
-            - Individual
-            - Joint Filing or Single
-            - Married and Filing Separately
           description: |-
             Some benefits require additional information to determine
             their limit.
@@ -37475,6 +37335,14 @@ components:
             `Family` or `Individual`: Applicable to HSA benefit.
 
             `Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
+          anyOf:
+            - type: string
+              enum:
+                - Family
+                - Individual
+                - Joint Filing or Single
+                - Married and Filing Separately
+            - type: 'null'
         catch_up:
           type: boolean
           default: false
@@ -37485,15 +37353,15 @@ components:
             - 'null'
           description: 'The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.'
         deduction_reduces_taxable_income:
-          type:
-            - string
-            - 'null'
-          default: unset
-          enum:
-            - unset
-            - reduces_taxable_income
-            - does_not_reduce_taxable_income
           description: 'Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.'
+          anyOf:
+            - type: string
+              enum:
+                - unset
+                - reduces_taxable_income
+                - does_not_reduce_taxable_income
+            - type: 'null'
+          default: unset
         coverage_salary_multiplier:
           type: string
           default: '0.00'
@@ -38026,11 +37894,11 @@ components:
         routing_number:
           type: string
           description: The bank routing number (nine digits).
-          example: 266905059
+          example: '266905059'
         account_number:
           type: string
           description: The bank account number.
-          example: 5809431207
+          example: '5809431207'
         account_type:
           type: string
           description: The bank account type.
@@ -38108,6 +37976,7 @@ components:
               - employee_phone_number
               - employee_social_security_tax
               - employee_taxes
+              - employee_uuid
               - employee_work_email
               - employer_additional_taxes
               - employer_benefit_contributions
@@ -38143,6 +38012,7 @@ components:
               - paycheck_tips
               - payment_method
               - payroll_type
+              - payroll_uuid
               - preferred_first_name
               - recurring_reimbursements
               - regular_earnings
@@ -38264,14 +38134,13 @@ components:
             - integration
           description: The breakdown of the report. Use 'default' for no split.
         integration_type:
-          type:
-            - string
-            - 'null'
-          enum:
-            - xero
-            - qbo
-            -
           description: The kind of integration set up for the company. Required when `aggregation` is 'integration'. Must be null if `aggregation` is not 'integration'.
+          anyOf:
+            - type: string
+              enum:
+                - xero
+                - qbo
+            - type: 'null'
       x-tags:
         - Reports
     General-Ledger-Report:
@@ -38304,7 +38173,7 @@ components:
           payroll_uuid: a83d0bd8-7d20-43b9-834c-6d514ef6cb20
           aggregation: integration
           integration_type: xero
-          request_uuid: p83d0ca8-7d41-42a9-834y-7d218ef6cb20
+          request_uuid: 550e8400-e29b-41d4-a716-446655440000
     Time-Sheet-Create-Body:
       type: object
       description: Request body for creating a time sheet.
@@ -38741,6 +38610,381 @@ components:
         active: true
         uud: sample-uuid-123231
         effective_date: '2024-01-01'
+    Payroll-Digest:
+      type: object
+      description: A payroll digest batch request.
+      x-examples:
+        success_status:
+          uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          idempotency_key: 80a74f8b-2c16-45e5-9038-aa108849c6e6
+          batch_action: create
+          status: pending
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: The unique identifier of the payroll digest batch.
+          readOnly: true
+        idempotency_key:
+          type: string
+          format: uuid
+          description: The idempotency key provided when creating the batch.
+        batch_action:
+          type: string
+          enum:
+            - create
+          description: The action being performed on the batch.
+        status:
+          type: string
+          enum:
+            - pending
+            - processing
+            - completed
+            - failed
+          description: The lifecycle status of the batch request itself. Terminal values are `completed` (processing finished — inspect `results` and `exclusions` for per-company outcomes) and `failed` (request failed; can be retried). This is distinct from the per-company `status` returned inside `results[]` and `exclusions[]`.
+      required:
+        - uuid
+        - idempotency_key
+        - batch_action
+        - status
+    Payroll-Digest-Results:
+      type: object
+      description: A payroll digest batch with processing results.
+      x-examples:
+        success_status:
+          uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          idempotency_key: 80a74f8b-2c16-45e5-9038-aa108849c6e6
+          status: completed
+          submitted_at: '2026-04-01T14:30:00Z'
+          completed_at: '2026-04-01T14:30:12Z'
+          submitted_items: 4
+          processed_items: 2
+          excluded_items: 2
+          results:
+            - idx: 0
+              entity_type: company
+              uuid: c1111111-1111-1111-1111-111111111111
+              name: Acme Corporation
+              status: success
+              blockers:
+                - type: missing_bank_account
+                  description: Company bank account not set up
+              payrolls:
+                - payroll_uuid:
+                  payroll_type: regular
+                  display_title: Run biweekly payroll
+                  auto_payroll: false
+                  status: ready_to_start
+                  pay_period:
+                    start_date: '2026-03-16'
+                    end_date: '2026-03-29'
+                    check_date: '2026-04-03'
+                    run_payroll_by: '2026-03-31'
+                  pay_schedule:
+                    uuid: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+                    frequency: Every other week
+                    custom_name: Custom - every 1st and 15th
+                  totals:
+                - payroll_uuid: 11111111-2222-3333-4444-555555555555
+                  payroll_type: regular
+                  display_title: Run biweekly payroll
+                  auto_payroll: true
+                  status: submitted
+                  pay_period:
+                    start_date: '2026-03-02'
+                    end_date: '2026-03-15'
+                    check_date: '2026-03-20'
+                    run_payroll_by: '2026-03-17'
+                  pay_schedule:
+                    uuid: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+                    frequency: Every other week
+                    custom_name: Custom - every 1st and 15th
+                  totals:
+                    total_debit_amount: '15234.56'
+                    net_pay: '11456.78'
+                    total_employer_cost: '16890.12'
+            - idx: 3
+              entity_type: company
+              uuid: c2222222-2222-2222-2222-222222222222
+              name: Widget Inc
+              status: success
+              payrolls: []
+          exclusions:
+            - idx: 1
+              entity_type: company
+              uuid: c3333333-3333-3333-3333-333333333333
+              status: failed
+              category: not_found
+              message: Company not found.
+            - idx: 2
+              entity_type: company
+              uuid: c4444444-4444-4444-4444-444444444444
+              status: failed
+              category: company_inactive
+              message: Company is inactive or not fully onboarded.
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: The unique identifier of the payroll digest batch.
+          readOnly: true
+        idempotency_key:
+          type: string
+          format: uuid
+          description: The idempotency key provided when creating the batch.
+        status:
+          type: string
+          enum:
+            - pending
+            - processing
+            - completed
+            - failed
+          description: The lifecycle status of the batch request itself. Terminal values are `completed` (processing finished — inspect `results` and `exclusions` for per-company outcomes) and `failed` (request failed; can be retried). This is distinct from the per-company `status` returned inside `results[]` and `exclusions[]`.
+        submitted_at:
+          type: string
+          format: date-time
+          description: The timestamp when the batch was submitted.
+        completed_at:
+          type:
+            - string
+            - 'null'
+          format: date-time
+          description: The timestamp when the batch processing completed.
+        submitted_items:
+          type:
+            - integer
+            - 'null'
+          description: The number of companies submitted in the batch.
+        processed_items:
+          type: integer
+          description: The number of companies successfully processed. Only present once the batch reaches a terminal status.
+        excluded_items:
+          type: integer
+          description: The number of companies excluded from processing. Only present once the batch reaches a terminal status.
+        results:
+          type: array
+          description: Per-company results. Only present once the batch reaches a terminal status. Includes successfully processed companies (with their `payrolls` array, which may be empty when the company has no payrolls in the date window).
+          items:
+            type: object
+            properties:
+              idx:
+                type: integer
+                description: The index of this company in the original POST batch array.
+              entity_type:
+                type: string
+                enum:
+                  - company
+                description: The type of entity this result represents.
+              uuid:
+                type: string
+                format: uuid
+                description: The UUID of the company.
+              name:
+                type: string
+                description: The legal/display name of the company.
+              status:
+                type: string
+                enum:
+                  - success
+                  - partial_success
+                  - failed
+                description: The status of this company's digest computation.
+              blockers:
+                type: array
+                description: Reasons the company cannot currently run payroll. Applies to every payroll in this company's `payrolls` array — blockers are evaluated at the company level, not per payroll. Empty when there are no blockers.
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      description: A machine-readable blocker key (e.g. `missing_bank_account`).
+                    description:
+                      type: string
+                      description: Human-readable description of the blocker.
+              payrolls:
+                type: array
+                description: Payrolls for this company within the digest date window (7 days past, 30–60 days future). May be empty.
+                items:
+                  type: object
+                  properties:
+                    payroll_uuid:
+                      type:
+                        - string
+                        - 'null'
+                      format: uuid
+                      description: UUID of the payroll. `null` for upcoming pay periods that have not been started yet (the `payrolls` API has not yet created a payroll record). Once a payroll is created, subsequent digest requests will include the real `payroll_uuid`.
+                    payroll_type:
+                      type: string
+                      description: The type of payroll (e.g. `regular`, `new_hire`, `termination`, `transition`, `bonus`, `correction`).
+                    display_title:
+                      type: string
+                      description: Partner-facing display title for this payroll (e.g. "Run biweekly payroll").
+                    auto_payroll:
+                      type: boolean
+                      description: Whether the company has auto-payroll enabled for this pay schedule.
+                    status:
+                      type: string
+                      description: The lifecycle status of the payroll (e.g. `ready_to_start`, `in_progress`, `submitted`, `completed`, `failed`).
+                    pay_period:
+                      type: object
+                      properties:
+                        start_date:
+                          type:
+                            - string
+                            - 'null'
+                          format: date
+                          description: First day of the pay period.
+                        end_date:
+                          type:
+                            - string
+                            - 'null'
+                          format: date
+                          description: Last day of the pay period.
+                        check_date:
+                          type:
+                            - string
+                            - 'null'
+                          format: date
+                          description: The date employees get paid.
+                        run_payroll_by:
+                          type:
+                            - string
+                            - 'null'
+                          format: date
+                          description: The deadline to run payroll for this pay period.
+                    pay_schedule:
+                      type:
+                        - object
+                        - 'null'
+                      properties:
+                        uuid:
+                          type: string
+                          format: uuid
+                          description: UUID of the pay schedule.
+                        frequency:
+                          type: string
+                          description: Human-friendly pay frequency (e.g. "Every other week").
+                        custom_name:
+                          type:
+                            - string
+                            - 'null'
+                          description: Custom name for the pay schedule, when set.
+                    totals:
+                      type:
+                        - object
+                        - 'null'
+                      description: Pay totals. `null` when the payroll has not been calculated, or when the calculation is stale (the partner edited hours/earnings after the last calculation).
+                      properties:
+                        total_debit_amount:
+                          type: string
+                          description: Total amount debited from the company bank account (string-formatted decimal).
+                        net_pay:
+                          type: string
+                          description: Total net pay across all employees on this payroll (string-formatted decimal).
+                        total_employer_cost:
+                          type: string
+                          description: Total employer cost including taxes and benefits (string-formatted decimal).
+        exclusions:
+          type: array
+          description: Companies that could not be processed. Only present once the batch reaches a terminal status. Every UUID submitted in the POST batch appears in exactly one of `results` or `exclusions`.
+          items:
+            type: object
+            properties:
+              idx:
+                type: integer
+                description: The index of this company in the original POST batch array.
+              entity_type:
+                type: string
+                enum:
+                  - company
+                description: The type of entity this exclusion represents.
+              uuid:
+                type: string
+                format: uuid
+                description: The UUID of the excluded company.
+              status:
+                type: string
+                enum:
+                  - failed
+                description: The status of this company's digest computation.
+              category:
+                type: string
+                enum:
+                  - not_found
+                  - company_inactive
+                  - duplicate
+                  - internal_error
+                description: Machine-readable category for why the company was excluded.
+              message:
+                type: string
+                description: Human-readable explanation for the exclusion.
+      required:
+        - uuid
+        - idempotency_key
+        - status
+        - submitted_at
+    Payroll-Digest-Conflict-Error:
+      type: object
+      description: Error response when a payroll digest idempotency key has already been used by the same partner.
+      x-examples:
+        conflict:
+          errors:
+            - error_key: idempotency_key
+              category: invalid_attribute_value
+              message: Idempotency key has already been used
+              metadata:
+                request_uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error_key:
+                type: string
+                description: The key identifying the error source.
+              category:
+                type: string
+                description: The error category.
+              message:
+                type: string
+                description: Human-readable error message.
+              metadata:
+                type: object
+                properties:
+                  request_uuid:
+                    type: string
+                    format: uuid
+                    description: The UUID of the existing payroll digest batch that already used this idempotency key.
+    Employees-Annual-Fica-Wage-Report-Acceptance:
+      type: object
+      description: Acceptance acknowledgement for an asynchronous employees annual FICA wage report. Returned with HTTP 202; poll the report status endpoint using `request_uuid`.
+      required:
+        - request_uuid
+        - company_uuid
+        - start_year
+        - end_year
+      properties:
+        request_uuid:
+          type: string
+          format: uuid
+          description: The UUID of the report request. Use this to poll for report completion.
+        company_uuid:
+          type: string
+          format: uuid
+          description: The UUID of the company.
+        start_year:
+          type: integer
+          description: The start year for the report.
+        end_year:
+          type: integer
+          description: The end year for the report.
+      x-examples:
+        accepted:
+          request_uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          company_uuid: 12345678-abcd-ef12-3456-7890abcdef12
+          start_year: 2023
+          end_year: 2024
   securitySchemes:
     CompanyAccessAuth:
       type: http

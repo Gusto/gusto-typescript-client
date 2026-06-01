@@ -98,42 +98,104 @@
 <body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
 
 <ul>
-<li><code>gustoembedded.paySchedules.create()</code>:  <code>response.autoPilot</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>gustoembedded.paySchedules.getAll()</code>:  <code>response.[].autoPilot</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>gustoembedded.paySchedules.get()</code>:  <code>response.autoPilot</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>gustoembedded.paySchedules.update()</code>:  <code>response.autoPilot</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>gustoembedded.payrolls.createOffCycle()</code>: <code>response</code> <strong>Changed</strong> (Breaking ⚠️)
+<li><code>gustoembedded.payrolls.get()</code>:
 
 <ul>
-<li><code>autoPayroll</code> <strong>Added</strong></li>
-<li><code>autoPilot</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>request.sortBy</code> <strong>Changed</strong> (Breaking ⚠️)</li>
 </ul></li>
-<li><code>gustoembedded.wireInRequests.get()</code>: <code>response.paymentType</code> <strong>Changed</strong> (Breaking ⚠️)
+<li><code>gustoembedded.companyForms.getAll()</code>:
 
 <ul>
-<li><code>enum(payroll)</code> <strong>Added</strong> (Breaking ⚠️)</li>
-<li><code>enum(payroll)</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>request.sortBy</code> <strong>Changed</strong> (Breaking ⚠️)</li>
 </ul></li>
-<li><code>gustoembedded.wireInRequests.submit()</code>: <code>response.paymentType</code> <strong>Changed</strong> (Breaking ⚠️)
+<li><code>gustoembedded.companies.get()</code>: <code>response.fundingType</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>enum(payroll)</code> <strong>Added</strong> (Breaking ⚠️)</li>
-<li><code>enum(payroll)</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>enum(brex)</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>enum(lineOfCredit)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(partnerDisbursement)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(rtp)</code> <strong>Added</strong> (Breaking ⚠️)</li>
 </ul></li>
-<li><code>gustoembedded.wireInRequests.list()</code>: <code>response.[].paymentType</code> <strong>Changed</strong> (Breaking ⚠️)
+<li><code>gustoembedded.companies.update()</code>: <code>response.fundingType</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>enum(payroll)</code> <strong>Added</strong> (Breaking ⚠️)</li>
-<li><code>enum(payroll)</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>enum(brex)</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>enum(lineOfCredit)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(partnerDisbursement)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>enum(rtp)</code> <strong>Added</strong> (Breaking ⚠️)</li>
 </ul></li>
-<li><code>gustoembedded.externalPayrolls.delete()</code>:  <code>error.status[422]</code> <strong>Added</strong></li>
-<li><code>gustoembedded.externalPayrolls.update()</code>:
+<li><code>gustoembedded.payrolls.prepare()</code>:
 
 <ul>
-<li><code>request.externalPayrollUpdateRequest.replaceFields</code> <strong>Added</strong></li>
+<li><code>request.sortBy</code> <strong>Changed</strong> (Breaking ⚠️)</li>
 </ul></li>
-<li><code>gustoembedded.employees.list()</code>:  <code>response.[].allHomeAddresses[].effectiveDate</code> <strong>Added</strong></li>
-<li><code>gustoembedded.employeePaymentMethod.deleteBankAccount()</code>:  <code>error.status[422]</code> <strong>Added</strong></li>
+<li><code>gustoembedded.contractorPayments.getV1ContractorPaymentsContractorPaymentIdPdf()</code>:  <code>error.status[404]</code> <strong>Added</strong></li>
+<li><code>gustoembedded.reports.createCustom()</code>:
+
+<ul>
+<li><code>request.createReportBody.columns[]</code> <strong>Changed</strong>
+
+<ul>
+<li><code>enum(employeeUuid)</code> <strong>Added</strong></li>
+<li><code>enum(payrollUuid)</code> <strong>Added</strong></li>
+</ul></li>
+</ul></li>
+<li><code>gustoembedded.employeeTaxSetup.updateStateTaxes()</code>:  <code>response.[].uuid</code> <strong>Added</strong></li>
+<li><code>gustoembedded.employeePaymentMethod.deleteBankAccount()</code>: <code>error</code> <strong>Changed</strong>
+
+<ul>
+<li>&rdquo; <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.earningTypes.delete()</code>:  <code>error.status[404]</code> <strong>Added</strong></li>
+<li><code>gustoembedded.externalPayrolls.finalizeTaxLiabilities()</code>: <code>error</code> <strong>Changed</strong>
+
+<ul>
+<li>&rdquo; <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.externalPayrolls.delete()</code>: <code>error</code> <strong>Changed</strong>
+
+<ul>
+<li>&rdquo; <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.payrollDigests.postV1PayrollDigests()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.payrollDigests.getV1PayrollDigestsPayrollDigestUuid()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.employeeTaxSetup.getStateTaxes()</code>:  <code>response.[].uuid</code> <strong>Added</strong></li>
+<li><code>gustoembedded.companyBenefits.delete()</code>: <code>error</code> <strong>Changed</strong>
+
+<ul>
+<li>&rdquo; <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.companyBenefits.getEmployeeBenefits()</code>:  <code>response.[].deductionReducesTaxableIncome</code> <strong>Changed</strong></li>
+<li><code>gustoembedded.companyBenefits.updateEmployeeBenefits()</code>:
+
+<ul>
+<li><code>request.employeeBenefitBulkUpdateRequest.employeeBenefits[].deductionReducesTaxableIncome</code> <strong>Changed</strong></li>
+<li><code>response.[].deductionReducesTaxableIncome</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>gustoembedded.employeeBenefits.get()</code>:  <code>response.[].deductionReducesTaxableIncome</code> <strong>Changed</strong></li>
+<li><code>gustoembedded.employeeBenefits.create()</code>:  <code>response.deductionReducesTaxableIncome</code> <strong>Changed</strong></li>
+<li><code>gustoembedded.employeeBenefits.retrieve()</code>:  <code>response.deductionReducesTaxableIncome</code> <strong>Changed</strong></li>
+<li><code>gustoembedded.employeeBenefits.update()</code>:
+
+<ul>
+<li><code>request.employeeBenefitUpdateRequest.deductionReducesTaxableIncome</code> <strong>Changed</strong></li>
+<li><code>response.deductionReducesTaxableIncome</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>gustoembedded.employeeBenefits.delete()</code>: <code>error</code> <strong>Changed</strong>
+
+<ul>
+<li>&rdquo; <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.informationRequests.getInformationRequests()</code>:
+
+<ul>
+<li><code>request.sortBy</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.timeOffRequests.deleteV1TimeOffRequestsTimeOffRequestUuid()</code>: <code>error</code> <strong>Changed</strong>
+
+<ul>
+<li>&rdquo; <strong>Added</strong></li>
+</ul></li>
 </ul>
 </body>
 </html>

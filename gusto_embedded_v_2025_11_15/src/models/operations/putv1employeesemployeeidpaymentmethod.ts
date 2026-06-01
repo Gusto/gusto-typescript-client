@@ -43,16 +43,10 @@ export const Type = {
  */
 export type Type = ClosedEnum<typeof Type>;
 
-/**
- * How the payment will be split. If Percentage, split amounts must add up to exactly 100. If Amount, values are in cents and the last split amount must be null to capture the remainder.
- */
 export const SplitBy = {
   Percentage: "Percentage",
   Amount: "Amount",
 } as const;
-/**
- * How the payment will be split. If Percentage, split amounts must add up to exactly 100. If Amount, values are in cents and the last split amount must be null to capture the remainder.
- */
 export type SplitBy = ClosedEnum<typeof SplitBy>;
 
 export type Splits = {

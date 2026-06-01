@@ -1,0 +1,18 @@
+# Errors
+
+## Example Usage
+
+```typescript
+import { Errors } from "@gusto/embedded-api-v-2026-06-15/models/components/partnermanagedcompanymigrateresponse.js";
+
+let value: Errors = {};
+```
+
+## Fields
+
+| Field                                                                                                                              | Type                                                                                                                               | Required                                                                                                                           | Description                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `errorKey`                                                                                                                         | *string*                                                                                                                           | :heavy_minus_sign:                                                                                                                 | N/A                                                                                                                                |
+| `category`                                                                                                                         | [components.PartnerManagedCompanyMigrateResponseCategory](../../models/components/partnermanagedcompanymigrateresponsecategory.md) | :heavy_minus_sign:                                                                                                                 | Returns `migration_blocker` for blockers.                                                                                          |
+| `message`                                                                                                                          | *string*                                                                                                                           | :heavy_minus_sign:                                                                                                                 | N/A                                                                                                                                |
+| `metadata`                                                                                                                         | [components.PartnerManagedCompanyMigrateResponseMetadata](../../models/components/partnermanagedcompanymigrateresponsemetadata.md) | :heavy_minus_sign:                                                                                                                 | N/A                                                                                                                                |
