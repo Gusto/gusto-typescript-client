@@ -9,17 +9,11 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * The employee's compensation payment method. Is *only* `Historical` when retrieving external payrolls initially run outside of Gusto, then put into Gusto.
- */
 export const PayrollEmployeeCompensationsTypePaymentMethod = {
   DirectDeposit: "Direct Deposit",
   Check: "Check",
   Historical: "Historical",
 } as const;
-/**
- * The employee's compensation payment method. Is *only* `Historical` when retrieving external payrolls initially run outside of Gusto, then put into Gusto.
- */
 export type PayrollEmployeeCompensationsTypePaymentMethod = ClosedEnum<
   typeof PayrollEmployeeCompensationsTypePaymentMethod
 >;

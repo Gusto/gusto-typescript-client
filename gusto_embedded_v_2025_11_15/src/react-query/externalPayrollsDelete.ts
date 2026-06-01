@@ -19,8 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   DeleteV1ExternalPayrollRequest,
   DeleteV1ExternalPayrollResponse,
@@ -38,6 +40,8 @@ export type ExternalPayrollsDeleteMutationData =
   DeleteV1ExternalPayrollResponse;
 
 export type ExternalPayrollsDeleteMutationError =
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

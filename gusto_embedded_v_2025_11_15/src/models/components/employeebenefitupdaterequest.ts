@@ -99,47 +99,21 @@ export type EmployeeBenefitUpdateRequestContribution = {
   value?: string | Array<EmployeeBenefitUpdateRequestValue2> | undefined;
 };
 
-/**
- * Some benefits require additional information to determine
- *
- * @remarks
- * their limit.
- *
- * `Family` or `Individual`: Applicable to HSA benefit.
- *
- * `Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
- */
 export const EmployeeBenefitUpdateRequestLimitOption = {
   Family: "Family",
   Individual: "Individual",
   JointFilingOrSingle: "Joint Filing or Single",
   MarriedAndFilingSeparately: "Married and Filing Separately",
 } as const;
-/**
- * Some benefits require additional information to determine
- *
- * @remarks
- * their limit.
- *
- * `Family` or `Individual`: Applicable to HSA benefit.
- *
- * `Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
- */
 export type EmployeeBenefitUpdateRequestLimitOption = ClosedEnum<
   typeof EmployeeBenefitUpdateRequestLimitOption
 >;
 
-/**
- * Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.
- */
 export const EmployeeBenefitUpdateRequestDeductionReducesTaxableIncome = {
   Unset: "unset",
   ReducesTaxableIncome: "reduces_taxable_income",
   DoesNotReduceTaxableIncome: "does_not_reduce_taxable_income",
 } as const;
-/**
- * Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.
- */
 export type EmployeeBenefitUpdateRequestDeductionReducesTaxableIncome =
   ClosedEnum<typeof EmployeeBenefitUpdateRequestDeductionReducesTaxableIncome>;
 
@@ -343,7 +317,7 @@ export type EmployeeBenefitUpdateRequest$Outbound = {
   limit_option?: string | null | undefined;
   catch_up: boolean;
   coverage_amount?: string | null | undefined;
-  deduction_reduces_taxable_income: string | null;
+  deduction_reduces_taxable_income?: string | null | undefined;
   coverage_salary_multiplier: string;
   company_contribution: string;
   contribute_as_percentage: boolean;
@@ -374,9 +348,8 @@ export const EmployeeBenefitUpdateRequest$outboundSchema: z.ZodType<
   catchUp: z.boolean().default(false),
   coverageAmount: z.nullable(z.string()).optional(),
   deductionReducesTaxableIncome: z.nullable(
-    EmployeeBenefitUpdateRequestDeductionReducesTaxableIncome$outboundSchema
-      .default("unset"),
-  ),
+    EmployeeBenefitUpdateRequestDeductionReducesTaxableIncome$outboundSchema,
+  ).optional(),
   coverageSalaryMultiplier: z.string().default("0.00"),
   companyContribution: z.string().default("0.00"),
   contributeAsPercentage: z.boolean().default(false),

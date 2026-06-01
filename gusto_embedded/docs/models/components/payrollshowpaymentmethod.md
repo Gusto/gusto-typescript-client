@@ -1,7 +1,5 @@
 # PayrollShowPaymentMethod
 
-The employee's compensation payment method. Is *only* `Historical` when retrieving external payrolls initially run outside of Gusto, then put into Gusto.
-
 ## Example Usage
 
 ```typescript

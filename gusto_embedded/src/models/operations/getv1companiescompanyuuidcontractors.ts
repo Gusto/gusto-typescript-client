@@ -53,7 +53,7 @@ export type GetV1CompaniesCompanyUuidContractorsRequest = {
    */
   searchTerm?: string | undefined;
   /**
-   * Sort contractors. Options: type, onboarding_status, name, created_at
+   * Sort by one or more fields. Options: created_at, type, onboarding_status, name. Append `:asc` or `:desc` to specify direction (e.g., `created_at:asc`). Defaults to ascending.
    */
   sortBy?: string | undefined;
   /**

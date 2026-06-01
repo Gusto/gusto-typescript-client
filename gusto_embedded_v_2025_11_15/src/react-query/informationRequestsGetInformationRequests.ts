@@ -121,6 +121,7 @@ export function setInformationRequestsGetInformationRequestsData(
       xGustoAPIVersion?:
         | GetInformationRequestsHeaderXGustoAPIVersion
         | undefined;
+      sortBy?: string | undefined;
     },
   ],
   data: InformationRequestsGetInformationRequestsQueryData,
@@ -143,6 +144,7 @@ export function invalidateInformationRequestsGetInformationRequests(
         xGustoAPIVersion?:
           | GetInformationRequestsHeaderXGustoAPIVersion
           | undefined;
+        sortBy?: string | undefined;
       },
     ]
   >,

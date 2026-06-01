@@ -19,6 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -47,6 +51,7 @@ export function earningTypesDelete(
 ): APIPromise<
   Result<
     DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -72,6 +77,7 @@ async function $do(
   [
     Result<
       DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse,
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -113,7 +119,7 @@ async function $do(
   )(pathParams);
 
   const headers = new Headers(compactMap({
-    Accept: "*/*",
+    Accept: "application/json",
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
       payload["X-Gusto-API-Version"],
@@ -176,6 +182,7 @@ async function $do(
 
   const [result] = await M.match<
     DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -189,7 +196,8 @@ async function $do(
       204,
       DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$inboundSchema,
     ),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

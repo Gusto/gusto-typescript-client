@@ -202,7 +202,7 @@ async function $do(
     M.json(
       202,
       PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse$inboundSchema,
-      { key: "object" },
+      { key: "Employees-Annual-Fica-Wage-Report-Acceptance" },
     ),
     M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityError$inboundSchema),

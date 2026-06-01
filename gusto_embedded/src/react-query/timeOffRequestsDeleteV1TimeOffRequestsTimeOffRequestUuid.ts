@@ -19,8 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   DeleteV1TimeOffRequestsTimeOffRequestUuidRequest,
   DeleteV1TimeOffRequestsTimeOffRequestUuidResponse,
@@ -39,6 +41,8 @@ export type TimeOffRequestsDeleteV1TimeOffRequestsTimeOffRequestUuidMutationData
   DeleteV1TimeOffRequestsTimeOffRequestUuidResponse;
 
 export type TimeOffRequestsDeleteV1TimeOffRequestsTimeOffRequestUuidMutationError =
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

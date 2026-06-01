@@ -285,17 +285,11 @@ export type PayrollUnprocessed = {
   partnerOwnedDisbursement?: boolean | null | undefined;
 };
 
-/**
- * The employee's compensation payment method. Is *only* `Historical` when retrieving external payrolls initially run outside of Gusto, then put into Gusto.
- */
 export const PayrollShowPaymentMethod = {
   DirectDeposit: "Direct Deposit",
   Check: "Check",
   Historical: "Historical",
 } as const;
-/**
- * The employee's compensation payment method. Is *only* `Historical` when retrieving external payrolls initially run outside of Gusto, then put into Gusto.
- */
 export type PayrollShowPaymentMethod = ClosedEnum<
   typeof PayrollShowPaymentMethod
 >;

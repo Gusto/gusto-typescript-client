@@ -26,6 +26,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.informationRequests.getInformationRequests({
     companyUuid: "<id>",
+    sortBy: "payroll_blocker:asc",
   });
 
   console.log(result);
@@ -51,6 +52,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await informationRequestsGetInformationRequests(gustoEmbedded, {
     companyUuid: "<id>",
+    sortBy: "payroll_blocker:asc",
   });
   if (res.ok) {
     const { value: result } = res;

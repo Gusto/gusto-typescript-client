@@ -13,7 +13,6 @@ import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1CompanyFormsHeaderXGustoAPIVersion,
-  GetV1CompanyFormsQueryParamSortBy,
   GetV1CompanyFormsRequest,
   GetV1CompanyFormsResponse,
 } from "../models/operations/getv1companyforms.js";
@@ -79,7 +78,7 @@ export function queryKeyCompanyFormsGetAll(
   companyId: string,
   parameters: {
     xGustoAPIVersion?: GetV1CompanyFormsHeaderXGustoAPIVersion | undefined;
-    sortBy?: GetV1CompanyFormsQueryParamSortBy | undefined;
+    sortBy?: string | undefined;
     page?: number | undefined;
     per?: number | undefined;
   },

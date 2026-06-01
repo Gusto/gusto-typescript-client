@@ -377,6 +377,7 @@ async function run() {
   const result = await gustoEmbedded.payrolls.get({
     companyId: "<id>",
     payrollId: "<id>",
+    sortBy: "first_name:asc",
   });
 
   console.log(result);
@@ -403,6 +404,7 @@ async function run() {
   const res = await payrollsGet(gustoEmbedded, {
     companyId: "<id>",
     payrollId: "<id>",
+    sortBy: "first_name:asc",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -700,6 +702,7 @@ async function run() {
   const result = await gustoEmbedded.payrolls.prepare({
     companyId: "<id>",
     payrollId: "<id>",
+    sortBy: "first_name:asc",
   });
 
   console.log(result);
@@ -726,6 +729,7 @@ async function run() {
   const res = await payrollsPrepare(gustoEmbedded, {
     companyId: "<id>",
     payrollId: "<id>",
+    sortBy: "first_name:asc",
   });
   if (res.ok) {
     const { value: result } = res;

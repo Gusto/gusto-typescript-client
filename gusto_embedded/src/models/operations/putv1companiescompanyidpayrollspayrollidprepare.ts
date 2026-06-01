@@ -32,18 +32,6 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersio
     typeof PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion
   >;
 
-/**
- * Sort employee compensations by name
- */
-export const QueryParamSortBy = {
-  FirstName: "first_name",
-  LastName: "last_name",
-} as const;
-/**
- * Sort employee compensations by name
- */
-export type QueryParamSortBy = ClosedEnum<typeof QueryParamSortBy>;
-
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody = {
   /**
    * An array of employee UUIDs. If passed, only those employees payroll items will be prepared.
@@ -75,9 +63,9 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest = {
    */
   per?: number | undefined;
   /**
-   * Sort employee compensations by name
+   * Sort employee compensations by one or more fields. Options: first_name, last_name. Append `:asc` or `:desc` to specify direction (e.g., `last_name:asc` or `last_name:asc,first_name:asc`). Defaults to ascending.
    */
-  sortBy?: QueryParamSortBy | undefined;
+  sortBy?: string | undefined;
   requestBody?:
     | PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody
     | undefined;
@@ -98,11 +86,6 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersi
   > = z.nativeEnum(
     PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion,
   );
-
-/** @internal */
-export const QueryParamSortBy$outboundSchema: z.ZodNativeEnum<
-  typeof QueryParamSortBy
-> = z.nativeEnum(QueryParamSortBy);
 
 /** @internal */
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$Outbound =
@@ -161,7 +144,7 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$outboundSche
     payrollId: z.string(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    sortBy: QueryParamSortBy$outboundSchema.optional(),
+    sortBy: z.string().optional(),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$outboundSchema
     ).optional(),

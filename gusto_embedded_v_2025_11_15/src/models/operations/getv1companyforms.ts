@@ -27,24 +27,6 @@ export type GetV1CompanyFormsHeaderXGustoAPIVersion = ClosedEnum<
   typeof GetV1CompanyFormsHeaderXGustoAPIVersion
 >;
 
-/**
- * Sort company forms by a given field. Append `:asc` or `:desc` to specify direction (e.g., `name:asc`). Defaults to ascending.
- */
-export const GetV1CompanyFormsQueryParamSortBy = {
-  Name: "name",
-  Year: "year",
-  Quarter: "quarter",
-  Draft: "draft",
-  DocumentContentType: "document_content_type",
-  CreatedAt: "created_at",
-} as const;
-/**
- * Sort company forms by a given field. Append `:asc` or `:desc` to specify direction (e.g., `name:asc`). Defaults to ascending.
- */
-export type GetV1CompanyFormsQueryParamSortBy = ClosedEnum<
-  typeof GetV1CompanyFormsQueryParamSortBy
->;
-
 export type GetV1CompanyFormsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -55,9 +37,9 @@ export type GetV1CompanyFormsRequest = {
    */
   companyId: string;
   /**
-   * Sort company forms by a given field. Append `:asc` or `:desc` to specify direction (e.g., `name:asc`). Defaults to ascending.
+   * Sort by one or more fields. Options: created_at, name, year, quarter, draft, document_content_type. Append `:asc` or `:desc` to specify direction (e.g., `created_at:asc`). Defaults to ascending.
    */
-  sortBy?: GetV1CompanyFormsQueryParamSortBy | undefined;
+  sortBy?: string | undefined;
   /**
    * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
    */
@@ -82,11 +64,6 @@ export const GetV1CompanyFormsHeaderXGustoAPIVersion$outboundSchema:
     .nativeEnum(GetV1CompanyFormsHeaderXGustoAPIVersion);
 
 /** @internal */
-export const GetV1CompanyFormsQueryParamSortBy$outboundSchema: z.ZodNativeEnum<
-  typeof GetV1CompanyFormsQueryParamSortBy
-> = z.nativeEnum(GetV1CompanyFormsQueryParamSortBy);
-
-/** @internal */
 export type GetV1CompanyFormsRequest$Outbound = {
   "X-Gusto-API-Version": string;
   company_id: string;
@@ -104,7 +81,7 @@ export const GetV1CompanyFormsRequest$outboundSchema: z.ZodType<
   xGustoAPIVersion: GetV1CompanyFormsHeaderXGustoAPIVersion$outboundSchema
     .default("2025-11-15"),
   companyId: z.string(),
-  sortBy: GetV1CompanyFormsQueryParamSortBy$outboundSchema.optional(),
+  sortBy: z.string().optional(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
 }).transform((v) => {

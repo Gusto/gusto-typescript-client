@@ -13,9 +13,6 @@ import {
   CompanyAddress$inboundSchema,
 } from "./companyaddress.js";
 
-/**
- * The tax payer type of the company.
- */
 export const EntityType = {
   CCorporation: "C-Corporation",
   SCorporation: "S-Corporation",
@@ -30,9 +27,6 @@ export const EntityType = {
   JointVenture: "Joint venture",
   NonProfit: "Non-Profit",
 } as const;
-/**
- * The tax payer type of the company.
- */
 export type EntityType = ClosedEnum<typeof EntityType>;
 
 /**
@@ -74,18 +68,14 @@ export const PayScheduleType = {
 } as const;
 export type PayScheduleType = ClosedEnum<typeof PayScheduleType>;
 
-/**
- * Company's default funding type
- */
 export const FundingType = {
   Ach: "ach",
   ReverseWire: "reverse_wire",
   WireIn: "wire_in",
-  Brex: "brex",
+  PartnerDisbursement: "partner_disbursement",
+  Rtp: "rtp",
+  LineOfCredit: "line_of_credit",
 } as const;
-/**
- * Company's default funding type
- */
 export type FundingType = ClosedEnum<typeof FundingType>;
 
 export type Hourly = {

@@ -39,6 +39,10 @@ export type GetInformationRequestsRequest = {
    * The UUID of the company
    */
   companyUuid: string;
+  /**
+   * Sort by one or more fields. Options: payroll_blocker, status, type. Append `:asc` or `:desc` to specify direction (e.g., `payroll_blocker:asc`). Defaults to ascending.
+   */
+  sortBy?: string | undefined;
 };
 
 export type GetInformationRequestsResponse = {
@@ -58,6 +62,7 @@ export const GetInformationRequestsHeaderXGustoAPIVersion$outboundSchema:
 export type GetInformationRequestsRequest$Outbound = {
   "X-Gusto-API-Version": string;
   company_uuid: string;
+  sort_by?: string | undefined;
 };
 
 /** @internal */
@@ -69,10 +74,12 @@ export const GetInformationRequestsRequest$outboundSchema: z.ZodType<
   xGustoAPIVersion: GetInformationRequestsHeaderXGustoAPIVersion$outboundSchema
     .default("2025-11-15"),
   companyUuid: z.string(),
+  sortBy: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",
     companyUuid: "company_uuid",
+    sortBy: "sort_by",
   });
 });
 

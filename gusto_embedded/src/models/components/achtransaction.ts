@@ -21,16 +21,10 @@ export const PaymentEventType = {
  */
 export type PaymentEventType = ClosedEnum<typeof PaymentEventType>;
 
-/**
- * The type of recipient associated with the ACH transaction
- */
 export const AchTransactionRecipientType = {
   Employee: "Employee",
   Contractor: "Contractor",
 } as const;
-/**
- * The type of recipient associated with the ACH transaction
- */
 export type AchTransactionRecipientType = ClosedEnum<
   typeof AchTransactionRecipientType
 >;

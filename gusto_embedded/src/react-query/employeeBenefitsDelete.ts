@@ -19,8 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest,
   DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse,
@@ -38,6 +40,8 @@ export type EmployeeBenefitsDeleteMutationData =
   DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse;
 
 export type EmployeeBenefitsDeleteMutationError =
+  | NotFoundErrorObject
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

@@ -44,18 +44,6 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude = {
 export type GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude =
   ClosedEnum<typeof GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>;
 
-/**
- * Field to sort employee compensations by
- */
-export const SortBy = {
-  FirstName: "first_name",
-  LastName: "last_name",
-} as const;
-/**
- * Field to sort employee compensations by
- */
-export type SortBy = ClosedEnum<typeof SortBy>;
-
 export type GetV1CompaniesCompanyIdPayrollsPayrollIdRequest = {
   /**
    * The UUID of the company
@@ -86,9 +74,9 @@ export type GetV1CompaniesCompanyIdPayrollsPayrollIdRequest = {
    */
   per?: number | undefined;
   /**
-   * Field to sort employee compensations by
+   * Sort employee compensations by one or more fields. Options: first_name, last_name. Append `:asc` or `:desc` to specify direction (e.g., `last_name:asc` or `last_name:asc,first_name:asc`). Defaults to ascending.
    */
-  sortBy?: SortBy | undefined;
+  sortBy?: string | undefined;
 };
 
 export type GetV1CompaniesCompanyIdPayrollsPayrollIdResponse = {
@@ -112,10 +100,6 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude$outboundS
   z.ZodNativeEnum<
     typeof GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude
   > = z.nativeEnum(GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude);
-
-/** @internal */
-export const SortBy$outboundSchema: z.ZodNativeEnum<typeof SortBy> = z
-  .nativeEnum(SortBy);
 
 /** @internal */
 export type GetV1CompaniesCompanyIdPayrollsPayrollIdRequest$Outbound = {
@@ -145,7 +129,7 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdRequest$outboundSchema:
     ).optional(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    sortBy: SortBy$outboundSchema.optional(),
+    sortBy: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",

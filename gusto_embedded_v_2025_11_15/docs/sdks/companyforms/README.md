@@ -31,6 +31,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.companyForms.getAll({
     companyId: "<id>",
+    sortBy: "created_at:asc",
   });
 
   console.log(result);
@@ -56,6 +57,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await companyFormsGetAll(gustoEmbedded, {
     companyId: "<id>",
+    sortBy: "created_at:asc",
   });
   if (res.ok) {
     const { value: result } = res;
