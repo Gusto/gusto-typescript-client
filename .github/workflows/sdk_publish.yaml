@@ -13,6 +13,7 @@ permissions:
     - gusto_embedded/.speakeasy/gen.lock
     - gusto_embedded_v_2025_11_15/.speakeasy/gen.lock
     - gusto_embedded_v_2026_06_15/.speakeasy/gen.lock
+    - gusto_embedded_v_2026_02_01/.speakeasy/gen.lock
   workflow_dispatch: {}
 jobs:
   publish-gusto-embedded:
@@ -37,6 +38,15 @@ jobs:
     uses: Gusto/sdk-generation-action/.github/workflows/sdk-publish.yaml@main
     with:
       target: gusto-embedded-v2026-06-15
+      runs-on: '{"group": "gusto-ubuntu-default"}'
+    secrets:
+      github_access_token: "${{ secrets.GITHUB_TOKEN }}"
+      npm_token: "${{ secrets.NPM_TOKEN }}"
+      speakeasy_api_key: "${{ secrets.SPEAKEASY_API_KEY }}"
+  publish-gusto-embedded-v2026-02-01:
+    uses: Gusto/sdk-generation-action/.github/workflows/sdk-publish.yaml@main
+    with:
+      target: gusto-embedded-v2026-02-01
       runs-on: '{"group": "gusto-ubuntu-default"}'
     secrets:
       github_access_token: "${{ secrets.GITHUB_TOKEN }}"
