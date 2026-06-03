@@ -1,0 +1,17 @@
+# RehireBodyEmploymentStatus
+
+The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
+
+## Example Usage
+
+```typescript
+import { RehireBodyEmploymentStatus } from "@gusto/embedded-api-v-2026-02-01/models/components/rehirebody.js";
+
+let value: RehireBodyEmploymentStatus = "full_time";
+```
+
+## Values
+
+```typescript
+"part_time" | "full_time" | "part_time_eligible" | "variable" | "seasonal" | "not_set"
+```

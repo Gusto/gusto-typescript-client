@@ -1,0 +1,23 @@
+# PostV1WebhookSubscriptionRequest
+
+## Example Usage
+
+```typescript
+import { PostV1WebhookSubscriptionRequest } from "@gusto/embedded-api-v-2026-02-01/models/operations/postv1webhooksubscription.js";
+
+let value: PostV1WebhookSubscriptionRequest = {
+  requestBody: {
+    url: "https://tight-allocation.name/",
+    subscriptionTypes: [
+      "PayrollSync",
+    ],
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PostV1WebhookSubscriptionHeaderXGustoAPIVersion](../../models/operations/postv1webhooksubscriptionheaderxgustoapiversion.md)                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `requestBody`                                                                                                                                                                                                                | [operations.PostV1WebhookSubscriptionRequestBody](../../models/operations/postv1webhooksubscriptionrequestbody.md)                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

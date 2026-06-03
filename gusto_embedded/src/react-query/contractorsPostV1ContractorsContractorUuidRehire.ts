@@ -21,6 +21,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityError } from "../models/errors/unprocessableentityerror.js";
 import {
   PostV1ContractorsContractorUuidRehireRequest,
   PostV1ContractorsContractorUuidRehireResponse,
@@ -39,6 +40,7 @@ export type ContractorsPostV1ContractorsContractorUuidRehireMutationData =
   PostV1ContractorsContractorUuidRehireResponse;
 
 export type ContractorsPostV1ContractorsContractorUuidRehireMutationError =
+  | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

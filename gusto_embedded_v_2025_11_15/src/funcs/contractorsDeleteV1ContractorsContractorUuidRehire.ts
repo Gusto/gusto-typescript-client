@@ -22,6 +22,10 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  UnprocessableEntityError,
+  UnprocessableEntityError$inboundSchema,
+} from "../models/errors/unprocessableentityerror.js";
+import {
   DeleteV1ContractorsContractorUuidRehireRequest,
   DeleteV1ContractorsContractorUuidRehireRequest$outboundSchema,
   DeleteV1ContractorsContractorUuidRehireResponse,
@@ -56,6 +60,7 @@ export function contractorsDeleteV1ContractorsContractorUuidRehire(
 ): APIPromise<
   Result<
     DeleteV1ContractorsContractorUuidRehireResponse,
+    | UnprocessableEntityError
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -81,6 +86,7 @@ async function $do(
   [
     Result<
       DeleteV1ContractorsContractorUuidRehireResponse,
+      | UnprocessableEntityError
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -118,7 +124,7 @@ async function $do(
   );
 
   const headers = new Headers(compactMap({
-    Accept: "*/*",
+    Accept: "application/json",
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
       payload["X-Gusto-API-Version"],
@@ -180,6 +186,7 @@ async function $do(
 
   const [result] = await M.match<
     DeleteV1ContractorsContractorUuidRehireResponse,
+    | UnprocessableEntityError
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -190,7 +197,8 @@ async function $do(
     | SDKValidationError
   >(
     M.nil(204, DeleteV1ContractorsContractorUuidRehireResponse$inboundSchema),
-    M.fail([422, "4XX"]),
+    M.jsonErr(422, UnprocessableEntityError$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

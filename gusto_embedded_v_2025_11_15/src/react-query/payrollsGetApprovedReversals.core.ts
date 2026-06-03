@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsGetApprovedReversals } from "../funcs/payrollsGetApprovedReversals.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdPayrollReversalsRequest,
   GetV1CompaniesCompanyIdPayrollReversalsResponse,
 } from "../models/operations/getv1companiescompanyidpayrollreversals.js";
@@ -47,9 +47,9 @@ export function buildPayrollsGetApprovedReversalsQuery(
 } {
   return {
     queryKey: queryKeyPayrollsGetApprovedReversals(request.companyId, {
+      xGustoAPIVersion: request.xGustoAPIVersion,
       page: request.page,
       per: request.per,
-      xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function payrollsGetApprovedReversalsQueryFn(
       ctx,
@@ -77,9 +77,11 @@ export function buildPayrollsGetApprovedReversalsQuery(
 export function queryKeyPayrollsGetApprovedReversals(
   companyId: string,
   parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion
+      | undefined;
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

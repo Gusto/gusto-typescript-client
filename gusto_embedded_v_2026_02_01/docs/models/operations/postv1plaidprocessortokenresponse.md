@@ -1,0 +1,16 @@
+# PostV1PlaidProcessorTokenResponse
+
+## Example Usage
+
+```typescript
+import { PostV1PlaidProcessorTokenResponse } from "@gusto/embedded-api-v-2026-02-01/models/operations/postv1plaidprocessortoken.js";
+
+let value: PostV1PlaidProcessorTokenResponse = {};
+```
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `httpMeta`                                                                     | [components.HTTPMetadata](../../models/components/httpmetadata.md)             | :heavy_check_mark:                                                             | N/A                                                                            |
+| `companyBankAccount`                                                           | [components.CompanyBankAccount](../../models/components/companybankaccount.md) | :heavy_minus_sign:                                                             | A JSON object containing bank information                                      |

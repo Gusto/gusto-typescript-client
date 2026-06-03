@@ -11,9 +11,9 @@ import { GustoEmbeddedCore } from "../core.js";
 import { generatedDocumentsGet } from "../funcs/generatedDocumentsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
   DocumentType,
+  GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion,
   GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
   GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse,
 } from "../models/operations/getv1generateddocumentsdocumenttyperequestuuid.js";
@@ -78,7 +78,11 @@ export function buildGeneratedDocumentsGetQuery(
 export function queryKeyGeneratedDocumentsGet(
   documentType: DocumentType,
   requestUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api-v-2026-06-15",
