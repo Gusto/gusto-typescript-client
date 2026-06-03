@@ -1,0 +1,15 @@
+# GetV1WebhookSubscriptionsRequest
+
+## Example Usage
+
+```typescript
+import { GetV1WebhookSubscriptionsRequest } from "@gusto/embedded-api-v-2026-02-01/models/operations/getv1webhooksubscriptions.js";
+
+let value: GetV1WebhookSubscriptionsRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.GetV1WebhookSubscriptionsHeaderXGustoAPIVersion](../../models/operations/getv1webhooksubscriptionsheaderxgustoapiversion.md)                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |

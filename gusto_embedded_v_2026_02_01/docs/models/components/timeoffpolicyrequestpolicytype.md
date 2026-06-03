@@ -1,0 +1,17 @@
+# TimeOffPolicyRequestPolicyType
+
+Type of the time off policy. Currently only "vacation" and "sick" are supported
+
+## Example Usage
+
+```typescript
+import { TimeOffPolicyRequestPolicyType } from "@gusto/embedded-api-v-2026-02-01/models/components/timeoffpolicyrequest.js";
+
+let value: TimeOffPolicyRequestPolicyType = "sick";
+```
+
+## Values
+
+```typescript
+"vacation" | "sick"
+```

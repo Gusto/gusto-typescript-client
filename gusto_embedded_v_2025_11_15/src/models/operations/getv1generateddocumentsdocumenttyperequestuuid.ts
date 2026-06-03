@@ -15,11 +15,22 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion
+  >;
 
 /**
  * The type of document being generated
@@ -34,6 +45,12 @@ export type DocumentType = ClosedEnum<typeof DocumentType>;
 
 export type GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The type of document being generated
    */
   documentType: DocumentType;
@@ -41,10 +58,6 @@ export type GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest = {
    * The UUID of the request to generate a document. Generate document endpoints return request_uuids to be used with the GET generated document endpoint.
    */
   requestUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse = {
@@ -56,14 +69,22 @@ export type GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse = {
 };
 
 /** @internal */
+export const GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export const DocumentType$outboundSchema: z.ZodNativeEnum<typeof DocumentType> =
   z.nativeEnum(DocumentType);
 
 /** @internal */
 export type GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   document_type: string;
   request_uuid: string;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -73,14 +94,16 @@ export const GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$outboundSchem
     z.ZodTypeDef,
     GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-11-15"),
     documentType: DocumentType$outboundSchema,
     requestUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-11-15"),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       documentType: "document_type",
       requestUuid: "request_uuid",
-      xGustoAPIVersion: "X-Gusto-API-Version",
     });
   });
 

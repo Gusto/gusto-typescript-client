@@ -1,0 +1,17 @@
+# GeneratedDocumentStatus
+
+Current status of the Generated Document
+
+## Example Usage
+
+```typescript
+import { GeneratedDocumentStatus } from "@gusto/embedded-api-v-2026-02-01/models/components/generateddocument.js";
+
+let value: GeneratedDocumentStatus = "started";
+```
+
+## Values
+
+```typescript
+"pending" | "started" | "succeeded" | "failed"
+```

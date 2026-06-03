@@ -1,0 +1,15 @@
+# PayrollFixedCompensationTypesType
+
+## Example Usage
+
+```typescript
+import { PayrollFixedCompensationTypesType } from "@gusto/embedded-api-v-2026-02-01/models/components/payrollfixedcompensationtypestype.js";
+
+let value: PayrollFixedCompensationTypesType = {};
+```
+
+## Fields
+
+| Field                                                | Type                                                 | Required                                             | Description                                          |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| `name`                                               | *string*                                             | :heavy_minus_sign:                                   | The name of an available type of fixed compensation. |

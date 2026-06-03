@@ -1,0 +1,29 @@
+# PostCompaniesCompanyUuidReportsRequest
+
+## Example Usage
+
+```typescript
+import { PostCompaniesCompanyUuidReportsRequest } from "@gusto/embedded-api-v-2026-02-01/models/operations/postcompaniescompanyuuidreports.js";
+import { RFCDate } from "@gusto/embedded-api-v-2026-02-01/types/rfcdate.js";
+
+let value: PostCompaniesCompanyUuidReportsRequest = {
+  companyUuid: "<id>",
+  createReportBody: {
+    columns: [],
+    groupings: [],
+    fileType: "pdf",
+    startDate: new RFCDate("2024-01-01"),
+    endDate: new RFCDate("2024-04-01"),
+    dismissedStartDate: new RFCDate("2024-01-01"),
+    dismissedEndDate: new RFCDate("2024-04-01"),
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PostCompaniesCompanyUuidReportsHeaderXGustoAPIVersion](../../models/operations/postcompaniescompanyuuidreportsheaderxgustoapiversion.md)                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyUuid`                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `createReportBody`                                                                                                                                                                                                           | [components.CreateReportBody](../../models/components/createreportbody.md)                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

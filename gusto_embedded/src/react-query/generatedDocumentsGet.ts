@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -24,6 +23,7 @@ import { ResponseValidationError } from "../models/errors/responsevalidationerro
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   DocumentType,
+  GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion,
   GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
 } from "../models/operations/getv1generateddocumentsdocumenttyperequestuuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -119,7 +119,11 @@ export function setGeneratedDocumentsGetData(
   queryKeyBase: [
     documentType: DocumentType,
     requestUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: GeneratedDocumentsGetQueryData,
 ): GeneratedDocumentsGetQueryData | undefined {
@@ -134,7 +138,11 @@ export function invalidateGeneratedDocumentsGet(
     [
       documentType: DocumentType,
       requestUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
