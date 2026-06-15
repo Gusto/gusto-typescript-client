@@ -35,15 +35,15 @@ export type GetV1PayrollDigestsPayrollDigestUuidHeaderXGustoAPIVersion =
 
 export type GetV1PayrollDigestsPayrollDigestUuidRequest = {
   /**
-   * The UUID of the payroll digest batch returned by `POST /v1/payroll_digests`.
-   */
-  payrollDigestUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | GetV1PayrollDigestsPayrollDigestUuidHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the payroll digest batch returned by `POST /v1/payroll_digests`.
+   */
+  payrollDigestUuid: string;
 };
 
 export type GetV1PayrollDigestsPayrollDigestUuidResponse = {
@@ -92,8 +92,8 @@ export const GetV1PayrollDigestsPayrollDigestUuidHeaderXGustoAPIVersion$outbound
 
 /** @internal */
 export type GetV1PayrollDigestsPayrollDigestUuidRequest$Outbound = {
-  payroll_digest_uuid: string;
   "X-Gusto-API-Version": string;
+  payroll_digest_uuid: string;
 };
 
 /** @internal */
@@ -103,14 +103,14 @@ export const GetV1PayrollDigestsPayrollDigestUuidRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1PayrollDigestsPayrollDigestUuidRequest
   > = z.object({
-    payrollDigestUuid: z.string(),
     xGustoAPIVersion:
       GetV1PayrollDigestsPayrollDigestUuidHeaderXGustoAPIVersion$outboundSchema
         .default("2026-02-01"),
+    payrollDigestUuid: z.string(),
   }).transform((v) => {
     return remap$(v, {
-      payrollDigestUuid: "payroll_digest_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      payrollDigestUuid: "payroll_digest_uuid",
     });
   });
 

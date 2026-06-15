@@ -31,15 +31,15 @@ export type GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion =
 
 export type GetV1HomeAddressesHomeAddressUuidRequest = {
   /**
-   * The UUID of the home address
-   */
-  homeAddressUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the home address
+   */
+  homeAddressUuid: string;
 };
 
 export type GetV1HomeAddressesHomeAddressUuidResponse = {
@@ -58,8 +58,8 @@ export const GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSch
 
 /** @internal */
 export type GetV1HomeAddressesHomeAddressUuidRequest$Outbound = {
-  home_address_uuid: string;
   "X-Gusto-API-Version": string;
+  home_address_uuid: string;
 };
 
 /** @internal */
@@ -68,14 +68,14 @@ export const GetV1HomeAddressesHomeAddressUuidRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1HomeAddressesHomeAddressUuidRequest
 > = z.object({
-  homeAddressUuid: z.string(),
   xGustoAPIVersion:
     GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema
       .default("2025-06-15"),
+  homeAddressUuid: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    homeAddressUuid: "home_address_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    homeAddressUuid: "home_address_uuid",
   });
 });
 

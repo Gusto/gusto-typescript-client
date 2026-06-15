@@ -293,6 +293,7 @@ run();
 * [getReceipt](docs/sdks/contractorpayments/README.md#getreceipt) - Get a single contractor payment receipt
 * [fund](docs/sdks/contractorpayments/README.md#fund) - Fund a contractor payment [DEMO]
 * [getV1ContractorPaymentsContractorPaymentIdPdf](docs/sdks/contractorpayments/README.md#getv1contractorpaymentscontractorpaymentidpdf) - Get a contractor payment PDF
+* [getV1ContractorsContractorUuidPayments](docs/sdks/contractorpayments/README.md#getv1contractorscontractoruuidpayments) - Get contractor payments
 
 ### [Contractors](docs/sdks/contractors/README.md)
 
@@ -736,6 +737,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`contractorPaymentsGet`](docs/sdks/contractorpayments/README.md#get) - Get a single contractor payment
 - [`contractorPaymentsGetReceipt`](docs/sdks/contractorpayments/README.md#getreceipt) - Get a single contractor payment receipt
 - [`contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf`](docs/sdks/contractorpayments/README.md#getv1contractorpaymentscontractorpaymentidpdf) - Get a contractor payment PDF
+- [`contractorPaymentsGetV1ContractorsContractorUuidPayments`](docs/sdks/contractorpayments/README.md#getv1contractorscontractoruuidpayments) - Get contractor payments
 - [`contractorPaymentsList`](docs/sdks/contractorpayments/README.md#list) - Get contractor payments for a company
 - [`contractorsCreate`](docs/sdks/contractors/README.md#create) - Create a contractor
 - [`contractorsDelete`](docs/sdks/contractors/README.md#delete) - Delete a contractor
@@ -1063,6 +1065,7 @@ To learn about this feature and how to get started, check
 - [`useContractorPaymentsGet`](docs/sdks/contractorpayments/README.md#get) - Get a single contractor payment
 - [`useContractorPaymentsGetReceipt`](docs/sdks/contractorpayments/README.md#getreceipt) - Get a single contractor payment receipt
 - [`useContractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf`](docs/sdks/contractorpayments/README.md#getv1contractorpaymentscontractorpaymentidpdf) - Get a contractor payment PDF
+- [`useContractorPaymentsGetV1ContractorsContractorUuidPayments`](docs/sdks/contractorpayments/README.md#getv1contractorscontractoruuidpayments) - Get contractor payments
 - [`useContractorPaymentsList`](docs/sdks/contractorpayments/README.md#list) - Get contractor payments for a company
 - [`useContractorsCreateMutation`](docs/sdks/contractors/README.md#create) - Create a contractor
 - [`useContractorsDeleteMutation`](docs/sdks/contractors/README.md#delete) - Delete a contractor
@@ -1473,11 +1476,11 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityError`](./src/models/errors/unprocessableentityerror.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 162 of 301 methods.*
-* [`ConflictErrorObject`](./src/models/errors/conflicterrorobject.ts): Conflict    This error occurs when the resource version provided does not match the current version. Retrieve the latest version and retry. Status code `409`. Applicable to 2 of 301 methods.*
-* [`PeopleBatchConflictError`](./src/models/errors/peoplebatchconflicterror.ts): Error response when a people batch idempotency key conflict occurs. Status code `409`. Applicable to 1 of 301 methods.*
-* [`PayrollDigestConflictError`](./src/models/errors/payrolldigestconflicterror.ts): Error response when a payroll digest idempotency key has already been used by the same partner. Status code `409`. Applicable to 1 of 301 methods.*
-* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 1 of 301 methods.*
+* [`UnprocessableEntityError`](./src/models/errors/unprocessableentityerror.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 163 of 302 methods.*
+* [`ConflictErrorObject`](./src/models/errors/conflicterrorobject.ts): Conflict    This error occurs when the resource version provided does not match the current version. Retrieve the latest version and retry. Status code `409`. Applicable to 2 of 302 methods.*
+* [`PeopleBatchConflictError`](./src/models/errors/peoplebatchconflicterror.ts): Error response when a people batch idempotency key conflict occurs. Status code `409`. Applicable to 1 of 302 methods.*
+* [`PayrollDigestConflictError`](./src/models/errors/payrolldigestconflicterror.ts): Error response when a payroll digest idempotency key has already been used by the same partner. Status code `409`. Applicable to 1 of 302 methods.*
+* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 1 of 302 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

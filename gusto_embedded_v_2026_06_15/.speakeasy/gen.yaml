@@ -34,7 +34,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.0.2
+  version: 0.1.0
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
@@ -44,6 +44,7 @@ typescript:
     license: MIT
   additionalScripts: {}
   alwaysIncludeInboundAndOutbound: false
+  apiPromiseHelpers: false
   author: Speakeasy
   baseErrorName: GustoEmbeddedError
   clientServerStatusCodesAsErrors: true
@@ -54,6 +55,7 @@ typescript:
   enableReactQuery: true
   enumFormat: union
   envVarPrefix: GUSTOEMBEDDED
+  eventStreamClassName: EventStream
   exportZodModelNamespace: false
   fixEnumNameSanitization: false
   flatAdditionalProperties: false
@@ -86,6 +88,7 @@ typescript:
   preApplyUnionDiscriminators: true
   preserveModelFieldNames: false
   privateIdentifierPrefix: '#'
+  requestExtras: false
   responseFormat: envelope-http
   sseFlatResponse: false
   templateVersion: v2

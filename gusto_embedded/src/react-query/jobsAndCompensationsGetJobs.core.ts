@@ -48,10 +48,10 @@ export function buildJobsAndCompensationsGetJobsQuery(
 } {
   return {
     queryKey: queryKeyJobsAndCompensationsGetJobs(request.employeeId, {
+      xGustoAPIVersion: request.xGustoAPIVersion,
       page: request.page,
       per: request.per,
       include: request.include,
-      xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function jobsAndCompensationsGetJobsQueryFn(
       ctx,
@@ -79,12 +79,12 @@ export function buildJobsAndCompensationsGetJobsQuery(
 export function queryKeyJobsAndCompensationsGetJobs(
   employeeId: string,
   parameters: {
-    page?: number | undefined;
-    per?: number | undefined;
-    include?: GetV1EmployeesEmployeeIdJobsQueryParamInclude | undefined;
     xGustoAPIVersion?:
       | GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion
       | undefined;
+    page?: number | undefined;
+    per?: number | undefined;
+    include?: GetV1EmployeesEmployeeIdJobsQueryParamInclude | undefined;
   },
 ): QueryKey {
   return [

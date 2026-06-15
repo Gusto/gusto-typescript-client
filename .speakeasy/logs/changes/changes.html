@@ -98,20 +98,53 @@
 <body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
 
 <ul>
-<li><code>gustoembedded.contractors.postV1ContractorsContractorUuidRehire()</code>:  <code>error.status[422]</code> <strong>Added</strong></li>
-<li><code>gustoembedded.contractors.deleteV1ContractorsContractorUuidRehire()</code>:  <code>error.status[422]</code> <strong>Added</strong></li>
-<li><code>gustoembedded.contractors.postV1ContractorsContractorUuidTermination()</code>:  <code>error.status[422]</code> <strong>Added</strong></li>
-<li><code>gustoembedded.contractors.deleteV1ContractorsContractorUuidTermination()</code>:  <code>error.status[422]</code> <strong>Added</strong></li>
-<li><code>gustoembedded.payrolls.getApprovedReversals()</code>:
+<li><code>gustoembedded.webhooks.createSubscription()</code>:
 
 <ul>
-<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>request.requestBody.subscriptionTypes[].enum(timeOffRequest)</code> <strong>Added</strong></li>
+<li><code>response.subscriptionTypes[].enum(timeOffRequest)</code> <strong>Added</strong> (Breaking ⚠️)</li>
 </ul></li>
-<li><code>gustoembedded.generatedDocuments.get()</code>:
+<li><code>gustoembedded.payrolls.get()</code>: <code>response.employeeCompensations[]</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>benefits[].companyContribution</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>benefits[].employeeDeduction</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>deductions[].amount</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>taxes[].amount</code> <strong>Changed</strong> (Breaking ⚠️)</li>
 </ul></li>
+<li><code>gustoembedded.payrolls.createOffCycle()</code>:
+
+<ul>
+<li><code>request.requestBody.employeeUuids</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.webhooks.listSubscriptions()</code>:  <code>response.[].subscriptionTypes[].enum(timeOffRequest)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.webhooks.getSubscription()</code>:  <code>response.subscriptionTypes[].enum(timeOffRequest)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.webhooks.updateSubscription()</code>:
+
+<ul>
+<li><code>request.requestBody.subscriptionTypes[].enum(timeOffRequest)</code> <strong>Added</strong></li>
+<li><code>response.subscriptionTypes[].enum(timeOffRequest)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.webhooks.verify()</code>:  <code>response.subscriptionTypes[].enum(timeOffRequest)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.employees.getOnboardingStatus()</code>:  <code>response.blockers</code> <strong>Added</strong></li>
+<li><code>gustoembedded.employees.updateOnboardingStatus()</code>:  <code>response.blockers</code> <strong>Added</strong></li>
+<li><code>gustoembedded.payrolls.update()</code>:
+
+<ul>
+<li><code>request.payrollUpdate.employeeCompensations[].customWithholdings</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.payrolls.getReceipt()</code>: <code>request</code> <strong>Changed</strong>
+
+<ul>
+<li><code>page</code> <strong>Added</strong></li>
+<li><code>per</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.paySchedules.getPreview()</code>:
+
+<ul>
+<li><code>request.payScheduleUuid</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.contractorPayments.getV1ContractorsContractorUuidPayments()</code>: <strong>Added</strong></li>
 </ul>
 </body>
 </html>

@@ -47,9 +47,9 @@ export function buildEmployeesGetCustomFieldsQuery(
 } {
   return {
     queryKey: queryKeyEmployeesGetCustomFields(request.employeeId, {
+      xGustoAPIVersion: request.xGustoAPIVersion,
       page: request.page,
       per: request.per,
-      xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function employeesGetCustomFieldsQueryFn(
       ctx,
@@ -77,11 +77,11 @@ export function buildEmployeesGetCustomFieldsQuery(
 export function queryKeyEmployeesGetCustomFields(
   employeeId: string,
   parameters: {
-    page?: number | undefined;
-    per?: number | undefined;
     xGustoAPIVersion?:
       | GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion
       | undefined;
+    page?: number | undefined;
+    per?: number | undefined;
   },
 ): QueryKey {
   return [

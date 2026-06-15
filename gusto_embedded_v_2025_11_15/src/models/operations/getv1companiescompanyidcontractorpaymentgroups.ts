@@ -34,6 +34,12 @@ export type GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
 
 export type GetV1CompaniesCompanyIdContractorPaymentGroupsRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the company
    */
   companyId: string;
@@ -53,12 +59,6 @@ export type GetV1CompaniesCompanyIdContractorPaymentGroupsRequest = {
    * Number of objects per page. For majority of endpoints will default to 25
    */
   per?: number | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?:
-    | GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
-    | undefined;
 };
 
 export type GetV1CompaniesCompanyIdContractorPaymentGroupsResponse = {
@@ -81,12 +81,12 @@ export const GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersio
 
 /** @internal */
 export type GetV1CompaniesCompanyIdContractorPaymentGroupsRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_id: string;
   start_date?: string | undefined;
   end_date?: string | undefined;
   page?: number | undefined;
   per?: number | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -96,20 +96,20 @@ export const GetV1CompaniesCompanyIdContractorPaymentGroupsRequest$outboundSchem
     z.ZodTypeDef,
     GetV1CompaniesCompanyIdContractorPaymentGroupsRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-11-15"),
     companyId: z.string(),
     startDate: z.string().optional(),
     endDate: z.string().optional(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    xGustoAPIVersion:
-      GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$outboundSchema
-        .default("2025-11-15"),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       companyId: "company_id",
       startDate: "start_date",
       endDate: "end_date",
-      xGustoAPIVersion: "X-Gusto-API-Version",
     });
   });
 

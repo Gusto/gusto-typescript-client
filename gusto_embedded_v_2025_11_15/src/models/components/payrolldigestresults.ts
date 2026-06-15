@@ -54,7 +54,7 @@ export type PayrollDigestResultsResultsStatus = ClosedEnum<
   typeof PayrollDigestResultsResultsStatus
 >;
 
-export type Blockers = {
+export type PayrollDigestResultsBlockers = {
   /**
    * A machine-readable blocker key (e.g. `missing_bank_account`).
    */
@@ -170,7 +170,7 @@ export type PayrollDigestResultsResults = {
   /**
    * Reasons the company cannot currently run payroll. Applies to every payroll in this company's `payrolls` array — blockers are evaluated at the company level, not per payroll. Empty when there are no blockers.
    */
-  blockers?: Array<Blockers> | undefined;
+  blockers?: Array<PayrollDigestResultsBlockers> | undefined;
   /**
    * Payrolls for this company within the digest date window (7 days past, 30–60 days future). May be empty.
    */
@@ -308,8 +308,8 @@ export const PayrollDigestResultsResultsStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(PayrollDigestResultsResultsStatus);
 
 /** @internal */
-export const Blockers$inboundSchema: z.ZodType<
-  Blockers,
+export const PayrollDigestResultsBlockers$inboundSchema: z.ZodType<
+  PayrollDigestResultsBlockers,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -317,13 +317,13 @@ export const Blockers$inboundSchema: z.ZodType<
   description: z.string().optional(),
 });
 
-export function blockersFromJSON(
+export function payrollDigestResultsBlockersFromJSON(
   jsonString: string,
-): SafeParseResult<Blockers, SDKValidationError> {
+): SafeParseResult<PayrollDigestResultsBlockers, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Blockers$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Blockers' from JSON`,
+    (x) => PayrollDigestResultsBlockers$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollDigestResultsBlockers' from JSON`,
   );
 }
 
@@ -457,7 +457,8 @@ export const PayrollDigestResultsResults$inboundSchema: z.ZodType<
   uuid: z.string().optional(),
   name: z.string().optional(),
   status: PayrollDigestResultsResultsStatus$inboundSchema.optional(),
-  blockers: z.array(z.lazy(() => Blockers$inboundSchema)).optional(),
+  blockers: z.array(z.lazy(() => PayrollDigestResultsBlockers$inboundSchema))
+    .optional(),
   payrolls: z.array(z.lazy(() => Payrolls$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {

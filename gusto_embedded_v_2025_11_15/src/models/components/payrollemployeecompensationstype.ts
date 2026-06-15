@@ -174,7 +174,7 @@ export type PayrollEmployeeCompensationsType = {
    */
   memo?: string | null | undefined;
   /**
-   * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements. If this payroll has been processed, only fixed compensations with a value greater than 0.00 are returned. For an unprocessed payroll, all active fixed compensations are returned.
+   * An array of fixed compensations for the employee. Fixed compensations include tips and bonuses. On regular payrolls, reimbursements are sent via the dedicated `reimbursements` array instead. Off-cycle payrolls continue to include reimbursements in `fixed_compensations`. If this payroll has been processed, only fixed compensations with a value greater than 0.00 are returned. For an unprocessed payroll, all active fixed compensations are returned.
    */
   fixedCompensations?:
     | Array<PayrollEmployeeCompensationsTypeFixedCompensations>

@@ -1115,6 +1115,26 @@ components:
             - error_key: is_active
               category: invalid_attribute_value
               message: Cannot reactivate while a rehire is scheduled. Use the cancel rehire endpoint to remove the pending rehire first.
+        contractor_rehire_start_date_required:
+          errors:
+            - error_key: start_date
+              category: invalid_attribute_value
+              message: Start date is required
+        contractor_rehire_no_pending:
+          errors:
+            - error_key: base
+              category: invalid_operation
+              message: No pending rehire to cancel
+        contractor_termination_end_date_required:
+          errors:
+            - error_key: end_date
+              category: invalid_attribute_value
+              message: End date is required
+        contractor_termination_no_pending_dismissal:
+          errors:
+            - error_key: base
+              category: invalid_operation
+              message: No pending dismissal to cancel
         contractor_address_invalid_attribute:
           errors:
             - error_key: street_1
@@ -23977,7 +23997,8 @@ paths:
             This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
           content:
             application/json:
-              schema: {}
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
       requestBody:
         content:
           application/json:
@@ -24039,7 +24060,8 @@ paths:
             This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
           content:
             application/json:
-              schema: {}
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
   "/v1/contractors/{contractor_uuid}/termination":
     post:
       summary: Schedule a contractor termination
@@ -24089,7 +24111,8 @@ paths:
             This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
           content:
             application/json:
-              schema: {}
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
       requestBody:
         content:
           application/json:
@@ -24151,7 +24174,8 @@ paths:
             This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
           content:
             application/json:
-              schema: {}
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
   "/v1/contractors/{contractor_uuid}":
     get:
       summary: Get a contractor
@@ -29402,6 +29426,14 @@ paths:
       x-gusto-integration-type:
         - embedded
       parameters:
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2026-06-15'
+            default: '2026-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: document_type
           in: path
           required: true
@@ -29416,7 +29448,6 @@ paths:
           description: The UUID of the request to generate a document. Generate document endpoints return request_uuids to be used with the GET generated document endpoint.
           schema:
             type: string
-        - "$ref": "#/components/parameters/VersionHeader"
       x-gusto-rswag: true
       responses:
         '200':
@@ -32940,6 +32971,14 @@ paths:
       x-gusto-integration-type:
         - embedded
       parameters:
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2026-06-15'
+            default: '2026-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
           description: The UUID of the company
@@ -32958,7 +32997,6 @@ paths:
           description: Number of objects per page. For majority of endpoints will default to 25
           schema:
             type: integer
-        - "$ref": "#/components/parameters/VersionHeader"
       x-gusto-rswag: true
       responses:
         '200':

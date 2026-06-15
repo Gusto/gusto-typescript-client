@@ -348,15 +348,15 @@ export type PostV1CompaniesCompanyIdPeopleBatchesRequestBody = {
 
 export type PostV1CompaniesCompanyIdPeopleBatchesRequest = {
   /**
-   * The UUID of the company
-   */
-  companyId: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the company
+   */
+  companyId: string;
   requestBody: PostV1CompaniesCompanyIdPeopleBatchesRequestBody;
 };
 
@@ -738,8 +738,8 @@ export function postV1CompaniesCompanyIdPeopleBatchesRequestBodyToJSON(
 
 /** @internal */
 export type PostV1CompaniesCompanyIdPeopleBatchesRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
+  company_id: string;
   RequestBody: PostV1CompaniesCompanyIdPeopleBatchesRequestBody$Outbound;
 };
 
@@ -750,17 +750,17 @@ export const PostV1CompaniesCompanyIdPeopleBatchesRequest$outboundSchema:
     z.ZodTypeDef,
     PostV1CompaniesCompanyIdPeopleBatchesRequest
   > = z.object({
-    companyId: z.string(),
     xGustoAPIVersion:
       PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion$outboundSchema
         .default("2025-06-15"),
+    companyId: z.string(),
     requestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdPeopleBatchesRequestBody$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyId: "company_id",
       requestBody: "RequestBody",
     });
   });

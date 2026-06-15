@@ -1208,6 +1208,7 @@ Notes:
 * Hour and dollar amounts are returned as string representations of numeric decimals.
 * Dollar amounts are represented to the cent.
 * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+* Results are paginated. Maximum page size is 100 employee compensations per request.
 
 scope: `payrolls:read`
 

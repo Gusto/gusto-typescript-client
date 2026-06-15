@@ -47,8 +47,8 @@ export function buildCompaniesGetOnboardingStatusQuery(
 } {
   return {
     queryKey: queryKeyCompaniesGetOnboardingStatus(request.companyUuid, {
-      additionalSteps: request.additionalSteps,
       xGustoAPIVersion: request.xGustoAPIVersion,
+      additionalSteps: request.additionalSteps,
     }),
     queryFn: async function companiesGetOnboardingStatusQueryFn(
       ctx,
@@ -76,10 +76,10 @@ export function buildCompaniesGetOnboardingStatusQuery(
 export function queryKeyCompaniesGetOnboardingStatus(
   companyUuid: string,
   parameters: {
-    additionalSteps?: string | undefined;
     xGustoAPIVersion?:
       | GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion
       | undefined;
+    additionalSteps?: string | undefined;
   },
 ): QueryKey {
   return [

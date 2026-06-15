@@ -8,6 +8,7 @@ import { contractorPaymentsFund } from "../funcs/contractorPaymentsFund.js";
 import { contractorPaymentsGet } from "../funcs/contractorPaymentsGet.js";
 import { contractorPaymentsGetReceipt } from "../funcs/contractorPaymentsGetReceipt.js";
 import { contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf } from "../funcs/contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf.js";
+import { contractorPaymentsGetV1ContractorsContractorUuidPayments } from "../funcs/contractorPaymentsGetV1ContractorsContractorUuidPayments.js";
 import { contractorPaymentsList } from "../funcs/contractorPaymentsList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import {
@@ -34,6 +35,10 @@ import {
   GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
   GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse,
 } from "../models/operations/getv1contractorpaymentscontractorpaymentuuidreceipt.js";
+import {
+  GetV1ContractorsContractorUuidPaymentsRequest,
+  GetV1ContractorsContractorUuidPaymentsResponse,
+} from "../models/operations/getv1contractorscontractoruuidpayments.js";
 import {
   PostV1CompaniesCompanyIdContractorPaymentsRequest,
   PostV1CompaniesCompanyIdContractorPaymentsResponse,
@@ -192,5 +197,26 @@ export class ContractorPayments extends ClientSDK {
         options,
       ),
     );
+  }
+
+  /**
+   * Get contractor payments
+   *
+   * @remarks
+   * Returns a paginated list of payments for a single contractor.
+   *
+   * Results are sortable by `check_date` or `created_at`. Append `:asc` or `:desc` to control direction (e.g., `check_date:desc`).
+   *
+   * scope: `contractor_pay_stubs:read`
+   */
+  async getV1ContractorsContractorUuidPayments(
+    request: GetV1ContractorsContractorUuidPaymentsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1ContractorsContractorUuidPaymentsResponse> {
+    return unwrapAsync(contractorPaymentsGetV1ContractorsContractorUuidPayments(
+      this,
+      request,
+      options,
+    ));
   }
 }

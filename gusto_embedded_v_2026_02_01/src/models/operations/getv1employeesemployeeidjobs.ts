@@ -15,6 +15,19 @@ import { Job, Job$inboundSchema } from "../components/job.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentySixMinus02Minus01: "2026-02-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion
+>;
+
+/**
  * Available options:
  *
  * @remarks
@@ -33,20 +46,13 @@ export type GetV1EmployeesEmployeeIdJobsQueryParamInclude = ClosedEnum<
   typeof GetV1EmployeesEmployeeIdJobsQueryParamInclude
 >;
 
-/**
- * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
- */
-export const GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion = {
-  TwoThousandAndTwentySixMinus02Minus01: "2026-02-01",
-} as const;
-/**
- * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
- */
-export type GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion = ClosedEnum<
-  typeof GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion
->;
-
 export type GetV1EmployeesEmployeeIdJobsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the employee
    */
@@ -66,12 +72,6 @@ export type GetV1EmployeesEmployeeIdJobsRequest = {
    * - all_compensations: Include all effective dated compensations for each job instead of only the current compensation
    */
   include?: GetV1EmployeesEmployeeIdJobsQueryParamInclude | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?:
-    | GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion
-    | undefined;
 };
 
 export type GetV1EmployeesEmployeeIdJobsResponse = {
@@ -83,22 +83,22 @@ export type GetV1EmployeesEmployeeIdJobsResponse = {
 };
 
 /** @internal */
-export const GetV1EmployeesEmployeeIdJobsQueryParamInclude$outboundSchema:
-  z.ZodNativeEnum<typeof GetV1EmployeesEmployeeIdJobsQueryParamInclude> = z
-    .nativeEnum(GetV1EmployeesEmployeeIdJobsQueryParamInclude);
-
-/** @internal */
 export const GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<typeof GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion> = z
     .nativeEnum(GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion);
 
 /** @internal */
+export const GetV1EmployeesEmployeeIdJobsQueryParamInclude$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1EmployeesEmployeeIdJobsQueryParamInclude> = z
+    .nativeEnum(GetV1EmployeesEmployeeIdJobsQueryParamInclude);
+
+/** @internal */
 export type GetV1EmployeesEmployeeIdJobsRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   employee_id: string;
   page?: number | undefined;
   per?: number | undefined;
   include?: string | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -107,19 +107,19 @@ export const GetV1EmployeesEmployeeIdJobsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1EmployeesEmployeeIdJobsRequest
 > = z.object({
+  xGustoAPIVersion:
+    GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion$outboundSchema.default(
+      "2026-02-01",
+    ),
   employeeId: z.string(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
   include: GetV1EmployeesEmployeeIdJobsQueryParamInclude$outboundSchema
     .optional(),
-  xGustoAPIVersion:
-    GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion$outboundSchema.default(
-      "2026-02-01",
-    ),
 }).transform((v) => {
   return remap$(v, {
-    employeeId: "employee_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    employeeId: "employee_id",
   });
 });
 

@@ -33,15 +33,15 @@ export type GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion =
 
 export type GetV1EmployeesEmployeeIdHomeAddressesRequest = {
   /**
-   * The UUID of the employee
-   */
-  employeeId: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the employee
+   */
+  employeeId: string;
 };
 
 export type GetV1EmployeesEmployeeIdHomeAddressesResponse = {
@@ -60,8 +60,8 @@ export const GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$outboun
 
 /** @internal */
 export type GetV1EmployeesEmployeeIdHomeAddressesRequest$Outbound = {
-  employee_id: string;
   "X-Gusto-API-Version": string;
+  employee_id: string;
 };
 
 /** @internal */
@@ -71,14 +71,14 @@ export const GetV1EmployeesEmployeeIdHomeAddressesRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1EmployeesEmployeeIdHomeAddressesRequest
   > = z.object({
-    employeeId: z.string(),
     xGustoAPIVersion:
       GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$outboundSchema
         .default("2026-02-01"),
+    employeeId: z.string(),
   }).transform((v) => {
     return remap$(v, {
-      employeeId: "employee_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      employeeId: "employee_id",
     });
   });
 

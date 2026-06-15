@@ -197,7 +197,7 @@ export type PayrollShowDeductions = {
   /**
    * The amount of the deduction for the pay period.
    */
-  amount?: number | undefined;
+  amount?: string | undefined;
   /**
    * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
    */
@@ -215,13 +215,13 @@ export type PayrollShowDeductions = {
 export type PayrollShowTaxes = {
   name: string;
   employer: boolean;
-  amount: number;
+  amount: string;
 };
 
 export type PayrollShowBenefits = {
   name?: string | undefined;
-  employeeDeduction?: number | undefined;
-  companyContribution?: number | undefined;
+  employeeDeduction?: string | undefined;
+  companyContribution?: string | undefined;
   imputed?: boolean | undefined;
 };
 
@@ -267,7 +267,7 @@ export type EmployeeCompensations = {
    */
   memo?: string | null | undefined;
   /**
-   * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements. If this payroll has been processed, only fixed compensations with a value greater than 0.00 are returned. For an unprocessed payroll, all active fixed compensations are returned.
+   * An array of fixed compensations for the employee. Fixed compensations include tips and bonuses. On regular payrolls, reimbursements are sent via the dedicated `reimbursements` array instead. Off-cycle payrolls continue to include reimbursements in `fixed_compensations`. If this payroll has been processed, only fixed compensations with a value greater than 0.00 are returned. For an unprocessed payroll, all active fixed compensations are returned.
    */
   fixedCompensations?: Array<PayrollShowFixedCompensations> | undefined;
   /**
@@ -887,7 +887,7 @@ export const PayrollShowDeductions$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().optional(),
-  amount: z.number().optional(),
+  amount: z.string().optional(),
   amount_type: PayrollShowAmountType$inboundSchema.optional(),
   uuid: z.string().optional(),
   updatable_via_payroll: z.boolean().optional(),
@@ -916,7 +916,7 @@ export const PayrollShowTaxes$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string(),
   employer: z.boolean(),
-  amount: z.number(),
+  amount: z.string(),
 });
 
 export function payrollShowTaxesFromJSON(
@@ -936,8 +936,8 @@ export const PayrollShowBenefits$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().optional(),
-  employee_deduction: z.number().optional(),
-  company_contribution: z.number().optional(),
+  employee_deduction: z.string().optional(),
+  company_contribution: z.string().optional(),
   imputed: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
