@@ -35,7 +35,7 @@ export type GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion =
  * @remarks
  * - all_benefits: If with_employee_benefits=true, include all effective dated benefits for each employee instead of only the current benefits.
  */
-export const GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude = {
+export const Include = {
   AllBenefits: "all_benefits",
 } as const;
 /**
@@ -44,9 +44,7 @@ export const GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude = {
  * @remarks
  * - all_benefits: If with_employee_benefits=true, include all effective dated benefits for each employee instead of only the current benefits.
  */
-export type GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude = ClosedEnum<
-  typeof GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude
->;
+export type Include = ClosedEnum<typeof Include>;
 
 export type GetV1CompanyBenefitsCompanyBenefitIdRequest = {
   /**
@@ -69,7 +67,7 @@ export type GetV1CompanyBenefitsCompanyBenefitIdRequest = {
    * @remarks
    * - all_benefits: If with_employee_benefits=true, include all effective dated benefits for each employee instead of only the current benefits.
    */
-  include?: GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude | undefined;
+  include?: Include | undefined;
 };
 
 export type GetV1CompanyBenefitsCompanyBenefitIdResponse = {
@@ -89,10 +87,8 @@ export const GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion$outbound
   > = z.nativeEnum(GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion);
 
 /** @internal */
-export const GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude
-  > = z.nativeEnum(GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude);
+export const Include$outboundSchema: z.ZodNativeEnum<typeof Include> = z
+  .nativeEnum(Include);
 
 /** @internal */
 export type GetV1CompanyBenefitsCompanyBenefitIdRequest$Outbound = {
@@ -114,9 +110,7 @@ export const GetV1CompanyBenefitsCompanyBenefitIdRequest$outboundSchema:
         .default("2026-02-01"),
     companyBenefitId: z.string(),
     withEmployeeBenefits: z.boolean().optional(),
-    include:
-      GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude$outboundSchema
-        .optional(),
+    include: Include$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       xGustoAPIVersion: "X-Gusto-API-Version",

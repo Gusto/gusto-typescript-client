@@ -90,6 +90,66 @@ export class ExternalPayrolls extends ClientSDK {
   }
 
   /**
+   * Get tax liabilities
+   *
+   * @remarks
+   * Get tax liabilities from aggregate external payrolls for a company.
+   *
+   * scope: `external_payrolls:read`
+   */
+  async listTaxLiabilities(
+    request: GetV1TaxLiabilitiesRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1TaxLiabilitiesResponse> {
+    return unwrapAsync(externalPayrollsListTaxLiabilities(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update tax liabilities
+   *
+   * @remarks
+   * Update tax liabilities for a company.
+   *
+   * scope: `external_payrolls:write`
+   */
+  async updateTaxLiabilities(
+    request: PutV1TaxLiabilitiesRequest,
+    options?: RequestOptions,
+  ): Promise<PutV1TaxLiabilitiesResponse> {
+    return unwrapAsync(externalPayrollsUpdateTaxLiabilities(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Finalize tax liabilities options and convert into processed payrolls
+   *
+   * @remarks
+   * Finalizes tax liabilities for a company. All external payrolls edit action will be disabled.
+   *
+   * ### Asynchronous processing
+   * This endpoint triggers an asynchronous operation. The external payrolls will be processed in the background after finalization.
+   *
+   * scope: `external_payrolls:write`
+   */
+  async finalizeTaxLiabilities(
+    request: PutV1TaxLiabilitiesFinishRequest,
+    options?: RequestOptions,
+  ): Promise<PutV1TaxLiabilitiesFinishResponse> {
+    return unwrapAsync(externalPayrollsFinalizeTaxLiabilities(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Get an external payroll
    *
    * @remarks
@@ -159,66 +219,6 @@ export class ExternalPayrolls extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetV1ExternalPayrollCalculateTaxesResponse> {
     return unwrapAsync(externalPayrollsCalculateTaxes(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get tax liabilities
-   *
-   * @remarks
-   * Get tax liabilities from aggregate external payrolls for a company.
-   *
-   * scope: `external_payrolls:read`
-   */
-  async listTaxLiabilities(
-    request: GetV1TaxLiabilitiesRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1TaxLiabilitiesResponse> {
-    return unwrapAsync(externalPayrollsListTaxLiabilities(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update tax liabilities
-   *
-   * @remarks
-   * Update tax liabilities for a company.
-   *
-   * scope: `external_payrolls:write`
-   */
-  async updateTaxLiabilities(
-    request: PutV1TaxLiabilitiesRequest,
-    options?: RequestOptions,
-  ): Promise<PutV1TaxLiabilitiesResponse> {
-    return unwrapAsync(externalPayrollsUpdateTaxLiabilities(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Finalize tax liabilities options and convert into processed payrolls
-   *
-   * @remarks
-   * Finalizes tax liabilities for a company. All external payrolls edit action will be disabled.
-   *
-   * ### Asynchronous processing
-   * This endpoint triggers an asynchronous operation. The external payrolls will be processed in the background after finalization.
-   *
-   * scope: `external_payrolls:write`
-   */
-  async finalizeTaxLiabilities(
-    request: PutV1TaxLiabilitiesFinishRequest,
-    options?: RequestOptions,
-  ): Promise<PutV1TaxLiabilitiesFinishResponse> {
-    return unwrapAsync(externalPayrollsFinalizeTaxLiabilities(
       this,
       request,
       options,

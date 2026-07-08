@@ -12,9 +12,9 @@ import { introspectionGetInfo } from "../funcs/introspectionGetInfo.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
+  GetV1TokenInfoHeaderXGustoAPIVersion,
   GetV1TokenInfoRequest,
   GetV1TokenInfoResponse,
-  XGustoAPIVersion,
 } from "../models/operations/getv1tokeninfo.js";
 import { unwrapAsync } from "../types/fp.js";
 export type IntrospectionGetInfoQueryData = GetV1TokenInfoResponse;
@@ -72,7 +72,9 @@ export function buildIntrospectionGetInfoQuery(
 }
 
 export function queryKeyIntrospectionGetInfo(
-  parameters: { xGustoAPIVersion?: XGustoAPIVersion | undefined },
+  parameters: {
+    xGustoAPIVersion?: GetV1TokenInfoHeaderXGustoAPIVersion | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api-v-2026-02-01",

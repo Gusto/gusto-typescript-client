@@ -1,17 +1,15 @@
 # RecipientType
 
-The type of recipient associated with the document (will be `Contractor` for Contractor Documents)
-
 ## Example Usage
 
 ```typescript
-import { RecipientType } from "@gusto/embedded-api-v-2026-02-01/models/components/document.js";
+import { RecipientType } from "@gusto/embedded-api-v-2026-02-01/models/components/achtransaction.js";
 
-let value: RecipientType = "Employee";
+let value: RecipientType = "Contractor";
 ```
 
 ## Values
 
 ```typescript
-"Company" | "Employee" | "Contractor"
+"Employee" | "Contractor"
 ```

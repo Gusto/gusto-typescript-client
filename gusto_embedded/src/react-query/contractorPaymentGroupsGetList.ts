@@ -118,13 +118,13 @@ export function setContractorPaymentGroupsGetListData(
   queryKeyBase: [
     companyId: string,
     parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
+        | undefined;
       startDate?: string | undefined;
       endDate?: string | undefined;
       page?: number | undefined;
       per?: number | undefined;
-      xGustoAPIVersion?:
-        | GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
-        | undefined;
     },
   ],
   data: ContractorPaymentGroupsGetListQueryData,
@@ -143,13 +143,13 @@ export function invalidateContractorPaymentGroupsGetList(
     [
       companyId: string,
       parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
+          | undefined;
         startDate?: string | undefined;
         endDate?: string | undefined;
         page?: number | undefined;
         per?: number | undefined;
-        xGustoAPIVersion?:
-          | GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
-          | undefined;
       },
     ]
   >,

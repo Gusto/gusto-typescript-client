@@ -48,7 +48,7 @@ export type PayrollBenefits = {
   payPeriod?: BenefitSummaryPayPeriod | undefined;
 };
 
-export type BenefitSummaryEmployees = {
+export type Employees = {
   /**
    * The UUID of the employee
    */
@@ -101,7 +101,7 @@ export type BenefitSummary = {
    * The aggregate of company contribution for all employees given the period of time and the specific company benefit.
    */
   companyBenefitContribution?: string | undefined;
-  employees?: Array<BenefitSummaryEmployees> | undefined;
+  employees?: Array<Employees> | undefined;
 };
 
 /** @internal */
@@ -167,8 +167,8 @@ export function payrollBenefitsFromJSON(
 }
 
 /** @internal */
-export const BenefitSummaryEmployees$inboundSchema: z.ZodType<
-  BenefitSummaryEmployees,
+export const Employees$inboundSchema: z.ZodType<
+  Employees,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -193,13 +193,13 @@ export const BenefitSummaryEmployees$inboundSchema: z.ZodType<
   });
 });
 
-export function benefitSummaryEmployeesFromJSON(
+export function employeesFromJSON(
   jsonString: string,
-): SafeParseResult<BenefitSummaryEmployees, SDKValidationError> {
+): SafeParseResult<Employees, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => BenefitSummaryEmployees$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'BenefitSummaryEmployees' from JSON`,
+    (x) => Employees$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Employees' from JSON`,
   );
 }
 
@@ -214,8 +214,7 @@ export const BenefitSummary$inboundSchema: z.ZodType<
   description: z.string().optional(),
   company_benefit_deduction: z.string().optional(),
   company_benefit_contribution: z.string().optional(),
-  employees: z.array(z.lazy(() => BenefitSummaryEmployees$inboundSchema))
-    .optional(),
+  employees: z.array(z.lazy(() => Employees$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "start_date": "startDate",

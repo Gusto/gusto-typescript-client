@@ -19,7 +19,7 @@ export type WorkAddress = {
 /**
  * Residential address on file for tax withholding and compliance mail.
  */
-export type HistoricalEmployeeBodyHomeAddress = {
+export type HomeAddress = {
   /**
    * Street address line 1.
    */
@@ -117,7 +117,7 @@ export type HistoricalEmployeeBody = {
   /**
    * Residential address on file for tax withholding and compliance mail.
    */
-  homeAddress: HistoricalEmployeeBodyHomeAddress;
+  homeAddress: HomeAddress;
   /**
    * End of the historical employment period.
    */
@@ -159,7 +159,7 @@ export function workAddressToJSON(workAddress: WorkAddress): string {
 }
 
 /** @internal */
-export type HistoricalEmployeeBodyHomeAddress$Outbound = {
+export type HomeAddress$Outbound = {
   street_1: string;
   street_2?: string | null | undefined;
   city: string;
@@ -168,10 +168,10 @@ export type HistoricalEmployeeBodyHomeAddress$Outbound = {
 };
 
 /** @internal */
-export const HistoricalEmployeeBodyHomeAddress$outboundSchema: z.ZodType<
-  HistoricalEmployeeBodyHomeAddress$Outbound,
+export const HomeAddress$outboundSchema: z.ZodType<
+  HomeAddress$Outbound,
   z.ZodTypeDef,
-  HistoricalEmployeeBodyHomeAddress
+  HomeAddress
 > = z.object({
   street1: z.string(),
   street2: z.nullable(z.string()).optional(),
@@ -185,14 +185,8 @@ export const HistoricalEmployeeBodyHomeAddress$outboundSchema: z.ZodType<
   });
 });
 
-export function historicalEmployeeBodyHomeAddressToJSON(
-  historicalEmployeeBodyHomeAddress: HistoricalEmployeeBodyHomeAddress,
-): string {
-  return JSON.stringify(
-    HistoricalEmployeeBodyHomeAddress$outboundSchema.parse(
-      historicalEmployeeBodyHomeAddress,
-    ),
-  );
+export function homeAddressToJSON(homeAddress: HomeAddress): string {
+  return JSON.stringify(HomeAddress$outboundSchema.parse(homeAddress));
 }
 
 /** @internal */
@@ -287,7 +281,7 @@ export type HistoricalEmployeeBody$Outbound = {
   date_of_birth: string;
   ssn: string;
   work_address: WorkAddress$Outbound;
-  home_address: HistoricalEmployeeBodyHomeAddress$Outbound;
+  home_address: HomeAddress$Outbound;
   termination: HistoricalEmployeeBodyTermination$Outbound;
   email?: string | undefined;
   job: HistoricalEmployeeBodyJob$Outbound;
@@ -307,7 +301,7 @@ export const HistoricalEmployeeBody$outboundSchema: z.ZodType<
   dateOfBirth: z.instanceof(RFCDate).transform(v => v.toString()),
   ssn: z.string(),
   workAddress: z.lazy(() => WorkAddress$outboundSchema),
-  homeAddress: z.lazy(() => HistoricalEmployeeBodyHomeAddress$outboundSchema),
+  homeAddress: z.lazy(() => HomeAddress$outboundSchema),
   termination: z.lazy(() => HistoricalEmployeeBodyTermination$outboundSchema),
   email: z.string().optional(),
   job: z.lazy(() => HistoricalEmployeeBodyJob$outboundSchema),

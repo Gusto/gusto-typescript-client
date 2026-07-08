@@ -42,8 +42,10 @@ import { Introspection } from "./introspection.js";
 import { Invoices } from "./invoices.js";
 import { JobsAndCompensations } from "./jobsandcompensations.js";
 import { Locations } from "./locations.js";
+import { MemberPortalInvitations } from "./memberportalinvitations.js";
 import { Notifications } from "./notifications.js";
 import { PaymentConfigs } from "./paymentconfigs.js";
+import { PayrollCancellations } from "./payrollcancellations.js";
 import { PayrollDigests } from "./payrolldigests.js";
 import { Payrolls } from "./payrolls.js";
 import { PaySchedules } from "./payschedules.js";
@@ -60,9 +62,9 @@ import { Webhooks } from "./webhooks.js";
 import { WireInRequests } from "./wireinrequests.js";
 
 export class GustoEmbedded extends ClientSDK {
-  private _introspection?: Introspection;
-  get introspection(): Introspection {
-    return (this._introspection ??= new Introspection(this._options));
+  private _achTransactions?: AchTransactions;
+  get achTransactions(): AchTransactions {
+    return (this._achTransactions ??= new AchTransactions(this._options));
   }
 
   private _companies?: Companies;
@@ -70,9 +72,14 @@ export class GustoEmbedded extends ClientSDK {
     return (this._companies ??= new Companies(this._options));
   }
 
-  private _invoices?: Invoices;
-  get invoices(): Invoices {
-    return (this._invoices ??= new Invoices(this._options));
+  private _companyBenefits?: CompanyBenefits;
+  get companyBenefits(): CompanyBenefits {
+    return (this._companyBenefits ??= new CompanyBenefits(this._options));
+  }
+
+  private _reports?: Reports;
+  get reports(): Reports {
+    return (this._reports ??= new Reports(this._options));
   }
 
   private _companyAttachments?: CompanyAttachments;
@@ -85,9 +92,14 @@ export class GustoEmbedded extends ClientSDK {
     return (this._companyAttachment ??= new CompanyAttachment(this._options));
   }
 
-  private _federalTaxDetails?: FederalTaxDetails;
-  get federalTaxDetails(): FederalTaxDetails {
-    return (this._federalTaxDetails ??= new FederalTaxDetails(this._options));
+  private _bankAccounts?: BankAccounts;
+  get bankAccounts(): BankAccounts {
+    return (this._bankAccounts ??= new BankAccounts(this._options));
+  }
+
+  private _companyForms?: CompanyForms;
+  get companyForms(): CompanyForms {
+    return (this._companyForms ??= new CompanyForms(this._options));
   }
 
   private _industrySelection?: IndustrySelection;
@@ -95,29 +107,9 @@ export class GustoEmbedded extends ClientSDK {
     return (this._industrySelection ??= new IndustrySelection(this._options));
   }
 
-  private _signatories?: Signatories;
-  get signatories(): Signatories {
-    return (this._signatories ??= new Signatories(this._options));
-  }
-
-  private _flows?: Flows;
-  get flows(): Flows {
-    return (this._flows ??= new Flows(this._options));
-  }
-
-  private _locations?: Locations;
-  get locations(): Locations {
-    return (this._locations ??= new Locations(this._options));
-  }
-
-  private _bankAccounts?: BankAccounts;
-  get bankAccounts(): BankAccounts {
-    return (this._bankAccounts ??= new BankAccounts(this._options));
-  }
-
-  private _externalPayrolls?: ExternalPayrolls;
-  get externalPayrolls(): ExternalPayrolls {
-    return (this._externalPayrolls ??= new ExternalPayrolls(this._options));
+  private _notifications?: Notifications;
+  get notifications(): Notifications {
+    return (this._notifications ??= new Notifications(this._options));
   }
 
   private _paymentConfigs?: PaymentConfigs;
@@ -125,57 +117,14 @@ export class GustoEmbedded extends ClientSDK {
     return (this._paymentConfigs ??= new PaymentConfigs(this._options));
   }
 
-  private _paySchedules?: PaySchedules;
-  get paySchedules(): PaySchedules {
-    return (this._paySchedules ??= new PaySchedules(this._options));
+  private _taxRequirements?: TaxRequirements;
+  get taxRequirements(): TaxRequirements {
+    return (this._taxRequirements ??= new TaxRequirements(this._options));
   }
 
-  private _employees?: Employees;
-  get employees(): Employees {
-    return (this._employees ??= new Employees(this._options));
-  }
-
-  private _historicalEmployees?: HistoricalEmployees;
-  get historicalEmployees(): HistoricalEmployees {
-    return (this._historicalEmployees ??= new HistoricalEmployees(
-      this._options,
-    ));
-  }
-
-  private _departments?: Departments;
-  get departments(): Departments {
-    return (this._departments ??= new Departments(this._options));
-  }
-
-  private _employeeEmployments?: EmployeeEmployments;
-  get employeeEmployments(): EmployeeEmployments {
-    return (this._employeeEmployments ??= new EmployeeEmployments(
-      this._options,
-    ));
-  }
-
-  private _employeeAddresses?: EmployeeAddresses;
-  get employeeAddresses(): EmployeeAddresses {
-    return (this._employeeAddresses ??= new EmployeeAddresses(this._options));
-  }
-
-  private _employeeTaxSetup?: EmployeeTaxSetup;
-  get employeeTaxSetup(): EmployeeTaxSetup {
-    return (this._employeeTaxSetup ??= new EmployeeTaxSetup(this._options));
-  }
-
-  private _employeePaymentMethods?: EmployeePaymentMethods;
-  get employeePaymentMethods(): EmployeePaymentMethods {
-    return (this._employeePaymentMethods ??= new EmployeePaymentMethods(
-      this._options,
-    ));
-  }
-
-  private _employeePaymentMethod?: EmployeePaymentMethod;
-  get employeePaymentMethod(): EmployeePaymentMethod {
-    return (this._employeePaymentMethod ??= new EmployeePaymentMethod(
-      this._options,
-    ));
+  private _federalTaxDetails?: FederalTaxDetails;
+  get federalTaxDetails(): FederalTaxDetails {
+    return (this._federalTaxDetails ??= new FederalTaxDetails(this._options));
   }
 
   private _jobsAndCompensations?: JobsAndCompensations;
@@ -183,16 +132,6 @@ export class GustoEmbedded extends ClientSDK {
     return (this._jobsAndCompensations ??= new JobsAndCompensations(
       this._options,
     ));
-  }
-
-  private _earningTypes?: EarningTypes;
-  get earningTypes(): EarningTypes {
-    return (this._earningTypes ??= new EarningTypes(this._options));
-  }
-
-  private _contractors?: Contractors;
-  get contractors(): Contractors {
-    return (this._contractors ??= new Contractors(this._options));
   }
 
   private _contractorPaymentMethod?: ContractorPaymentMethod;
@@ -209,41 +148,14 @@ export class GustoEmbedded extends ClientSDK {
     ));
   }
 
-  private _webhooks?: Webhooks;
-  get webhooks(): Webhooks {
-    return (this._webhooks ??= new Webhooks(this._options));
-  }
-
   private _contractorForms?: ContractorForms;
   get contractorForms(): ContractorForms {
     return (this._contractorForms ??= new ContractorForms(this._options));
   }
 
-  private _contractorDocuments?: ContractorDocuments;
-  get contractorDocuments(): ContractorDocuments {
-    return (this._contractorDocuments ??= new ContractorDocuments(
-      this._options,
-    ));
-  }
-
-  private _employeeForms?: EmployeeForms;
-  get employeeForms(): EmployeeForms {
-    return (this._employeeForms ??= new EmployeeForms(this._options));
-  }
-
-  private _payrolls?: Payrolls;
-  get payrolls(): Payrolls {
-    return (this._payrolls ??= new Payrolls(this._options));
-  }
-
-  private _timeOffPolicies?: TimeOffPolicies;
-  get timeOffPolicies(): TimeOffPolicies {
-    return (this._timeOffPolicies ??= new TimeOffPolicies(this._options));
-  }
-
-  private _contractorPayments?: ContractorPayments;
-  get contractorPayments(): ContractorPayments {
-    return (this._contractorPayments ??= new ContractorPayments(this._options));
+  private _contractors?: Contractors;
+  get contractors(): Contractors {
+    return (this._contractors ??= new Contractors(this._options));
   }
 
   private _contractorPaymentGroups?: ContractorPaymentGroups;
@@ -253,24 +165,40 @@ export class GustoEmbedded extends ClientSDK {
     ));
   }
 
-  private _companyForms?: CompanyForms;
-  get companyForms(): CompanyForms {
-    return (this._companyForms ??= new CompanyForms(this._options));
+  private _contractorPayments?: ContractorPayments;
+  get contractorPayments(): ContractorPayments {
+    return (this._contractorPayments ??= new ContractorPayments(this._options));
   }
 
-  private _generatedDocuments?: GeneratedDocuments;
-  get generatedDocuments(): GeneratedDocuments {
-    return (this._generatedDocuments ??= new GeneratedDocuments(this._options));
+  private _departments?: Departments;
+  get departments(): Departments {
+    return (this._departments ??= new Departments(this._options));
   }
 
-  private _reports?: Reports;
-  get reports(): Reports {
-    return (this._reports ??= new Reports(this._options));
+  private _contractorDocuments?: ContractorDocuments;
+  get contractorDocuments(): ContractorDocuments {
+    return (this._contractorDocuments ??= new ContractorDocuments(
+      this._options,
+    ));
   }
 
-  private _companyBenefits?: CompanyBenefits;
-  get companyBenefits(): CompanyBenefits {
-    return (this._companyBenefits ??= new CompanyBenefits(this._options));
+  private _earningTypes?: EarningTypes;
+  get earningTypes(): EarningTypes {
+    return (this._earningTypes ??= new EarningTypes(this._options));
+  }
+
+  private _employeePaymentMethods?: EmployeePaymentMethods;
+  get employeePaymentMethods(): EmployeePaymentMethods {
+    return (this._employeePaymentMethods ??= new EmployeePaymentMethods(
+      this._options,
+    ));
+  }
+
+  private _employeePaymentMethod?: EmployeePaymentMethod;
+  get employeePaymentMethod(): EmployeePaymentMethod {
+    return (this._employeePaymentMethod ??= new EmployeePaymentMethod(
+      this._options,
+    ));
   }
 
   private _employeeBenefits?: EmployeeBenefits;
@@ -278,19 +206,63 @@ export class GustoEmbedded extends ClientSDK {
     return (this._employeeBenefits ??= new EmployeeBenefits(this._options));
   }
 
+  private _employees?: Employees;
+  get employees(): Employees {
+    return (this._employees ??= new Employees(this._options));
+  }
+
+  private _employeeTaxSetup?: EmployeeTaxSetup;
+  get employeeTaxSetup(): EmployeeTaxSetup {
+    return (this._employeeTaxSetup ??= new EmployeeTaxSetup(this._options));
+  }
+
+  private _employeeForms?: EmployeeForms;
+  get employeeForms(): EmployeeForms {
+    return (this._employeeForms ??= new EmployeeForms(this._options));
+  }
+
+  private _employeeEmployments?: EmployeeEmployments;
+  get employeeEmployments(): EmployeeEmployments {
+    return (this._employeeEmployments ??= new EmployeeEmployments(
+      this._options,
+    ));
+  }
+
+  private _events?: Events;
+  get events(): Events {
+    return (this._events ??= new Events(this._options));
+  }
+
+  private _externalPayrolls?: ExternalPayrolls;
+  get externalPayrolls(): ExternalPayrolls {
+    return (this._externalPayrolls ??= new ExternalPayrolls(this._options));
+  }
+
+  private _flows?: Flows;
+  get flows(): Flows {
+    return (this._flows ??= new Flows(this._options));
+  }
+
   private _garnishments?: Garnishments;
   get garnishments(): Garnishments {
     return (this._garnishments ??= new Garnishments(this._options));
   }
 
-  private _i9Verification?: I9Verification;
-  get i9Verification(): I9Verification {
-    return (this._i9Verification ??= new I9Verification(this._options));
+  private _payrolls?: Payrolls;
+  get payrolls(): Payrolls {
+    return (this._payrolls ??= new Payrolls(this._options));
   }
 
-  private _taxRequirements?: TaxRequirements;
-  get taxRequirements(): TaxRequirements {
-    return (this._taxRequirements ??= new TaxRequirements(this._options));
+  private _generatedDocuments?: GeneratedDocuments;
+  get generatedDocuments(): GeneratedDocuments {
+    return (this._generatedDocuments ??= new GeneratedDocuments(this._options));
+  }
+
+  private _historicalEmployees?: HistoricalEmployees;
+  get historicalEmployees(): HistoricalEmployees {
+    return (this._historicalEmployees ??= new HistoricalEmployees(
+      this._options,
+    ));
   }
 
   private _holidayPayPolicies?: HolidayPayPolicies;
@@ -298,14 +270,14 @@ export class GustoEmbedded extends ClientSDK {
     return (this._holidayPayPolicies ??= new HolidayPayPolicies(this._options));
   }
 
-  private _notifications?: Notifications;
-  get notifications(): Notifications {
-    return (this._notifications ??= new Notifications(this._options));
+  private _employeeAddresses?: EmployeeAddresses;
+  get employeeAddresses(): EmployeeAddresses {
+    return (this._employeeAddresses ??= new EmployeeAddresses(this._options));
   }
 
-  private _events?: Events;
-  get events(): Events {
-    return (this._events ??= new Events(this._options));
+  private _i9Verification?: I9Verification;
+  get i9Verification(): I9Verification {
+    return (this._i9Verification ??= new I9Verification(this._options));
   }
 
   private _informationRequests?: InformationRequests;
@@ -315,29 +287,43 @@ export class GustoEmbedded extends ClientSDK {
     ));
   }
 
-  private _recoveryCases?: RecoveryCases;
-  get recoveryCases(): RecoveryCases {
-    return (this._recoveryCases ??= new RecoveryCases(this._options));
+  private _invoices?: Invoices;
+  get invoices(): Invoices {
+    return (this._invoices ??= new Invoices(this._options));
   }
 
-  private _achTransactions?: AchTransactions;
-  get achTransactions(): AchTransactions {
-    return (this._achTransactions ??= new AchTransactions(this._options));
+  private _locations?: Locations;
+  get locations(): Locations {
+    return (this._locations ??= new Locations(this._options));
   }
 
-  private _wireInRequests?: WireInRequests;
-  get wireInRequests(): WireInRequests {
-    return (this._wireInRequests ??= new WireInRequests(this._options));
+  private _memberPortalInvitations?: MemberPortalInvitations;
+  get memberPortalInvitations(): MemberPortalInvitations {
+    return (this._memberPortalInvitations ??= new MemberPortalInvitations(
+      this._options,
+    ));
   }
 
-  private _salaryEstimates?: SalaryEstimates;
-  get salaryEstimates(): SalaryEstimates {
-    return (this._salaryEstimates ??= new SalaryEstimates(this._options));
+  private _paySchedules?: PaySchedules;
+  get paySchedules(): PaySchedules {
+    return (this._paySchedules ??= new PaySchedules(this._options));
   }
 
-  private _reimbursements?: Reimbursements;
-  get reimbursements(): Reimbursements {
-    return (this._reimbursements ??= new Reimbursements(this._options));
+  private _payrollCancellations?: PayrollCancellations;
+  get payrollCancellations(): PayrollCancellations {
+    return (this._payrollCancellations ??= new PayrollCancellations(
+      this._options,
+    ));
+  }
+
+  private _payrollDigests?: PayrollDigests;
+  get payrollDigests(): PayrollDigests {
+    return (this._payrollDigests ??= new PayrollDigests(this._options));
+  }
+
+  private _timeOffPolicies?: TimeOffPolicies;
+  get timeOffPolicies(): TimeOffPolicies {
+    return (this._timeOffPolicies ??= new TimeOffPolicies(this._options));
   }
 
   private _peopleBatches?: PeopleBatches;
@@ -345,13 +331,43 @@ export class GustoEmbedded extends ClientSDK {
     return (this._peopleBatches ??= new PeopleBatches(this._options));
   }
 
+  private _recoveryCases?: RecoveryCases;
+  get recoveryCases(): RecoveryCases {
+    return (this._recoveryCases ??= new RecoveryCases(this._options));
+  }
+
+  private _reimbursements?: Reimbursements;
+  get reimbursements(): Reimbursements {
+    return (this._reimbursements ??= new Reimbursements(this._options));
+  }
+
+  private _salaryEstimates?: SalaryEstimates;
+  get salaryEstimates(): SalaryEstimates {
+    return (this._salaryEstimates ??= new SalaryEstimates(this._options));
+  }
+
+  private _signatories?: Signatories;
+  get signatories(): Signatories {
+    return (this._signatories ??= new Signatories(this._options));
+  }
+
   private _timeOffRequests?: TimeOffRequests;
   get timeOffRequests(): TimeOffRequests {
     return (this._timeOffRequests ??= new TimeOffRequests(this._options));
   }
 
-  private _payrollDigests?: PayrollDigests;
-  get payrollDigests(): PayrollDigests {
-    return (this._payrollDigests ??= new PayrollDigests(this._options));
+  private _introspection?: Introspection;
+  get introspection(): Introspection {
+    return (this._introspection ??= new Introspection(this._options));
+  }
+
+  private _webhooks?: Webhooks;
+  get webhooks(): Webhooks {
+    return (this._webhooks ??= new Webhooks(this._options));
+  }
+
+  private _wireInRequests?: WireInRequests;
+  get wireInRequests(): WireInRequests {
+    return (this._wireInRequests ??= new WireInRequests(this._options));
   }
 }

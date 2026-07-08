@@ -11,7 +11,7 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import { Payroll, Payroll$inboundSchema } from "../components/payroll.js";
+import { Payroll, Payroll$inboundSchema } from "../components/payrollshow.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -65,26 +65,26 @@ export type DateFilterBy = ClosedEnum<typeof DateFilterBy>;
 /**
  * A string indicating whether to sort resulting events in ascending (asc) or descending (desc) chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
  */
-export const SortOrder = {
+export const QueryParamSortOrder = {
   Asc: "asc",
   Desc: "desc",
 } as const;
 /**
  * A string indicating whether to sort resulting events in ascending (asc) or descending (desc) chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
  */
-export type SortOrder = ClosedEnum<typeof SortOrder>;
+export type QueryParamSortOrder = ClosedEnum<typeof QueryParamSortOrder>;
 
 export type GetV1CompaniesCompanyIdPayrollsRequest = {
-  /**
-   * The UUID of the company
-   */
-  companyId: string;
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the company
+   */
+  companyId: string;
   /**
    * Whether to include processed and/or unprocessed payrolls in the response, defaults to processed, for multiple attributes comma separate the values, i.e. `?processing_statuses=processed,unprocessed`
    */
@@ -128,7 +128,7 @@ export type GetV1CompaniesCompanyIdPayrollsRequest = {
   /**
    * A string indicating whether to sort resulting events in ascending (asc) or descending (desc) chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
    */
-  sortOrder?: SortOrder | undefined;
+  sortOrder?: QueryParamSortOrder | undefined;
 };
 
 export type GetV1CompaniesCompanyIdPayrollsResponse = {
@@ -165,13 +165,14 @@ export const DateFilterBy$outboundSchema: z.ZodNativeEnum<typeof DateFilterBy> =
   z.nativeEnum(DateFilterBy);
 
 /** @internal */
-export const SortOrder$outboundSchema: z.ZodNativeEnum<typeof SortOrder> = z
-  .nativeEnum(SortOrder);
+export const QueryParamSortOrder$outboundSchema: z.ZodNativeEnum<
+  typeof QueryParamSortOrder
+> = z.nativeEnum(QueryParamSortOrder);
 
 /** @internal */
 export type GetV1CompaniesCompanyIdPayrollsRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
+  company_id: string;
   processing_statuses?: Array<string> | undefined;
   payroll_types?: Array<string> | undefined;
   processed?: boolean | undefined;
@@ -191,10 +192,10 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1CompaniesCompanyIdPayrollsRequest
 > = z.object({
-  companyId: z.string(),
   xGustoAPIVersion:
     GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema
       .default("2025-06-15"),
+  companyId: z.string(),
   processingStatuses: z.array(ProcessingStatuses$outboundSchema).optional(),
   payrollTypes: z.array(QueryParamPayrollTypes$outboundSchema).optional(),
   processed: z.boolean().optional(),
@@ -207,11 +208,11 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$outboundSchema: z.ZodType<
   dateFilterBy: DateFilterBy$outboundSchema.optional(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
-  sortOrder: SortOrder$outboundSchema.optional(),
+  sortOrder: QueryParamSortOrder$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    companyId: "company_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    companyId: "company_id",
     processingStatuses: "processing_statuses",
     payrollTypes: "payroll_types",
     includeOffCycle: "include_off_cycle",

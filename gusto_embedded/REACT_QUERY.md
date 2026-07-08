@@ -50,10 +50,12 @@ from TanStack Query.
 [use-query]: https://tanstack.com/query/v5/docs/framework/react/reference/useQuery
 
 ```tsx
-import { useIntrospectionGetInfo } from "@gusto/embedded-api/react-query/introspectionGetInfo.js";
+import { useAchTransactionsGetAll } from "@gusto/embedded-api/react-query/achTransactionsGetAll.js";
 
 export function Example() {
-  const { data, error, status } = useIntrospectionGetInfo({});
+  const { data, error, status } = useAchTransactionsGetAll({
+    companyUuid: "<id>",
+  });
 
   // Render the UI here...
 }
@@ -66,12 +68,14 @@ more options provided by the query hooks to control these behaviors.
 
 ```tsx
 import { useState } from "react";
-import { useIntrospectionGetInfo } from "@gusto/embedded-api/react-query/introspectionGetInfo.js";
+import { useAchTransactionsGetAll } from "@gusto/embedded-api/react-query/achTransactionsGetAll.js";
 
 export function ExampleWithOptions() {
   const [enabled, setEnabled] = useState(true);
-  const { data, error, status } = useIntrospectionGetInfo(
-    {},
+  const { data, error, status } = useAchTransactionsGetAll(
+    {
+      companyUuid: "<id>",
+    },
     {
       // TanStack Query options:
       enabled,
@@ -108,10 +112,10 @@ Query.
 [use-mutation]: https://tanstack.com/query/v5/docs/framework/react/reference/useMutation
 
 ```tsx
-import { useIntrospectionOauthAccessTokenMutation } from "@gusto/embedded-api/react-query/introspectionOauthAccessToken.js";
+import { useCompaniesCreateAdminMutation } from "@gusto/embedded-api/react-query/companiesCreateAdmin.js";
 
 export function Example() {
-  const { mutate, status } = useIntrospectionOauthAccessTokenMutation();
+  const { mutate, status } = useCompaniesCreateAdminMutation();
 
   return (
     <form
@@ -121,10 +125,11 @@ export function Example() {
         // Read form data here...
 
         mutate({
-          requestBody: {
-            clientId: "qr6L_9FRkbMVL_GdwvrMW6Ef8tcU6NUxjWpOfqXqOG8",
-            clientSecret: "3aQSHRB3596nZhm6NdNBELZ1u9xbZmvCrKpBhbZYq6w",
-            grantType: "system_access",
+          companyId: "<id>",
+          adminCreateRequest: {
+            firstName: "John",
+            lastName: "Smith",
+            email: "jsmith99@gmail.com",
           },
         });
       }}
@@ -142,10 +147,10 @@ Since the underlying SDK handles request timeouts and retries, there are a few
 more options provided by the mutation hooks to control these behaviors.
 
 ```tsx
-import { useIntrospectionOauthAccessTokenMutation } from "@gusto/embedded-api/react-query/introspectionOauthAccessToken.js";
+import { useCompaniesCreateAdminMutation } from "@gusto/embedded-api/react-query/companiesCreateAdmin.js";
 
 export function ExampleWithOptions() {
-  const { mutate, status } = useIntrospectionOauthAccessTokenMutation({
+  const { mutate, status } = useCompaniesCreateAdminMutation({
     // TanStack Query options:
     networkMode: "online",
     gcTime: 5 * 60 * 1000, // 5 minutes
@@ -177,7 +182,7 @@ query hook there are two functions that help invalidate cached data:
 
 ```tsx
 import { useQueryClient } from "@tanstack/react-query";
-import { invalidateIntrospectionGetInfo, invalidateAllIntrospectionGetInfo } from "@gusto/embedded-api/react-query/introspectionGetInfo.js";
+import { invalidateAchTransactionsGetAll, invalidateAllAchTransactionsGetAll } from "@gusto/embedded-api/react-query/achTransactionsGetAll.js";
 // Replace this with a real mutation
 import { useExampleMutation } from "@gusto/embedded-api/react-query/example.js";
 
@@ -195,9 +200,9 @@ export function Example() {
         mutate(formData, {
           onSuccess: () => {
             // Invalidate a single cache entry:
-            invalidateIntrospectionGetInfo(queryClient, /* ... arguments ... */);
+            invalidateAchTransactionsGetAll(queryClient, /* ... arguments ... */);
             // OR, invalidate all cache entries for the query targets:
-            invalidateAllIntrospectionGetInfo(queryClient);
+            invalidateAllAchTransactionsGetAll(queryClient);
           },
         });
       }}
@@ -225,7 +230,7 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import { GustoEmbeddedCore } from "@gusto/embedded-api";
 import { GustoEmbeddedProvider } from "@gusto/embedded-api/react-query";
-import { useIntrospectionGetInfoSuspense } from "@gusto/embedded-api/react-query/introspectionGetInfo.js";
+import { useAchTransactionsGetAllSuspense } from "@gusto/embedded-api/react-query/achTransactionsGetAll.js";
 
 const queryClient = new QueryClient();
 const gustoEmbedded = new GustoEmbeddedCore({
@@ -260,7 +265,9 @@ export function App() {
 }
 
 function Example() {
-  const { data } = useIntrospectionGetInfoSuspense({});
+  const { data } = useAchTransactionsGetAllSuspense({
+    companyUuid: "<id>",
+  });
 
   // Render the UI here...
 }
@@ -280,7 +287,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { GustoEmbeddedCore } from "@gusto/embedded-api";
-import { prefetchIntrospectionGetInfo } from "@gusto/embedded-api/react-query/introspectionGetInfo.js";
+import { prefetchAchTransactionsGetAll } from "@gusto/embedded-api/react-query/achTransactionsGetAll.js";
 
 export default async function Page() {
   const queryClient = new QueryClient();
@@ -288,7 +295,9 @@ export default async function Page() {
     companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
   });
 
-  await prefetchIntrospectionGetInfo(queryClient, gustoEmbedded, {});
+  await prefetchAchTransactionsGetAll(queryClient, gustoEmbedded, {
+    companyUuid: "<id>",
+  });
 
   return (
     // HydrationBoundary is a Client Component, so hydration will happen there.

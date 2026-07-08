@@ -31,7 +31,7 @@ export type BenefitTypeRequirementsDefaultValue = {
 /**
  * An object representing the type and value of the company contribution.
  */
-export type BenefitTypeRequirementsContribution = {
+export type Contribution = {
   required?: boolean | undefined;
   editable?: boolean | undefined;
   defaultValue?: BenefitTypeRequirementsDefaultValue | null | undefined;
@@ -152,7 +152,7 @@ export type BenefitTypeRequirements = {
   /**
    * An object representing the type and value of the company contribution.
    */
-  contribution?: BenefitTypeRequirementsContribution | undefined;
+  contribution?: Contribution | undefined;
   /**
    * Whether the employee deduction amount should be treated as a percentage to be deducted from each payroll.
    */
@@ -250,8 +250,8 @@ export function benefitTypeRequirementsDefaultValueFromJSON(
 }
 
 /** @internal */
-export const BenefitTypeRequirementsContribution$inboundSchema: z.ZodType<
-  BenefitTypeRequirementsContribution,
+export const Contribution$inboundSchema: z.ZodType<
+  Contribution,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -267,14 +267,13 @@ export const BenefitTypeRequirementsContribution$inboundSchema: z.ZodType<
   });
 });
 
-export function benefitTypeRequirementsContributionFromJSON(
+export function contributionFromJSON(
   jsonString: string,
-): SafeParseResult<BenefitTypeRequirementsContribution, SDKValidationError> {
+): SafeParseResult<Contribution, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      BenefitTypeRequirementsContribution$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'BenefitTypeRequirementsContribution' from JSON`,
+    (x) => Contribution$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Contribution' from JSON`,
   );
 }
 
@@ -615,8 +614,7 @@ export const BenefitTypeRequirements$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   employee_deduction: z.lazy(() => EmployeeDeduction$inboundSchema).optional(),
-  contribution: z.lazy(() => BenefitTypeRequirementsContribution$inboundSchema)
-    .optional(),
+  contribution: z.lazy(() => Contribution$inboundSchema).optional(),
   deduct_as_percentage: z.lazy(() => DeductAsPercentage$inboundSchema)
     .optional(),
   catch_up: z.lazy(() => CatchUp$inboundSchema).optional(),

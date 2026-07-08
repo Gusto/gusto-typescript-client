@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The subtotals for the payroll.
  */
-export type Totals = {
+export type PayrollReceiptTotals = {
   /**
    * The total company debit for the payroll.
    */
@@ -102,7 +102,7 @@ export type PayrollReceiptEmployeeCompensations = {
 /**
  * The licensed payroll processor
  */
-export type Licensee = {
+export type PayrollReceiptLicensee = {
   /**
    * Always the fixed string "Gusto, Zenpayroll Inc."
    */
@@ -167,7 +167,7 @@ export type PayrollReceipt = {
   /**
    * The subtotals for the payroll.
    */
-  totals?: Totals | undefined;
+  totals?: PayrollReceiptTotals | undefined;
   /**
    * An array of totaled employer and employee taxes for the pay period.
    */
@@ -181,34 +181,37 @@ export type PayrollReceipt = {
   /**
    * The licensed payroll processor
    */
-  licensee?: Licensee | undefined;
+  licensee?: PayrollReceiptLicensee | undefined;
 };
 
 /** @internal */
-export const Totals$inboundSchema: z.ZodType<Totals, z.ZodTypeDef, unknown> = z
-  .object({
-    company_debit: z.string().optional(),
-    net_pay_debit: z.string().optional(),
-    child_support_debit: z.string().optional(),
-    reimbursement_debit: z.string().optional(),
-    tax_debit: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_debit": "companyDebit",
-      "net_pay_debit": "netPayDebit",
-      "child_support_debit": "childSupportDebit",
-      "reimbursement_debit": "reimbursementDebit",
-      "tax_debit": "taxDebit",
-    });
+export const PayrollReceiptTotals$inboundSchema: z.ZodType<
+  PayrollReceiptTotals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  company_debit: z.string().optional(),
+  net_pay_debit: z.string().optional(),
+  child_support_debit: z.string().optional(),
+  reimbursement_debit: z.string().optional(),
+  tax_debit: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "company_debit": "companyDebit",
+    "net_pay_debit": "netPayDebit",
+    "child_support_debit": "childSupportDebit",
+    "reimbursement_debit": "reimbursementDebit",
+    "tax_debit": "taxDebit",
   });
+});
 
-export function totalsFromJSON(
+export function payrollReceiptTotalsFromJSON(
   jsonString: string,
-): SafeParseResult<Totals, SDKValidationError> {
+): SafeParseResult<PayrollReceiptTotals, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Totals$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Totals' from JSON`,
+    (x) => PayrollReceiptTotals$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollReceiptTotals' from JSON`,
   );
 }
 
@@ -275,8 +278,8 @@ export function payrollReceiptEmployeeCompensationsFromJSON(
 }
 
 /** @internal */
-export const Licensee$inboundSchema: z.ZodType<
-  Licensee,
+export const PayrollReceiptLicensee$inboundSchema: z.ZodType<
+  PayrollReceiptLicensee,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -293,13 +296,13 @@ export const Licensee$inboundSchema: z.ZodType<
   });
 });
 
-export function licenseeFromJSON(
+export function payrollReceiptLicenseeFromJSON(
   jsonString: string,
-): SafeParseResult<Licensee, SDKValidationError> {
+): SafeParseResult<PayrollReceiptLicensee, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Licensee$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Licensee' from JSON`,
+    (x) => PayrollReceiptLicensee$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollReceiptLicensee' from JSON`,
   );
 }
 
@@ -319,12 +322,12 @@ export const PayrollReceipt$inboundSchema: z.ZodType<
   license_uri: z.string().optional(),
   right_to_refund: z.string().optional(),
   liability_of_licensee: z.string().optional(),
-  totals: z.lazy(() => Totals$inboundSchema).optional(),
+  totals: z.lazy(() => PayrollReceiptTotals$inboundSchema).optional(),
   taxes: z.array(z.lazy(() => Taxes$inboundSchema)).optional(),
   employee_compensations: z.array(
     z.lazy(() => PayrollReceiptEmployeeCompensations$inboundSchema),
   ).optional(),
-  licensee: z.lazy(() => Licensee$inboundSchema).optional(),
+  licensee: z.lazy(() => PayrollReceiptLicensee$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "payroll_uuid": "payrollUuid",

@@ -162,7 +162,7 @@ export function invalidateContractorPaymentsGetReceipt(
     ...filters,
     queryKey: [
       "@gusto/embedded-api",
-      "contractorPayments",
+      "Contractor Payments",
       "getReceipt",
       ...queryKeyBase,
     ],
@@ -175,6 +175,6 @@ export function invalidateAllContractorPaymentsGetReceipt(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api", "contractorPayments", "getReceipt"],
+    queryKey: ["@gusto/embedded-api", "Contractor Payments", "getReceipt"],
   });
 }

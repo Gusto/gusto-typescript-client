@@ -3,14 +3,20 @@
 ## Example Usage
 
 ```typescript
-import { Employees } from "@gusto/embedded-api/models/components/payscheduleassignmentbody.js";
+import { Employees } from "@gusto/embedded-api/models/components/benefitsummary.js";
 
 let value: Employees = {};
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `employeeUuid`     | *string*           | :heavy_minus_sign: | Employee UUID      |
-| `payScheduleUuid`  | *string*           | :heavy_minus_sign: | Pay schedule UUID  |
+| Field                                                                                                        | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `uuid`                                                                                                       | *string*                                                                                                     | :heavy_minus_sign:                                                                                           | The UUID of the employee                                                                                     |
+| `companyBenefitDeduction`                                                                                    | *string*                                                                                                     | :heavy_minus_sign:                                                                                           | The sum of employee deduction for this employee given the period of time and the specific company benefit.   |
+| `companyBenefitContribution`                                                                                 | *string*                                                                                                     | :heavy_minus_sign:                                                                                           | The sum of company contribution for this employee given the period of time and the specific company benefit. |
+| `benefitDeduction`                                                                                           | *string*                                                                                                     | :heavy_minus_sign:                                                                                           | The sum of employee benefit deduction for this employee given the period of time and the benefit type.       |
+| `benefitContribution`                                                                                        | *string*                                                                                                     | :heavy_minus_sign:                                                                                           | The sum of company contribution for this employee given the period of time and the benefit type.             |
+| `grossPay`                                                                                                   | *string*                                                                                                     | :heavy_minus_sign:                                                                                           | Gross pay for this employee given the period of time.                                                        |
+| `imputedPay`                                                                                                 | *string*                                                                                                     | :heavy_minus_sign:                                                                                           | Total imputed pay for this employee given the period of time (not scoped to a benefit type).                 |
+| `payrollBenefits`                                                                                            | [components.PayrollBenefits](../../models/components/payrollbenefits.md)[]                                   | :heavy_minus_sign:                                                                                           | N/A                                                                                                          |

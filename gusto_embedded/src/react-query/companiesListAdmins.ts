@@ -22,8 +22,8 @@ import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdAdminsRequest,
+  HeaderXGustoAPIVersion,
 } from "../models/operations/getv1companiescompanyidadmins.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -115,9 +115,7 @@ export function setCompaniesListAdminsData(
   queryKeyBase: [
     companyId: string,
     parameters: {
-      xGustoAPIVersion?:
-        | GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion
-        | undefined;
+      xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined;
       page?: number | undefined;
       per?: number | undefined;
     },
@@ -135,9 +133,7 @@ export function invalidateCompaniesListAdmins(
     [
       companyId: string,
       parameters: {
-        xGustoAPIVersion?:
-          | GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion
-          | undefined;
+        xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined;
         page?: number | undefined;
         per?: number | undefined;
       },

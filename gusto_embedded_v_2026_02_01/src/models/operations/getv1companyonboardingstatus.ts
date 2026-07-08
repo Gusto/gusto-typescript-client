@@ -32,6 +32,12 @@ export type GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion = ClosedEnum<
 
 export type GetV1CompanyOnboardingStatusRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the company
    */
   companyUuid: string;
@@ -39,12 +45,6 @@ export type GetV1CompanyOnboardingStatusRequest = {
    * Comma-delimited string of additional onboarding steps to include. Currently only supports the value "external_payroll".
    */
   additionalSteps?: string | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?:
-    | GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion
-    | undefined;
 };
 
 export type GetV1CompanyOnboardingStatusResponse = {
@@ -62,9 +62,9 @@ export const GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion$outboundSchema:
 
 /** @internal */
 export type GetV1CompanyOnboardingStatusRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_uuid: string;
   additional_steps?: string | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -73,17 +73,17 @@ export const GetV1CompanyOnboardingStatusRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1CompanyOnboardingStatusRequest
 > = z.object({
-  companyUuid: z.string(),
-  additionalSteps: z.string().optional(),
   xGustoAPIVersion:
     GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion$outboundSchema.default(
       "2026-02-01",
     ),
+  companyUuid: z.string(),
+  additionalSteps: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    xGustoAPIVersion: "X-Gusto-API-Version",
     companyUuid: "company_uuid",
     additionalSteps: "additional_steps",
-    xGustoAPIVersion: "X-Gusto-API-Version",
   });
 });
 

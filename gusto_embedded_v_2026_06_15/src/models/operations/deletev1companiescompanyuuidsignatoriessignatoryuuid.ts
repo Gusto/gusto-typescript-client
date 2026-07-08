@@ -30,6 +30,12 @@ export type DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIV
 
 export type DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the company
    */
   companyUuid: string;
@@ -37,12 +43,6 @@ export type DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest = {
    * The UUID of the signatory
    */
   signatoryUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?:
-    | DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion
-    | undefined;
 };
 
 export type DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse = {
@@ -60,9 +60,9 @@ export const DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPI
 /** @internal */
 export type DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$Outbound =
   {
+    "X-Gusto-API-Version": string;
     company_uuid: string;
     signatory_uuid: string;
-    "X-Gusto-API-Version": string;
   };
 
 /** @internal */
@@ -72,16 +72,16 @@ export const DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$outboun
     z.ZodTypeDef,
     DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest
   > = z.object({
-    companyUuid: z.string(),
-    signatoryUuid: z.string(),
     xGustoAPIVersion:
       DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion$outboundSchema
         .default("2026-06-15"),
+    companyUuid: z.string(),
+    signatoryUuid: z.string(),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       companyUuid: "company_uuid",
       signatoryUuid: "signatory_uuid",
-      xGustoAPIVersion: "X-Gusto-API-Version",
     });
   });
 

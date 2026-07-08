@@ -39,15 +39,15 @@ export type PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPI
 
 export type PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest = {
   /**
-   * The UUID of the company
-   */
-  companyUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the company
+   */
+  companyUuid: string;
   partnerManagedCompanyRetrieveTermsOfServiceRequest:
     PartnerManagedCompanyRetrieveTermsOfServiceRequest;
 };
@@ -73,8 +73,8 @@ export const PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAP
 /** @internal */
 export type PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest$Outbound =
   {
-    company_uuid: string;
     "X-Gusto-API-Version": string;
+    company_uuid: string;
     "Partner-Managed-Company-Retrieve-Terms-Of-Service-Request":
       PartnerManagedCompanyRetrieveTermsOfServiceRequest$Outbound;
   };
@@ -86,16 +86,16 @@ export const PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest$outbou
     z.ZodTypeDef,
     PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest
   > = z.object({
-    companyUuid: z.string(),
     xGustoAPIVersion:
       PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPIVersion$outboundSchema
         .default("2026-02-01"),
+    companyUuid: z.string(),
     partnerManagedCompanyRetrieveTermsOfServiceRequest:
       PartnerManagedCompanyRetrieveTermsOfServiceRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      companyUuid: "company_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyUuid: "company_uuid",
       partnerManagedCompanyRetrieveTermsOfServiceRequest:
         "Partner-Managed-Company-Retrieve-Terms-Of-Service-Request",
     });

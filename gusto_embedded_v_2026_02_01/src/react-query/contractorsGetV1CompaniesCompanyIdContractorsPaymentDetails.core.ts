@@ -52,9 +52,9 @@ export function buildContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails
       queryKeyContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails(
         request.companyId,
         {
+          xGustoAPIVersion: request.xGustoAPIVersion,
           contractorUuid: request.contractorUuid,
           contractorPaymentGroupUuid: request.contractorPaymentGroupUuid,
-          xGustoAPIVersion: request.xGustoAPIVersion,
         },
       ),
     queryFn:
@@ -88,11 +88,11 @@ export function buildContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails
 export function queryKeyContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails(
   companyId: string,
   parameters: {
-    contractorUuid?: string | undefined;
-    contractorPaymentGroupUuid?: string | undefined;
     xGustoAPIVersion?:
       | GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion
       | undefined;
+    contractorUuid?: string | undefined;
+    contractorPaymentGroupUuid?: string | undefined;
   },
 ): QueryKey {
   return [

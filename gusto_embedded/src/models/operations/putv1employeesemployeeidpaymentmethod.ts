@@ -34,14 +34,16 @@ export type PutV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion =
 /**
  * The payment method type. If type is Check, split_by and splits do not need to be populated. If type is Direct Deposit, split_by and splits are required.
  */
-export const Type = {
+export const PutV1EmployeesEmployeeIdPaymentMethodType = {
   Check: "Check",
   DirectDeposit: "Direct Deposit",
 } as const;
 /**
  * The payment method type. If type is Check, split_by and splits do not need to be populated. If type is Direct Deposit, split_by and splits are required.
  */
-export type Type = ClosedEnum<typeof Type>;
+export type PutV1EmployeesEmployeeIdPaymentMethodType = ClosedEnum<
+  typeof PutV1EmployeesEmployeeIdPaymentMethodType
+>;
 
 export const SplitBy = {
   Percentage: "Percentage",
@@ -76,7 +78,7 @@ export type PutV1EmployeesEmployeeIdPaymentMethodRequestBody = {
   /**
    * The payment method type. If type is Check, split_by and splits do not need to be populated. If type is Direct Deposit, split_by and splits are required.
    */
-  type: Type;
+  type: PutV1EmployeesEmployeeIdPaymentMethodType;
   /**
    * How the payment will be split. If Percentage, split amounts must add up to exactly 100. If Amount, values are in cents and the last split amount must be null to capture the remainder.
    */
@@ -116,9 +118,9 @@ export const PutV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion$outboun
   > = z.nativeEnum(PutV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion);
 
 /** @internal */
-export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
-  Type,
-);
+export const PutV1EmployeesEmployeeIdPaymentMethodType$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1EmployeesEmployeeIdPaymentMethodType> = z
+    .nativeEnum(PutV1EmployeesEmployeeIdPaymentMethodType);
 
 /** @internal */
 export const SplitBy$outboundSchema: z.ZodNativeEnum<typeof SplitBy> = z
@@ -168,7 +170,7 @@ export const PutV1EmployeesEmployeeIdPaymentMethodRequestBody$outboundSchema:
     PutV1EmployeesEmployeeIdPaymentMethodRequestBody
   > = z.object({
     version: z.string(),
-    type: Type$outboundSchema,
+    type: PutV1EmployeesEmployeeIdPaymentMethodType$outboundSchema,
     splitBy: z.nullable(SplitBy$outboundSchema).optional(),
     splits: z.nullable(z.array(z.lazy(() => Splits$outboundSchema))).optional(),
   }).transform((v) => {

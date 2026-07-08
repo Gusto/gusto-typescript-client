@@ -37,13 +37,13 @@ export type PutDepartmentsHeaderXGustoAPIVersion = ClosedEnum<
 
 export type PutDepartmentsRequest = {
   /**
-   * The UUID of the department
-   */
-  departmentUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: PutDepartmentsHeaderXGustoAPIVersion | undefined;
+  /**
+   * The UUID of the department
+   */
+  departmentUuid: string;
   departmentUpdateRequestBody: DepartmentUpdateRequestBody;
 };
 
@@ -63,8 +63,8 @@ export const PutDepartmentsHeaderXGustoAPIVersion$outboundSchema:
 
 /** @internal */
 export type PutDepartmentsRequest$Outbound = {
-  department_uuid: string;
   "X-Gusto-API-Version": string;
+  department_uuid: string;
   "Department-Update-Request-Body": DepartmentUpdateRequestBody$Outbound;
 };
 
@@ -74,15 +74,15 @@ export const PutDepartmentsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutDepartmentsRequest
 > = z.object({
-  departmentUuid: z.string(),
   xGustoAPIVersion: PutDepartmentsHeaderXGustoAPIVersion$outboundSchema.default(
     "2025-06-15",
   ),
+  departmentUuid: z.string(),
   departmentUpdateRequestBody: DepartmentUpdateRequestBody$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    departmentUuid: "department_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    departmentUuid: "department_uuid",
     departmentUpdateRequestBody: "Department-Update-Request-Body",
   });
 });

@@ -9,7 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { GustoEmbeddedError } from "./gustoembeddederror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
 
-export type Metadata = {
+export type PayrollBlockersErrorMetadata = {
   /**
    * A categorization of the payroll blocker, e.g. "geocode_error"
    */
@@ -29,7 +29,7 @@ export type PayrollBlockersErrorErrors = {
    * Human readable description of the payroll blocker
    */
   message?: string | undefined;
-  metadata?: Metadata | undefined;
+  metadata?: PayrollBlockersErrorMetadata | undefined;
 };
 
 /**
@@ -72,21 +72,21 @@ export class PayrollBlockersError extends GustoEmbeddedError {
 }
 
 /** @internal */
-export const Metadata$inboundSchema: z.ZodType<
-  Metadata,
+export const PayrollBlockersErrorMetadata$inboundSchema: z.ZodType<
+  PayrollBlockersErrorMetadata,
   z.ZodTypeDef,
   unknown
 > = z.object({
   key: z.string().optional(),
 });
 
-export function metadataFromJSON(
+export function payrollBlockersErrorMetadataFromJSON(
   jsonString: string,
-): SafeParseResult<Metadata, SDKValidationError> {
+): SafeParseResult<PayrollBlockersErrorMetadata, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Metadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Metadata' from JSON`,
+    (x) => PayrollBlockersErrorMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollBlockersErrorMetadata' from JSON`,
   );
 }
 
@@ -99,7 +99,7 @@ export const PayrollBlockersErrorErrors$inboundSchema: z.ZodType<
   error_key: z.string().optional(),
   category: z.string().optional(),
   message: z.string().optional(),
-  metadata: z.lazy(() => Metadata$inboundSchema).optional(),
+  metadata: z.lazy(() => PayrollBlockersErrorMetadata$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "error_key": "errorKey",

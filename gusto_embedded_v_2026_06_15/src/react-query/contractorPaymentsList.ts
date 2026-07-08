@@ -164,7 +164,7 @@ export function invalidateContractorPaymentsList(
     ...filters,
     queryKey: [
       "@gusto/embedded-api-v-2026-06-15",
-      "contractorPayments",
+      "Contractor Payments",
       "list",
       ...queryKeyBase,
     ],
@@ -179,7 +179,7 @@ export function invalidateAllContractorPaymentsList(
     ...filters,
     queryKey: [
       "@gusto/embedded-api-v-2026-06-15",
-      "contractorPayments",
+      "Contractor Payments",
       "list",
     ],
   });

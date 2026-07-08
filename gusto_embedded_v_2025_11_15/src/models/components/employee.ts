@@ -39,7 +39,7 @@ export type EmployeeOnboardingStatus1 = ClosedEnum<
 /**
  * Configuration for an employee onboarding documents during onboarding
  */
-export type EmployeeOnboardingDocumentsConfig = {
+export type OnboardingDocumentsConfig = {
   /**
    * The UUID of the onboarding documents config
    */
@@ -62,15 +62,15 @@ export const EmployeePaymentMethod1 = {
  */
 export type EmployeePaymentMethod1 = ClosedEnum<typeof EmployeePaymentMethod1>;
 
-export const EmployeeCurrentEmploymentStatus = {
+export const CurrentEmploymentStatus = {
   FullTime: "full_time",
   PartTimeUnderTwentyHours: "part_time_under_twenty_hours",
   PartTimeTwentyPlusHours: "part_time_twenty_plus_hours",
   Variable: "variable",
   Seasonal: "seasonal",
 } as const;
-export type EmployeeCurrentEmploymentStatus = ClosedEnum<
-  typeof EmployeeCurrentEmploymentStatus
+export type CurrentEmploymentStatus = ClosedEnum<
+  typeof CurrentEmploymentStatus
 >;
 
 /**
@@ -164,7 +164,7 @@ export type Employee = {
   /**
    * Configuration for an employee onboarding documents during onboarding
    */
-  onboardingDocumentsConfig?: EmployeeOnboardingDocumentsConfig | undefined;
+  onboardingDocumentsConfig?: OnboardingDocumentsConfig | undefined;
   jobs?: Array<Job> | undefined;
   eligiblePaidTimeOff?: Array<PaidTimeOff> | undefined;
   terminations?: Array<Termination> | undefined;
@@ -191,7 +191,7 @@ export type Employee = {
   /**
    * The current employment status of the employee. Full-time employees work 30+ hours per week. Part-time employees are split into two groups: those that work 20-29 hours a week, and those that work under 20 hours a week. Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the year or less.
    */
-  currentEmploymentStatus?: EmployeeCurrentEmploymentStatus | null | undefined;
+  currentEmploymentStatus?: CurrentEmploymentStatus | null | undefined;
   historical?: boolean | undefined;
   /**
    * The short format code of the employee
@@ -231,8 +231,8 @@ export const EmployeeOnboardingStatus1$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(EmployeeOnboardingStatus1);
 
 /** @internal */
-export const EmployeeOnboardingDocumentsConfig$inboundSchema: z.ZodType<
-  EmployeeOnboardingDocumentsConfig,
+export const OnboardingDocumentsConfig$inboundSchema: z.ZodType<
+  OnboardingDocumentsConfig,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -244,13 +244,13 @@ export const EmployeeOnboardingDocumentsConfig$inboundSchema: z.ZodType<
   });
 });
 
-export function employeeOnboardingDocumentsConfigFromJSON(
+export function onboardingDocumentsConfigFromJSON(
   jsonString: string,
-): SafeParseResult<EmployeeOnboardingDocumentsConfig, SDKValidationError> {
+): SafeParseResult<OnboardingDocumentsConfig, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => EmployeeOnboardingDocumentsConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EmployeeOnboardingDocumentsConfig' from JSON`,
+    (x) => OnboardingDocumentsConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OnboardingDocumentsConfig' from JSON`,
   );
 }
 
@@ -260,9 +260,9 @@ export const EmployeePaymentMethod1$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(EmployeePaymentMethod1);
 
 /** @internal */
-export const EmployeeCurrentEmploymentStatus$inboundSchema: z.ZodNativeEnum<
-  typeof EmployeeCurrentEmploymentStatus
-> = z.nativeEnum(EmployeeCurrentEmploymentStatus);
+export const CurrentEmploymentStatus$inboundSchema: z.ZodNativeEnum<
+  typeof CurrentEmploymentStatus
+> = z.nativeEnum(CurrentEmploymentStatus);
 
 /** @internal */
 export const EmployeeStatus$inboundSchema: z.ZodNativeEnum<
@@ -324,7 +324,7 @@ export const Employee$inboundSchema: z.ZodType<
   onboarding_status: z.nullable(EmployeeOnboardingStatus1$inboundSchema)
     .optional(),
   onboarding_documents_config: z.lazy(() =>
-    EmployeeOnboardingDocumentsConfig$inboundSchema
+    OnboardingDocumentsConfig$inboundSchema
   ).optional(),
   jobs: z.array(Job$inboundSchema).optional(),
   eligible_paid_time_off: z.array(PaidTimeOff$inboundSchema).optional(),
@@ -337,9 +337,8 @@ export const Employee$inboundSchema: z.ZodType<
   phone: z.nullable(z.string()).optional(),
   preferred_first_name: z.nullable(z.string()).optional(),
   payment_method: EmployeePaymentMethod1$inboundSchema.default("Check"),
-  current_employment_status: z.nullable(
-    EmployeeCurrentEmploymentStatus$inboundSchema,
-  ).optional(),
+  current_employment_status: z.nullable(CurrentEmploymentStatus$inboundSchema)
+    .optional(),
   historical: z.boolean().optional(),
   employee_code: z.string().optional(),
   department_uuid: z.nullable(z.string()).optional(),

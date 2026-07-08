@@ -33,7 +33,7 @@ import { Job, Job$inboundSchema } from "./job.js";
 import { PaidTimeOff, PaidTimeOff$inboundSchema } from "./paidtimeoff.js";
 import { Termination, Termination$inboundSchema } from "./termination.js";
 
-export const OnboardingStatus = {
+export const ShowEmployeesOnboardingStatus = {
   OnboardingCompleted: "onboarding_completed",
   AdminOnboardingIncomplete: "admin_onboarding_incomplete",
   SelfOnboardingPendingInvite: "self_onboarding_pending_invite",
@@ -43,12 +43,14 @@ export const OnboardingStatus = {
   SelfOnboardingCompletedByEmployee: "self_onboarding_completed_by_employee",
   SelfOnboardingAwaitingAdminReview: "self_onboarding_awaiting_admin_review",
 } as const;
-export type OnboardingStatus = ClosedEnum<typeof OnboardingStatus>;
+export type ShowEmployeesOnboardingStatus = ClosedEnum<
+  typeof ShowEmployeesOnboardingStatus
+>;
 
 /**
  * Configuration for an employee onboarding documents during onboarding
  */
-export type OnboardingDocumentsConfig = {
+export type ShowEmployeesOnboardingDocumentsConfig = {
   /**
    * The UUID of the onboarding documents config
    */
@@ -62,24 +64,26 @@ export type OnboardingDocumentsConfig = {
 /**
  * The employee's payment method
  */
-export const PaymentMethod = {
+export const ShowEmployeesPaymentMethod = {
   DirectDeposit: "Direct Deposit",
   Check: "Check",
 } as const;
 /**
  * The employee's payment method
  */
-export type PaymentMethod = ClosedEnum<typeof PaymentMethod>;
+export type ShowEmployeesPaymentMethod = ClosedEnum<
+  typeof ShowEmployeesPaymentMethod
+>;
 
-export const CurrentEmploymentStatus = {
+export const ShowEmployeesCurrentEmploymentStatus = {
   FullTime: "full_time",
   PartTimeUnderTwentyHours: "part_time_under_twenty_hours",
   PartTimeTwentyPlusHours: "part_time_twenty_plus_hours",
   Variable: "variable",
   Seasonal: "seasonal",
 } as const;
-export type CurrentEmploymentStatus = ClosedEnum<
-  typeof CurrentEmploymentStatus
+export type ShowEmployeesCurrentEmploymentStatus = ClosedEnum<
+  typeof ShowEmployeesCurrentEmploymentStatus
 >;
 
 /**
@@ -100,7 +104,7 @@ export type ShowEmployeesStatus = ClosedEnum<typeof ShowEmployeesStatus>;
 /**
  * Member portal invitation status information. Only included when the include param has the portal_invitations value set.
  */
-export type MemberPortalInvitationStatus = {
+export type ShowEmployeesMemberPortalInvitationStatus = {
   /**
    * The current status of the member portal invitation.
    */
@@ -169,11 +173,13 @@ export type ShowEmployees = {
   /**
    * The current onboarding status of the employee
    */
-  onboardingStatus?: OnboardingStatus | null | undefined;
+  onboardingStatus?: ShowEmployeesOnboardingStatus | null | undefined;
   /**
    * Configuration for an employee onboarding documents during onboarding
    */
-  onboardingDocumentsConfig?: OnboardingDocumentsConfig | undefined;
+  onboardingDocumentsConfig?:
+    | ShowEmployeesOnboardingDocumentsConfig
+    | undefined;
   jobs?: Array<Job> | undefined;
   eligiblePaidTimeOff?: Array<PaidTimeOff> | undefined;
   terminations?: Array<Termination> | undefined;
@@ -196,11 +202,14 @@ export type ShowEmployees = {
   /**
    * The employee's payment method
    */
-  paymentMethod: PaymentMethod;
+  paymentMethod: ShowEmployeesPaymentMethod;
   /**
    * The current employment status of the employee. Full-time employees work 30+ hours per week. Part-time employees are split into two groups: those that work 20-29 hours a week, and those that work under 20 hours a week. Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the year or less.
    */
-  currentEmploymentStatus?: CurrentEmploymentStatus | null | undefined;
+  currentEmploymentStatus?:
+    | ShowEmployeesCurrentEmploymentStatus
+    | null
+    | undefined;
   historical?: boolean | undefined;
   /**
    * The short format code of the employee
@@ -225,7 +234,7 @@ export type ShowEmployees = {
    * Member portal invitation status information. Only included when the include param has the portal_invitations value set.
    */
   memberPortalInvitationStatus?:
-    | MemberPortalInvitationStatus
+    | ShowEmployeesMemberPortalInvitationStatus
     | null
     | undefined;
   /**
@@ -238,13 +247,13 @@ export type ShowEmployees = {
 };
 
 /** @internal */
-export const OnboardingStatus$inboundSchema: z.ZodNativeEnum<
-  typeof OnboardingStatus
-> = z.nativeEnum(OnboardingStatus);
+export const ShowEmployeesOnboardingStatus$inboundSchema: z.ZodNativeEnum<
+  typeof ShowEmployeesOnboardingStatus
+> = z.nativeEnum(ShowEmployeesOnboardingStatus);
 
 /** @internal */
-export const OnboardingDocumentsConfig$inboundSchema: z.ZodType<
-  OnboardingDocumentsConfig,
+export const ShowEmployeesOnboardingDocumentsConfig$inboundSchema: z.ZodType<
+  ShowEmployeesOnboardingDocumentsConfig,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -256,25 +265,27 @@ export const OnboardingDocumentsConfig$inboundSchema: z.ZodType<
   });
 });
 
-export function onboardingDocumentsConfigFromJSON(
+export function showEmployeesOnboardingDocumentsConfigFromJSON(
   jsonString: string,
-): SafeParseResult<OnboardingDocumentsConfig, SDKValidationError> {
+): SafeParseResult<ShowEmployeesOnboardingDocumentsConfig, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => OnboardingDocumentsConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OnboardingDocumentsConfig' from JSON`,
+    (x) =>
+      ShowEmployeesOnboardingDocumentsConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ShowEmployeesOnboardingDocumentsConfig' from JSON`,
   );
 }
 
 /** @internal */
-export const PaymentMethod$inboundSchema: z.ZodNativeEnum<
-  typeof PaymentMethod
-> = z.nativeEnum(PaymentMethod);
+export const ShowEmployeesPaymentMethod$inboundSchema: z.ZodNativeEnum<
+  typeof ShowEmployeesPaymentMethod
+> = z.nativeEnum(ShowEmployeesPaymentMethod);
 
 /** @internal */
-export const CurrentEmploymentStatus$inboundSchema: z.ZodNativeEnum<
-  typeof CurrentEmploymentStatus
-> = z.nativeEnum(CurrentEmploymentStatus);
+export const ShowEmployeesCurrentEmploymentStatus$inboundSchema:
+  z.ZodNativeEnum<typeof ShowEmployeesCurrentEmploymentStatus> = z.nativeEnum(
+    ShowEmployeesCurrentEmploymentStatus,
+  );
 
 /** @internal */
 export const ShowEmployeesStatus$inboundSchema: z.ZodNativeEnum<
@@ -282,8 +293,8 @@ export const ShowEmployeesStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ShowEmployeesStatus);
 
 /** @internal */
-export const MemberPortalInvitationStatus$inboundSchema: z.ZodType<
-  MemberPortalInvitationStatus,
+export const ShowEmployeesMemberPortalInvitationStatus$inboundSchema: z.ZodType<
+  ShowEmployeesMemberPortalInvitationStatus,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -303,13 +314,19 @@ export const MemberPortalInvitationStatus$inboundSchema: z.ZodType<
   });
 });
 
-export function memberPortalInvitationStatusFromJSON(
+export function showEmployeesMemberPortalInvitationStatusFromJSON(
   jsonString: string,
-): SafeParseResult<MemberPortalInvitationStatus, SDKValidationError> {
+): SafeParseResult<
+  ShowEmployeesMemberPortalInvitationStatus,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => MemberPortalInvitationStatus$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MemberPortalInvitationStatus' from JSON`,
+    (x) =>
+      ShowEmployeesMemberPortalInvitationStatus$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ShowEmployeesMemberPortalInvitationStatus' from JSON`,
   );
 }
 
@@ -333,9 +350,10 @@ export const ShowEmployees$inboundSchema: z.ZodType<
     two_percent_shareholder: z.nullable(z.boolean()).optional(),
     work_email: z.nullable(z.string()).optional(),
     onboarded: z.boolean().optional(),
-    onboarding_status: z.nullable(OnboardingStatus$inboundSchema).optional(),
+    onboarding_status: z.nullable(ShowEmployeesOnboardingStatus$inboundSchema)
+      .optional(),
     onboarding_documents_config: z.lazy(() =>
-      OnboardingDocumentsConfig$inboundSchema
+      ShowEmployeesOnboardingDocumentsConfig$inboundSchema
     ).optional(),
     jobs: z.array(Job$inboundSchema).optional(),
     eligible_paid_time_off: z.array(PaidTimeOff$inboundSchema).optional(),
@@ -347,9 +365,10 @@ export const ShowEmployees$inboundSchema: z.ZodType<
     ssn: z.string().optional(),
     phone: z.nullable(z.string()).optional(),
     preferred_first_name: z.nullable(z.string()).optional(),
-    payment_method: PaymentMethod$inboundSchema.default("Check"),
-    current_employment_status: z.nullable(CurrentEmploymentStatus$inboundSchema)
-      .optional(),
+    payment_method: ShowEmployeesPaymentMethod$inboundSchema.default("Check"),
+    current_employment_status: z.nullable(
+      ShowEmployeesCurrentEmploymentStatus$inboundSchema,
+    ).optional(),
     historical: z.boolean().optional(),
     employee_code: z.string().optional(),
     department_uuid: z.nullable(z.string()).optional(),
@@ -359,7 +378,7 @@ export const ShowEmployees$inboundSchema: z.ZodType<
     flsa_status: FlsaStatusType$inboundSchema.optional(),
     applicable_tax_ids: z.array(z.number()).optional(),
     member_portal_invitation_status: z.nullable(
-      z.lazy(() => MemberPortalInvitationStatus$inboundSchema),
+      z.lazy(() => ShowEmployeesMemberPortalInvitationStatus$inboundSchema),
     ).optional(),
     partner_portal_invitation_sent: z.nullable(z.boolean()).optional(),
     current_home_address: EmployeeHomeAddress$inboundSchema.optional(),

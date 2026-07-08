@@ -15,7 +15,7 @@ export type EmployeeStateTaxInputQuestionFormatValue =
   | boolean
   | number;
 
-export type Options = {
+export type EmployeeStateTaxInputQuestionFormatOptions = {
   /**
    * An allowed value to answer the question
    */
@@ -34,7 +34,7 @@ export type EmployeeStateTaxInputQuestionFormat = {
   /**
    * For "Select" type questions, the allowed values and display labels.
    */
-  options?: Array<Options> | undefined;
+  options?: Array<EmployeeStateTaxInputQuestionFormatOptions> | undefined;
 };
 
 /** @internal */
@@ -61,19 +61,26 @@ export function employeeStateTaxInputQuestionFormatValueFromJSON(
 }
 
 /** @internal */
-export const Options$inboundSchema: z.ZodType<Options, z.ZodTypeDef, unknown> =
-  z.object({
-    value: z.union([z.string(), z.boolean(), z.number()]).optional(),
-    label: z.string(),
-  });
+export const EmployeeStateTaxInputQuestionFormatOptions$inboundSchema:
+  z.ZodType<EmployeeStateTaxInputQuestionFormatOptions, z.ZodTypeDef, unknown> =
+    z.object({
+      value: z.union([z.string(), z.boolean(), z.number()]).optional(),
+      label: z.string(),
+    });
 
-export function optionsFromJSON(
+export function employeeStateTaxInputQuestionFormatOptionsFromJSON(
   jsonString: string,
-): SafeParseResult<Options, SDKValidationError> {
+): SafeParseResult<
+  EmployeeStateTaxInputQuestionFormatOptions,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => Options$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Options' from JSON`,
+    (x) =>
+      EmployeeStateTaxInputQuestionFormatOptions$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'EmployeeStateTaxInputQuestionFormatOptions' from JSON`,
   );
 }
 
@@ -84,7 +91,9 @@ export const EmployeeStateTaxInputQuestionFormat$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.string(),
-  options: z.array(z.lazy(() => Options$inboundSchema)).optional(),
+  options: z.array(
+    z.lazy(() => EmployeeStateTaxInputQuestionFormatOptions$inboundSchema),
+  ).optional(),
 });
 
 export function employeeStateTaxInputQuestionFormatFromJSON(

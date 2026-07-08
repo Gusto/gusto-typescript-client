@@ -12,14 +12,14 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The contractor's wage type, either "Fixed" or "Hourly".
  */
-export const WageType = {
+export const ContractorWageType = {
   Fixed: "Fixed",
   Hourly: "Hourly",
 } as const;
 /**
  * The contractor's wage type, either "Fixed" or "Hourly".
  */
-export type WageType = ClosedEnum<typeof WageType>;
+export type ContractorWageType = ClosedEnum<typeof ContractorWageType>;
 
 /**
  * The contractor's type, either "Individual" or "Business".
@@ -48,7 +48,7 @@ export type Address = {
 /**
  * One of the "onboarding_status" enum values.
  */
-export const ContractorOnboardingStatus1 = {
+export const OnboardingStatus = {
   AdminOnboardingIncomplete: "admin_onboarding_incomplete",
   AdminOnboardingReview: "admin_onboarding_review",
   SelfOnboardingNotInvited: "self_onboarding_not_invited",
@@ -60,9 +60,7 @@ export const ContractorOnboardingStatus1 = {
 /**
  * One of the "onboarding_status" enum values.
  */
-export type ContractorOnboardingStatus1 = ClosedEnum<
-  typeof ContractorOnboardingStatus1
->;
+export type OnboardingStatus = ClosedEnum<typeof OnboardingStatus>;
 
 export const ContractorPaymentMethod1 = {
   DirectDeposit: "Direct Deposit",
@@ -104,7 +102,7 @@ export type ContractorStatus = ClosedEnum<typeof ContractorStatus>;
 /**
  * Member portal invitation status information. Only included when the include param has the portal_invitations value set.
  */
-export type ContractorMemberPortalInvitationStatus = {
+export type MemberPortalInvitationStatus = {
   /**
    * The current status of the member portal invitation.
    */
@@ -138,7 +136,7 @@ export type Contractor = {
   /**
    * The contractor's wage type, either "Fixed" or "Hourly".
    */
-  wageType?: WageType | undefined;
+  wageType?: ContractorWageType | undefined;
   /**
    * The status of the contractor with the company.
    */
@@ -209,7 +207,7 @@ export type Contractor = {
   /**
    * One of the "onboarding_status" enum values.
    */
-  onboardingStatus?: ContractorOnboardingStatus1 | undefined;
+  onboardingStatus?: OnboardingStatus | undefined;
   /**
    * The contractor's payment method.
    */
@@ -250,7 +248,7 @@ export type Contractor = {
    * Member portal invitation status information. Only included when the include param has the portal_invitations value set.
    */
   memberPortalInvitationStatus?:
-    | ContractorMemberPortalInvitationStatus
+    | MemberPortalInvitationStatus
     | null
     | undefined;
   /**
@@ -260,8 +258,9 @@ export type Contractor = {
 };
 
 /** @internal */
-export const WageType$inboundSchema: z.ZodNativeEnum<typeof WageType> = z
-  .nativeEnum(WageType);
+export const ContractorWageType$inboundSchema: z.ZodNativeEnum<
+  typeof ContractorWageType
+> = z.nativeEnum(ContractorWageType);
 
 /** @internal */
 export const ContractorType$inboundSchema: z.ZodNativeEnum<
@@ -295,9 +294,9 @@ export function addressFromJSON(
 }
 
 /** @internal */
-export const ContractorOnboardingStatus1$inboundSchema: z.ZodNativeEnum<
-  typeof ContractorOnboardingStatus1
-> = z.nativeEnum(ContractorOnboardingStatus1);
+export const OnboardingStatus$inboundSchema: z.ZodNativeEnum<
+  typeof OnboardingStatus
+> = z.nativeEnum(OnboardingStatus);
 
 /** @internal */
 export const ContractorPaymentMethod1$inboundSchema: z.ZodNativeEnum<
@@ -335,8 +334,8 @@ export const ContractorStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ContractorStatus);
 
 /** @internal */
-export const ContractorMemberPortalInvitationStatus$inboundSchema: z.ZodType<
-  ContractorMemberPortalInvitationStatus,
+export const MemberPortalInvitationStatus$inboundSchema: z.ZodType<
+  MemberPortalInvitationStatus,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -356,14 +355,13 @@ export const ContractorMemberPortalInvitationStatus$inboundSchema: z.ZodType<
   });
 });
 
-export function contractorMemberPortalInvitationStatusFromJSON(
+export function memberPortalInvitationStatusFromJSON(
   jsonString: string,
-): SafeParseResult<ContractorMemberPortalInvitationStatus, SDKValidationError> {
+): SafeParseResult<MemberPortalInvitationStatus, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      ContractorMemberPortalInvitationStatus$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ContractorMemberPortalInvitationStatus' from JSON`,
+    (x) => MemberPortalInvitationStatus$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MemberPortalInvitationStatus' from JSON`,
   );
 }
 
@@ -375,7 +373,7 @@ export const Contractor$inboundSchema: z.ZodType<
 > = z.object({
   uuid: z.string(),
   company_uuid: z.string().optional(),
-  wage_type: WageType$inboundSchema.optional(),
+  wage_type: ContractorWageType$inboundSchema.optional(),
   is_active: z.boolean().default(true),
   version: z.string().optional(),
   type: ContractorType$inboundSchema.optional(),
@@ -392,7 +390,7 @@ export const Contractor$inboundSchema: z.ZodType<
   file_new_hire_report: z.nullable(z.boolean()).optional(),
   work_state: z.nullable(z.string()).optional(),
   onboarded: z.boolean().optional(),
-  onboarding_status: ContractorOnboardingStatus1$inboundSchema.optional(),
+  onboarding_status: OnboardingStatus$inboundSchema.optional(),
   payment_method: z.nullable(ContractorPaymentMethod1$inboundSchema).optional(),
   has_ssn: z.boolean().optional(),
   department_uuid: z.nullable(z.string()).optional(),
@@ -405,7 +403,7 @@ export const Contractor$inboundSchema: z.ZodType<
   dismissal_cancellation_eligible: z.boolean().optional(),
   rehire_cancellation_eligible: z.boolean().optional(),
   member_portal_invitation_status: z.nullable(
-    z.lazy(() => ContractorMemberPortalInvitationStatus$inboundSchema),
+    z.lazy(() => MemberPortalInvitationStatus$inboundSchema),
   ).optional(),
   partner_portal_invitation_sent: z.nullable(z.boolean()).optional(),
 }).transform((v) => {

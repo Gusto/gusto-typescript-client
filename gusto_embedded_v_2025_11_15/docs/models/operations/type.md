@@ -1,17 +1,17 @@
 # Type
 
-The payment method type. If type is Check, split_by and splits do not need to be populated. If type is Direct Deposit, split_by and splits are required.
+The payment method type. If type is Direct Deposit, the contractor is required to have a bank account. See [Bank account endpoint](./post-v1-contractors-contractor_uuid-bank_accounts).
 
 ## Example Usage
 
 ```typescript
-import { Type } from "@gusto/embedded-api-v-2025-11-15/models/operations/putv1employeesemployeeidpaymentmethod.js";
+import { Type } from "@gusto/embedded-api-v-2025-11-15/models/operations/putv1contractorscontractoridpaymentmethod.js";
 
-let value: Type = "Check";
+let value: Type = "Direct Deposit";
 ```
 
 ## Values
 
 ```typescript
-"Check" | "Direct Deposit"
+"Direct Deposit" | "Check"
 ```

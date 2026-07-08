@@ -40,15 +40,15 @@ export type PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGus
 export type PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest =
   {
     /**
-     * The UUID of the company
-     */
-    companyUuid: string;
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     xGustoAPIVersion?:
       | PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion
       | undefined;
+    /**
+     * The UUID of the company
+     */
+    companyUuid: string;
     partnerManagedCompanyAcceptTermsOfServiceRequest:
       PartnerManagedCompanyAcceptTermsOfServiceRequest;
   };
@@ -75,8 +75,8 @@ export const PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGu
 /** @internal */
 export type PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest$Outbound =
   {
-    company_uuid: string;
     "X-Gusto-API-Version": string;
+    company_uuid: string;
     "Partner-Managed-Company-Accept-Terms-Of-Service-Request":
       PartnerManagedCompanyAcceptTermsOfServiceRequest$Outbound;
   };
@@ -88,16 +88,16 @@ export const PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest$o
     z.ZodTypeDef,
     PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest
   > = z.object({
-    companyUuid: z.string(),
     xGustoAPIVersion:
       PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion$outboundSchema
         .default("2025-11-15"),
+    companyUuid: z.string(),
     partnerManagedCompanyAcceptTermsOfServiceRequest:
       PartnerManagedCompanyAcceptTermsOfServiceRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      companyUuid: "company_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyUuid: "company_uuid",
       partnerManagedCompanyAcceptTermsOfServiceRequest:
         "Partner-Managed-Company-Accept-Terms-Of-Service-Request",
     });

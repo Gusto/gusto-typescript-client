@@ -16,7 +16,7 @@ export type PayScheduleAssignmentBodyType = ClosedEnum<
   typeof PayScheduleAssignmentBodyType
 >;
 
-export type Employees = {
+export type PayScheduleAssignmentBodyEmployees = {
   /**
    * Employee UUID
    */
@@ -62,7 +62,7 @@ export type PayScheduleAssignmentBody = {
   /**
    * List of employees and their pay schedules.
    */
-  employees?: Array<Employees> | undefined;
+  employees?: Array<PayScheduleAssignmentBodyEmployees> | undefined;
   /**
    * List of departments and their pay schedules.
    */
@@ -75,16 +75,16 @@ export const PayScheduleAssignmentBodyType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(PayScheduleAssignmentBodyType);
 
 /** @internal */
-export type Employees$Outbound = {
+export type PayScheduleAssignmentBodyEmployees$Outbound = {
   employee_uuid?: string | undefined;
   pay_schedule_uuid?: string | undefined;
 };
 
 /** @internal */
-export const Employees$outboundSchema: z.ZodType<
-  Employees$Outbound,
+export const PayScheduleAssignmentBodyEmployees$outboundSchema: z.ZodType<
+  PayScheduleAssignmentBodyEmployees$Outbound,
   z.ZodTypeDef,
-  Employees
+  PayScheduleAssignmentBodyEmployees
 > = z.object({
   employeeUuid: z.string().optional(),
   payScheduleUuid: z.string().optional(),
@@ -95,8 +95,14 @@ export const Employees$outboundSchema: z.ZodType<
   });
 });
 
-export function employeesToJSON(employees: Employees): string {
-  return JSON.stringify(Employees$outboundSchema.parse(employees));
+export function payScheduleAssignmentBodyEmployeesToJSON(
+  payScheduleAssignmentBodyEmployees: PayScheduleAssignmentBodyEmployees,
+): string {
+  return JSON.stringify(
+    PayScheduleAssignmentBodyEmployees$outboundSchema.parse(
+      payScheduleAssignmentBodyEmployees,
+    ),
+  );
 }
 
 /** @internal */
@@ -131,7 +137,7 @@ export type PayScheduleAssignmentBody$Outbound = {
   salaried_pay_schedule_uuid?: string | undefined;
   default_pay_schedule_uuid?: string | undefined;
   partial_assignment?: boolean | undefined;
-  employees?: Array<Employees$Outbound> | undefined;
+  employees?: Array<PayScheduleAssignmentBodyEmployees$Outbound> | undefined;
   departments?: Array<Departments$Outbound> | undefined;
 };
 
@@ -146,7 +152,9 @@ export const PayScheduleAssignmentBody$outboundSchema: z.ZodType<
   salariedPayScheduleUuid: z.string().optional(),
   defaultPayScheduleUuid: z.string().optional(),
   partialAssignment: z.boolean().optional(),
-  employees: z.array(z.lazy(() => Employees$outboundSchema)).optional(),
+  employees: z.array(
+    z.lazy(() => PayScheduleAssignmentBodyEmployees$outboundSchema),
+  ).optional(),
   departments: z.array(z.lazy(() => Departments$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {

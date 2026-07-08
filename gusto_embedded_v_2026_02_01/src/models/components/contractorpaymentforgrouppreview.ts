@@ -42,16 +42,14 @@ export type ContractorPaymentForGroupPreviewStatus = ClosedEnum<
 /**
  * The wage type for the payment.
  */
-export const ContractorPaymentForGroupPreviewWageType = {
+export const WageType = {
   Hourly: "Hourly",
   Fixed: "Fixed",
 } as const;
 /**
  * The wage type for the payment.
  */
-export type ContractorPaymentForGroupPreviewWageType = ClosedEnum<
-  typeof ContractorPaymentForGroupPreviewWageType
->;
+export type WageType = ClosedEnum<typeof WageType>;
 
 /**
  * Preview representation of a single contractor payment with nullable uuid.
@@ -100,7 +98,7 @@ export type ContractorPaymentForGroupPreview = {
   /**
    * The wage type for the payment.
    */
-  wageType?: ContractorPaymentForGroupPreviewWageType | undefined;
+  wageType?: WageType | undefined;
   /**
    * (hours * hourly_rate) + wage + bonus
    */
@@ -127,9 +125,8 @@ export const ContractorPaymentForGroupPreviewStatus$inboundSchema:
   );
 
 /** @internal */
-export const ContractorPaymentForGroupPreviewWageType$inboundSchema:
-  z.ZodNativeEnum<typeof ContractorPaymentForGroupPreviewWageType> = z
-    .nativeEnum(ContractorPaymentForGroupPreviewWageType);
+export const WageType$inboundSchema: z.ZodNativeEnum<typeof WageType> = z
+  .nativeEnum(WageType);
 
 /** @internal */
 export const ContractorPaymentForGroupPreview$inboundSchema: z.ZodType<
@@ -148,7 +145,7 @@ export const ContractorPaymentForGroupPreview$inboundSchema: z.ZodType<
   hourly_rate: z.string().optional(),
   may_cancel: z.boolean().optional(),
   wage: z.string().optional(),
-  wage_type: ContractorPaymentForGroupPreviewWageType$inboundSchema.optional(),
+  wage_type: WageType$inboundSchema.optional(),
   wage_total: z.string().optional(),
   invoice_number: z.nullable(z.string()).optional(),
   memo: z.nullable(z.string()).optional(),

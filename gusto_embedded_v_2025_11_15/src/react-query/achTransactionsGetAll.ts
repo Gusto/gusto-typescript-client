@@ -22,8 +22,8 @@ import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  GetAchTransactionsHeaderXGustoAPIVersion,
   GetAchTransactionsRequest,
+  XGustoAPIVersion,
 } from "../models/operations/getachtransactions.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -118,7 +118,7 @@ export function setAchTransactionsGetAllData(
   queryKeyBase: [
     companyUuid: string,
     parameters: {
-      xGustoAPIVersion?: GetAchTransactionsHeaderXGustoAPIVersion | undefined;
+      xGustoAPIVersion?: XGustoAPIVersion | undefined;
       contractorPaymentUuid?: string | undefined;
       payrollUuid?: string | undefined;
       transactionType?: string | undefined;
@@ -140,7 +140,7 @@ export function invalidateAchTransactionsGetAll(
     [
       companyUuid: string,
       parameters: {
-        xGustoAPIVersion?: GetAchTransactionsHeaderXGustoAPIVersion | undefined;
+        xGustoAPIVersion?: XGustoAPIVersion | undefined;
         contractorPaymentUuid?: string | undefined;
         payrollUuid?: string | undefined;
         transactionType?: string | undefined;

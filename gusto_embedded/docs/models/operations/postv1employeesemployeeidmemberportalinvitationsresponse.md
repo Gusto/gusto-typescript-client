@@ -1,0 +1,15 @@
+# PostV1EmployeesEmployeeIdMemberPortalInvitationsResponse
+
+## Example Usage
+
+```typescript
+import { PostV1EmployeesEmployeeIdMemberPortalInvitationsResponse } from "@gusto/embedded-api/models/operations/postv1employeesemployeeidmemberportalinvitations.js";
+
+let value: PostV1EmployeesEmployeeIdMemberPortalInvitationsResponse = {};
+```
+
+## Fields
+
+| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `httpMeta`                                                         | [components.HTTPMetadata](../../models/components/httpmetadata.md) | :heavy_check_mark:                                                 | N/A                                                                |

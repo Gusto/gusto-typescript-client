@@ -17,6 +17,23 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Introspection extends ClientSDK {
   /**
+   * Create a System Access Token or Refresh an Access Token
+   *
+   * @remarks
+   * Creates a system access token or refreshes an oauth access token
+   */
+  async oauthAccessToken(
+    request: OauthAccessTokenRequest,
+    options?: RequestOptions,
+  ): Promise<OauthAccessTokenResponse> {
+    return unwrapAsync(introspectionOauthAccessToken(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Get info about the current access token
    *
    * @remarks
@@ -29,23 +46,6 @@ export class Introspection extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetV1TokenInfoResponse> {
     return unwrapAsync(introspectionGetInfo(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create a System Access Token or Refresh an Access Token
-   *
-   * @remarks
-   * Creates a system access token or refreshes an oauth access token
-   */
-  async oauthAccessToken(
-    request: OauthAccessTokenRequest,
-    options?: RequestOptions,
-  ): Promise<OauthAccessTokenResponse> {
-    return unwrapAsync(introspectionOauthAccessToken(
       this,
       request,
       options,

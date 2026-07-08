@@ -32,29 +32,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class EmployeeForms extends ClientSDK {
   /**
-   * Generate a W2 form [DEMO]
-   *
-   * @remarks
-   * > 🚧 Demo action
-   * >
-   * > This action is only available in the Demo environment
-   *
-   * Generates a W2 document for testing purposes.
-   *
-   * scope: `employees:write`
-   */
-  async generateW2(
-    request: PostV1SandboxGenerateW2Request,
-    options?: RequestOptions,
-  ): Promise<PostV1SandboxGenerateW2Response> {
-    return unwrapAsync(employeeFormsGenerateW2(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get all employee forms
    *
    * @remarks
@@ -127,6 +104,29 @@ export class EmployeeForms extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PutV1EmployeeFormSignResponse> {
     return unwrapAsync(employeeFormsSign(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Generate a W2 form [DEMO]
+   *
+   * @remarks
+   * > 🚧 Demo action
+   * >
+   * > This action is only available in the Demo environment
+   *
+   * Generates a W2 document for testing purposes.
+   *
+   * scope: `employees:write`
+   */
+  async generateW2(
+    request: PostV1SandboxGenerateW2Request,
+    options?: RequestOptions,
+  ): Promise<PostV1SandboxGenerateW2Response> {
+    return unwrapAsync(employeeFormsGenerateW2(
       this,
       request,
       options,

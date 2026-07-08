@@ -91,7 +91,7 @@ export function queryKeyContractorPaymentsGetV1ContractorPaymentsContractorPayme
 ): QueryKey {
   return [
     "@gusto/embedded-api-v-2026-02-01",
-    "contractorPayments",
+    "Contractor Payments",
     "getV1ContractorPaymentsContractorPaymentIdPdf",
     contractorPaymentId,
     parameters,

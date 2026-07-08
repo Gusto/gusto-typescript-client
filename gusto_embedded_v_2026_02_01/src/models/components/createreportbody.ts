@@ -7,7 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { RFCDate } from "../../types/rfcdate.js";
 
-export const Columns = {
+export const CreateReportBodyColumns = {
   BankAccountAccountNumber: "bank_account_account_number",
   BankAccountRoutingNumber: "bank_account_routing_number",
   BankAccountType: "bank_account_type",
@@ -93,20 +93,24 @@ export const Columns = {
   WorkAddressStreet: "work_address_street",
   WorkAddressZip: "work_address_zip",
 } as const;
-export type Columns = ClosedEnum<typeof Columns>;
+export type CreateReportBodyColumns = ClosedEnum<
+  typeof CreateReportBodyColumns
+>;
 
-export const Groupings = {
+export const CreateReportBodyGroupings = {
   Payroll: "payroll",
   Employee: "employee",
   WorkAddress: "work_address",
   WorkAddressState: "work_address_state",
 } as const;
-export type Groupings = ClosedEnum<typeof Groupings>;
+export type CreateReportBodyGroupings = ClosedEnum<
+  typeof CreateReportBodyGroupings
+>;
 
 /**
  * The type of file to generate
  */
-export const FileType = {
+export const CreateReportBodyFileType = {
   Csv: "csv",
   Json: "json",
   Pdf: "pdf",
@@ -114,7 +118,24 @@ export const FileType = {
 /**
  * The type of file to generate
  */
-export type FileType = ClosedEnum<typeof FileType>;
+export type CreateReportBodyFileType = ClosedEnum<
+  typeof CreateReportBodyFileType
+>;
+
+/**
+ * Which payroll date `start_date` and `end_date` filter against.
+ */
+export const CreateReportBodyDateFilterType = {
+  PeriodEndDate: "period_end_date",
+  PeriodStartDate: "period_start_date",
+  CheckDate: "check_date",
+} as const;
+/**
+ * Which payroll date `start_date` and `end_date` filter against.
+ */
+export type CreateReportBodyDateFilterType = ClosedEnum<
+  typeof CreateReportBodyDateFilterType
+>;
 
 /**
  * Payment method to filter by
@@ -133,7 +154,7 @@ export type CreateReportBodyPaymentMethod = ClosedEnum<
 /**
  * Employee employment type to filter by
  */
-export const EmploymentType = {
+export const CreateReportBodyEmploymentType = {
   Exempt: "exempt",
   SalariedNonexempt: "salaried_nonexempt",
   Nonexempt: "nonexempt",
@@ -143,7 +164,9 @@ export const EmploymentType = {
 /**
  * Employee employment type to filter by
  */
-export type EmploymentType = ClosedEnum<typeof EmploymentType>;
+export type CreateReportBodyEmploymentType = ClosedEnum<
+  typeof CreateReportBodyEmploymentType
+>;
 
 /**
  * Employee employment status to filter by
@@ -171,11 +194,11 @@ export type CreateReportBody = {
   /**
    * Columns to include in the report
    */
-  columns: Array<Columns>;
+  columns: Array<CreateReportBodyColumns>;
   /**
-   * How to group the report
+   * Optional. How to group the report. If omitted, sensible defaults are derived from the `columns` requested.
    */
-  groupings: Array<Groupings>;
+  groupings?: Array<CreateReportBodyGroupings> | undefined;
   /**
    * The title of the report
    */
@@ -183,11 +206,15 @@ export type CreateReportBody = {
   /**
    * The type of file to generate
    */
-  fileType: FileType;
+  fileType: CreateReportBodyFileType;
   /**
    * Whether to include subtotals and grand totals in the report
    */
   withTotals?: boolean | undefined;
+  /**
+   * Which payroll date `start_date` and `end_date` filter against.
+   */
+  dateFilterType?: CreateReportBodyDateFilterType | undefined;
   /**
    * Start date of data to filter by
    */
@@ -211,7 +238,7 @@ export type CreateReportBody = {
   /**
    * Employee employment type to filter by
    */
-  employmentType?: EmploymentType | undefined;
+  employmentType?: CreateReportBodyEmploymentType | undefined;
   /**
    * Employee employment status to filter by
    */
@@ -231,16 +258,24 @@ export type CreateReportBody = {
 };
 
 /** @internal */
-export const Columns$outboundSchema: z.ZodNativeEnum<typeof Columns> = z
-  .nativeEnum(Columns);
+export const CreateReportBodyColumns$outboundSchema: z.ZodNativeEnum<
+  typeof CreateReportBodyColumns
+> = z.nativeEnum(CreateReportBodyColumns);
 
 /** @internal */
-export const Groupings$outboundSchema: z.ZodNativeEnum<typeof Groupings> = z
-  .nativeEnum(Groupings);
+export const CreateReportBodyGroupings$outboundSchema: z.ZodNativeEnum<
+  typeof CreateReportBodyGroupings
+> = z.nativeEnum(CreateReportBodyGroupings);
 
 /** @internal */
-export const FileType$outboundSchema: z.ZodNativeEnum<typeof FileType> = z
-  .nativeEnum(FileType);
+export const CreateReportBodyFileType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateReportBodyFileType
+> = z.nativeEnum(CreateReportBodyFileType);
+
+/** @internal */
+export const CreateReportBodyDateFilterType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateReportBodyDateFilterType
+> = z.nativeEnum(CreateReportBodyDateFilterType);
 
 /** @internal */
 export const CreateReportBodyPaymentMethod$outboundSchema: z.ZodNativeEnum<
@@ -248,9 +283,9 @@ export const CreateReportBodyPaymentMethod$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateReportBodyPaymentMethod);
 
 /** @internal */
-export const EmploymentType$outboundSchema: z.ZodNativeEnum<
-  typeof EmploymentType
-> = z.nativeEnum(EmploymentType);
+export const CreateReportBodyEmploymentType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateReportBodyEmploymentType
+> = z.nativeEnum(CreateReportBodyEmploymentType);
 
 /** @internal */
 export const CreateReportBodyEmploymentStatus$outboundSchema: z.ZodNativeEnum<
@@ -260,10 +295,11 @@ export const CreateReportBodyEmploymentStatus$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export type CreateReportBody$Outbound = {
   columns: Array<string>;
-  groupings: Array<string>;
+  groupings?: Array<string> | undefined;
   custom_name?: string | undefined;
   file_type: string;
   with_totals: boolean;
+  date_filter_type: string;
   start_date?: string | undefined;
   end_date?: string | undefined;
   dismissed_start_date?: string | undefined;
@@ -282,11 +318,14 @@ export const CreateReportBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateReportBody
 > = z.object({
-  columns: z.array(Columns$outboundSchema),
-  groupings: z.array(Groupings$outboundSchema),
+  columns: z.array(CreateReportBodyColumns$outboundSchema),
+  groupings: z.array(CreateReportBodyGroupings$outboundSchema).optional(),
   customName: z.string().optional(),
-  fileType: FileType$outboundSchema,
+  fileType: CreateReportBodyFileType$outboundSchema,
   withTotals: z.boolean().default(false),
+  dateFilterType: CreateReportBodyDateFilterType$outboundSchema.default(
+    "period_end_date",
+  ),
   startDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
   endDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
   dismissedStartDate: z.instanceof(RFCDate).transform(v => v.toString())
@@ -294,7 +333,7 @@ export const CreateReportBody$outboundSchema: z.ZodType<
   dismissedEndDate: z.instanceof(RFCDate).transform(v => v.toString())
     .optional(),
   paymentMethod: CreateReportBodyPaymentMethod$outboundSchema.optional(),
-  employmentType: EmploymentType$outboundSchema.optional(),
+  employmentType: CreateReportBodyEmploymentType$outboundSchema.optional(),
   employmentStatus: CreateReportBodyEmploymentStatus$outboundSchema.optional(),
   employeeUuids: z.nullable(z.array(z.string())).optional(),
   departmentUuids: z.array(z.string()).optional(),
@@ -304,6 +343,7 @@ export const CreateReportBody$outboundSchema: z.ZodType<
     customName: "custom_name",
     fileType: "file_type",
     withTotals: "with_totals",
+    dateFilterType: "date_filter_type",
     startDate: "start_date",
     endDate: "end_date",
     dismissedStartDate: "dismissed_start_date",

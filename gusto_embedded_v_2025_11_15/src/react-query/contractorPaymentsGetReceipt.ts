@@ -162,7 +162,7 @@ export function invalidateContractorPaymentsGetReceipt(
     ...filters,
     queryKey: [
       "@gusto/embedded-api-v-2025-11-15",
-      "contractorPayments",
+      "Contractor Payments",
       "getReceipt",
       ...queryKeyBase,
     ],
@@ -177,7 +177,7 @@ export function invalidateAllContractorPaymentsGetReceipt(
     ...filters,
     queryKey: [
       "@gusto/embedded-api-v-2025-11-15",
-      "contractorPayments",
+      "Contractor Payments",
       "getReceipt",
     ],
   });

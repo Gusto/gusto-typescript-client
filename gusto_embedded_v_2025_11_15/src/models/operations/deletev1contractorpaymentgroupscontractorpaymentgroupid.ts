@@ -30,15 +30,15 @@ export type DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoA
 
 export type DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest = {
   /**
-   * The UUID of the contractor payment group
-   */
-  contractorPaymentGroupUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the contractor payment group
+   */
+  contractorPaymentGroupUuid: string;
 };
 
 export type DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse = {
@@ -56,8 +56,8 @@ export const DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGusto
 /** @internal */
 export type DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest$Outbound =
   {
-    contractor_payment_group_uuid: string;
     "X-Gusto-API-Version": string;
+    contractor_payment_group_uuid: string;
   };
 
 /** @internal */
@@ -67,14 +67,14 @@ export const DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest$outb
     z.ZodTypeDef,
     DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest
   > = z.object({
-    contractorPaymentGroupUuid: z.string(),
     xGustoAPIVersion:
       DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion$outboundSchema
         .default("2025-11-15"),
+    contractorPaymentGroupUuid: z.string(),
   }).transform((v) => {
     return remap$(v, {
-      contractorPaymentGroupUuid: "contractor_payment_group_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      contractorPaymentGroupUuid: "contractor_payment_group_uuid",
     });
   });
 

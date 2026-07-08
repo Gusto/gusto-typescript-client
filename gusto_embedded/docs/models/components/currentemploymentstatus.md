@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { CurrentEmploymentStatus } from "@gusto/embedded-api/models/components/showemployees.js";
+import { CurrentEmploymentStatus } from "@gusto/embedded-api/models/components/employee.js";
 
 let value: CurrentEmploymentStatus = "part_time_twenty_plus_hours";
 ```

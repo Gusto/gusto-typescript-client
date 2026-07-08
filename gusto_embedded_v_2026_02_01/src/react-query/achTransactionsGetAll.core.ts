@@ -12,9 +12,9 @@ import { achTransactionsGetAll } from "../funcs/achTransactionsGetAll.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
-  GetAchTransactionsHeaderXGustoAPIVersion,
   GetAchTransactionsRequest,
   GetAchTransactionsResponse,
+  XGustoAPIVersion,
 } from "../models/operations/getachtransactions.js";
 import { unwrapAsync } from "../types/fp.js";
 export type AchTransactionsGetAllQueryData = GetAchTransactionsResponse;
@@ -80,7 +80,7 @@ export function buildAchTransactionsGetAllQuery(
 export function queryKeyAchTransactionsGetAll(
   companyUuid: string,
   parameters: {
-    xGustoAPIVersion?: GetAchTransactionsHeaderXGustoAPIVersion | undefined;
+    xGustoAPIVersion?: XGustoAPIVersion | undefined;
     contractorPaymentUuid?: string | undefined;
     payrollUuid?: string | undefined;
     transactionType?: string | undefined;

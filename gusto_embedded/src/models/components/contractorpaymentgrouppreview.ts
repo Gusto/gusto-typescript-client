@@ -35,7 +35,7 @@ export type ContractorPaymentGroupPreviewStatus = ClosedEnum<
   typeof ContractorPaymentGroupPreviewStatus
 >;
 
-export type ContractorPaymentGroupPreviewTotals = {
+export type Totals = {
   /**
    * The total amount for the group of contractor payments.
    */
@@ -98,7 +98,7 @@ export type ContractorPaymentGroupPreview = {
    * List of credit blockers for the contractor payment group.
    */
   creditBlockers?: Array<PayrollCreditBlockerType> | undefined;
-  totals?: ContractorPaymentGroupPreviewTotals | undefined;
+  totals?: Totals | undefined;
   contractorPayments?: Array<ContractorPaymentForGroupPreview> | undefined;
 };
 
@@ -108,33 +108,29 @@ export const ContractorPaymentGroupPreviewStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ContractorPaymentGroupPreviewStatus);
 
 /** @internal */
-export const ContractorPaymentGroupPreviewTotals$inboundSchema: z.ZodType<
-  ContractorPaymentGroupPreviewTotals,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  amount: z.string().optional(),
-  debit_amount: z.string().optional(),
-  wage_amount: z.string().optional(),
-  reimbursement_amount: z.string().optional(),
-  check_amount: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "debit_amount": "debitAmount",
-    "wage_amount": "wageAmount",
-    "reimbursement_amount": "reimbursementAmount",
-    "check_amount": "checkAmount",
+export const Totals$inboundSchema: z.ZodType<Totals, z.ZodTypeDef, unknown> = z
+  .object({
+    amount: z.string().optional(),
+    debit_amount: z.string().optional(),
+    wage_amount: z.string().optional(),
+    reimbursement_amount: z.string().optional(),
+    check_amount: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "debit_amount": "debitAmount",
+      "wage_amount": "wageAmount",
+      "reimbursement_amount": "reimbursementAmount",
+      "check_amount": "checkAmount",
+    });
   });
-});
 
-export function contractorPaymentGroupPreviewTotalsFromJSON(
+export function totalsFromJSON(
   jsonString: string,
-): SafeParseResult<ContractorPaymentGroupPreviewTotals, SDKValidationError> {
+): SafeParseResult<Totals, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      ContractorPaymentGroupPreviewTotals$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ContractorPaymentGroupPreviewTotals' from JSON`,
+    (x) => Totals$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Totals' from JSON`,
   );
 }
 
@@ -154,8 +150,7 @@ export const ContractorPaymentGroupPreview$inboundSchema: z.ZodType<
   submission_blockers: z.array(PayrollSubmissionBlockerType$inboundSchema)
     .optional(),
   credit_blockers: z.array(PayrollCreditBlockerType$inboundSchema).optional(),
-  totals: z.lazy(() => ContractorPaymentGroupPreviewTotals$inboundSchema)
-    .optional(),
+  totals: z.lazy(() => Totals$inboundSchema).optional(),
   contractor_payments: z.array(ContractorPaymentForGroupPreview$inboundSchema)
     .optional(),
 }).transform((v) => {

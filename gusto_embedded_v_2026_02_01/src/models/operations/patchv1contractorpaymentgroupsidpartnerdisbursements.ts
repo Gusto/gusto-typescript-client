@@ -85,15 +85,15 @@ export type PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBody = {
 
 export type PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest = {
   /**
-   * The UUID of the contractor payment group
-   */
-  id: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | PatchV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the contractor payment group
+   */
+  id: string;
   requestBody?:
     | PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBody
     | undefined;
@@ -189,8 +189,8 @@ export function patchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBodyT
 /** @internal */
 export type PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest$Outbound =
   {
-    id: string;
     "X-Gusto-API-Version": string;
+    id: string;
     RequestBody?:
       | PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBody$Outbound
       | undefined;
@@ -203,10 +203,10 @@ export const PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest$outboun
     z.ZodTypeDef,
     PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest
   > = z.object({
-    id: z.string(),
     xGustoAPIVersion:
       PatchV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion$outboundSchema
         .default("2026-02-01"),
+    id: z.string(),
     requestBody: z.lazy(() =>
       PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBody$outboundSchema
     ).optional(),

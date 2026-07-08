@@ -131,6 +131,7 @@ async function $do(
     "day_2": payload.day_2,
     "end_date": payload.end_date,
     "frequency": payload.frequency,
+    "pay_schedule_uuid": payload.pay_schedule_uuid,
   });
 
   const headers = new Headers(compactMap({

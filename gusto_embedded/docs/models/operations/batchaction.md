@@ -1,17 +1,17 @@
 # BatchAction
 
-The action to perform on the batch
+The action to perform on the batch. Only `cancel` is supported.
 
 ## Example Usage
 
 ```typescript
-import { BatchAction } from "@gusto/embedded-api/models/operations/postv1companiescompanyidpeoplebatches.js";
+import { BatchAction } from "@gusto/embedded-api/models/operations/postv1payrollbatches.js";
 
-let value: BatchAction = "create";
+let value: BatchAction = "cancel";
 ```
 
 ## Values
 
 ```typescript
-"create"
+"cancel"
 ```

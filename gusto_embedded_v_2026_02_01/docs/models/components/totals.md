@@ -1,21 +1,19 @@
 # Totals
 
-The subtotals for the payroll.
-
 ## Example Usage
 
 ```typescript
-import { Totals } from "@gusto/embedded-api-v-2026-02-01/models/components/payrollreceipt.js";
+import { Totals } from "@gusto/embedded-api-v-2026-02-01/models/components/contractorpaymentgrouppreview.js";
 
 let value: Totals = {};
 ```
 
 ## Fields
 
-| Field                                          | Type                                           | Required                                       | Description                                    |
-| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| `companyDebit`                                 | *string*                                       | :heavy_minus_sign:                             | The total company debit for the payroll.       |
-| `netPayDebit`                                  | *string*                                       | :heavy_minus_sign:                             | The total company net pay for the payroll.     |
-| `childSupportDebit`                            | *string*                                       | :heavy_minus_sign:                             | The total child support debit for the payroll. |
-| `reimbursementDebit`                           | *string*                                       | :heavy_minus_sign:                             | The total reimbursements for the payroll.      |
-| `taxDebit`                                     | *string*                                       | :heavy_minus_sign:                             | The total tax debit for the payroll.           |
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `amount`                                                                                         | *string*                                                                                         | :heavy_minus_sign:                                                                               | The total amount for the group of contractor payments.                                           |
+| `debitAmount`                                                                                    | *string*                                                                                         | :heavy_minus_sign:                                                                               | The total debit amount for the group of contractor payments. Sum of wage & reimbursement amount. |
+| `wageAmount`                                                                                     | *string*                                                                                         | :heavy_minus_sign:                                                                               | The total wage amount for the group of contractor payments.                                      |
+| `reimbursementAmount`                                                                            | *string*                                                                                         | :heavy_minus_sign:                                                                               | The total reimbursement amount for the group of contractor payments.                             |
+| `checkAmount`                                                                                    | *string*                                                                                         | :heavy_minus_sign:                                                                               | The total check amount for the group of contractor payments.                                     |

@@ -17,6 +17,25 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Notifications extends ClientSDK {
   /**
+   * Get notifications for company
+   *
+   * @remarks
+   * Returns all notifications relevant for the given company.
+   *
+   * scope: `notifications:read`
+   */
+  async getCompanyNotifications(
+    request: GetCompanyNotificationsRequest,
+    options?: RequestOptions,
+  ): Promise<GetCompanyNotificationsResponse> {
+    return unwrapAsync(notificationsGetCompanyNotifications(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Get a notification's details
    *
    * @remarks
@@ -33,25 +52,6 @@ export class Notifications extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetNotificationsNotificationUuidResponse> {
     return unwrapAsync(notificationsGetDetails(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get notifications for company
-   *
-   * @remarks
-   * Returns all notifications relevant for the given company.
-   *
-   * scope: `notifications:read`
-   */
-  async getCompanyNotifications(
-    request: GetCompanyNotificationsRequest,
-    options?: RequestOptions,
-  ): Promise<GetCompanyNotificationsResponse> {
-    return unwrapAsync(notificationsGetCompanyNotifications(
       this,
       request,
       options,

@@ -47,8 +47,8 @@ export function buildJobsAndCompensationsGetJobQuery(
 } {
   return {
     queryKey: queryKeyJobsAndCompensationsGetJob(request.jobId, {
-      include: request.include,
       xGustoAPIVersion: request.xGustoAPIVersion,
+      include: request.include,
     }),
     queryFn: async function jobsAndCompensationsGetJobQueryFn(
       ctx,
@@ -76,8 +76,8 @@ export function buildJobsAndCompensationsGetJobQuery(
 export function queryKeyJobsAndCompensationsGetJob(
   jobId: string,
   parameters: {
-    include?: GetV1JobsJobIdQueryParamInclude | undefined;
     xGustoAPIVersion?: GetV1JobsJobIdHeaderXGustoAPIVersion | undefined;
+    include?: GetV1JobsJobIdQueryParamInclude | undefined;
   },
 ): QueryKey {
   return [

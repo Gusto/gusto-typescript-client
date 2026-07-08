@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The type of recipient associated with the document (will be `Contractor` for Contractor Documents)
  */
-export const RecipientType = {
+export const DocumentRecipientType = {
   Company: "Company",
   Employee: "Employee",
   Contractor: "Contractor",
@@ -20,7 +20,7 @@ export const RecipientType = {
 /**
  * The type of recipient associated with the document (will be `Contractor` for Contractor Documents)
  */
-export type RecipientType = ClosedEnum<typeof RecipientType>;
+export type DocumentRecipientType = ClosedEnum<typeof DocumentRecipientType>;
 
 export type Pages = {
   /**
@@ -88,7 +88,7 @@ export type Document = {
   /**
    * The type of recipient associated with the document (will be `Contractor` for Contractor Documents)
    */
-  recipientType?: RecipientType | undefined;
+  recipientType?: DocumentRecipientType | undefined;
   /**
    * Unique identifier for the recipient associated with the document
    */
@@ -128,9 +128,9 @@ export type Document = {
 };
 
 /** @internal */
-export const RecipientType$inboundSchema: z.ZodNativeEnum<
-  typeof RecipientType
-> = z.nativeEnum(RecipientType);
+export const DocumentRecipientType$inboundSchema: z.ZodNativeEnum<
+  typeof DocumentRecipientType
+> = z.nativeEnum(DocumentRecipientType);
 
 /** @internal */
 export const Pages$inboundSchema: z.ZodType<Pages, z.ZodTypeDef, unknown> = z
@@ -192,7 +192,7 @@ export const Document$inboundSchema: z.ZodType<
   uuid: z.string().optional(),
   title: z.string().optional(),
   name: z.string().optional(),
-  recipient_type: RecipientType$inboundSchema.optional(),
+  recipient_type: DocumentRecipientType$inboundSchema.optional(),
   recipient_uuid: z.string().optional(),
   pages: z.array(z.lazy(() => Pages$inboundSchema)).optional(),
   fields: z.array(z.lazy(() => Fields$inboundSchema)).optional(),

@@ -31,15 +31,15 @@ export type GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion =
 
 export type GetWireInRequestsWireInRequestUuidRequest = {
   /**
-   * The UUID of the Wire In Request
-   */
-  wireInRequestUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the Wire In Request
+   */
+  wireInRequestUuid: string;
 };
 
 export type GetWireInRequestsWireInRequestUuidResponse = {
@@ -58,8 +58,8 @@ export const GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion$outboundSc
 
 /** @internal */
 export type GetWireInRequestsWireInRequestUuidRequest$Outbound = {
-  wire_in_request_uuid: string;
   "X-Gusto-API-Version": string;
+  wire_in_request_uuid: string;
 };
 
 /** @internal */
@@ -69,14 +69,14 @@ export const GetWireInRequestsWireInRequestUuidRequest$outboundSchema:
     z.ZodTypeDef,
     GetWireInRequestsWireInRequestUuidRequest
   > = z.object({
-    wireInRequestUuid: z.string(),
     xGustoAPIVersion:
       GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion$outboundSchema
         .default("2025-06-15"),
+    wireInRequestUuid: z.string(),
   }).transform((v) => {
     return remap$(v, {
-      wireInRequestUuid: "wire_in_request_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      wireInRequestUuid: "wire_in_request_uuid",
     });
   });
 

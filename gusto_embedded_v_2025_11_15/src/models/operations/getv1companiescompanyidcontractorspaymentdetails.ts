@@ -34,6 +34,12 @@ export type GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersi
 
 export type GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the company. This identifies the company whose contractor payment details you want to retrieve.
    */
   companyId: string;
@@ -45,12 +51,6 @@ export type GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest = {
    * Optional filter to get payment details for contractors in a specific payment group. When provided, the response will only include payment details for contractors in this group.
    */
   contractorPaymentGroupUuid?: string | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?:
-    | GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion
-    | undefined;
 };
 
 export type GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse = {
@@ -73,10 +73,10 @@ export const GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVers
 
 /** @internal */
 export type GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_id: string;
   contractor_uuid?: string | undefined;
   contractor_payment_group_uuid?: string | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -86,18 +86,18 @@ export const GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest$outboundSch
     z.ZodTypeDef,
     GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest
   > = z.object({
-    companyId: z.string(),
-    contractorUuid: z.string().optional(),
-    contractorPaymentGroupUuid: z.string().optional(),
     xGustoAPIVersion:
       GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion$outboundSchema
         .default("2025-11-15"),
+    companyId: z.string(),
+    contractorUuid: z.string().optional(),
+    contractorPaymentGroupUuid: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       companyId: "company_id",
       contractorUuid: "contractor_uuid",
       contractorPaymentGroupUuid: "contractor_payment_group_uuid",
-      xGustoAPIVersion: "X-Gusto-API-Version",
     });
   });
 

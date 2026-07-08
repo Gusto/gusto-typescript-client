@@ -5,9 +5,9 @@ A string indicating whether to sort resulting events in ascending (asc) or desce
 ## Example Usage
 
 ```typescript
-import { SortOrder } from "@gusto/embedded-api-v-2026-02-01/models/operations/getv1companiescompanyidpayrolls.js";
+import { SortOrder } from "@gusto/embedded-api-v-2026-02-01/models/operations/getevents.js";
 
-let value: SortOrder = "asc";
+let value: SortOrder = "desc";
 ```
 
 ## Values

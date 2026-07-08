@@ -38,15 +38,15 @@ export type PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion =
 
 export type PutV1CompaniesCompanyIdFederalTaxDetailsRequest = {
   /**
-   * The UUID of the company
-   */
-  companyId: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the company
+   */
+  companyId: string;
   federalTaxDetailsUpdate: FederalTaxDetailsUpdate;
 };
 
@@ -68,8 +68,8 @@ export const PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion$outb
 
 /** @internal */
 export type PutV1CompaniesCompanyIdFederalTaxDetailsRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
+  company_id: string;
   "Federal-Tax-Details-Update": FederalTaxDetailsUpdate$Outbound;
 };
 
@@ -80,15 +80,15 @@ export const PutV1CompaniesCompanyIdFederalTaxDetailsRequest$outboundSchema:
     z.ZodTypeDef,
     PutV1CompaniesCompanyIdFederalTaxDetailsRequest
   > = z.object({
-    companyId: z.string(),
     xGustoAPIVersion:
       PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion$outboundSchema
         .default("2025-06-15"),
+    companyId: z.string(),
     federalTaxDetailsUpdate: FederalTaxDetailsUpdate$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyId: "company_id",
       federalTaxDetailsUpdate: "Federal-Tax-Details-Update",
     });
   });

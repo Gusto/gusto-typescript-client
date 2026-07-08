@@ -32,15 +32,15 @@ export type GetNotificationsNotificationUuidHeaderXGustoAPIVersion = ClosedEnum<
 
 export type GetNotificationsNotificationUuidRequest = {
   /**
-   * The notification entity_uuid
-   */
-  notificationUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | GetNotificationsNotificationUuidHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The notification entity_uuid
+   */
+  notificationUuid: string;
 };
 
 export type GetNotificationsNotificationUuidResponse = {
@@ -59,8 +59,8 @@ export const GetNotificationsNotificationUuidHeaderXGustoAPIVersion$outboundSche
 
 /** @internal */
 export type GetNotificationsNotificationUuidRequest$Outbound = {
-  notification_uuid: string;
   "X-Gusto-API-Version": string;
+  notification_uuid: string;
 };
 
 /** @internal */
@@ -69,14 +69,14 @@ export const GetNotificationsNotificationUuidRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetNotificationsNotificationUuidRequest
 > = z.object({
-  notificationUuid: z.string(),
   xGustoAPIVersion:
     GetNotificationsNotificationUuidHeaderXGustoAPIVersion$outboundSchema
       .default("2025-11-15"),
+  notificationUuid: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    notificationUuid: "notification_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    notificationUuid: "notification_uuid",
   });
 });
 

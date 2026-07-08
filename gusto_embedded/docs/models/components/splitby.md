@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { SplitBy } from "@gusto/embedded-api/models/components/employeepaymentdetailslist.js";
+import { SplitBy } from "@gusto/embedded-api/models/components/contractorpaymentdetailslist.js";
 
 let value: SplitBy = "Amount";
 ```

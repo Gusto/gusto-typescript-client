@@ -22,6 +22,26 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class TaxRequirements extends ClientSDK {
   /**
+   * Get all tax requirements for a company
+   *
+   * @remarks
+   * Retrieves all states for which a company has tax requirements, along with a boolean indicating whether tax setup
+   * is complete for each state. Use this to determine which states still need tax setup during company onboarding.
+   *
+   * scope: `company_tax_requirements:read`
+   */
+  async getAll(
+    request: GetV1CompaniesCompanyUuidTaxRequirementsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyUuidTaxRequirementsResponse> {
+    return unwrapAsync(taxRequirementsGetAll(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Get tax requirements for a state
    *
    * @remarks
@@ -63,26 +83,6 @@ export class TaxRequirements extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PutV1CompaniesCompanyUuidTaxRequirementsStateResponse> {
     return unwrapAsync(taxRequirementsUpdateState(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get all tax requirements for a company
-   *
-   * @remarks
-   * Retrieves all states for which a company has tax requirements, along with a boolean indicating whether tax setup
-   * is complete for each state. Use this to determine which states still need tax setup during company onboarding.
-   *
-   * scope: `company_tax_requirements:read`
-   */
-  async getAll(
-    request: GetV1CompaniesCompanyUuidTaxRequirementsRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyUuidTaxRequirementsResponse> {
-    return unwrapAsync(taxRequirementsGetAll(
       this,
       request,
       options,

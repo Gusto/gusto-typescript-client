@@ -98,19 +98,72 @@
 <body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
 
 <ul>
-<li><code>gustoembedded.contractors.postV1ContractorsContractorUuidRehire()</code>:  <code>error.status[422]</code> <strong>Added</strong></li>
-<li><code>gustoembedded.contractors.deleteV1ContractorsContractorUuidRehire()</code>:  <code>error.status[422]</code> <strong>Added</strong></li>
-<li><code>gustoembedded.contractors.postV1ContractorsContractorUuidTermination()</code>:  <code>error.status[422]</code> <strong>Added</strong></li>
-<li><code>gustoembedded.contractors.deleteV1ContractorsContractorUuidTermination()</code>:  <code>error.status[422]</code> <strong>Added</strong></li>
-<li><code>gustoembedded.payrolls.getApprovedReversals()</code>:
+<li><code>gustoembedded.webhooks.listSubscriptions()</code>:  <code>response.[].subscriptionTypes[].enum(timeOffRequest)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.webhooks.verify()</code>:  <code>response.subscriptionTypes[].enum(timeOffRequest)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.webhooks.updateSubscription()</code>:
 
 <ul>
-<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>request.requestBody.subscriptionTypes[].enum(timeOffRequest)</code> <strong>Added</strong></li>
+<li><code>response.subscriptionTypes[].enum(timeOffRequest)</code> <strong>Added</strong> (Breaking ⚠️)</li>
 </ul></li>
-<li><code>gustoembedded.generatedDocuments.get()</code>:
+<li><code>gustoembedded.webhooks.getSubscription()</code>:  <code>response.subscriptionTypes[].enum(timeOffRequest)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.webhooks.createSubscription()</code>:
 
 <ul>
-<li><code>request.xGustoApiVersion</code> <strong>Changed</strong></li>
+<li><code>request.requestBody.subscriptionTypes[].enum(timeOffRequest)</code> <strong>Added</strong></li>
+<li><code>response.subscriptionTypes[].enum(timeOffRequest)</code> <strong>Added</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.contractorPayments.getReceipt()</code>: <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.contractorPayments.get()</code>: <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.contractorPayments.delete()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.contractorPayments.getReceipt()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.contractorPayments.fund()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.memberPortalInvitations.postV1EmployeesEmployeeIdMemberPortalInvitations()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.memberPortalInvitations.getV1EmployeesEmployeeIdMemberPortalInvitations()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.memberPortalInvitations.deleteV1EmployeesEmployeeIdMemberPortalInvitations()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.memberPortalInvitations.postV1ContractorsContractorUuidMemberPortalInvitations()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.memberPortalInvitations.getV1ContractorsContractorUuidMemberPortalInvitations()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.memberPortalInvitations.deleteV1ContractorsContractorUuidMemberPortalInvitations()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.payrollCancellations.postV1PayrollBatches()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.payrollCancellations.getV1PayrollBatchesPayrollBatchUuid()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.reports.postV1BulkReports()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.contractorPayments.fund()</code>: <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.contractorPayments.list()</code>: <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.contractorPayments.create()</code>: <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.contractorPayments.get()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.contractorPayments.delete()</code>: <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.contractorPayments.getV1ContractorPaymentsContractorPaymentIdPdf()</code>: <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.federalTaxDetails.update()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>gustoembedded.paySchedules.getPreview()</code>:
+
+<ul>
+<li><code>request.payScheduleUuid</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.employees.getOnboardingStatus()</code>:  <code>response.blockers</code> <strong>Added</strong></li>
+<li><code>gustoembedded.employees.updateOnboardingStatus()</code>:  <code>response.blockers</code> <strong>Added</strong></li>
+<li><code>gustoembedded.contractorPayments.create()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.contractorPayments.list()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.contractorPayments.getV1ContractorPaymentsContractorPaymentIdPdf()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.contractorPayments.getV1ContractorsContractorUuidPayments()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.reports.getV1BulkReportsRequestUuid()</code>: <strong>Added</strong></li>
+<li><code>gustoembedded.payrolls.createOffCycle()</code>:  <code>response.employeeCompensations[].customWithholdings</code> <strong>Added</strong></li>
+<li><code>gustoembedded.payrolls.get()</code>:  <code>response.employeeCompensations[].customWithholdings</code> <strong>Added</strong></li>
+<li><code>gustoembedded.payrolls.update()</code>:
+
+<ul>
+<li><code>request.payrollUpdate.employeeCompensations[].customWithholdings</code> <strong>Added</strong></li>
+<li><code>response.employeeCompensations[].customWithholdings</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.payrolls.prepare()</code>:  <code>response.employeeCompensations[].customWithholdings</code> <strong>Added</strong></li>
+<li><code>gustoembedded.reports.createCustom()</code>:
+
+<ul>
+<li><code>request.createReportBody</code> <strong>Changed</strong>
+
+<ul>
+<li><code>dateFilterType</code> <strong>Added</strong></li>
+<li><code>groupings</code> <strong>Changed</strong></li>
+</ul></li>
 </ul></li>
 </ul>
 </body>

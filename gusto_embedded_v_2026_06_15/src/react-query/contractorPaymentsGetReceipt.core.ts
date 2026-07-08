@@ -83,7 +83,7 @@ export function queryKeyContractorPaymentsGetReceipt(
 ): QueryKey {
   return [
     "@gusto/embedded-api-v-2026-06-15",
-    "contractorPayments",
+    "Contractor Payments",
     "getReceipt",
     contractorPaymentUuid,
     parameters,

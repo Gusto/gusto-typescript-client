@@ -28,13 +28,13 @@ export type DeleteDepartmentHeaderXGustoAPIVersion = ClosedEnum<
 
 export type DeleteDepartmentRequest = {
   /**
-   * The UUID of the department
-   */
-  departmentUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: DeleteDepartmentHeaderXGustoAPIVersion | undefined;
+  /**
+   * The UUID of the department
+   */
+  departmentUuid: string;
 };
 
 export type DeleteDepartmentResponse = {
@@ -49,8 +49,8 @@ export const DeleteDepartmentHeaderXGustoAPIVersion$outboundSchema:
 
 /** @internal */
 export type DeleteDepartmentRequest$Outbound = {
-  department_uuid: string;
   "X-Gusto-API-Version": string;
+  department_uuid: string;
 };
 
 /** @internal */
@@ -59,13 +59,13 @@ export const DeleteDepartmentRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeleteDepartmentRequest
 > = z.object({
-  departmentUuid: z.string(),
   xGustoAPIVersion: DeleteDepartmentHeaderXGustoAPIVersion$outboundSchema
     .default("2025-11-15"),
+  departmentUuid: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    departmentUuid: "department_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    departmentUuid: "department_uuid",
   });
 });
 

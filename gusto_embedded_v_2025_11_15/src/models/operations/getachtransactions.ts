@@ -20,21 +20,19 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const GetAchTransactionsHeaderXGustoAPIVersion = {
+export const XGustoAPIVersion = {
   TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type GetAchTransactionsHeaderXGustoAPIVersion = ClosedEnum<
-  typeof GetAchTransactionsHeaderXGustoAPIVersion
->;
+export type XGustoAPIVersion = ClosedEnum<typeof XGustoAPIVersion>;
 
 export type GetAchTransactionsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: GetAchTransactionsHeaderXGustoAPIVersion | undefined;
+  xGustoAPIVersion?: XGustoAPIVersion | undefined;
   /**
    * The UUID of the company
    */
@@ -74,9 +72,9 @@ export type GetAchTransactionsResponse = {
 };
 
 /** @internal */
-export const GetAchTransactionsHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<typeof GetAchTransactionsHeaderXGustoAPIVersion> = z
-    .nativeEnum(GetAchTransactionsHeaderXGustoAPIVersion);
+export const XGustoAPIVersion$outboundSchema: z.ZodNativeEnum<
+  typeof XGustoAPIVersion
+> = z.nativeEnum(XGustoAPIVersion);
 
 /** @internal */
 export type GetAchTransactionsRequest$Outbound = {
@@ -96,8 +94,7 @@ export const GetAchTransactionsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAchTransactionsRequest
 > = z.object({
-  xGustoAPIVersion: GetAchTransactionsHeaderXGustoAPIVersion$outboundSchema
-    .default("2025-11-15"),
+  xGustoAPIVersion: XGustoAPIVersion$outboundSchema.default("2025-11-15"),
   companyUuid: z.string(),
   contractorPaymentUuid: z.string().optional(),
   payrollUuid: z.string().optional(),

@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Represents the notification's status as managed by our system. It is updated based on observable system events and internal business logic, and does not reflect resolution steps taken outside our system. This field is read-only and cannot be modified via the API.
  */
-export const Status = {
+export const NotificationStatus = {
   Open: "open",
   Resolved: "resolved",
   Expired: "expired",
@@ -20,7 +20,7 @@ export const Status = {
 /**
  * Represents the notification's status as managed by our system. It is updated based on observable system events and internal business logic, and does not reflect resolution steps taken outside our system. This field is read-only and cannot be modified via the API.
  */
-export type Status = ClosedEnum<typeof Status>;
+export type NotificationStatus = ClosedEnum<typeof NotificationStatus>;
 
 /**
  * The type of entity being described.
@@ -80,7 +80,7 @@ export type Notification = {
   /**
    * Represents the notification's status as managed by our system. It is updated based on observable system events and internal business logic, and does not reflect resolution steps taken outside our system. This field is read-only and cannot be modified via the API.
    */
-  status: Status;
+  status: NotificationStatus;
   /**
    * The notification's category.
    */
@@ -112,8 +112,9 @@ export type Notification = {
 };
 
 /** @internal */
-export const Status$inboundSchema: z.ZodNativeEnum<typeof Status> = z
-  .nativeEnum(Status);
+export const NotificationStatus$inboundSchema: z.ZodNativeEnum<
+  typeof NotificationStatus
+> = z.nativeEnum(NotificationStatus);
 
 /** @internal */
 export const NotificationEntityType$inboundSchema: z.ZodNativeEnum<
@@ -159,7 +160,7 @@ export const Notification$inboundSchema: z.ZodType<
   company_uuid: z.string(),
   title: z.string(),
   message: z.string(),
-  status: Status$inboundSchema,
+  status: NotificationStatus$inboundSchema,
   category: z.string(),
   actionable: z.boolean(),
   can_block_payroll: z.boolean(),

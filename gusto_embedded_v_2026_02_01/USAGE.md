@@ -7,7 +7,9 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.introspection.getInfo({});
+  const result = await gustoEmbedded.achTransactions.getAll({
+    companyUuid: "<id>",
+  });
 
   console.log(result);
 }

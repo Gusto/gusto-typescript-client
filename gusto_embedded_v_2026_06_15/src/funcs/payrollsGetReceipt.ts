@@ -3,7 +3,7 @@
  */
 
 import { GustoEmbeddedCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -44,6 +44,7 @@ import { Result } from "../types/fp.js";
  * * Hour and dollar amounts are returned as string representations of numeric decimals.
  * * Dollar amounts are represented to the cent.
  * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+ * * Results are paginated. Maximum page size is 100 employee compensations per request.
  *
  * scope: `payrolls:read`
  *
@@ -117,6 +118,11 @@ async function $do(
   };
   const path = pathToFunc("/v1/payrolls/{payroll_uuid}/receipt")(pathParams);
 
+  const query = encodeFormQuery({
+    "page": payload.page,
+    "per": payload.per,
+  });
+
   const headers = new Headers(compactMap({
     Accept: "application/json",
     "X-Gusto-API-Version": encodeSimple(
@@ -153,6 +159,7 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,

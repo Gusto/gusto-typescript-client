@@ -1,17 +1,22 @@
 # Status
 
-Represents the notification's status as managed by our system. It is updated based on observable system events and internal business logic, and does not reflect resolution steps taken outside our system. This field is read-only and cannot be modified via the API.
+The batch's processing state.
+- `pending`: accepted, not yet started
+- `processing`: reports are being generated
+- `completed`: all reports finished
+- `failed`: the batch failed before completing
+
 
 ## Example Usage
 
 ```typescript
-import { Status } from "@gusto/embedded-api-v-2026-06-15/models/components/notification.js";
+import { Status } from "@gusto/embedded-api-v-2026-06-15/models/components/createbulkreport.js";
 
-let value: Status = "resolved";
+let value: Status = "completed";
 ```
 
 ## Values
 
 ```typescript
-"open" | "resolved" | "expired"
+"pending" | "processing" | "completed" | "failed"
 ```

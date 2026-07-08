@@ -44,15 +44,15 @@ export type PutV1WorkAddressesWorkAddressUuidRequestBody = {
 
 export type PutV1WorkAddressesWorkAddressUuidRequest = {
   /**
-   * The UUID of the work address
-   */
-  workAddressUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the work address
+   */
+  workAddressUuid: string;
   requestBody: PutV1WorkAddressesWorkAddressUuidRequestBody;
 };
 
@@ -108,8 +108,8 @@ export function putV1WorkAddressesWorkAddressUuidRequestBodyToJSON(
 
 /** @internal */
 export type PutV1WorkAddressesWorkAddressUuidRequest$Outbound = {
-  work_address_uuid: string;
   "X-Gusto-API-Version": string;
+  work_address_uuid: string;
   RequestBody: PutV1WorkAddressesWorkAddressUuidRequestBody$Outbound;
 };
 
@@ -119,17 +119,17 @@ export const PutV1WorkAddressesWorkAddressUuidRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1WorkAddressesWorkAddressUuidRequest
 > = z.object({
-  workAddressUuid: z.string(),
   xGustoAPIVersion:
     PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema
       .default("2025-11-15"),
+  workAddressUuid: z.string(),
   requestBody: z.lazy(() =>
     PutV1WorkAddressesWorkAddressUuidRequestBody$outboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
-    workAddressUuid: "work_address_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    workAddressUuid: "work_address_uuid",
     requestBody: "RequestBody",
   });
 });

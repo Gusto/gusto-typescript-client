@@ -47,6 +47,49 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class ContractorPaymentGroups extends ClientSDK {
   /**
+   * Preview a contractor payment group
+   *
+   * @remarks
+   * Preview a group of contractor payments. Request will validate inputs and return preview of the contractor payment group including the expected `debit_date`. The `uuid` field will be null in the response.
+   *
+   * The returned `creation_token` is a required parameter in order to create the contractor payment group.
+   *
+   * scope: `payrolls:read`
+   */
+  async preview(
+    request: PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse> {
+    return unwrapAsync(contractorPaymentGroupsPreview(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Fund a contractor payment group [DEMO]
+   *
+   * @remarks
+   * > 🚧 Demo action
+   * > This action is only available in the Demo environment
+   *
+   * Simulate funding a contractor payment group. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment group's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
+   *
+   * scope: `payrolls:run`
+   */
+  async fund(
+    request: PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest,
+    options?: RequestOptions,
+  ): Promise<PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse> {
+    return unwrapAsync(contractorPaymentGroupsFund(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Get contractor payment groups for a company
    *
    * @remarks
@@ -85,27 +128,6 @@ export class ContractorPaymentGroups extends ClientSDK {
   }
 
   /**
-   * Preview a contractor payment group
-   *
-   * @remarks
-   * Preview a group of contractor payments. Request will validate inputs and return preview of the contractor payment group including the expected `debit_date`. The `uuid` field will be null in the response.
-   *
-   * The returned `creation_token` is a required parameter in order to create the contractor payment group.
-   *
-   * scope: `payrolls:read`
-   */
-  async preview(
-    request: PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse> {
-    return unwrapAsync(contractorPaymentGroupsPreview(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get a contractor payment group
    *
    * @remarks
@@ -137,28 +159,6 @@ export class ContractorPaymentGroups extends ClientSDK {
     options?: RequestOptions,
   ): Promise<DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse> {
     return unwrapAsync(contractorPaymentGroupsDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Fund a contractor payment group [DEMO]
-   *
-   * @remarks
-   * > 🚧 Demo action
-   * > This action is only available in the Demo environment
-   *
-   * Simulate funding a contractor payment group. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment group's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
-   *
-   * scope: `payrolls:run`
-   */
-  async fund(
-    request: PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest,
-    options?: RequestOptions,
-  ): Promise<PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse> {
-    return unwrapAsync(contractorPaymentGroupsFund(
       this,
       request,
       options,

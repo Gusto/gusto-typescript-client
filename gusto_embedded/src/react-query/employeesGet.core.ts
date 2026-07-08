@@ -13,9 +13,9 @@ import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1EmployeesHeaderXGustoAPIVersion,
+  GetV1EmployeesQueryParamInclude,
   GetV1EmployeesRequest,
   GetV1EmployeesResponse,
-  QueryParamInclude,
 } from "../models/operations/getv1employees.js";
 import { unwrapAsync } from "../types/fp.js";
 export type EmployeesGetQueryData = GetV1EmployeesResponse;
@@ -75,7 +75,7 @@ export function queryKeyEmployeesGet(
   employeeId: string,
   parameters: {
     xGustoAPIVersion?: GetV1EmployeesHeaderXGustoAPIVersion | undefined;
-    include?: Array<QueryParamInclude> | undefined;
+    include?: Array<GetV1EmployeesQueryParamInclude> | undefined;
   },
 ): QueryKey {
   return ["@gusto/embedded-api", "Employees", "get", employeeId, parameters];

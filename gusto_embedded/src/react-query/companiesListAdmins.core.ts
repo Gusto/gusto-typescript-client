@@ -12,9 +12,9 @@ import { companiesListAdmins } from "../funcs/companiesListAdmins.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
-  GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdAdminsRequest,
   GetV1CompaniesCompanyIdAdminsResponse,
+  HeaderXGustoAPIVersion,
 } from "../models/operations/getv1companiescompanyidadmins.js";
 import { unwrapAsync } from "../types/fp.js";
 export type CompaniesListAdminsQueryData =
@@ -77,9 +77,7 @@ export function buildCompaniesListAdminsQuery(
 export function queryKeyCompaniesListAdmins(
   companyId: string,
   parameters: {
-    xGustoAPIVersion?:
-      | GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion
-      | undefined;
+    xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined;
     page?: number | undefined;
     per?: number | undefined;
   },

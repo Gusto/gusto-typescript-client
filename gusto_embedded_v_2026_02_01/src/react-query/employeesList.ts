@@ -23,8 +23,8 @@ import { ResponseValidationError } from "../models/errors/responsevalidationerro
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion,
+  GetV1CompaniesCompanyIdEmployeesQueryParamInclude,
   GetV1CompaniesCompanyIdEmployeesRequest,
-  Include,
 } from "../models/operations/getv1companiescompanyidemployees.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -121,7 +121,9 @@ export function setEmployeesListData(
       payrollUuid?: string | undefined;
       searchTerm?: string | undefined;
       sortBy?: string | undefined;
-      include?: Array<Include> | undefined;
+      include?:
+        | Array<GetV1CompaniesCompanyIdEmployeesQueryParamInclude>
+        | undefined;
       onboarded?: boolean | undefined;
       onboardedActive?: boolean | undefined;
       terminated?: boolean | undefined;
@@ -151,7 +153,9 @@ export function invalidateEmployeesList(
         payrollUuid?: string | undefined;
         searchTerm?: string | undefined;
         sortBy?: string | undefined;
-        include?: Array<Include> | undefined;
+        include?:
+          | Array<GetV1CompaniesCompanyIdEmployeesQueryParamInclude>
+          | undefined;
         onboarded?: boolean | undefined;
         onboardedActive?: boolean | undefined;
         terminated?: boolean | undefined;

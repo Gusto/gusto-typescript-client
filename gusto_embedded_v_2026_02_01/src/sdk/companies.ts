@@ -89,32 +89,39 @@ export class Companies extends ClientSDK {
   }
 
   /**
-   * Create a partner managed company
+   * Get all the admins at a company
    *
    * @remarks
-   * Create a partner managed company. When you successfully call the API, it does the following:
-   * * Creates a new company in Gusto
-   * * Creates a new user using the provided email if the user does not already exist.
-   * * Makes the user the primary payroll administrator of the new company.
+   * Returns a list of all the admins at a company
    *
-   * In response, you will receive oauth access tokens for the created company.
-   *
-   * IMPORTANT: the returned access and refresh tokens are reserved for this company only. They cannot be used to access other companies AND previously granted tokens cannot be used to access this company.
-   *
-   * 📘 System Access Authentication
-   *
-   * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
-   *
-   * scope: `partner_managed_companies:manage`
+   * scope: `company_admin:read`
    */
-  async createPartnerManaged(
-    security: PostV1PartnerManagedCompaniesSecurity,
-    request: PostV1PartnerManagedCompaniesRequest,
+  async listAdmins(
+    request: GetV1CompaniesCompanyIdAdminsRequest,
     options?: RequestOptions,
-  ): Promise<PostV1PartnerManagedCompaniesResponse> {
-    return unwrapAsync(companiesCreatePartnerManaged(
+  ): Promise<GetV1CompaniesCompanyIdAdminsResponse> {
+    return unwrapAsync(companiesListAdmins(
       this,
-      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create an admin for the company
+   *
+   * @remarks
+   * Creates a new admin for a company.
+   * If the email matches an existing user, this will create an admin account for the current user. Otherwise, this will create a new user.
+   *
+   * scope: `company_admin:write`
+   */
+  async createAdmin(
+    request: PostV1CompaniesCompanyIdAdminsRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1CompaniesCompanyIdAdminsResponse> {
+    return unwrapAsync(companiesCreateAdmin(
+      this,
       request,
       options,
     ));
@@ -163,6 +170,78 @@ export class Companies extends ClientSDK {
   }
 
   /**
+   * Get the custom fields of a company
+   *
+   * @remarks
+   * Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company.
+   *
+   * scope: `companies:read`
+   */
+  async getCustomFields(
+    request: GetV1CompaniesCompanyIdCustomFieldsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyIdCustomFieldsResponse> {
+    return unwrapAsync(companiesGetCustomFields(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get company onboarding status
+   *
+   * @remarks
+   * Retrieves a company's onboarding status, including whether onboarding is complete and the list of
+   * required onboarding steps with their respective completion state.
+   *
+   * scope: `company_onboarding_status:read`
+   */
+  async getOnboardingStatus(
+    request: GetV1CompanyOnboardingStatusRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompanyOnboardingStatusResponse> {
+    return unwrapAsync(companiesGetOnboardingStatus(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Finish company onboarding
+   *
+   * @remarks
+   * Finalize a company's onboarding process.
+   *
+   * ### Approve a company in demo
+   *
+   * After a company is finished onboarding, Gusto requires an additional step to review and approve that company.
+   * The company onboarding status is "onboarding_completed": false, until the API call is made to finish company
+   * onboarding. In production environments, this step is required for risk-analysis purposes.
+   *
+   * We provide the endpoint `PUT '/v1/companies/{company_uuid}/approve'` to facilitate company approvals in the demo environment.
+   *
+   * ```shell
+   * PUT '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/approve'
+   *
+   * # Response: Company object, with company_status: 'Approved'
+   * ```
+   *
+   * scope: `companies:write`
+   */
+  async finishOnboarding(
+    request: GetV1CompanyFinishOnboardingRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompanyFinishOnboardingResponse> {
+    return unwrapAsync(companiesFinishOnboarding(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Migrate company to embedded payroll
    *
    * @remarks
@@ -184,6 +263,38 @@ export class Companies extends ClientSDK {
   ): Promise<PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse> {
     return unwrapAsync(companiesMigrate(
       this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a partner managed company
+   *
+   * @remarks
+   * Create a partner managed company. When you successfully call the API, it does the following:
+   * * Creates a new company in Gusto
+   * * Creates a new user using the provided email if the user does not already exist.
+   * * Makes the user the primary payroll administrator of the new company.
+   *
+   * In response, you will receive oauth access tokens for the created company.
+   *
+   * IMPORTANT: the returned access and refresh tokens are reserved for this company only. They cannot be used to access other companies AND previously granted tokens cannot be used to access this company.
+   *
+   * 📘 System Access Authentication
+   *
+   * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+   *
+   * scope: `partner_managed_companies:manage`
+   */
+  async createPartnerManaged(
+    security: PostV1PartnerManagedCompaniesSecurity,
+    request: PostV1PartnerManagedCompaniesRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1PartnerManagedCompaniesResponse> {
+    return unwrapAsync(companiesCreatePartnerManaged(
+      this,
+      security,
       request,
       options,
     ));
@@ -331,116 +442,5 @@ export class Companies extends ClientSDK {
         options,
       ),
     );
-  }
-
-  /**
-   * Get all the admins at a company
-   *
-   * @remarks
-   * Returns a list of all the admins at a company
-   *
-   * scope: `company_admin:read`
-   */
-  async listAdmins(
-    request: GetV1CompaniesCompanyIdAdminsRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyIdAdminsResponse> {
-    return unwrapAsync(companiesListAdmins(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create an admin for the company
-   *
-   * @remarks
-   * Creates a new admin for a company.
-   * If the email matches an existing user, this will create an admin account for the current user. Otherwise, this will create a new user.
-   *
-   * scope: `company_admin:write`
-   */
-  async createAdmin(
-    request: PostV1CompaniesCompanyIdAdminsRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1CompaniesCompanyIdAdminsResponse> {
-    return unwrapAsync(companiesCreateAdmin(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get company onboarding status
-   *
-   * @remarks
-   * Retrieves a company's onboarding status, including whether onboarding is complete and the list of
-   * required onboarding steps with their respective completion state.
-   *
-   * scope: `company_onboarding_status:read`
-   */
-  async getOnboardingStatus(
-    request: GetV1CompanyOnboardingStatusRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompanyOnboardingStatusResponse> {
-    return unwrapAsync(companiesGetOnboardingStatus(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Finish company onboarding
-   *
-   * @remarks
-   * Finalize a company's onboarding process.
-   *
-   * ### Approve a company in demo
-   *
-   * After a company is finished onboarding, Gusto requires an additional step to review and approve that company.
-   * The company onboarding status is "onboarding_completed": false, until the API call is made to finish company
-   * onboarding. In production environments, this step is required for risk-analysis purposes.
-   *
-   * We provide the endpoint `PUT '/v1/companies/{company_uuid}/approve'` to facilitate company approvals in the demo environment.
-   *
-   * ```shell
-   * PUT '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/approve'
-   *
-   * # Response: Company object, with company_status: 'Approved'
-   * ```
-   *
-   * scope: `companies:write`
-   */
-  async finishOnboarding(
-    request: GetV1CompanyFinishOnboardingRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompanyFinishOnboardingResponse> {
-    return unwrapAsync(companiesFinishOnboarding(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get the custom fields of a company
-   *
-   * @remarks
-   * Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company.
-   *
-   * scope: `companies:read`
-   */
-  async getCustomFields(
-    request: GetV1CompaniesCompanyIdCustomFieldsRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyIdCustomFieldsResponse> {
-    return unwrapAsync(companiesGetCustomFields(
-      this,
-      request,
-      options,
-    ));
   }
 }

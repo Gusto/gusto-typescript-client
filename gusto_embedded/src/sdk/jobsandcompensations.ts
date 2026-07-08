@@ -57,108 +57,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class JobsAndCompensations extends ClientSDK {
   /**
-   * Get jobs for an employee
-   *
-   * @remarks
-   * Get all of the jobs that an employee holds.
-   * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
-   *
-   * Compensation data in the response requires the `compensations:read` scope.
-   *
-   * scope: `jobs:read`
-   */
-  async getJobs(
-    request: GetV1EmployeesEmployeeIdJobsRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1EmployeesEmployeeIdJobsResponse> {
-    return unwrapAsync(jobsAndCompensationsGetJobs(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create a job
-   *
-   * @remarks
-   * Create a job.
-   *
-   * scope: `jobs:write`
-   */
-  async createJob(
-    request: PostV1EmployeesEmployeeIdJobsRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1EmployeesEmployeeIdJobsResponse> {
-    return unwrapAsync(jobsAndCompensationsCreateJob(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get a job
-   *
-   * @remarks
-   * Get a job.
-   *
-   * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
-   *
-   * Compensation data in the response requires the `compensations:read` scope.
-   *
-   * scope: `jobs:read`
-   */
-  async getJob(
-    request: GetV1JobsJobIdRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1JobsJobIdResponse> {
-    return unwrapAsync(jobsAndCompensationsGetJob(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update a job
-   *
-   * @remarks
-   * Update a job.
-   *
-   * scope: `jobs:write`
-   */
-  async update(
-    request: PutV1JobsJobIdRequest,
-    options?: RequestOptions,
-  ): Promise<PutV1JobsJobIdResponse> {
-    return unwrapAsync(jobsAndCompensationsUpdate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete an individual job
-   *
-   * @remarks
-   * Deletes a specific job that an employee holds.
-   *
-   * scope: `jobs:write`
-   */
-  async delete(
-    request: DeleteV1JobsJobIdRequest,
-    options?: RequestOptions,
-  ): Promise<DeleteV1JobsJobIdResponse> {
-    return unwrapAsync(jobsAndCompensationsDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get compensations for a job
    *
    * @remarks
@@ -265,6 +163,108 @@ export class JobsAndCompensations extends ClientSDK {
     options?: RequestOptions,
   ): Promise<DeleteV1CompensationsCompensationIdResponse> {
     return unwrapAsync(jobsAndCompensationsDeleteCompensation(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get a job
+   *
+   * @remarks
+   * Get a job.
+   *
+   * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
+   *
+   * Compensation data in the response requires the `compensations:read` scope.
+   *
+   * scope: `jobs:read`
+   */
+  async getJob(
+    request: GetV1JobsJobIdRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1JobsJobIdResponse> {
+    return unwrapAsync(jobsAndCompensationsGetJob(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update a job
+   *
+   * @remarks
+   * Update a job.
+   *
+   * scope: `jobs:write`
+   */
+  async update(
+    request: PutV1JobsJobIdRequest,
+    options?: RequestOptions,
+  ): Promise<PutV1JobsJobIdResponse> {
+    return unwrapAsync(jobsAndCompensationsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete an individual job
+   *
+   * @remarks
+   * Deletes a specific job that an employee holds.
+   *
+   * scope: `jobs:write`
+   */
+  async delete(
+    request: DeleteV1JobsJobIdRequest,
+    options?: RequestOptions,
+  ): Promise<DeleteV1JobsJobIdResponse> {
+    return unwrapAsync(jobsAndCompensationsDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get jobs for an employee
+   *
+   * @remarks
+   * Get all of the jobs that an employee holds.
+   * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
+   *
+   * Compensation data in the response requires the `compensations:read` scope.
+   *
+   * scope: `jobs:read`
+   */
+  async getJobs(
+    request: GetV1EmployeesEmployeeIdJobsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1EmployeesEmployeeIdJobsResponse> {
+    return unwrapAsync(jobsAndCompensationsGetJobs(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a job
+   *
+   * @remarks
+   * Create a job.
+   *
+   * scope: `jobs:write`
+   */
+  async createJob(
+    request: PostV1EmployeesEmployeeIdJobsRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1EmployeesEmployeeIdJobsResponse> {
+    return unwrapAsync(jobsAndCompensationsCreateJob(
       this,
       request,
       options,

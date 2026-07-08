@@ -80,6 +80,44 @@ export class TimeOffPolicies extends ClientSDK {
   }
 
   /**
+   * Get all time off policies for a company
+   *
+   * @remarks
+   * Get all time off policies for a company
+   *
+   * scope: `time_off_policies:read`
+   */
+  async getAll(
+    request: GetV1CompaniesCompanyUuidTimeOffPoliciesRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyUuidTimeOffPoliciesResponse> {
+    return unwrapAsync(timeOffPoliciesGetAll(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a time off policy
+   *
+   * @remarks
+   * Create a time off policy
+   *
+   * scope: `time_off_policies:write`
+   */
+  async create(
+    request: PostV1CompaniesCompanyUuidTimeOffPoliciesRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1CompaniesCompanyUuidTimeOffPoliciesResponse> {
+    return unwrapAsync(timeOffPoliciesCreate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Get a time off policy
    *
    * @remarks
@@ -118,37 +156,18 @@ export class TimeOffPolicies extends ClientSDK {
   }
 
   /**
-   * Get all time off policies for a company
+   * Deactivate a time off policy
    *
    * @remarks
-   * Get all time off policies for a company
-   *
-   * scope: `time_off_policies:read`
-   */
-  async getAll(
-    request: GetV1CompaniesCompanyUuidTimeOffPoliciesRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyUuidTimeOffPoliciesResponse> {
-    return unwrapAsync(timeOffPoliciesGetAll(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create a time off policy
-   *
-   * @remarks
-   * Create a time off policy
+   * Deactivate a time off policy
    *
    * scope: `time_off_policies:write`
    */
-  async create(
-    request: PostV1CompaniesCompanyUuidTimeOffPoliciesRequest,
+  async deactivate(
+    request: PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest,
     options?: RequestOptions,
-  ): Promise<PostV1CompaniesCompanyUuidTimeOffPoliciesResponse> {
-    return unwrapAsync(timeOffPoliciesCreate(
+  ): Promise<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse> {
+    return unwrapAsync(timeOffPoliciesDeactivate(
       this,
       request,
       options,
@@ -206,25 +225,6 @@ export class TimeOffPolicies extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse> {
     return unwrapAsync(timeOffPoliciesUpdateBalance(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Deactivate a time off policy
-   *
-   * @remarks
-   * Deactivate a time off policy
-   *
-   * scope: `time_off_policies:write`
-   */
-  async deactivate(
-    request: PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest,
-    options?: RequestOptions,
-  ): Promise<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse> {
-    return unwrapAsync(timeOffPoliciesDeactivate(
       this,
       request,
       options,

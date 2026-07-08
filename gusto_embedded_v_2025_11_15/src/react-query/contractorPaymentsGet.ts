@@ -150,7 +150,7 @@ export function invalidateContractorPaymentsGet(
     ...filters,
     queryKey: [
       "@gusto/embedded-api-v-2025-11-15",
-      "contractorPayments",
+      "Contractor Payments",
       "get",
       ...queryKeyBase,
     ],
@@ -163,6 +163,10 @@ export function invalidateAllContractorPaymentsGet(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@gusto/embedded-api-v-2025-11-15", "contractorPayments", "get"],
+    queryKey: [
+      "@gusto/embedded-api-v-2025-11-15",
+      "Contractor Payments",
+      "get",
+    ],
   });
 }

@@ -27,7 +27,7 @@ export type GetV1EmployeesHeaderXGustoAPIVersion = ClosedEnum<
   typeof GetV1EmployeesHeaderXGustoAPIVersion
 >;
 
-export const QueryParamInclude = {
+export const GetV1EmployeesQueryParamInclude = {
   AllCompensations: "all_compensations",
   AllHomeAddresses: "all_home_addresses",
   CompanyName: "company_name",
@@ -35,7 +35,9 @@ export const QueryParamInclude = {
   CustomFields: "custom_fields",
   PortalInvitations: "portal_invitations",
 } as const;
-export type QueryParamInclude = ClosedEnum<typeof QueryParamInclude>;
+export type GetV1EmployeesQueryParamInclude = ClosedEnum<
+  typeof GetV1EmployeesQueryParamInclude
+>;
 
 export type GetV1EmployeesRequest = {
   /**
@@ -49,7 +51,7 @@ export type GetV1EmployeesRequest = {
   /**
    * Include the requested attribute(s) in each employee response. Multiple options are comma separated.
    */
-  include?: Array<QueryParamInclude> | undefined;
+  include?: Array<GetV1EmployeesQueryParamInclude> | undefined;
 };
 
 export type GetV1EmployeesResponse = {
@@ -67,9 +69,9 @@ export const GetV1EmployeesHeaderXGustoAPIVersion$outboundSchema:
   );
 
 /** @internal */
-export const QueryParamInclude$outboundSchema: z.ZodNativeEnum<
-  typeof QueryParamInclude
-> = z.nativeEnum(QueryParamInclude);
+export const GetV1EmployeesQueryParamInclude$outboundSchema: z.ZodNativeEnum<
+  typeof GetV1EmployeesQueryParamInclude
+> = z.nativeEnum(GetV1EmployeesQueryParamInclude);
 
 /** @internal */
 export type GetV1EmployeesRequest$Outbound = {
@@ -88,7 +90,7 @@ export const GetV1EmployeesRequest$outboundSchema: z.ZodType<
     "2025-06-15",
   ),
   employeeId: z.string(),
-  include: z.array(QueryParamInclude$outboundSchema).optional(),
+  include: z.array(GetV1EmployeesQueryParamInclude$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",

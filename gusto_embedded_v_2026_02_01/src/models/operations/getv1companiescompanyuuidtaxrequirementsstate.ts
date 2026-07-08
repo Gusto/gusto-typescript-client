@@ -34,6 +34,12 @@ export type GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion 
 
 export type GetV1CompaniesCompanyUuidTaxRequirementsStateRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the company
    */
   companyUuid: string;
@@ -41,12 +47,6 @@ export type GetV1CompaniesCompanyUuidTaxRequirementsStateRequest = {
    * The two-letter state abbreviation
    */
   state: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?:
-    | GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion
-    | undefined;
   /**
    * When true, return "new" requirement sets with valid `effective_from` dates that are available to save new effective-dated values.
    */
@@ -71,9 +71,9 @@ export const GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion
 
 /** @internal */
 export type GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_uuid: string;
   state: string;
-  "X-Gusto-API-Version": string;
   scheduling?: boolean | undefined;
 };
 
@@ -84,16 +84,16 @@ export const GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$outboundSchema
     z.ZodTypeDef,
     GetV1CompaniesCompanyUuidTaxRequirementsStateRequest
   > = z.object({
-    companyUuid: z.string(),
-    state: z.string(),
     xGustoAPIVersion:
       GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion$outboundSchema
         .default("2026-02-01"),
+    companyUuid: z.string(),
+    state: z.string(),
     scheduling: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
-      companyUuid: "company_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyUuid: "company_uuid",
     });
   });
 

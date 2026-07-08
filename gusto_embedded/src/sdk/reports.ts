@@ -5,7 +5,9 @@
 import { reportsCreateCustom } from "../funcs/reportsCreateCustom.js";
 import { reportsGetReportsRequestUuid } from "../funcs/reportsGetReportsRequestUuid.js";
 import { reportsGetTemplate } from "../funcs/reportsGetTemplate.js";
+import { reportsGetV1BulkReportsRequestUuid } from "../funcs/reportsGetV1BulkReportsRequestUuid.js";
 import { reportsPostPayrollsPayrollUuidReportsGeneralLedger } from "../funcs/reportsPostPayrollsPayrollUuidReportsGeneralLedger.js";
+import { reportsPostV1BulkReports } from "../funcs/reportsPostV1BulkReports.js";
 import { reportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage } from "../funcs/reportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import {
@@ -17,6 +19,11 @@ import {
   GetReportsRequestUuidResponse,
 } from "../models/operations/getreportsrequestuuid.js";
 import {
+  GetV1BulkReportsRequestUuidRequest,
+  GetV1BulkReportsRequestUuidResponse,
+  GetV1BulkReportsRequestUuidSecurity,
+} from "../models/operations/getv1bulkreportsrequestuuid.js";
+import {
   PostCompaniesCompanyUuidReportsRequest,
   PostCompaniesCompanyUuidReportsResponse,
 } from "../models/operations/postcompaniescompanyuuidreports.js";
@@ -25,12 +32,96 @@ import {
   PostPayrollsPayrollUuidReportsGeneralLedgerResponse,
 } from "../models/operations/postpayrollspayrolluuidreportsgeneralledger.js";
 import {
+  PostV1BulkReportsRequest,
+  PostV1BulkReportsResponse,
+  PostV1BulkReportsSecurity,
+} from "../models/operations/postv1bulkreports.js";
+import {
   PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest,
   PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse,
 } from "../models/operations/postv1companiescompanyidreportsemployeesannualficawage.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Reports extends ClientSDK {
+  /**
+   * Create a bulk report batch
+   *
+   * @remarks
+   * Triggers asynchronous generation of up to 25 reports across companies the partner is mapped to. Each `batch` item is a `custom_report` (same parameters as [create a custom report](https://docs.gusto.com/embedded-payroll/reference/post-companies-company_uuid-reports)) or a `general_ledger` report (same parameters as [create a general ledger report](https://docs.gusto.com/embedded-payroll/reference/post-payrolls-payroll_uuid-reports-general_ledger)), keyed by `company_uuid` and `report_type`. Items are validated synchronously; if any is invalid, the entire batch is rejected.
+   *
+   * Poll the [bulk report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-v1-bulk_reports-request_uuid) with the returned `uuid` for status and the report URL, which is valid for 10 minutes.
+   *
+   * 📘 System Access Authentication
+   *
+   * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+   *
+   * scope: `company_reports:write`
+   */
+  async postV1BulkReports(
+    security: PostV1BulkReportsSecurity,
+    request: PostV1BulkReportsRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1BulkReportsResponse> {
+    return unwrapAsync(reportsPostV1BulkReports(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get a bulk report batch
+   *
+   * @remarks
+   * Get a bulk report batch's status and results given the `request_uuid`. While in progress, only batch metadata is returned; once complete, it also includes a signed `report_url` (a zip of all generated reports, valid for 10 minutes) and a per-company breakdown.
+   *
+   * Reports containing PHI are inaccessible with `company_reports:read:tier_2_only` data scope.
+   *
+   * 📘 System Access Authentication
+   *
+   * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+   *
+   * scope: `company_reports:read`
+   */
+  async getV1BulkReportsRequestUuid(
+    security: GetV1BulkReportsRequestUuidSecurity,
+    request: GetV1BulkReportsRequestUuidRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1BulkReportsRequestUuidResponse> {
+    return unwrapAsync(reportsGetV1BulkReportsRequestUuid(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create an employees annual FICA wage report
+   *
+   * @remarks
+   * Generates a report containing annual FICA (Federal Insurance Contributions Act) wage data for all employees in a company over a specified year range.
+   *
+   * This report provides detailed wage information subject to Social Security and Medicare taxes, useful for benefits integrations that need to verify employee earnings for compliance and benefit calculations.
+   *
+   * The report is generated asynchronously. After making this request, you will receive a `request_uuid` which can be used to poll the [Get a report](ref:get-v1-reports-request_uuid) endpoint to check the status and retrieve the report when complete.
+   *
+   * scope: `company_reports:write`
+   */
+  async postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(
+    request: PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse> {
+    return unwrapAsync(
+      reportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(
+        this,
+        request,
+        options,
+      ),
+    );
+  }
+
   /**
    * Create a custom report
    *
@@ -109,30 +200,5 @@ export class Reports extends ClientSDK {
       request,
       options,
     ));
-  }
-
-  /**
-   * Create an employees annual FICA wage report
-   *
-   * @remarks
-   * Generates a report containing annual FICA (Federal Insurance Contributions Act) wage data for all employees in a company over a specified year range.
-   *
-   * This report provides detailed wage information subject to Social Security and Medicare taxes, useful for benefits integrations that need to verify employee earnings for compliance and benefit calculations.
-   *
-   * The report is generated asynchronously. After making this request, you will receive a `request_uuid` which can be used to poll the [Get a report](ref:get-v1-reports-request_uuid) endpoint to check the status and retrieve the report when complete.
-   *
-   * scope: `company_reports:write`
-   */
-  async postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(
-    request: PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse> {
-    return unwrapAsync(
-      reportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(
-        this,
-        request,
-        options,
-      ),
-    );
   }
 }

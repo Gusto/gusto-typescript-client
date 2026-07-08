@@ -78,7 +78,7 @@ export function useContractorPaymentsCreateMutation(
 }
 
 export function mutationKeyContractorPaymentsCreate(): MutationKey {
-  return ["@gusto/embedded-api-v-2026-02-01", "contractorPayments", "create"];
+  return ["@gusto/embedded-api-v-2026-02-01", "Contractor Payments", "create"];
 }
 
 export function buildContractorPaymentsCreateMutation(

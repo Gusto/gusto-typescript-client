@@ -44,15 +44,15 @@ export type PostV1EmployeesEmployeeIdHomeAddressesRequestBody = {
 
 export type PostV1EmployeesEmployeeIdHomeAddressesRequest = {
   /**
-   * The UUID of the employee
-   */
-  employeeId: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the employee
+   */
+  employeeId: string;
   requestBody: PostV1EmployeesEmployeeIdHomeAddressesRequestBody;
 };
 
@@ -121,8 +121,8 @@ export function postV1EmployeesEmployeeIdHomeAddressesRequestBodyToJSON(
 
 /** @internal */
 export type PostV1EmployeesEmployeeIdHomeAddressesRequest$Outbound = {
-  employee_id: string;
   "X-Gusto-API-Version": string;
+  employee_id: string;
   RequestBody: PostV1EmployeesEmployeeIdHomeAddressesRequestBody$Outbound;
 };
 
@@ -133,17 +133,17 @@ export const PostV1EmployeesEmployeeIdHomeAddressesRequest$outboundSchema:
     z.ZodTypeDef,
     PostV1EmployeesEmployeeIdHomeAddressesRequest
   > = z.object({
-    employeeId: z.string(),
     xGustoAPIVersion:
       PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$outboundSchema
         .default("2025-06-15"),
+    employeeId: z.string(),
     requestBody: z.lazy(() =>
       PostV1EmployeesEmployeeIdHomeAddressesRequestBody$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      employeeId: "employee_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      employeeId: "employee_id",
       requestBody: "RequestBody",
     });
   });

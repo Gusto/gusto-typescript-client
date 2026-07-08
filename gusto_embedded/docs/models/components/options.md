@@ -3,16 +3,18 @@
 ## Example Usage
 
 ```typescript
-import { Options } from "@gusto/embedded-api/models/components/employeestatetaxinputquestionformat.js";
+import { Options } from "@gusto/embedded-api/models/components/taxrequirementmetadata.js";
 
 let value: Options = {
   label: "<value>",
+  value: "<value>",
 };
 ```
 
 ## Fields
 
-| Field                                                 | Type                                                  | Required                                              | Description                                           |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| `value`                                               | *components.EmployeeStateTaxInputQuestionFormatValue* | :heavy_minus_sign:                                    | An allowed value to answer the question               |
-| `label`                                               | *string*                                              | :heavy_check_mark:                                    | A display label that corresponds to the answer value  |
+| Field                                                | Type                                                 | Required                                             | Description                                          |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| `label`                                              | *string*                                             | :heavy_check_mark:                                   | A customer facing label for the answer               |
+| `value`                                              | *components.TaxRequirementMetadataValue*             | :heavy_check_mark:                                   | The actual value to be submitted                     |
+| `shortLabel`                                         | *string*                                             | :heavy_minus_sign:                                   | A less verbose label that may sometimes be available |

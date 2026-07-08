@@ -17,23 +17,19 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion = {
+export const HeaderXGustoAPIVersion = {
   TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion = ClosedEnum<
-  typeof GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion
->;
+export type HeaderXGustoAPIVersion = ClosedEnum<typeof HeaderXGustoAPIVersion>;
 
 export type GetV1CompaniesCompanyIdAdminsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?:
-    | GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion
-    | undefined;
+  xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the company
    */
@@ -57,9 +53,9 @@ export type GetV1CompaniesCompanyIdAdminsResponse = {
 };
 
 /** @internal */
-export const GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<typeof GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> =
-    z.nativeEnum(GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion);
+export const HeaderXGustoAPIVersion$outboundSchema: z.ZodNativeEnum<
+  typeof HeaderXGustoAPIVersion
+> = z.nativeEnum(HeaderXGustoAPIVersion);
 
 /** @internal */
 export type GetV1CompaniesCompanyIdAdminsRequest$Outbound = {
@@ -75,10 +71,7 @@ export const GetV1CompaniesCompanyIdAdminsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1CompaniesCompanyIdAdminsRequest
 > = z.object({
-  xGustoAPIVersion:
-    GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion$outboundSchema.default(
-      "2025-11-15",
-    ),
+  xGustoAPIVersion: HeaderXGustoAPIVersion$outboundSchema.default("2025-11-15"),
   companyId: z.string(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),

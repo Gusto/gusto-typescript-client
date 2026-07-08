@@ -35,6 +35,12 @@ export type GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearH
 export type GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest =
   {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    xGustoAPIVersion?:
+      | GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion
+      | undefined;
+    /**
      * The UUID of the employee
      */
     employeeUuid: string;
@@ -42,12 +48,6 @@ export type GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearR
      * The effective year for the Section 603 status
      */
     effectiveYear: number;
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    xGustoAPIVersion?:
-      | GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion
-      | undefined;
   };
 
 export type GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse =
@@ -72,9 +72,9 @@ export const GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear
 /** @internal */
 export type GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest$Outbound =
   {
+    "X-Gusto-API-Version": string;
     employee_uuid: string;
     effective_year: number;
-    "X-Gusto-API-Version": string;
   };
 
 /** @internal */
@@ -84,16 +84,16 @@ export const GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear
     z.ZodTypeDef,
     GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest
   > = z.object({
-    employeeUuid: z.string(),
-    effectiveYear: z.number().int(),
     xGustoAPIVersion:
       GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion$outboundSchema
         .default("2026-02-01"),
+    employeeUuid: z.string(),
+    effectiveYear: z.number().int(),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       employeeUuid: "employee_uuid",
       effectiveYear: "effective_year",
-      xGustoAPIVersion: "X-Gusto-API-Version",
     });
   });
 

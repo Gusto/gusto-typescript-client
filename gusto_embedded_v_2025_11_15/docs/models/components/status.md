@@ -1,17 +1,22 @@
 # Status
 
-The status of the external payroll. The status will be `unprocessed` when the external payroll is created and transition to `processed` once tax liabilities are entered and finalized.  Once in the `processed` status all actions that can edit an external payroll will be disabled.
+The batch's processing state.
+- `pending`: accepted, not yet started
+- `processing`: reports are being generated
+- `completed`: all reports finished
+- `failed`: the batch failed before completing
+
 
 ## Example Usage
 
 ```typescript
-import { Status } from "@gusto/embedded-api-v-2025-11-15/models/components/externalpayrollbasic.js";
+import { Status } from "@gusto/embedded-api-v-2025-11-15/models/components/createbulkreport.js";
 
-let value: Status = "processed";
+let value: Status = "completed";
 ```
 
 ## Values
 
 ```typescript
-"unprocessed" | "processed"
+"pending" | "processing" | "completed" | "failed"
 ```

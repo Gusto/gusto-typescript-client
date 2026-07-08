@@ -67,39 +67,18 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Employees extends ClientSDK {
   /**
-   * Get employees of a company
+   * Get an employee's custom fields
    *
    * @remarks
-   * Get all of the employees, onboarding, active and terminated, for a given company.
-   *
-   * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
+   * Returns a list of the employee's custom fields.
    *
    * scope: `employees:read`
    */
-  async list(
-    request: GetV1CompaniesCompanyIdEmployeesRequest,
+  async getCustomFields(
+    request: GetV1EmployeesEmployeeIdCustomFieldsRequest,
     options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyIdEmployeesResponse> {
-    return unwrapAsync(employeesList(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create an employee
-   *
-   * @remarks
-   * Create an employee.
-   *
-   * scope: `employees:manage`
-   */
-  async create(
-    request: PostV1EmployeesRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1EmployeesResponse> {
-    return unwrapAsync(employeesCreate(
+  ): Promise<GetV1EmployeesEmployeeIdCustomFieldsResponse> {
+    return unwrapAsync(employeesGetCustomFields(
       this,
       request,
       options,
@@ -133,18 +112,18 @@ export class Employees extends ClientSDK {
   }
 
   /**
-   * Create a historical employee
+   * Get employee time off activities
    *
    * @remarks
-   * Create a historical employee, an employee that was previously dismissed from the company in the current year.
+   * Get employee time off activities.
    *
-   * scope: `employees:manage`
+   * scope: `employee_time_off_activities:read`
    */
-  async createHistorical(
-    request: PostV1HistoricalEmployeesRequest,
+  async getTimeOffActivities(
+    request: GetVersionEmployeesTimeOffActivitiesRequest,
     options?: RequestOptions,
-  ): Promise<PostV1HistoricalEmployeesResponse> {
-    return unwrapAsync(employeesCreateHistorical(
+  ): Promise<GetVersionEmployeesTimeOffActivitiesResponse> {
+    return unwrapAsync(employeesGetTimeOffActivities(
       this,
       request,
       options,
@@ -213,18 +192,20 @@ export class Employees extends ClientSDK {
   }
 
   /**
-   * Get an employee's custom fields
+   * Get employees of a company
    *
    * @remarks
-   * Returns a list of the employee's custom fields.
+   * Get all of the employees, onboarding, active and terminated, for a given company.
+   *
+   * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
    *
    * scope: `employees:read`
    */
-  async getCustomFields(
-    request: GetV1EmployeesEmployeeIdCustomFieldsRequest,
+  async list(
+    request: GetV1CompaniesCompanyIdEmployeesRequest,
     options?: RequestOptions,
-  ): Promise<GetV1EmployeesEmployeeIdCustomFieldsResponse> {
-    return unwrapAsync(employeesGetCustomFields(
+  ): Promise<GetV1CompaniesCompanyIdEmployeesResponse> {
+    return unwrapAsync(employeesList(
       this,
       request,
       options,
@@ -232,22 +213,18 @@ export class Employees extends ClientSDK {
   }
 
   /**
-   * Update employee onboarding documents config
+   * Create an employee
    *
    * @remarks
-   * Indicate whether to include the Form I-9 for an employee during the onboarding process.
-   * If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
-   *
-   * ## Related guides
-   * - [Employee onboarding](doc:employee-onboarding)
+   * Create an employee.
    *
    * scope: `employees:manage`
    */
-  async updateOnboardingDocumentsConfig(
-    request: PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest,
+  async create(
+    request: PostV1EmployeesRequest,
     options?: RequestOptions,
-  ): Promise<PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse> {
-    return unwrapAsync(employeesUpdateOnboardingDocumentsConfig(
+  ): Promise<PostV1EmployeesResponse> {
+    return unwrapAsync(employeesCreate(
       this,
       request,
       options,
@@ -338,18 +315,41 @@ export class Employees extends ClientSDK {
   }
 
   /**
-   * Get employee time off activities
+   * Update employee onboarding documents config
    *
    * @remarks
-   * Get employee time off activities.
+   * Indicate whether to include the Form I-9 for an employee during the onboarding process.
+   * If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
    *
-   * scope: `employee_time_off_activities:read`
+   * ## Related guides
+   * - [Employee onboarding](doc:employee-onboarding)
+   *
+   * scope: `employees:manage`
    */
-  async getTimeOffActivities(
-    request: GetVersionEmployeesTimeOffActivitiesRequest,
+  async updateOnboardingDocumentsConfig(
+    request: PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest,
     options?: RequestOptions,
-  ): Promise<GetVersionEmployeesTimeOffActivitiesResponse> {
-    return unwrapAsync(employeesGetTimeOffActivities(
+  ): Promise<PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse> {
+    return unwrapAsync(employeesUpdateOnboardingDocumentsConfig(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a historical employee
+   *
+   * @remarks
+   * Create a historical employee, an employee that was previously dismissed from the company in the current year.
+   *
+   * scope: `employees:manage`
+   */
+  async createHistorical(
+    request: PostV1HistoricalEmployeesRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1HistoricalEmployeesResponse> {
+    return unwrapAsync(employeesCreateHistorical(
       this,
       request,
       options,
