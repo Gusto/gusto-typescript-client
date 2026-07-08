@@ -30,7 +30,7 @@ export type GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion = ClosedEnum<
   typeof GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion
 >;
 
-export const Include = {
+export const GetV1CompaniesCompanyIdEmployeesQueryParamInclude = {
   AllCompensations: "all_compensations",
   AllHomeAddresses: "all_home_addresses",
   CompanyName: "company_name",
@@ -38,7 +38,9 @@ export const Include = {
   CustomFields: "custom_fields",
   PortalInvitations: "portal_invitations",
 } as const;
-export type Include = ClosedEnum<typeof Include>;
+export type GetV1CompaniesCompanyIdEmployeesQueryParamInclude = ClosedEnum<
+  typeof GetV1CompaniesCompanyIdEmployeesQueryParamInclude
+>;
 
 export type GetV1CompaniesCompanyIdEmployeesRequest = {
   /**
@@ -70,7 +72,9 @@ export type GetV1CompaniesCompanyIdEmployeesRequest = {
   /**
    * Include the requested attribute(s) in each employee response. Multiple options are comma separated.
    */
-  include?: Array<Include> | undefined;
+  include?:
+    | Array<GetV1CompaniesCompanyIdEmployeesQueryParamInclude>
+    | undefined;
   /**
    * Filters employees by those who have completed onboarding
    */
@@ -116,8 +120,9 @@ export const GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion$outboundSche
   > = z.nativeEnum(GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion);
 
 /** @internal */
-export const Include$outboundSchema: z.ZodNativeEnum<typeof Include> = z
-  .nativeEnum(Include);
+export const GetV1CompaniesCompanyIdEmployeesQueryParamInclude$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1CompaniesCompanyIdEmployeesQueryParamInclude> = z
+    .nativeEnum(GetV1CompaniesCompanyIdEmployeesQueryParamInclude);
 
 /** @internal */
 export type GetV1CompaniesCompanyIdEmployeesRequest$Outbound = {
@@ -151,7 +156,9 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$outboundSchema: z.ZodType<
   payrollUuid: z.string().optional(),
   searchTerm: z.string().optional(),
   sortBy: z.string().optional(),
-  include: z.array(Include$outboundSchema).optional(),
+  include: z.array(
+    GetV1CompaniesCompanyIdEmployeesQueryParamInclude$outboundSchema,
+  ).optional(),
   onboarded: z.boolean().optional(),
   onboardedActive: z.boolean().optional(),
   terminated: z.boolean().optional(),

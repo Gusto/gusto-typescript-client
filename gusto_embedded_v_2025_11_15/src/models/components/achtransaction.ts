@@ -21,13 +21,11 @@ export const PaymentEventType = {
  */
 export type PaymentEventType = ClosedEnum<typeof PaymentEventType>;
 
-export const AchTransactionRecipientType = {
+export const RecipientType = {
   Employee: "Employee",
   Contractor: "Contractor",
 } as const;
-export type AchTransactionRecipientType = ClosedEnum<
-  typeof AchTransactionRecipientType
->;
+export type RecipientType = ClosedEnum<typeof RecipientType>;
 
 /**
  * The status of the ACH transaction
@@ -78,7 +76,7 @@ export type AchTransaction = {
   /**
    * The type of recipient associated with the ACH transaction
    */
-  recipientType?: AchTransactionRecipientType | null | undefined;
+  recipientType?: RecipientType | null | undefined;
   /**
    * Unique identifier for the recipient associated with the ACH transaction
    */
@@ -123,9 +121,9 @@ export const PaymentEventType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(PaymentEventType);
 
 /** @internal */
-export const AchTransactionRecipientType$inboundSchema: z.ZodNativeEnum<
-  typeof AchTransactionRecipientType
-> = z.nativeEnum(AchTransactionRecipientType);
+export const RecipientType$inboundSchema: z.ZodNativeEnum<
+  typeof RecipientType
+> = z.nativeEnum(RecipientType);
 
 /** @internal */
 export const PaymentStatus$inboundSchema: z.ZodNativeEnum<
@@ -147,8 +145,7 @@ export const AchTransaction$inboundSchema: z.ZodType<
   company_uuid: z.string().optional(),
   payment_event_type: PaymentEventType$inboundSchema.optional(),
   payment_event_uuid: z.string().optional(),
-  recipient_type: z.nullable(AchTransactionRecipientType$inboundSchema)
-    .optional(),
+  recipient_type: z.nullable(RecipientType$inboundSchema).optional(),
   recipient_uuid: z.string().optional(),
   error_code: z.nullable(z.string()).optional(),
   transaction_type: z.string().optional(),

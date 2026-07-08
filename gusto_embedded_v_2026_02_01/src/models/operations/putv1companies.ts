@@ -36,13 +36,13 @@ export type PutV1CompaniesRequestBody = {
 
 export type PutV1CompaniesRequest = {
   /**
-   * The UUID of the company
-   */
-  companyId: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: PutV1CompaniesHeaderXGustoAPIVersion | undefined;
+  /**
+   * The UUID of the company
+   */
+  companyId: string;
   requestBody: PutV1CompaniesRequestBody;
 };
 
@@ -88,8 +88,8 @@ export function putV1CompaniesRequestBodyToJSON(
 
 /** @internal */
 export type PutV1CompaniesRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
+  company_id: string;
   RequestBody: PutV1CompaniesRequestBody$Outbound;
 };
 
@@ -99,15 +99,15 @@ export const PutV1CompaniesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1CompaniesRequest
 > = z.object({
-  companyId: z.string(),
   xGustoAPIVersion: PutV1CompaniesHeaderXGustoAPIVersion$outboundSchema.default(
     "2026-02-01",
   ),
+  companyId: z.string(),
   requestBody: z.lazy(() => PutV1CompaniesRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
-    companyId: "company_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    companyId: "company_id",
     requestBody: "RequestBody",
   });
 });

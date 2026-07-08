@@ -17,19 +17,21 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const XGustoAPIVersion = {
+export const GetV1TokenInfoHeaderXGustoAPIVersion = {
   TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type XGustoAPIVersion = ClosedEnum<typeof XGustoAPIVersion>;
+export type GetV1TokenInfoHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1TokenInfoHeaderXGustoAPIVersion
+>;
 
 export type GetV1TokenInfoRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: XGustoAPIVersion | undefined;
+  xGustoAPIVersion?: GetV1TokenInfoHeaderXGustoAPIVersion | undefined;
 };
 
 export type GetV1TokenInfoResponse = {
@@ -41,9 +43,10 @@ export type GetV1TokenInfoResponse = {
 };
 
 /** @internal */
-export const XGustoAPIVersion$outboundSchema: z.ZodNativeEnum<
-  typeof XGustoAPIVersion
-> = z.nativeEnum(XGustoAPIVersion);
+export const GetV1TokenInfoHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1TokenInfoHeaderXGustoAPIVersion> = z.nativeEnum(
+    GetV1TokenInfoHeaderXGustoAPIVersion,
+  );
 
 /** @internal */
 export type GetV1TokenInfoRequest$Outbound = {
@@ -56,7 +59,9 @@ export const GetV1TokenInfoRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1TokenInfoRequest
 > = z.object({
-  xGustoAPIVersion: XGustoAPIVersion$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: GetV1TokenInfoHeaderXGustoAPIVersion$outboundSchema.default(
+    "2025-06-15",
+  ),
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",

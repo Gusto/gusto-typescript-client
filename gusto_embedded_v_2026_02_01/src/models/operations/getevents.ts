@@ -34,14 +34,14 @@ export type GetEventsHeaderXGustoAPIVersion = ClosedEnum<
 /**
  * A string indicating whether to sort resulting events in ascending (asc) or descending (desc) chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
  */
-export const QueryParamSortOrder = {
+export const SortOrder = {
   Asc: "asc",
   Desc: "desc",
 } as const;
 /**
  * A string indicating whether to sort resulting events in ascending (asc) or descending (desc) chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
  */
-export type QueryParamSortOrder = ClosedEnum<typeof QueryParamSortOrder>;
+export type SortOrder = ClosedEnum<typeof SortOrder>;
 
 export type GetEventsRequest = {
   /**
@@ -67,7 +67,7 @@ export type GetEventsRequest = {
   /**
    * A string indicating whether to sort resulting events in ascending (asc) or descending (desc) chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
    */
-  sortOrder?: QueryParamSortOrder | undefined;
+  sortOrder?: SortOrder | undefined;
 };
 
 export type GetEventsResponse = {
@@ -110,9 +110,8 @@ export const GetEventsHeaderXGustoAPIVersion$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(GetEventsHeaderXGustoAPIVersion);
 
 /** @internal */
-export const QueryParamSortOrder$outboundSchema: z.ZodNativeEnum<
-  typeof QueryParamSortOrder
-> = z.nativeEnum(QueryParamSortOrder);
+export const SortOrder$outboundSchema: z.ZodNativeEnum<typeof SortOrder> = z
+  .nativeEnum(SortOrder);
 
 /** @internal */
 export type GetEventsRequest$Outbound = {
@@ -137,7 +136,7 @@ export const GetEventsRequest$outboundSchema: z.ZodType<
   resourceUuid: z.string().optional(),
   limit: z.string().optional(),
   eventType: z.string().optional(),
-  sortOrder: QueryParamSortOrder$outboundSchema.optional(),
+  sortOrder: SortOrder$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",

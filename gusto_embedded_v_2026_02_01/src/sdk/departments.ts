@@ -42,44 +42,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Departments extends ClientSDK {
   /**
-   * Get all departments of a company
-   *
-   * @remarks
-   * Get all of the departments for a given company with the employees and contractors assigned to that department.
-   *
-   * scope: `departments:read`
-   */
-  async getAll(
-    request: GetCompaniesDepartmentsRequest,
-    options?: RequestOptions,
-  ): Promise<GetCompaniesDepartmentsResponse> {
-    return unwrapAsync(departmentsGetAll(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create a department
-   *
-   * @remarks
-   * Create a department
-   *
-   * scope: `departments:write`
-   */
-  async create(
-    request: PostDepartmentsRequest,
-    options?: RequestOptions,
-  ): Promise<PostDepartmentsResponse> {
-    return unwrapAsync(departmentsCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get a department
    *
    * @remarks
@@ -168,6 +130,44 @@ export class Departments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PutRemovePeopleFromDepartmentResponse> {
     return unwrapAsync(departmentsRemovePeople(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get all departments of a company
+   *
+   * @remarks
+   * Get all of the departments for a given company with the employees and contractors assigned to that department.
+   *
+   * scope: `departments:read`
+   */
+  async getAll(
+    request: GetCompaniesDepartmentsRequest,
+    options?: RequestOptions,
+  ): Promise<GetCompaniesDepartmentsResponse> {
+    return unwrapAsync(departmentsGetAll(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a department
+   *
+   * @remarks
+   * Create a department
+   *
+   * scope: `departments:write`
+   */
+  async create(
+    request: PostDepartmentsRequest,
+    options?: RequestOptions,
+  ): Promise<PostDepartmentsResponse> {
+    return unwrapAsync(departmentsCreate(
       this,
       request,
       options,

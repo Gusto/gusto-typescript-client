@@ -1,15 +1,17 @@
 # OnboardingStatus
 
+One of the "onboarding_status" enum values.
+
 ## Example Usage
 
 ```typescript
-import { OnboardingStatus } from "@gusto/embedded-api-v-2026-02-01/models/components/showemployees.js";
+import { OnboardingStatus } from "@gusto/embedded-api-v-2026-02-01/models/components/contractor.js";
 
-let value: OnboardingStatus = "admin_onboarding_incomplete";
+let value: OnboardingStatus = "admin_onboarding_review";
 ```
 
 ## Values
 
 ```typescript
-"onboarding_completed" | "admin_onboarding_incomplete" | "self_onboarding_pending_invite" | "self_onboarding_invited" | "self_onboarding_invited_started" | "self_onboarding_invited_overdue" | "self_onboarding_completed_by_employee" | "self_onboarding_awaiting_admin_review"
+"admin_onboarding_incomplete" | "admin_onboarding_review" | "self_onboarding_not_invited" | "self_onboarding_invited" | "self_onboarding_started" | "self_onboarding_review" | "onboarding_completed"
 ```

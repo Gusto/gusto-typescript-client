@@ -29,15 +29,15 @@ export type DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion =
 
 export type DeleteV1ContractorsContractorUuidRehireRequest = {
   /**
-   * The UUID of the contractor
-   */
-  contractorUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the contractor
+   */
+  contractorUuid: string;
 };
 
 export type DeleteV1ContractorsContractorUuidRehireResponse = {
@@ -54,8 +54,8 @@ export const DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion$outbo
 
 /** @internal */
 export type DeleteV1ContractorsContractorUuidRehireRequest$Outbound = {
-  contractor_uuid: string;
   "X-Gusto-API-Version": string;
+  contractor_uuid: string;
 };
 
 /** @internal */
@@ -65,14 +65,14 @@ export const DeleteV1ContractorsContractorUuidRehireRequest$outboundSchema:
     z.ZodTypeDef,
     DeleteV1ContractorsContractorUuidRehireRequest
   > = z.object({
-    contractorUuid: z.string(),
     xGustoAPIVersion:
       DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion$outboundSchema
         .default("2025-11-15"),
+    contractorUuid: z.string(),
   }).transform((v) => {
     return remap$(v, {
-      contractorUuid: "contractor_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      contractorUuid: "contractor_uuid",
     });
   });
 

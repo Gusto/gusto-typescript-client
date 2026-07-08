@@ -32,7 +32,7 @@ export type PutV1CompaniesCompanyUuidHolidayPayPolicyAddHeaderXGustoAPIVersion =
     typeof PutV1CompaniesCompanyUuidHolidayPayPolicyAddHeaderXGustoAPIVersion
   >;
 
-export type PutV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees = {
+export type Employees = {
   uuid?: string | undefined;
 };
 
@@ -44,7 +44,7 @@ export type PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody = {
   /**
    * An array of employee objects, each containing an employee_uuid.
    */
-  employees: Array<PutV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees>;
+  employees: Array<Employees>;
 };
 
 export type PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequest = {
@@ -78,37 +78,27 @@ export const PutV1CompaniesCompanyUuidHolidayPayPolicyAddHeaderXGustoAPIVersion$
   );
 
 /** @internal */
-export type PutV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees$Outbound = {
+export type Employees$Outbound = {
   uuid?: string | undefined;
 };
 
 /** @internal */
-export const PutV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees$outboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees$Outbound,
-    z.ZodTypeDef,
-    PutV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees
-  > = z.object({
-    uuid: z.string().optional(),
-  });
+export const Employees$outboundSchema: z.ZodType<
+  Employees$Outbound,
+  z.ZodTypeDef,
+  Employees
+> = z.object({
+  uuid: z.string().optional(),
+});
 
-export function putV1CompaniesCompanyUuidHolidayPayPolicyAddEmployeesToJSON(
-  putV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees:
-    PutV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees,
-): string {
-  return JSON.stringify(
-    PutV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees$outboundSchema.parse(
-      putV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees,
-    ),
-  );
+export function employeesToJSON(employees: Employees): string {
+  return JSON.stringify(Employees$outboundSchema.parse(employees));
 }
 
 /** @internal */
 export type PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody$Outbound = {
   version: string;
-  employees: Array<
-    PutV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees$Outbound
-  >;
+  employees: Array<Employees$Outbound>;
 };
 
 /** @internal */
@@ -119,11 +109,7 @@ export const PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody$outboundSch
     PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody
   > = z.object({
     version: z.string(),
-    employees: z.array(
-      z.lazy(() =>
-        PutV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees$outboundSchema
-      ),
-    ),
+    employees: z.array(z.lazy(() => Employees$outboundSchema)),
   });
 
 export function putV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBodyToJSON(

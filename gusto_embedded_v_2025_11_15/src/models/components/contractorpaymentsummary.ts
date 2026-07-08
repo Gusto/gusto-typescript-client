@@ -26,7 +26,7 @@ export type Total = {
   wages?: string | undefined;
 };
 
-export type ContractorPaymentSummaryContractorPayments = {
+export type ContractorPayments = {
   /**
    * The UUID of the contractor.
    */
@@ -56,9 +56,7 @@ export type ContractorPaymentSummary = {
   /**
    * The individual contractor payments, within a given time period, grouped by contractor.
    */
-  contractorPayments?:
-    | Array<ContractorPaymentSummaryContractorPayments>
-    | undefined;
+  contractorPayments?: Array<ContractorPayments> | undefined;
 };
 
 /** @internal */
@@ -79,34 +77,30 @@ export function totalFromJSON(
 }
 
 /** @internal */
-export const ContractorPaymentSummaryContractorPayments$inboundSchema:
-  z.ZodType<ContractorPaymentSummaryContractorPayments, z.ZodTypeDef, unknown> =
-    z.object({
-      contractor_uuid: z.number().optional(),
-      reimbursement_total: z.string().optional(),
-      wage_total: z.string().optional(),
-      payments: z.array(ContractorPayment$inboundSchema).optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "contractor_uuid": "contractorUuid",
-        "reimbursement_total": "reimbursementTotal",
-        "wage_total": "wageTotal",
-      });
-    });
+export const ContractorPayments$inboundSchema: z.ZodType<
+  ContractorPayments,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  contractor_uuid: z.number().optional(),
+  reimbursement_total: z.string().optional(),
+  wage_total: z.string().optional(),
+  payments: z.array(ContractorPayment$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "contractor_uuid": "contractorUuid",
+    "reimbursement_total": "reimbursementTotal",
+    "wage_total": "wageTotal",
+  });
+});
 
-export function contractorPaymentSummaryContractorPaymentsFromJSON(
+export function contractorPaymentsFromJSON(
   jsonString: string,
-): SafeParseResult<
-  ContractorPaymentSummaryContractorPayments,
-  SDKValidationError
-> {
+): SafeParseResult<ContractorPayments, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      ContractorPaymentSummaryContractorPayments$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'ContractorPaymentSummaryContractorPayments' from JSON`,
+    (x) => ContractorPayments$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ContractorPayments' from JSON`,
   );
 }
 
@@ -117,9 +111,8 @@ export const ContractorPaymentSummary$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   total: z.lazy(() => Total$inboundSchema).optional(),
-  contractor_payments: z.array(
-    z.lazy(() => ContractorPaymentSummaryContractorPayments$inboundSchema),
-  ).optional(),
+  contractor_payments: z.array(z.lazy(() => ContractorPayments$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "contractor_payments": "contractorPayments",

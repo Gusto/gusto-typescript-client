@@ -33,57 +33,48 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAP
     typeof PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion
   >;
 
-export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod =
-  {
-    DirectDeposit: "Direct Deposit",
-    Check: "Check",
-    HistoricalPayment: "Historical Payment",
-  } as const;
-export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod =
-  ClosedEnum<
-    typeof PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod
-  >;
+export const PaymentMethod = {
+  DirectDeposit: "Direct Deposit",
+  Check: "Check",
+  HistoricalPayment: "Historical Payment",
+} as const;
+export type PaymentMethod = ClosedEnum<typeof PaymentMethod>;
 
-export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments =
-  {
-    /**
-     * The contractor receiving the payment
-     */
-    contractorUuid?: string | undefined;
-    paymentMethod?:
-      | PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod
-      | undefined;
-    /**
-     * If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless of hours worked
-     */
-    wage?: string | undefined;
-    /**
-     * If the contractor is on an hourly wage, this is the number of hours that the contractor worked for the payment
-     */
-    hours?: string | undefined;
-    /**
-     * If the contractor is on an hourly wage, this is the bonus the contractor earned
-     */
-    bonus?: string | undefined;
-    /**
-     * Reimbursed wages for the contractor
-     */
-    reimbursement?: string | undefined;
-    /**
-     * An optional invoice number to associate with this contractor payment. This will be visible to the contractor on their paystub.
-     */
-    invoiceNumber?: string | undefined;
-    /**
-     * An optional note or memo for this contractor payment. This will be visible to the contractor on their paystub.
-     */
-    memo?: string | undefined;
-  };
+export type ContractorPayments = {
+  /**
+   * The contractor receiving the payment
+   */
+  contractorUuid?: string | undefined;
+  paymentMethod?: PaymentMethod | undefined;
+  /**
+   * If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless of hours worked
+   */
+  wage?: string | undefined;
+  /**
+   * If the contractor is on an hourly wage, this is the number of hours that the contractor worked for the payment
+   */
+  hours?: string | undefined;
+  /**
+   * If the contractor is on an hourly wage, this is the bonus the contractor earned
+   */
+  bonus?: string | undefined;
+  /**
+   * Reimbursed wages for the contractor
+   */
+  reimbursement?: string | undefined;
+  /**
+   * An optional invoice number to associate with this contractor payment. This will be visible to the contractor on their paystub.
+   */
+  invoiceNumber?: string | undefined;
+  /**
+   * An optional note or memo for this contractor payment. This will be visible to the contractor on their paystub.
+   */
+  memo?: string | undefined;
+};
 
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody =
   {
-    contractorPayments: Array<
-      PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments
-    >;
+    contractorPayments: Array<ContractorPayments>;
     /**
      * Date when payments should be processed
      */
@@ -122,69 +113,56 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoA
   );
 
 /** @internal */
-export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod$outboundSchema:
-  z.ZodNativeEnum<
-    typeof PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod
-  > = z.nativeEnum(
-    PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod,
-  );
+export const PaymentMethod$outboundSchema: z.ZodNativeEnum<
+  typeof PaymentMethod
+> = z.nativeEnum(PaymentMethod);
 
 /** @internal */
-export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments$Outbound =
-  {
-    contractor_uuid?: string | undefined;
-    payment_method: string;
-    wage?: string | undefined;
-    hours?: string | undefined;
-    bonus?: string | undefined;
-    reimbursement?: string | undefined;
-    invoice_number?: string | undefined;
-    memo?: string | undefined;
-  };
+export type ContractorPayments$Outbound = {
+  contractor_uuid?: string | undefined;
+  payment_method: string;
+  wage?: string | undefined;
+  hours?: string | undefined;
+  bonus?: string | undefined;
+  reimbursement?: string | undefined;
+  invoice_number?: string | undefined;
+  memo?: string | undefined;
+};
 
 /** @internal */
-export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments$outboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments$Outbound,
-    z.ZodTypeDef,
-    PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments
-  > = z.object({
-    contractorUuid: z.string().optional(),
-    paymentMethod:
-      PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod$outboundSchema
-        .default("Direct Deposit"),
-    wage: z.string().optional(),
-    hours: z.string().optional(),
-    bonus: z.string().optional(),
-    reimbursement: z.string().optional(),
-    invoiceNumber: z.string().optional(),
-    memo: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contractorUuid: "contractor_uuid",
-      paymentMethod: "payment_method",
-      invoiceNumber: "invoice_number",
-    });
+export const ContractorPayments$outboundSchema: z.ZodType<
+  ContractorPayments$Outbound,
+  z.ZodTypeDef,
+  ContractorPayments
+> = z.object({
+  contractorUuid: z.string().optional(),
+  paymentMethod: PaymentMethod$outboundSchema.default("Direct Deposit"),
+  wage: z.string().optional(),
+  hours: z.string().optional(),
+  bonus: z.string().optional(),
+  reimbursement: z.string().optional(),
+  invoiceNumber: z.string().optional(),
+  memo: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contractorUuid: "contractor_uuid",
+    paymentMethod: "payment_method",
+    invoiceNumber: "invoice_number",
   });
+});
 
-export function postV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPaymentsToJSON(
-  postV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments:
-    PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments,
+export function contractorPaymentsToJSON(
+  contractorPayments: ContractorPayments,
 ): string {
   return JSON.stringify(
-    PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments$outboundSchema
-      .parse(
-        postV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments,
-      ),
+    ContractorPayments$outboundSchema.parse(contractorPayments),
   );
 }
 
 /** @internal */
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody$Outbound =
   {
-    contractor_payments: Array<
-      PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments$Outbound
-    >;
+    contractor_payments: Array<ContractorPayments$Outbound>;
     check_date?: string | undefined;
   };
 
@@ -196,9 +174,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody$o
     PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody
   > = z.object({
     contractorPayments: z.array(
-      z.lazy(() =>
-        PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments$outboundSchema
-      ),
+      z.lazy(() => ContractorPayments$outboundSchema),
     ),
     checkDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
   }).transform((v) => {

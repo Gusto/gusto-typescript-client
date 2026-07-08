@@ -23,8 +23,8 @@ import { ResponseValidationError } from "../models/errors/responsevalidationerro
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   GetV1EmployeesHeaderXGustoAPIVersion,
+  GetV1EmployeesQueryParamInclude,
   GetV1EmployeesRequest,
-  QueryParamInclude,
 } from "../models/operations/getv1employees.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -115,7 +115,7 @@ export function setEmployeesGetData(
     employeeId: string,
     parameters: {
       xGustoAPIVersion?: GetV1EmployeesHeaderXGustoAPIVersion | undefined;
-      include?: Array<QueryParamInclude> | undefined;
+      include?: Array<GetV1EmployeesQueryParamInclude> | undefined;
     },
   ],
   data: EmployeesGetQueryData,
@@ -132,7 +132,7 @@ export function invalidateEmployeesGet(
       employeeId: string,
       parameters: {
         xGustoAPIVersion?: GetV1EmployeesHeaderXGustoAPIVersion | undefined;
-        include?: Array<QueryParamInclude> | undefined;
+        include?: Array<GetV1EmployeesQueryParamInclude> | undefined;
       },
     ]
   >,

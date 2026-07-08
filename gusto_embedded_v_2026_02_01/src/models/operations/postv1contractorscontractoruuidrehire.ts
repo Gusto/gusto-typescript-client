@@ -37,15 +37,15 @@ export type PostV1ContractorsContractorUuidRehireRequestBody = {
 
 export type PostV1ContractorsContractorUuidRehireRequest = {
   /**
-   * The UUID of the contractor
-   */
-  contractorUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | PostV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the contractor
+   */
+  contractorUuid: string;
   requestBody?: PostV1ContractorsContractorUuidRehireRequestBody | undefined;
 };
 
@@ -91,8 +91,8 @@ export function postV1ContractorsContractorUuidRehireRequestBodyToJSON(
 
 /** @internal */
 export type PostV1ContractorsContractorUuidRehireRequest$Outbound = {
-  contractor_uuid: string;
   "X-Gusto-API-Version": string;
+  contractor_uuid: string;
   RequestBody?:
     | PostV1ContractorsContractorUuidRehireRequestBody$Outbound
     | undefined;
@@ -105,17 +105,17 @@ export const PostV1ContractorsContractorUuidRehireRequest$outboundSchema:
     z.ZodTypeDef,
     PostV1ContractorsContractorUuidRehireRequest
   > = z.object({
-    contractorUuid: z.string(),
     xGustoAPIVersion:
       PostV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion$outboundSchema
         .default("2026-02-01"),
+    contractorUuid: z.string(),
     requestBody: z.lazy(() =>
       PostV1ContractorsContractorUuidRehireRequestBody$outboundSchema
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
-      contractorUuid: "contractor_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      contractorUuid: "contractor_uuid",
       requestBody: "RequestBody",
     });
   });

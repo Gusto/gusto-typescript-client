@@ -32,15 +32,15 @@ export type DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion = ClosedEnum<
 
 export type DeleteV1WebhookSubscriptionUuidRequest = {
   /**
-   * The webhook subscription UUID.
-   */
-  webhookSubscriptionUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The webhook subscription UUID.
+   */
+  webhookSubscriptionUuid: string;
 };
 
 export type DeleteV1WebhookSubscriptionUuidResponse = {
@@ -84,8 +84,8 @@ export const DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion$outboundSchem
 
 /** @internal */
 export type DeleteV1WebhookSubscriptionUuidRequest$Outbound = {
-  webhook_subscription_uuid: string;
   "X-Gusto-API-Version": string;
+  webhook_subscription_uuid: string;
 };
 
 /** @internal */
@@ -94,14 +94,14 @@ export const DeleteV1WebhookSubscriptionUuidRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeleteV1WebhookSubscriptionUuidRequest
 > = z.object({
-  webhookSubscriptionUuid: z.string(),
   xGustoAPIVersion:
     DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion$outboundSchema
       .default("2025-11-15"),
+  webhookSubscriptionUuid: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    webhookSubscriptionUuid: "webhook_subscription_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    webhookSubscriptionUuid: "webhook_subscription_uuid",
   });
 });
 

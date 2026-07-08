@@ -72,6 +72,63 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class CompanyBenefits extends ClientSDK {
   /**
+   * Get all supported benefits
+   *
+   * @remarks
+   * Returns all benefits supported by Gusto. The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+   *
+   * scope: `benefits:read`
+   */
+  async getAll(
+    request: GetV1BenefitsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1BenefitsResponse> {
+    return unwrapAsync(companyBenefitsGetAll(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get a supported benefit
+   *
+   * @remarks
+   * Returns a benefit supported by Gusto. The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+   *
+   * scope: `benefits:read`
+   */
+  async getSupported(
+    request: GetV1BenefitsBenefitIdRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1BenefitsBenefitIdResponse> {
+    return unwrapAsync(companyBenefitsGetSupported(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get benefit fields requirements by benefit type
+   *
+   * @remarks
+   * Returns the field requirements for a given benefit type.
+   *
+   * scope: `benefits:read`
+   */
+  async getRequirements(
+    request: GetV1BenefitsBenefitsIdRequirementsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1BenefitsBenefitsIdRequirementsResponse> {
+    return unwrapAsync(companyBenefitsGetRequirements(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Get benefits for a company
    *
    * @remarks
@@ -189,65 +246,6 @@ export class CompanyBenefits extends ClientSDK {
   }
 
   /**
-   * Get all supported benefits
-   *
-   * @remarks
-   * Returns all benefits supported by Gusto. The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
-   *
-   * scope: `benefits:read`
-   */
-  async getAll(
-    request: GetV1BenefitsRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1BenefitsResponse> {
-    return unwrapAsync(companyBenefitsGetAll(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get a supported benefit
-   *
-   * @remarks
-   * Returns a benefit supported by Gusto. The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
-   *
-   * scope: `benefits:read`
-   */
-  async getSupported(
-    request: GetV1BenefitsBenefitIdRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1BenefitsBenefitIdResponse> {
-    return unwrapAsync(companyBenefitsGetSupported(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get company benefit summary by company benefit id.
-   *
-   * @remarks
-   * Returns summary benefit data for the requested company benefit id.
-   *
-   * Benefits containing PHI are only visible to applications with the `company_benefits:read:phi` scope.
-   *
-   * scope: `company_benefits:read`
-   */
-  async getSummary(
-    request: GetV1BenefitsCompanyBenefitIdSummaryRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1BenefitsCompanyBenefitIdSummaryResponse> {
-    return unwrapAsync(companyBenefitsGetSummary(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get all employee benefits for a company benefit
    *
    * @remarks
@@ -296,18 +294,20 @@ export class CompanyBenefits extends ClientSDK {
   }
 
   /**
-   * Get benefit fields requirements by benefit type
+   * Get company benefit summary by company benefit id.
    *
    * @remarks
-   * Returns the field requirements for a given benefit type.
+   * Returns summary benefit data for the requested company benefit id.
    *
-   * scope: `benefits:read`
+   * Benefits containing PHI are only visible to applications with the `company_benefits:read:phi` scope.
+   *
+   * scope: `company_benefits:read`
    */
-  async getRequirements(
-    request: GetV1BenefitsBenefitsIdRequirementsRequest,
+  async getSummary(
+    request: GetV1BenefitsCompanyBenefitIdSummaryRequest,
     options?: RequestOptions,
-  ): Promise<GetV1BenefitsBenefitsIdRequirementsResponse> {
-    return unwrapAsync(companyBenefitsGetRequirements(
+  ): Promise<GetV1BenefitsCompanyBenefitIdSummaryResponse> {
+    return unwrapAsync(companyBenefitsGetSummary(
       this,
       request,
       options,

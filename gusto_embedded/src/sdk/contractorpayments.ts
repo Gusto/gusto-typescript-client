@@ -8,6 +8,7 @@ import { contractorPaymentsFund } from "../funcs/contractorPaymentsFund.js";
 import { contractorPaymentsGet } from "../funcs/contractorPaymentsGet.js";
 import { contractorPaymentsGetReceipt } from "../funcs/contractorPaymentsGetReceipt.js";
 import { contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf } from "../funcs/contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf.js";
+import { contractorPaymentsGetV1ContractorsContractorUuidPayments } from "../funcs/contractorPaymentsGetV1ContractorsContractorUuidPayments.js";
 import { contractorPaymentsList } from "../funcs/contractorPaymentsList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import {
@@ -35,6 +36,10 @@ import {
   GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse,
 } from "../models/operations/getv1contractorpaymentscontractorpaymentuuidreceipt.js";
 import {
+  GetV1ContractorsContractorUuidPaymentsRequest,
+  GetV1ContractorsContractorUuidPaymentsResponse,
+} from "../models/operations/getv1contractorscontractoruuidpayments.js";
+import {
   PostV1CompaniesCompanyIdContractorPaymentsRequest,
   PostV1CompaniesCompanyIdContractorPaymentsResponse,
 } from "../models/operations/postv1companiescompanyidcontractorpayments.js";
@@ -42,25 +47,20 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class ContractorPayments extends ClientSDK {
   /**
-   * Get a single contractor payment receipt
+   * Get contractor payments
    *
    * @remarks
-   * Returns a contractor payment receipt.
+   * Returns a paginated list of payments for a single contractor.
    *
-   * Notes:
-   * * Receipts are only available for direct deposit payments and are only available once those payments have been funded.
-   * * Payroll Receipt requests for payrolls which do not have receipts available (e.g. payment by check) will return a 404 status.
-   * * Hour and dollar amounts are returned as string representations of numeric decimals.
-   * * Dollar amounts are represented to the cent.
-   * * If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts).
+   * Results are sortable by `check_date` or `created_at`. Append `:asc` or `:desc` to control direction (e.g., `check_date:desc`).
    *
-   * scope: `payrolls:read`
+   * scope: `contractor_pay_stubs:read`
    */
-  async getReceipt(
-    request: GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
+  async getV1ContractorsContractorUuidPayments(
+    request: GetV1ContractorsContractorUuidPaymentsRequest,
     options?: RequestOptions,
-  ): Promise<GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse> {
-    return unwrapAsync(contractorPaymentsGetReceipt(
+  ): Promise<GetV1ContractorsContractorUuidPaymentsResponse> {
+    return unwrapAsync(contractorPaymentsGetV1ContractorsContractorUuidPayments(
       this,
       request,
       options,
@@ -68,26 +68,24 @@ export class ContractorPayments extends ClientSDK {
   }
 
   /**
-   * Fund a contractor payment [DEMO]
+   * Get a contractor payment PDF
    *
    * @remarks
-   * > 🚧 Demo action
-   * >
-   * > This action is only available in the Demo environment
+   * Get a PDF document for a single contractor payment.
    *
-   * Simulate funding a contractor payment. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
-   *
-   * scope: `payrolls:run`
+   * scope: `payrolls:read`
    */
-  async fund(
-    request: GetV1ContractorPaymentsContractorPaymentUuidFundRequest,
+  async getV1ContractorPaymentsContractorPaymentIdPdf(
+    request: GetV1ContractorPaymentsContractorPaymentIdPdfRequest,
     options?: RequestOptions,
-  ): Promise<GetV1ContractorPaymentsContractorPaymentUuidFundResponse> {
-    return unwrapAsync(contractorPaymentsFund(
-      this,
-      request,
-      options,
-    ));
+  ): Promise<GetV1ContractorPaymentsContractorPaymentIdPdfResponse> {
+    return unwrapAsync(
+      contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf(
+        this,
+        request,
+        options,
+      ),
+    );
   }
 
   /**
@@ -174,23 +172,51 @@ export class ContractorPayments extends ClientSDK {
   }
 
   /**
-   * Get a contractor payment PDF
+   * Get a single contractor payment receipt
    *
    * @remarks
-   * Get a PDF document for a single contractor payment.
+   * Returns a contractor payment receipt.
+   *
+   * Notes:
+   * * Receipts are only available for direct deposit payments and are only available once those payments have been funded.
+   * * Payroll Receipt requests for payrolls which do not have receipts available (e.g. payment by check) will return a 404 status.
+   * * Hour and dollar amounts are returned as string representations of numeric decimals.
+   * * Dollar amounts are represented to the cent.
+   * * If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts).
    *
    * scope: `payrolls:read`
    */
-  async getV1ContractorPaymentsContractorPaymentIdPdf(
-    request: GetV1ContractorPaymentsContractorPaymentIdPdfRequest,
+  async getReceipt(
+    request: GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
     options?: RequestOptions,
-  ): Promise<GetV1ContractorPaymentsContractorPaymentIdPdfResponse> {
-    return unwrapAsync(
-      contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf(
-        this,
-        request,
-        options,
-      ),
-    );
+  ): Promise<GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse> {
+    return unwrapAsync(contractorPaymentsGetReceipt(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Fund a contractor payment [DEMO]
+   *
+   * @remarks
+   * > 🚧 Demo action
+   * >
+   * > This action is only available in the Demo environment
+   *
+   * Simulate funding a contractor payment. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
+   *
+   * scope: `payrolls:run`
+   */
+  async fund(
+    request: GetV1ContractorPaymentsContractorPaymentUuidFundRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1ContractorPaymentsContractorPaymentUuidFundResponse> {
+    return unwrapAsync(contractorPaymentsFund(
+      this,
+      request,
+      options,
+    ));
   }
 }

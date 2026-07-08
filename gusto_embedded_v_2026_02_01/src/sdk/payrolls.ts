@@ -102,25 +102,21 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Payrolls extends ClientSDK {
   /**
-   * Get all payrolls for a company
+   * Generate printable payroll checks (pdf)
    *
    * @remarks
-   * Returns a list of payrolls for a company. You can change the payrolls returned by updating the processing_status, payroll_types, start_date, & end_date params.
+   * This endpoint initiates the generation of employee checks for the payroll specified by payroll_uuid. A generation status and corresponding request_uuid will be returned. Use the generated document GET endpoint with document_type: `printable_payroll_checks` and request_uuid to poll the check generation process and retrieve the generated check URL upon completion.
    *
-   * By default, will return processed, regular payrolls for the past 6 months.
-   *
-   * Notes:
-   * * Dollar amounts are returned as string representations of numeric decimals, are represented to the cent.
-   * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1 year apart.
-   * * Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
-   *
-   * scope: `payrolls:read`
+   * scope: `generated_documents:write`
    */
-  async list(
-    request: GetV1CompaniesCompanyIdPayrollsRequest,
+  async generatePrintableChecks(
+    request:
+      PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest,
     options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyIdPayrollsResponse> {
-    return unwrapAsync(payrollsList(
+  ): Promise<
+    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse
+  > {
+    return unwrapAsync(payrollsGeneratePrintableChecks(
       this,
       request,
       options,
@@ -128,29 +124,85 @@ export class Payrolls extends ClientSDK {
   }
 
   /**
-   * Create an off-cycle payroll
+   * Get an employee's pay stubs
    *
    * @remarks
-   * Creates a new, unprocessed, off-cycle payroll.
+   * Get an employee's pay stubs.
    *
-   * ## `off_cycle_reason`
-   * By default:
-   * - External benefits and deductions will be included when the `off_cycle_reason` is set to `Correction`.
-   * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
+   * Results are returned in reverse chronological order (newest first).
    *
-   * These elections can be overridden with the `skip_regular_deductions` boolean.
-   *
-   * scope: `payrolls:run`
+   * scope: `pay_stubs:read`
    */
-  async createOffCycle(
-    request: PostV1CompaniesCompanyIdPayrollsRequest,
+  async getPayStubs(
+    request: GetV1EmployeesEmployeeUuidPayStubsRequest,
     options?: RequestOptions,
-  ): Promise<PostV1CompaniesCompanyIdPayrollsResponse> {
-    return unwrapAsync(payrollsCreateOffCycle(
+  ): Promise<GetV1EmployeesEmployeeUuidPayStubsResponse> {
+    return unwrapAsync(payrollsGetPayStubs(
       this,
       request,
       options,
     ));
+  }
+
+  /**
+   * Get an employee pay stub (pdf)
+   *
+   * @remarks
+   * Get an employee's pay stub for the specified payroll. By default, an application/pdf response will be returned. No other content types are currently supported, but may be supported in the future.
+   *
+   * scope: `pay_stubs:read`
+   */
+  async getPayStub(
+    request: GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse> {
+    return unwrapAsync(payrollsGetPayStub(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get partner disbursements for a payroll
+   *
+   * @remarks
+   * Get partner disbursements for a specific payroll.
+   *
+   * scope: `partner_disbursements:read`
+   */
+  async getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
+    request: GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> {
+    return unwrapAsync(
+      payrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
+        this,
+        request,
+        options,
+      ),
+    );
+  }
+
+  /**
+   * Update partner disbursements for a payroll
+   *
+   * @remarks
+   * Update partner disbursements for a specific payroll.
+   *
+   * scope: `partner_disbursements:write`
+   */
+  async patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
+    request: PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
+    options?: RequestOptions,
+  ): Promise<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> {
+    return unwrapAsync(
+      payrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
+        this,
+        request,
+        options,
+      ),
+    );
   }
 
   /**
@@ -245,6 +297,104 @@ export class Payrolls extends ClientSDK {
   }
 
   /**
+   * Get all payrolls for a company
+   *
+   * @remarks
+   * Returns a list of payrolls for a company. You can change the payrolls returned by updating the processing_status, payroll_types, start_date, & end_date params.
+   *
+   * By default, will return processed, regular payrolls for the past 6 months.
+   *
+   * Notes:
+   * * Dollar amounts are returned as string representations of numeric decimals, are represented to the cent.
+   * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1 year apart.
+   * * Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
+   *
+   * scope: `payrolls:read`
+   */
+  async list(
+    request: GetV1CompaniesCompanyIdPayrollsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyIdPayrollsResponse> {
+    return unwrapAsync(payrollsList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create an off-cycle payroll
+   *
+   * @remarks
+   * Creates a new, unprocessed, off-cycle payroll.
+   *
+   * ## `off_cycle_reason`
+   * By default:
+   * - External benefits and deductions will be included when the `off_cycle_reason` is set to `Correction`.
+   * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
+   *
+   * These elections can be overridden with the `skip_regular_deductions` boolean.
+   *
+   * scope: `payrolls:run`
+   */
+  async createOffCycle(
+    request: PostV1CompaniesCompanyIdPayrollsRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1CompaniesCompanyIdPayrollsResponse> {
+    return unwrapAsync(payrollsCreateOffCycle(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get a single payroll receipt
+   *
+   * @remarks
+   * Returns a payroll receipt.
+   *
+   * Notes:
+   * * Hour and dollar amounts are returned as string representations of numeric decimals.
+   * * Dollar amounts are represented to the cent.
+   * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+   *
+   * scope: `payrolls:read`
+   */
+  async getReceipt(
+    request: GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1PaymentReceiptsPayrollsPayrollUuidResponse> {
+    return unwrapAsync(payrollsGetReceipt(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Cancel a payroll
+   *
+   * @remarks
+   * Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it meets both criteria:
+   *
+   * - `processed` is `true`
+   * - Current time is earlier than 4pm PT on the `payroll_deadline`
+   *
+   * scope: `payrolls:run`
+   */
+  async cancel(
+    request: PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest,
+    options?: RequestOptions,
+  ): Promise<PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse> {
+    return unwrapAsync(payrollsCancel(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Prepare a payroll for update
    *
    * @remarks
@@ -274,23 +424,22 @@ export class Payrolls extends ClientSDK {
   }
 
   /**
-   * Get a single payroll receipt
+   * Calculate a payroll
    *
    * @remarks
-   * Returns a payroll receipt.
+   * Performs calculations for taxes, benefits, and deductions for an unprocessed payroll. The calculated payroll details provide a preview of the actual values that will be used when the payroll is run.
    *
-   * Notes:
-   * * Hour and dollar amounts are returned as string representations of numeric decimals.
-   * * Dollar amounts are represented to the cent.
-   * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+   * This calculation is asynchronous and a successful request responds with a 202 HTTP status. To view the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id} endpoint with *include=taxes,benefits,deductions* params.
    *
-   * scope: `payrolls:read`
+   * If the company is blocked from running payroll due to issues like incomplete setup, missing information or other compliance issues, the response will be 422 Unprocessable Entity with a categorization of the blockers as described in the error responses.
+   *
+   * scope: `payrolls:run`
    */
-  async getReceipt(
-    request: GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
+  async calculate(
+    request: PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest,
     options?: RequestOptions,
-  ): Promise<GetV1PaymentReceiptsPayrollsPayrollUuidResponse> {
-    return unwrapAsync(payrollsGetReceipt(
+  ): Promise<PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse> {
+    return unwrapAsync(payrollsCalculate(
       this,
       request,
       options,
@@ -338,50 +487,6 @@ export class Payrolls extends ClientSDK {
   }
 
   /**
-   * Calculate gross up for a payroll
-   *
-   * @remarks
-   * Calculates gross up earnings for an employee's payroll, given net earnings. This endpoint is only applicable to off-cycle unprocessed payrolls.
-   *
-   * The gross up amount must then be mapped to the corresponding fixed compensation earning type to get the correct payroll amount. For example, for bonus off-cycles, the gross up amount should be set with the Bonus earning type in the payroll `fixed_compensations` field.
-   *
-   * scope: `payrolls:run`
-   */
-  async calculateGrossUp(
-    request: PostPayrollsGrossUpPayrollUuidRequest,
-    options?: RequestOptions,
-  ): Promise<PostPayrollsGrossUpPayrollUuidResponse> {
-    return unwrapAsync(payrollsCalculateGrossUp(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Calculate a payroll
-   *
-   * @remarks
-   * Performs calculations for taxes, benefits, and deductions for an unprocessed payroll. The calculated payroll details provide a preview of the actual values that will be used when the payroll is run.
-   *
-   * This calculation is asynchronous and a successful request responds with a 202 HTTP status. To view the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id} endpoint with *include=taxes,benefits,deductions* params.
-   *
-   * If the company is blocked from running payroll due to issues like incomplete setup, missing information or other compliance issues, the response will be 422 Unprocessable Entity with a categorization of the blockers as described in the error responses.
-   *
-   * scope: `payrolls:run`
-   */
-  async calculate(
-    request: PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest,
-    options?: RequestOptions,
-  ): Promise<PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse> {
-    return unwrapAsync(payrollsCalculate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Submit payroll
    *
    * @remarks
@@ -405,128 +510,23 @@ export class Payrolls extends ClientSDK {
   }
 
   /**
-   * Cancel a payroll
+   * Calculate gross up for a payroll
    *
    * @remarks
-   * Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it meets both criteria:
+   * Calculates gross up earnings for an employee's payroll, given net earnings. This endpoint is only applicable to off-cycle unprocessed payrolls.
    *
-   * - `processed` is `true`
-   * - Current time is earlier than 4pm PT on the `payroll_deadline`
+   * The gross up amount must then be mapped to the corresponding fixed compensation earning type to get the correct payroll amount. For example, for bonus off-cycles, the gross up amount should be set with the Bonus earning type in the payroll `fixed_compensations` field.
    *
    * scope: `payrolls:run`
    */
-  async cancel(
-    request: PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest,
+  async calculateGrossUp(
+    request: PostPayrollsGrossUpPayrollUuidRequest,
     options?: RequestOptions,
-  ): Promise<PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse> {
-    return unwrapAsync(payrollsCancel(
+  ): Promise<PostPayrollsGrossUpPayrollUuidResponse> {
+    return unwrapAsync(payrollsCalculateGrossUp(
       this,
       request,
       options,
     ));
-  }
-
-  /**
-   * Get an employee pay stub (pdf)
-   *
-   * @remarks
-   * Get an employee's pay stub for the specified payroll. By default, an application/pdf response will be returned. No other content types are currently supported, but may be supported in the future.
-   *
-   * scope: `pay_stubs:read`
-   */
-  async getPayStub(
-    request: GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse> {
-    return unwrapAsync(payrollsGetPayStub(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get an employee's pay stubs
-   *
-   * @remarks
-   * Get an employee's pay stubs.
-   *
-   * Results are returned in reverse chronological order (newest first).
-   *
-   * scope: `pay_stubs:read`
-   */
-  async getPayStubs(
-    request: GetV1EmployeesEmployeeUuidPayStubsRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1EmployeesEmployeeUuidPayStubsResponse> {
-    return unwrapAsync(payrollsGetPayStubs(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Generate printable payroll checks (pdf)
-   *
-   * @remarks
-   * This endpoint initiates the generation of employee checks for the payroll specified by payroll_uuid. A generation status and corresponding request_uuid will be returned. Use the generated document GET endpoint with document_type: `printable_payroll_checks` and request_uuid to poll the check generation process and retrieve the generated check URL upon completion.
-   *
-   * scope: `generated_documents:write`
-   */
-  async generatePrintableChecks(
-    request:
-      PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest,
-    options?: RequestOptions,
-  ): Promise<
-    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse
-  > {
-    return unwrapAsync(payrollsGeneratePrintableChecks(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get partner disbursements for a payroll
-   *
-   * @remarks
-   * Get partner disbursements for a specific payroll.
-   *
-   * scope: `partner_disbursements:read`
-   */
-  async getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
-    request: GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> {
-    return unwrapAsync(
-      payrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
-        this,
-        request,
-        options,
-      ),
-    );
-  }
-
-  /**
-   * Update partner disbursements for a payroll
-   *
-   * @remarks
-   * Update partner disbursements for a specific payroll.
-   *
-   * scope: `partner_disbursements:write`
-   */
-  async patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
-    request: PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
-    options?: RequestOptions,
-  ): Promise<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> {
-    return unwrapAsync(
-      payrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
-        this,
-        request,
-        options,
-      ),
-    );
   }
 }

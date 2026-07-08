@@ -12,14 +12,14 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Returns `migration_blocker` for blockers.
  */
-export const PartnerManagedCompanyMigrateResponseErrorsCategory = {
+export const PartnerManagedCompanyMigrateResponseCategory = {
   MigrationBlocker: "migration_blocker",
 } as const;
 /**
  * Returns `migration_blocker` for blockers.
  */
-export type PartnerManagedCompanyMigrateResponseErrorsCategory = ClosedEnum<
-  typeof PartnerManagedCompanyMigrateResponseErrorsCategory
+export type PartnerManagedCompanyMigrateResponseCategory = ClosedEnum<
+  typeof PartnerManagedCompanyMigrateResponseCategory
 >;
 
 export type PartnerManagedCompanyMigrateResponseMetadata = {
@@ -34,7 +34,7 @@ export type Errors = {
   /**
    * Returns `migration_blocker` for blockers.
    */
-  category?: PartnerManagedCompanyMigrateResponseErrorsCategory | undefined;
+  category?: PartnerManagedCompanyMigrateResponseCategory | undefined;
   message?: string | undefined;
   metadata?: PartnerManagedCompanyMigrateResponseMetadata | undefined;
 };
@@ -42,14 +42,14 @@ export type Errors = {
 /**
  * Returns `migration_warning` for warnings.
  */
-export const PartnerManagedCompanyMigrateResponseCategory = {
+export const PartnerManagedCompanyMigrateResponseWarningsCategory = {
   MigrationWarning: "migration_warning",
 } as const;
 /**
  * Returns `migration_warning` for warnings.
  */
-export type PartnerManagedCompanyMigrateResponseCategory = ClosedEnum<
-  typeof PartnerManagedCompanyMigrateResponseCategory
+export type PartnerManagedCompanyMigrateResponseWarningsCategory = ClosedEnum<
+  typeof PartnerManagedCompanyMigrateResponseWarningsCategory
 >;
 
 export type PartnerManagedCompanyMigrateResponseWarningsMetadata = {
@@ -61,7 +61,7 @@ export type Warnings = {
   /**
    * Returns `migration_warning` for warnings.
    */
-  category?: PartnerManagedCompanyMigrateResponseCategory | undefined;
+  category?: PartnerManagedCompanyMigrateResponseWarningsCategory | undefined;
   message?: string | undefined;
   metadata?: PartnerManagedCompanyMigrateResponseWarningsMetadata | undefined;
 };
@@ -86,9 +86,9 @@ export type PartnerManagedCompanyMigrateResponse = {
 };
 
 /** @internal */
-export const PartnerManagedCompanyMigrateResponseErrorsCategory$inboundSchema:
-  z.ZodNativeEnum<typeof PartnerManagedCompanyMigrateResponseErrorsCategory> = z
-    .nativeEnum(PartnerManagedCompanyMigrateResponseErrorsCategory);
+export const PartnerManagedCompanyMigrateResponseCategory$inboundSchema:
+  z.ZodNativeEnum<typeof PartnerManagedCompanyMigrateResponseCategory> = z
+    .nativeEnum(PartnerManagedCompanyMigrateResponseCategory);
 
 /** @internal */
 export const PartnerManagedCompanyMigrateResponseMetadata$inboundSchema:
@@ -120,7 +120,7 @@ export function partnerManagedCompanyMigrateResponseMetadataFromJSON(
 export const Errors$inboundSchema: z.ZodType<Errors, z.ZodTypeDef, unknown> = z
   .object({
     error_key: z.string().optional(),
-    category: PartnerManagedCompanyMigrateResponseErrorsCategory$inboundSchema
+    category: PartnerManagedCompanyMigrateResponseCategory$inboundSchema
       .optional(),
     message: z.string().optional(),
     metadata: z.lazy(() =>
@@ -143,9 +143,9 @@ export function errorsFromJSON(
 }
 
 /** @internal */
-export const PartnerManagedCompanyMigrateResponseCategory$inboundSchema:
-  z.ZodNativeEnum<typeof PartnerManagedCompanyMigrateResponseCategory> = z
-    .nativeEnum(PartnerManagedCompanyMigrateResponseCategory);
+export const PartnerManagedCompanyMigrateResponseWarningsCategory$inboundSchema:
+  z.ZodNativeEnum<typeof PartnerManagedCompanyMigrateResponseWarningsCategory> =
+    z.nativeEnum(PartnerManagedCompanyMigrateResponseWarningsCategory);
 
 /** @internal */
 export const PartnerManagedCompanyMigrateResponseWarningsMetadata$inboundSchema:
@@ -180,7 +180,7 @@ export const Warnings$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   error_key: z.string().optional(),
-  category: PartnerManagedCompanyMigrateResponseCategory$inboundSchema
+  category: PartnerManagedCompanyMigrateResponseWarningsCategory$inboundSchema
     .optional(),
   message: z.string().optional(),
   metadata: z.lazy(() =>

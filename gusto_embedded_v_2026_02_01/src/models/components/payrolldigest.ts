@@ -12,13 +12,15 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The action being performed on the batch.
  */
-export const BatchAction = {
+export const PayrollDigestBatchAction = {
   Create: "create",
 } as const;
 /**
  * The action being performed on the batch.
  */
-export type BatchAction = ClosedEnum<typeof BatchAction>;
+export type PayrollDigestBatchAction = ClosedEnum<
+  typeof PayrollDigestBatchAction
+>;
 
 /**
  * The lifecycle status of the batch request itself. Terminal values are `completed` (processing finished — inspect `results` and `exclusions` for per-company outcomes) and `failed` (request failed; can be retried). This is distinct from the per-company `status` returned inside `results[]` and `exclusions[]`.
@@ -49,7 +51,7 @@ export type PayrollDigest = {
   /**
    * The action being performed on the batch.
    */
-  batchAction: BatchAction;
+  batchAction: PayrollDigestBatchAction;
   /**
    * The lifecycle status of the batch request itself. Terminal values are `completed` (processing finished — inspect `results` and `exclusions` for per-company outcomes) and `failed` (request failed; can be retried). This is distinct from the per-company `status` returned inside `results[]` and `exclusions[]`.
    */
@@ -57,8 +59,9 @@ export type PayrollDigest = {
 };
 
 /** @internal */
-export const BatchAction$inboundSchema: z.ZodNativeEnum<typeof BatchAction> = z
-  .nativeEnum(BatchAction);
+export const PayrollDigestBatchAction$inboundSchema: z.ZodNativeEnum<
+  typeof PayrollDigestBatchAction
+> = z.nativeEnum(PayrollDigestBatchAction);
 
 /** @internal */
 export const PayrollDigestStatus$inboundSchema: z.ZodNativeEnum<
@@ -73,7 +76,7 @@ export const PayrollDigest$inboundSchema: z.ZodType<
 > = z.object({
   uuid: z.string(),
   idempotency_key: z.string(),
-  batch_action: BatchAction$inboundSchema,
+  batch_action: PayrollDigestBatchAction$inboundSchema,
   status: PayrollDigestStatus$inboundSchema,
 }).transform((v) => {
   return remap$(v, {

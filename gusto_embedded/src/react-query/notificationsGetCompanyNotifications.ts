@@ -117,10 +117,10 @@ export function setNotificationsGetCompanyNotificationsData(
   queryKeyBase: [
     companyUuid: string,
     parameters: {
-      status?: Status | undefined;
       xGustoAPIVersion?:
         | GetCompanyNotificationsHeaderXGustoAPIVersion
         | undefined;
+      status?: Status | undefined;
       page?: number | undefined;
       per?: number | undefined;
     },
@@ -141,10 +141,10 @@ export function invalidateNotificationsGetCompanyNotifications(
     [
       companyUuid: string,
       parameters: {
-        status?: Status | undefined;
         xGustoAPIVersion?:
           | GetCompanyNotificationsHeaderXGustoAPIVersion
           | undefined;
+        status?: Status | undefined;
         page?: number | undefined;
         per?: number | undefined;
       },

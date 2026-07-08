@@ -22,28 +22,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class CompanyAttachments extends ClientSDK {
   /**
-   * Get Company Attachment Details
-   *
-   * @remarks
-   * Retrieve the detail of an attachment uploaded by the company.
-   *
-   * ### Related guides
-   * - [Manage company attachments](doc:manage-company-attachments)
-   *
-   * scope: `company_attachments:read`
-   */
-  async getDetails(
-    request: GetV1CompaniesAttachmentRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompaniesAttachmentResponse> {
-    return unwrapAsync(companyAttachmentsGetDetails(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get List of Company Attachments
    *
    * @remarks
@@ -81,6 +59,28 @@ export class CompanyAttachments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PostV1CompaniesAttachmentResponse> {
     return unwrapAsync(companyAttachmentsCreate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get Company Attachment Details
+   *
+   * @remarks
+   * Retrieve the detail of an attachment uploaded by the company.
+   *
+   * ### Related guides
+   * - [Manage company attachments](doc:manage-company-attachments)
+   *
+   * scope: `company_attachments:read`
+   */
+  async getDetails(
+    request: GetV1CompaniesAttachmentRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesAttachmentResponse> {
+    return unwrapAsync(companyAttachmentsGetDetails(
       this,
       request,
       options,

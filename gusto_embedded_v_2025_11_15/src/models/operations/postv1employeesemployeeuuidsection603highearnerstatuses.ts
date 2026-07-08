@@ -39,15 +39,15 @@ export type PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoA
 
 export type PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest = {
   /**
-   * The UUID of the employee
-   */
-  employeeUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the employee
+   */
+  employeeUuid: string;
   employeeSection603HighEarnerStatusCreateRequest:
     EmployeeSection603HighEarnerStatusCreateRequest;
 };
@@ -73,8 +73,8 @@ export const PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGusto
 /** @internal */
 export type PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest$Outbound =
   {
-    employee_uuid: string;
     "X-Gusto-API-Version": string;
+    employee_uuid: string;
     "Employee-Section603-High-Earner-Status-Create-Request":
       EmployeeSection603HighEarnerStatusCreateRequest$Outbound;
   };
@@ -86,16 +86,16 @@ export const PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest$outb
     z.ZodTypeDef,
     PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest
   > = z.object({
-    employeeUuid: z.string(),
     xGustoAPIVersion:
       PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion$outboundSchema
         .default("2025-11-15"),
+    employeeUuid: z.string(),
     employeeSection603HighEarnerStatusCreateRequest:
       EmployeeSection603HighEarnerStatusCreateRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      employeeUuid: "employee_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      employeeUuid: "employee_uuid",
       employeeSection603HighEarnerStatusCreateRequest:
         "Employee-Section603-High-Earner-Status-Create-Request",
     });

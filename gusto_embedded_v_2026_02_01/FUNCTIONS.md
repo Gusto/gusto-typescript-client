@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-02-01/core.js";
-import { introspectionGetInfo } from "@gusto/embedded-api-v-2026-02-01/funcs/introspectionGetInfo.js";
+import { achTransactionsGetAll } from "@gusto/embedded-api-v-2026-02-01/funcs/achTransactionsGetAll.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -29,12 +29,14 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await introspectionGetInfo(gustoEmbedded, {});
+  const res = await achTransactionsGetAll(gustoEmbedded, {
+    companyUuid: "<id>",
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("introspectionGetInfo failed:", res.error);
+    console.log("achTransactionsGetAll failed:", res.error);
   }
 }
 

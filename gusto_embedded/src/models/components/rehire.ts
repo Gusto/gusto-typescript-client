@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
  */
-export const EmploymentStatus = {
+export const RehireEmploymentStatus = {
   PartTime: "part_time",
   FullTime: "full_time",
   PartTimeEligible: "part_time_eligible",
@@ -23,7 +23,7 @@ export const EmploymentStatus = {
 /**
  * The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
  */
-export type EmploymentStatus = ClosedEnum<typeof EmploymentStatus>;
+export type RehireEmploymentStatus = ClosedEnum<typeof RehireEmploymentStatus>;
 
 export type Rehire = {
   /**
@@ -45,7 +45,7 @@ export type Rehire = {
   /**
    * The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
    */
-  employmentStatus?: EmploymentStatus | undefined;
+  employmentStatus?: RehireEmploymentStatus | undefined;
   /**
    * Whether the employee is a two percent shareholder of the company. This field only applies to companies with an S-Corp entity type.
    */
@@ -61,9 +61,9 @@ export type Rehire = {
 };
 
 /** @internal */
-export const EmploymentStatus$inboundSchema: z.ZodNativeEnum<
-  typeof EmploymentStatus
-> = z.nativeEnum(EmploymentStatus);
+export const RehireEmploymentStatus$inboundSchema: z.ZodNativeEnum<
+  typeof RehireEmploymentStatus
+> = z.nativeEnum(RehireEmploymentStatus);
 
 /** @internal */
 export const Rehire$inboundSchema: z.ZodType<Rehire, z.ZodTypeDef, unknown> = z
@@ -72,7 +72,7 @@ export const Rehire$inboundSchema: z.ZodType<Rehire, z.ZodTypeDef, unknown> = z
     effective_date: z.string().optional(),
     file_new_hire_report: z.boolean().optional(),
     work_location_uuid: z.string().optional(),
-    employment_status: EmploymentStatus$inboundSchema.optional(),
+    employment_status: RehireEmploymentStatus$inboundSchema.optional(),
     two_percent_shareholder: z.boolean().optional(),
     employee_uuid: z.string().optional(),
     active: z.boolean().optional(),

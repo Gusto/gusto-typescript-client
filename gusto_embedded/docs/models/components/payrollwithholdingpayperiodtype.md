@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PayrollWithholdingPayPeriodType } from "@gusto/embedded-api/models/components/payroll.js";
+import { PayrollWithholdingPayPeriodType } from "@gusto/embedded-api/models/components/payrollshow.js";
 
 let value: PayrollWithholdingPayPeriodType = "Quarterly";
 ```

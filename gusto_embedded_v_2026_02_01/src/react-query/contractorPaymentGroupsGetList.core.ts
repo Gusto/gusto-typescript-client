@@ -47,11 +47,11 @@ export function buildContractorPaymentGroupsGetListQuery(
 } {
   return {
     queryKey: queryKeyContractorPaymentGroupsGetList(request.companyId, {
+      xGustoAPIVersion: request.xGustoAPIVersion,
       startDate: request.startDate,
       endDate: request.endDate,
       page: request.page,
       per: request.per,
-      xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function contractorPaymentGroupsGetListQueryFn(
       ctx,
@@ -79,13 +79,13 @@ export function buildContractorPaymentGroupsGetListQuery(
 export function queryKeyContractorPaymentGroupsGetList(
   companyId: string,
   parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
+      | undefined;
     startDate?: string | undefined;
     endDate?: string | undefined;
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?:
-      | GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
-      | undefined;
   },
 ): QueryKey {
   return [

@@ -5,13 +5,13 @@ The action being performed on the batch.
 ## Example Usage
 
 ```typescript
-import { BatchAction } from "@gusto/embedded-api-v-2025-11-15/models/components/payrolldigest.js";
+import { BatchAction } from "@gusto/embedded-api-v-2025-11-15/models/components/payrollbatch.js";
 
-let value: BatchAction = "create";
+let value: BatchAction = "cancel";
 ```
 
 ## Values
 
 ```typescript
-"create"
+"cancel"
 ```

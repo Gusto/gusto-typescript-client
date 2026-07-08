@@ -78,7 +78,7 @@ export function useContractorPaymentsDeleteMutation(
 }
 
 export function mutationKeyContractorPaymentsDelete(): MutationKey {
-  return ["@gusto/embedded-api-v-2026-02-01", "contractorPayments", "delete"];
+  return ["@gusto/embedded-api-v-2026-02-01", "Contractor Payments", "delete"];
 }
 
 export function buildContractorPaymentsDeleteMutation(

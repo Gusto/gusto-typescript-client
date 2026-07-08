@@ -17,13 +17,15 @@ import {
   PayScheduleAssignmentEmployee$inboundSchema,
 } from "./payscheduleassignmentemployee.js";
 
-export const Type = {
+export const PayScheduleAssignmentType = {
   Single: "single",
   HourlySalaried: "hourly_salaried",
   ByEmployee: "by_employee",
   ByDepartment: "by_department",
 } as const;
-export type Type = ClosedEnum<typeof Type>;
+export type PayScheduleAssignmentType = ClosedEnum<
+  typeof PayScheduleAssignmentType
+>;
 
 /**
  * The representation of a pay schedule assignment.
@@ -32,7 +34,7 @@ export type PayScheduleAssignment = {
   /**
    * The pay schedule assignment type.
    */
-  type?: Type | null | undefined;
+  type?: PayScheduleAssignmentType | null | undefined;
   /**
    * Pay schedule for hourly employees.
    */
@@ -56,9 +58,9 @@ export type PayScheduleAssignment = {
 };
 
 /** @internal */
-export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
-  Type,
-);
+export const PayScheduleAssignmentType$inboundSchema: z.ZodNativeEnum<
+  typeof PayScheduleAssignmentType
+> = z.nativeEnum(PayScheduleAssignmentType);
 
 /** @internal */
 export const PayScheduleAssignment$inboundSchema: z.ZodType<
@@ -66,7 +68,7 @@ export const PayScheduleAssignment$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.nullable(Type$inboundSchema).optional(),
+  type: z.nullable(PayScheduleAssignmentType$inboundSchema).optional(),
   hourly_pay_schedule_uuid: z.nullable(z.string()).optional(),
   salaried_pay_schedule_uuid: z.nullable(z.string()).optional(),
   default_pay_schedule_uuid: z.nullable(z.string()).optional(),

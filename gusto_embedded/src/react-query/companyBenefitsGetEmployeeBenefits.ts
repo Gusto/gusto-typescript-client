@@ -23,8 +23,8 @@ import { ResponseValidationError } from "../models/errors/responsevalidationerro
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion,
-  GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude,
   GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
+  QueryParamInclude,
 } from "../models/operations/getv1companybenefitscompanybenefitidemployeebenefits.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -132,9 +132,7 @@ export function setCompanyBenefitsGetEmployeeBenefitsData(
         | undefined;
       page?: number | undefined;
       per?: number | undefined;
-      include?:
-        | GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude
-        | undefined;
+      include?: QueryParamInclude | undefined;
     },
   ],
   data: CompanyBenefitsGetEmployeeBenefitsQueryData,
@@ -158,9 +156,7 @@ export function invalidateCompanyBenefitsGetEmployeeBenefits(
           | undefined;
         page?: number | undefined;
         per?: number | undefined;
-        include?:
-          | GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude
-          | undefined;
+        include?: QueryParamInclude | undefined;
       },
     ]
   >,

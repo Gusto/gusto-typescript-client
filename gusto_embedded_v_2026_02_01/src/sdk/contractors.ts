@@ -77,184 +77,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Contractors extends ClientSDK {
   /**
-   * Get contractors of a company
-   *
-   * @remarks
-   * Get all contractors, active and inactive, individual and business, for a company.
-   *
-   * scope: `contractors:read`
-   */
-  async list(
-    request: GetV1CompaniesCompanyUuidContractorsRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyUuidContractorsResponse> {
-    return unwrapAsync(contractorsList(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create a contractor
-   *
-   * @remarks
-   * Create an individual or business contractor.
-   *
-   * scope: `contractors:manage`
-   */
-  async create(
-    request: PostV1CompaniesCompanyUuidContractorsRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1CompaniesCompanyUuidContractorsResponse> {
-    return unwrapAsync(contractorsCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get a contractor
-   *
-   * @remarks
-   * Get a contractor.
-   *
-   * scope: `contractors:read`
-   */
-  async get(
-    request: GetV1ContractorsContractorUuidRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1ContractorsContractorUuidResponse> {
-    return unwrapAsync(contractorsGet(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update a contractor
-   *
-   * @remarks
-   * Update a contractor.
-   *
-   * > 🚧 Warning
-   * >
-   * > Watch out when changing a contractor's type (when the contractor is finished onboarding). Specifically, changing contractor type can be dangerous since Gusto won't recognize and file two separate 1099s if they simply change from business to individual
-   *
-   * scope: `contractors:write`
-   */
-  async update(
-    request: PutV1ContractorsContractorUuidRequest,
-    options?: RequestOptions,
-  ): Promise<PutV1ContractorsContractorUuidResponse> {
-    return unwrapAsync(contractorsUpdate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete a contractor
-   *
-   * @remarks
-   * A contractor can only be deleted when there are no contractor payments.
-   *
-   * scope: `contractors:manage`
-   */
-  async delete(
-    request: DeleteV1ContractorsContractorUuidRequest,
-    options?: RequestOptions,
-  ): Promise<DeleteV1ContractorsContractorUuidResponse> {
-    return unwrapAsync(contractorsDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get the contractor's onboarding status
-   *
-   * @remarks
-   * Retrieves a contractor's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
-   *
-   * ## onboarding_status
-   *
-   * ### Admin-facilitated onboarding
-   * | onboarding_status | Description |
-   * |:------------------|------------:|
-   * | `admin_onboarding_incomplete` | Admin needs to enter basic information about the contractor. |
-   * | `admin_onboarding_review` | All information has been completed and admin needs to confirm onboarding. |
-   * | `onboarding_completed` | Contractor has been fully onboarded and verified. |
-   *
-   * ### Contractor self-onboarding
-   *
-   * | onboarding_status | Description |
-   * | --- | ----------- |
-   * | `admin_onboarding_incomplete` | Admin needs to enter basic information about the contractor. |
-   * | `self_onboarding_not_invited` | Admin has the intention to invite the contractor to self-onboard (e.g., marking a checkbox), but the system has not yet sent the invitation. |
-   * | `self_onboarding_invited` | Contractor has been sent an invitation to self-onboard. |
-   * | `self_onboarding_started` | Contractor has started the self-onboarding process. |
-   * | `self_onboarding_review` | Admin needs to review contractors's entered information and confirm onboarding. |
-   * | `onboarding_completed` | Contractor has been fully onboarded and verified. |
-   *
-   * ## onboarding_steps
-   *
-   * | onboarding_steps | Requirement(s) to be completed |
-   * |:-----------------|-------------------------------:|
-   * | `basic_details` | Add individual contractor's first name, last name, social security number or Business name and EIN depending on the contractor type |
-   * | `add_address` | Add contractor address. |
-   * | `compensation_details` | Add contractor compensation. |
-   * | `payment_details` | (optional) Set up contractor's direct deposit or set to check. |
-   * | `sign_documents` | Contractor forms (e.g., W9) are generated & signed. |
-   * | `file_new_hire_report` | Contractor new hire report is generated. |
-   *
-   * scope: `contractors:read`
-   */
-  async getOnboardingStatus(
-    request: GetV1ContractorsContractorUuidOnboardingStatusRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1ContractorsContractorUuidOnboardingStatusResponse> {
-    return unwrapAsync(contractorsGetOnboardingStatus(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Change the contractor's onboarding status
-   *
-   * @remarks
-   * Updates a contractor's onboarding status.
-   *
-   * Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the contractor.
-   *
-   * | Action | current onboarding_status | new onboarding_status |
-   * |:------------------|:------------:|----------:|
-   * | Mark a contractor as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_not_invited` |
-   * | Invite a contractor to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_not_invited` | `self_onboarding_invited` |
-   * | Cancel a contractor's self-onboarding | `self_onboarding_invited` or `self_onboarding_not_invited` | `admin_onboarding_incomplete` |
-   * | Review a contractor's self-onboarded info | `self_onboarding_started` | `self_onboarding_review` |
-   * | Finish a contractor's onboarding | `admin_onboarding_review` or `self_onboarding_review` | `onboarding_completed` |
-   *
-   * scope: `contractors:write`
-   */
-  async updateOnboardingStatus(
-    request: PutV1ContractorsContractorUuidOnboardingStatusRequest,
-    options?: RequestOptions,
-  ): Promise<PutV1ContractorsContractorUuidOnboardingStatusResponse> {
-    return unwrapAsync(contractorsUpdateOnboardingStatus(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get a contractor address
    *
    * @remarks
@@ -447,6 +269,184 @@ export class Contractors extends ClientSDK {
     options?: RequestOptions,
   ): Promise<DeleteV1ContractorsContractorUuidTerminationResponse> {
     return unwrapAsync(contractorsDeleteV1ContractorsContractorUuidTermination(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get a contractor
+   *
+   * @remarks
+   * Get a contractor.
+   *
+   * scope: `contractors:read`
+   */
+  async get(
+    request: GetV1ContractorsContractorUuidRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1ContractorsContractorUuidResponse> {
+    return unwrapAsync(contractorsGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update a contractor
+   *
+   * @remarks
+   * Update a contractor.
+   *
+   * > 🚧 Warning
+   * >
+   * > Watch out when changing a contractor's type (when the contractor is finished onboarding). Specifically, changing contractor type can be dangerous since Gusto won't recognize and file two separate 1099s if they simply change from business to individual
+   *
+   * scope: `contractors:write`
+   */
+  async update(
+    request: PutV1ContractorsContractorUuidRequest,
+    options?: RequestOptions,
+  ): Promise<PutV1ContractorsContractorUuidResponse> {
+    return unwrapAsync(contractorsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a contractor
+   *
+   * @remarks
+   * A contractor can only be deleted when there are no contractor payments.
+   *
+   * scope: `contractors:manage`
+   */
+  async delete(
+    request: DeleteV1ContractorsContractorUuidRequest,
+    options?: RequestOptions,
+  ): Promise<DeleteV1ContractorsContractorUuidResponse> {
+    return unwrapAsync(contractorsDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get contractors of a company
+   *
+   * @remarks
+   * Get all contractors, active and inactive, individual and business, for a company.
+   *
+   * scope: `contractors:read`
+   */
+  async list(
+    request: GetV1CompaniesCompanyUuidContractorsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyUuidContractorsResponse> {
+    return unwrapAsync(contractorsList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a contractor
+   *
+   * @remarks
+   * Create an individual or business contractor.
+   *
+   * scope: `contractors:manage`
+   */
+  async create(
+    request: PostV1CompaniesCompanyUuidContractorsRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1CompaniesCompanyUuidContractorsResponse> {
+    return unwrapAsync(contractorsCreate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get the contractor's onboarding status
+   *
+   * @remarks
+   * Retrieves a contractor's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
+   *
+   * ## onboarding_status
+   *
+   * ### Admin-facilitated onboarding
+   * | onboarding_status | Description |
+   * |:------------------|------------:|
+   * | `admin_onboarding_incomplete` | Admin needs to enter basic information about the contractor. |
+   * | `admin_onboarding_review` | All information has been completed and admin needs to confirm onboarding. |
+   * | `onboarding_completed` | Contractor has been fully onboarded and verified. |
+   *
+   * ### Contractor self-onboarding
+   *
+   * | onboarding_status | Description |
+   * | --- | ----------- |
+   * | `admin_onboarding_incomplete` | Admin needs to enter basic information about the contractor. |
+   * | `self_onboarding_not_invited` | Admin has the intention to invite the contractor to self-onboard (e.g., marking a checkbox), but the system has not yet sent the invitation. |
+   * | `self_onboarding_invited` | Contractor has been sent an invitation to self-onboard. |
+   * | `self_onboarding_started` | Contractor has started the self-onboarding process. |
+   * | `self_onboarding_review` | Admin needs to review contractors's entered information and confirm onboarding. |
+   * | `onboarding_completed` | Contractor has been fully onboarded and verified. |
+   *
+   * ## onboarding_steps
+   *
+   * | onboarding_steps | Requirement(s) to be completed |
+   * |:-----------------|-------------------------------:|
+   * | `basic_details` | Add individual contractor's first name, last name, social security number or Business name and EIN depending on the contractor type |
+   * | `add_address` | Add contractor address. |
+   * | `compensation_details` | Add contractor compensation. |
+   * | `payment_details` | (optional) Set up contractor's direct deposit or set to check. |
+   * | `sign_documents` | Contractor forms (e.g., W9) are generated & signed. |
+   * | `file_new_hire_report` | Contractor new hire report is generated. |
+   *
+   * scope: `contractors:read`
+   */
+  async getOnboardingStatus(
+    request: GetV1ContractorsContractorUuidOnboardingStatusRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1ContractorsContractorUuidOnboardingStatusResponse> {
+    return unwrapAsync(contractorsGetOnboardingStatus(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Change the contractor's onboarding status
+   *
+   * @remarks
+   * Updates a contractor's onboarding status.
+   *
+   * Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the contractor.
+   *
+   * | Action | current onboarding_status | new onboarding_status |
+   * |:------------------|:------------:|----------:|
+   * | Mark a contractor as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_not_invited` |
+   * | Invite a contractor to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_not_invited` | `self_onboarding_invited` |
+   * | Cancel a contractor's self-onboarding | `self_onboarding_invited` or `self_onboarding_not_invited` | `admin_onboarding_incomplete` |
+   * | Review a contractor's self-onboarded info | `self_onboarding_started` | `self_onboarding_review` |
+   * | Finish a contractor's onboarding | `admin_onboarding_review` or `self_onboarding_review` | `onboarding_completed` |
+   *
+   * scope: `contractors:write`
+   */
+  async updateOnboardingStatus(
+    request: PutV1ContractorsContractorUuidOnboardingStatusRequest,
+    options?: RequestOptions,
+  ): Promise<PutV1ContractorsContractorUuidOnboardingStatusResponse> {
+    return unwrapAsync(contractorsUpdateOnboardingStatus(
       this,
       request,
       options,

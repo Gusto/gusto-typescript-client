@@ -57,6 +57,52 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class PaySchedules extends ClientSDK {
   /**
+   * Get pay periods for a company
+   *
+   * @remarks
+   * Pay periods are the foundation of payroll. Compensation, time & attendance, taxes, and expense reports all rely on when they happened.
+   *
+   * To begin submitting information for a given payroll, we need to agree on the time period.
+   *
+   * By default, this endpoint returns pay periods starting from 6 months ago to the date today. Use the `start_date` and `end_date` parameters to change the scope of the response. End dates can be up to 3 months in the future and there is no limit on start dates.
+   *
+   * Starting in version 2023-04-01, the `eligible_employees` attribute was removed from the response. The eligible employees for a payroll are determined by the employee_compensations returned from the [PUT /v1/companies/{company_id}/payrolls/{payroll_id}/prepare](ref:put-v1-companies-company_id-payrolls-payroll_id-prepare) endpoint.
+   *
+   * scope: `payrolls:read`
+   */
+  async getPayPeriods(
+    request: GetV1CompaniesCompanyIdPayPeriodsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyIdPayPeriodsResponse> {
+    return unwrapAsync(paySchedulesGetPayPeriods(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get termination pay periods for a company
+   *
+   * @remarks
+   * When a payroll admin terminates an employee and selects "Dismissal Payroll" as the employee's final payroll, their last pay period will appear on the list.
+   *
+   * This endpoint returns the unprocessed pay periods for past and future terminated employees in a given company.
+   *
+   * scope: `payrolls:read`
+   */
+  async getUnprocessedTerminationPeriods(
+    request: GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse> {
+    return unwrapAsync(paySchedulesGetUnprocessedTerminationPeriods(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Get the pay schedules for a company
    *
    * @remarks
@@ -183,71 +229,6 @@ export class PaySchedules extends ClientSDK {
   }
 
   /**
-   * Get pay periods for a company
-   *
-   * @remarks
-   * Pay periods are the foundation of payroll. Compensation, time & attendance, taxes, and expense reports all rely on when they happened.
-   *
-   * To begin submitting information for a given payroll, we need to agree on the time period.
-   *
-   * By default, this endpoint returns pay periods starting from 6 months ago to the date today. Use the `start_date` and `end_date` parameters to change the scope of the response. End dates can be up to 3 months in the future and there is no limit on start dates.
-   *
-   * Starting in version 2023-04-01, the `eligible_employees` attribute was removed from the response. The eligible employees for a payroll are determined by the employee_compensations returned from the [PUT /v1/companies/{company_id}/payrolls/{payroll_id}/prepare](ref:put-v1-companies-company_id-payrolls-payroll_id-prepare) endpoint.
-   *
-   * scope: `payrolls:read`
-   */
-  async getPayPeriods(
-    request: GetV1CompaniesCompanyIdPayPeriodsRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyIdPayPeriodsResponse> {
-    return unwrapAsync(paySchedulesGetPayPeriods(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get termination pay periods for a company
-   *
-   * @remarks
-   * When a payroll admin terminates an employee and selects "Dismissal Payroll" as the employee's final payroll, their last pay period will appear on the list.
-   *
-   * This endpoint returns the unprocessed pay periods for past and future terminated employees in a given company.
-   *
-   * scope: `payrolls:read`
-   */
-  async getUnprocessedTerminationPeriods(
-    request: GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse> {
-    return unwrapAsync(paySchedulesGetUnprocessedTerminationPeriods(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get pay schedule assignments for a company
-   *
-   * @remarks
-   * This endpoint returns the current pay schedule assignment for a company, with pay schedule and employee/department mappings depending on the pay schedule type.
-   *
-   * scope: `pay_schedules:read`
-   */
-  async getAssignments(
-    request: GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse> {
-    return unwrapAsync(paySchedulesGetAssignments(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Preview pay schedule assignments for a company
    *
    * @remarks
@@ -280,6 +261,25 @@ export class PaySchedules extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PostV1CompaniesCompanyIdPaySchedulesAssignResponse> {
     return unwrapAsync(paySchedulesAssign(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get pay schedule assignments for a company
+   *
+   * @remarks
+   * This endpoint returns the current pay schedule assignment for a company, with pay schedule and employee/department mappings depending on the pay schedule type.
+   *
+   * scope: `pay_schedules:read`
+   */
+  async getAssignments(
+    request: GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse> {
+    return unwrapAsync(paySchedulesGetAssignments(
       this,
       request,
       options,

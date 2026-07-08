@@ -57,7 +57,7 @@ export type EmployeeBenefitValue = string | Two;
 /**
  * An object representing the type and value of the company contribution.
  */
-export type Contribution = {
+export type EmployeeBenefitContribution = {
   /**
    * The company contribution scheme.
    *
@@ -116,7 +116,7 @@ export type EmployeeBenefit = {
   /**
    * An object representing the type and value of the company contribution.
    */
-  contribution?: Contribution | undefined;
+  contribution?: EmployeeBenefitContribution | undefined;
   /**
    * Whether the company contribution is elective (aka matching). For "tiered" contribution types, this is always true.
    */
@@ -249,8 +249,8 @@ export function employeeBenefitValueFromJSON(
 }
 
 /** @internal */
-export const Contribution$inboundSchema: z.ZodType<
-  Contribution,
+export const EmployeeBenefitContribution$inboundSchema: z.ZodType<
+  EmployeeBenefitContribution,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -258,13 +258,13 @@ export const Contribution$inboundSchema: z.ZodType<
   value: z.union([z.string(), z.lazy(() => Two$inboundSchema)]).optional(),
 });
 
-export function contributionFromJSON(
+export function employeeBenefitContributionFromJSON(
   jsonString: string,
-): SafeParseResult<Contribution, SDKValidationError> {
+): SafeParseResult<EmployeeBenefitContribution, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Contribution$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Contribution' from JSON`,
+    (x) => EmployeeBenefitContribution$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EmployeeBenefitContribution' from JSON`,
   );
 }
 
@@ -285,7 +285,8 @@ export const EmployeeBenefit$inboundSchema: z.ZodType<
     employee_deduction: z.string().default("0.00"),
     deduct_as_percentage: z.boolean().default(false),
     employee_deduction_annual_maximum: z.nullable(z.string()).optional(),
-    contribution: z.lazy(() => Contribution$inboundSchema).optional(),
+    contribution: z.lazy(() => EmployeeBenefitContribution$inboundSchema)
+      .optional(),
     elective: z.boolean().default(false),
     company_contribution_annual_maximum: z.nullable(z.string()).optional(),
     limit_option: z.nullable(z.string()).optional(),

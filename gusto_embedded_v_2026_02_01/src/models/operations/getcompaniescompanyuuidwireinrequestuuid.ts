@@ -33,15 +33,15 @@ export type GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion =
 
 export type GetCompaniesCompanyUuidWireInRequestUuidRequest = {
   /**
-   * The UUID of the company
-   */
-  companyUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the company
+   */
+  companyUuid: string;
   /**
    * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
    */
@@ -70,8 +70,8 @@ export const GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion$outb
 
 /** @internal */
 export type GetCompaniesCompanyUuidWireInRequestUuidRequest$Outbound = {
-  company_uuid: string;
   "X-Gusto-API-Version": string;
+  company_uuid: string;
   page?: number | undefined;
   per?: number | undefined;
 };
@@ -83,16 +83,16 @@ export const GetCompaniesCompanyUuidWireInRequestUuidRequest$outboundSchema:
     z.ZodTypeDef,
     GetCompaniesCompanyUuidWireInRequestUuidRequest
   > = z.object({
-    companyUuid: z.string(),
     xGustoAPIVersion:
       GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion$outboundSchema
         .default("2026-02-01"),
+    companyUuid: z.string(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
   }).transform((v) => {
     return remap$(v, {
-      companyUuid: "company_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyUuid: "company_uuid",
     });
   });
 

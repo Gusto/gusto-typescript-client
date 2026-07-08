@@ -32,45 +32,18 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Locations extends ClientSDK {
   /**
-   * Get all company locations
+   * Get minimum wages for a location
    *
    * @remarks
-   * Retrieves all company locations (addresses) associated with a company: mailing addresses, filing
-   * addresses, or work locations. A single address may serve multiple, or all, purposes.
-   *
-   * Since all company locations are subsets of locations, use the Locations endpoints to
-   * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
+   * Get minimum wages for a location
    *
    * scope: `companies:read`
    */
-  async get(
-    request: GetV1CompaniesCompanyIdLocationsRequest,
+  async getMinimumWages(
+    request: GetV1LocationsLocationUuidMinimumWagesRequest,
     options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyIdLocationsResponse> {
-    return unwrapAsync(locationsGet(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create a company location
-   *
-   * @remarks
-   * Create a company location, which represents any address associated with a company: mailing
-   * addresses, filing addresses, or work locations. A single address may serve multiple, or all, purposes.
-   *
-   * Since all company locations are subsets of locations, use the Locations endpoints to
-   * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
-   *
-   * scope: `companies:write`
-   */
-  async create(
-    request: PostV1CompaniesCompanyIdLocationsRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1CompaniesCompanyIdLocationsResponse> {
-    return unwrapAsync(locationsCreate(
+  ): Promise<GetV1LocationsLocationUuidMinimumWagesResponse> {
+    return unwrapAsync(locationsGetMinimumWages(
       this,
       request,
       options,
@@ -116,18 +89,45 @@ export class Locations extends ClientSDK {
   }
 
   /**
-   * Get minimum wages for a location
+   * Get all company locations
    *
    * @remarks
-   * Get minimum wages for a location
+   * Retrieves all company locations (addresses) associated with a company: mailing addresses, filing
+   * addresses, or work locations. A single address may serve multiple, or all, purposes.
+   *
+   * Since all company locations are subsets of locations, use the Locations endpoints to
+   * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
    *
    * scope: `companies:read`
    */
-  async getMinimumWages(
-    request: GetV1LocationsLocationUuidMinimumWagesRequest,
+  async get(
+    request: GetV1CompaniesCompanyIdLocationsRequest,
     options?: RequestOptions,
-  ): Promise<GetV1LocationsLocationUuidMinimumWagesResponse> {
-    return unwrapAsync(locationsGetMinimumWages(
+  ): Promise<GetV1CompaniesCompanyIdLocationsResponse> {
+    return unwrapAsync(locationsGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a company location
+   *
+   * @remarks
+   * Create a company location, which represents any address associated with a company: mailing
+   * addresses, filing addresses, or work locations. A single address may serve multiple, or all, purposes.
+   *
+   * Since all company locations are subsets of locations, use the Locations endpoints to
+   * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
+   *
+   * scope: `companies:write`
+   */
+  async create(
+    request: PostV1CompaniesCompanyIdLocationsRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1CompaniesCompanyIdLocationsResponse> {
+    return unwrapAsync(locationsCreate(
       this,
       request,
       options,

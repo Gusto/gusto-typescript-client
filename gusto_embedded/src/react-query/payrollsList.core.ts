@@ -19,7 +19,7 @@ import {
   GetV1CompaniesCompanyIdPayrollsResponse,
   ProcessingStatuses,
   QueryParamPayrollTypes,
-  SortOrder,
+  QueryParamSortOrder,
 } from "../models/operations/getv1companiescompanyidpayrolls.js";
 import { unwrapAsync } from "../types/fp.js";
 export type PayrollsListQueryData = GetV1CompaniesCompanyIdPayrollsResponse;
@@ -103,7 +103,7 @@ export function queryKeyPayrollsList(
     dateFilterBy?: DateFilterBy | undefined;
     page?: number | undefined;
     per?: number | undefined;
-    sortOrder?: SortOrder | undefined;
+    sortOrder?: QueryParamSortOrder | undefined;
   },
 ): QueryKey {
   return ["@gusto/embedded-api", "Payrolls", "list", companyId, parameters];

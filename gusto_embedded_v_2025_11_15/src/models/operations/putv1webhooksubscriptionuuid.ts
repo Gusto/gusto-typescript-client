@@ -52,6 +52,7 @@ export const PutV1WebhookSubscriptionUuidSubscriptionTypes = {
   PaySchedule: "PaySchedule",
   PeopleBatch: "PeopleBatch",
   Signatory: "Signatory",
+  TimeOffRequest: "TimeOffRequest",
 } as const;
 export type PutV1WebhookSubscriptionUuidSubscriptionTypes = ClosedEnum<
   typeof PutV1WebhookSubscriptionUuidSubscriptionTypes
@@ -66,15 +67,15 @@ export type PutV1WebhookSubscriptionUuidRequestBody = {
 
 export type PutV1WebhookSubscriptionUuidRequest = {
   /**
-   * The webhook subscription UUID.
-   */
-  webhookSubscriptionUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | PutV1WebhookSubscriptionUuidHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The webhook subscription UUID.
+   */
+  webhookSubscriptionUuid: string;
   requestBody: PutV1WebhookSubscriptionUuidRequestBody;
 };
 
@@ -157,8 +158,8 @@ export function putV1WebhookSubscriptionUuidRequestBodyToJSON(
 
 /** @internal */
 export type PutV1WebhookSubscriptionUuidRequest$Outbound = {
-  webhook_subscription_uuid: string;
   "X-Gusto-API-Version": string;
+  webhook_subscription_uuid: string;
   RequestBody: PutV1WebhookSubscriptionUuidRequestBody$Outbound;
 };
 
@@ -168,18 +169,18 @@ export const PutV1WebhookSubscriptionUuidRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1WebhookSubscriptionUuidRequest
 > = z.object({
-  webhookSubscriptionUuid: z.string(),
   xGustoAPIVersion:
     PutV1WebhookSubscriptionUuidHeaderXGustoAPIVersion$outboundSchema.default(
       "2025-11-15",
     ),
+  webhookSubscriptionUuid: z.string(),
   requestBody: z.lazy(() =>
     PutV1WebhookSubscriptionUuidRequestBody$outboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
-    webhookSubscriptionUuid: "webhook_subscription_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    webhookSubscriptionUuid: "webhook_subscription_uuid",
     requestBody: "RequestBody",
   });
 });

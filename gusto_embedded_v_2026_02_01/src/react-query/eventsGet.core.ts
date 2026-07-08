@@ -16,7 +16,7 @@ import {
   GetEventsRequest,
   GetEventsResponse,
   GetEventsSecurity,
-  QueryParamSortOrder,
+  SortOrder,
 } from "../models/operations/getevents.js";
 import { unwrapAsync } from "../types/fp.js";
 export type EventsGetQueryData = GetEventsResponse;
@@ -85,7 +85,7 @@ export function queryKeyEventsGet(
     resourceUuid?: string | undefined;
     limit?: string | undefined;
     eventType?: string | undefined;
-    sortOrder?: QueryParamSortOrder | undefined;
+    sortOrder?: SortOrder | undefined;
   },
 ): QueryKey {
   return ["@gusto/embedded-api-v-2026-02-01", "Events", "get", parameters];

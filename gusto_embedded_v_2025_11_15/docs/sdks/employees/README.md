@@ -4,30 +4,28 @@
 
 ### Available Operations
 
-* [list](#list) - Get employees of a company
-* [create](#create) - Create an employee
+* [getCustomFields](#getcustomfields) - Get an employee's custom fields
 * [getV1CompaniesCompanyIdEmployeesPaymentDetails](#getv1companiescompanyidemployeespaymentdetails) - Get employee payment details for a company
-* [createHistorical](#createhistorical) - Create a historical employee
+* [getTimeOffActivities](#gettimeoffactivities) - Get employee time off activities
 * [get](#get) - Get an employee
 * [update](#update) - Update an employee.
 * [delete](#delete) - Delete an onboarding employee
-* [getCustomFields](#getcustomfields) - Get an employee's custom fields
-* [updateOnboardingDocumentsConfig](#updateonboardingdocumentsconfig) - Update employee onboarding documents config
+* [list](#list) - Get employees of a company
+* [create](#create) - Create an employee
 * [getOnboardingStatus](#getonboardingstatus) - Get the employee's onboarding status
 * [updateOnboardingStatus](#updateonboardingstatus) - Update the employee's onboarding status
-* [getTimeOffActivities](#gettimeoffactivities) - Get employee time off activities
+* [updateOnboardingDocumentsConfig](#updateonboardingdocumentsconfig) - Update employee onboarding documents config
+* [createHistorical](#createhistorical) - Create a historical employee
 
-## list
+## getCustomFields
 
-Get all of the employees, onboarding, active and terminated, for a given company.
-
-Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
+Returns a list of the employee's custom fields.
 
 scope: `employees:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-employees" method="get" path="/v1/companies/{company_id}/employees" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-custom_fields" method="get" path="/v1/employees/{employee_id}/custom_fields" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2025-11-15";
 
@@ -36,9 +34,8 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.employees.list({
-    companyId: "<id>",
-    sortBy: "name:desc",
+  const result = await gustoEmbedded.employees.getCustomFields({
+    employeeId: "<id>",
   });
 
   console.log(result);
@@ -53,7 +50,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2025-11-15/core.js";
-import { employeesList } from "@gusto/embedded-api-v-2025-11-15/funcs/employeesList.js";
+import { employeesGetCustomFields } from "@gusto/embedded-api-v-2025-11-15/funcs/employeesGetCustomFields.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -62,15 +59,14 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await employeesList(gustoEmbedded, {
-    companyId: "<id>",
-    sortBy: "name:desc",
+  const res = await employeesGetCustomFields(gustoEmbedded, {
+    employeeId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("employeesList failed:", res.error);
+    console.log("employeesGetCustomFields failed:", res.error);
   }
 }
 
@@ -90,33 +86,33 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useEmployeesList,
-  useEmployeesListSuspense,
+  useEmployeesGetCustomFields,
+  useEmployeesGetCustomFieldsSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchEmployeesList,
+  prefetchEmployeesGetCustomFields,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateEmployeesList,
-  invalidateAllEmployeesList,
-} from "@gusto/embedded-api-v-2025-11-15/react-query/employeesList.js";
+  invalidateEmployeesGetCustomFields,
+  invalidateAllEmployeesGetCustomFields,
+} from "@gusto/embedded-api-v-2025-11-15/react-query/employeesGetCustomFields.js";
 ```
 
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1CompaniesCompanyIdEmployeesRequest](../../models/operations/getv1companiescompanyidemployeesrequest.md)                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetV1EmployeesEmployeeIdCustomFieldsRequest](../../models/operations/getv1employeesemployeeidcustomfieldsrequest.md)                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetV1CompaniesCompanyIdEmployeesResponse](../../models/operations/getv1companiescompanyidemployeesresponse.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeIdCustomFieldsResponse](../../models/operations/getv1employeesemployeeidcustomfieldsresponse.md)\>**
 
 ### Errors
 
@@ -124,100 +120,6 @@ import {
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.NotFoundErrorObject | 404                        | application/json           |
 | errors.APIError            | 4XX, 5XX                   | \*/\*                      |
-
-## create
-
-Create an employee.
-
-scope: `employees:manage`
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="post-v1-employees" method="post" path="/v1/companies/{company_id}/employees" -->
-```typescript
-import { GustoEmbedded } from "@gusto/embedded-api-v-2025-11-15";
-
-const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const result = await gustoEmbedded.employees.create({
-    companyId: "<id>",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2025-11-15/core.js";
-import { employeesCreate } from "@gusto/embedded-api-v-2025-11-15/funcs/employeesCreate.js";
-
-// Use `GustoEmbeddedCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await employeesCreate(gustoEmbedded, {
-    companyId: "<id>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("employeesCreate failed:", res.error);
-  }
-}
-
-run();
-```
-
-### React hooks and utilities
-
-This method can be used in React components through the following hooks and
-associated utilities.
-
-> Check out [this guide][hook-guide] for information about each of the utilities
-> below and how to get started using React hooks.
-
-[hook-guide]: ../../../REACT_QUERY.md
-
-```tsx
-import {
-  // Mutation hook for triggering the API call.
-  useEmployeesCreateMutation
-} from "@gusto/embedded-api-v-2025-11-15/react-query/employeesCreate.js";
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostV1EmployeesRequest](../../models/operations/postv1employeesrequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.PostV1EmployeesResponse](../../models/operations/postv1employeesresponse.md)\>**
-
-### Errors
-
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| errors.NotFoundErrorObject      | 404                             | application/json                |
-| errors.UnprocessableEntityError | 422                             | application/json                |
-| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## getV1CompaniesCompanyIdEmployeesPaymentDetails
 
@@ -331,55 +233,26 @@ import {
 | errors.UnprocessableEntityError | 422                             | application/json                |
 | errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
-## createHistorical
+## getTimeOffActivities
 
-Create a historical employee, an employee that was previously dismissed from the company in the current year.
+Get employee time off activities.
 
-scope: `employees:manage`
+scope: `employee_time_off_activities:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" -->
+<!-- UsageSnippet language="typescript" operationID="get-version-employees-time_off_activities" method="get" path="/v1/employees/{employee_uuid}/time_off_activities" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2025-11-15";
-import { RFCDate } from "@gusto/embedded-api-v-2025-11-15/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.employees.createHistorical({
-    companyUuid: "7b1d0df1-6403-4a06-8768-c1dd7d24d27a",
-    historicalEmployeeBody: {
-      firstName: "Soren",
-      middleInitial: "A",
-      lastName: "Kierkegaard",
-      preferredFirstName: "Angel",
-      dateOfBirth: new RFCDate("1995-05-05"),
-      ssn: "123456294",
-      workAddress: {
-        locationUuid: "1da85d35-1910-40a7-9c1f-8e2b3d4c5a6f",
-      },
-      homeAddress: {
-        street1: "55 Mission St",
-        street2: "Floor 3",
-        city: "San Francisco",
-        state: "CA",
-        zip: "94105",
-      },
-      termination: {
-        effectiveDate: new RFCDate("2022-01-01"),
-      },
-      email: "soren.kierkegaard@example.com",
-      job: {
-        hireDate: new RFCDate("2020-01-01"),
-      },
-      employeeStateTaxes: {
-        wcCovered: true,
-        wcClassCode: "051000",
-      },
-    },
+  const result = await gustoEmbedded.employees.getTimeOffActivities({
+    employeeUuid: "<id>",
+    timeOffType: "<value>",
   });
 
   console.log(result);
@@ -394,8 +267,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2025-11-15/core.js";
-import { employeesCreateHistorical } from "@gusto/embedded-api-v-2025-11-15/funcs/employeesCreateHistorical.js";
-import { RFCDate } from "@gusto/embedded-api-v-2025-11-15/types/rfcdate.js";
+import { employeesGetTimeOffActivities } from "@gusto/embedded-api-v-2025-11-15/funcs/employeesGetTimeOffActivities.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -404,43 +276,15 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await employeesCreateHistorical(gustoEmbedded, {
-    companyUuid: "7b1d0df1-6403-4a06-8768-c1dd7d24d27a",
-    historicalEmployeeBody: {
-      firstName: "Soren",
-      middleInitial: "A",
-      lastName: "Kierkegaard",
-      preferredFirstName: "Angel",
-      dateOfBirth: new RFCDate("1995-05-05"),
-      ssn: "123456294",
-      workAddress: {
-        locationUuid: "1da85d35-1910-40a7-9c1f-8e2b3d4c5a6f",
-      },
-      homeAddress: {
-        street1: "55 Mission St",
-        street2: "Floor 3",
-        city: "San Francisco",
-        state: "CA",
-        zip: "94105",
-      },
-      termination: {
-        effectiveDate: new RFCDate("2022-01-01"),
-      },
-      email: "soren.kierkegaard@example.com",
-      job: {
-        hireDate: new RFCDate("2020-01-01"),
-      },
-      employeeStateTaxes: {
-        wcCovered: true,
-        wcClassCode: "051000",
-      },
-    },
+  const res = await employeesGetTimeOffActivities(gustoEmbedded, {
+    employeeUuid: "<id>",
+    timeOffType: "<value>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("employeesCreateHistorical failed:", res.error);
+    console.log("employeesGetTimeOffActivities failed:", res.error);
   }
 }
 
@@ -459,23 +303,34 @@ associated utilities.
 
 ```tsx
 import {
-  // Mutation hook for triggering the API call.
-  useEmployeesCreateHistoricalMutation
-} from "@gusto/embedded-api-v-2025-11-15/react-query/employeesCreateHistorical.js";
+  // Query hooks for fetching data.
+  useEmployeesGetTimeOffActivities,
+  useEmployeesGetTimeOffActivitiesSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchEmployeesGetTimeOffActivities,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateEmployeesGetTimeOffActivities,
+  invalidateAllEmployeesGetTimeOffActivities,
+} from "@gusto/embedded-api-v-2025-11-15/react-query/employeesGetTimeOffActivities.js";
 ```
 
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostV1HistoricalEmployeesRequest](../../models/operations/postv1historicalemployeesrequest.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetVersionEmployeesTimeOffActivitiesRequest](../../models/operations/getversionemployeestimeoffactivitiesrequest.md)                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PostV1HistoricalEmployeesResponse](../../models/operations/postv1historicalemployeesresponse.md)\>**
+**Promise\<[operations.GetVersionEmployeesTimeOffActivitiesResponse](../../models/operations/getversionemployeestimeoffactivitiesresponse.md)\>**
 
 ### Errors
 
@@ -801,15 +656,17 @@ import {
 | errors.UnprocessableEntityError | 422                             | application/json                |
 | errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
-## getCustomFields
+## list
 
-Returns a list of the employee's custom fields.
+Get all of the employees, onboarding, active and terminated, for a given company.
+
+Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
 
 scope: `employees:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-custom_fields" method="get" path="/v1/employees/{employee_id}/custom_fields" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-employees" method="get" path="/v1/companies/{company_id}/employees" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2025-11-15";
 
@@ -818,8 +675,9 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.employees.getCustomFields({
-    employeeId: "<id>",
+  const result = await gustoEmbedded.employees.list({
+    companyId: "<id>",
+    sortBy: "name:desc",
   });
 
   console.log(result);
@@ -834,7 +692,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2025-11-15/core.js";
-import { employeesGetCustomFields } from "@gusto/embedded-api-v-2025-11-15/funcs/employeesGetCustomFields.js";
+import { employeesList } from "@gusto/embedded-api-v-2025-11-15/funcs/employeesList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -843,14 +701,15 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await employeesGetCustomFields(gustoEmbedded, {
-    employeeId: "<id>",
+  const res = await employeesList(gustoEmbedded, {
+    companyId: "<id>",
+    sortBy: "name:desc",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("employeesGetCustomFields failed:", res.error);
+    console.log("employeesList failed:", res.error);
   }
 }
 
@@ -870,33 +729,33 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useEmployeesGetCustomFields,
-  useEmployeesGetCustomFieldsSuspense,
+  useEmployeesList,
+  useEmployeesListSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchEmployeesGetCustomFields,
+  prefetchEmployeesList,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateEmployeesGetCustomFields,
-  invalidateAllEmployeesGetCustomFields,
-} from "@gusto/embedded-api-v-2025-11-15/react-query/employeesGetCustomFields.js";
+  invalidateEmployeesList,
+  invalidateAllEmployeesList,
+} from "@gusto/embedded-api-v-2025-11-15/react-query/employeesList.js";
 ```
 
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1EmployeesEmployeeIdCustomFieldsRequest](../../models/operations/getv1employeesemployeeidcustomfieldsrequest.md)                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetV1CompaniesCompanyIdEmployeesRequest](../../models/operations/getv1companiescompanyidemployeesrequest.md)                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetV1EmployeesEmployeeIdCustomFieldsResponse](../../models/operations/getv1employeesemployeeidcustomfieldsresponse.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdEmployeesResponse](../../models/operations/getv1companiescompanyidemployeesresponse.md)\>**
 
 ### Errors
 
@@ -905,19 +764,15 @@ import {
 | errors.NotFoundErrorObject | 404                        | application/json           |
 | errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## updateOnboardingDocumentsConfig
+## create
 
-Indicate whether to include the Form I-9 for an employee during the onboarding process.
-If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
-
-## Related guides
-- [Employee onboarding](doc:employee-onboarding)
+Create an employee.
 
 scope: `employees:manage`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-onboarding_documents_config" method="put" path="/v1/employees/{employee_id}/onboarding_documents_config" -->
+<!-- UsageSnippet language="typescript" operationID="post-v1-employees" method="post" path="/v1/companies/{company_id}/employees" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2025-11-15";
 
@@ -926,8 +781,8 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.employees.updateOnboardingDocumentsConfig({
-    employeeId: "7b1d0df1-6403-4a06-8768-c1dd7d24d27a",
+  const result = await gustoEmbedded.employees.create({
+    companyId: "<id>",
   });
 
   console.log(result);
@@ -942,7 +797,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2025-11-15/core.js";
-import { employeesUpdateOnboardingDocumentsConfig } from "@gusto/embedded-api-v-2025-11-15/funcs/employeesUpdateOnboardingDocumentsConfig.js";
+import { employeesCreate } from "@gusto/embedded-api-v-2025-11-15/funcs/employeesCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -951,14 +806,14 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await employeesUpdateOnboardingDocumentsConfig(gustoEmbedded, {
-    employeeId: "7b1d0df1-6403-4a06-8768-c1dd7d24d27a",
+  const res = await employeesCreate(gustoEmbedded, {
+    companyId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("employeesUpdateOnboardingDocumentsConfig failed:", res.error);
+    console.log("employeesCreate failed:", res.error);
   }
 }
 
@@ -978,29 +833,30 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useEmployeesUpdateOnboardingDocumentsConfigMutation
-} from "@gusto/embedded-api-v-2025-11-15/react-query/employeesUpdateOnboardingDocumentsConfig.js";
+  useEmployeesCreateMutation
+} from "@gusto/embedded-api-v-2025-11-15/react-query/employeesCreate.js";
 ```
 
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest](../../models/operations/putv1employeesemployeeidonboardingdocumentsconfigrequest.md)                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.PostV1EmployeesRequest](../../models/operations/postv1employeesrequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse](../../models/operations/putv1employeesemployeeidonboardingdocumentsconfigresponse.md)\>**
+**Promise\<[operations.PostV1EmployeesResponse](../../models/operations/postv1employeesresponse.md)\>**
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.NotFoundErrorObject | 404                        | application/json           |
-| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## getOnboardingStatus
 
@@ -1252,15 +1108,19 @@ import {
 | errors.UnprocessableEntityError | 422                             | application/json                |
 | errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
-## getTimeOffActivities
+## updateOnboardingDocumentsConfig
 
-Get employee time off activities.
+Indicate whether to include the Form I-9 for an employee during the onboarding process.
+If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
 
-scope: `employee_time_off_activities:read`
+## Related guides
+- [Employee onboarding](doc:employee-onboarding)
+
+scope: `employees:manage`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-version-employees-time_off_activities" method="get" path="/v1/employees/{employee_uuid}/time_off_activities" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-onboarding_documents_config" method="put" path="/v1/employees/{employee_id}/onboarding_documents_config" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2025-11-15";
 
@@ -1269,9 +1129,8 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.employees.getTimeOffActivities({
-    employeeUuid: "<id>",
-    timeOffType: "<value>",
+  const result = await gustoEmbedded.employees.updateOnboardingDocumentsConfig({
+    employeeId: "7b1d0df1-6403-4a06-8768-c1dd7d24d27a",
   });
 
   console.log(result);
@@ -1286,7 +1145,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2025-11-15/core.js";
-import { employeesGetTimeOffActivities } from "@gusto/embedded-api-v-2025-11-15/funcs/employeesGetTimeOffActivities.js";
+import { employeesUpdateOnboardingDocumentsConfig } from "@gusto/embedded-api-v-2025-11-15/funcs/employeesUpdateOnboardingDocumentsConfig.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1295,15 +1154,14 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await employeesGetTimeOffActivities(gustoEmbedded, {
-    employeeUuid: "<id>",
-    timeOffType: "<value>",
+  const res = await employeesUpdateOnboardingDocumentsConfig(gustoEmbedded, {
+    employeeId: "7b1d0df1-6403-4a06-8768-c1dd7d24d27a",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("employeesGetTimeOffActivities failed:", res.error);
+    console.log("employeesUpdateOnboardingDocumentsConfig failed:", res.error);
   }
 }
 
@@ -1322,34 +1180,176 @@ associated utilities.
 
 ```tsx
 import {
-  // Query hooks for fetching data.
-  useEmployeesGetTimeOffActivities,
-  useEmployeesGetTimeOffActivitiesSuspense,
-
-  // Utility for prefetching data during server-side rendering and in React
-  // Server Components that will be immediately available to client components
-  // using the hooks.
-  prefetchEmployeesGetTimeOffActivities,
-  
-  // Utilities to invalidate the query cache for this query in response to
-  // mutations and other user actions.
-  invalidateEmployeesGetTimeOffActivities,
-  invalidateAllEmployeesGetTimeOffActivities,
-} from "@gusto/embedded-api-v-2025-11-15/react-query/employeesGetTimeOffActivities.js";
+  // Mutation hook for triggering the API call.
+  useEmployeesUpdateOnboardingDocumentsConfigMutation
+} from "@gusto/embedded-api-v-2025-11-15/react-query/employeesUpdateOnboardingDocumentsConfig.js";
 ```
 
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetVersionEmployeesTimeOffActivitiesRequest](../../models/operations/getversionemployeestimeoffactivitiesrequest.md)                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest](../../models/operations/putv1employeesemployeeidonboardingdocumentsconfigrequest.md)                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetVersionEmployeesTimeOffActivitiesResponse](../../models/operations/getversionemployeestimeoffactivitiesresponse.md)\>**
+**Promise\<[operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse](../../models/operations/putv1employeesemployeeidonboardingdocumentsconfigresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
+
+## createHistorical
+
+Create a historical employee, an employee that was previously dismissed from the company in the current year.
+
+scope: `employees:manage`
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api-v-2025-11-15";
+import { RFCDate } from "@gusto/embedded-api-v-2025-11-15/types/rfcdate.js";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employees.createHistorical({
+    companyUuid: "7b1d0df1-6403-4a06-8768-c1dd7d24d27a",
+    historicalEmployeeBody: {
+      firstName: "Soren",
+      middleInitial: "A",
+      lastName: "Kierkegaard",
+      preferredFirstName: "Angel",
+      dateOfBirth: new RFCDate("1995-05-05"),
+      ssn: "123456294",
+      workAddress: {
+        locationUuid: "1da85d35-1910-40a7-9c1f-8e2b3d4c5a6f",
+      },
+      homeAddress: {
+        street1: "55 Mission St",
+        street2: "Floor 3",
+        city: "San Francisco",
+        state: "CA",
+        zip: "94105",
+      },
+      termination: {
+        effectiveDate: new RFCDate("2022-01-01"),
+      },
+      email: "soren.kierkegaard@example.com",
+      job: {
+        hireDate: new RFCDate("2020-01-01"),
+      },
+      employeeStateTaxes: {
+        wcCovered: true,
+        wcClassCode: "051000",
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2025-11-15/core.js";
+import { employeesCreateHistorical } from "@gusto/embedded-api-v-2025-11-15/funcs/employeesCreateHistorical.js";
+import { RFCDate } from "@gusto/embedded-api-v-2025-11-15/types/rfcdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeesCreateHistorical(gustoEmbedded, {
+    companyUuid: "7b1d0df1-6403-4a06-8768-c1dd7d24d27a",
+    historicalEmployeeBody: {
+      firstName: "Soren",
+      middleInitial: "A",
+      lastName: "Kierkegaard",
+      preferredFirstName: "Angel",
+      dateOfBirth: new RFCDate("1995-05-05"),
+      ssn: "123456294",
+      workAddress: {
+        locationUuid: "1da85d35-1910-40a7-9c1f-8e2b3d4c5a6f",
+      },
+      homeAddress: {
+        street1: "55 Mission St",
+        street2: "Floor 3",
+        city: "San Francisco",
+        state: "CA",
+        zip: "94105",
+      },
+      termination: {
+        effectiveDate: new RFCDate("2022-01-01"),
+      },
+      email: "soren.kierkegaard@example.com",
+      job: {
+        hireDate: new RFCDate("2020-01-01"),
+      },
+      employeeStateTaxes: {
+        wcCovered: true,
+        wcClassCode: "051000",
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesCreateHistorical failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeesCreateHistoricalMutation
+} from "@gusto/embedded-api-v-2025-11-15/react-query/employeesCreateHistorical.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.PostV1HistoricalEmployeesRequest](../../models/operations/postv1historicalemployeesrequest.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.PostV1HistoricalEmployeesResponse](../../models/operations/postv1historicalemployeesresponse.md)\>**
 
 ### Errors
 

@@ -92,6 +92,118 @@ export type PayrollUpdateDeductions = {
   uuid?: string | undefined;
 };
 
+/**
+ * Override mode. Only `one_time` is currently supported.
+ */
+export const PayrollUpdateOverrideType = {
+  OneTime: "one_time",
+} as const;
+/**
+ * Override mode. Only `one_time` is currently supported.
+ */
+export type PayrollUpdateOverrideType = ClosedEnum<
+  typeof PayrollUpdateOverrideType
+>;
+
+/**
+ * How to interpret the amount.
+ */
+export const PayrollUpdateEmployeeCompensationsAmountType = {
+  Fixed: "fixed",
+  Percent: "percent",
+} as const;
+/**
+ * How to interpret the amount.
+ */
+export type PayrollUpdateEmployeeCompensationsAmountType = ClosedEnum<
+  typeof PayrollUpdateEmployeeCompensationsAmountType
+>;
+
+/**
+ * Federal one-time custom withholding override.
+ */
+export type PayrollUpdateFederal = {
+  /**
+   * Override mode. Only `one_time` is currently supported.
+   */
+  overrideType?: PayrollUpdateOverrideType | undefined;
+  /**
+   * The amount to be withheld for this payroll.
+   */
+  amount?: string | undefined;
+  /**
+   * How to interpret the amount.
+   */
+  amountType?: PayrollUpdateEmployeeCompensationsAmountType | undefined;
+};
+
+/**
+ * Override mode. Only `one_time` is currently supported.
+ */
+export const PayrollUpdateEmployeeCompensationsOverrideType = {
+  OneTime: "one_time",
+} as const;
+/**
+ * Override mode. Only `one_time` is currently supported.
+ */
+export type PayrollUpdateEmployeeCompensationsOverrideType = ClosedEnum<
+  typeof PayrollUpdateEmployeeCompensationsOverrideType
+>;
+
+/**
+ * How to interpret the amount.
+ */
+export const PayrollUpdateEmployeeCompensationsCustomWithholdingsAmountType = {
+  Fixed: "fixed",
+  Percent: "percent",
+} as const;
+/**
+ * How to interpret the amount.
+ */
+export type PayrollUpdateEmployeeCompensationsCustomWithholdingsAmountType =
+  ClosedEnum<
+    typeof PayrollUpdateEmployeeCompensationsCustomWithholdingsAmountType
+  >;
+
+export type PayrollUpdateState = {
+  /**
+   * The UUID of the EmployeeStateField this withholding applies to.
+   */
+  employeeStateFieldUuid?: string | undefined;
+  /**
+   * Override mode. Only `one_time` is currently supported.
+   */
+  overrideType?: PayrollUpdateEmployeeCompensationsOverrideType | undefined;
+  /**
+   * The amount to be withheld for this payroll.
+   */
+  amount?: string | undefined;
+  /**
+   * How to interpret the amount.
+   */
+  amountType?:
+    | PayrollUpdateEmployeeCompensationsCustomWithholdingsAmountType
+    | undefined;
+};
+
+/**
+ * Optional per-payroll one-time custom withholdings for federal and/or state income tax.
+ *
+ * @remarks
+ * When provided, the supplied override takes precedence over any persistent withholding schedule for this run.
+ * This field is in limited release; if your application does not have access, requests including it are silently ignored.
+ */
+export type PayrollUpdateCustomWithholdings = {
+  /**
+   * Federal one-time custom withholding override.
+   */
+  federal?: PayrollUpdateFederal | undefined;
+  /**
+   * State one-time custom withholding overrides, one entry per state field.
+   */
+  state?: Array<PayrollUpdateState> | undefined;
+};
+
 export type PayrollUpdatePaidTimeOff = {
   /**
    * The name of the PTO. This also serves as the unique, immutable identifier for the PTO. Must pass in name or policy_uuid but not both.
@@ -150,6 +262,14 @@ export type PayrollUpdateEmployeeCompensations = {
   fixedCompensations?: Array<PayrollUpdateFixedCompensations> | undefined;
   hourlyCompensations?: Array<PayrollUpdateHourlyCompensations> | undefined;
   deductions?: Array<PayrollUpdateDeductions> | undefined;
+  /**
+   * Optional per-payroll one-time custom withholdings for federal and/or state income tax.
+   *
+   * @remarks
+   * When provided, the supplied override takes precedence over any persistent withholding schedule for this run.
+   * This field is in limited release; if your application does not have access, requests including it are silently ignored.
+   */
+  customWithholdings?: PayrollUpdateCustomWithholdings | undefined;
   /**
    * An array of all paid time off the employee is eligible for this pay period. Each paid time off object can be the name or the specific policy_uuid.
    */
@@ -300,6 +420,124 @@ export function payrollUpdateDeductionsToJSON(
 }
 
 /** @internal */
+export const PayrollUpdateOverrideType$outboundSchema: z.ZodNativeEnum<
+  typeof PayrollUpdateOverrideType
+> = z.nativeEnum(PayrollUpdateOverrideType);
+
+/** @internal */
+export const PayrollUpdateEmployeeCompensationsAmountType$outboundSchema:
+  z.ZodNativeEnum<typeof PayrollUpdateEmployeeCompensationsAmountType> = z
+    .nativeEnum(PayrollUpdateEmployeeCompensationsAmountType);
+
+/** @internal */
+export type PayrollUpdateFederal$Outbound = {
+  override_type?: string | undefined;
+  amount?: string | undefined;
+  amount_type?: string | undefined;
+};
+
+/** @internal */
+export const PayrollUpdateFederal$outboundSchema: z.ZodType<
+  PayrollUpdateFederal$Outbound,
+  z.ZodTypeDef,
+  PayrollUpdateFederal
+> = z.object({
+  overrideType: PayrollUpdateOverrideType$outboundSchema.optional(),
+  amount: z.string().optional(),
+  amountType: PayrollUpdateEmployeeCompensationsAmountType$outboundSchema
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    overrideType: "override_type",
+    amountType: "amount_type",
+  });
+});
+
+export function payrollUpdateFederalToJSON(
+  payrollUpdateFederal: PayrollUpdateFederal,
+): string {
+  return JSON.stringify(
+    PayrollUpdateFederal$outboundSchema.parse(payrollUpdateFederal),
+  );
+}
+
+/** @internal */
+export const PayrollUpdateEmployeeCompensationsOverrideType$outboundSchema:
+  z.ZodNativeEnum<typeof PayrollUpdateEmployeeCompensationsOverrideType> = z
+    .nativeEnum(PayrollUpdateEmployeeCompensationsOverrideType);
+
+/** @internal */
+export const PayrollUpdateEmployeeCompensationsCustomWithholdingsAmountType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PayrollUpdateEmployeeCompensationsCustomWithholdingsAmountType
+  > = z.nativeEnum(
+    PayrollUpdateEmployeeCompensationsCustomWithholdingsAmountType,
+  );
+
+/** @internal */
+export type PayrollUpdateState$Outbound = {
+  employee_state_field_uuid?: string | undefined;
+  override_type?: string | undefined;
+  amount?: string | undefined;
+  amount_type?: string | undefined;
+};
+
+/** @internal */
+export const PayrollUpdateState$outboundSchema: z.ZodType<
+  PayrollUpdateState$Outbound,
+  z.ZodTypeDef,
+  PayrollUpdateState
+> = z.object({
+  employeeStateFieldUuid: z.string().optional(),
+  overrideType: PayrollUpdateEmployeeCompensationsOverrideType$outboundSchema
+    .optional(),
+  amount: z.string().optional(),
+  amountType:
+    PayrollUpdateEmployeeCompensationsCustomWithholdingsAmountType$outboundSchema
+      .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    employeeStateFieldUuid: "employee_state_field_uuid",
+    overrideType: "override_type",
+    amountType: "amount_type",
+  });
+});
+
+export function payrollUpdateStateToJSON(
+  payrollUpdateState: PayrollUpdateState,
+): string {
+  return JSON.stringify(
+    PayrollUpdateState$outboundSchema.parse(payrollUpdateState),
+  );
+}
+
+/** @internal */
+export type PayrollUpdateCustomWithholdings$Outbound = {
+  federal?: PayrollUpdateFederal$Outbound | undefined;
+  state?: Array<PayrollUpdateState$Outbound> | undefined;
+};
+
+/** @internal */
+export const PayrollUpdateCustomWithholdings$outboundSchema: z.ZodType<
+  PayrollUpdateCustomWithholdings$Outbound,
+  z.ZodTypeDef,
+  PayrollUpdateCustomWithholdings
+> = z.object({
+  federal: z.lazy(() => PayrollUpdateFederal$outboundSchema).optional(),
+  state: z.array(z.lazy(() => PayrollUpdateState$outboundSchema)).optional(),
+});
+
+export function payrollUpdateCustomWithholdingsToJSON(
+  payrollUpdateCustomWithholdings: PayrollUpdateCustomWithholdings,
+): string {
+  return JSON.stringify(
+    PayrollUpdateCustomWithholdings$outboundSchema.parse(
+      payrollUpdateCustomWithholdings,
+    ),
+  );
+}
+
+/** @internal */
 export type PayrollUpdatePaidTimeOff$Outbound = {
   name?: string | undefined;
   hours?: string | undefined;
@@ -374,6 +612,7 @@ export type PayrollUpdateEmployeeCompensations$Outbound = {
     | Array<PayrollUpdateHourlyCompensations$Outbound>
     | undefined;
   deductions?: Array<PayrollUpdateDeductions$Outbound> | undefined;
+  custom_withholdings?: PayrollUpdateCustomWithholdings$Outbound | undefined;
   paid_time_off?: Array<PayrollUpdatePaidTimeOff$Outbound> | undefined;
   reimbursements?: Array<PayrollUpdateReimbursements$Outbound> | undefined;
 };
@@ -397,6 +636,9 @@ export const PayrollUpdateEmployeeCompensations$outboundSchema: z.ZodType<
   ).optional(),
   deductions: z.array(z.lazy(() => PayrollUpdateDeductions$outboundSchema))
     .optional(),
+  customWithholdings: z.lazy(() =>
+    PayrollUpdateCustomWithholdings$outboundSchema
+  ).optional(),
   paidTimeOff: z.array(z.lazy(() => PayrollUpdatePaidTimeOff$outboundSchema))
     .optional(),
   reimbursements: z.array(
@@ -408,6 +650,7 @@ export const PayrollUpdateEmployeeCompensations$outboundSchema: z.ZodType<
     paymentMethod: "payment_method",
     fixedCompensations: "fixed_compensations",
     hourlyCompensations: "hourly_compensations",
+    customWithholdings: "custom_withholdings",
     paidTimeOff: "paid_time_off",
   });
 });

@@ -9,7 +9,7 @@ import { ClosedEnum } from "../../types/enums.js";
 /**
  * The breakdown of the report. Use 'default' for no split.
  */
-export const Aggregation = {
+export const GeneralLedgerReportBodyAggregation = {
   Default: "default",
   Job: "job",
   Department: "department",
@@ -18,7 +18,9 @@ export const Aggregation = {
 /**
  * The breakdown of the report. Use 'default' for no split.
  */
-export type Aggregation = ClosedEnum<typeof Aggregation>;
+export type GeneralLedgerReportBodyAggregation = ClosedEnum<
+  typeof GeneralLedgerReportBodyAggregation
+>;
 
 export const IntegrationType = {
   Xero: "xero",
@@ -33,7 +35,7 @@ export type GeneralLedgerReportBody = {
   /**
    * The breakdown of the report. Use 'default' for no split.
    */
-  aggregation: Aggregation;
+  aggregation: GeneralLedgerReportBodyAggregation;
   /**
    * The kind of integration set up for the company. Required when `aggregation` is 'integration'. Must be null if `aggregation` is not 'integration'.
    */
@@ -41,8 +43,9 @@ export type GeneralLedgerReportBody = {
 };
 
 /** @internal */
-export const Aggregation$outboundSchema: z.ZodNativeEnum<typeof Aggregation> = z
-  .nativeEnum(Aggregation);
+export const GeneralLedgerReportBodyAggregation$outboundSchema: z.ZodNativeEnum<
+  typeof GeneralLedgerReportBodyAggregation
+> = z.nativeEnum(GeneralLedgerReportBodyAggregation);
 
 /** @internal */
 export const IntegrationType$outboundSchema: z.ZodNativeEnum<
@@ -61,7 +64,7 @@ export const GeneralLedgerReportBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GeneralLedgerReportBody
 > = z.object({
-  aggregation: Aggregation$outboundSchema,
+  aggregation: GeneralLedgerReportBodyAggregation$outboundSchema,
   integrationType: z.nullable(IntegrationType$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

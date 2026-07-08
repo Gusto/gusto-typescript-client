@@ -34,13 +34,13 @@ export type PostV1CompanySignatoriesHeaderXGustoAPIVersion = ClosedEnum<
 
 export type PostV1CompanySignatoriesRequest = {
   /**
-   * The UUID of the company
-   */
-  companyUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: PostV1CompanySignatoriesHeaderXGustoAPIVersion | undefined;
+  /**
+   * The UUID of the company
+   */
+  companyUuid: string;
   signatoryCreateRequest: SignatoryCreateRequest;
 };
 
@@ -59,8 +59,8 @@ export const PostV1CompanySignatoriesHeaderXGustoAPIVersion$outboundSchema:
 
 /** @internal */
 export type PostV1CompanySignatoriesRequest$Outbound = {
-  company_uuid: string;
   "X-Gusto-API-Version": string;
+  company_uuid: string;
   "Signatory-Create-Request": SignatoryCreateRequest$Outbound;
 };
 
@@ -70,16 +70,16 @@ export const PostV1CompanySignatoriesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1CompanySignatoriesRequest
 > = z.object({
-  companyUuid: z.string(),
   xGustoAPIVersion:
     PostV1CompanySignatoriesHeaderXGustoAPIVersion$outboundSchema.default(
       "2025-06-15",
     ),
+  companyUuid: z.string(),
   signatoryCreateRequest: SignatoryCreateRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    companyUuid: "company_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    companyUuid: "company_uuid",
     signatoryCreateRequest: "Signatory-Create-Request",
   });
 });

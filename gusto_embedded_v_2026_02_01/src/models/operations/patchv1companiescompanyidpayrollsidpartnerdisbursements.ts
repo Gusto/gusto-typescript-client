@@ -95,6 +95,12 @@ export type PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody =
 
 export type PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the company
    */
   companyId: string;
@@ -102,12 +108,6 @@ export type PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest = {
    * The UUID of the payroll
    */
   id: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?:
-    | PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion
-    | undefined;
   requestBody?:
     | PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody
     | undefined;
@@ -224,9 +224,9 @@ export function patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBo
 /** @internal */
 export type PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest$Outbound =
   {
+    "X-Gusto-API-Version": string;
     company_id: string;
     id: string;
-    "X-Gusto-API-Version": string;
     RequestBody?:
       | PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody$Outbound
       | undefined;
@@ -239,18 +239,18 @@ export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest$outb
     z.ZodTypeDef,
     PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest
   > = z.object({
-    companyId: z.string(),
-    id: z.string(),
     xGustoAPIVersion:
       PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion$outboundSchema
         .default("2026-02-01"),
+    companyId: z.string(),
+    id: z.string(),
     requestBody: z.lazy(() =>
       PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody$outboundSchema
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyId: "company_id",
       requestBody: "RequestBody",
     });
   });

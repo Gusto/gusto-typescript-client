@@ -56,6 +56,7 @@ export function buildPaySchedulesGetPreviewQuery(
       day1: request.day1,
       day2: request.day2,
       endDate: request.endDate,
+      payScheduleUuid: request.payScheduleUuid,
     }),
     queryFn: async function paySchedulesGetPreviewQueryFn(
       ctx,
@@ -92,6 +93,7 @@ export function queryKeyPaySchedulesGetPreview(
     day1?: number | undefined;
     day2?: number | undefined;
     endDate?: RFCDate | undefined;
+    payScheduleUuid?: string | undefined;
   },
 ): QueryKey {
   return [

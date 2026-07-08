@@ -29,13 +29,13 @@ export type GetV1CompaniesHeaderXGustoAPIVersion = ClosedEnum<
 
 export type GetV1CompaniesRequest = {
   /**
-   * The UUID of the company
-   */
-  companyId: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: GetV1CompaniesHeaderXGustoAPIVersion | undefined;
+  /**
+   * The UUID of the company
+   */
+  companyId: string;
 };
 
 export type GetV1CompaniesResponse = {
@@ -54,8 +54,8 @@ export const GetV1CompaniesHeaderXGustoAPIVersion$outboundSchema:
 
 /** @internal */
 export type GetV1CompaniesRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
+  company_id: string;
 };
 
 /** @internal */
@@ -64,14 +64,14 @@ export const GetV1CompaniesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1CompaniesRequest
 > = z.object({
-  companyId: z.string(),
   xGustoAPIVersion: GetV1CompaniesHeaderXGustoAPIVersion$outboundSchema.default(
     "2026-06-15",
   ),
+  companyId: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    companyId: "company_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    companyId: "company_id",
   });
 });
 

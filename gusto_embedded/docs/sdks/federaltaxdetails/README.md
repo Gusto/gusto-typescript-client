@@ -440,6 +440,7 @@ import {
 
 | Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.ForbiddenErrorObject     | 403                             | application/json                |
 | errors.NotFoundErrorObject      | 404                             | application/json                |
 | errors.UnprocessableEntityError | 409, 422                        | application/json                |
 | errors.APIError                 | 4XX, 5XX                        | \*/\*                           |

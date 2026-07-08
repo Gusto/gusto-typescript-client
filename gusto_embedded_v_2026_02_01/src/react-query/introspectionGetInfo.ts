@@ -21,8 +21,8 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  GetV1TokenInfoHeaderXGustoAPIVersion,
   GetV1TokenInfoRequest,
-  XGustoAPIVersion,
 } from "../models/operations/getv1tokeninfo.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -114,7 +114,9 @@ export function useIntrospectionGetInfoSuspense(
 export function setIntrospectionGetInfoData(
   client: QueryClient,
   queryKeyBase: [
-    parameters: { xGustoAPIVersion?: XGustoAPIVersion | undefined },
+    parameters: {
+      xGustoAPIVersion?: GetV1TokenInfoHeaderXGustoAPIVersion | undefined;
+    },
   ],
   data: IntrospectionGetInfoQueryData,
 ): IntrospectionGetInfoQueryData | undefined {
@@ -126,7 +128,9 @@ export function setIntrospectionGetInfoData(
 export function invalidateIntrospectionGetInfo(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
-    [parameters: { xGustoAPIVersion?: XGustoAPIVersion | undefined }]
+    [parameters: {
+      xGustoAPIVersion?: GetV1TokenInfoHeaderXGustoAPIVersion | undefined;
+    }]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
 ): Promise<void> {

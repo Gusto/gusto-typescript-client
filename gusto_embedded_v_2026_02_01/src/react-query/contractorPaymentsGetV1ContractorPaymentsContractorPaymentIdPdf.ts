@@ -157,7 +157,7 @@ export function invalidateContractorPaymentsGetV1ContractorPaymentsContractorPay
     ...filters,
     queryKey: [
       "@gusto/embedded-api-v-2026-02-01",
-      "contractorPayments",
+      "Contractor Payments",
       "getV1ContractorPaymentsContractorPaymentIdPdf",
       ...queryKeyBase,
     ],
@@ -172,7 +172,7 @@ export function invalidateAllContractorPaymentsGetV1ContractorPaymentsContractor
     ...filters,
     queryKey: [
       "@gusto/embedded-api-v-2026-02-01",
-      "contractorPayments",
+      "Contractor Payments",
       "getV1ContractorPaymentsContractorPaymentIdPdf",
     ],
   });

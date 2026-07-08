@@ -13,9 +13,9 @@ import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion,
-  GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude,
   GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
   GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse,
+  QueryParamInclude,
 } from "../models/operations/getv1companybenefitscompanybenefitidemployeebenefits.js";
 import { unwrapAsync } from "../types/fp.js";
 export type CompanyBenefitsGetEmployeeBenefitsQueryData =
@@ -87,9 +87,7 @@ export function queryKeyCompanyBenefitsGetEmployeeBenefits(
       | undefined;
     page?: number | undefined;
     per?: number | undefined;
-    include?:
-      | GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude
-      | undefined;
+    include?: QueryParamInclude | undefined;
   },
 ): QueryKey {
   return [

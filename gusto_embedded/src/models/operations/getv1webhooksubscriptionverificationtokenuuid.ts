@@ -38,15 +38,15 @@ export type GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion 
 
 export type GetV1WebhookSubscriptionVerificationTokenUuidRequest = {
   /**
-   * The webhook subscription UUID.
-   */
-  webhookSubscriptionUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The webhook subscription UUID.
+   */
+  webhookSubscriptionUuid: string;
 };
 
 export type GetV1WebhookSubscriptionVerificationTokenUuidResponse = {
@@ -99,8 +99,8 @@ export const GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion
 
 /** @internal */
 export type GetV1WebhookSubscriptionVerificationTokenUuidRequest$Outbound = {
-  webhook_subscription_uuid: string;
   "X-Gusto-API-Version": string;
+  webhook_subscription_uuid: string;
 };
 
 /** @internal */
@@ -110,14 +110,14 @@ export const GetV1WebhookSubscriptionVerificationTokenUuidRequest$outboundSchema
     z.ZodTypeDef,
     GetV1WebhookSubscriptionVerificationTokenUuidRequest
   > = z.object({
-    webhookSubscriptionUuid: z.string(),
     xGustoAPIVersion:
       GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion$outboundSchema
         .default("2025-06-15"),
+    webhookSubscriptionUuid: z.string(),
   }).transform((v) => {
     return remap$(v, {
-      webhookSubscriptionUuid: "webhook_subscription_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      webhookSubscriptionUuid: "webhook_subscription_uuid",
     });
   });
 

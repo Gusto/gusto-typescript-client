@@ -170,7 +170,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, GetV1BenefitsResponse$inboundSchema, {
-      key: "Supported-Benefits",
+      key: "Supported-Benefit-List",
     }),
     M.fail("4XX"),
     M.fail("5XX"),

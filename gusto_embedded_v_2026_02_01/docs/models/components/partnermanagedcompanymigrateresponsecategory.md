@@ -1,17 +1,17 @@
 # PartnerManagedCompanyMigrateResponseCategory
 
-Returns `migration_warning` for warnings.
+Returns `migration_blocker` for blockers.
 
 ## Example Usage
 
 ```typescript
 import { PartnerManagedCompanyMigrateResponseCategory } from "@gusto/embedded-api-v-2026-02-01/models/components/partnermanagedcompanymigrateresponse.js";
 
-let value: PartnerManagedCompanyMigrateResponseCategory = "migration_warning";
+let value: PartnerManagedCompanyMigrateResponseCategory = "migration_blocker";
 ```
 
 ## Values
 
 ```typescript
-"migration_warning"
+"migration_blocker"
 ```

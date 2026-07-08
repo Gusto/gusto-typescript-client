@@ -10,8 +10,7 @@ let value: PostCompaniesCompanyUuidReportsRequest = {
   companyUuid: "<id>",
   createReportBody: {
     columns: [],
-    groupings: [],
-    fileType: "pdf",
+    fileType: "csv",
     startDate: new RFCDate("2024-01-01"),
     endDate: new RFCDate("2024-04-01"),
     dismissedStartDate: new RFCDate("2024-01-01"),

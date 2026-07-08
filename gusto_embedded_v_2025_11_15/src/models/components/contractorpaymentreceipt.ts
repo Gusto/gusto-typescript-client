@@ -36,7 +36,7 @@ export type ContractorPaymentReceiptPaymentMethod = ClosedEnum<
   typeof ContractorPaymentReceiptPaymentMethod
 >;
 
-export type ContractorPayments = {
+export type ContractorPaymentReceiptContractorPayments = {
   /**
    * The UUID of the contractor.
    */
@@ -82,7 +82,7 @@ export type ContractorPayments = {
 /**
  * The licensed payroll processor
  */
-export type ContractorPaymentReceiptLicensee = {
+export type Licensee = {
   /**
    * Always the fixed string "Gusto, Zenpayroll Inc."
    */
@@ -153,11 +153,13 @@ export type ContractorPaymentReceipt = {
   /**
    * An array of contractor payments for this contractor payment.
    */
-  contractorPayments?: Array<ContractorPayments> | undefined;
+  contractorPayments?:
+    | Array<ContractorPaymentReceiptContractorPayments>
+    | undefined;
   /**
    * The licensed payroll processor
    */
-  licensee?: ContractorPaymentReceiptLicensee | undefined;
+  licensee?: Licensee | undefined;
 };
 
 /** @internal */
@@ -190,45 +192,49 @@ export const ContractorPaymentReceiptPaymentMethod$inboundSchema:
   );
 
 /** @internal */
-export const ContractorPayments$inboundSchema: z.ZodType<
-  ContractorPayments,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contractor_uuid: z.string().optional(),
-  contractor_first_name: z.string().optional(),
-  contractor_last_name: z.string().optional(),
-  contractor_business_name: z.string().optional(),
-  contractor_type: z.string().optional(),
-  payment_method: ContractorPaymentReceiptPaymentMethod$inboundSchema
-    .optional(),
-  wage: z.string().optional(),
-  bonus: z.string().optional(),
-  reimbursement: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "contractor_uuid": "contractorUuid",
-    "contractor_first_name": "contractorFirstName",
-    "contractor_last_name": "contractorLastName",
-    "contractor_business_name": "contractorBusinessName",
-    "contractor_type": "contractorType",
-    "payment_method": "paymentMethod",
-  });
-});
+export const ContractorPaymentReceiptContractorPayments$inboundSchema:
+  z.ZodType<ContractorPaymentReceiptContractorPayments, z.ZodTypeDef, unknown> =
+    z.object({
+      contractor_uuid: z.string().optional(),
+      contractor_first_name: z.string().optional(),
+      contractor_last_name: z.string().optional(),
+      contractor_business_name: z.string().optional(),
+      contractor_type: z.string().optional(),
+      payment_method: ContractorPaymentReceiptPaymentMethod$inboundSchema
+        .optional(),
+      wage: z.string().optional(),
+      bonus: z.string().optional(),
+      reimbursement: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "contractor_uuid": "contractorUuid",
+        "contractor_first_name": "contractorFirstName",
+        "contractor_last_name": "contractorLastName",
+        "contractor_business_name": "contractorBusinessName",
+        "contractor_type": "contractorType",
+        "payment_method": "paymentMethod",
+      });
+    });
 
-export function contractorPaymentsFromJSON(
+export function contractorPaymentReceiptContractorPaymentsFromJSON(
   jsonString: string,
-): SafeParseResult<ContractorPayments, SDKValidationError> {
+): SafeParseResult<
+  ContractorPaymentReceiptContractorPayments,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => ContractorPayments$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ContractorPayments' from JSON`,
+    (x) =>
+      ContractorPaymentReceiptContractorPayments$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ContractorPaymentReceiptContractorPayments' from JSON`,
   );
 }
 
 /** @internal */
-export const ContractorPaymentReceiptLicensee$inboundSchema: z.ZodType<
-  ContractorPaymentReceiptLicensee,
+export const Licensee$inboundSchema: z.ZodType<
+  Licensee,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -245,13 +251,13 @@ export const ContractorPaymentReceiptLicensee$inboundSchema: z.ZodType<
   });
 });
 
-export function contractorPaymentReceiptLicenseeFromJSON(
+export function licenseeFromJSON(
   jsonString: string,
-): SafeParseResult<ContractorPaymentReceiptLicensee, SDKValidationError> {
+): SafeParseResult<Licensee, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ContractorPaymentReceiptLicensee$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ContractorPaymentReceiptLicensee' from JSON`,
+    (x) => Licensee$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Licensee' from JSON`,
   );
 }
 
@@ -271,10 +277,10 @@ export const ContractorPaymentReceipt$inboundSchema: z.ZodType<
   right_to_refund: z.string().optional(),
   liability_of_licensee: z.string().optional(),
   totals: z.lazy(() => ContractorPaymentReceiptTotals$inboundSchema).optional(),
-  contractor_payments: z.array(z.lazy(() => ContractorPayments$inboundSchema))
-    .optional(),
-  licensee: z.lazy(() => ContractorPaymentReceiptLicensee$inboundSchema)
-    .optional(),
+  contractor_payments: z.array(
+    z.lazy(() => ContractorPaymentReceiptContractorPayments$inboundSchema),
+  ).optional(),
+  licensee: z.lazy(() => Licensee$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "contractor_payment_uuid": "contractorPaymentUuid",

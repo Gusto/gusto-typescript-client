@@ -17,13 +17,6 @@ import {
 } from "../components/notification.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const Status = {
-  Open: "open",
-  Expired: "expired",
-  Resolved: "resolved",
-} as const;
-export type Status = ClosedEnum<typeof Status>;
-
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
@@ -37,16 +30,23 @@ export type GetCompanyNotificationsHeaderXGustoAPIVersion = ClosedEnum<
   typeof GetCompanyNotificationsHeaderXGustoAPIVersion
 >;
 
+export const Status = {
+  Open: "open",
+  Expired: "expired",
+  Resolved: "resolved",
+} as const;
+export type Status = ClosedEnum<typeof Status>;
+
 export type GetCompanyNotificationsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: GetCompanyNotificationsHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the company for which you would like to return notifications
    */
   companyUuid: string;
   status?: Status | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: GetCompanyNotificationsHeaderXGustoAPIVersion | undefined;
   /**
    * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
    */
@@ -66,19 +66,19 @@ export type GetCompanyNotificationsResponse = {
 };
 
 /** @internal */
-export const Status$outboundSchema: z.ZodNativeEnum<typeof Status> = z
-  .nativeEnum(Status);
-
-/** @internal */
 export const GetCompanyNotificationsHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<typeof GetCompanyNotificationsHeaderXGustoAPIVersion> = z
     .nativeEnum(GetCompanyNotificationsHeaderXGustoAPIVersion);
 
 /** @internal */
+export const Status$outboundSchema: z.ZodNativeEnum<typeof Status> = z
+  .nativeEnum(Status);
+
+/** @internal */
 export type GetCompanyNotificationsRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_uuid: string;
   status?: string | undefined;
-  "X-Gusto-API-Version": string;
   page?: number | undefined;
   per?: number | undefined;
 };
@@ -89,16 +89,16 @@ export const GetCompanyNotificationsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetCompanyNotificationsRequest
 > = z.object({
-  companyUuid: z.string(),
-  status: Status$outboundSchema.optional(),
   xGustoAPIVersion: GetCompanyNotificationsHeaderXGustoAPIVersion$outboundSchema
     .default("2026-02-01"),
+  companyUuid: z.string(),
+  status: Status$outboundSchema.optional(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
-    companyUuid: "company_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    companyUuid: "company_uuid",
   });
 });
 

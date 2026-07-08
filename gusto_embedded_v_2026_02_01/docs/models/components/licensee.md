@@ -5,7 +5,7 @@ The licensed payroll processor
 ## Example Usage
 
 ```typescript
-import { Licensee } from "@gusto/embedded-api-v-2026-02-01/models/components/payrollreceipt.js";
+import { Licensee } from "@gusto/embedded-api-v-2026-02-01/models/components/contractorpaymentreceipt.js";
 
 let value: Licensee = {};
 ```

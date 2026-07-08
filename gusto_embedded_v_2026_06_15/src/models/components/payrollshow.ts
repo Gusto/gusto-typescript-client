@@ -178,6 +178,118 @@ export type PayrollShowReimbursements = {
 };
 
 /**
+ * Override mode. Only `one_time` is currently exposed.
+ */
+export const PayrollShowEmployeeCompensationsOverrideType = {
+  OneTime: "one_time",
+} as const;
+/**
+ * Override mode. Only `one_time` is currently exposed.
+ */
+export type PayrollShowEmployeeCompensationsOverrideType = ClosedEnum<
+  typeof PayrollShowEmployeeCompensationsOverrideType
+>;
+
+/**
+ * How to interpret the amount.
+ */
+export const PayrollShowEmployeeCompensationsAmountType = {
+  Fixed: "fixed",
+  Percent: "percent",
+} as const;
+/**
+ * How to interpret the amount.
+ */
+export type PayrollShowEmployeeCompensationsAmountType = ClosedEnum<
+  typeof PayrollShowEmployeeCompensationsAmountType
+>;
+
+/**
+ * Federal one-time custom withholding override applied to this payroll.
+ */
+export type PayrollShowFederal = {
+  /**
+   * Override mode. Only `one_time` is currently exposed.
+   */
+  overrideType?: PayrollShowEmployeeCompensationsOverrideType | undefined;
+  /**
+   * The amount that was withheld for this payroll.
+   */
+  amount?: string | undefined;
+  /**
+   * How to interpret the amount.
+   */
+  amountType?: PayrollShowEmployeeCompensationsAmountType | undefined;
+};
+
+/**
+ * Override mode. Only `one_time` is currently exposed.
+ */
+export const PayrollShowOverrideType = {
+  OneTime: "one_time",
+} as const;
+/**
+ * Override mode. Only `one_time` is currently exposed.
+ */
+export type PayrollShowOverrideType = ClosedEnum<
+  typeof PayrollShowOverrideType
+>;
+
+/**
+ * How to interpret the amount.
+ */
+export const PayrollShowEmployeeCompensationsCustomWithholdingsAmountType = {
+  Fixed: "fixed",
+  Percent: "percent",
+} as const;
+/**
+ * How to interpret the amount.
+ */
+export type PayrollShowEmployeeCompensationsCustomWithholdingsAmountType =
+  ClosedEnum<
+    typeof PayrollShowEmployeeCompensationsCustomWithholdingsAmountType
+  >;
+
+export type PayrollShowState = {
+  /**
+   * The UUID of the EmployeeStateField this withholding applies to.
+   */
+  employeeStateFieldUuid?: string | undefined;
+  /**
+   * Override mode. Only `one_time` is currently exposed.
+   */
+  overrideType?: PayrollShowOverrideType | undefined;
+  /**
+   * The amount that was withheld for this payroll.
+   */
+  amount?: string | undefined;
+  /**
+   * How to interpret the amount.
+   */
+  amountType?:
+    | PayrollShowEmployeeCompensationsCustomWithholdingsAmountType
+    | undefined;
+};
+
+/**
+ * The one-time custom withholding overrides applied to this payroll for this employee.
+ *
+ * @remarks
+ * `federal` is null when no federal one-time override is set; `state` is an empty
+ * array when no state one-time overrides are set.
+ */
+export type PayrollShowCustomWithholdings = {
+  /**
+   * Federal one-time custom withholding override applied to this payroll.
+   */
+  federal?: PayrollShowFederal | null | undefined;
+  /**
+   * State one-time custom withholding overrides applied to this payroll, one entry per state field.
+   */
+  state?: Array<PayrollShowState> | undefined;
+};
+
+/**
  * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
  */
 export const PayrollShowAmountType = {
@@ -197,7 +309,7 @@ export type PayrollShowDeductions = {
   /**
    * The amount of the deduction for the pay period.
    */
-  amount?: number | undefined;
+  amount?: string | undefined;
   /**
    * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
    */
@@ -215,13 +327,13 @@ export type PayrollShowDeductions = {
 export type PayrollShowTaxes = {
   name: string;
   employer: boolean;
-  amount: number;
+  amount: string;
 };
 
 export type PayrollShowBenefits = {
   name?: string | undefined;
-  employeeDeduction?: number | undefined;
-  companyContribution?: number | undefined;
+  employeeDeduction?: string | undefined;
+  companyContribution?: string | undefined;
   imputed?: boolean | undefined;
 };
 
@@ -267,7 +379,7 @@ export type EmployeeCompensations = {
    */
   memo?: string | null | undefined;
   /**
-   * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements. If this payroll has been processed, only fixed compensations with a value greater than 0.00 are returned. For an unprocessed payroll, all active fixed compensations are returned.
+   * An array of fixed compensations for the employee. Fixed compensations include tips and bonuses. On regular payrolls, reimbursements are sent via the dedicated `reimbursements` array instead. Off-cycle payrolls continue to include reimbursements in `fixed_compensations`. If this payroll has been processed, only fixed compensations with a value greater than 0.00 are returned. For an unprocessed payroll, all active fixed compensations are returned.
    */
   fixedCompensations?: Array<PayrollShowFixedCompensations> | undefined;
   /**
@@ -282,6 +394,14 @@ export type EmployeeCompensations = {
    * An array of reimbursements for the employee.
    */
   reimbursements?: Array<PayrollShowReimbursements> | undefined;
+  /**
+   * The one-time custom withholding overrides applied to this payroll for this employee.
+   *
+   * @remarks
+   * `federal` is null when no federal one-time override is set; `state` is an empty
+   * array when no state one-time overrides are set.
+   */
+  customWithholdings?: PayrollShowCustomWithholdings | undefined;
   /**
    * The current version of this employee compensation. This field is only available for prepared payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
    */
@@ -876,6 +996,108 @@ export function payrollShowReimbursementsFromJSON(
 }
 
 /** @internal */
+export const PayrollShowEmployeeCompensationsOverrideType$inboundSchema:
+  z.ZodNativeEnum<typeof PayrollShowEmployeeCompensationsOverrideType> = z
+    .nativeEnum(PayrollShowEmployeeCompensationsOverrideType);
+
+/** @internal */
+export const PayrollShowEmployeeCompensationsAmountType$inboundSchema:
+  z.ZodNativeEnum<typeof PayrollShowEmployeeCompensationsAmountType> = z
+    .nativeEnum(PayrollShowEmployeeCompensationsAmountType);
+
+/** @internal */
+export const PayrollShowFederal$inboundSchema: z.ZodType<
+  PayrollShowFederal,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  override_type: PayrollShowEmployeeCompensationsOverrideType$inboundSchema
+    .optional(),
+  amount: z.string().optional(),
+  amount_type: PayrollShowEmployeeCompensationsAmountType$inboundSchema
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "override_type": "overrideType",
+    "amount_type": "amountType",
+  });
+});
+
+export function payrollShowFederalFromJSON(
+  jsonString: string,
+): SafeParseResult<PayrollShowFederal, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PayrollShowFederal$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollShowFederal' from JSON`,
+  );
+}
+
+/** @internal */
+export const PayrollShowOverrideType$inboundSchema: z.ZodNativeEnum<
+  typeof PayrollShowOverrideType
+> = z.nativeEnum(PayrollShowOverrideType);
+
+/** @internal */
+export const PayrollShowEmployeeCompensationsCustomWithholdingsAmountType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof PayrollShowEmployeeCompensationsCustomWithholdingsAmountType
+  > = z.nativeEnum(
+    PayrollShowEmployeeCompensationsCustomWithholdingsAmountType,
+  );
+
+/** @internal */
+export const PayrollShowState$inboundSchema: z.ZodType<
+  PayrollShowState,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  employee_state_field_uuid: z.string().optional(),
+  override_type: PayrollShowOverrideType$inboundSchema.optional(),
+  amount: z.string().optional(),
+  amount_type:
+    PayrollShowEmployeeCompensationsCustomWithholdingsAmountType$inboundSchema
+      .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "employee_state_field_uuid": "employeeStateFieldUuid",
+    "override_type": "overrideType",
+    "amount_type": "amountType",
+  });
+});
+
+export function payrollShowStateFromJSON(
+  jsonString: string,
+): SafeParseResult<PayrollShowState, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PayrollShowState$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollShowState' from JSON`,
+  );
+}
+
+/** @internal */
+export const PayrollShowCustomWithholdings$inboundSchema: z.ZodType<
+  PayrollShowCustomWithholdings,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  federal: z.nullable(z.lazy(() => PayrollShowFederal$inboundSchema))
+    .optional(),
+  state: z.array(z.lazy(() => PayrollShowState$inboundSchema)).optional(),
+});
+
+export function payrollShowCustomWithholdingsFromJSON(
+  jsonString: string,
+): SafeParseResult<PayrollShowCustomWithholdings, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PayrollShowCustomWithholdings$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollShowCustomWithholdings' from JSON`,
+  );
+}
+
+/** @internal */
 export const PayrollShowAmountType$inboundSchema: z.ZodNativeEnum<
   typeof PayrollShowAmountType
 > = z.nativeEnum(PayrollShowAmountType);
@@ -887,7 +1109,7 @@ export const PayrollShowDeductions$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().optional(),
-  amount: z.number().optional(),
+  amount: z.string().optional(),
   amount_type: PayrollShowAmountType$inboundSchema.optional(),
   uuid: z.string().optional(),
   updatable_via_payroll: z.boolean().optional(),
@@ -916,7 +1138,7 @@ export const PayrollShowTaxes$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string(),
   employer: z.boolean(),
-  amount: z.number(),
+  amount: z.string(),
 });
 
 export function payrollShowTaxesFromJSON(
@@ -936,8 +1158,8 @@ export const PayrollShowBenefits$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().optional(),
-  employee_deduction: z.number().optional(),
-  company_contribution: z.number().optional(),
+  employee_deduction: z.string().optional(),
+  company_contribution: z.string().optional(),
   imputed: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -985,6 +1207,9 @@ export const EmployeeCompensations$inboundSchema: z.ZodType<
     reimbursements: z.array(
       z.lazy(() => PayrollShowReimbursements$inboundSchema),
     ).optional(),
+    custom_withholdings: z.lazy(() =>
+      PayrollShowCustomWithholdings$inboundSchema
+    ).optional(),
     version: z.any().optional(),
     deductions: z.array(z.lazy(() => PayrollShowDeductions$inboundSchema))
       .optional(),
@@ -1007,6 +1232,7 @@ export const EmployeeCompensations$inboundSchema: z.ZodType<
     "fixed_compensations": "fixedCompensations",
     "hourly_compensations": "hourlyCompensations",
     "paid_time_off": "paidTimeOff",
+    "custom_withholdings": "customWithholdings",
   });
 });
 

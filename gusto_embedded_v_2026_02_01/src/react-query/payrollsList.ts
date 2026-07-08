@@ -28,7 +28,7 @@ import {
   GetV1CompaniesCompanyIdPayrollsRequest,
   ProcessingStatuses,
   QueryParamPayrollTypes,
-  SortOrder,
+  QueryParamSortOrder,
 } from "../models/operations/getv1companiescompanyidpayrolls.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -143,7 +143,7 @@ export function setPayrollsListData(
       dateFilterBy?: DateFilterBy | undefined;
       page?: number | undefined;
       per?: number | undefined;
-      sortOrder?: SortOrder | undefined;
+      sortOrder?: QueryParamSortOrder | undefined;
     },
   ],
   data: PayrollsListQueryData,
@@ -174,7 +174,7 @@ export function invalidatePayrollsList(
         dateFilterBy?: DateFilterBy | undefined;
         page?: number | undefined;
         per?: number | undefined;
-        sortOrder?: SortOrder | undefined;
+        sortOrder?: QueryParamSortOrder | undefined;
       },
     ]
   >,

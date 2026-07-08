@@ -1,17 +1,17 @@
 # EmploymentStatus
 
-The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
+Employee employment status to filter by.
 
 ## Example Usage
 
 ```typescript
-import { EmploymentStatus } from "@gusto/embedded-api-v-2025-11-15/models/components/rehire.js";
+import { EmploymentStatus } from "@gusto/embedded-api-v-2025-11-15/models/components/bulkreportcustomreportitem.js";
 
-let value: EmploymentStatus = "not_set";
+let value: EmploymentStatus = "dismissed";
 ```
 
 ## Values
 
 ```typescript
-"part_time" | "full_time" | "part_time_eligible" | "variable" | "seasonal" | "not_set"
+"active_full_time" | "active_part_time" | "active_part_time_eligible" | "active_variable" | "active_seasonal" | "active" | "dismissed"
 ```

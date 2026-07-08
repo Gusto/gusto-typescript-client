@@ -42,6 +42,12 @@ export type PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody = {
 
 export type PutV1CompaniesCompanyUuidTaxRequirementsStateRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the company
    */
   companyUuid: string;
@@ -49,12 +55,6 @@ export type PutV1CompaniesCompanyUuidTaxRequirementsStateRequest = {
    * The two-letter state abbreviation
    */
   state: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?:
-    | PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion
-    | undefined;
   requestBody: PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody;
 };
 
@@ -102,9 +102,9 @@ export function putV1CompaniesCompanyUuidTaxRequirementsStateRequestBodyToJSON(
 
 /** @internal */
 export type PutV1CompaniesCompanyUuidTaxRequirementsStateRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_uuid: string;
   state: string;
-  "X-Gusto-API-Version": string;
   RequestBody:
     PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody$Outbound;
 };
@@ -116,18 +116,18 @@ export const PutV1CompaniesCompanyUuidTaxRequirementsStateRequest$outboundSchema
     z.ZodTypeDef,
     PutV1CompaniesCompanyUuidTaxRequirementsStateRequest
   > = z.object({
-    companyUuid: z.string(),
-    state: z.string(),
     xGustoAPIVersion:
       PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion$outboundSchema
         .default("2026-06-15"),
+    companyUuid: z.string(),
+    state: z.string(),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      companyUuid: "company_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyUuid: "company_uuid",
       requestBody: "RequestBody",
     });
   });

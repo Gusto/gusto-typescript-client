@@ -5,7 +5,7 @@ The response from preparing a payroll for update. Contains refreshed employee co
 ## Example Usage
 
 ```typescript
-import { PayrollPrepared } from "@gusto/embedded-api/models/components/payroll.js";
+import { PayrollPrepared } from "@gusto/embedded-api/models/components/payrollshow.js";
 
 let value: PayrollPrepared = {};
 ```

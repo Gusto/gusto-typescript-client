@@ -34,6 +34,12 @@ export type GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPI
 
 export type GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the company
    */
   companyId: string;
@@ -41,12 +47,6 @@ export type GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest = {
    * The UUID of the payroll
    */
   id: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?:
-    | GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion
-    | undefined;
 };
 
 export type GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse = {
@@ -68,9 +68,9 @@ export const GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAP
 /** @internal */
 export type GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest$Outbound =
   {
+    "X-Gusto-API-Version": string;
     company_id: string;
     id: string;
-    "X-Gusto-API-Version": string;
   };
 
 /** @internal */
@@ -80,15 +80,15 @@ export const GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest$outbou
     z.ZodTypeDef,
     GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest
   > = z.object({
-    companyId: z.string(),
-    id: z.string(),
     xGustoAPIVersion:
       GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion$outboundSchema
         .default("2026-06-15"),
+    companyId: z.string(),
+    id: z.string(),
   }).transform((v) => {
     return remap$(v, {
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyId: "company_id",
     });
   });
 

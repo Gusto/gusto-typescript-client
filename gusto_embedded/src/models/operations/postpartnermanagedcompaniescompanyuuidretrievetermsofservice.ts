@@ -40,15 +40,15 @@ export type PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXG
 export type PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest =
   {
     /**
-     * The UUID of the company
-     */
-    companyUuid: string;
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     xGustoAPIVersion?:
       | PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion
       | undefined;
+    /**
+     * The UUID of the company
+     */
+    companyUuid: string;
     partnerManagedCompanyRetrieveTermsOfServiceRequest:
       PartnerManagedCompanyRetrieveTermsOfServiceRequest;
   };
@@ -75,8 +75,8 @@ export const PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderX
 /** @internal */
 export type PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest$Outbound =
   {
-    company_uuid: string;
     "X-Gusto-API-Version": string;
+    company_uuid: string;
     "Partner-Managed-Company-Retrieve-Terms-Of-Service-Request":
       PartnerManagedCompanyRetrieveTermsOfServiceRequest$Outbound;
   };
@@ -88,16 +88,16 @@ export const PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest
     z.ZodTypeDef,
     PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest
   > = z.object({
-    companyUuid: z.string(),
     xGustoAPIVersion:
       PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion$outboundSchema
         .default("2025-06-15"),
+    companyUuid: z.string(),
     partnerManagedCompanyRetrieveTermsOfServiceRequest:
       PartnerManagedCompanyRetrieveTermsOfServiceRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      companyUuid: "company_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyUuid: "company_uuid",
       partnerManagedCompanyRetrieveTermsOfServiceRequest:
         "Partner-Managed-Company-Retrieve-Terms-Of-Service-Request",
     });

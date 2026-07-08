@@ -73,7 +73,7 @@ export type PeopleBatchResultsErrors = {
   errors?: Array<PeopleBatchResultsResultsErrors> | null | undefined;
 };
 
-export type Results = {
+export type PeopleBatchResultsResults = {
   /**
    * The external ID provided in the batch request.
    */
@@ -104,7 +104,7 @@ export type Results = {
   errors?: Array<PeopleBatchResultsErrors> | null | undefined;
 };
 
-export type Exclusions = {
+export type PeopleBatchResultsExclusions = {
   /**
    * The external ID of the excluded item(s).
    */
@@ -162,11 +162,11 @@ export type PeopleBatchResults = {
   /**
    * The results for each batch item.
    */
-  results?: Array<Results> | undefined;
+  results?: Array<PeopleBatchResultsResults> | undefined;
   /**
    * Items excluded from processing due to validation errors.
    */
-  exclusions?: Array<Exclusions> | null | undefined;
+  exclusions?: Array<PeopleBatchResultsExclusions> | null | undefined;
 };
 
 /** @internal */
@@ -230,37 +230,40 @@ export function peopleBatchResultsErrorsFromJSON(
 }
 
 /** @internal */
-export const Results$inboundSchema: z.ZodType<Results, z.ZodTypeDef, unknown> =
-  z.object({
-    external_id: z.string().optional(),
-    role: Role$inboundSchema.optional(),
-    status: PeopleBatchResultsResultsStatus$inboundSchema.optional(),
-    idx: z.number().int().optional(),
-    uuid: z.string().optional(),
-    employee_uuid: z.string().optional(),
-    errors: z.nullable(
-      z.array(z.lazy(() => PeopleBatchResultsErrors$inboundSchema)),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "external_id": "externalId",
-      "employee_uuid": "employeeUuid",
-    });
+export const PeopleBatchResultsResults$inboundSchema: z.ZodType<
+  PeopleBatchResultsResults,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  external_id: z.string().optional(),
+  role: Role$inboundSchema.optional(),
+  status: PeopleBatchResultsResultsStatus$inboundSchema.optional(),
+  idx: z.number().int().optional(),
+  uuid: z.string().optional(),
+  employee_uuid: z.string().optional(),
+  errors: z.nullable(
+    z.array(z.lazy(() => PeopleBatchResultsErrors$inboundSchema)),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "external_id": "externalId",
+    "employee_uuid": "employeeUuid",
   });
+});
 
-export function resultsFromJSON(
+export function peopleBatchResultsResultsFromJSON(
   jsonString: string,
-): SafeParseResult<Results, SDKValidationError> {
+): SafeParseResult<PeopleBatchResultsResults, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Results$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Results' from JSON`,
+    (x) => PeopleBatchResultsResults$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PeopleBatchResultsResults' from JSON`,
   );
 }
 
 /** @internal */
-export const Exclusions$inboundSchema: z.ZodType<
-  Exclusions,
+export const PeopleBatchResultsExclusions$inboundSchema: z.ZodType<
+  PeopleBatchResultsExclusions,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -275,13 +278,13 @@ export const Exclusions$inboundSchema: z.ZodType<
   });
 });
 
-export function exclusionsFromJSON(
+export function peopleBatchResultsExclusionsFromJSON(
   jsonString: string,
-): SafeParseResult<Exclusions, SDKValidationError> {
+): SafeParseResult<PeopleBatchResultsExclusions, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Exclusions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Exclusions' from JSON`,
+    (x) => PeopleBatchResultsExclusions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PeopleBatchResultsExclusions' from JSON`,
   );
 }
 
@@ -303,9 +306,11 @@ export const PeopleBatchResults$inboundSchema: z.ZodType<
   submitted_items: z.nullable(z.number().int()).optional(),
   processed_items: z.number().int().optional(),
   excluded_items: z.number().int().optional(),
-  results: z.array(z.lazy(() => Results$inboundSchema)).optional(),
-  exclusions: z.nullable(z.array(z.lazy(() => Exclusions$inboundSchema)))
+  results: z.array(z.lazy(() => PeopleBatchResultsResults$inboundSchema))
     .optional(),
+  exclusions: z.nullable(
+    z.array(z.lazy(() => PeopleBatchResultsExclusions$inboundSchema)),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "idempotency_key": "idempotencyKey",

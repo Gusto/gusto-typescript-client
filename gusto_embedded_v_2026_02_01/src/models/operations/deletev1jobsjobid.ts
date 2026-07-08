@@ -28,13 +28,13 @@ export type DeleteV1JobsJobIdHeaderXGustoAPIVersion = ClosedEnum<
 
 export type DeleteV1JobsJobIdRequest = {
   /**
-   * The UUID of the job
-   */
-  jobId: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: DeleteV1JobsJobIdHeaderXGustoAPIVersion | undefined;
+  /**
+   * The UUID of the job
+   */
+  jobId: string;
 };
 
 export type DeleteV1JobsJobIdResponse = {
@@ -48,8 +48,8 @@ export const DeleteV1JobsJobIdHeaderXGustoAPIVersion$outboundSchema:
 
 /** @internal */
 export type DeleteV1JobsJobIdRequest$Outbound = {
-  job_id: string;
   "X-Gusto-API-Version": string;
+  job_id: string;
 };
 
 /** @internal */
@@ -58,13 +58,13 @@ export const DeleteV1JobsJobIdRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeleteV1JobsJobIdRequest
 > = z.object({
-  jobId: z.string(),
   xGustoAPIVersion: DeleteV1JobsJobIdHeaderXGustoAPIVersion$outboundSchema
     .default("2026-02-01"),
+  jobId: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    jobId: "job_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    jobId: "job_id",
   });
 });
 

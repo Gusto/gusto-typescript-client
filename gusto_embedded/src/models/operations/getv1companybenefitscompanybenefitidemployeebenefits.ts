@@ -38,20 +38,16 @@ export type GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIV
  * @remarks
  * - all_benefits: Include all effective dated benefits for each employee instead of only the current benefits.
  */
-export const GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude =
-  {
-    AllBenefits: "all_benefits",
-  } as const;
+export const QueryParamInclude = {
+  AllBenefits: "all_benefits",
+} as const;
 /**
  * Available options:
  *
  * @remarks
  * - all_benefits: Include all effective dated benefits for each employee instead of only the current benefits.
  */
-export type GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude =
-  ClosedEnum<
-    typeof GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude
-  >;
+export type QueryParamInclude = ClosedEnum<typeof QueryParamInclude>;
 
 export type GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest = {
   /**
@@ -78,9 +74,7 @@ export type GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest = {
    * @remarks
    * - all_benefits: Include all effective dated benefits for each employee instead of only the current benefits.
    */
-  include?:
-    | GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude
-    | undefined;
+  include?: QueryParamInclude | undefined;
 };
 
 export type GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse = {
@@ -100,12 +94,9 @@ export const GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPI
   );
 
 /** @internal */
-export const GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude
-  > = z.nativeEnum(
-    GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude,
-  );
+export const QueryParamInclude$outboundSchema: z.ZodNativeEnum<
+  typeof QueryParamInclude
+> = z.nativeEnum(QueryParamInclude);
 
 /** @internal */
 export type GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$Outbound =
@@ -130,9 +121,7 @@ export const GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$outboun
     companyBenefitId: z.string(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    include:
-      GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude$outboundSchema
-        .optional(),
+    include: QueryParamInclude$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       xGustoAPIVersion: "X-Gusto-API-Version",

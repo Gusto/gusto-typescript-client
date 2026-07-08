@@ -34,16 +34,14 @@ export type PutV1ContractorsContractorIdPaymentMethodHeaderXGustoAPIVersion =
 /**
  * The payment method type. If type is Direct Deposit, the contractor is required to have a bank account. See [Bank account endpoint](./post-v1-contractors-contractor_uuid-bank_accounts).
  */
-export const PutV1ContractorsContractorIdPaymentMethodType = {
+export const Type = {
   DirectDeposit: "Direct Deposit",
   Check: "Check",
 } as const;
 /**
  * The payment method type. If type is Direct Deposit, the contractor is required to have a bank account. See [Bank account endpoint](./post-v1-contractors-contractor_uuid-bank_accounts).
  */
-export type PutV1ContractorsContractorIdPaymentMethodType = ClosedEnum<
-  typeof PutV1ContractorsContractorIdPaymentMethodType
->;
+export type Type = ClosedEnum<typeof Type>;
 
 export type PutV1ContractorsContractorIdPaymentMethodRequestBody = {
   /**
@@ -53,7 +51,7 @@ export type PutV1ContractorsContractorIdPaymentMethodRequestBody = {
   /**
    * The payment method type. If type is Direct Deposit, the contractor is required to have a bank account. See [Bank account endpoint](./post-v1-contractors-contractor_uuid-bank_accounts).
    */
-  type: PutV1ContractorsContractorIdPaymentMethodType;
+  type: Type;
 };
 
 export type PutV1ContractorsContractorIdPaymentMethodRequest = {
@@ -87,9 +85,9 @@ export const PutV1ContractorsContractorIdPaymentMethodHeaderXGustoAPIVersion$out
   );
 
 /** @internal */
-export const PutV1ContractorsContractorIdPaymentMethodType$outboundSchema:
-  z.ZodNativeEnum<typeof PutV1ContractorsContractorIdPaymentMethodType> = z
-    .nativeEnum(PutV1ContractorsContractorIdPaymentMethodType);
+export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
+  Type,
+);
 
 /** @internal */
 export type PutV1ContractorsContractorIdPaymentMethodRequestBody$Outbound = {
@@ -105,7 +103,7 @@ export const PutV1ContractorsContractorIdPaymentMethodRequestBody$outboundSchema
     PutV1ContractorsContractorIdPaymentMethodRequestBody
   > = z.object({
     version: z.string(),
-    type: PutV1ContractorsContractorIdPaymentMethodType$outboundSchema,
+    type: Type$outboundSchema,
   });
 
 export function putV1ContractorsContractorIdPaymentMethodRequestBodyToJSON(

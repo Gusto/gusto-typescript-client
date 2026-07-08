@@ -23,13 +23,15 @@ export type EmployeePaymentDetailsListPaymentMethod = ClosedEnum<
   typeof EmployeePaymentDetailsListPaymentMethod
 >;
 
-export const SplitBy = {
+export const EmployeePaymentDetailsListSplitBy = {
   Amount: "Amount",
   Percentage: "Percentage",
 } as const;
-export type SplitBy = ClosedEnum<typeof SplitBy>;
+export type EmployeePaymentDetailsListSplitBy = ClosedEnum<
+  typeof EmployeePaymentDetailsListSplitBy
+>;
 
-export type Splits = {
+export type EmployeePaymentDetailsListSplits = {
   /**
    * The UUID of the bank account.
    */
@@ -84,11 +86,11 @@ export type EmployeePaymentDetailsList = {
   /**
    * How the payment is split. This field is applicable when `payment_method` is "Direct Deposit". If `split_by` is Percentage, then the split amounts must add up to exactly 100. If `split_by` is Amount, the last split amount must be `null` to capture the remainder.
    */
-  splitBy?: SplitBy | null | undefined;
+  splitBy?: EmployeePaymentDetailsListSplitBy | null | undefined;
   /**
    * An array of payment splits. This field is applicable when `payment_method` is "Direct Deposit".
    */
-  splits?: Array<Splits> | null | undefined;
+  splits?: Array<EmployeePaymentDetailsListSplits> | null | undefined;
 };
 
 /** @internal */
@@ -97,38 +99,42 @@ export const EmployeePaymentDetailsListPaymentMethod$inboundSchema:
     .nativeEnum(EmployeePaymentDetailsListPaymentMethod);
 
 /** @internal */
-export const SplitBy$inboundSchema: z.ZodNativeEnum<typeof SplitBy> = z
-  .nativeEnum(SplitBy);
+export const EmployeePaymentDetailsListSplitBy$inboundSchema: z.ZodNativeEnum<
+  typeof EmployeePaymentDetailsListSplitBy
+> = z.nativeEnum(EmployeePaymentDetailsListSplitBy);
 
 /** @internal */
-export const Splits$inboundSchema: z.ZodType<Splits, z.ZodTypeDef, unknown> = z
-  .object({
-    bank_account_uuid: z.string().optional(),
-    name: z.string().optional(),
-    hidden_account_number: z.string().optional(),
-    encrypted_account_number: z.nullable(z.string()).optional(),
-    routing_number: z.string().optional(),
-    account_type: z.string().optional(),
-    priority: z.number().int().optional(),
-    split_amount: z.nullable(z.number()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "bank_account_uuid": "bankAccountUuid",
-      "hidden_account_number": "hiddenAccountNumber",
-      "encrypted_account_number": "encryptedAccountNumber",
-      "routing_number": "routingNumber",
-      "account_type": "accountType",
-      "split_amount": "splitAmount",
-    });
+export const EmployeePaymentDetailsListSplits$inboundSchema: z.ZodType<
+  EmployeePaymentDetailsListSplits,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  bank_account_uuid: z.string().optional(),
+  name: z.string().optional(),
+  hidden_account_number: z.string().optional(),
+  encrypted_account_number: z.nullable(z.string()).optional(),
+  routing_number: z.string().optional(),
+  account_type: z.string().optional(),
+  priority: z.number().int().optional(),
+  split_amount: z.nullable(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "bank_account_uuid": "bankAccountUuid",
+    "hidden_account_number": "hiddenAccountNumber",
+    "encrypted_account_number": "encryptedAccountNumber",
+    "routing_number": "routingNumber",
+    "account_type": "accountType",
+    "split_amount": "splitAmount",
   });
+});
 
-export function splitsFromJSON(
+export function employeePaymentDetailsListSplitsFromJSON(
   jsonString: string,
-): SafeParseResult<Splits, SDKValidationError> {
+): SafeParseResult<EmployeePaymentDetailsListSplits, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Splits$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Splits' from JSON`,
+    (x) => EmployeePaymentDetailsListSplits$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EmployeePaymentDetailsListSplits' from JSON`,
   );
 }
 
@@ -143,8 +149,11 @@ export const EmployeePaymentDetailsList$inboundSchema: z.ZodType<
   last_name: z.string().optional(),
   payment_method: EmployeePaymentDetailsListPaymentMethod$inboundSchema
     .optional(),
-  split_by: z.nullable(SplitBy$inboundSchema).optional(),
-  splits: z.nullable(z.array(z.lazy(() => Splits$inboundSchema))).optional(),
+  split_by: z.nullable(EmployeePaymentDetailsListSplitBy$inboundSchema)
+    .optional(),
+  splits: z.nullable(
+    z.array(z.lazy(() => EmployeePaymentDetailsListSplits$inboundSchema)),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",

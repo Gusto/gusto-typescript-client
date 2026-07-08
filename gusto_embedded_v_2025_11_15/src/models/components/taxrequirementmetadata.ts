@@ -23,7 +23,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * - `tax_rate`: A decimal value representing a tax rate, e.g. `0.034` representing a tax rate of `3.4%`, see `validation` for additional validation guidance
  * - `workers_compensation_rate`: A decimal value representing a percentage, see `risk_class_code`, `risk_class_description`, and `rate_type`
  */
-export const TaxRequirementMetadataType = {
+export const Type = {
   Text: "text",
   Currency: "currency",
   Radio: "radio",
@@ -47,16 +47,14 @@ export const TaxRequirementMetadataType = {
  * - `tax_rate`: A decimal value representing a tax rate, e.g. `0.034` representing a tax rate of `3.4%`, see `validation` for additional validation guidance
  * - `workers_compensation_rate`: A decimal value representing a percentage, see `risk_class_code`, `risk_class_description`, and `rate_type`
  */
-export type TaxRequirementMetadataType = ClosedEnum<
-  typeof TaxRequirementMetadataType
->;
+export type Type = ClosedEnum<typeof Type>;
 
 /**
  * The actual value to be submitted
  */
 export type TaxRequirementMetadataValue = string | boolean;
 
-export type TaxRequirementMetadataOptions = {
+export type Options = {
   /**
    * A customer facing label for the answer
    */
@@ -94,15 +92,15 @@ export type RateType = ClosedEnum<typeof RateType>;
 /**
  * Describes the type of tax_rate validation rule
  */
-export const TaxRequirementMetadataValidationType = {
+export const TaxRequirementMetadataType = {
   OneOf: "one_of",
   MinMax: "min_max",
 } as const;
 /**
  * Describes the type of tax_rate validation rule
  */
-export type TaxRequirementMetadataValidationType = ClosedEnum<
-  typeof TaxRequirementMetadataValidationType
+export type TaxRequirementMetadataType = ClosedEnum<
+  typeof TaxRequirementMetadataType
 >;
 
 /**
@@ -112,7 +110,7 @@ export type Validation = {
   /**
    * Describes the type of tax_rate validation rule
    */
-  type: TaxRequirementMetadataValidationType;
+  type: TaxRequirementMetadataType;
   /**
    * [for `min_max`] The inclusive lower bound of the tax rate
    */
@@ -145,11 +143,11 @@ export type TaxRequirementMetadata = {
    * - `tax_rate`: A decimal value representing a tax rate, e.g. `0.034` representing a tax rate of `3.4%`, see `validation` for additional validation guidance
    * - `workers_compensation_rate`: A decimal value representing a percentage, see `risk_class_code`, `risk_class_description`, and `rate_type`
    */
-  type: TaxRequirementMetadataType;
+  type: Type;
   /**
    * [for `select` or `radio`] An array of objects describing the possible values.
    */
-  options?: Array<TaxRequirementMetadataOptions> | undefined;
+  options?: Array<Options> | undefined;
   /**
    * [for `workers_compensation_rate`] The industry risk class code for the rate being requested
    */
@@ -194,9 +192,9 @@ export type TaxRequirementMetadata = {
 };
 
 /** @internal */
-export const TaxRequirementMetadataType$inboundSchema: z.ZodNativeEnum<
-  typeof TaxRequirementMetadataType
-> = z.nativeEnum(TaxRequirementMetadataType);
+export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
+  Type,
+);
 
 /** @internal */
 export const TaxRequirementMetadataValue$inboundSchema: z.ZodType<
@@ -216,27 +214,24 @@ export function taxRequirementMetadataValueFromJSON(
 }
 
 /** @internal */
-export const TaxRequirementMetadataOptions$inboundSchema: z.ZodType<
-  TaxRequirementMetadataOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  label: z.string(),
-  value: z.union([z.string(), z.boolean()]),
-  short_label: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "short_label": "shortLabel",
+export const Options$inboundSchema: z.ZodType<Options, z.ZodTypeDef, unknown> =
+  z.object({
+    label: z.string(),
+    value: z.union([z.string(), z.boolean()]),
+    short_label: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "short_label": "shortLabel",
+    });
   });
-});
 
-export function taxRequirementMetadataOptionsFromJSON(
+export function optionsFromJSON(
   jsonString: string,
-): SafeParseResult<TaxRequirementMetadataOptions, SDKValidationError> {
+): SafeParseResult<Options, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => TaxRequirementMetadataOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaxRequirementMetadataOptions' from JSON`,
+    (x) => Options$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Options' from JSON`,
   );
 }
 
@@ -245,10 +240,9 @@ export const RateType$inboundSchema: z.ZodNativeEnum<typeof RateType> = z
   .nativeEnum(RateType);
 
 /** @internal */
-export const TaxRequirementMetadataValidationType$inboundSchema:
-  z.ZodNativeEnum<typeof TaxRequirementMetadataValidationType> = z.nativeEnum(
-    TaxRequirementMetadataValidationType,
-  );
+export const TaxRequirementMetadataType$inboundSchema: z.ZodNativeEnum<
+  typeof TaxRequirementMetadataType
+> = z.nativeEnum(TaxRequirementMetadataType);
 
 /** @internal */
 export const Validation$inboundSchema: z.ZodType<
@@ -256,7 +250,7 @@ export const Validation$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: TaxRequirementMetadataValidationType$inboundSchema,
+  type: TaxRequirementMetadataType$inboundSchema,
   min: z.string().optional(),
   max: z.string().optional(),
   rates: z.array(z.string()).optional(),
@@ -278,9 +272,8 @@ export const TaxRequirementMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: TaxRequirementMetadataType$inboundSchema,
-  options: z.array(z.lazy(() => TaxRequirementMetadataOptions$inboundSchema))
-    .optional(),
+  type: Type$inboundSchema,
+  options: z.array(z.lazy(() => Options$inboundSchema)).optional(),
   risk_class_code: z.string().optional(),
   risk_class_description: z.string().optional(),
   rate_type: RateType$inboundSchema.optional(),

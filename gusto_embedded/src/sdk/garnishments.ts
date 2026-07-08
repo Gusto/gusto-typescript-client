@@ -70,6 +70,25 @@ export class Garnishments extends ClientSDK {
   }
 
   /**
+   * Get child support garnishment data
+   *
+   * @remarks
+   * Agency data and requirements to be used for creating child support garnishments
+   *
+   * scope: `garnishments:read`
+   */
+  async getChildSupportData(
+    request: GetV1GarnishmentsChildSupportRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1GarnishmentsChildSupportResponse> {
+    return unwrapAsync(garnishmentsGetChildSupportData(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Get a garnishment
    *
    * @remarks
@@ -101,25 +120,6 @@ export class Garnishments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PutV1GarnishmentsGarnishmentIdResponse> {
     return unwrapAsync(garnishmentsUpdate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get child support garnishment data
-   *
-   * @remarks
-   * Agency data and requirements to be used for creating child support garnishments
-   *
-   * scope: `garnishments:read`
-   */
-  async getChildSupportData(
-    request: GetV1GarnishmentsChildSupportRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1GarnishmentsChildSupportResponse> {
-    return unwrapAsync(garnishmentsGetChildSupportData(
       this,
       request,
       options,

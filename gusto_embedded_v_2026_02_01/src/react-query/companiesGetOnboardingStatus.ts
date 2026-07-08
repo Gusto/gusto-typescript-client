@@ -120,10 +120,10 @@ export function setCompaniesGetOnboardingStatusData(
   queryKeyBase: [
     companyUuid: string,
     parameters: {
-      additionalSteps?: string | undefined;
       xGustoAPIVersion?:
         | GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion
         | undefined;
+      additionalSteps?: string | undefined;
     },
   ],
   data: CompaniesGetOnboardingStatusQueryData,
@@ -139,10 +139,10 @@ export function invalidateCompaniesGetOnboardingStatus(
     [
       companyUuid: string,
       parameters: {
-        additionalSteps?: string | undefined;
         xGustoAPIVersion?:
           | GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion
           | undefined;
+        additionalSteps?: string | undefined;
       },
     ]
   >,

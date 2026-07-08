@@ -31,15 +31,15 @@ export type GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion =
 
 export type GetV1PeopleBatchesPeopleBatchUuidRequest = {
   /**
-   * The UUID of the people batch
-   */
-  peopleBatchUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the people batch
+   */
+  peopleBatchUuid: string;
 };
 
 export type GetV1PeopleBatchesPeopleBatchUuidResponse = {
@@ -58,8 +58,8 @@ export const GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion$outboundSch
 
 /** @internal */
 export type GetV1PeopleBatchesPeopleBatchUuidRequest$Outbound = {
-  people_batch_uuid: string;
   "X-Gusto-API-Version": string;
+  people_batch_uuid: string;
 };
 
 /** @internal */
@@ -68,14 +68,14 @@ export const GetV1PeopleBatchesPeopleBatchUuidRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1PeopleBatchesPeopleBatchUuidRequest
 > = z.object({
-  peopleBatchUuid: z.string(),
   xGustoAPIVersion:
     GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion$outboundSchema
       .default("2025-06-15"),
+  peopleBatchUuid: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    peopleBatchUuid: "people_batch_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    peopleBatchUuid: "people_batch_uuid",
   });
 });
 

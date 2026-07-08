@@ -13,9 +13,9 @@ import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion,
+  GetV1CompaniesCompanyIdEmployeesQueryParamInclude,
   GetV1CompaniesCompanyIdEmployeesRequest,
   GetV1CompaniesCompanyIdEmployeesResponse,
-  Include,
 } from "../models/operations/getv1companiescompanyidemployees.js";
 import { unwrapAsync } from "../types/fp.js";
 export type EmployeesListQueryData = GetV1CompaniesCompanyIdEmployeesResponse;
@@ -92,7 +92,9 @@ export function queryKeyEmployeesList(
     payrollUuid?: string | undefined;
     searchTerm?: string | undefined;
     sortBy?: string | undefined;
-    include?: Array<Include> | undefined;
+    include?:
+      | Array<GetV1CompaniesCompanyIdEmployeesQueryParamInclude>
+      | undefined;
     onboarded?: boolean | undefined;
     onboardedActive?: boolean | undefined;
     terminated?: boolean | undefined;

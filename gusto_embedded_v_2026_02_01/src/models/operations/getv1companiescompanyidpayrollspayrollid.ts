@@ -14,7 +14,7 @@ import {
 import {
   PayrollShow,
   PayrollShow$inboundSchema,
-} from "../components/payroll.js";
+} from "../components/payrollshow.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -46,6 +46,12 @@ export type GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude =
 
 export type GetV1CompaniesCompanyIdPayrollsPayrollIdRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the company
    */
   companyId: string;
@@ -53,12 +59,6 @@ export type GetV1CompaniesCompanyIdPayrollsPayrollIdRequest = {
    * The UUID of the payroll
    */
   payrollId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?:
-    | GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion
-    | undefined;
   /**
    * Include the requested attribute in the response, for multiple attributes comma separate the values, i.e. `?include=benefits,deductions,taxes`
    */
@@ -103,9 +103,9 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude$outboundS
 
 /** @internal */
 export type GetV1CompaniesCompanyIdPayrollsPayrollIdRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_id: string;
   payroll_id: string;
-  "X-Gusto-API-Version": string;
   include?: Array<string> | undefined;
   page?: number | undefined;
   per?: number | undefined;
@@ -119,11 +119,11 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1CompaniesCompanyIdPayrollsPayrollIdRequest
   > = z.object({
-    companyId: z.string(),
-    payrollId: z.string(),
     xGustoAPIVersion:
       GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion$outboundSchema
         .default("2026-02-01"),
+    companyId: z.string(),
+    payrollId: z.string(),
     include: z.array(
       GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude$outboundSchema,
     ).optional(),
@@ -132,9 +132,9 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdRequest$outboundSchema:
     sortBy: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       companyId: "company_id",
       payrollId: "payroll_id",
-      xGustoAPIVersion: "X-Gusto-API-Version",
       sortBy: "sort_by",
     });
   });

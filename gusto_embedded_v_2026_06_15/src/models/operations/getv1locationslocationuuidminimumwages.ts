@@ -33,15 +33,15 @@ export type GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion =
 
 export type GetV1LocationsLocationUuidMinimumWagesRequest = {
   /**
-   * The UUID of the location
-   */
-  locationUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the location
+   */
+  locationUuid: string;
   effectiveDate?: string | undefined;
 };
 
@@ -63,8 +63,8 @@ export const GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion$outbou
 
 /** @internal */
 export type GetV1LocationsLocationUuidMinimumWagesRequest$Outbound = {
-  location_uuid: string;
   "X-Gusto-API-Version": string;
+  location_uuid: string;
   effective_date?: string | undefined;
 };
 
@@ -75,15 +75,15 @@ export const GetV1LocationsLocationUuidMinimumWagesRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1LocationsLocationUuidMinimumWagesRequest
   > = z.object({
-    locationUuid: z.string(),
     xGustoAPIVersion:
       GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion$outboundSchema
         .default("2026-06-15"),
+    locationUuid: z.string(),
     effectiveDate: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
-      locationUuid: "location_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      locationUuid: "location_uuid",
       effectiveDate: "effective_date",
     });
   });

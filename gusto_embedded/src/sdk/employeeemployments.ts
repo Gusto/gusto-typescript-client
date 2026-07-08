@@ -57,88 +57,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class EmployeeEmployments extends ClientSDK {
   /**
-   * Get terminations for an employee
-   *
-   * @remarks
-   * Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
-   *
-   * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
-   *
-   * scope: `employments:read`
-   */
-  async getTerminations(
-    request: GetV1EmployeesEmployeeIdTerminationsRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1EmployeesEmployeeIdTerminationsResponse> {
-    return unwrapAsync(employeeEmploymentsGetTerminations(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create an employee termination
-   *
-   * @remarks
-   * Create a termination for an employee. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
-   *
-   * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
-   *
-   * scope: `employments:write`
-   */
-  async createTermination(
-    request: PostV1EmployeesEmployeeIdTerminationsRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1EmployeesEmployeeIdTerminationsResponse> {
-    return unwrapAsync(employeeEmploymentsCreateTermination(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete an employee termination
-   *
-   * @remarks
-   * Delete an employee termination.
-   *
-   * scope: `employments:write`
-   */
-  async deleteTermination(
-    request: DeleteV1EmployeesEmployeeIdTerminationsRequest,
-    options?: RequestOptions,
-  ): Promise<DeleteV1EmployeesEmployeeIdTerminationsResponse> {
-    return unwrapAsync(employeeEmploymentsDeleteTermination(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update an employee termination
-   *
-   * @remarks
-   * Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
-   *
-   * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
-   *
-   * scope: `employments:write`
-   */
-  async updateTermination(
-    request: PutV1TerminationsEmployeeIdRequest,
-    options?: RequestOptions,
-  ): Promise<PutV1TerminationsEmployeeIdResponse> {
-    return unwrapAsync(employeeEmploymentsUpdateTermination(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get an employee rehire
    *
    * @remarks
@@ -227,6 +145,88 @@ export class EmployeeEmployments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetV1EmployeesEmployeeIdEmploymentHistoryResponse> {
     return unwrapAsync(employeeEmploymentsGetHistory(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get terminations for an employee
+   *
+   * @remarks
+   * Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
+   *
+   * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+   *
+   * scope: `employments:read`
+   */
+  async getTerminations(
+    request: GetV1EmployeesEmployeeIdTerminationsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1EmployeesEmployeeIdTerminationsResponse> {
+    return unwrapAsync(employeeEmploymentsGetTerminations(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create an employee termination
+   *
+   * @remarks
+   * Create a termination for an employee. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
+   *
+   * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+   *
+   * scope: `employments:write`
+   */
+  async createTermination(
+    request: PostV1EmployeesEmployeeIdTerminationsRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1EmployeesEmployeeIdTerminationsResponse> {
+    return unwrapAsync(employeeEmploymentsCreateTermination(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete an employee termination
+   *
+   * @remarks
+   * Delete an employee termination.
+   *
+   * scope: `employments:write`
+   */
+  async deleteTermination(
+    request: DeleteV1EmployeesEmployeeIdTerminationsRequest,
+    options?: RequestOptions,
+  ): Promise<DeleteV1EmployeesEmployeeIdTerminationsResponse> {
+    return unwrapAsync(employeeEmploymentsDeleteTermination(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update an employee termination
+   *
+   * @remarks
+   * Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
+   *
+   * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+   *
+   * scope: `employments:write`
+   */
+  async updateTermination(
+    request: PutV1TerminationsEmployeeIdRequest,
+    options?: RequestOptions,
+  ): Promise<PutV1TerminationsEmployeeIdResponse> {
+    return unwrapAsync(employeeEmploymentsUpdateTermination(
       this,
       request,
       options,

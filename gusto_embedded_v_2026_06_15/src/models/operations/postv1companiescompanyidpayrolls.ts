@@ -85,9 +85,9 @@ export type PostV1CompaniesCompanyIdPayrollsRequestBody = {
    */
   payScheduleUuid?: string | undefined;
   /**
-   * A list of employee uuids to include on the payroll.
+   * A list of employee UUIDs to include on the payroll. At least one UUID is required for non-termination off-cycle payrolls.
    */
-  employeeUuids?: Array<string> | null | undefined;
+  employeeUuids?: Array<string> | undefined;
   /**
    * Payment date.
    */
@@ -155,7 +155,7 @@ export type PostV1CompaniesCompanyIdPayrollsRequestBody$Outbound = {
   start_date: string;
   end_date: string;
   pay_schedule_uuid?: string | undefined;
-  employee_uuids?: Array<string> | null | undefined;
+  employee_uuids?: Array<string> | undefined;
   check_date?: string | undefined;
   withholding_pay_period?: string | undefined;
   skip_regular_deductions?: boolean | undefined;
@@ -175,7 +175,7 @@ export const PostV1CompaniesCompanyIdPayrollsRequestBody$outboundSchema:
     startDate: z.instanceof(RFCDate).transform(v => v.toString()),
     endDate: z.instanceof(RFCDate).transform(v => v.toString()),
     payScheduleUuid: z.string().optional(),
-    employeeUuids: z.nullable(z.array(z.string())).optional(),
+    employeeUuids: z.array(z.string()).optional(),
     checkDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
     withholdingPayPeriod: WithholdingPayPeriod$outboundSchema.optional(),
     skipRegularDeductions: z.boolean().optional(),

@@ -180,6 +180,31 @@ export class Webhooks extends ClientSDK {
   }
 
   /**
+   * Request a verification token for a webhook subscription
+   *
+   * @remarks
+   * Request that the webhook subscription `verification_token` be POSTed to the Subscription URL.
+   *
+   * 📘 System Access Authentication
+   *
+   * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+   *
+   * scope: `webhook_subscriptions:read`
+   */
+  async requestVerificationToken(
+    security: GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
+    request: GetV1WebhookSubscriptionVerificationTokenUuidRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1WebhookSubscriptionVerificationTokenUuidResponse> {
+    return unwrapAsync(webhooksRequestVerificationToken(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Verify a webhook subscription
    *
    * @remarks
@@ -199,31 +224,6 @@ export class Webhooks extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PutV1VerifyWebhookSubscriptionUuidResponse> {
     return unwrapAsync(webhooksVerify(
-      this,
-      security,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Request a verification token for a webhook subscription
-   *
-   * @remarks
-   * Request that the webhook subscription `verification_token` be POSTed to the Subscription URL.
-   *
-   * 📘 System Access Authentication
-   *
-   * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
-   *
-   * scope: `webhook_subscriptions:read`
-   */
-  async requestVerificationToken(
-    security: GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
-    request: GetV1WebhookSubscriptionVerificationTokenUuidRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1WebhookSubscriptionVerificationTokenUuidResponse> {
-    return unwrapAsync(webhooksRequestVerificationToken(
       this,
       security,
       request,

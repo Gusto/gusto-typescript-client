@@ -42,8 +42,10 @@ import { Introspection } from "./introspection.js";
 import { Invoices } from "./invoices.js";
 import { JobsAndCompensations } from "./jobsandcompensations.js";
 import { Locations } from "./locations.js";
+import { MemberPortalInvitations } from "./memberportalinvitations.js";
 import { Notifications } from "./notifications.js";
 import { PaymentConfigs } from "./paymentconfigs.js";
+import { PayrollCancellations } from "./payrollcancellations.js";
 import { PayrollDigests } from "./payrolldigests.js";
 import { Payrolls } from "./payrolls.js";
 import { PaySchedules } from "./payschedules.js";
@@ -73,6 +75,11 @@ export class GustoEmbedded extends ClientSDK {
   private _companyBenefits?: CompanyBenefits;
   get companyBenefits(): CompanyBenefits {
     return (this._companyBenefits ??= new CompanyBenefits(this._options));
+  }
+
+  private _reports?: Reports;
+  get reports(): Reports {
+    return (this._reports ??= new Reports(this._options));
   }
 
   private _companyAttachments?: CompanyAttachments;
@@ -221,11 +228,6 @@ export class GustoEmbedded extends ClientSDK {
     ));
   }
 
-  private _reports?: Reports;
-  get reports(): Reports {
-    return (this._reports ??= new Reports(this._options));
-  }
-
   private _events?: Events;
   get events(): Events {
     return (this._events ??= new Events(this._options));
@@ -295,9 +297,28 @@ export class GustoEmbedded extends ClientSDK {
     return (this._locations ??= new Locations(this._options));
   }
 
+  private _memberPortalInvitations?: MemberPortalInvitations;
+  get memberPortalInvitations(): MemberPortalInvitations {
+    return (this._memberPortalInvitations ??= new MemberPortalInvitations(
+      this._options,
+    ));
+  }
+
   private _paySchedules?: PaySchedules;
   get paySchedules(): PaySchedules {
     return (this._paySchedules ??= new PaySchedules(this._options));
+  }
+
+  private _payrollCancellations?: PayrollCancellations;
+  get payrollCancellations(): PayrollCancellations {
+    return (this._payrollCancellations ??= new PayrollCancellations(
+      this._options,
+    ));
+  }
+
+  private _payrollDigests?: PayrollDigests;
+  get payrollDigests(): PayrollDigests {
+    return (this._payrollDigests ??= new PayrollDigests(this._options));
   }
 
   private _timeOffPolicies?: TimeOffPolicies;
@@ -348,10 +369,5 @@ export class GustoEmbedded extends ClientSDK {
   private _wireInRequests?: WireInRequests;
   get wireInRequests(): WireInRequests {
     return (this._wireInRequests ??= new WireInRequests(this._options));
-  }
-
-  private _payrollDigests?: PayrollDigests;
-  get payrollDigests(): PayrollDigests {
-    return (this._payrollDigests ??= new PayrollDigests(this._options));
   }
 }

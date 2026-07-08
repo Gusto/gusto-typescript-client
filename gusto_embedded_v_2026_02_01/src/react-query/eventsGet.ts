@@ -25,7 +25,7 @@ import {
   GetEventsHeaderXGustoAPIVersion,
   GetEventsRequest,
   GetEventsSecurity,
-  QueryParamSortOrder,
+  SortOrder,
 } from "../models/operations/getevents.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -124,7 +124,7 @@ export function setEventsGetData(
       resourceUuid?: string | undefined;
       limit?: string | undefined;
       eventType?: string | undefined;
-      sortOrder?: QueryParamSortOrder | undefined;
+      sortOrder?: SortOrder | undefined;
     },
   ],
   data: EventsGetQueryData,
@@ -143,7 +143,7 @@ export function invalidateEventsGet(
       resourceUuid?: string | undefined;
       limit?: string | undefined;
       eventType?: string | undefined;
-      sortOrder?: QueryParamSortOrder | undefined;
+      sortOrder?: SortOrder | undefined;
     }]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
