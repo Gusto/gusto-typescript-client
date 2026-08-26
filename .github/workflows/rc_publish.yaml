@@ -1,0 +1,99 @@
+name: RC Publish
+permissions:
+  contents: read
+  id-token: write
+on:
+  workflow_dispatch:
+    inputs:
+      partner_api_branch:
+        description: >
+          Branch name in Gusto/Gusto-Partner-API to generate from
+          (e.g., automated-openapi-updates-603)
+        required: true
+        type: string
+      target:
+        description: Speakeasy target to generate and publish
+        required: true
+        type: choice
+        options:
+          - gusto-embedded
+          - gusto-embedded-v2025-11-15
+          - gusto-embedded-v2026-02-01
+          - gusto-embedded-v2026-06-15
+      rc_number:
+        description: "RC iteration (e.g., 1 for version X.Y.Z-rc.1)"
+        required: true
+        type: string
+        default: "1"
+
+jobs:
+  rc-publish:
+    runs-on:
+      group: gusto-ubuntu-default
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Speakeasy CLI
+        uses: speakeasy-api/speakeasy-client-sdk-generator-action@v15
+        with:
+          speakeasy_version: latest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24.x"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Map target to output directory
+        id: target-info
+        run: |
+          declare -A TARGET_MAP=(
+            ["gusto-embedded"]="gusto_embedded"
+            ["gusto-embedded-v2025-11-15"]="gusto_embedded_v_2025_11_15"
+            ["gusto-embedded-v2026-02-01"]="gusto_embedded_v_2026_02_01"
+            ["gusto-embedded-v2026-06-15"]="gusto_embedded_v_2026_06_15"
+          )
+          DIR="${TARGET_MAP[${{ inputs.target }}]}"
+          echo "dir=${DIR}" >> "$GITHUB_OUTPUT"
+
+      - name: Point sources at Partner API branch
+        run: |
+          sed -i \
+            "s|refs/heads/main|refs/heads/${{ inputs.partner_api_branch }}|g" \
+            .speakeasy/workflow.yaml
+          echo "--- Modified sources ---"
+          grep "location:" .speakeasy/workflow.yaml | head -4
+
+      - name: Run Speakeasy generation
+        run: speakeasy run --target=${{ inputs.target }}
+        env:
+          SPEAKEASY_API_KEY: ${{ secrets.SPEAKEASY_API_KEY }}
+          SPEAKEASY_SERVER_URL: https://app.speakeasyapi.dev
+          OPENAPI_DOC_AUTH_TOKEN: ${{ secrets.OPENAPI_DOC_AUTH_TOKEN }}
+
+      - name: Compute RC version and publish
+        working-directory: ${{ steps.target-info.outputs.dir }}
+        run: |
+          CURRENT=$(npm pkg get version | tr -d '"')
+          IFS='.' read -r MAJOR MINOR PATCH <<< "${CURRENT}"
+          RC_VERSION="${MAJOR}.$((MINOR + 1)).0-rc.${{ inputs.rc_number }}"
+          echo "Current: ${CURRENT} -> RC: ${RC_VERSION}"
+          npm version "${RC_VERSION}" --no-git-tag-version
+          npm install --ignore-scripts
+          npm publish --tag rc --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Summary
+        run: |
+          DIR="${{ steps.target-info.outputs.dir }}"
+          PKG_NAME=$(cd "${DIR}" && npm pkg get name | tr -d '"')
+          PKG_VERSION=$(cd "${DIR}" && npm pkg get version | tr -d '"')
+          echo "## RC Published" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Field | Value |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|-------|-------|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Package | \`${PKG_NAME}\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Version | \`${PKG_VERSION}\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Source branch | \`${{ inputs.partner_api_branch }}\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Install | \`npm install ${PKG_NAME}@rc\` |" >> "$GITHUB_STEP_SUMMARY"
