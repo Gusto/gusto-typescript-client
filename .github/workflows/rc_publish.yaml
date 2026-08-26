@@ -11,20 +11,6 @@ on:
           (e.g., automated-openapi-updates-603)
         required: true
         type: string
-      target:
-        description: Speakeasy target to generate and publish
-        required: true
-        type: choice
-        options:
-          - gusto-embedded
-          - gusto-embedded-v2025-11-15
-          - gusto-embedded-v2026-02-01
-          - gusto-embedded-v2026-06-15
-      rc_number:
-        description: "RC iteration (e.g., 1 for version X.Y.Z-rc.1)"
-        required: true
-        type: string
-        default: "1"
 
 jobs:
   rc-publish:
@@ -44,56 +30,131 @@ jobs:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
 
-      - name: Map target to output directory
-        id: target-info
+      - name: Detect changed targets
+        id: detect
         run: |
-          declare -A TARGET_MAP=(
+          CHANGED_FILES=$(curl -sL \
+            -H "Authorization: token ${OPENAPI_DOC_AUTH_TOKEN}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/Gusto/Gusto-Partner-API/compare/main...${{ inputs.partner_api_branch }}" \
+            | jq -r '.files[].filename')
+
+          declare -A SPEC_TO_TARGET=(
+            ["src/api.v2025-06-15.yaml"]="gusto-embedded"
+            ["src/api.v2025-11-15.yaml"]="gusto-embedded-v2025-11-15"
+            ["src/api.v2026-02-01.yaml"]="gusto-embedded-v2026-02-01"
+            ["src/api.v2026-06-15.yaml"]="gusto-embedded-v2026-06-15"
+          )
+          declare -A TARGET_TO_DIR=(
             ["gusto-embedded"]="gusto_embedded"
             ["gusto-embedded-v2025-11-15"]="gusto_embedded_v_2025_11_15"
             ["gusto-embedded-v2026-02-01"]="gusto_embedded_v_2026_02_01"
             ["gusto-embedded-v2026-06-15"]="gusto_embedded_v_2026_06_15"
           )
-          DIR="${TARGET_MAP[${{ inputs.target }}]}"
-          echo "dir=${DIR}" >> "$GITHUB_OUTPUT"
+
+          ALL_TARGETS=false
+          if echo "$CHANGED_FILES" | grep -q "^\.speakeasy/speakeasy-modifications-overlay\.yaml$"; then
+            echo "Overlay file changed — all targets will be regenerated"
+            ALL_TARGETS=true
+          fi
+
+          TARGETS=()
+          DIRS=()
+          for SPEC in "${!SPEC_TO_TARGET[@]}"; do
+            TARGET="${SPEC_TO_TARGET[$SPEC]}"
+            DIR="${TARGET_TO_DIR[$TARGET]}"
+            if [ "$ALL_TARGETS" = true ] || echo "$CHANGED_FILES" | grep -q "^${SPEC}$"; then
+              TARGETS+=("$TARGET")
+              DIRS+=("$DIR")
+              echo "Target: ${TARGET} (${DIR})"
+            fi
+          done
+
+          if [ ${#TARGETS[@]} -eq 0 ]; then
+            echo "No spec changes detected between main and ${{ inputs.partner_api_branch }}"
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          printf '%s\n' "${TARGETS[@]}" > /tmp/changed_targets.txt
+          printf '%s\n' "${DIRS[@]}" > /tmp/changed_dirs.txt
+        env:
+          OPENAPI_DOC_AUTH_TOKEN: ${{ secrets.OPENAPI_DOC_AUTH_TOKEN }}
 
       - name: Point sources at Partner API branch
+        if: steps.detect.outputs.has_changes == 'true'
         run: |
           sed -i \
             "s|refs/heads/main|refs/heads/${{ inputs.partner_api_branch }}|g" \
             .speakeasy/workflow.yaml
           echo "--- Modified sources ---"
-          grep "location:" .speakeasy/workflow.yaml | head -4
+          grep "location:" .speakeasy/workflow.yaml
 
-      - name: Run Speakeasy generation
-        run: speakeasy run --target=${{ inputs.target }}
+      - name: Generate and publish RCs
+        if: steps.detect.outputs.has_changes == 'true'
+        run: |
+          paste /tmp/changed_targets.txt /tmp/changed_dirs.txt | while IFS=$'\t' read -r TARGET DIR; do
+            echo "::group::${TARGET} (${DIR})"
+
+            speakeasy run --target="${TARGET}"
+
+            cd "${DIR}"
+            CURRENT=$(npm pkg get version | tr -d '"')
+            IFS='.' read -r MAJOR MINOR PATCH <<< "${CURRENT}"
+            NEXT_MINOR="${MAJOR}.$((MINOR + 1)).0"
+            PKG_NAME=$(npm pkg get name | tr -d '"')
+
+            LATEST_RC=$(npm view "${PKG_NAME}" versions --json 2>/dev/null \
+              | jq -r --arg prefix "${NEXT_MINOR}-rc." \
+                '[.[] | select(startswith($prefix))] | last // empty')
+
+            if [ -z "$LATEST_RC" ]; then
+              RC_NUM=1
+            else
+              RC_NUM=$(echo "$LATEST_RC" | grep -oP 'rc\.\K\d+')
+              RC_NUM=$((RC_NUM + 1))
+            fi
+
+            RC_VERSION="${NEXT_MINOR}-rc.${RC_NUM}"
+            echo "Current: ${CURRENT} -> RC: ${RC_VERSION}"
+            npm version "${RC_VERSION}" --no-git-tag-version
+            npm install --ignore-scripts
+            npm publish --tag rc --access public
+            cd ..
+
+            echo "::endgroup::"
+          done
         env:
           SPEAKEASY_API_KEY: ${{ secrets.SPEAKEASY_API_KEY }}
           SPEAKEASY_SERVER_URL: https://app.speakeasyapi.dev
           OPENAPI_DOC_AUTH_TOKEN: ${{ secrets.OPENAPI_DOC_AUTH_TOKEN }}
-
-      - name: Compute RC version and publish
-        working-directory: ${{ steps.target-info.outputs.dir }}
-        run: |
-          CURRENT=$(npm pkg get version | tr -d '"')
-          IFS='.' read -r MAJOR MINOR PATCH <<< "${CURRENT}"
-          RC_VERSION="${MAJOR}.$((MINOR + 1)).0-rc.${{ inputs.rc_number }}"
-          echo "Current: ${CURRENT} -> RC: ${RC_VERSION}"
-          npm version "${RC_VERSION}" --no-git-tag-version
-          npm install --ignore-scripts
-          npm publish --tag rc --access public
-        env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Summary
+        if: always()
         run: |
-          DIR="${{ steps.target-info.outputs.dir }}"
-          PKG_NAME=$(cd "${DIR}" && npm pkg get name | tr -d '"')
-          PKG_VERSION=$(cd "${DIR}" && npm pkg get version | tr -d '"')
+          if [ "${{ steps.detect.outputs.has_changes }}" != "true" ]; then
+            echo "## No Changes Detected" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "No spec file differences found between \`main\` and \`${{ inputs.partner_api_branch }}\`." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
           echo "## RC Published" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "| Field | Value |" >> "$GITHUB_STEP_SUMMARY"
-          echo "|-------|-------|" >> "$GITHUB_STEP_SUMMARY"
-          echo "| Package | \`${PKG_NAME}\` |" >> "$GITHUB_STEP_SUMMARY"
-          echo "| Version | \`${PKG_VERSION}\` |" >> "$GITHUB_STEP_SUMMARY"
-          echo "| Source branch | \`${{ inputs.partner_api_branch }}\` |" >> "$GITHUB_STEP_SUMMARY"
-          echo "| Install | \`npm install ${PKG_NAME}@rc\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Package | Version | Install |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|---------|---------|---------|" >> "$GITHUB_STEP_SUMMARY"
+          while IFS= read -r DIR; do
+            PKG_NAME=$(cd "${DIR}" && npm pkg get name | tr -d '"')
+            PKG_VERSION=$(cd "${DIR}" && npm pkg get version | tr -d '"')
+            echo "| \`${PKG_NAME}\` | \`${PKG_VERSION}\` | \`npm install ${PKG_NAME}@rc\` |" >> "$GITHUB_STEP_SUMMARY"
+          done < /tmp/changed_dirs.txt
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Source branch:** \`${{ inputs.partner_api_branch }}\`" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: No changes detected
+        if: steps.detect.outputs.has_changes != 'true'
+        run: |
+          echo "::error::No spec changes detected between main and ${{ inputs.partner_api_branch }}"
+          exit 1
