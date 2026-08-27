@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { WarningObject, WarningObject$inboundSchema } from "./warningobject.js";
 
 /**
  * The representation of an address in Gusto.
@@ -58,6 +59,10 @@ export type Location = {
    * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
    */
   inactive?: boolean | undefined;
+  /**
+   * An array of warning objects that provide additional information about the address. Warnings do not prevent the address from being saved.
+   */
+  warnings?: Array<WarningObject> | undefined;
 };
 
 /** @internal */
@@ -82,6 +87,7 @@ export const Location$inboundSchema: z.ZodType<
   updated_at: z.string().optional(),
   active: z.boolean().optional(),
   inactive: z.boolean().optional(),
+  warnings: z.array(WarningObject$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

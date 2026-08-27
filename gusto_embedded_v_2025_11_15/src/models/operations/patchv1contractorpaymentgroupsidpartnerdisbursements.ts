@@ -39,6 +39,8 @@ export const PatchV1ContractorPaymentGroupsIdPartnerDisbursementsPaymentMethod =
   {
     DirectDeposit: "Direct Deposit",
     Check: "Check",
+    HistoricalPayment: "Historical Payment",
+    CorrectionPayment: "Correction Payment",
   } as const;
 /**
  * Payment method for the contractor

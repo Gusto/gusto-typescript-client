@@ -152,20 +152,12 @@ import { GustoEmbedded } from "@gusto/embedded-api-v-2025-11-15";
 const gustoEmbedded = new GustoEmbedded();
 
 async function run() {
-  const result = await gustoEmbedded.companies.createPartnerManaged({
-    systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
-  }, {
-    partnerManagedCompanyCreateRequest: {
-      user: {
-        firstName: "Marco",
-        lastName: "Trantow",
-        email: "Jewell_Greenholt72@hotmail.com",
-      },
-      company: {
-        name: "<value>",
-      },
-    },
-  });
+  const result = await gustoEmbedded.companies
+    .putV1PartnerManagedCompaniesCompanyUuidDisassociate({
+      systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
+    }, {
+      companyUuid: "<id>",
+    });
 
   console.log(result);
 }
@@ -202,6 +194,7 @@ run();
 * [getCustomFields](docs/sdks/companies/README.md#getcustomfields) - Get the custom fields of a company
 * [getOnboardingStatus](docs/sdks/companies/README.md#getonboardingstatus) - Get company onboarding status
 * [finishOnboarding](docs/sdks/companies/README.md#finishonboarding) - Finish company onboarding
+* [putV1PartnerManagedCompaniesCompanyUuidDisassociate](docs/sdks/companies/README.md#putv1partnermanagedcompaniescompanyuuiddisassociate) - Disassociate a partner managed company
 * [migrate](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
 * [createPartnerManaged](docs/sdks/companies/README.md#createpartnermanaged) - Create a partner managed company
 * [getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness](docs/sdks/companies/README.md#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
@@ -601,6 +594,10 @@ run();
 * [getReportsRequestUuid](docs/sdks/reports/README.md#getreportsrequestuuid) - Get a report
 * [getTemplate](docs/sdks/reports/README.md#gettemplate) - Get a report template
 
+### [ReverseWireTransactions](docs/sdks/reversewiretransactions/README.md)
+
+* [getReverseWireTransactions](docs/sdks/reversewiretransactions/README.md#getreversewiretransactions) - Get all reverse wire transactions for a company
+
 ### [SalaryEstimates](docs/sdks/salaryestimates/README.md)
 
 * [postV1EmployeesEmployeeIdSalaryEstimates](docs/sdks/salaryestimates/README.md#postv1employeesemployeeidsalaryestimates) - Create a salary estimate for an employee
@@ -616,6 +613,11 @@ run();
 * [invite](docs/sdks/signatories/README.md#invite) - Invite a signatory
 * [update](docs/sdks/signatories/README.md#update) - Update a signatory
 * [delete](docs/sdks/signatories/README.md#delete) - Delete a signatory
+
+### [TaxPayments](docs/sdks/taxpayments/README.md)
+
+* [getTaxPayments](docs/sdks/taxpayments/README.md#gettaxpayments) - Get all tax payments for a company
+* [getTaxPayment](docs/sdks/taxpayments/README.md#gettaxpayment) - Get a tax payment for a company
 
 ### [TaxRequirements](docs/sdks/taxrequirements/README.md)
 
@@ -698,6 +700,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`companiesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness`](docs/sdks/companies/README.md#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
 - [`companiesListAdmins`](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
 - [`companiesMigrate`](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
+- [`companiesPutV1PartnerManagedCompaniesCompanyUuidDisassociate`](docs/sdks/companies/README.md#putv1partnermanagedcompaniescompanyuuiddisassociate) - Disassociate a partner managed company
 - [`companiesRetrieveTermsOfService`](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for a company user
 - [`companiesSuspensionsGet`](docs/sdks/suspensions/README.md#get) - Get suspensions for this company
 - [`companiesSuspensionsSuspend`](docs/sdks/suspensions/README.md#suspend) - Suspend a company's account
@@ -949,6 +952,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`reportsPostPayrollsPayrollUuidReportsGeneralLedger`](docs/sdks/reports/README.md#postpayrollspayrolluuidreportsgeneralledger) - Create a general ledger report
 - [`reportsPostV1BulkReports`](docs/sdks/reports/README.md#postv1bulkreports) - Create a bulk report batch
 - [`reportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage`](docs/sdks/reports/README.md#postv1companiescompanyidreportsemployeesannualficawage) - Create an employees annual FICA wage report
+- [`reverseWireTransactionsGetReverseWireTransactions`](docs/sdks/reversewiretransactions/README.md#getreversewiretransactions) - Get all reverse wire transactions for a company
 - [`salaryEstimatesGetV1SalaryEstimatesId`](docs/sdks/salaryestimates/README.md#getv1salaryestimatesid) - Get a salary estimate
 - [`salaryEstimatesGetV1SalaryEstimatesOccupations`](docs/sdks/salaryestimates/README.md#getv1salaryestimatesoccupations) - Search for BLS occupations
 - [`salaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimates`](docs/sdks/salaryestimates/README.md#postv1employeesemployeeidsalaryestimates) - Create a salary estimate for an employee
@@ -959,6 +963,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`signatoriesInvite`](docs/sdks/signatories/README.md#invite) - Invite a signatory
 - [`signatoriesList`](docs/sdks/signatories/README.md#list) - Get the signatories for a company
 - [`signatoriesUpdate`](docs/sdks/signatories/README.md#update) - Update a signatory
+- [`taxPaymentsGetTaxPayment`](docs/sdks/taxpayments/README.md#gettaxpayment) - Get a tax payment for a company
+- [`taxPaymentsGetTaxPayments`](docs/sdks/taxpayments/README.md#gettaxpayments) - Get all tax payments for a company
 - [`taxRequirementsGet`](docs/sdks/taxrequirements/README.md#get) - Get tax requirements for a state
 - [`taxRequirementsGetAll`](docs/sdks/taxrequirements/README.md#getall) - Get all tax requirements for a company
 - [`taxRequirementsUpdateState`](docs/sdks/taxrequirements/README.md#updatestate) - Update tax requirements for a state
@@ -1033,6 +1039,7 @@ To learn about this feature and how to get started, check
 - [`useCompaniesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness`](docs/sdks/companies/README.md#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
 - [`useCompaniesListAdmins`](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
 - [`useCompaniesMigrateMutation`](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
+- [`useCompaniesPutV1PartnerManagedCompaniesCompanyUuidDisassociateMutation`](docs/sdks/companies/README.md#putv1partnermanagedcompaniescompanyuuiddisassociate) - Disassociate a partner managed company
 - [`useCompaniesRetrieveTermsOfServiceMutation`](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for a company user
 - [`useCompaniesSuspensionsGet`](docs/sdks/suspensions/README.md#get) - Get suspensions for this company
 - [`useCompaniesSuspensionsSuspendMutation`](docs/sdks/suspensions/README.md#suspend) - Suspend a company's account
@@ -1284,6 +1291,7 @@ To learn about this feature and how to get started, check
 - [`useReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutation`](docs/sdks/reports/README.md#postpayrollspayrolluuidreportsgeneralledger) - Create a general ledger report
 - [`useReportsPostV1BulkReportsMutation`](docs/sdks/reports/README.md#postv1bulkreports) - Create a bulk report batch
 - [`useReportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageMutation`](docs/sdks/reports/README.md#postv1companiescompanyidreportsemployeesannualficawage) - Create an employees annual FICA wage report
+- [`useReverseWireTransactionsGetReverseWireTransactions`](docs/sdks/reversewiretransactions/README.md#getreversewiretransactions) - Get all reverse wire transactions for a company
 - [`useSalaryEstimatesGetV1SalaryEstimatesId`](docs/sdks/salaryestimates/README.md#getv1salaryestimatesid) - Get a salary estimate
 - [`useSalaryEstimatesGetV1SalaryEstimatesOccupations`](docs/sdks/salaryestimates/README.md#getv1salaryestimatesoccupations) - Search for BLS occupations
 - [`useSalaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimatesMutation`](docs/sdks/salaryestimates/README.md#postv1employeesemployeeidsalaryestimates) - Create a salary estimate for an employee
@@ -1294,6 +1302,8 @@ To learn about this feature and how to get started, check
 - [`useSignatoriesInviteMutation`](docs/sdks/signatories/README.md#invite) - Invite a signatory
 - [`useSignatoriesList`](docs/sdks/signatories/README.md#list) - Get the signatories for a company
 - [`useSignatoriesUpdateMutation`](docs/sdks/signatories/README.md#update) - Update a signatory
+- [`useTaxPaymentsGetTaxPayment`](docs/sdks/taxpayments/README.md#gettaxpayment) - Get a tax payment for a company
+- [`useTaxPaymentsGetTaxPayments`](docs/sdks/taxpayments/README.md#gettaxpayments) - Get all tax payments for a company
 - [`useTaxRequirementsGet`](docs/sdks/taxrequirements/README.md#get) - Get tax requirements for a state
 - [`useTaxRequirementsGetAll`](docs/sdks/taxrequirements/README.md#getall) - Get all tax requirements for a company
 - [`useTaxRequirementsUpdateStateMutation`](docs/sdks/taxrequirements/README.md#updatestate) - Update tax requirements for a state
@@ -1503,13 +1513,13 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityError`](./src/models/errors/unprocessableentityerror.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 169 of 309 methods.*
-* [`ConflictErrorObject`](./src/models/errors/conflicterrorobject.ts): Conflict    This error occurs when the resource version provided does not match the current version. Retrieve the latest version and retry. Status code `409`. Applicable to 2 of 309 methods.*
-* [`ForbiddenErrorObject`](./src/models/errors/forbiddenerrorobject.ts): Forbidden    The targeted company has been archived because its EIN was reassigned to a replacement company. Use the replacement company referenced in the error metadata. Status code `403`. Applicable to 1 of 309 methods.*
-* [`PayrollBatchConflictError`](./src/models/errors/payrollbatchconflicterror.ts): Error response when a payroll cancellation idempotency key has already been used by the same partner. Status code `409`. Applicable to 1 of 309 methods.*
-* [`PayrollDigestConflictError`](./src/models/errors/payrolldigestconflicterror.ts): Error response when a payroll digest idempotency key has already been used by the same partner. Status code `409`. Applicable to 1 of 309 methods.*
-* [`PeopleBatchConflictError`](./src/models/errors/peoplebatchconflicterror.ts): Error response when a people batch idempotency key conflict occurs. Status code `409`. Applicable to 1 of 309 methods.*
-* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 1 of 309 methods.*
+* [`UnprocessableEntityError`](./src/models/errors/unprocessableentityerror.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 171 of 313 methods.*
+* [`ConflictErrorObject`](./src/models/errors/conflicterrorobject.ts): Conflict    This may happen when the resource version provided does not match the current version — retrieve the latest version and retry — or when the request conflicts with another in-progress operation on the same resource. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `409`. Applicable to 3 of 313 methods.*
+* [`ForbiddenErrorObject`](./src/models/errors/forbiddenerrorobject.ts): Forbidden    The targeted company has been archived because its EIN was reassigned to a replacement company. Use the replacement company referenced in the error metadata. Status code `403`. Applicable to 1 of 313 methods.*
+* [`PayrollBatchConflictError`](./src/models/errors/payrollbatchconflicterror.ts): Error response when a payroll cancellation idempotency key has already been used by the same partner. Status code `409`. Applicable to 1 of 313 methods.*
+* [`PayrollDigestConflictError`](./src/models/errors/payrolldigestconflicterror.ts): Error response when a payroll digest idempotency key has already been used by the same partner. Status code `409`. Applicable to 1 of 313 methods.*
+* [`PeopleBatchConflictError`](./src/models/errors/peoplebatchconflicterror.ts): Error response when a people batch idempotency key conflict occurs. Status code `409`. Applicable to 1 of 313 methods.*
+* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 1 of 313 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

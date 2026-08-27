@@ -8,6 +8,7 @@ import { ClosedEnum } from "../../types/enums.js";
 import { RFCDate } from "../../types/rfcdate.js";
 
 export const CreateReportBodyColumns = {
+  AdditionalEarnings: "additional_earnings",
   BankAccountAccountNumber: "bank_account_account_number",
   BankAccountRoutingNumber: "bank_account_routing_number",
   BankAccountType: "bank_account_type",
@@ -37,6 +38,7 @@ export const CreateReportBodyColumns = {
   EmployeeMedicareTax: "employee_medicare_tax",
   EmployeePhoneNumber: "employee_phone_number",
   EmployeeSocialSecurityTax: "employee_social_security_tax",
+  EmployeeStateIncomeTax: "employee_state_income_tax",
   EmployeeTaxes: "employee_taxes",
   EmployeeUuid: "employee_uuid",
   EmployeeWorkEmail: "employee_work_email",

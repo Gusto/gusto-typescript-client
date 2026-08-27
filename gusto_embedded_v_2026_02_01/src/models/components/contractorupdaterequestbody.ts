@@ -79,6 +79,10 @@ export type ContractorUpdateRequestBody = {
    */
   email?: string | undefined;
   /**
+   * The work email address of the contractor. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
+   */
+  workEmail?: string | undefined;
+  /**
    * The contractor’s first name.
    *
    * @remarks
@@ -158,6 +162,7 @@ export type ContractorUpdateRequestBody$Outbound = {
   hourly_rate?: string | undefined;
   self_onboarding: boolean;
   email?: string | undefined;
+  work_email?: string | undefined;
   first_name?: string | undefined;
   last_name?: string | undefined;
   middle_initial?: string | undefined;
@@ -182,6 +187,7 @@ export const ContractorUpdateRequestBody$outboundSchema: z.ZodType<
   hourlyRate: z.string().optional(),
   selfOnboarding: z.boolean().default(false),
   email: z.string().optional(),
+  workEmail: z.string().optional(),
   firstName: z.string().optional(),
   lastName: z.string().optional(),
   middleInitial: z.string().optional(),
@@ -197,6 +203,7 @@ export const ContractorUpdateRequestBody$outboundSchema: z.ZodType<
     startDate: "start_date",
     hourlyRate: "hourly_rate",
     selfOnboarding: "self_onboarding",
+    workEmail: "work_email",
     firstName: "first_name",
     lastName: "last_name",
     middleInitial: "middle_initial",

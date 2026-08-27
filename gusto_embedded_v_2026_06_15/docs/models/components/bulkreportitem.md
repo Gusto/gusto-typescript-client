@@ -12,7 +12,7 @@ const value: components.BulkReportCustomReportItem = {
   companyUuid: "12345678-abcd-ef12-3456-7890abcdef12",
   reportType: "custom_report",
   columns: [
-    "gross_earnings",
+    "garnishments",
   ],
   fileType: "csv",
   startDate: new RFCDate("2026-01-01"),

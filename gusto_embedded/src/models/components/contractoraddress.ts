@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { WarningObject, WarningObject$inboundSchema } from "./warningobject.js";
 
 export type ContractorAddress = {
   /**
@@ -27,6 +28,10 @@ export type ContractorAddress = {
    * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
    */
   version?: string | undefined;
+  /**
+   * An array of warning objects that provide additional information about the address. Warnings do not prevent the address from being saved.
+   */
+  warnings?: Array<WarningObject> | undefined;
 };
 
 /** @internal */
@@ -44,6 +49,7 @@ export const ContractorAddress$inboundSchema: z.ZodType<
   country: z.nullable(z.string().default("USA")),
   active: z.boolean().optional(),
   version: z.string().optional(),
+  warnings: z.array(WarningObject$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "contractor_uuid": "contractorUuid",

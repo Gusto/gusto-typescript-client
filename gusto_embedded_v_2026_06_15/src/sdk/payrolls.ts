@@ -358,7 +358,8 @@ export class Payrolls extends ClientSDK {
    * * Hour and dollar amounts are returned as string representations of numeric decimals.
    * * Dollar amounts are represented to the cent.
    * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
-   * * Results are paginated. Maximum page size is 100 employee compensations per request.
+   * * Employee compensations are always paginated. Maximum page size is 100 employee compensations per request.
+   * * Responses include the `X-Page`, `X-Total-Count`, `X-Total-Pages`, and `X-Per-Page` pagination headers.
    *
    * scope: `payrolls:read`
    */
@@ -399,7 +400,7 @@ export class Payrolls extends ClientSDK {
    * Prepare a payroll for update
    *
    * @remarks
-   * Prepares an unprocessed payroll for update, including: adding or removing eligible employees from the payroll,
+   * Prepares an unprocessed payroll for update, including: adding eligible employees to off-cycle payrolls that support multiple employees (`Bonus`, `Correction`, and `Adhoc`),
    * and updating `check_date`, `payroll_deadline`, and `payroll_status_meta` dates and times.
    *
    * Use this endpoint before calling [PUT /v1/companies/{company_id}/payrolls/{payroll_id}](ref:put-v1-companies-company_id-payrolls).

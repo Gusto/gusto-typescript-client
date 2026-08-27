@@ -1208,6 +1208,8 @@ Notes:
 * Hour and dollar amounts are returned as string representations of numeric decimals.
 * Dollar amounts are represented to the cent.
 * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+* Pagination is optional. Supplying `page` and/or `per` returns only the requested page of employee compensations and includes the `X-Page`, `X-Total-Count`, `X-Total-Pages`, and `X-Per-Page` response headers. Without either parameter, all employee compensations are returned without pagination headers.
+* Maximum page size is 100 employee compensations per request.
 
 scope: `payrolls:read`
 
@@ -1410,7 +1412,7 @@ import {
 
 ## prepare
 
-Prepares an unprocessed payroll for update, including: adding or removing eligible employees from the payroll,
+Prepares an unprocessed payroll for update, including: adding eligible employees to off-cycle payrolls that support multiple employees (`Bonus`, `Correction`, and `Adhoc`),
 and updating `check_date`, `payroll_deadline`, and `payroll_status_meta` dates and times.
 
 Use this endpoint before calling [PUT /v1/companies/{company_id}/payrolls/{payroll_id}](ref:put-v1-companies-company_id-payrolls).
@@ -1819,6 +1821,7 @@ import {
 | Error Type                  | Status Code                 | Content Type                |
 | --------------------------- | --------------------------- | --------------------------- |
 | errors.NotFoundErrorObject  | 404                         | application/json            |
+| errors.ConflictErrorObject  | 409                         | application/json            |
 | errors.PayrollBlockersError | 422                         | application/json            |
 | errors.APIError             | 4XX, 5XX                    | \*/\*                       |
 

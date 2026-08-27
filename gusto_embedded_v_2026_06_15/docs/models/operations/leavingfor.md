@@ -11,11 +11,11 @@ The competitor the company is switching to. Required if `reason` is `'switching_
 ```typescript
 import { LeavingFor } from "@gusto/embedded-api-v-2026-06-15/models/operations/postcompaniescompanyuuidsuspensions.js";
 
-let value: LeavingFor = "rippling";
+let value: LeavingFor = "square";
 ```
 
 ## Values
 
 ```typescript
-"accountant" | "adp" | "adp_total_source" | "bamboo_hr" | "bank_or_financial_institution" | "check" | "deel" | "gusto_com" | "homebase" | "insperity" | "intuit_or_quickbooks" | "justworks" | "manual" | "namely" | "onpay" | "other" | "oyster" | "patriot" | "paychex" | "paycom" | "paylocity" | "remote" | "rippling" | "square" | "surepayroll" | "trinet" | "velocity_global" | "zenefits"
+"accountant" | "adp" | "adp_total_source" | "bamboo_hr" | "bank_or_financial_institution" | "check" | "deel" | "gusto_com" | "homebase" | "insperity" | "intuit_or_quickbooks" | "justworks" | "manual" | "namely" | "onpay" | "other" | "other_peo" | "oyster" | "patriot" | "paychex" | "paycom" | "paylocity" | "remote" | "rippling" | "square" | "surepayroll" | "toast" | "trinet" | "velocity_global" | "zenefits"
 ```
