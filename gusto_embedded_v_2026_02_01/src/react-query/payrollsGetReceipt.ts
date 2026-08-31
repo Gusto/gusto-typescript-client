@@ -65,6 +65,8 @@ export type PayrollsGetReceiptQueryError =
  * * Hour and dollar amounts are returned as string representations of numeric decimals.
  * * Dollar amounts are represented to the cent.
  * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+ * * Pagination is optional. Supplying `page` and/or `per` returns only the requested page of employee compensations and includes the `X-Page`, `X-Total-Count`, `X-Total-Pages`, and `X-Per-Page` response headers. Without either parameter, all employee compensations are returned without pagination headers.
+ * * Maximum page size is 100 employee compensations per request.
  *
  * scope: `payrolls:read`
  */
@@ -96,6 +98,8 @@ export function usePayrollsGetReceipt(
  * * Hour and dollar amounts are returned as string representations of numeric decimals.
  * * Dollar amounts are represented to the cent.
  * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+ * * Pagination is optional. Supplying `page` and/or `per` returns only the requested page of employee compensations and includes the `X-Page`, `X-Total-Count`, `X-Total-Pages`, and `X-Per-Page` response headers. Without either parameter, all employee compensations are returned without pagination headers.
+ * * Maximum page size is 100 employee compensations per request.
  *
  * scope: `payrolls:read`
  */
@@ -128,6 +132,8 @@ export function setPayrollsGetReceiptData(
       xGustoAPIVersion?:
         | GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion
         | undefined;
+      page?: number | undefined;
+      per?: number | undefined;
     },
   ],
   data: PayrollsGetReceiptQueryData,
@@ -146,6 +152,8 @@ export function invalidatePayrollsGetReceipt(
         xGustoAPIVersion?:
           | GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion
           | undefined;
+        page?: number | undefined;
+        per?: number | undefined;
       },
     ]
   >,

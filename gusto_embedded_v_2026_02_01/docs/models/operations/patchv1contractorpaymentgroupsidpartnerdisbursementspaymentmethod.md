@@ -8,11 +8,11 @@ Payment method for the contractor
 import { PatchV1ContractorPaymentGroupsIdPartnerDisbursementsPaymentMethod } from "@gusto/embedded-api-v-2026-02-01/models/operations/patchv1contractorpaymentgroupsidpartnerdisbursements.js";
 
 let value: PatchV1ContractorPaymentGroupsIdPartnerDisbursementsPaymentMethod =
-  "Check";
+  "Historical Payment";
 ```
 
 ## Values
 
 ```typescript
-"Direct Deposit" | "Check"
+"Direct Deposit" | "Check" | "Historical Payment" | "Correction Payment"
 ```

@@ -42,6 +42,14 @@ export type GetV1PaymentReceiptsPayrollsPayrollUuidRequest = {
    * The UUID of the payroll
    */
   payrollUuid: string;
+  /**
+   * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+   */
+  page?: number | undefined;
+  /**
+   * Number of objects per page. For majority of endpoints will default to 25
+   */
+  per?: number | undefined;
 };
 
 export type GetV1PaymentReceiptsPayrollsPayrollUuidResponse = {
@@ -64,6 +72,8 @@ export const GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion$outbo
 export type GetV1PaymentReceiptsPayrollsPayrollUuidRequest$Outbound = {
   "X-Gusto-API-Version": string;
   payroll_uuid: string;
+  page?: number | undefined;
+  per?: number | undefined;
 };
 
 /** @internal */
@@ -77,6 +87,8 @@ export const GetV1PaymentReceiptsPayrollsPayrollUuidRequest$outboundSchema:
       GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion$outboundSchema
         .default("2026-02-01"),
     payrollUuid: z.string(),
+    page: z.number().int().optional(),
+    per: z.number().int().optional(),
   }).transform((v) => {
     return remap$(v, {
       xGustoAPIVersion: "X-Gusto-API-Version",

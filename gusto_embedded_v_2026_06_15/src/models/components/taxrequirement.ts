@@ -58,6 +58,20 @@ export type TaxRequirement = {
    * Whether the value of this requirement can be updated
    */
   editable?: boolean | undefined;
+  /**
+   * Whether this requirement, when blank, would block payroll processing for the company in this state.
+   *
+   * @remarks
+   * Stable across changes to the field's value: a `payroll_blocking: true` field reports `true` whether
+   * currently empty or populated.
+   */
+  payrollBlocking?: boolean | undefined;
+  /**
+   * Whether the current `value` is a default rather than an explicitly set one.
+   *
+   * @remarks
+   */
+  defaultValueApplied?: boolean | undefined;
 };
 
 /** @internal */
@@ -110,9 +124,13 @@ export const TaxRequirement$inboundSchema: z.ZodType<
   value: z.nullable(TaxRequirementsValue$inboundSchema).optional(),
   metadata: TaxRequirementMetadata$inboundSchema.optional(),
   editable: z.boolean().optional(),
+  payroll_blocking: z.boolean().optional(),
+  default_value_applied: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "applicable_if": "applicableIf",
+    "payroll_blocking": "payrollBlocking",
+    "default_value_applied": "defaultValueApplied",
   });
 });
 

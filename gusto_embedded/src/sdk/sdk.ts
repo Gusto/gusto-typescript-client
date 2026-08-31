@@ -53,8 +53,10 @@ import { PeopleBatches } from "./peoplebatches.js";
 import { RecoveryCases } from "./recoverycases.js";
 import { Reimbursements } from "./reimbursements.js";
 import { Reports } from "./reports.js";
+import { ReverseWireTransactions } from "./reversewiretransactions.js";
 import { SalaryEstimates } from "./salaryestimates.js";
 import { Signatories } from "./signatories.js";
+import { TaxPayments } from "./taxpayments.js";
 import { TaxRequirements } from "./taxrequirements.js";
 import { TimeOffPolicies } from "./timeoffpolicies.js";
 import { TimeOffRequests } from "./timeoffrequests.js";
@@ -341,6 +343,13 @@ export class GustoEmbedded extends ClientSDK {
     return (this._reimbursements ??= new Reimbursements(this._options));
   }
 
+  private _reverseWireTransactions?: ReverseWireTransactions;
+  get reverseWireTransactions(): ReverseWireTransactions {
+    return (this._reverseWireTransactions ??= new ReverseWireTransactions(
+      this._options,
+    ));
+  }
+
   private _salaryEstimates?: SalaryEstimates;
   get salaryEstimates(): SalaryEstimates {
     return (this._salaryEstimates ??= new SalaryEstimates(this._options));
@@ -349,6 +358,11 @@ export class GustoEmbedded extends ClientSDK {
   private _signatories?: Signatories;
   get signatories(): Signatories {
     return (this._signatories ??= new Signatories(this._options));
+  }
+
+  private _taxPayments?: TaxPayments;
+  get taxPayments(): TaxPayments {
+    return (this._taxPayments ??= new TaxPayments(this._options));
   }
 
   private _timeOffRequests?: TimeOffRequests;

@@ -29,7 +29,7 @@ export type ConflictErrorObjectErrors = {
  *
  * @remarks
  *
- * This error occurs when the resource version provided does not match the current version. Retrieve the latest version and retry.
+ * This may happen when the resource version provided does not match the current version — retrieve the latest version and retry — or when the request conflicts with another in-progress operation on the same resource. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
  */
 export type ConflictErrorObjectData = {
   errors: Array<ConflictErrorObjectErrors>;
@@ -40,7 +40,7 @@ export type ConflictErrorObjectData = {
  *
  * @remarks
  *
- * This error occurs when the resource version provided does not match the current version. Retrieve the latest version and retry.
+ * This may happen when the resource version provided does not match the current version — retrieve the latest version and retry — or when the request conflicts with another in-progress operation on the same resource. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
  */
 export class ConflictErrorObject extends GustoEmbeddedError {
   errors: Array<ConflictErrorObjectErrors>;

@@ -11,6 +11,7 @@
 * [getCustomFields](#getcustomfields) - Get the custom fields of a company
 * [getOnboardingStatus](#getonboardingstatus) - Get company onboarding status
 * [finishOnboarding](#finishonboarding) - Finish company onboarding
+* [putV1PartnerManagedCompaniesCompanyUuidDisassociate](#putv1partnermanagedcompaniescompanyuuiddisassociate) - Disassociate a partner managed company
 * [migrate](#migrate) - Migrate company to embedded payroll
 * [createPartnerManaged](#createpartnermanaged) - Create a partner managed company
 * [getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness](#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
@@ -747,6 +748,105 @@ import {
 ### Response
 
 **Promise\<[operations.GetV1CompanyFinishOnboardingResponse](../../models/operations/getv1companyfinishonboardingresponse.md)\>**
+
+### Errors
+
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
+
+## putV1PartnerManagedCompaniesCompanyUuidDisassociate
+
+Disassociate a company from your embedded payroll product, reversing an earlier association or migration. You can only disassociate a company that is currently associated with your application.
+
+📘 System Access Authentication
+
+This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+
+scope: `partner_managed_companies:disassociate`
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-partner-managed-companies-company-uuid-disassociate" method="put" path="/v1/partner_managed_companies/{company_uuid}/disassociate" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api-v-2026-02-01";
+
+const gustoEmbedded = new GustoEmbedded();
+
+async function run() {
+  const result = await gustoEmbedded.companies.putV1PartnerManagedCompaniesCompanyUuidDisassociate({
+    systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
+  }, {
+    companyUuid: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-02-01/core.js";
+import { companiesPutV1PartnerManagedCompaniesCompanyUuidDisassociate } from "@gusto/embedded-api-v-2026-02-01/funcs/companiesPutV1PartnerManagedCompaniesCompanyUuidDisassociate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore();
+
+async function run() {
+  const res = await companiesPutV1PartnerManagedCompaniesCompanyUuidDisassociate(gustoEmbedded, {
+    systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
+  }, {
+    companyUuid: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companiesPutV1PartnerManagedCompaniesCompanyUuidDisassociate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useCompaniesPutV1PartnerManagedCompaniesCompanyUuidDisassociateMutation
+} from "@gusto/embedded-api-v-2026-02-01/react-query/companiesPutV1PartnerManagedCompaniesCompanyUuidDisassociate.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.PutV1PartnerManagedCompaniesCompanyUuidDisassociateRequest](../../models/operations/putv1partnermanagedcompaniescompanyuuiddisassociaterequest.md)                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `security`                                                                                                                                                                     | [operations.PutV1PartnerManagedCompaniesCompanyUuidDisassociateSecurity](../../models/operations/putv1partnermanagedcompaniescompanyuuiddisassociatesecurity.md)               | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.PutV1PartnerManagedCompaniesCompanyUuidDisassociateResponse](../../models/operations/putv1partnermanagedcompaniescompanyuuiddisassociateresponse.md)\>**
 
 ### Errors
 

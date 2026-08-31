@@ -8,6 +8,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { WarningObject, WarningObject$inboundSchema } from "./warningobject.js";
 
 export type EmployeeAddress = {
   /**
@@ -40,6 +41,10 @@ export type EmployeeAddress = {
    * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
    */
   version: string;
+  /**
+   * An array of warning objects that provide additional information about the address. Warnings do not prevent the address from being saved.
+   */
+  warnings?: Array<WarningObject> | undefined;
 };
 
 /** @internal */
@@ -60,6 +65,7 @@ export const EmployeeAddress$inboundSchema: z.ZodType<
   country: z.string().default("USA"),
   active: z.boolean().optional(),
   version: z.string(),
+  warnings: z.array(WarningObject$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",

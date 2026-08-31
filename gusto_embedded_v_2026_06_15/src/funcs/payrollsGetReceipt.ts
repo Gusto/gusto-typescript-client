@@ -44,7 +44,8 @@ import { Result } from "../types/fp.js";
  * * Hour and dollar amounts are returned as string representations of numeric decimals.
  * * Dollar amounts are represented to the cent.
  * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
- * * Results are paginated. Maximum page size is 100 employee compensations per request.
+ * * Employee compensations are always paginated. Maximum page size is 100 employee compensations per request.
+ * * Responses include the `X-Page`, `X-Total-Count`, `X-Total-Pages`, and `X-Per-Page` pagination headers.
  *
  * scope: `payrolls:read`
  *

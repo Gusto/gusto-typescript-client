@@ -11,6 +11,10 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import {
+  ConflictErrorObject,
+  ConflictErrorObject$inboundSchema,
+} from "../models/errors/conflicterrorobject.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -58,6 +62,7 @@ export function payrollsSkip(
   Result<
     PostCompaniesPayrollSkipCompanyUuidResponse,
     | NotFoundErrorObject
+    | ConflictErrorObject
     | PayrollBlockersError
     | GustoEmbeddedError
     | ResponseValidationError
@@ -85,6 +90,7 @@ async function $do(
     Result<
       PostCompaniesPayrollSkipCompanyUuidResponse,
       | NotFoundErrorObject
+      | ConflictErrorObject
       | PayrollBlockersError
       | GustoEmbeddedError
       | ResponseValidationError
@@ -185,6 +191,7 @@ async function $do(
   const [result] = await M.match<
     PostCompaniesPayrollSkipCompanyUuidResponse,
     | NotFoundErrorObject
+    | ConflictErrorObject
     | PayrollBlockersError
     | GustoEmbeddedError
     | ResponseValidationError
@@ -197,6 +204,7 @@ async function $do(
   >(
     M.nil(202, PostCompaniesPayrollSkipCompanyUuidResponse$inboundSchema),
     M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.jsonErr(409, ConflictErrorObject$inboundSchema),
     M.jsonErr(422, PayrollBlockersError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

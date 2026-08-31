@@ -17,7 +17,7 @@ export type PayScheduleAutoPayrollEnablementBlockerMetadata = {};
  */
 export type PayScheduleAutoPayrollEnablementBlocker = {
   /**
-   * The blocker type (e.g. employees_not_on_direct_deposit, employees_not_salaried, missing_funding_method, missing_state_tax_requirements, one_day_ach_speed_not_supported, company_suspended, earned_fast_ach_not_met).
+   * The blocker type. Possible values: employees_not_on_direct_deposit, employees_not_salaried, missing_state_tax_requirements, missing_funding_method, one_day_ach_speed_not_supported, company_suspended, earned_fast_ach_not_met, hourly_employees_missing_default_hours.
    */
   key?: string | undefined;
   /**
