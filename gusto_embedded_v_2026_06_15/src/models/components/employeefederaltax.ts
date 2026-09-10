@@ -4,6 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
+import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
+import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -20,17 +22,18 @@ import {
  */
 export type EmployeeFederalTax =
   | EmployeeFederalTaxPre2020
-  | EmployeeFederalTaxRev2020;
+  | EmployeeFederalTaxRev2020
+  | discriminatedUnionTypes.Unknown<"w4DataType">;
 
 /** @internal */
 export const EmployeeFederalTax$inboundSchema: z.ZodType<
   EmployeeFederalTax,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  EmployeeFederalTaxPre2020$inboundSchema,
-  EmployeeFederalTaxRev2020$inboundSchema,
-]);
+> = discriminatedUnion("w4_data_type", {
+  pre_2020_w4: EmployeeFederalTaxPre2020$inboundSchema,
+  rev_2020_w4: EmployeeFederalTaxRev2020$inboundSchema,
+}, { outputPropertyName: "w4DataType" });
 
 export function employeeFederalTaxFromJSON(
   jsonString: string,

@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -30,7 +32,7 @@ export const Category = {
  * - `compliance`: A compliance attachment
  * - `other`: Any other attachment type
  */
-export type Category = ClosedEnum<typeof Category>;
+export type Category = OpenEnum<typeof Category>;
 
 /**
  * The company attachment
@@ -60,8 +62,11 @@ export type CompanyAttachment = {
 };
 
 /** @internal */
-export const Category$inboundSchema: z.ZodNativeEnum<typeof Category> = z
-  .nativeEnum(Category);
+export const Category$inboundSchema: z.ZodType<
+  Category,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(Category);
 
 /** @internal */
 export const CompanyAttachment$inboundSchema: z.ZodType<
@@ -69,10 +74,10 @@ export const CompanyAttachment$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  name: z.string(),
+  uuid: types.string(),
+  name: types.string(),
   category: Category$inboundSchema,
-  upload_time: z.string(),
+  upload_time: types.string(),
 }).transform((v) => {
   return remap$(v, {
     "upload_time": "uploadTime",

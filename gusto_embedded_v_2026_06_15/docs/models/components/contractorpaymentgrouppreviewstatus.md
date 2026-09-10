@@ -8,10 +8,12 @@ The status of the contractor payment group.  Will be `Funded` if all payments th
 import { ContractorPaymentGroupPreviewStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/contractorpaymentgrouppreview.js";
 
 let value: ContractorPaymentGroupPreviewStatus = "Unfunded";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"Unfunded" | "Funded"
+"Unfunded" | "Funded" | Unrecognized<string>
 ```

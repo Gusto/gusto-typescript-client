@@ -12,10 +12,12 @@ The current status of the state tax setup.
 import { SetupStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/taxrequirementstateslist.js";
 
 let value: SetupStatus = "complete";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"not_started" | "in_progress" | "complete"
+"not_started" | "in_progress" | "complete" | Unrecognized<string>
 ```

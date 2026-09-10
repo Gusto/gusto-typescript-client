@@ -6,10 +6,9 @@ End of the historical employment period.
 
 ```typescript
 import { HistoricalEmployeeBodyTermination } from "@gusto/embedded-api-v-2026-06-15/models/components/historicalemployeebody.js";
-import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 let value: HistoricalEmployeeBodyTermination = {
-  effectiveDate: new RFCDate("2022-01-01"),
+  effectiveDate: new Date("2022-01-01"),
 };
 ```
 
@@ -17,4 +16,4 @@ let value: HistoricalEmployeeBodyTermination = {
 
 | Field                                                                                                                                            | Type                                                                                                                                             | Required                                                                                                                                         | Description                                                                                                                                      | Example                                                                                                                                          |
 | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `effectiveDate`                                                                                                                                  | [RFCDate](../../types/rfcdate.md)                                                                                                                | :heavy_check_mark:                                                                                                                               | Last day of employment (termination date). This is recorded on the employment; use the calendar date the person stopped working for the company. | 2022-01-01                                                                                                                                       |
+| `effectiveDate`                                                                                                                                  | [Date](../../types/rfcdate.md)                                                                                                                   | :heavy_check_mark:                                                                                                                               | Last day of employment (termination date). This is recorded on the employment; use the calendar date the person stopped working for the company. | 2022-01-01                                                                                                                                       |

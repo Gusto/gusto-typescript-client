@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ContractorPayment,
@@ -71,8 +72,8 @@ export const ContractorPaymentSummaryByDatesTotal$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  reimbursements: z.string().optional(),
-  wages: z.string().optional(),
+  reimbursements: types.optional(types.string()),
+  wages: types.optional(types.string()),
 });
 
 export function contractorPaymentSummaryByDatesTotalFromJSON(
@@ -93,11 +94,11 @@ export const ContractorPaymentSummaryByDatesContractorPayments$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    contractor_uuid: z.string().optional(),
-    check_date: z.string().optional(),
-    reimbursement_total: z.string().optional(),
-    wage_total: z.string().optional(),
-    payments: z.array(ContractorPayment$inboundSchema).optional(),
+    contractor_uuid: types.optional(types.string()),
+    check_date: types.optional(types.string()),
+    reimbursement_total: types.optional(types.string()),
+    wage_total: types.optional(types.string()),
+    payments: types.optional(z.array(ContractorPayment$inboundSchema)),
   }).transform((v) => {
     return remap$(v, {
       "contractor_uuid": "contractorUuid",
@@ -129,13 +130,14 @@ export const ContractorPaymentSummaryByDates$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  total: z.lazy(() => ContractorPaymentSummaryByDatesTotal$inboundSchema)
-    .optional(),
-  contractor_payments: z.array(
-    z.lazy(() =>
+  total: types.optional(
+    z.lazy(() => ContractorPaymentSummaryByDatesTotal$inboundSchema),
+  ),
+  contractor_payments: types.optional(
+    z.array(z.lazy(() =>
       ContractorPaymentSummaryByDatesContractorPayments$inboundSchema
-    ),
-  ).optional(),
+    )),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "contractor_payments": "contractorPayments",

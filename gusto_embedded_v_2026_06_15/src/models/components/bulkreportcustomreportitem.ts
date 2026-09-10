@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { RFCDate } from "../../types/rfcdate.js";
 
 export const Columns = {
   AdditionalEarnings: "additional_earnings",
@@ -214,11 +213,11 @@ export type BulkReportCustomReportItem = {
   /**
    * Start date of data to filter by.
    */
-  startDate?: RFCDate | undefined;
+  startDate?: Date | undefined;
   /**
    * End date of data to filter by.
    */
-  endDate?: RFCDate | undefined;
+  endDate?: Date | undefined;
   /**
    * Payment method to filter by.
    */
@@ -311,8 +310,12 @@ export const BulkReportCustomReportItem$outboundSchema: z.ZodType<
   customName: z.string().optional(),
   withTotals: z.boolean().default(false),
   dateFilterType: DateFilterType$outboundSchema.default("period_end_date"),
-  startDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
-  endDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  startDate: z.date().transform(v =>
+    v.toISOString().slice(0, "YYYY-MM-DD".length)
+  ).optional(),
+  endDate: z.date().transform(v =>
+    v.toISOString().slice(0, "YYYY-MM-DD".length)
+  ).optional(),
   paymentMethod: PaymentMethod$outboundSchema.optional(),
   employmentType: EmploymentType$outboundSchema.optional(),
   employmentStatus: EmploymentStatus$outboundSchema.optional(),

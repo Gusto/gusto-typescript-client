@@ -5,7 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { RFCDate } from "../../types/rfcdate.js";
+import { smartUnion } from "../../types/smartUnion.js";
 
 /**
  * The company contribution scheme.
@@ -195,11 +195,11 @@ export type EmployeeBenefitCreateRequest = {
   /**
    * The date the employee benefit will start. If not provided, the benefit will be effective from 1970-01-01 (unix epoch).
    */
-  effectiveDate?: RFCDate | undefined;
+  effectiveDate?: Date | undefined;
   /**
    * The date the employee benefit will expire. A null value indicates the benefit will not expire.
    */
-  expirationDate?: RFCDate | null | undefined;
+  expirationDate?: Date | null | undefined;
 };
 
 /** @internal */
@@ -243,7 +243,7 @@ export const EmployeeBenefitCreateRequestValue$outboundSchema: z.ZodType<
   EmployeeBenefitCreateRequestValue$Outbound,
   z.ZodTypeDef,
   EmployeeBenefitCreateRequestValue
-> = z.union([
+> = smartUnion([
   z.string(),
   z.array(z.lazy(() => EmployeeBenefitCreateRequestValue2$outboundSchema)),
 ]);
@@ -274,7 +274,7 @@ export const EmployeeBenefitCreateRequestContribution$outboundSchema: z.ZodType<
   EmployeeBenefitCreateRequestContribution
 > = z.object({
   type: EmployeeBenefitCreateRequestType$outboundSchema.optional(),
-  value: z.union([
+  value: smartUnion([
     z.string(),
     z.array(z.lazy(() => EmployeeBenefitCreateRequestValue2$outboundSchema)),
   ]).optional(),
@@ -350,10 +350,12 @@ export const EmployeeBenefitCreateRequest$outboundSchema: z.ZodType<
   ).optional(),
   companyContribution: z.string().default("0.00"),
   contributeAsPercentage: z.boolean().default(false),
-  effectiveDate: z.instanceof(RFCDate).default(() => new RFCDate("1970-01-01"))
-    .transform(v => v.toString()),
-  expirationDate: z.nullable(z.instanceof(RFCDate).transform(v => v.toString()))
-    .default(null),
+  effectiveDate: z.date().default(new Date("1970-01-01")).transform(v =>
+    v.toISOString().slice(0, "YYYY-MM-DD".length)
+  ),
+  expirationDate: z.nullable(
+    z.date().transform(v => v.toISOString().slice(0, "YYYY-MM-DD".length)),
+  ).default(null),
 }).transform((v) => {
   return remap$(v, {
     companyBenefitUuid: "company_benefit_uuid",

@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
@@ -115,7 +116,9 @@ export const GetCompaniesCompanyUuidWireInRequestUuidResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Wire-In-Request-List": z.array(WireInRequest$inboundSchema).optional(),
+    "Wire-In-Request-List": types.optional(
+      z.array(WireInRequest$inboundSchema),
+    ),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",

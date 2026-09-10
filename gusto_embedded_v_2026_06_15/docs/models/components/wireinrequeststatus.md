@@ -8,10 +8,12 @@ Status of the wire in
 import { WireInRequestStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/wireinrequest.js";
 
 let value: WireInRequestStatus = "awaiting_funds";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"awaiting_funds" | "pending_review" | "approved" | "canceled"
+"awaiting_funds" | "pending_review" | "approved" | "canceled" | Unrecognized<string>
 ```

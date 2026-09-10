@@ -8,10 +8,12 @@ The document option's section in the list of acceptable documents on the Form I-
 import { Section } from "@gusto/embedded-api-v-2026-06-15/models/components/i9authorizationdocumentoption.js";
 
 let value: Section = "C";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"A" | "A1" | "A2" | "A3" | "B" | "C"
+"A" | "A1" | "A2" | "A3" | "B" | "C" | Unrecognized<string>
 ```

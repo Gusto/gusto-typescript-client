@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -30,7 +32,7 @@ export const SetupStatus = {
  * - `in_progress`: Some requirements have been filled, or default rates are applied
  * - `complete`: All requirements have been filled without default rates
  */
-export type SetupStatus = ClosedEnum<typeof SetupStatus>;
+export type SetupStatus = OpenEnum<typeof SetupStatus>;
 
 export type TaxRequirementStatesList = {
   /**
@@ -57,8 +59,11 @@ export type TaxRequirementStatesList = {
 };
 
 /** @internal */
-export const SetupStatus$inboundSchema: z.ZodNativeEnum<typeof SetupStatus> = z
-  .nativeEnum(SetupStatus);
+export const SetupStatus$inboundSchema: z.ZodType<
+  SetupStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(SetupStatus);
 
 /** @internal */
 export const TaxRequirementStatesList$inboundSchema: z.ZodType<
@@ -66,10 +71,10 @@ export const TaxRequirementStatesList$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  state: z.string().optional(),
-  setup_status: SetupStatus$inboundSchema.optional(),
-  default_rates_applied: z.boolean().optional(),
-  ready_to_run_payroll: z.boolean().optional(),
+  state: types.optional(types.string()),
+  setup_status: types.optional(SetupStatus$inboundSchema),
+  default_rates_applied: types.optional(types.boolean()),
+  ready_to_run_payroll: types.optional(types.boolean()),
 }).transform((v) => {
   return remap$(v, {
     "setup_status": "setupStatus",

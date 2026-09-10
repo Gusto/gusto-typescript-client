@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -28,7 +30,7 @@ export const PolicyType = {
 /**
  * Type of the time off policy. Only "vacation" and "sick" can be created through the API, but other types may be present if the company was previously a Gusto.com customer.
  */
-export type PolicyType = ClosedEnum<typeof PolicyType>;
+export type PolicyType = OpenEnum<typeof PolicyType>;
 
 export type TimeOffPolicyEmployees = {
   uuid?: string | undefined;
@@ -113,8 +115,11 @@ export type TimeOffPolicy = {
 };
 
 /** @internal */
-export const PolicyType$inboundSchema: z.ZodNativeEnum<typeof PolicyType> = z
-  .nativeEnum(PolicyType);
+export const PolicyType$inboundSchema: z.ZodType<
+  PolicyType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PolicyType);
 
 /** @internal */
 export const TimeOffPolicyEmployees$inboundSchema: z.ZodType<
@@ -122,8 +127,8 @@ export const TimeOffPolicyEmployees$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string().optional(),
-  balance: z.string().optional(),
+  uuid: types.optional(types.string()),
+  balance: types.optional(types.string()),
 });
 
 export function timeOffPolicyEmployeesFromJSON(
@@ -142,22 +147,22 @@ export const TimeOffPolicy$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  company_uuid: z.string(),
-  name: z.string(),
+  uuid: types.string(),
+  company_uuid: types.string(),
+  name: types.string(),
   policy_type: PolicyType$inboundSchema,
-  accrual_method: z.string(),
-  accrual_rate: z.nullable(z.string()).optional(),
-  accrual_rate_unit: z.nullable(z.string()).optional(),
-  paid_out_on_termination: z.boolean().optional(),
-  accrual_waiting_period_days: z.nullable(z.number().int()).optional(),
-  carryover_limit_hours: z.nullable(z.string()).optional(),
-  max_accrual_hours_per_year: z.nullable(z.string()).optional(),
-  max_hours: z.nullable(z.string()).optional(),
-  policy_reset_date: z.nullable(z.string()).optional(),
-  complete: z.boolean().optional(),
-  version: z.nullable(z.string()).optional(),
-  is_active: z.boolean(),
+  accrual_method: types.string(),
+  accrual_rate: z.nullable(types.string()).optional(),
+  accrual_rate_unit: z.nullable(types.string()).optional(),
+  paid_out_on_termination: types.optional(types.boolean()),
+  accrual_waiting_period_days: z.nullable(types.number()).optional(),
+  carryover_limit_hours: z.nullable(types.string()).optional(),
+  max_accrual_hours_per_year: z.nullable(types.string()).optional(),
+  max_hours: z.nullable(types.string()).optional(),
+  policy_reset_date: z.nullable(types.string()).optional(),
+  complete: types.optional(types.boolean()),
+  version: z.nullable(types.string()).optional(),
+  is_active: types.boolean(),
   employees: z.array(z.lazy(() => TimeOffPolicyEmployees$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {

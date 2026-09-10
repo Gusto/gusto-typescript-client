@@ -8,10 +8,12 @@ The type of blocker
 import { BlockerType } from "@gusto/embedded-api-v-2026-06-15/models/components/paymentconfigs.js";
 
 let value: BlockerType = "minimum_funded_payments";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"minimum_days" | "minimum_funded_payments"
+"minimum_days" | "minimum_funded_payments" | Unrecognized<string>
 ```

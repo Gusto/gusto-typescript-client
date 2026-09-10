@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -19,7 +21,7 @@ export const ReconcileTaxMethod = {
 /**
  * How Gusto will handle taxes already collected.
  */
-export type ReconcileTaxMethod = ClosedEnum<typeof ReconcileTaxMethod>;
+export type ReconcileTaxMethod = OpenEnum<typeof ReconcileTaxMethod>;
 
 export type TaxRefunds = {
   /**
@@ -85,9 +87,11 @@ export type CompanySuspension = {
 };
 
 /** @internal */
-export const ReconcileTaxMethod$inboundSchema: z.ZodNativeEnum<
-  typeof ReconcileTaxMethod
-> = z.nativeEnum(ReconcileTaxMethod);
+export const ReconcileTaxMethod$inboundSchema: z.ZodType<
+  ReconcileTaxMethod,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ReconcileTaxMethod);
 
 /** @internal */
 export const TaxRefunds$inboundSchema: z.ZodType<
@@ -95,8 +99,8 @@ export const TaxRefunds$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  amount: z.string().optional(),
-  description: z.string().optional(),
+  amount: types.optional(types.string()),
+  description: types.optional(types.string()),
 });
 
 export function taxRefundsFromJSON(
@@ -115,16 +119,16 @@ export const CompanySuspension$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string().optional(),
-  company_uuid: z.string().optional(),
-  effective_date: z.string().optional(),
-  leaving_for: z.nullable(z.string()).optional(),
-  reason: z.string().optional(),
-  reconcile_tax_method: ReconcileTaxMethod$inboundSchema.optional(),
-  file_quarterly_forms: z.boolean().optional(),
-  file_yearly_forms: z.boolean().optional(),
-  comments: z.nullable(z.string()).optional(),
-  tax_refunds: z.array(z.lazy(() => TaxRefunds$inboundSchema)).optional(),
+  uuid: types.optional(types.string()),
+  company_uuid: types.optional(types.string()),
+  effective_date: types.optional(types.string()),
+  leaving_for: z.nullable(types.string()).optional(),
+  reason: types.optional(types.string()),
+  reconcile_tax_method: types.optional(ReconcileTaxMethod$inboundSchema),
+  file_quarterly_forms: types.optional(types.boolean()),
+  file_yearly_forms: types.optional(types.boolean()),
+  comments: z.nullable(types.string()).optional(),
+  tax_refunds: types.optional(z.array(z.lazy(() => TaxRefunds$inboundSchema))),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

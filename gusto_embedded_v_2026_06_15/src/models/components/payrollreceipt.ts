@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -56,7 +58,7 @@ export const PayrollReceiptPaymentMethod = {
 /**
  * The employee's compensation payment method.
  */
-export type PayrollReceiptPaymentMethod = ClosedEnum<
+export type PayrollReceiptPaymentMethod = OpenEnum<
   typeof PayrollReceiptPaymentMethod
 >;
 
@@ -190,11 +192,11 @@ export const PayrollReceiptTotals$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  company_debit: z.string().optional(),
-  net_pay_debit: z.string().optional(),
-  child_support_debit: z.string().optional(),
-  reimbursement_debit: z.string().optional(),
-  tax_debit: z.string().optional(),
+  company_debit: types.optional(types.string()),
+  net_pay_debit: types.optional(types.string()),
+  child_support_debit: types.optional(types.string()),
+  reimbursement_debit: types.optional(types.string()),
+  tax_debit: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "company_debit": "companyDebit",
@@ -218,8 +220,8 @@ export function payrollReceiptTotalsFromJSON(
 /** @internal */
 export const Taxes$inboundSchema: z.ZodType<Taxes, z.ZodTypeDef, unknown> = z
   .object({
-    name: z.string().optional(),
-    amount: z.string().optional(),
+    name: types.optional(types.string()),
+    amount: types.optional(types.string()),
   });
 
 export function taxesFromJSON(
@@ -233,9 +235,11 @@ export function taxesFromJSON(
 }
 
 /** @internal */
-export const PayrollReceiptPaymentMethod$inboundSchema: z.ZodNativeEnum<
-  typeof PayrollReceiptPaymentMethod
-> = z.nativeEnum(PayrollReceiptPaymentMethod);
+export const PayrollReceiptPaymentMethod$inboundSchema: z.ZodType<
+  PayrollReceiptPaymentMethod,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PayrollReceiptPaymentMethod);
 
 /** @internal */
 export const PayrollReceiptEmployeeCompensations$inboundSchema: z.ZodType<
@@ -243,15 +247,15 @@ export const PayrollReceiptEmployeeCompensations$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  employee_uuid: z.string().optional(),
-  employee_first_name: z.string().optional(),
-  employee_last_name: z.string().optional(),
-  payment_method: PayrollReceiptPaymentMethod$inboundSchema.optional(),
-  net_pay: z.string().optional(),
-  total_tax: z.string().optional(),
-  total_garnishments: z.string().optional(),
-  child_support_garnishment: z.string().optional(),
-  total_reimbursement: z.string().optional(),
+  employee_uuid: types.optional(types.string()),
+  employee_first_name: types.optional(types.string()),
+  employee_last_name: types.optional(types.string()),
+  payment_method: types.optional(PayrollReceiptPaymentMethod$inboundSchema),
+  net_pay: types.optional(types.string()),
+  total_tax: types.optional(types.string()),
+  total_garnishments: types.optional(types.string()),
+  child_support_garnishment: types.optional(types.string()),
+  total_reimbursement: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",
@@ -283,12 +287,12 @@ export const PayrollReceiptLicensee$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
-  address: z.string().optional(),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  postal_code: z.string().optional(),
-  phone_number: z.string().optional(),
+  name: types.optional(types.string()),
+  address: types.optional(types.string()),
+  city: types.optional(types.string()),
+  state: types.optional(types.string()),
+  postal_code: types.optional(types.string()),
+  phone_number: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "postal_code": "postalCode",
@@ -312,22 +316,22 @@ export const PayrollReceipt$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  payroll_uuid: z.string().optional(),
-  company_uuid: z.string().optional(),
-  name_of_sender: z.string().optional(),
-  name_of_recipient: z.string().optional(),
-  recipient_notice: z.string().optional(),
-  debit_date: z.string().optional(),
-  license: z.string().optional(),
-  license_uri: z.string().optional(),
-  right_to_refund: z.string().optional(),
-  liability_of_licensee: z.string().optional(),
-  totals: z.lazy(() => PayrollReceiptTotals$inboundSchema).optional(),
-  taxes: z.array(z.lazy(() => Taxes$inboundSchema)).optional(),
-  employee_compensations: z.array(
-    z.lazy(() => PayrollReceiptEmployeeCompensations$inboundSchema),
-  ).optional(),
-  licensee: z.lazy(() => PayrollReceiptLicensee$inboundSchema).optional(),
+  payroll_uuid: types.optional(types.string()),
+  company_uuid: types.optional(types.string()),
+  name_of_sender: types.optional(types.string()),
+  name_of_recipient: types.optional(types.string()),
+  recipient_notice: types.optional(types.string()),
+  debit_date: types.optional(types.string()),
+  license: types.optional(types.string()),
+  license_uri: types.optional(types.string()),
+  right_to_refund: types.optional(types.string()),
+  liability_of_licensee: types.optional(types.string()),
+  totals: types.optional(z.lazy(() => PayrollReceiptTotals$inboundSchema)),
+  taxes: types.optional(z.array(z.lazy(() => Taxes$inboundSchema))),
+  employee_compensations: types.optional(
+    z.array(z.lazy(() => PayrollReceiptEmployeeCompensations$inboundSchema)),
+  ),
+  licensee: types.optional(z.lazy(() => PayrollReceiptLicensee$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     "payroll_uuid": "payrollUuid",

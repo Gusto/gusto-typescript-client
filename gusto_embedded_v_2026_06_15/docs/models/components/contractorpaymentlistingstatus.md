@@ -8,10 +8,12 @@ Contractor payment status
 import { ContractorPaymentListingStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/contractorpaymentlisting.js";
 
 let value: ContractorPaymentListingStatus = "Funded";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"Funded" | "Unfunded"
+"Funded" | "Unfunded" | Unrecognized<string>
 ```

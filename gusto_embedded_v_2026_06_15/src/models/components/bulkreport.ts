@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BulkReportCompany,
@@ -26,7 +28,7 @@ export const BulkReportStatus = {
 /**
  * Overall batch status. `pending`/`processing` while in progress; once finished, `success` (all reports succeeded), `partial_success` (some succeeded, some failed), or `failed` (none succeeded).
  */
-export type BulkReportStatus = ClosedEnum<typeof BulkReportStatus>;
+export type BulkReportStatus = OpenEnum<typeof BulkReportStatus>;
 
 export type BulkReport = {
   /**
@@ -68,9 +70,11 @@ export type BulkReport = {
 };
 
 /** @internal */
-export const BulkReportStatus$inboundSchema: z.ZodNativeEnum<
-  typeof BulkReportStatus
-> = z.nativeEnum(BulkReportStatus);
+export const BulkReportStatus$inboundSchema: z.ZodType<
+  BulkReportStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(BulkReportStatus);
 
 /** @internal */
 export const BulkReport$inboundSchema: z.ZodType<
@@ -78,19 +82,15 @@ export const BulkReport$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
+  uuid: types.string(),
   status: BulkReportStatus$inboundSchema,
-  submitted_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  completed_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  submitted_items: z.number().int(),
-  partner_uuid: z.string().optional(),
-  processed_items: z.number().int().optional(),
-  report_url: z.nullable(z.string()).optional(),
-  companies: z.array(BulkReportCompany$inboundSchema).optional(),
+  submitted_at: types.date(),
+  completed_at: types.nullable(types.date()),
+  submitted_items: types.number(),
+  partner_uuid: types.optional(types.string()),
+  processed_items: types.optional(types.number()),
+  report_url: z.nullable(types.string()).optional(),
+  companies: types.optional(z.array(BulkReportCompany$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     "submitted_at": "submittedAt",

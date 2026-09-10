@@ -8,10 +8,12 @@ The status of the submission blocker.
 import { PayrollSubmissionBlockerTypeStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/payrollsubmissionblockertype.js";
 
 let value: PayrollSubmissionBlockerTypeStatus = "resolved";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"unresolved" | "resolved"
+"unresolved" | "resolved" | Unrecognized<string>
 ```

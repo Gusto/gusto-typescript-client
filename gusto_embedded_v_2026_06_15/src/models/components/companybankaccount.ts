@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -19,7 +21,7 @@ export const AccountType = {
 /**
  * Bank account type
  */
-export type AccountType = ClosedEnum<typeof AccountType>;
+export type AccountType = OpenEnum<typeof AccountType>;
 
 /**
  * The verification status of the bank account.
@@ -44,7 +46,7 @@ export const VerificationStatus = {
  * 'ready_for_verification' means the micro-deposits are completed and the verification process can begin by using the verify endpoint.
  * 'verified' means the bank account is verified.
  */
-export type VerificationStatus = ClosedEnum<typeof VerificationStatus>;
+export type VerificationStatus = OpenEnum<typeof VerificationStatus>;
 
 /**
  * The verification type of the bank account.
@@ -67,13 +69,13 @@ export const VerificationType = {
  * 'bank_deposits' means the bank account is connected by entering routing and accounting numbers and verifying through micro-deposits.
  * 'plaid' means the bank account is connected through Plaid.
  */
-export type VerificationType = ClosedEnum<typeof VerificationType>;
+export type VerificationType = OpenEnum<typeof VerificationType>;
 
 export const PlaidStatus = {
   Connected: "connected",
   Disconnected: "disconnected",
 } as const;
-export type PlaidStatus = ClosedEnum<typeof PlaidStatus>;
+export type PlaidStatus = OpenEnum<typeof PlaidStatus>;
 
 /**
  * The company bank account
@@ -145,22 +147,32 @@ export type CompanyBankAccount = {
 };
 
 /** @internal */
-export const AccountType$inboundSchema: z.ZodNativeEnum<typeof AccountType> = z
-  .nativeEnum(AccountType);
+export const AccountType$inboundSchema: z.ZodType<
+  AccountType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(AccountType);
 
 /** @internal */
-export const VerificationStatus$inboundSchema: z.ZodNativeEnum<
-  typeof VerificationStatus
-> = z.nativeEnum(VerificationStatus);
+export const VerificationStatus$inboundSchema: z.ZodType<
+  VerificationStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(VerificationStatus);
 
 /** @internal */
-export const VerificationType$inboundSchema: z.ZodNativeEnum<
-  typeof VerificationType
-> = z.nativeEnum(VerificationType);
+export const VerificationType$inboundSchema: z.ZodType<
+  VerificationType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(VerificationType);
 
 /** @internal */
-export const PlaidStatus$inboundSchema: z.ZodNativeEnum<typeof PlaidStatus> = z
-  .nativeEnum(PlaidStatus);
+export const PlaidStatus$inboundSchema: z.ZodType<
+  PlaidStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PlaidStatus);
 
 /** @internal */
 export const CompanyBankAccount$inboundSchema: z.ZodType<
@@ -168,18 +180,18 @@ export const CompanyBankAccount$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  company_uuid: z.string().optional(),
-  account_type: AccountType$inboundSchema.optional(),
-  routing_number: z.string().optional(),
-  hidden_account_number: z.string().optional(),
-  verification_status: VerificationStatus$inboundSchema.optional(),
-  verification_type: VerificationType$inboundSchema.optional(),
+  uuid: types.string(),
+  company_uuid: types.optional(types.string()),
+  account_type: types.optional(AccountType$inboundSchema),
+  routing_number: types.optional(types.string()),
+  hidden_account_number: types.optional(types.string()),
+  verification_status: types.optional(VerificationStatus$inboundSchema),
+  verification_type: types.optional(VerificationType$inboundSchema),
   plaid_status: z.nullable(PlaidStatus$inboundSchema).optional(),
-  last_cached_balance: z.nullable(z.string()).optional(),
-  balance_fetched_date: z.nullable(z.string()).optional(),
-  name: z.string().optional(),
-  reverse_wire_enabled: z.nullable(z.boolean()).optional(),
+  last_cached_balance: z.nullable(types.string()).optional(),
+  balance_fetched_date: z.nullable(types.string()).optional(),
+  name: types.optional(types.string()),
+  reverse_wire_enabled: z.nullable(types.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { GustoEmbeddedError } from "./gustoembeddederror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
 
@@ -77,7 +78,7 @@ export const PayrollBlockersErrorMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  key: z.string().optional(),
+  key: types.optional(types.string()),
 });
 
 export function payrollBlockersErrorMetadataFromJSON(
@@ -96,10 +97,12 @@ export const PayrollBlockersErrorErrors$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  error_key: z.string().optional(),
-  category: z.string().optional(),
-  message: z.string().optional(),
-  metadata: z.lazy(() => PayrollBlockersErrorMetadata$inboundSchema).optional(),
+  error_key: types.optional(types.string()),
+  category: types.optional(types.string()),
+  message: types.optional(types.string()),
+  metadata: types.optional(
+    z.lazy(() => PayrollBlockersErrorMetadata$inboundSchema),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "error_key": "errorKey",
@@ -122,8 +125,9 @@ export const PayrollBlockersError$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  errors: z.array(z.lazy(() => PayrollBlockersErrorErrors$inboundSchema))
-    .optional(),
+  errors: types.optional(
+    z.array(z.lazy(() => PayrollBlockersErrorErrors$inboundSchema)),
+  ),
   request$: z.instanceof(Request),
   response$: z.instanceof(Response),
   body$: z.string(),

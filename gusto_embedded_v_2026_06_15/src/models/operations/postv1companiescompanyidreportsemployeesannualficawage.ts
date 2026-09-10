@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import {
   EmployeesAnnualFicaWageReportAcceptance,
   EmployeesAnnualFicaWageReportAcceptance$inboundSchema,
@@ -159,8 +160,9 @@ export const PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse$inbo
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Employees-Annual-Fica-Wage-Report-Acceptance":
-      EmployeesAnnualFicaWageReportAcceptance$inboundSchema.optional(),
+    "Employees-Annual-Fica-Wage-Report-Acceptance": types.optional(
+      EmployeesAnnualFicaWageReportAcceptance$inboundSchema,
+    ),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",

@@ -4,8 +4,10 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   EntityErrorObject,
@@ -25,7 +27,7 @@ export const PayrollProcessingRequestStatus = {
 /**
  * The status of the payroll processing request
  */
-export type PayrollProcessingRequestStatus = ClosedEnum<
+export type PayrollProcessingRequestStatus = OpenEnum<
   typeof PayrollProcessingRequestStatus
 >;
 
@@ -41,9 +43,11 @@ export type PayrollProcessingRequest = {
 };
 
 /** @internal */
-export const PayrollProcessingRequestStatus$inboundSchema: z.ZodNativeEnum<
-  typeof PayrollProcessingRequestStatus
-> = z.nativeEnum(PayrollProcessingRequestStatus);
+export const PayrollProcessingRequestStatus$inboundSchema: z.ZodType<
+  PayrollProcessingRequestStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PayrollProcessingRequestStatus);
 
 /** @internal */
 export const PayrollProcessingRequest$inboundSchema: z.ZodType<
@@ -51,8 +55,8 @@ export const PayrollProcessingRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  status: PayrollProcessingRequestStatus$inboundSchema.optional(),
-  errors: z.array(EntityErrorObject$inboundSchema).optional(),
+  status: types.optional(PayrollProcessingRequestStatus$inboundSchema),
+  errors: types.optional(z.array(EntityErrorObject$inboundSchema)),
 });
 
 export function payrollProcessingRequestFromJSON(

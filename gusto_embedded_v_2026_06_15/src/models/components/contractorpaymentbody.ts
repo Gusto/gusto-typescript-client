@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { RFCDate } from "../../types/rfcdate.js";
 
 export const ContractorPaymentBodyPaymentMethod = {
   DirectDeposit: "Direct Deposit",
@@ -27,7 +26,7 @@ export type ContractorPaymentBody = {
   /**
    * Date of contractor payment.
    */
-  date: RFCDate;
+  date: Date;
   paymentMethod?: ContractorPaymentBodyPaymentMethod | undefined;
   /**
    * If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless of hours worked.
@@ -80,7 +79,7 @@ export const ContractorPaymentBody$outboundSchema: z.ZodType<
   ContractorPaymentBody
 > = z.object({
   contractorUuid: z.string(),
-  date: z.instanceof(RFCDate).transform(v => v.toString()),
+  date: z.date().transform(v => v.toISOString().slice(0, "YYYY-MM-DD".length)),
   paymentMethod: ContractorPaymentBodyPaymentMethod$outboundSchema.default(
     "Direct Deposit",
   ),

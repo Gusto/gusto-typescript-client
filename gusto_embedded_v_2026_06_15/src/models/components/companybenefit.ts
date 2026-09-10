@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -20,13 +22,13 @@ export const Source = {
 /**
  * The source of the company benefit. This can be "internal", "external", or "partnered". Company benefits created via the API default to "external". Certain partners can create company benefits with a source of "partnered".
  */
-export type Source = ClosedEnum<typeof Source>;
+export type Source = OpenEnum<typeof Source>;
 
 export const CatchUpType = {
   Elective: "elective",
   Deemed: "deemed",
 } as const;
-export type CatchUpType = ClosedEnum<typeof CatchUpType>;
+export type CatchUpType = OpenEnum<typeof CatchUpType>;
 
 /**
  * The representation of a company benefit.
@@ -91,12 +93,15 @@ export type CompanyBenefit = {
 };
 
 /** @internal */
-export const Source$inboundSchema: z.ZodNativeEnum<typeof Source> = z
-  .nativeEnum(Source);
+export const Source$inboundSchema: z.ZodType<Source, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(Source);
 
 /** @internal */
-export const CatchUpType$inboundSchema: z.ZodNativeEnum<typeof CatchUpType> = z
-  .nativeEnum(CatchUpType);
+export const CatchUpType$inboundSchema: z.ZodType<
+  CatchUpType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(CatchUpType);
 
 /** @internal */
 export const CompanyBenefit$inboundSchema: z.ZodType<
@@ -104,19 +109,19 @@ export const CompanyBenefit$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  version: z.string().optional(),
-  enrollment_count: z.number().int().optional(),
-  company_uuid: z.string().optional(),
-  uuid: z.string(),
-  benefit_type: z.number().int().optional(),
-  active: z.boolean().default(true),
-  description: z.string().optional(),
-  source: Source$inboundSchema.optional(),
-  partner_name: z.nullable(z.string()).optional(),
-  deletable: z.boolean().optional(),
-  supports_percentage_amounts: z.boolean().optional(),
-  responsible_for_employer_taxes: z.boolean().optional(),
-  responsible_for_employee_w2: z.boolean().optional(),
+  version: types.optional(types.string()),
+  enrollment_count: types.optional(types.number()),
+  company_uuid: types.optional(types.string()),
+  uuid: types.string(),
+  benefit_type: types.optional(types.number()),
+  active: types.boolean().default(true),
+  description: types.optional(types.string()),
+  source: types.optional(Source$inboundSchema),
+  partner_name: z.nullable(types.string()).optional(),
+  deletable: types.optional(types.boolean()),
+  supports_percentage_amounts: types.optional(types.boolean()),
+  responsible_for_employer_taxes: types.optional(types.boolean()),
+  responsible_for_employee_w2: types.optional(types.boolean()),
   catch_up_type: z.nullable(CatchUpType$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

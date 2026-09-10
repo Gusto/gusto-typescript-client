@@ -11,10 +11,12 @@ The verification type of the bank account.
 import { VerificationType } from "@gusto/embedded-api-v-2026-06-15/models/components/companybankaccount.js";
 
 let value: VerificationType = "plaid_external";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"bank_deposits" | "plaid" | "plaid_external"
+"bank_deposits" | "plaid" | "plaid_external" | Unrecognized<string>
 ```

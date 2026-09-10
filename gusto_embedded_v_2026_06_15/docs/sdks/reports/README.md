@@ -29,7 +29,6 @@ scope: `company_reports:write`
 <!-- UsageSnippet language="typescript" operationID="post-v1-bulk_reports" method="post" path="/v1/bulk_reports" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2026-06-15";
-import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -52,8 +51,8 @@ async function run() {
           customName: "Q1 Payroll Export",
           withTotals: false,
           dateFilterType: "check_date",
-          startDate: new RFCDate("2026-01-01"),
-          endDate: new RFCDate("2026-03-31"),
+          startDate: new Date("2026-01-01"),
+          endDate: new Date("2026-03-31"),
           paymentMethod: "check",
           employmentType: "exempt",
           employmentStatus: "active_full_time",
@@ -81,7 +80,6 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-06-15/core.js";
 import { reportsPostV1BulkReports } from "@gusto/embedded-api-v-2026-06-15/funcs/reportsPostV1BulkReports.js";
-import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -106,8 +104,8 @@ async function run() {
           customName: "Q1 Payroll Export",
           withTotals: false,
           dateFilterType: "check_date",
-          startDate: new RFCDate("2026-01-01"),
-          endDate: new RFCDate("2026-03-31"),
+          startDate: new Date("2026-01-01"),
+          endDate: new Date("2026-03-31"),
           paymentMethod: "check",
           employmentType: "exempt",
           employmentStatus: "active_full_time",
@@ -398,7 +396,6 @@ scope: `company_reports:write`
 <!-- UsageSnippet language="typescript" operationID="post-companies-company_uuid-reports" method="post" path="/v1/companies/{company_uuid}/reports" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2026-06-15";
-import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -412,10 +409,10 @@ async function run() {
         "total_time_off_earnings",
       ],
       fileType: "json",
-      startDate: new RFCDate("2024-01-01"),
-      endDate: new RFCDate("2024-04-01"),
-      dismissedStartDate: new RFCDate("2024-01-01"),
-      dismissedEndDate: new RFCDate("2024-04-01"),
+      startDate: new Date("2024-01-01"),
+      endDate: new Date("2024-04-01"),
+      dismissedStartDate: new Date("2024-01-01"),
+      dismissedEndDate: new Date("2024-04-01"),
     },
   });
 
@@ -432,7 +429,6 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-06-15/core.js";
 import { reportsCreateCustom } from "@gusto/embedded-api-v-2026-06-15/funcs/reportsCreateCustom.js";
-import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -448,10 +444,10 @@ async function run() {
         "total_time_off_earnings",
       ],
       fileType: "json",
-      startDate: new RFCDate("2024-01-01"),
-      endDate: new RFCDate("2024-04-01"),
-      dismissedStartDate: new RFCDate("2024-01-01"),
-      dismissedEndDate: new RFCDate("2024-04-01"),
+      startDate: new Date("2024-01-01"),
+      endDate: new Date("2024-04-01"),
+      dismissedStartDate: new Date("2024-01-01"),
+      dismissedEndDate: new Date("2024-04-01"),
     },
   });
   if (res.ok) {

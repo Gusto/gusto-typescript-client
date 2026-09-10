@@ -4,14 +4,13 @@
 
 ```typescript
 import { PostV1ExternalPayrollRequest } from "@gusto/embedded-api-v-2026-06-15/models/operations/postv1externalpayroll.js";
-import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 let value: PostV1ExternalPayrollRequest = {
   companyUuid: "<id>",
   externalPayrollCreateRequest: {
-    checkDate: new RFCDate("2022-06-03"),
-    paymentPeriodStartDate: new RFCDate("2022-05-15"),
-    paymentPeriodEndDate: new RFCDate("2022-05-30"),
+    checkDate: new Date("2022-06-03"),
+    paymentPeriodStartDate: new Date("2022-05-15"),
+    paymentPeriodEndDate: new Date("2022-05-30"),
   },
 };
 ```

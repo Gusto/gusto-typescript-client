@@ -8,10 +8,12 @@ The type of recipient associated with the document (will be `Contractor` for Con
 import { DocumentRecipientType } from "@gusto/embedded-api-v-2026-06-15/models/components/document.js";
 
 let value: DocumentRecipientType = "Contractor";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"Company" | "Employee" | "Contractor"
+"Company" | "Employee" | "Contractor" | Unrecognized<string>
 ```

@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -49,7 +51,7 @@ export const TokenInfoType = {
  * - `Employee`: An employee
  * - `Contractor`: A contractor
  */
-export type TokenInfoType = ClosedEnum<typeof TokenInfoType>;
+export type TokenInfoType = OpenEnum<typeof TokenInfoType>;
 
 /**
  * The resource owner (user) who authorized this access token. Null for
@@ -102,8 +104,8 @@ export const Resource$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.string().optional(),
-  uuid: z.string().optional(),
+  type: types.optional(types.string()),
+  uuid: types.optional(types.string()),
 });
 
 export function resourceFromJSON(
@@ -117,9 +119,11 @@ export function resourceFromJSON(
 }
 
 /** @internal */
-export const TokenInfoType$inboundSchema: z.ZodNativeEnum<
-  typeof TokenInfoType
-> = z.nativeEnum(TokenInfoType);
+export const TokenInfoType$inboundSchema: z.ZodType<
+  TokenInfoType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(TokenInfoType);
 
 /** @internal */
 export const ResourceOwner$inboundSchema: z.ZodType<
@@ -127,8 +131,8 @@ export const ResourceOwner$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: TokenInfoType$inboundSchema.optional(),
-  uuid: z.string().optional(),
+  type: types.optional(TokenInfoType$inboundSchema),
+  uuid: types.optional(types.string()),
 });
 
 export function resourceOwnerFromJSON(
@@ -147,7 +151,7 @@ export const TokenInfo$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  scope: z.string().optional(),
+  scope: types.optional(types.string()),
   resource: z.nullable(z.lazy(() => Resource$inboundSchema)).optional(),
   resource_owner: z.nullable(z.lazy(() => ResourceOwner$inboundSchema))
     .optional(),

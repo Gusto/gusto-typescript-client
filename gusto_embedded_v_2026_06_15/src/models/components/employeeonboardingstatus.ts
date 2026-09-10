@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type EmployeeOnboardingStatusOnboardingStep = {
@@ -107,11 +108,11 @@ export const EmployeeOnboardingStatusOnboardingStep$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  title: z.string().optional(),
-  id: z.string().optional(),
-  required: z.boolean().optional(),
-  completed: z.boolean().optional(),
-  requirements: z.array(z.string()).optional(),
+  title: types.optional(types.string()),
+  id: types.optional(types.string()),
+  required: types.optional(types.boolean()),
+  completed: types.optional(types.boolean()),
+  requirements: types.optional(z.array(types.string())),
 });
 
 export function employeeOnboardingStatusOnboardingStepFromJSON(
@@ -141,9 +142,9 @@ export const Blockers$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  field: Field$inboundSchema.optional(),
-  category: EmployeeOnboardingStatusCategory$inboundSchema.optional(),
-  message: z.string().optional(),
+  field: types.optional(Field$inboundSchema),
+  category: types.optional(EmployeeOnboardingStatusCategory$inboundSchema),
+  message: types.optional(types.string()),
 });
 
 export function blockersFromJSON(
@@ -162,12 +163,12 @@ export const EmployeeOnboardingStatus$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  onboarding_status: z.string().optional(),
-  onboarding_steps: z.array(
-    z.lazy(() => EmployeeOnboardingStatusOnboardingStep$inboundSchema),
-  ).optional(),
-  blockers: z.array(z.lazy(() => Blockers$inboundSchema)).optional(),
+  uuid: types.string(),
+  onboarding_status: types.optional(types.string()),
+  onboarding_steps: types.optional(
+    z.array(z.lazy(() => EmployeeOnboardingStatusOnboardingStep$inboundSchema)),
+  ),
+  blockers: types.optional(z.array(z.lazy(() => Blockers$inboundSchema))),
 }).transform((v) => {
   return remap$(v, {
     "onboarding_status": "onboardingStatus",

@@ -6,7 +6,6 @@ A custom report entry in a bulk batch.
 
 ```typescript
 import { BulkReportCustomReportItem } from "@gusto/embedded-api-v-2026-06-15/models/components/bulkreportcustomreportitem.js";
-import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 let value: BulkReportCustomReportItem = {
   companyUuid: "12345678-abcd-ef12-3456-7890abcdef12",
@@ -15,8 +14,8 @@ let value: BulkReportCustomReportItem = {
     "garnishments",
   ],
   fileType: "csv",
-  startDate: new RFCDate("2026-01-01"),
-  endDate: new RFCDate("2026-03-31"),
+  startDate: new Date("2026-01-01"),
+  endDate: new Date("2026-03-31"),
 };
 ```
 
@@ -32,8 +31,8 @@ let value: BulkReportCustomReportItem = {
 | `customName`                                                                                | *string*                                                                                    | :heavy_minus_sign:                                                                          | Display name for the report.                                                                |                                                                                             |
 | `withTotals`                                                                                | *boolean*                                                                                   | :heavy_minus_sign:                                                                          | Whether to include subtotals and grand totals.                                              |                                                                                             |
 | `dateFilterType`                                                                            | [components.DateFilterType](../../models/components/datefiltertype.md)                      | :heavy_minus_sign:                                                                          | Which payroll date `start_date` and `end_date` filter against.                              |                                                                                             |
-| `startDate`                                                                                 | [RFCDate](../../types/rfcdate.md)                                                           | :heavy_minus_sign:                                                                          | Start date of data to filter by.                                                            | 2026-01-01                                                                                  |
-| `endDate`                                                                                   | [RFCDate](../../types/rfcdate.md)                                                           | :heavy_minus_sign:                                                                          | End date of data to filter by.                                                              | 2026-03-31                                                                                  |
+| `startDate`                                                                                 | [Date](../../types/rfcdate.md)                                                              | :heavy_minus_sign:                                                                          | Start date of data to filter by.                                                            | 2026-01-01                                                                                  |
+| `endDate`                                                                                   | [Date](../../types/rfcdate.md)                                                              | :heavy_minus_sign:                                                                          | End date of data to filter by.                                                              | 2026-03-31                                                                                  |
 | `paymentMethod`                                                                             | [components.PaymentMethod](../../models/components/paymentmethod.md)                        | :heavy_minus_sign:                                                                          | Payment method to filter by.                                                                |                                                                                             |
 | `employmentType`                                                                            | [components.EmploymentType](../../models/components/employmenttype.md)                      | :heavy_minus_sign:                                                                          | Employee employment type to filter by.                                                      |                                                                                             |
 | `employmentStatus`                                                                          | [components.EmploymentStatus](../../models/components/employmentstatus.md)                  | :heavy_minus_sign:                                                                          | Employee employment status to filter by.                                                    |                                                                                             |

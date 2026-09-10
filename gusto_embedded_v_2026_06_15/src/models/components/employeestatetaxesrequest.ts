@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 
 export type EmployeeStateTaxesRequestValue = string | number | boolean;
 
@@ -35,7 +36,7 @@ export const EmployeeStateTaxesRequestValue$outboundSchema: z.ZodType<
   EmployeeStateTaxesRequestValue$Outbound,
   z.ZodTypeDef,
   EmployeeStateTaxesRequestValue
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = smartUnion([z.string(), z.number(), z.boolean()]);
 
 export function employeeStateTaxesRequestValueToJSON(
   employeeStateTaxesRequestValue: EmployeeStateTaxesRequestValue,
@@ -60,7 +61,7 @@ export const Answers$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Answers
 > = z.object({
-  value: z.nullable(z.union([z.string(), z.number(), z.boolean()])),
+  value: z.nullable(smartUnion([z.string(), z.number(), z.boolean()])),
   validFrom: z.string(),
   validUpTo: z.nullable(z.string()).optional(),
 }).transform((v) => {

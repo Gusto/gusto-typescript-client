@@ -4,8 +4,10 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -40,7 +42,7 @@ export const Key = {
 /**
  * A unique identifier for the payroll blocker reason. For a complete list of blockers and their meanings, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers).
  */
-export type Key = ClosedEnum<typeof Key>;
+export type Key = OpenEnum<typeof Key>;
 
 export type PayrollBlocker = {
   /**
@@ -54,7 +56,8 @@ export type PayrollBlocker = {
 };
 
 /** @internal */
-export const Key$inboundSchema: z.ZodNativeEnum<typeof Key> = z.nativeEnum(Key);
+export const Key$inboundSchema: z.ZodType<Key, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(Key);
 
 /** @internal */
 export const PayrollBlocker$inboundSchema: z.ZodType<
@@ -63,7 +66,7 @@ export const PayrollBlocker$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   key: Key$inboundSchema,
-  message: z.string(),
+  message: types.string(),
 });
 
 export function payrollBlockerFromJSON(

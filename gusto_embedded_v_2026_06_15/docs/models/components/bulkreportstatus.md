@@ -8,10 +8,12 @@ Overall batch status. `pending`/`processing` while in progress; once finished, `
 import { BulkReportStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/bulkreport.js";
 
 let value: BulkReportStatus = "pending";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"pending" | "processing" | "success" | "partial_success" | "failed"
+"pending" | "processing" | "success" | "partial_success" | "failed" | Unrecognized<string>
 ```

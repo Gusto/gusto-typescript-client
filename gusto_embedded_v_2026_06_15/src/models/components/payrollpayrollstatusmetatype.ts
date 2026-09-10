@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -44,12 +45,12 @@ export const PayrollPayrollStatusMetaType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  cancellable: z.boolean().optional(),
-  expected_check_date: z.string().optional(),
-  initial_check_date: z.nullable(z.string()).optional(),
-  expected_debit_time: z.string().optional(),
-  payroll_late: z.nullable(z.boolean()).optional(),
-  initial_debit_cutoff_time: z.string().optional(),
+  cancellable: types.optional(types.boolean()),
+  expected_check_date: types.optional(types.string()),
+  initial_check_date: z.nullable(types.string()).optional(),
+  expected_debit_time: types.optional(types.string()),
+  payroll_late: z.nullable(types.boolean()).optional(),
+  initial_debit_cutoff_time: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "expected_check_date": "expectedCheckDate",

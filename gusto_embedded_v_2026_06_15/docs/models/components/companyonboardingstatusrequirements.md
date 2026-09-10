@@ -6,10 +6,12 @@
 import { CompanyOnboardingStatusRequirements } from "@gusto/embedded-api-v-2026-06-15/models/components/companyonboardingstatus.js";
 
 let value: CompanyOnboardingStatusRequirements = "state_setup";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"add_addresses" | "federal_tax_setup" | "select_industry" | "add_bank_info" | "add_employees" | "state_setup" | "payroll_schedule" | "sign_all_forms" | "verify_bank_info" | "external_payroll"
+"add_addresses" | "federal_tax_setup" | "select_industry" | "add_bank_info" | "add_employees" | "state_setup" | "payroll_schedule" | "sign_all_forms" | "verify_bank_info" | "external_payroll" | Unrecognized<string>
 ```

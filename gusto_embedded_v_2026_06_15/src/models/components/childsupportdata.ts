@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FipsCodes = {
@@ -31,7 +33,7 @@ export const ChildSupportDataKey = {
 /**
  * A required attribute when creating a garnishment for this state agency. The current values are listed as an enum; though unlikely, values could be added if state agency requirements change in the future.
  */
-export type ChildSupportDataKey = ClosedEnum<typeof ChildSupportDataKey>;
+export type ChildSupportDataKey = OpenEnum<typeof ChildSupportDataKey>;
 
 export type RequiredAttributes = {
   /**
@@ -83,8 +85,8 @@ export const FipsCodes$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  code: z.string().optional(),
-  county: z.nullable(z.string()).optional(),
+  code: types.optional(types.string()),
+  county: z.nullable(types.string()).optional(),
 });
 
 export function fipsCodesFromJSON(
@@ -98,9 +100,11 @@ export function fipsCodesFromJSON(
 }
 
 /** @internal */
-export const ChildSupportDataKey$inboundSchema: z.ZodNativeEnum<
-  typeof ChildSupportDataKey
-> = z.nativeEnum(ChildSupportDataKey);
+export const ChildSupportDataKey$inboundSchema: z.ZodType<
+  ChildSupportDataKey,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ChildSupportDataKey);
 
 /** @internal */
 export const RequiredAttributes$inboundSchema: z.ZodType<
@@ -108,8 +112,8 @@ export const RequiredAttributes$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  key: ChildSupportDataKey$inboundSchema.optional(),
-  label: z.string().optional(),
+  key: types.optional(ChildSupportDataKey$inboundSchema),
+  label: types.optional(types.string()),
 });
 
 export function requiredAttributesFromJSON(
@@ -128,12 +132,13 @@ export const Agencies$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  state: z.string().optional(),
-  name: z.string().optional(),
-  manual_payment_required: z.boolean().optional(),
-  fips_codes: z.array(z.lazy(() => FipsCodes$inboundSchema)).optional(),
-  required_attributes: z.array(z.lazy(() => RequiredAttributes$inboundSchema))
-    .optional(),
+  state: types.optional(types.string()),
+  name: types.optional(types.string()),
+  manual_payment_required: types.optional(types.boolean()),
+  fips_codes: types.optional(z.array(z.lazy(() => FipsCodes$inboundSchema))),
+  required_attributes: types.optional(
+    z.array(z.lazy(() => RequiredAttributes$inboundSchema)),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "manual_payment_required": "manualPaymentRequired",
@@ -158,7 +163,7 @@ export const ChildSupportData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  agencies: z.array(z.lazy(() => Agencies$inboundSchema)).optional(),
+  agencies: types.optional(z.array(z.lazy(() => Agencies$inboundSchema))),
 });
 
 export function childSupportDataFromJSON(

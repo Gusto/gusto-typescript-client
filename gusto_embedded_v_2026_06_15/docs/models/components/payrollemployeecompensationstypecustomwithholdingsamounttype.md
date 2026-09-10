@@ -9,10 +9,12 @@ import { PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType } from "@g
 
 let value: PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType =
   "fixed";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"fixed" | "percent"
+"fixed" | "percent" | Unrecognized<string>
 ```

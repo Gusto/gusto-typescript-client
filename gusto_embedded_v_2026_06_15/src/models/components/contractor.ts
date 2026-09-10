@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -19,7 +21,7 @@ export const ContractorWageType = {
 /**
  * The contractor's wage type, either "Fixed" or "Hourly".
  */
-export type ContractorWageType = ClosedEnum<typeof ContractorWageType>;
+export type ContractorWageType = OpenEnum<typeof ContractorWageType>;
 
 /**
  * The contractor's type, either "Individual" or "Business".
@@ -31,7 +33,7 @@ export const ContractorType = {
 /**
  * The contractor's type, either "Individual" or "Business".
  */
-export type ContractorType = ClosedEnum<typeof ContractorType>;
+export type ContractorType = OpenEnum<typeof ContractorType>;
 
 /**
  * The contractor’s home address.
@@ -60,13 +62,13 @@ export const OnboardingStatus = {
 /**
  * One of the "onboarding_status" enum values.
  */
-export type OnboardingStatus = ClosedEnum<typeof OnboardingStatus>;
+export type OnboardingStatus = OpenEnum<typeof OnboardingStatus>;
 
 export const ContractorPaymentMethod1 = {
   DirectDeposit: "Direct Deposit",
   Check: "Check",
 } as const;
-export type ContractorPaymentMethod1 = ClosedEnum<
+export type ContractorPaymentMethod1 = OpenEnum<
   typeof ContractorPaymentMethod1
 >;
 
@@ -97,7 +99,7 @@ export const ContractorStatus = {
 /**
  * The current status of the member portal invitation.
  */
-export type ContractorStatus = ClosedEnum<typeof ContractorStatus>;
+export type ContractorStatus = OpenEnum<typeof ContractorStatus>;
 
 /**
  * Member portal invitation status information. Only included when the include param has the portal_invitations value set.
@@ -262,24 +264,28 @@ export type Contractor = {
 };
 
 /** @internal */
-export const ContractorWageType$inboundSchema: z.ZodNativeEnum<
-  typeof ContractorWageType
-> = z.nativeEnum(ContractorWageType);
+export const ContractorWageType$inboundSchema: z.ZodType<
+  ContractorWageType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorWageType);
 
 /** @internal */
-export const ContractorType$inboundSchema: z.ZodNativeEnum<
-  typeof ContractorType
-> = z.nativeEnum(ContractorType);
+export const ContractorType$inboundSchema: z.ZodType<
+  ContractorType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorType);
 
 /** @internal */
 export const Address$inboundSchema: z.ZodType<Address, z.ZodTypeDef, unknown> =
   z.object({
-    street_1: z.string().optional(),
-    street_2: z.nullable(z.string()).optional(),
-    city: z.string().optional(),
-    state: z.string().optional(),
-    zip: z.string().optional(),
-    country: z.string().optional(),
+    street_1: types.optional(types.string()),
+    street_2: z.nullable(types.string()).optional(),
+    city: types.optional(types.string()),
+    state: types.optional(types.string()),
+    zip: types.optional(types.string()),
+    country: types.optional(types.string()),
   }).transform((v) => {
     return remap$(v, {
       "street_1": "street1",
@@ -298,14 +304,18 @@ export function addressFromJSON(
 }
 
 /** @internal */
-export const OnboardingStatus$inboundSchema: z.ZodNativeEnum<
-  typeof OnboardingStatus
-> = z.nativeEnum(OnboardingStatus);
+export const OnboardingStatus$inboundSchema: z.ZodType<
+  OnboardingStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(OnboardingStatus);
 
 /** @internal */
-export const ContractorPaymentMethod1$inboundSchema: z.ZodNativeEnum<
-  typeof ContractorPaymentMethod1
-> = z.nativeEnum(ContractorPaymentMethod1);
+export const ContractorPaymentMethod1$inboundSchema: z.ZodType<
+  ContractorPaymentMethod1,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorPaymentMethod1);
 
 /** @internal */
 export const UpcomingEmployment$inboundSchema: z.ZodType<
@@ -313,8 +323,8 @@ export const UpcomingEmployment$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  start_date: z.string().optional(),
-  setup_status: z.nullable(z.string()).optional(),
+  start_date: types.optional(types.string()),
+  setup_status: z.nullable(types.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "start_date": "startDate",
@@ -333,9 +343,11 @@ export function upcomingEmploymentFromJSON(
 }
 
 /** @internal */
-export const ContractorStatus$inboundSchema: z.ZodNativeEnum<
-  typeof ContractorStatus
-> = z.nativeEnum(ContractorStatus);
+export const ContractorStatus$inboundSchema: z.ZodType<
+  ContractorStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorStatus);
 
 /** @internal */
 export const MemberPortalInvitationStatus$inboundSchema: z.ZodType<
@@ -343,14 +355,10 @@ export const MemberPortalInvitationStatus$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  status: ContractorStatus$inboundSchema.optional(),
-  token_expired: z.nullable(z.boolean()).optional(),
-  welcome_email_sent_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  last_password_resent_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
+  status: types.optional(ContractorStatus$inboundSchema),
+  token_expired: z.nullable(types.boolean()).optional(),
+  welcome_email_sent_at: z.nullable(types.date()).optional(),
+  last_password_resent_at: z.nullable(types.date()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "token_expired": "tokenExpired",
@@ -375,42 +383,42 @@ export const Contractor$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  company_uuid: z.string().optional(),
-  wage_type: ContractorWageType$inboundSchema.optional(),
-  is_active: z.boolean().default(true),
-  version: z.string().optional(),
-  type: ContractorType$inboundSchema.optional(),
-  first_name: z.nullable(z.string()).optional(),
-  last_name: z.nullable(z.string()).optional(),
-  middle_initial: z.nullable(z.string()).optional(),
-  business_name: z.nullable(z.string()).optional(),
-  ein: z.nullable(z.string()).optional(),
-  has_ein: z.nullable(z.boolean()).optional(),
-  email: z.nullable(z.string()).optional(),
-  work_email: z.nullable(z.string()).optional(),
-  start_date: z.string().optional(),
+  uuid: types.string(),
+  company_uuid: types.optional(types.string()),
+  wage_type: types.optional(ContractorWageType$inboundSchema),
+  is_active: types.boolean().default(true),
+  version: types.optional(types.string()),
+  type: types.optional(ContractorType$inboundSchema),
+  first_name: z.nullable(types.string()).optional(),
+  last_name: z.nullable(types.string()).optional(),
+  middle_initial: z.nullable(types.string()).optional(),
+  business_name: z.nullable(types.string()).optional(),
+  ein: z.nullable(types.string()).optional(),
+  has_ein: z.nullable(types.boolean()).optional(),
+  email: z.nullable(types.string()).optional(),
+  work_email: z.nullable(types.string()).optional(),
+  start_date: types.optional(types.string()),
   address: z.nullable(z.lazy(() => Address$inboundSchema)).optional(),
-  hourly_rate: z.string().optional(),
-  file_new_hire_report: z.nullable(z.boolean()).optional(),
-  work_state: z.nullable(z.string()).optional(),
-  onboarded: z.boolean().optional(),
-  onboarding_status: OnboardingStatus$inboundSchema.optional(),
+  hourly_rate: types.optional(types.string()),
+  file_new_hire_report: z.nullable(types.boolean()).optional(),
+  work_state: z.nullable(types.string()).optional(),
+  onboarded: types.optional(types.boolean()),
+  onboarding_status: types.optional(OnboardingStatus$inboundSchema),
   payment_method: z.nullable(ContractorPaymentMethod1$inboundSchema).optional(),
-  has_ssn: z.boolean().optional(),
-  department_uuid: z.nullable(z.string()).optional(),
-  department: z.nullable(z.string()).optional(),
-  department_title: z.nullable(z.string()).optional(),
-  dismissal_date: z.nullable(z.string()).optional(),
+  has_ssn: types.optional(types.boolean()),
+  department_uuid: z.nullable(types.string()).optional(),
+  department: z.nullable(types.string()).optional(),
+  department_title: z.nullable(types.string()).optional(),
+  dismissal_date: z.nullable(types.string()).optional(),
   upcoming_employment: z.nullable(
     z.lazy(() => UpcomingEmployment$inboundSchema),
   ).optional(),
-  dismissal_cancellation_eligible: z.boolean().optional(),
-  rehire_cancellation_eligible: z.boolean().optional(),
+  dismissal_cancellation_eligible: types.optional(types.boolean()),
+  rehire_cancellation_eligible: types.optional(types.boolean()),
   member_portal_invitation_status: z.nullable(
     z.lazy(() => MemberPortalInvitationStatus$inboundSchema),
   ).optional(),
-  partner_portal_invitation_sent: z.nullable(z.boolean()).optional(),
+  partner_portal_invitation_sent: z.nullable(types.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

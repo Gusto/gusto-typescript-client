@@ -8,10 +8,12 @@ Bank account type
 import { AccountType } from "@gusto/embedded-api-v-2026-06-15/models/components/companybankaccount.js";
 
 let value: AccountType = "Savings";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"Checking" | "Savings"
+"Checking" | "Savings" | Unrecognized<string>
 ```

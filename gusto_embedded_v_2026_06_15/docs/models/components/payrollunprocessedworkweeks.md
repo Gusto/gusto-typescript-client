@@ -10,7 +10,7 @@ let value: PayrollUnprocessedWorkweeks = {};
 
 ## Fields
 
-| Field                             | Type                              | Required                          | Description                       |
-| --------------------------------- | --------------------------------- | --------------------------------- | --------------------------------- |
-| `startDate`                       | [RFCDate](../../types/rfcdate.md) | :heavy_minus_sign:                | The start date of the workweek.   |
-| `endDate`                         | [RFCDate](../../types/rfcdate.md) | :heavy_minus_sign:                | The end date of the workweek.     |
+| Field                           | Type                            | Required                        | Description                     |
+| ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
+| `startDate`                     | [Date](../../types/rfcdate.md)  | :heavy_minus_sign:              | The start date of the workweek. |
+| `endDate`                       | [Date](../../types/rfcdate.md)  | :heavy_minus_sign:              | The end date of the workweek.   |

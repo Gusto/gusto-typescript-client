@@ -5,15 +5,17 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const ContractorPaymentDetailsListPaymentMethod = {
   DirectDeposit: "Direct Deposit",
   Check: "Check",
 } as const;
-export type ContractorPaymentDetailsListPaymentMethod = ClosedEnum<
+export type ContractorPaymentDetailsListPaymentMethod = OpenEnum<
   typeof ContractorPaymentDetailsListPaymentMethod
 >;
 
@@ -21,7 +23,7 @@ export const SplitBy = {
   Amount: "Amount",
   Percentage: "Percentage",
 } as const;
-export type SplitBy = ClosedEnum<typeof SplitBy>;
+export type SplitBy = OpenEnum<typeof SplitBy>;
 
 export type Splits = {
   bankAccountUuid?: string | undefined;
@@ -59,25 +61,27 @@ export type ContractorPaymentDetailsList = {
 };
 
 /** @internal */
-export const ContractorPaymentDetailsListPaymentMethod$inboundSchema:
-  z.ZodNativeEnum<typeof ContractorPaymentDetailsListPaymentMethod> = z
-    .nativeEnum(ContractorPaymentDetailsListPaymentMethod);
+export const ContractorPaymentDetailsListPaymentMethod$inboundSchema: z.ZodType<
+  ContractorPaymentDetailsListPaymentMethod,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorPaymentDetailsListPaymentMethod);
 
 /** @internal */
-export const SplitBy$inboundSchema: z.ZodNativeEnum<typeof SplitBy> = z
-  .nativeEnum(SplitBy);
+export const SplitBy$inboundSchema: z.ZodType<SplitBy, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(SplitBy);
 
 /** @internal */
 export const Splits$inboundSchema: z.ZodType<Splits, z.ZodTypeDef, unknown> = z
   .object({
-    bank_account_uuid: z.string().optional(),
-    name: z.string().optional(),
-    hidden_account_number: z.string().optional(),
-    encrypted_account_number: z.nullable(z.string()).optional(),
-    routing_number: z.string().optional(),
-    priority: z.number().int().optional(),
-    split_amount: z.nullable(z.number()).optional(),
-    account_type: z.string().optional(),
+    bank_account_uuid: types.optional(types.string()),
+    name: types.optional(types.string()),
+    hidden_account_number: types.optional(types.string()),
+    encrypted_account_number: z.nullable(types.string()).optional(),
+    routing_number: types.optional(types.string()),
+    priority: types.optional(types.number()),
+    split_amount: z.nullable(types.number()).optional(),
+    account_type: types.optional(types.string()),
   }).transform((v) => {
     return remap$(v, {
       "bank_account_uuid": "bankAccountUuid",
@@ -105,11 +109,12 @@ export const ContractorPaymentDetailsList$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  contractor_uuid: z.string().optional(),
-  payment_method: ContractorPaymentDetailsListPaymentMethod$inboundSchema
-    .optional(),
-  first_name: z.string().optional(),
-  last_name: z.string().optional(),
+  contractor_uuid: types.optional(types.string()),
+  payment_method: types.optional(
+    ContractorPaymentDetailsListPaymentMethod$inboundSchema,
+  ),
+  first_name: types.optional(types.string()),
+  last_name: types.optional(types.string()),
   split_by: z.nullable(SplitBy$inboundSchema).optional(),
   splits: z.nullable(z.array(z.lazy(() => Splits$inboundSchema))).optional(),
 }).transform((v) => {

@@ -8,10 +8,12 @@ Represents the notification's status as managed by our system. It is updated bas
 import { NotificationStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/notification.js";
 
 let value: NotificationStatus = "expired";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"open" | "resolved" | "expired"
+"open" | "resolved" | "expired" | Unrecognized<string>
 ```

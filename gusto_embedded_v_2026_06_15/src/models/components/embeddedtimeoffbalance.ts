@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Balances = {
@@ -51,11 +52,11 @@ export const Balances$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  policy_uuid: z.string().optional(),
-  balance_hours: z.string().optional(),
-  accrued_hours: z.string().optional(),
-  used_hours: z.string().optional(),
-  pending_hours: z.nullable(z.string()).optional(),
+  policy_uuid: types.optional(types.string()),
+  balance_hours: types.optional(types.string()),
+  accrued_hours: types.optional(types.string()),
+  used_hours: types.optional(types.string()),
+  pending_hours: z.nullable(types.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "policy_uuid": "policyUuid",
@@ -82,8 +83,8 @@ export const EmbeddedTimeOffBalance$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  employee_uuid: z.string().optional(),
-  balances: z.array(z.lazy(() => Balances$inboundSchema)).optional(),
+  employee_uuid: types.optional(types.string()),
+  balances: types.optional(z.array(z.lazy(() => Balances$inboundSchema))),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",

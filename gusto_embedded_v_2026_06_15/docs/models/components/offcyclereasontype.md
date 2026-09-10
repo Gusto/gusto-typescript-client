@@ -6,10 +6,12 @@
 import { OffCycleReasonType } from "@gusto/embedded-api-v-2026-06-15/models/components/payrollshow.js";
 
 let value: OffCycleReasonType = "Transition from old pay schedule";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"Adhoc" | "Benefit reversal" | "Bonus" | "Correction" | "Dismissed employee" | "Hired employee" | "Wage correction" | "Tax reconciliation" | "Reversal" | "Disability insurance distribution" | "Transition from old pay schedule"
+"Adhoc" | "Benefit reversal" | "Bonus" | "Correction" | "Dismissed employee" | "Hired employee" | "Wage correction" | "Tax reconciliation" | "Reversal" | "Disability insurance distribution" | "Transition from old pay schedule" | Unrecognized<string>
 ```

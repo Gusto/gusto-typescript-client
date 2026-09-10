@@ -7,7 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import { RFCDate } from "../../types/rfcdate.js";
+import * as types from "../../types/primitives.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
@@ -75,11 +75,11 @@ export type PostV1CompaniesCompanyIdPayrollsRequestBody = {
   /**
    * Pay period start date.
    */
-  startDate: RFCDate;
+  startDate: Date;
   /**
    * Pay period end date.
    */
-  endDate: RFCDate;
+  endDate: Date;
   /**
    * A pay schedule is required for transition from old pay schedule payroll to identify the matching transition pay period.
    */
@@ -91,7 +91,7 @@ export type PostV1CompaniesCompanyIdPayrollsRequestBody = {
   /**
    * Payment date.
    */
-  checkDate?: RFCDate | undefined;
+  checkDate?: Date | undefined;
   /**
    * The payment schedule tax rate the payroll is based on.
    */
@@ -172,11 +172,17 @@ export const PostV1CompaniesCompanyIdPayrollsRequestBody$outboundSchema:
   > = z.object({
     offCycle: z.boolean(),
     offCycleReason: OffCycleReason$outboundSchema,
-    startDate: z.instanceof(RFCDate).transform(v => v.toString()),
-    endDate: z.instanceof(RFCDate).transform(v => v.toString()),
+    startDate: z.date().transform(v =>
+      v.toISOString().slice(0, "YYYY-MM-DD".length)
+    ),
+    endDate: z.date().transform(v =>
+      v.toISOString().slice(0, "YYYY-MM-DD".length)
+    ),
     payScheduleUuid: z.string().optional(),
     employeeUuids: z.array(z.string()).optional(),
-    checkDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+    checkDate: z.date().transform(v =>
+      v.toISOString().slice(0, "YYYY-MM-DD".length)
+    ).optional(),
     withholdingPayPeriod: WithholdingPayPeriod$outboundSchema.optional(),
     skipRegularDeductions: z.boolean().optional(),
     fixedWithholdingRate: z.boolean().optional(),
@@ -256,7 +262,7 @@ export const PostV1CompaniesCompanyIdPayrollsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Payroll-Unprocessed": PayrollUnprocessed$inboundSchema.optional(),
+  "Payroll-Unprocessed": types.optional(PayrollUnprocessed$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",

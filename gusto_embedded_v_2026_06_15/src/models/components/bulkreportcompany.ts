@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BulkReportItemResult,
@@ -37,9 +39,7 @@ export const BulkReportCompanyStatus = {
  * - `failed`: every report failed
  * - `pending`: at least one report is still being generated
  */
-export type BulkReportCompanyStatus = ClosedEnum<
-  typeof BulkReportCompanyStatus
->;
+export type BulkReportCompanyStatus = OpenEnum<typeof BulkReportCompanyStatus>;
 
 /**
  * Results for a single company in a bulk report batch.
@@ -63,9 +63,11 @@ export type BulkReportCompany = {
 };
 
 /** @internal */
-export const BulkReportCompanyStatus$inboundSchema: z.ZodNativeEnum<
-  typeof BulkReportCompanyStatus
-> = z.nativeEnum(BulkReportCompanyStatus);
+export const BulkReportCompanyStatus$inboundSchema: z.ZodType<
+  BulkReportCompanyStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(BulkReportCompanyStatus);
 
 /** @internal */
 export const BulkReportCompany$inboundSchema: z.ZodType<
@@ -73,7 +75,7 @@ export const BulkReportCompany$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  company_uuid: z.string(),
+  company_uuid: types.string(),
   status: BulkReportCompanyStatus$inboundSchema,
   reports: z.array(BulkReportItemResult$inboundSchema),
 }).transform((v) => {

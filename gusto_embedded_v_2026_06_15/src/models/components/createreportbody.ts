@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { RFCDate } from "../../types/rfcdate.js";
 
 export const CreateReportBodyColumns = {
   AdditionalEarnings: "additional_earnings",
@@ -220,19 +219,19 @@ export type CreateReportBody = {
   /**
    * Start date of data to filter by
    */
-  startDate?: RFCDate | undefined;
+  startDate?: Date | undefined;
   /**
    * End date of data to filter by
    */
-  endDate?: RFCDate | undefined;
+  endDate?: Date | undefined;
   /**
    * Dismissed start date of employees to filter by
    */
-  dismissedStartDate?: RFCDate | undefined;
+  dismissedStartDate?: Date | undefined;
   /**
    * Dismissed end date of employees to filter by
    */
-  dismissedEndDate?: RFCDate | undefined;
+  dismissedEndDate?: Date | undefined;
   /**
    * Payment method to filter by
    */
@@ -328,12 +327,18 @@ export const CreateReportBody$outboundSchema: z.ZodType<
   dateFilterType: CreateReportBodyDateFilterType$outboundSchema.default(
     "period_end_date",
   ),
-  startDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
-  endDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
-  dismissedStartDate: z.instanceof(RFCDate).transform(v => v.toString())
-    .optional(),
-  dismissedEndDate: z.instanceof(RFCDate).transform(v => v.toString())
-    .optional(),
+  startDate: z.date().transform(v =>
+    v.toISOString().slice(0, "YYYY-MM-DD".length)
+  ).optional(),
+  endDate: z.date().transform(v =>
+    v.toISOString().slice(0, "YYYY-MM-DD".length)
+  ).optional(),
+  dismissedStartDate: z.date().transform(v =>
+    v.toISOString().slice(0, "YYYY-MM-DD".length)
+  ).optional(),
+  dismissedEndDate: z.date().transform(v =>
+    v.toISOString().slice(0, "YYYY-MM-DD".length)
+  ).optional(),
   paymentMethod: CreateReportBodyPaymentMethod$outboundSchema.optional(),
   employmentType: CreateReportBodyEmploymentType$outboundSchema.optional(),
   employmentStatus: CreateReportBodyEmploymentStatus$outboundSchema.optional(),

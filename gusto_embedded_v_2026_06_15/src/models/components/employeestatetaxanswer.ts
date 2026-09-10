@@ -6,6 +6,8 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -29,8 +31,8 @@ export type EmployeeStateTaxAnswer = {
 };
 
 /** @internal */
-export const Value$inboundSchema: z.ZodType<Value, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.number(), z.boolean()]);
+export const Value$inboundSchema: z.ZodType<Value, z.ZodTypeDef, unknown> =
+  smartUnion([types.string(), types.number(), types.boolean()]);
 
 export function valueFromJSON(
   jsonString: string,
@@ -48,9 +50,11 @@ export const EmployeeStateTaxAnswer$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  value: z.nullable(z.union([z.string(), z.number(), z.boolean()])).optional(),
-  valid_from: z.string().optional(),
-  valid_up_to: z.nullable(z.string()).optional(),
+  value: z.nullable(
+    smartUnion([types.string(), types.number(), types.boolean()]),
+  ).optional(),
+  valid_from: types.optional(types.string()),
+  valid_up_to: z.nullable(types.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "valid_from": "validFrom",

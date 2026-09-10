@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RecurringReimbursement = {
@@ -45,13 +46,13 @@ export const RecurringReimbursement$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  employee_uuid: z.string(),
-  description: z.string(),
-  amount: z.string(),
-  version: z.string(),
-  created_at: z.string().optional(),
-  updated_at: z.string().optional(),
+  uuid: types.string(),
+  employee_uuid: types.string(),
+  description: types.string(),
+  amount: types.string(),
+  version: types.string(),
+  created_at: types.optional(types.string()),
+  updated_at: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",

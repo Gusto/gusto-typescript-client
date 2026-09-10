@@ -8,10 +8,12 @@ The amount type of the deduction for the pay period. Only present for unprocesse
 import { PayrollShowAmountType } from "@gusto/embedded-api-v-2026-06-15/models/components/payrollshow.js";
 
 let value: PayrollShowAmountType = "percent";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"fixed" | "percent"
+"fixed" | "percent" | Unrecognized<string>
 ```

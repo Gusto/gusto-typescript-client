@@ -8,10 +8,12 @@ How to interpret the amount.
 import { PayrollUnprocessedEmployeeCompensationsTypeAmountType } from "@gusto/embedded-api-v-2026-06-15/models/components/payrollunprocessedemployeecompensationstype.js";
 
 let value: PayrollUnprocessedEmployeeCompensationsTypeAmountType = "fixed";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"fixed" | "percent"
+"fixed" | "percent" | Unrecognized<string>
 ```

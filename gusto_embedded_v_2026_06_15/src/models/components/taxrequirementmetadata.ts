@@ -5,8 +5,11 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -47,7 +50,7 @@ export const Type = {
  * - `tax_rate`: A decimal value representing a tax rate, e.g. `0.034` representing a tax rate of `3.4%`, see `validation` for additional validation guidance
  * - `workers_compensation_rate`: A decimal value representing a percentage, see `risk_class_code`, `risk_class_description`, and `rate_type`
  */
-export type Type = ClosedEnum<typeof Type>;
+export type Type = OpenEnum<typeof Type>;
 
 /**
  * The actual value to be submitted
@@ -87,7 +90,7 @@ export const RateType = {
  *   - `percent`: A percentage formatted as a decimal, e.g. `0.01` for 1%
  *   - `currency_per_hour`: A dollar amount per hour, e.g. `3.24` for $3.24/hr
  */
-export type RateType = ClosedEnum<typeof RateType>;
+export type RateType = OpenEnum<typeof RateType>;
 
 /**
  * Describes the type of tax_rate validation rule
@@ -99,7 +102,7 @@ export const TaxRequirementMetadataType = {
 /**
  * Describes the type of tax_rate validation rule
  */
-export type TaxRequirementMetadataType = ClosedEnum<
+export type TaxRequirementMetadataType = OpenEnum<
   typeof TaxRequirementMetadataType
 >;
 
@@ -192,16 +195,15 @@ export type TaxRequirementMetadata = {
 };
 
 /** @internal */
-export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
-  Type,
-);
+export const Type$inboundSchema: z.ZodType<Type, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(Type);
 
 /** @internal */
 export const TaxRequirementMetadataValue$inboundSchema: z.ZodType<
   TaxRequirementMetadataValue,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.boolean()]);
+> = smartUnion([types.string(), types.boolean()]);
 
 export function taxRequirementMetadataValueFromJSON(
   jsonString: string,
@@ -216,9 +218,9 @@ export function taxRequirementMetadataValueFromJSON(
 /** @internal */
 export const Options$inboundSchema: z.ZodType<Options, z.ZodTypeDef, unknown> =
   z.object({
-    label: z.string(),
-    value: z.union([z.string(), z.boolean()]),
-    short_label: z.nullable(z.string()).optional(),
+    label: types.string(),
+    value: smartUnion([types.string(), types.boolean()]),
+    short_label: z.nullable(types.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "short_label": "shortLabel",
@@ -236,13 +238,18 @@ export function optionsFromJSON(
 }
 
 /** @internal */
-export const RateType$inboundSchema: z.ZodNativeEnum<typeof RateType> = z
-  .nativeEnum(RateType);
+export const RateType$inboundSchema: z.ZodType<
+  RateType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(RateType);
 
 /** @internal */
-export const TaxRequirementMetadataType$inboundSchema: z.ZodNativeEnum<
-  typeof TaxRequirementMetadataType
-> = z.nativeEnum(TaxRequirementMetadataType);
+export const TaxRequirementMetadataType$inboundSchema: z.ZodType<
+  TaxRequirementMetadataType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(TaxRequirementMetadataType);
 
 /** @internal */
 export const Validation$inboundSchema: z.ZodType<
@@ -251,9 +258,9 @@ export const Validation$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: TaxRequirementMetadataType$inboundSchema,
-  min: z.string().optional(),
-  max: z.string().optional(),
-  rates: z.array(z.string()).optional(),
+  min: types.optional(types.string()),
+  max: types.optional(types.string()),
+  rates: types.optional(z.array(types.string())),
 });
 
 export function validationFromJSON(
@@ -273,13 +280,13 @@ export const TaxRequirementMetadata$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: Type$inboundSchema,
-  options: z.array(z.lazy(() => Options$inboundSchema)).optional(),
-  risk_class_code: z.string().optional(),
-  risk_class_description: z.string().optional(),
-  rate_type: RateType$inboundSchema.optional(),
-  mask: z.nullable(z.string()).optional(),
-  prefix: z.nullable(z.string()).optional(),
-  validation: z.lazy(() => Validation$inboundSchema).optional(),
+  options: types.optional(z.array(z.lazy(() => Options$inboundSchema))),
+  risk_class_code: types.optional(types.string()),
+  risk_class_description: types.optional(types.string()),
+  rate_type: types.optional(RateType$inboundSchema),
+  mask: z.nullable(types.string()).optional(),
+  prefix: z.nullable(types.string()).optional(),
+  validation: types.optional(z.lazy(() => Validation$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     "risk_class_code": "riskClassCode",

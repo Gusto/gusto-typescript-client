@@ -7,10 +7,12 @@ import { PayrollUnprocessedEmployeeCompensationsTypePaymentMethod } from "@gusto
 
 let value: PayrollUnprocessedEmployeeCompensationsTypePaymentMethod =
   "Direct Deposit";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"Direct Deposit" | "Check" | "Historical"
+"Direct Deposit" | "Check" | "Historical" | Unrecognized<string>
 ```

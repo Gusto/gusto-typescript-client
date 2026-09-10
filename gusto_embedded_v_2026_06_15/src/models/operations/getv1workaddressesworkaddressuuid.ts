@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import {
   EmployeeWorkAddress,
   EmployeeWorkAddress$inboundSchema,
@@ -97,7 +98,7 @@ export const GetV1WorkAddressesWorkAddressUuidResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Employee-Work-Address": EmployeeWorkAddress$inboundSchema.optional(),
+  "Employee-Work-Address": types.optional(EmployeeWorkAddress$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",

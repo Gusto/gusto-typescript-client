@@ -13,10 +13,12 @@ This company's overall status across its `reports`:
 import { BulkReportCompanyStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/bulkreportcompany.js";
 
 let value: BulkReportCompanyStatus = "failed";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"pending" | "success" | "partial_success" | "failed"
+"pending" | "success" | "partial_success" | "failed" | Unrecognized<string>
 ```

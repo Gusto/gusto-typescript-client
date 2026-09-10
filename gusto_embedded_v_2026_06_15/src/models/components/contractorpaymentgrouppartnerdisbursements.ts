@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -19,8 +21,9 @@ export const ContractorPaymentGroupPartnerDisbursementsPaymentMethod = {
 /**
  * The payment method for the disbursement
  */
-export type ContractorPaymentGroupPartnerDisbursementsPaymentMethod =
-  ClosedEnum<typeof ContractorPaymentGroupPartnerDisbursementsPaymentMethod>;
+export type ContractorPaymentGroupPartnerDisbursementsPaymentMethod = OpenEnum<
+  typeof ContractorPaymentGroupPartnerDisbursementsPaymentMethod
+>;
 
 /**
  * The status of the payment
@@ -34,8 +37,9 @@ export const ContractorPaymentGroupPartnerDisbursementsPaymentStatus = {
 /**
  * The status of the payment
  */
-export type ContractorPaymentGroupPartnerDisbursementsPaymentStatus =
-  ClosedEnum<typeof ContractorPaymentGroupPartnerDisbursementsPaymentStatus>;
+export type ContractorPaymentGroupPartnerDisbursementsPaymentStatus = OpenEnum<
+  typeof ContractorPaymentGroupPartnerDisbursementsPaymentStatus
+>;
 
 export type Disbursements = {
   /**
@@ -76,15 +80,23 @@ export type ContractorPaymentGroupPartnerDisbursements = {
 
 /** @internal */
 export const ContractorPaymentGroupPartnerDisbursementsPaymentMethod$inboundSchema:
-  z.ZodNativeEnum<
-    typeof ContractorPaymentGroupPartnerDisbursementsPaymentMethod
-  > = z.nativeEnum(ContractorPaymentGroupPartnerDisbursementsPaymentMethod);
+  z.ZodType<
+    ContractorPaymentGroupPartnerDisbursementsPaymentMethod,
+    z.ZodTypeDef,
+    unknown
+  > = openEnums.inboundSchema(
+    ContractorPaymentGroupPartnerDisbursementsPaymentMethod,
+  );
 
 /** @internal */
 export const ContractorPaymentGroupPartnerDisbursementsPaymentStatus$inboundSchema:
-  z.ZodNativeEnum<
-    typeof ContractorPaymentGroupPartnerDisbursementsPaymentStatus
-  > = z.nativeEnum(ContractorPaymentGroupPartnerDisbursementsPaymentStatus);
+  z.ZodType<
+    ContractorPaymentGroupPartnerDisbursementsPaymentStatus,
+    z.ZodTypeDef,
+    unknown
+  > = openEnums.inboundSchema(
+    ContractorPaymentGroupPartnerDisbursementsPaymentStatus,
+  );
 
 /** @internal */
 export const Disbursements$inboundSchema: z.ZodType<
@@ -92,14 +104,14 @@ export const Disbursements$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  contractor_payment_uuid: z.string().optional(),
-  contractor_uuid: z.string().optional(),
-  payment_method:
-    ContractorPaymentGroupPartnerDisbursementsPaymentMethod$inboundSchema
-      .optional(),
-  payment_status:
-    ContractorPaymentGroupPartnerDisbursementsPaymentStatus$inboundSchema
-      .optional(),
+  contractor_payment_uuid: types.optional(types.string()),
+  contractor_uuid: types.optional(types.string()),
+  payment_method: types.optional(
+    ContractorPaymentGroupPartnerDisbursementsPaymentMethod$inboundSchema,
+  ),
+  payment_status: types.optional(
+    ContractorPaymentGroupPartnerDisbursementsPaymentStatus$inboundSchema,
+  ),
 }).transform((v) => {
   return remap$(v, {
     "contractor_payment_uuid": "contractorPaymentUuid",
@@ -123,9 +135,10 @@ export function disbursementsFromJSON(
 export const ContractorPaymentGroupPartnerDisbursements$inboundSchema:
   z.ZodType<ContractorPaymentGroupPartnerDisbursements, z.ZodTypeDef, unknown> =
     z.object({
-      contractor_payment_group_uuid: z.string().optional(),
-      disbursements: z.array(z.lazy(() => Disbursements$inboundSchema))
-        .optional(),
+      contractor_payment_group_uuid: types.optional(types.string()),
+      disbursements: types.optional(
+        z.array(z.lazy(() => Disbursements$inboundSchema)),
+      ),
     }).transform((v) => {
       return remap$(v, {
         "contractor_payment_group_uuid": "contractorPaymentGroupUuid",

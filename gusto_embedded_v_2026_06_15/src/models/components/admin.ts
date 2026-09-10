@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -37,11 +38,11 @@ export type Admin = {
 /** @internal */
 export const Admin$inboundSchema: z.ZodType<Admin, z.ZodTypeDef, unknown> = z
   .object({
-    uuid: z.string(),
-    email: z.string().optional(),
-    first_name: z.string().optional(),
-    last_name: z.string().optional(),
-    phone: z.nullable(z.string()).optional(),
+    uuid: types.string(),
+    email: types.optional(types.string()),
+    first_name: types.optional(types.string()),
+    last_name: types.optional(types.string()),
+    phone: z.nullable(types.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "first_name": "firstName",

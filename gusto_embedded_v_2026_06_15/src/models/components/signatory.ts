@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const IdentityVerificationStatus = {
@@ -14,7 +16,7 @@ export const IdentityVerificationStatus = {
   Fail: "Fail",
   Skipped: "Skipped",
 } as const;
-export type IdentityVerificationStatus = ClosedEnum<
+export type IdentityVerificationStatus = OpenEnum<
   typeof IdentityVerificationStatus
 >;
 
@@ -66,9 +68,11 @@ export type Signatory = {
 };
 
 /** @internal */
-export const IdentityVerificationStatus$inboundSchema: z.ZodNativeEnum<
-  typeof IdentityVerificationStatus
-> = z.nativeEnum(IdentityVerificationStatus);
+export const IdentityVerificationStatus$inboundSchema: z.ZodType<
+  IdentityVerificationStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(IdentityVerificationStatus);
 
 /** @internal */
 export const SignatoryHomeAddress$inboundSchema: z.ZodType<
@@ -76,12 +80,12 @@ export const SignatoryHomeAddress$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  street_1: z.string().optional(),
-  street_2: z.string().optional(),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  zip: z.string().optional(),
-  country: z.string().default("USA"),
+  street_1: types.optional(types.string()),
+  street_2: types.optional(types.string()),
+  city: types.optional(types.string()),
+  state: types.optional(types.string()),
+  zip: types.optional(types.string()),
+  country: types.string().default("USA"),
 }).transform((v) => {
   return remap$(v, {
     "street_1": "street1",
@@ -105,16 +109,16 @@ export const Signatory$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  first_name: z.nullable(z.string()).optional(),
-  last_name: z.nullable(z.string()).optional(),
-  title: z.nullable(z.string()).optional(),
-  phone: z.nullable(z.string()).optional(),
-  email: z.string().optional(),
-  birthday: z.nullable(z.string()).optional(),
-  is_admin: z.boolean().optional(),
-  has_ssn: z.boolean().optional(),
-  version: z.string().optional(),
+  uuid: types.string(),
+  first_name: z.nullable(types.string()).optional(),
+  last_name: z.nullable(types.string()).optional(),
+  title: z.nullable(types.string()).optional(),
+  phone: z.nullable(types.string()).optional(),
+  email: types.optional(types.string()),
+  birthday: z.nullable(types.string()).optional(),
+  is_admin: types.optional(types.boolean()),
+  has_ssn: types.optional(types.boolean()),
+  version: types.optional(types.string()),
   identity_verification_status: z.nullable(
     IdentityVerificationStatus$inboundSchema,
   ).optional(),

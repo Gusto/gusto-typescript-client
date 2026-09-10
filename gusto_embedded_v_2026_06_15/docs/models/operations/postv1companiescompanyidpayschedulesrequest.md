@@ -4,14 +4,13 @@
 
 ```typescript
 import { PostV1CompaniesCompanyIdPaySchedulesRequest } from "@gusto/embedded-api-v-2026-06-15/models/operations/postv1companiescompanyidpayschedules.js";
-import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 let value: PostV1CompaniesCompanyIdPaySchedulesRequest = {
   companyId: "<id>",
   payScheduleCreateRequest: {
     frequency: "Twice per month",
-    anchorPayDate: new RFCDate("2020-05-15"),
-    anchorEndOfPayPeriod: new RFCDate("2020-05-08"),
+    anchorPayDate: new Date("2020-05-15"),
+    anchorEndOfPayPeriod: new Date("2020-05-08"),
     day1: 15,
     day2: 31,
     customName: "demo pay schedule",

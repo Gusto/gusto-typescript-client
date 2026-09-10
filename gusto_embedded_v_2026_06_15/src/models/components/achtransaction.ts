@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -19,13 +21,13 @@ export const PaymentEventType = {
 /**
  * The type of payment event associated with the ACH transaction
  */
-export type PaymentEventType = ClosedEnum<typeof PaymentEventType>;
+export type PaymentEventType = OpenEnum<typeof PaymentEventType>;
 
 export const RecipientType = {
   Employee: "Employee",
   Contractor: "Contractor",
 } as const;
-export type RecipientType = ClosedEnum<typeof RecipientType>;
+export type RecipientType = OpenEnum<typeof RecipientType>;
 
 /**
  * The status of the ACH transaction
@@ -39,7 +41,7 @@ export const PaymentStatus = {
 /**
  * The status of the ACH transaction
  */
-export type PaymentStatus = ClosedEnum<typeof PaymentStatus>;
+export type PaymentStatus = OpenEnum<typeof PaymentStatus>;
 
 /**
  * The direction of the payment
@@ -51,7 +53,7 @@ export const PaymentDirection = {
 /**
  * The direction of the payment
  */
-export type PaymentDirection = ClosedEnum<typeof PaymentDirection>;
+export type PaymentDirection = OpenEnum<typeof PaymentDirection>;
 
 /**
  * Representation of an ACH transaction
@@ -116,24 +118,32 @@ export type AchTransaction = {
 };
 
 /** @internal */
-export const PaymentEventType$inboundSchema: z.ZodNativeEnum<
-  typeof PaymentEventType
-> = z.nativeEnum(PaymentEventType);
+export const PaymentEventType$inboundSchema: z.ZodType<
+  PaymentEventType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PaymentEventType);
 
 /** @internal */
-export const RecipientType$inboundSchema: z.ZodNativeEnum<
-  typeof RecipientType
-> = z.nativeEnum(RecipientType);
+export const RecipientType$inboundSchema: z.ZodType<
+  RecipientType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(RecipientType);
 
 /** @internal */
-export const PaymentStatus$inboundSchema: z.ZodNativeEnum<
-  typeof PaymentStatus
-> = z.nativeEnum(PaymentStatus);
+export const PaymentStatus$inboundSchema: z.ZodType<
+  PaymentStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PaymentStatus);
 
 /** @internal */
-export const PaymentDirection$inboundSchema: z.ZodNativeEnum<
-  typeof PaymentDirection
-> = z.nativeEnum(PaymentDirection);
+export const PaymentDirection$inboundSchema: z.ZodType<
+  PaymentDirection,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PaymentDirection);
 
 /** @internal */
 export const AchTransaction$inboundSchema: z.ZodType<
@@ -141,20 +151,20 @@ export const AchTransaction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  company_uuid: z.string().optional(),
-  payment_event_type: PaymentEventType$inboundSchema.optional(),
-  payment_event_uuid: z.string().optional(),
+  uuid: types.string(),
+  company_uuid: types.optional(types.string()),
+  payment_event_type: types.optional(PaymentEventType$inboundSchema),
+  payment_event_uuid: types.optional(types.string()),
   recipient_type: z.nullable(RecipientType$inboundSchema).optional(),
-  recipient_uuid: z.string().optional(),
-  error_code: z.nullable(z.string()).optional(),
-  transaction_type: z.string().optional(),
-  payment_status: PaymentStatus$inboundSchema.optional(),
-  payment_direction: PaymentDirection$inboundSchema.optional(),
-  payment_event_check_date: z.string().optional(),
-  payment_date: z.string().optional(),
-  amount: z.string().optional(),
-  description: z.string().optional(),
+  recipient_uuid: types.optional(types.string()),
+  error_code: z.nullable(types.string()).optional(),
+  transaction_type: types.optional(types.string()),
+  payment_status: types.optional(PaymentStatus$inboundSchema),
+  payment_direction: types.optional(PaymentDirection$inboundSchema),
+  payment_event_check_date: types.optional(types.string()),
+  payment_date: types.optional(types.string()),
+  amount: types.optional(types.string()),
+  description: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

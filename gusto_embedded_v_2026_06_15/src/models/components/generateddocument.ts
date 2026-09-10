@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -21,9 +23,7 @@ export const GeneratedDocumentStatus = {
 /**
  * Current status of the Generated Document
  */
-export type GeneratedDocumentStatus = ClosedEnum<
-  typeof GeneratedDocumentStatus
->;
+export type GeneratedDocumentStatus = OpenEnum<typeof GeneratedDocumentStatus>;
 
 export type GeneratedDocument = {
   /**
@@ -41,9 +41,11 @@ export type GeneratedDocument = {
 };
 
 /** @internal */
-export const GeneratedDocumentStatus$inboundSchema: z.ZodNativeEnum<
-  typeof GeneratedDocumentStatus
-> = z.nativeEnum(GeneratedDocumentStatus);
+export const GeneratedDocumentStatus$inboundSchema: z.ZodType<
+  GeneratedDocumentStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(GeneratedDocumentStatus);
 
 /** @internal */
 export const GeneratedDocument$inboundSchema: z.ZodType<
@@ -51,9 +53,9 @@ export const GeneratedDocument$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  request_uuid: z.string().optional(),
-  status: GeneratedDocumentStatus$inboundSchema.optional(),
-  document_urls: z.array(z.string()).optional(),
+  request_uuid: types.optional(types.string()),
+  status: types.optional(GeneratedDocumentStatus$inboundSchema),
+  document_urls: types.optional(z.array(types.string())),
 }).transform((v) => {
   return remap$(v, {
     "request_uuid": "requestUuid",

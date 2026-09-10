@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -20,7 +22,7 @@ export const WebhooksHealthCheckStatusStatus = {
 /**
  * Latest health status of the webhooks system
  */
-export type WebhooksHealthCheckStatusStatus = ClosedEnum<
+export type WebhooksHealthCheckStatusStatus = OpenEnum<
   typeof WebhooksHealthCheckStatusStatus
 >;
 
@@ -39,9 +41,11 @@ export type WebhooksHealthCheckStatus = {
 };
 
 /** @internal */
-export const WebhooksHealthCheckStatusStatus$inboundSchema: z.ZodNativeEnum<
-  typeof WebhooksHealthCheckStatusStatus
-> = z.nativeEnum(WebhooksHealthCheckStatusStatus);
+export const WebhooksHealthCheckStatusStatus$inboundSchema: z.ZodType<
+  WebhooksHealthCheckStatusStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(WebhooksHealthCheckStatusStatus);
 
 /** @internal */
 export const WebhooksHealthCheckStatus$inboundSchema: z.ZodType<
@@ -49,10 +53,8 @@ export const WebhooksHealthCheckStatus$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  status: WebhooksHealthCheckStatusStatus$inboundSchema.optional(),
-  last_checked_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
+  status: types.optional(WebhooksHealthCheckStatusStatus$inboundSchema),
+  last_checked_at: types.optional(types.date()),
 }).transform((v) => {
   return remap$(v, {
     "last_checked_at": "lastCheckedAt",

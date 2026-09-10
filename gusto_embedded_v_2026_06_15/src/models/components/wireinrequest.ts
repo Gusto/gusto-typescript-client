@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -21,7 +23,7 @@ export const WireInRequestStatus = {
 /**
  * Status of the wire in
  */
-export type WireInRequestStatus = ClosedEnum<typeof WireInRequestStatus>;
+export type WireInRequestStatus = OpenEnum<typeof WireInRequestStatus>;
 
 /**
  * Type of payment for the wire in
@@ -33,7 +35,7 @@ export const PaymentType = {
 /**
  * Type of payment for the wire in
  */
-export type PaymentType = ClosedEnum<typeof PaymentType>;
+export type PaymentType = OpenEnum<typeof PaymentType>;
 
 /**
  * Representation of a wire in request
@@ -110,13 +112,18 @@ export type WireInRequest = {
 };
 
 /** @internal */
-export const WireInRequestStatus$inboundSchema: z.ZodNativeEnum<
-  typeof WireInRequestStatus
-> = z.nativeEnum(WireInRequestStatus);
+export const WireInRequestStatus$inboundSchema: z.ZodType<
+  WireInRequestStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(WireInRequestStatus);
 
 /** @internal */
-export const PaymentType$inboundSchema: z.ZodNativeEnum<typeof PaymentType> = z
-  .nativeEnum(PaymentType);
+export const PaymentType$inboundSchema: z.ZodType<
+  PaymentType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PaymentType);
 
 /** @internal */
 export const WireInRequest$inboundSchema: z.ZodType<
@@ -124,23 +131,23 @@ export const WireInRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string().optional(),
-  status: WireInRequestStatus$inboundSchema.optional(),
-  origination_bank: z.string().optional(),
-  origination_bank_address: z.string().optional(),
-  recipient_name: z.string().optional(),
-  recipient_address: z.string().optional(),
-  recipient_account_number: z.string().optional(),
-  recipient_routing_number: z.string().optional(),
-  additional_notes: z.nullable(z.string()).optional(),
-  bank_name: z.nullable(z.string()).optional(),
-  date_sent: z.nullable(z.string()).optional(),
-  unique_tracking_code: z.string().optional(),
-  payment_type: PaymentType$inboundSchema.optional(),
-  payment_uuid: z.string().optional(),
-  amount_sent: z.nullable(z.string()).optional(),
-  requested_amount: z.string().optional(),
-  wire_in_deadline: z.string().optional(),
+  uuid: types.optional(types.string()),
+  status: types.optional(WireInRequestStatus$inboundSchema),
+  origination_bank: types.optional(types.string()),
+  origination_bank_address: types.optional(types.string()),
+  recipient_name: types.optional(types.string()),
+  recipient_address: types.optional(types.string()),
+  recipient_account_number: types.optional(types.string()),
+  recipient_routing_number: types.optional(types.string()),
+  additional_notes: z.nullable(types.string()).optional(),
+  bank_name: z.nullable(types.string()).optional(),
+  date_sent: z.nullable(types.string()).optional(),
+  unique_tracking_code: types.optional(types.string()),
+  payment_type: types.optional(PaymentType$inboundSchema),
+  payment_uuid: types.optional(types.string()),
+  amount_sent: z.nullable(types.string()).optional(),
+  requested_amount: types.optional(types.string()),
+  wire_in_deadline: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "origination_bank": "originationBank",

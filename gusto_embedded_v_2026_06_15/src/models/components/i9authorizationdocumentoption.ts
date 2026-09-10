@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -23,7 +25,7 @@ export const Section = {
 /**
  * The document option's section in the list of acceptable documents on the Form I-9
  */
-export type Section = ClosedEnum<typeof Section>;
+export type Section = OpenEnum<typeof Section>;
 
 /**
  * An employee's I-9 verification document option based on the authorization status
@@ -52,8 +54,8 @@ export type I9AuthorizationDocumentOption = {
 };
 
 /** @internal */
-export const Section$inboundSchema: z.ZodNativeEnum<typeof Section> = z
-  .nativeEnum(Section);
+export const Section$inboundSchema: z.ZodType<Section, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(Section);
 
 /** @internal */
 export const I9AuthorizationDocumentOption$inboundSchema: z.ZodType<
@@ -62,10 +64,10 @@ export const I9AuthorizationDocumentOption$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   section: Section$inboundSchema,
-  description: z.string(),
-  document_type: z.string(),
-  document_title: z.array(z.string()),
-  common_choice: z.boolean(),
+  description: types.string(),
+  document_type: types.string(),
+  document_title: z.array(types.string()),
+  common_choice: types.boolean(),
 }).transform((v) => {
   return remap$(v, {
     "document_type": "documentType",

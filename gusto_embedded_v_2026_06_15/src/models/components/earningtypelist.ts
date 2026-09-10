@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { EarningType, EarningType$inboundSchema } from "./earningtype.js";
 
@@ -28,8 +29,8 @@ export const EarningTypeList$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  default: z.array(EarningType$inboundSchema).optional(),
-  custom: z.array(EarningType$inboundSchema).optional(),
+  default: types.optional(z.array(EarningType$inboundSchema)),
+  custom: types.optional(z.array(EarningType$inboundSchema)),
 });
 
 export function earningTypeListFromJSON(

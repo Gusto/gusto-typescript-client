@@ -3,7 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 /**
  * The frequency that employees on this pay schedule are paid with Gusto.
@@ -41,9 +42,11 @@ export const PayScheduleFrequency = {
  * - `Quarterly`: Employees are paid every three months.
  * - `Annually`: Employees are paid once per year.
  */
-export type PayScheduleFrequency = ClosedEnum<typeof PayScheduleFrequency>;
+export type PayScheduleFrequency = OpenEnum<typeof PayScheduleFrequency>;
 
 /** @internal */
-export const PayScheduleFrequency$inboundSchema: z.ZodNativeEnum<
-  typeof PayScheduleFrequency
-> = z.nativeEnum(PayScheduleFrequency);
+export const PayScheduleFrequency$inboundSchema: z.ZodType<
+  PayScheduleFrequency,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PayScheduleFrequency);

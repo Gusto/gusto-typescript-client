@@ -8,9 +8,11 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import { RFCDate } from "../../types/rfcdate.js";
+import * as types from "../../types/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -85,7 +87,7 @@ export const DeductionReducesTaxableIncome = {
   ReducesTaxableIncome: "reduces_taxable_income",
   DoesNotReduceTaxableIncome: "does_not_reduce_taxable_income",
 } as const;
-export type DeductionReducesTaxableIncome = ClosedEnum<
+export type DeductionReducesTaxableIncome = OpenEnum<
   typeof DeductionReducesTaxableIncome
 >;
 
@@ -173,11 +175,11 @@ export type EmployeeBenefit = {
   /**
    * The date the employee benefit will start.
    */
-  effectiveDate?: RFCDate | undefined;
+  effectiveDate?: Date | undefined;
   /**
    * The date the employee benefit will expire. A null value indicates the benefit will not expire.
    */
-  expirationDate?: RFCDate | null | undefined;
+  expirationDate?: Date | null | undefined;
   /**
    * The UUID of the employee to which the benefit belongs.
    */
@@ -196,9 +198,9 @@ export type EmployeeBenefit = {
 /** @internal */
 export const Tiers$inboundSchema: z.ZodType<Tiers, z.ZodTypeDef, unknown> = z
   .object({
-    rate: z.string().optional(),
-    threshold: z.string().optional(),
-    threshold_delta: z.string().optional(),
+    rate: types.optional(types.string()),
+    threshold: types.optional(types.string()),
+    threshold_delta: types.optional(types.string()),
   }).transform((v) => {
     return remap$(v, {
       "threshold_delta": "thresholdDelta",
@@ -218,7 +220,7 @@ export function tiersFromJSON(
 /** @internal */
 export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> = z
   .object({
-    tiers: z.array(z.lazy(() => Tiers$inboundSchema)).optional(),
+    tiers: types.optional(z.array(z.lazy(() => Tiers$inboundSchema))),
   });
 
 export function twoFromJSON(
@@ -236,7 +238,7 @@ export const EmployeeBenefitValue$inboundSchema: z.ZodType<
   EmployeeBenefitValue,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.lazy(() => Two$inboundSchema)]);
+> = smartUnion([types.string(), z.lazy(() => Two$inboundSchema)]);
 
 export function employeeBenefitValueFromJSON(
   jsonString: string,
@@ -254,8 +256,10 @@ export const EmployeeBenefitContribution$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.string().optional(),
-  value: z.union([z.string(), z.lazy(() => Two$inboundSchema)]).optional(),
+  type: types.optional(types.string()),
+  value: types.optional(
+    smartUnion([types.string(), z.lazy(() => Two$inboundSchema)]),
+  ),
 });
 
 export function employeeBenefitContributionFromJSON(
@@ -269,9 +273,11 @@ export function employeeBenefitContributionFromJSON(
 }
 
 /** @internal */
-export const DeductionReducesTaxableIncome$inboundSchema: z.ZodNativeEnum<
-  typeof DeductionReducesTaxableIncome
-> = z.nativeEnum(DeductionReducesTaxableIncome);
+export const DeductionReducesTaxableIncome$inboundSchema: z.ZodType<
+  DeductionReducesTaxableIncome,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(DeductionReducesTaxableIncome);
 
 /** @internal */
 export const EmployeeBenefit$inboundSchema: z.ZodType<
@@ -280,31 +286,31 @@ export const EmployeeBenefit$inboundSchema: z.ZodType<
   unknown
 > = collectExtraKeys$(
   z.object({
-    version: z.string().optional(),
-    active: z.boolean().default(true),
-    employee_deduction: z.string().default("0.00"),
-    deduct_as_percentage: z.boolean().default(false),
-    employee_deduction_annual_maximum: z.nullable(z.string()).optional(),
-    contribution: z.lazy(() => EmployeeBenefitContribution$inboundSchema)
-      .optional(),
-    elective: z.boolean().default(false),
-    company_contribution_annual_maximum: z.nullable(z.string()).optional(),
-    limit_option: z.nullable(z.string()).optional(),
-    catch_up: z.nullable(z.boolean().default(false)),
-    retirement_loan_identifier: z.nullable(z.string()).optional(),
-    coverage_amount: z.nullable(z.string()).optional(),
+    version: types.optional(types.string()),
+    active: types.boolean().default(true),
+    employee_deduction: types.string().default("0.00"),
+    deduct_as_percentage: types.boolean().default(false),
+    employee_deduction_annual_maximum: z.nullable(types.string()).optional(),
+    contribution: types.optional(
+      z.lazy(() => EmployeeBenefitContribution$inboundSchema),
+    ),
+    elective: types.boolean().default(false),
+    company_contribution_annual_maximum: z.nullable(types.string()).optional(),
+    limit_option: z.nullable(types.string()).optional(),
+    catch_up: z.nullable(types.boolean().default(false)),
+    retirement_loan_identifier: z.nullable(types.string()).optional(),
+    coverage_amount: z.nullable(types.string()).optional(),
     deduction_reduces_taxable_income: z.nullable(
       DeductionReducesTaxableIncome$inboundSchema,
     ).optional(),
-    coverage_salary_multiplier: z.nullable(z.string().default("0.00")),
-    company_contribution: z.string().default("0.00"),
-    contribute_as_percentage: z.boolean().default(false),
-    effective_date: z.string().transform(v => new RFCDate(v)).optional(),
-    expiration_date: z.nullable(z.string().transform(v => new RFCDate(v)))
-      .optional(),
-    employee_uuid: z.string().optional(),
-    company_benefit_uuid: z.string().optional(),
-    uuid: z.string(),
+    coverage_salary_multiplier: z.nullable(types.string().default("0.00")),
+    company_contribution: types.string().default("0.00"),
+    contribute_as_percentage: types.boolean().default(false),
+    effective_date: types.optional(types.date()),
+    expiration_date: z.nullable(types.date()).optional(),
+    employee_uuid: types.optional(types.string()),
+    company_benefit_uuid: types.optional(types.string()),
+    uuid: types.string(),
   }).catchall(z.any()),
   "additionalProperties",
   true,

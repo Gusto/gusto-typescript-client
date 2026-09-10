@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SupportedBenefit = {
@@ -61,17 +62,17 @@ export const SupportedBenefit$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  benefit_type: z.number().int().optional(),
-  name: z.string().optional(),
-  description: z.string().optional(),
-  pretax: z.boolean().optional(),
-  posttax: z.boolean().optional(),
-  imputed: z.boolean().optional(),
-  healthcare: z.boolean().optional(),
-  retirement: z.boolean().optional(),
-  yearly_limit: z.boolean().optional(),
-  category: z.string().optional(),
-  writable_by_application: z.boolean().optional(),
+  benefit_type: types.optional(types.number()),
+  name: types.optional(types.string()),
+  description: types.optional(types.string()),
+  pretax: types.optional(types.boolean()),
+  posttax: types.optional(types.boolean()),
+  imputed: types.optional(types.boolean()),
+  healthcare: types.optional(types.boolean()),
+  retirement: types.optional(types.boolean()),
+  yearly_limit: types.optional(types.boolean()),
+  category: types.optional(types.string()),
+  writable_by_application: types.optional(types.boolean()),
 }).transform((v) => {
   return remap$(v, {
     "benefit_type": "benefitType",

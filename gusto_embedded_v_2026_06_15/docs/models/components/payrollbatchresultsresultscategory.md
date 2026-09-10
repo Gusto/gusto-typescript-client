@@ -11,10 +11,12 @@ Machine-readable reason the cancellation failed.
 import { PayrollBatchResultsResultsCategory } from "@gusto/embedded-api-v-2026-06-15/models/components/payrollbatchresults.js";
 
 let value: PayrollBatchResultsResultsCategory = "not_cancellable";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"not_cancellable" | "internal_error"
+"not_cancellable" | "internal_error" | Unrecognized<string>
 ```

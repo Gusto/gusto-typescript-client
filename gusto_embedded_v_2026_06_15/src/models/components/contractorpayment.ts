@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -21,7 +23,7 @@ export const ContractorPaymentPaymentMethod = {
 /**
  * The payment method.
  */
-export type ContractorPaymentPaymentMethod = ClosedEnum<
+export type ContractorPaymentPaymentMethod = OpenEnum<
   typeof ContractorPaymentPaymentMethod
 >;
 
@@ -35,9 +37,7 @@ export const ContractorPaymentStatus = {
 /**
  * Contractor payment status
  */
-export type ContractorPaymentStatus = ClosedEnum<
-  typeof ContractorPaymentStatus
->;
+export type ContractorPaymentStatus = OpenEnum<typeof ContractorPaymentStatus>;
 
 /**
  * The wage type for the payment.
@@ -49,7 +49,7 @@ export const ContractorPaymentWageType = {
 /**
  * The wage type for the payment.
  */
-export type ContractorPaymentWageType = ClosedEnum<
+export type ContractorPaymentWageType = OpenEnum<
   typeof ContractorPaymentWageType
 >;
 
@@ -120,19 +120,25 @@ export type ContractorPayment = {
 };
 
 /** @internal */
-export const ContractorPaymentPaymentMethod$inboundSchema: z.ZodNativeEnum<
-  typeof ContractorPaymentPaymentMethod
-> = z.nativeEnum(ContractorPaymentPaymentMethod);
+export const ContractorPaymentPaymentMethod$inboundSchema: z.ZodType<
+  ContractorPaymentPaymentMethod,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorPaymentPaymentMethod);
 
 /** @internal */
-export const ContractorPaymentStatus$inboundSchema: z.ZodNativeEnum<
-  typeof ContractorPaymentStatus
-> = z.nativeEnum(ContractorPaymentStatus);
+export const ContractorPaymentStatus$inboundSchema: z.ZodType<
+  ContractorPaymentStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorPaymentStatus);
 
 /** @internal */
-export const ContractorPaymentWageType$inboundSchema: z.ZodNativeEnum<
-  typeof ContractorPaymentWageType
-> = z.nativeEnum(ContractorPaymentWageType);
+export const ContractorPaymentWageType$inboundSchema: z.ZodType<
+  ContractorPaymentWageType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorPaymentWageType);
 
 /** @internal */
 export const ContractorPayment$inboundSchema: z.ZodType<
@@ -140,21 +146,21 @@ export const ContractorPayment$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  contractor_uuid: z.string().optional(),
-  bonus: z.string().optional(),
-  date: z.string().optional(),
-  hours: z.string().optional(),
-  payment_method: ContractorPaymentPaymentMethod$inboundSchema.optional(),
-  reimbursement: z.string().optional(),
-  status: ContractorPaymentStatus$inboundSchema.optional(),
-  hourly_rate: z.string().optional(),
-  may_cancel: z.boolean().optional(),
-  wage: z.string().optional(),
-  wage_type: ContractorPaymentWageType$inboundSchema.optional(),
-  wage_total: z.string().optional(),
-  invoice_number: z.nullable(z.string()).optional(),
-  memo: z.nullable(z.string()).optional(),
+  uuid: types.string(),
+  contractor_uuid: types.optional(types.string()),
+  bonus: types.optional(types.string()),
+  date: types.optional(types.string()),
+  hours: types.optional(types.string()),
+  payment_method: types.optional(ContractorPaymentPaymentMethod$inboundSchema),
+  reimbursement: types.optional(types.string()),
+  status: types.optional(ContractorPaymentStatus$inboundSchema),
+  hourly_rate: types.optional(types.string()),
+  may_cancel: types.optional(types.boolean()),
+  wage: types.optional(types.string()),
+  wage_type: types.optional(ContractorPaymentWageType$inboundSchema),
+  wage_total: types.optional(types.string()),
+  invoice_number: z.nullable(types.string()).optional(),
+  memo: z.nullable(types.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "contractor_uuid": "contractorUuid",

@@ -5,6 +5,8 @@
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -42,7 +44,7 @@ export const EmployeeStateTaxInputQuestionFormatValue$inboundSchema: z.ZodType<
   EmployeeStateTaxInputQuestionFormatValue,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.boolean(), z.number()]);
+> = smartUnion([types.string(), types.boolean(), types.number()]);
 
 export function employeeStateTaxInputQuestionFormatValueFromJSON(
   jsonString: string,
@@ -64,8 +66,10 @@ export function employeeStateTaxInputQuestionFormatValueFromJSON(
 export const EmployeeStateTaxInputQuestionFormatOptions$inboundSchema:
   z.ZodType<EmployeeStateTaxInputQuestionFormatOptions, z.ZodTypeDef, unknown> =
     z.object({
-      value: z.union([z.string(), z.boolean(), z.number()]).optional(),
-      label: z.string(),
+      value: types.optional(
+        smartUnion([types.string(), types.boolean(), types.number()]),
+      ),
+      label: types.string(),
     });
 
 export function employeeStateTaxInputQuestionFormatOptionsFromJSON(
@@ -90,10 +94,12 @@ export const EmployeeStateTaxInputQuestionFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.string(),
-  options: z.array(
-    z.lazy(() => EmployeeStateTaxInputQuestionFormatOptions$inboundSchema),
-  ).optional(),
+  type: types.string(),
+  options: types.optional(
+    z.array(z.lazy(() =>
+      EmployeeStateTaxInputQuestionFormatOptions$inboundSchema
+    )),
+  ),
 });
 
 export function employeeStateTaxInputQuestionFormatFromJSON(

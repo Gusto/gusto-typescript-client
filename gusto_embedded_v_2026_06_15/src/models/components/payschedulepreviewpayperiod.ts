@@ -6,7 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import { RFCDate } from "../../types/rfcdate.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -16,19 +16,19 @@ export type PaySchedulePreviewPayPeriod = {
   /**
    * The payment date, "Check date", for the pay period.
    */
-  checkDate: RFCDate;
+  checkDate: Date;
   /**
    * The first day of the pay period.
    */
-  startDate: RFCDate;
+  startDate: Date;
   /**
    * The deadline to run payroll for direct deposit on the check date.
    */
-  runPayrollBy: RFCDate;
+  runPayrollBy: Date;
   /**
    * The last day of the pay period.
    */
-  endDate: RFCDate;
+  endDate: Date;
 };
 
 /** @internal */
@@ -37,10 +37,10 @@ export const PaySchedulePreviewPayPeriod$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  check_date: z.string().transform(v => new RFCDate(v)),
-  start_date: z.string().transform(v => new RFCDate(v)),
-  run_payroll_by: z.string().transform(v => new RFCDate(v)),
-  end_date: z.string().transform(v => new RFCDate(v)),
+  check_date: types.date(),
+  start_date: types.date(),
+  run_payroll_by: types.date(),
+  end_date: types.date(),
 }).transform((v) => {
   return remap$(v, {
     "check_date": "checkDate",

@@ -4,7 +4,6 @@
 
 ```typescript
 import { PostV1EmployeesEmployeeIdHomeAddressesRequest } from "@gusto/embedded-api-v-2026-06-15/models/operations/postv1employeesemployeeidhomeaddresses.js";
-import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 let value: PostV1EmployeesEmployeeIdHomeAddressesRequest = {
   employeeId: "<id>",
@@ -13,7 +12,7 @@ let value: PostV1EmployeesEmployeeIdHomeAddressesRequest = {
     city: "San Francisco",
     state: "CA",
     zip: "94107",
-    effectiveDate: new RFCDate("2022-01-31"),
+    effectiveDate: new Date("2022-01-31"),
   },
 };
 ```

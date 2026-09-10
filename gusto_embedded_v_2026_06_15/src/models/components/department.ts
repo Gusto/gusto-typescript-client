@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DepartmentEmployees = {
@@ -49,7 +50,7 @@ export const DepartmentEmployees$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string().optional(),
+  uuid: types.optional(types.string()),
 });
 
 export function departmentEmployeesFromJSON(
@@ -68,7 +69,7 @@ export const Contractors$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string().optional(),
+  uuid: types.optional(types.string()),
 });
 
 export function contractorsFromJSON(
@@ -87,13 +88,14 @@ export const Department$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  version: z.string().optional(),
-  uuid: z.string().optional(),
-  company_uuid: z.string().optional(),
-  title: z.string().optional(),
-  employees: z.array(z.lazy(() => DepartmentEmployees$inboundSchema))
-    .optional(),
-  contractors: z.array(z.lazy(() => Contractors$inboundSchema)).optional(),
+  version: types.optional(types.string()),
+  uuid: types.optional(types.string()),
+  company_uuid: types.optional(types.string()),
+  title: types.optional(types.string()),
+  employees: types.optional(
+    z.array(z.lazy(() => DepartmentEmployees$inboundSchema)),
+  ),
+  contractors: types.optional(z.array(z.lazy(() => Contractors$inboundSchema))),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

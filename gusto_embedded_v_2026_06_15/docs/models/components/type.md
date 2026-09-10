@@ -18,10 +18,12 @@ Describes the type of requirement - each type may have additional metadata prope
 import { Type } from "@gusto/embedded-api-v-2026-06-15/models/components/taxrequirementmetadata.js";
 
 let value: Type = "text";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"text" | "currency" | "radio" | "select" | "percent" | "account_number" | "tax_rate" | "workers_compensation_rate"
+"text" | "currency" | "radio" | "select" | "percent" | "account_number" | "tax_rate" | "workers_compensation_rate" | Unrecognized<string>
 ```

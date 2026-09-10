@@ -8,10 +8,12 @@ The status of the information request
 import { InformationRequestStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/informationrequest.js";
 
 let value: InformationRequestStatus = "approved";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"pending_response" | "pending_review" | "approved"
+"pending_response" | "pending_review" | "approved" | Unrecognized<string>
 ```

@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -48,13 +49,13 @@ export const Termination$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  version: z.string().optional(),
-  employee_uuid: z.string().optional(),
-  active: z.boolean().optional(),
-  cancelable: z.boolean().optional(),
-  effective_date: z.string().optional(),
-  run_termination_payroll: z.boolean().optional(),
+  uuid: types.string(),
+  version: types.optional(types.string()),
+  employee_uuid: types.optional(types.string()),
+  active: types.optional(types.boolean()),
+  cancelable: types.optional(types.boolean()),
+  effective_date: types.optional(types.string()),
+  run_termination_payroll: types.optional(types.boolean()),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",

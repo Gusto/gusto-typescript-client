@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DocumentPdf = {
@@ -25,8 +26,8 @@ export const DocumentPdf$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string().optional(),
-  document_url: z.string().optional(),
+  uuid: types.optional(types.string()),
+  document_url: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "document_url": "documentUrl",

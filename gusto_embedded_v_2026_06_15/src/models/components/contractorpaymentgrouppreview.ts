@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ContractorPaymentForGroupPreview,
@@ -31,7 +33,7 @@ export const ContractorPaymentGroupPreviewStatus = {
 /**
  * The status of the contractor payment group.  Will be `Funded` if all payments that should be funded (i.e. have `Direct Deposit` for payment method) are funded.  A group can have status `Funded` while having associated payments that have status `Unfunded`, i.e. payment with `Check` payment method.
  */
-export type ContractorPaymentGroupPreviewStatus = ClosedEnum<
+export type ContractorPaymentGroupPreviewStatus = OpenEnum<
   typeof ContractorPaymentGroupPreviewStatus
 >;
 
@@ -103,18 +105,20 @@ export type ContractorPaymentGroupPreview = {
 };
 
 /** @internal */
-export const ContractorPaymentGroupPreviewStatus$inboundSchema: z.ZodNativeEnum<
-  typeof ContractorPaymentGroupPreviewStatus
-> = z.nativeEnum(ContractorPaymentGroupPreviewStatus);
+export const ContractorPaymentGroupPreviewStatus$inboundSchema: z.ZodType<
+  ContractorPaymentGroupPreviewStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorPaymentGroupPreviewStatus);
 
 /** @internal */
 export const Totals$inboundSchema: z.ZodType<Totals, z.ZodTypeDef, unknown> = z
   .object({
-    amount: z.string().optional(),
-    debit_amount: z.string().optional(),
-    wage_amount: z.string().optional(),
-    reimbursement_amount: z.string().optional(),
-    check_amount: z.string().optional(),
+    amount: types.optional(types.string()),
+    debit_amount: types.optional(types.string()),
+    wage_amount: types.optional(types.string()),
+    reimbursement_amount: types.optional(types.string()),
+    check_amount: types.optional(types.string()),
   }).transform((v) => {
     return remap$(v, {
       "debit_amount": "debitAmount",
@@ -140,19 +144,23 @@ export const ContractorPaymentGroupPreview$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.nullable(z.string()).optional(),
-  company_uuid: z.string().optional(),
-  check_date: z.string().optional(),
-  debit_date: z.string().optional(),
-  status: ContractorPaymentGroupPreviewStatus$inboundSchema.optional(),
-  creation_token: z.nullable(z.string()).optional(),
-  partner_owned_disbursement: z.nullable(z.boolean()).optional(),
-  submission_blockers: z.array(PayrollSubmissionBlockerType$inboundSchema)
-    .optional(),
-  credit_blockers: z.array(PayrollCreditBlockerType$inboundSchema).optional(),
-  totals: z.lazy(() => Totals$inboundSchema).optional(),
-  contractor_payments: z.array(ContractorPaymentForGroupPreview$inboundSchema)
-    .optional(),
+  uuid: z.nullable(types.string()).optional(),
+  company_uuid: types.optional(types.string()),
+  check_date: types.optional(types.string()),
+  debit_date: types.optional(types.string()),
+  status: types.optional(ContractorPaymentGroupPreviewStatus$inboundSchema),
+  creation_token: z.nullable(types.string()).optional(),
+  partner_owned_disbursement: z.nullable(types.boolean()).optional(),
+  submission_blockers: types.optional(
+    z.array(PayrollSubmissionBlockerType$inboundSchema),
+  ),
+  credit_blockers: types.optional(
+    z.array(PayrollCreditBlockerType$inboundSchema),
+  ),
+  totals: types.optional(z.lazy(() => Totals$inboundSchema)),
+  contractor_payments: types.optional(
+    z.array(ContractorPaymentForGroupPreview$inboundSchema),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

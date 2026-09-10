@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UnblockOptions = {
@@ -34,7 +36,7 @@ export const PayrollSubmissionBlockerTypeStatus = {
 /**
  * The status of the submission blocker.
  */
-export type PayrollSubmissionBlockerTypeStatus = ClosedEnum<
+export type PayrollSubmissionBlockerTypeStatus = OpenEnum<
   typeof PayrollSubmissionBlockerTypeStatus
 >;
 
@@ -70,9 +72,9 @@ export const UnblockOptions$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  unblock_type: z.string().optional(),
-  check_date: z.string().optional(),
-  metadata: z.record(z.any()).optional(),
+  unblock_type: types.optional(types.string()),
+  check_date: types.optional(types.string()),
+  metadata: types.optional(z.record(z.any())),
 }).transform((v) => {
   return remap$(v, {
     "unblock_type": "unblockType",
@@ -91,9 +93,11 @@ export function unblockOptionsFromJSON(
 }
 
 /** @internal */
-export const PayrollSubmissionBlockerTypeStatus$inboundSchema: z.ZodNativeEnum<
-  typeof PayrollSubmissionBlockerTypeStatus
-> = z.nativeEnum(PayrollSubmissionBlockerTypeStatus);
+export const PayrollSubmissionBlockerTypeStatus$inboundSchema: z.ZodType<
+  PayrollSubmissionBlockerTypeStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PayrollSubmissionBlockerTypeStatus);
 
 /** @internal */
 export const PayrollSubmissionBlockerType$inboundSchema: z.ZodType<
@@ -101,12 +105,13 @@ export const PayrollSubmissionBlockerType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  blocker_type: z.string().optional(),
-  blocker_name: z.string().optional(),
-  unblock_options: z.array(z.lazy(() => UnblockOptions$inboundSchema))
-    .optional(),
-  selected_option: z.nullable(z.string()).optional(),
-  status: PayrollSubmissionBlockerTypeStatus$inboundSchema.optional(),
+  blocker_type: types.optional(types.string()),
+  blocker_name: types.optional(types.string()),
+  unblock_options: types.optional(
+    z.array(z.lazy(() => UnblockOptions$inboundSchema)),
+  ),
+  selected_option: z.nullable(types.string()).optional(),
+  status: types.optional(PayrollSubmissionBlockerTypeStatus$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "blocker_type": "blockerType",

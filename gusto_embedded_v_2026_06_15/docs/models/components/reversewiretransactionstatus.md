@@ -13,10 +13,12 @@ Current status of the reverse wire transaction.
 import { ReverseWireTransactionStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/reversewiretransaction.js";
 
 let value: ReverseWireTransactionStatus = "pending_processing";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"pending_processing" | "processed" | "rejected" | "failed"
+"pending_processing" | "processed" | "rejected" | "failed" | Unrecognized<string>
 ```

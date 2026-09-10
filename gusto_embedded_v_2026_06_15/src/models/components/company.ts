@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   CompanyAddress,
@@ -27,7 +29,7 @@ export const EntityType = {
   JointVenture: "Joint venture",
   NonProfit: "Non-Profit",
 } as const;
-export type EntityType = ClosedEnum<typeof EntityType>;
+export type EntityType = OpenEnum<typeof EntityType>;
 
 /**
  * The Gusto product tier of the company (not applicable to Embedded partner managed companies).
@@ -45,7 +47,7 @@ export const Tier = {
 /**
  * The Gusto product tier of the company (not applicable to Embedded partner managed companies).
  */
-export type Tier = ClosedEnum<typeof Tier>;
+export type Tier = OpenEnum<typeof Tier>;
 
 /**
  * The status of the company in Gusto. "Approved" companies are approved to run payroll from a risk and compliance perspective. However, an approved company may still need to resolve other [payroll blockers](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers) to be able to run payroll. "Not Approved" companies may not yet run payroll with Gusto and may need to complete onboarding or contact support. "Suspended" companies may not run payroll with Gusto. In order to unsuspend their account, the company must contact support.
@@ -58,7 +60,7 @@ export const CompanyStatus = {
 /**
  * The status of the company in Gusto. "Approved" companies are approved to run payroll from a risk and compliance perspective. However, an approved company may still need to resolve other [payroll blockers](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers) to be able to run payroll. "Not Approved" companies may not yet run payroll with Gusto and may need to complete onboarding or contact support. "Suspended" companies may not run payroll with Gusto. In order to unsuspend their account, the company must contact support.
  */
-export type CompanyStatus = ClosedEnum<typeof CompanyStatus>;
+export type CompanyStatus = OpenEnum<typeof CompanyStatus>;
 
 export const PayScheduleType = {
   Single: "single",
@@ -66,7 +68,7 @@ export const PayScheduleType = {
   ByEmployee: "by_employee",
   ByDepartment: "by_department",
 } as const;
-export type PayScheduleType = ClosedEnum<typeof PayScheduleType>;
+export type PayScheduleType = OpenEnum<typeof PayScheduleType>;
 
 export const FundingType = {
   Ach: "ach",
@@ -76,7 +78,7 @@ export const FundingType = {
   Rtp: "rtp",
   LineOfCredit: "line_of_credit",
 } as const;
-export type FundingType = ClosedEnum<typeof FundingType>;
+export type FundingType = OpenEnum<typeof FundingType>;
 
 export type Hourly = {
   /**
@@ -288,34 +290,43 @@ export type Company = {
 };
 
 /** @internal */
-export const EntityType$inboundSchema: z.ZodNativeEnum<typeof EntityType> = z
-  .nativeEnum(EntityType);
+export const EntityType$inboundSchema: z.ZodType<
+  EntityType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(EntityType);
 
 /** @internal */
-export const Tier$inboundSchema: z.ZodNativeEnum<typeof Tier> = z.nativeEnum(
-  Tier,
-);
+export const Tier$inboundSchema: z.ZodType<Tier, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(Tier);
 
 /** @internal */
-export const CompanyStatus$inboundSchema: z.ZodNativeEnum<
-  typeof CompanyStatus
-> = z.nativeEnum(CompanyStatus);
+export const CompanyStatus$inboundSchema: z.ZodType<
+  CompanyStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(CompanyStatus);
 
 /** @internal */
-export const PayScheduleType$inboundSchema: z.ZodNativeEnum<
-  typeof PayScheduleType
-> = z.nativeEnum(PayScheduleType);
+export const PayScheduleType$inboundSchema: z.ZodType<
+  PayScheduleType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PayScheduleType);
 
 /** @internal */
-export const FundingType$inboundSchema: z.ZodNativeEnum<typeof FundingType> = z
-  .nativeEnum(FundingType);
+export const FundingType$inboundSchema: z.ZodType<
+  FundingType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(FundingType);
 
 /** @internal */
 export const Hourly$inboundSchema: z.ZodType<Hourly, z.ZodTypeDef, unknown> = z
   .object({
-    uuid: z.nullable(z.string()).optional(),
-    name: z.string().optional(),
-    multiple: z.number().optional(),
+    uuid: z.nullable(types.string()).optional(),
+    name: types.optional(types.string()),
+    multiple: types.optional(types.number()),
   });
 
 export function hourlyFromJSON(
@@ -331,8 +342,8 @@ export function hourlyFromJSON(
 /** @internal */
 export const Fixed$inboundSchema: z.ZodType<Fixed, z.ZodTypeDef, unknown> = z
   .object({
-    uuid: z.nullable(z.string()).optional(),
-    name: z.string().optional(),
+    uuid: z.nullable(types.string()).optional(),
+    name: types.optional(types.string()),
   });
 
 export function fixedFromJSON(
@@ -351,8 +362,8 @@ export const CompanyPaidTimeOff$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.nullable(z.string()).optional(),
-  name: z.string().optional(),
+  uuid: z.nullable(types.string()).optional(),
+  name: types.optional(types.string()),
 });
 
 export function companyPaidTimeOffFromJSON(
@@ -371,10 +382,11 @@ export const Compensations$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  hourly: z.array(z.lazy(() => Hourly$inboundSchema)).optional(),
-  fixed: z.array(z.lazy(() => Fixed$inboundSchema)).optional(),
-  paid_time_off: z.array(z.lazy(() => CompanyPaidTimeOff$inboundSchema))
-    .optional(),
+  hourly: types.optional(z.array(z.lazy(() => Hourly$inboundSchema))),
+  fixed: types.optional(z.array(z.lazy(() => Fixed$inboundSchema))),
+  paid_time_off: types.optional(
+    z.array(z.lazy(() => CompanyPaidTimeOff$inboundSchema)),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "paid_time_off": "paidTimeOff",
@@ -397,12 +409,12 @@ export const CompanyHomeAddress$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  street_1: z.string().optional(),
-  street_2: z.nullable(z.string()).optional(),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  zip: z.string().optional(),
-  country: z.string().optional(),
+  street_1: types.optional(types.string()),
+  street_2: z.nullable(types.string()).optional(),
+  city: types.optional(types.string()),
+  state: types.optional(types.string()),
+  zip: types.optional(types.string()),
+  country: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "street_1": "street1",
@@ -426,13 +438,13 @@ export const PrimarySignatory$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string().optional(),
-  first_name: z.string().optional(),
-  middle_initial: z.nullable(z.string()).optional(),
-  last_name: z.string().optional(),
-  phone: z.string().optional(),
-  email: z.string().optional(),
-  home_address: z.lazy(() => CompanyHomeAddress$inboundSchema).optional(),
+  uuid: types.optional(types.string()),
+  first_name: types.optional(types.string()),
+  middle_initial: z.nullable(types.string()).optional(),
+  last_name: types.optional(types.string()),
+  phone: types.optional(types.string()),
+  email: types.optional(types.string()),
+  home_address: types.optional(z.lazy(() => CompanyHomeAddress$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     "first_name": "firstName",
@@ -458,10 +470,10 @@ export const PrimaryPayrollAdmin$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  first_name: z.string().optional(),
-  last_name: z.string().optional(),
-  phone: z.nullable(z.string()).optional(),
-  email: z.string().optional(),
+  first_name: types.optional(types.string()),
+  last_name: types.optional(types.string()),
+  phone: z.nullable(types.string()).optional(),
+  email: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "first_name": "firstName",
@@ -482,28 +494,29 @@ export function primaryPayrollAdminFromJSON(
 /** @internal */
 export const Company$inboundSchema: z.ZodType<Company, z.ZodTypeDef, unknown> =
   z.object({
-    ein: z.string().optional(),
+    ein: types.optional(types.string()),
     entity_type: z.nullable(EntityType$inboundSchema).optional(),
-    contractor_only: z.boolean().optional(),
+    contractor_only: types.optional(types.boolean()),
     tier: z.nullable(Tier$inboundSchema).optional(),
-    is_suspended: z.boolean().optional(),
-    company_status: CompanyStatus$inboundSchema.optional(),
-    uuid: z.string(),
-    name: z.string().optional(),
-    slug: z.string().optional(),
-    trade_name: z.nullable(z.string()).optional(),
-    is_partner_managed: z.boolean().optional(),
-    is_high_risk_business: z.boolean().optional(),
-    is_marijuana_business: z.boolean().optional(),
+    is_suspended: types.optional(types.boolean()),
+    company_status: types.optional(CompanyStatus$inboundSchema),
+    uuid: types.string(),
+    name: types.optional(types.string()),
+    slug: types.optional(types.string()),
+    trade_name: z.nullable(types.string()).optional(),
+    is_partner_managed: types.optional(types.boolean()),
+    is_high_risk_business: types.optional(types.boolean()),
+    is_marijuana_business: types.optional(types.boolean()),
     pay_schedule_type: z.nullable(PayScheduleType$inboundSchema).optional(),
-    join_date: z.nullable(z.string()).optional(),
+    join_date: z.nullable(types.string()).optional(),
     funding_type: z.nullable(FundingType$inboundSchema).optional(),
-    locations: z.array(CompanyAddress$inboundSchema).optional(),
-    compensations: z.lazy(() => Compensations$inboundSchema).optional(),
+    locations: types.optional(z.array(CompanyAddress$inboundSchema)),
+    compensations: types.optional(z.lazy(() => Compensations$inboundSchema)),
     primary_signatory: z.nullable(z.lazy(() => PrimarySignatory$inboundSchema))
       .optional(),
-    primary_payroll_admin: z.lazy(() => PrimaryPayrollAdmin$inboundSchema)
-      .optional(),
+    primary_payroll_admin: types.optional(
+      z.lazy(() => PrimaryPayrollAdmin$inboundSchema),
+    ),
   }).transform((v) => {
     return remap$(v, {
       "entity_type": "entityType",

@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PossibleLiabilities = {
@@ -55,9 +56,9 @@ export const PossibleLiabilities$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  liability_amount: z.string().optional(),
-  payroll_check_date: z.nullable(z.string()).optional(),
-  external_payroll_uuid: z.nullable(z.string()).optional(),
+  liability_amount: types.optional(types.string()),
+  payroll_check_date: z.nullable(types.string()).optional(),
+  external_payroll_uuid: z.nullable(types.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "liability_amount": "liabilityAmount",
@@ -82,12 +83,13 @@ export const TaxLiabilitiesSelections$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  tax_id: z.number().int().optional(),
-  tax_name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  last_unpaid_external_payroll_uuid: z.nullable(z.string()).optional(),
-  possible_liabilities: z.array(z.lazy(() => PossibleLiabilities$inboundSchema))
-    .optional(),
+  tax_id: types.optional(types.number()),
+  tax_name: types.optional(types.string()),
+  description: z.nullable(types.string()).optional(),
+  last_unpaid_external_payroll_uuid: z.nullable(types.string()).optional(),
+  possible_liabilities: types.optional(
+    z.array(z.lazy(() => PossibleLiabilities$inboundSchema)),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "tax_id": "taxId",

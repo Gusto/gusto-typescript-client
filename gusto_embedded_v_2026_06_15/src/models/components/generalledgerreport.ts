@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -21,7 +23,7 @@ export const GeneralLedgerReportAggregation = {
 /**
  * The breakdown level used for the report.
  */
-export type GeneralLedgerReportAggregation = ClosedEnum<
+export type GeneralLedgerReportAggregation = OpenEnum<
   typeof GeneralLedgerReportAggregation
 >;
 
@@ -48,9 +50,11 @@ export type GeneralLedgerReport = {
 };
 
 /** @internal */
-export const GeneralLedgerReportAggregation$inboundSchema: z.ZodNativeEnum<
-  typeof GeneralLedgerReportAggregation
-> = z.nativeEnum(GeneralLedgerReportAggregation);
+export const GeneralLedgerReportAggregation$inboundSchema: z.ZodType<
+  GeneralLedgerReportAggregation,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(GeneralLedgerReportAggregation);
 
 /** @internal */
 export const GeneralLedgerReport$inboundSchema: z.ZodType<
@@ -58,10 +62,10 @@ export const GeneralLedgerReport$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  payroll_uuid: z.string().optional(),
-  aggregation: GeneralLedgerReportAggregation$inboundSchema.optional(),
-  integration_type: z.nullable(z.string()).optional(),
-  request_uuid: z.string().optional(),
+  payroll_uuid: types.optional(types.string()),
+  aggregation: types.optional(GeneralLedgerReportAggregation$inboundSchema),
+  integration_type: z.nullable(types.string()).optional(),
+  request_uuid: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "payroll_uuid": "payrollUuid",

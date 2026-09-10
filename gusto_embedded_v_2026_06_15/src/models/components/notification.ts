@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -20,7 +22,7 @@ export const NotificationStatus = {
 /**
  * Represents the notification's status as managed by our system. It is updated based on observable system events and internal business logic, and does not reflect resolution steps taken outside our system. This field is read-only and cannot be modified via the API.
  */
-export type NotificationStatus = ClosedEnum<typeof NotificationStatus>;
+export type NotificationStatus = OpenEnum<typeof NotificationStatus>;
 
 /**
  * The type of entity being described.
@@ -39,7 +41,7 @@ export const NotificationEntityType = {
 /**
  * The type of entity being described.
  */
-export type NotificationEntityType = ClosedEnum<typeof NotificationEntityType>;
+export type NotificationEntityType = OpenEnum<typeof NotificationEntityType>;
 
 export type Resources = {
   /**
@@ -112,14 +114,18 @@ export type Notification = {
 };
 
 /** @internal */
-export const NotificationStatus$inboundSchema: z.ZodNativeEnum<
-  typeof NotificationStatus
-> = z.nativeEnum(NotificationStatus);
+export const NotificationStatus$inboundSchema: z.ZodType<
+  NotificationStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(NotificationStatus);
 
 /** @internal */
-export const NotificationEntityType$inboundSchema: z.ZodNativeEnum<
-  typeof NotificationEntityType
-> = z.nativeEnum(NotificationEntityType);
+export const NotificationEntityType$inboundSchema: z.ZodType<
+  NotificationEntityType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(NotificationEntityType);
 
 /** @internal */
 export const Resources$inboundSchema: z.ZodType<
@@ -128,9 +134,9 @@ export const Resources$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   entity_type: NotificationEntityType$inboundSchema,
-  entity_uuid: z.string(),
-  reference_type: z.string().optional(),
-  reference_uuid: z.string().optional(),
+  entity_uuid: types.string(),
+  reference_type: types.optional(types.string()),
+  reference_uuid: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "entity_type": "entityType",
@@ -156,17 +162,17 @@ export const Notification$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  company_uuid: z.string(),
-  title: z.string(),
-  message: z.string(),
+  uuid: types.string(),
+  company_uuid: types.string(),
+  title: types.string(),
+  message: types.string(),
   status: NotificationStatus$inboundSchema,
-  category: z.string(),
-  actionable: z.boolean(),
-  can_block_payroll: z.boolean(),
-  published_at: z.string(),
-  due_at: z.nullable(z.string()),
-  template_variables: z.record(z.string()).optional(),
+  category: types.string(),
+  actionable: types.boolean(),
+  can_block_payroll: types.boolean(),
+  published_at: types.string(),
+  due_at: types.nullable(types.string()),
+  template_variables: types.optional(z.record(types.string())),
   resources: z.array(z.lazy(() => Resources$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {

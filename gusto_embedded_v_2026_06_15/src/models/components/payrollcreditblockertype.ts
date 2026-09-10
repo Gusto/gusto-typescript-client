@@ -5,8 +5,12 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
+import { discriminatedUnion } from "../../types/discriminatedUnion.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi,
@@ -29,7 +33,8 @@ export type PayrollCreditBlockerTypeUnblockOptions =
   | PayrollCreditBlockerUnblockOptionSubmitWire
   | PayrollCreditBlockerUnblockOptionSubmitBankScreenshot
   | PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi
-  | PayrollCreditBlockerUnblockOptionWaitForReverseWire;
+  | PayrollCreditBlockerUnblockOptionWaitForReverseWire
+  | discriminatedUnionTypes.Unknown<"unblockType">;
 
 /**
  * The status of the credit blocker
@@ -43,7 +48,7 @@ export const PayrollCreditBlockerTypeStatus = {
 /**
  * The status of the credit blocker
  */
-export type PayrollCreditBlockerTypeStatus = ClosedEnum<
+export type PayrollCreditBlockerTypeStatus = OpenEnum<
   typeof PayrollCreditBlockerTypeStatus
 >;
 
@@ -68,6 +73,7 @@ export type PayrollCreditBlockerType = {
       | PayrollCreditBlockerUnblockOptionSubmitBankScreenshot
       | PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi
       | PayrollCreditBlockerUnblockOptionWaitForReverseWire
+      | discriminatedUnionTypes.Unknown<"unblockType">
     >
     | undefined;
   /**
@@ -85,12 +91,15 @@ export const PayrollCreditBlockerTypeUnblockOptions$inboundSchema: z.ZodType<
   PayrollCreditBlockerTypeUnblockOptions,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  PayrollCreditBlockerUnblockOptionSubmitWire$inboundSchema,
-  PayrollCreditBlockerUnblockOptionSubmitBankScreenshot$inboundSchema,
-  PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi$inboundSchema,
-  PayrollCreditBlockerUnblockOptionWaitForReverseWire$inboundSchema,
-]);
+> = discriminatedUnion("unblock_type", {
+  submit_wire: PayrollCreditBlockerUnblockOptionSubmitWire$inboundSchema,
+  submit_bank_screenshot:
+    PayrollCreditBlockerUnblockOptionSubmitBankScreenshot$inboundSchema,
+  respond_to_high_risk_fraud_rfi:
+    PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi$inboundSchema,
+  wait_for_reverse_wire:
+    PayrollCreditBlockerUnblockOptionWaitForReverseWire$inboundSchema,
+}, { outputPropertyName: "unblockType" });
 
 export function payrollCreditBlockerTypeUnblockOptionsFromJSON(
   jsonString: string,
@@ -104,9 +113,11 @@ export function payrollCreditBlockerTypeUnblockOptionsFromJSON(
 }
 
 /** @internal */
-export const PayrollCreditBlockerTypeStatus$inboundSchema: z.ZodNativeEnum<
-  typeof PayrollCreditBlockerTypeStatus
-> = z.nativeEnum(PayrollCreditBlockerTypeStatus);
+export const PayrollCreditBlockerTypeStatus$inboundSchema: z.ZodType<
+  PayrollCreditBlockerTypeStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PayrollCreditBlockerTypeStatus);
 
 /** @internal */
 export const PayrollCreditBlockerType$inboundSchema: z.ZodType<
@@ -114,18 +125,19 @@ export const PayrollCreditBlockerType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  blocker_type: z.string().optional(),
-  blocker_name: z.string().optional(),
-  unblock_options: z.array(
-    z.union([
-      PayrollCreditBlockerUnblockOptionSubmitWire$inboundSchema,
+  blocker_type: types.optional(types.string()),
+  blocker_name: types.optional(types.string()),
+  unblock_options: types.optional(z.array(discriminatedUnion("unblock_type", {
+    submit_wire: PayrollCreditBlockerUnblockOptionSubmitWire$inboundSchema,
+    submit_bank_screenshot:
       PayrollCreditBlockerUnblockOptionSubmitBankScreenshot$inboundSchema,
+    respond_to_high_risk_fraud_rfi:
       PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi$inboundSchema,
+    wait_for_reverse_wire:
       PayrollCreditBlockerUnblockOptionWaitForReverseWire$inboundSchema,
-    ]),
-  ).optional(),
-  selected_option: z.nullable(z.string()).optional(),
-  status: PayrollCreditBlockerTypeStatus$inboundSchema.optional(),
+  }, { outputPropertyName: "unblockType" }))),
+  selected_option: z.nullable(types.string()).optional(),
+  status: types.optional(PayrollCreditBlockerTypeStatus$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "blocker_type": "blockerType",

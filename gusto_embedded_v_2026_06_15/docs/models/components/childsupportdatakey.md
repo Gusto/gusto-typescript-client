@@ -8,10 +8,12 @@ A required attribute when creating a garnishment for this state agency. The curr
 import { ChildSupportDataKey } from "@gusto/embedded-api-v-2026-06-15/models/components/childsupportdata.js";
 
 let value: ChildSupportDataKey = "remittance_number";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"case_number" | "order_number" | "remittance_number"
+"case_number" | "order_number" | "remittance_number" | Unrecognized<string>
 ```

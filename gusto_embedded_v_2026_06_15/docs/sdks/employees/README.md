@@ -1216,7 +1216,6 @@ scope: `employees:manage`
 <!-- UsageSnippet language="typescript" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2026-06-15";
-import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -1230,7 +1229,7 @@ async function run() {
       middleInitial: "A",
       lastName: "Kierkegaard",
       preferredFirstName: "Angel",
-      dateOfBirth: new RFCDate("1995-05-05"),
+      dateOfBirth: new Date("1995-05-05"),
       ssn: "123456294",
       workAddress: {
         locationUuid: "1da85d35-1910-40a7-9c1f-8e2b3d4c5a6f",
@@ -1243,11 +1242,11 @@ async function run() {
         zip: "94105",
       },
       termination: {
-        effectiveDate: new RFCDate("2022-01-01"),
+        effectiveDate: new Date("2022-01-01"),
       },
       email: "soren.kierkegaard@example.com",
       job: {
-        hireDate: new RFCDate("2020-01-01"),
+        hireDate: new Date("2020-01-01"),
       },
       employeeStateTaxes: {
         wcCovered: true,
@@ -1269,7 +1268,6 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-06-15/core.js";
 import { employeesCreateHistorical } from "@gusto/embedded-api-v-2026-06-15/funcs/employeesCreateHistorical.js";
-import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1285,7 +1283,7 @@ async function run() {
       middleInitial: "A",
       lastName: "Kierkegaard",
       preferredFirstName: "Angel",
-      dateOfBirth: new RFCDate("1995-05-05"),
+      dateOfBirth: new Date("1995-05-05"),
       ssn: "123456294",
       workAddress: {
         locationUuid: "1da85d35-1910-40a7-9c1f-8e2b3d4c5a6f",
@@ -1298,11 +1296,11 @@ async function run() {
         zip: "94105",
       },
       termination: {
-        effectiveDate: new RFCDate("2022-01-01"),
+        effectiveDate: new Date("2022-01-01"),
       },
       email: "soren.kierkegaard@example.com",
       job: {
-        hireDate: new RFCDate("2020-01-01"),
+        hireDate: new Date("2020-01-01"),
       },
       employeeStateTaxes: {
         wcCovered: true,

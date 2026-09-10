@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -21,7 +23,7 @@ export const PaymentPeriod = {
 /**
  * How often the agency collects the withholding amount. e.g. $500 monthly -> `Monthly`.
  */
-export type PaymentPeriod = ClosedEnum<typeof PaymentPeriod>;
+export type PaymentPeriod = OpenEnum<typeof PaymentPeriod>;
 
 /**
  * Additional child support order details
@@ -54,13 +56,17 @@ export type GarnishmentChildSupport = {
 };
 
 /** @internal */
-export const PaymentPeriod$inboundSchema: z.ZodNativeEnum<
-  typeof PaymentPeriod
-> = z.nativeEnum(PaymentPeriod);
+export const PaymentPeriod$inboundSchema: z.ZodType<
+  PaymentPeriod,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PaymentPeriod);
 /** @internal */
-export const PaymentPeriod$outboundSchema: z.ZodNativeEnum<
-  typeof PaymentPeriod
-> = PaymentPeriod$inboundSchema;
+export const PaymentPeriod$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  PaymentPeriod
+> = openEnums.outboundSchema(PaymentPeriod);
 
 /** @internal */
 export const GarnishmentChildSupport$inboundSchema: z.ZodType<
@@ -68,12 +74,12 @@ export const GarnishmentChildSupport$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  state: z.string().optional(),
-  payment_period: PaymentPeriod$inboundSchema.optional(),
-  fips_code: z.string().optional(),
-  case_number: z.nullable(z.string()).optional(),
-  order_number: z.nullable(z.string()).optional(),
-  remittance_number: z.nullable(z.string()).optional(),
+  state: types.optional(types.string()),
+  payment_period: types.optional(PaymentPeriod$inboundSchema),
+  fips_code: types.optional(types.string()),
+  case_number: z.nullable(types.string()).optional(),
+  order_number: z.nullable(types.string()).optional(),
+  remittance_number: z.nullable(types.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "payment_period": "paymentPeriod",

@@ -11,10 +11,12 @@ The outcome of cancelling this payroll. A cancel is atomic — there is no per-p
 import { PayrollBatchResultsResultsStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/payrollbatchresults.js";
 
 let value: PayrollBatchResultsResultsStatus = "failed";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"success" | "failed"
+"success" | "failed" | Unrecognized<string>
 ```

@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -27,7 +29,7 @@ export const Id = {
 /**
  * The string identifier for each onboarding step
  */
-export type Id = ClosedEnum<typeof Id>;
+export type Id = OpenEnum<typeof Id>;
 
 export const CompanyOnboardingStatusRequirements = {
   AddAddresses: "add_addresses",
@@ -41,7 +43,7 @@ export const CompanyOnboardingStatusRequirements = {
   VerifyBankInfo: "verify_bank_info",
   ExternalPayroll: "external_payroll",
 } as const;
-export type CompanyOnboardingStatusRequirements = ClosedEnum<
+export type CompanyOnboardingStatusRequirements = OpenEnum<
   typeof CompanyOnboardingStatusRequirements
 >;
 
@@ -95,12 +97,15 @@ export type CompanyOnboardingStatus = {
 };
 
 /** @internal */
-export const Id$inboundSchema: z.ZodNativeEnum<typeof Id> = z.nativeEnum(Id);
+export const Id$inboundSchema: z.ZodType<Id, z.ZodTypeDef, unknown> = openEnums
+  .inboundSchema(Id);
 
 /** @internal */
-export const CompanyOnboardingStatusRequirements$inboundSchema: z.ZodNativeEnum<
-  typeof CompanyOnboardingStatusRequirements
-> = z.nativeEnum(CompanyOnboardingStatusRequirements);
+export const CompanyOnboardingStatusRequirements$inboundSchema: z.ZodType<
+  CompanyOnboardingStatusRequirements,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(CompanyOnboardingStatusRequirements);
 
 /** @internal */
 export const OnboardingStep$inboundSchema: z.ZodType<
@@ -108,14 +113,15 @@ export const OnboardingStep$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  title: z.string().optional(),
-  id: Id$inboundSchema.optional(),
-  required: z.boolean().optional(),
-  completed: z.boolean().optional(),
-  completed_at: z.nullable(z.string()).optional(),
-  skippable: z.boolean().optional(),
-  requirements: z.array(CompanyOnboardingStatusRequirements$inboundSchema)
-    .optional(),
+  title: types.optional(types.string()),
+  id: types.optional(Id$inboundSchema),
+  required: types.optional(types.boolean()),
+  completed: types.optional(types.boolean()),
+  completed_at: z.nullable(types.string()).optional(),
+  skippable: types.optional(types.boolean()),
+  requirements: types.optional(
+    z.array(CompanyOnboardingStatusRequirements$inboundSchema),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "completed_at": "completedAt",
@@ -138,10 +144,11 @@ export const CompanyOnboardingStatus$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  onboarding_completed: z.boolean().optional(),
-  onboarding_steps: z.array(z.lazy(() => OnboardingStep$inboundSchema))
-    .optional(),
+  uuid: types.string(),
+  onboarding_completed: types.optional(types.boolean()),
+  onboarding_steps: types.optional(
+    z.array(z.lazy(() => OnboardingStep$inboundSchema)),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "onboarding_completed": "onboardingCompleted",

@@ -3,7 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 /**
  * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Commissioned employees ('Commission Only Exempt') earn wages based only on commission. Commissioned with overtime ('Commission Only Nonexempt') earn wages based on commission, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company.
@@ -19,13 +20,17 @@ export const FlsaStatusType = {
 /**
  * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Commissioned employees ('Commission Only Exempt') earn wages based only on commission. Commissioned with overtime ('Commission Only Nonexempt') earn wages based on commission, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company.
  */
-export type FlsaStatusType = ClosedEnum<typeof FlsaStatusType>;
+export type FlsaStatusType = OpenEnum<typeof FlsaStatusType>;
 
 /** @internal */
-export const FlsaStatusType$inboundSchema: z.ZodNativeEnum<
-  typeof FlsaStatusType
-> = z.nativeEnum(FlsaStatusType);
+export const FlsaStatusType$inboundSchema: z.ZodType<
+  FlsaStatusType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(FlsaStatusType);
 /** @internal */
-export const FlsaStatusType$outboundSchema: z.ZodNativeEnum<
-  typeof FlsaStatusType
-> = FlsaStatusType$inboundSchema;
+export const FlsaStatusType$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  FlsaStatusType
+> = openEnums.outboundSchema(FlsaStatusType);

@@ -4,7 +4,6 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { RFCDate } from "../../types/rfcdate.js";
 
 /**
  * The request body for creating an external payroll.
@@ -13,15 +12,15 @@ export type ExternalPayrollCreateRequest = {
   /**
    * The check date of the external payroll.
    */
-  checkDate: RFCDate;
+  checkDate: Date;
   /**
    * The start date of the external payroll payment period.
    */
-  paymentPeriodStartDate: RFCDate;
+  paymentPeriodStartDate: Date;
   /**
    * The end date of the external payroll payment period.
    */
-  paymentPeriodEndDate: RFCDate;
+  paymentPeriodEndDate: Date;
 };
 
 /** @internal */
@@ -37,9 +36,15 @@ export const ExternalPayrollCreateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ExternalPayrollCreateRequest
 > = z.object({
-  checkDate: z.instanceof(RFCDate).transform(v => v.toString()),
-  paymentPeriodStartDate: z.instanceof(RFCDate).transform(v => v.toString()),
-  paymentPeriodEndDate: z.instanceof(RFCDate).transform(v => v.toString()),
+  checkDate: z.date().transform(v =>
+    v.toISOString().slice(0, "YYYY-MM-DD".length)
+  ),
+  paymentPeriodStartDate: z.date().transform(v =>
+    v.toISOString().slice(0, "YYYY-MM-DD".length)
+  ),
+  paymentPeriodEndDate: z.date().transform(v =>
+    v.toISOString().slice(0, "YYYY-MM-DD".length)
+  ),
 }).transform((v) => {
   return remap$(v, {
     checkDate: "check_date",

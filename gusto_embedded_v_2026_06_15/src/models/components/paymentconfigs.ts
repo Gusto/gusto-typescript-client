@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -30,7 +32,7 @@ export const PaymentSpeed = {
  * - `2-day`: Two-day ACH.
  * - `4-day`: Standard ACH.
  */
-export type PaymentSpeed = ClosedEnum<typeof PaymentSpeed>;
+export type PaymentSpeed = OpenEnum<typeof PaymentSpeed>;
 
 /**
  * The type of blocker
@@ -42,7 +44,7 @@ export const BlockerType = {
 /**
  * The type of blocker
  */
-export type BlockerType = ClosedEnum<typeof BlockerType>;
+export type BlockerType = OpenEnum<typeof BlockerType>;
 
 export type EarnedFastAchBlockers = {
   /**
@@ -88,12 +90,18 @@ export type PaymentConfigs = {
 };
 
 /** @internal */
-export const PaymentSpeed$inboundSchema: z.ZodNativeEnum<typeof PaymentSpeed> =
-  z.nativeEnum(PaymentSpeed);
+export const PaymentSpeed$inboundSchema: z.ZodType<
+  PaymentSpeed,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PaymentSpeed);
 
 /** @internal */
-export const BlockerType$inboundSchema: z.ZodNativeEnum<typeof BlockerType> = z
-  .nativeEnum(BlockerType);
+export const BlockerType$inboundSchema: z.ZodType<
+  BlockerType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(BlockerType);
 
 /** @internal */
 export const EarnedFastAchBlockers$inboundSchema: z.ZodType<
@@ -101,8 +109,8 @@ export const EarnedFastAchBlockers$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  blocker_type: BlockerType$inboundSchema.optional(),
-  threshold: z.number().optional(),
+  blocker_type: types.optional(BlockerType$inboundSchema),
+  threshold: types.optional(types.number()),
 }).transform((v) => {
   return remap$(v, {
     "blocker_type": "blockerType",
@@ -125,14 +133,14 @@ export const PaymentConfigs$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  company_uuid: z.string().optional(),
-  partner_uuid: z.string().optional(),
-  fast_payment_limit: z.nullable(z.string()).optional(),
-  payment_speed: PaymentSpeed$inboundSchema.optional(),
-  partner_owned_disbursement: z.boolean().optional(),
-  earned_fast_ach_blockers: z.array(
-    z.lazy(() => EarnedFastAchBlockers$inboundSchema),
-  ).optional(),
+  company_uuid: types.optional(types.string()),
+  partner_uuid: types.optional(types.string()),
+  fast_payment_limit: z.nullable(types.string()).optional(),
+  payment_speed: types.optional(PaymentSpeed$inboundSchema),
+  partner_owned_disbursement: types.optional(types.boolean()),
+  earned_fast_ach_blockers: types.optional(
+    z.array(z.lazy(() => EarnedFastAchBlockers$inboundSchema)),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

@@ -8,9 +8,10 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { ClosedEnum, OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import { RFCDate } from "../../types/rfcdate.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PayrollCompanyTaxesType,
@@ -74,7 +75,7 @@ export const OffCycleReasonType = {
   DisabilityInsuranceDistribution: "Disability insurance distribution",
   TransitionFromOldPaySchedule: "Transition from old pay schedule",
 } as const;
-export type OffCycleReasonType = ClosedEnum<typeof OffCycleReasonType>;
+export type OffCycleReasonType = OpenEnum<typeof OffCycleReasonType>;
 
 export const PayrollWithholdingPayPeriodType = {
   EveryWeek: "Every week",
@@ -85,7 +86,7 @@ export const PayrollWithholdingPayPeriodType = {
   Semiannually: "Semiannually",
   Annually: "Annually",
 } as const;
-export type PayrollWithholdingPayPeriodType = ClosedEnum<
+export type PayrollWithholdingPayPeriodType = OpenEnum<
   typeof PayrollWithholdingPayPeriodType
 >;
 
@@ -94,7 +95,7 @@ export const PayrollShowPaymentMethod = {
   Check: "Check",
   Historical: "Historical",
 } as const;
-export type PayrollShowPaymentMethod = ClosedEnum<
+export type PayrollShowPaymentMethod = OpenEnum<
   typeof PayrollShowPaymentMethod
 >;
 
@@ -102,11 +103,11 @@ export type PayrollShowEmployeeCompensationsBreakdowns = {
   /**
    * The start date of the workweek.
    */
-  startDate?: RFCDate | undefined;
+  startDate?: Date | undefined;
   /**
    * The end date of the workweek.
    */
-  endDate?: RFCDate | undefined;
+  endDate?: Date | undefined;
   /**
    * The dollar amount for this workweek.
    */
@@ -139,11 +140,11 @@ export type PayrollShowBreakdowns = {
   /**
    * The start date of the workweek.
    */
-  startDate?: RFCDate | undefined;
+  startDate?: Date | undefined;
   /**
    * The end date of the workweek.
    */
-  endDate?: RFCDate | undefined;
+  endDate?: Date | undefined;
   /**
    * The number of hours worked during this workweek.
    */
@@ -245,7 +246,7 @@ export const PayrollShowEmployeeCompensationsAmountType = {
 /**
  * How to interpret the amount.
  */
-export type PayrollShowEmployeeCompensationsAmountType = ClosedEnum<
+export type PayrollShowEmployeeCompensationsAmountType = OpenEnum<
   typeof PayrollShowEmployeeCompensationsAmountType
 >;
 
@@ -291,9 +292,7 @@ export const PayrollShowEmployeeCompensationsCustomWithholdingsAmountType = {
  * How to interpret the amount.
  */
 export type PayrollShowEmployeeCompensationsCustomWithholdingsAmountType =
-  ClosedEnum<
-    typeof PayrollShowEmployeeCompensationsCustomWithholdingsAmountType
-  >;
+  OpenEnum<typeof PayrollShowEmployeeCompensationsCustomWithholdingsAmountType>;
 
 export type PayrollShowState = {
   /**
@@ -344,7 +343,7 @@ export const PayrollShowAmountType = {
 /**
  * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
  */
-export type PayrollShowAmountType = ClosedEnum<typeof PayrollShowAmountType>;
+export type PayrollShowAmountType = OpenEnum<typeof PayrollShowAmountType>;
 
 export type PayrollShowDeductions = {
   /**
@@ -595,11 +594,11 @@ export type Workweeks = {
   /**
    * The start date of the workweek.
    */
-  startDate?: RFCDate | undefined;
+  startDate?: Date | undefined;
   /**
    * The end date of the workweek.
    */
-  endDate?: RFCDate | undefined;
+  endDate?: Date | undefined;
 };
 
 /**
@@ -809,11 +808,11 @@ export type PayrollUnprocessedWorkweeks = {
   /**
    * The start date of the workweek.
    */
-  startDate?: RFCDate | undefined;
+  startDate?: Date | undefined;
   /**
    * The end date of the workweek.
    */
-  endDate?: RFCDate | undefined;
+  endDate?: Date | undefined;
 };
 
 /**
@@ -980,27 +979,33 @@ export type UnprocessedPayroll = {
 };
 
 /** @internal */
-export const OffCycleReasonType$inboundSchema: z.ZodNativeEnum<
-  typeof OffCycleReasonType
-> = z.nativeEnum(OffCycleReasonType);
+export const OffCycleReasonType$inboundSchema: z.ZodType<
+  OffCycleReasonType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(OffCycleReasonType);
 
 /** @internal */
-export const PayrollWithholdingPayPeriodType$inboundSchema: z.ZodNativeEnum<
-  typeof PayrollWithholdingPayPeriodType
-> = z.nativeEnum(PayrollWithholdingPayPeriodType);
+export const PayrollWithholdingPayPeriodType$inboundSchema: z.ZodType<
+  PayrollWithholdingPayPeriodType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PayrollWithholdingPayPeriodType);
 
 /** @internal */
-export const PayrollShowPaymentMethod$inboundSchema: z.ZodNativeEnum<
-  typeof PayrollShowPaymentMethod
-> = z.nativeEnum(PayrollShowPaymentMethod);
+export const PayrollShowPaymentMethod$inboundSchema: z.ZodType<
+  PayrollShowPaymentMethod,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PayrollShowPaymentMethod);
 
 /** @internal */
 export const PayrollShowEmployeeCompensationsBreakdowns$inboundSchema:
   z.ZodType<PayrollShowEmployeeCompensationsBreakdowns, z.ZodTypeDef, unknown> =
     z.object({
-      start_date: z.string().transform(v => new RFCDate(v)).optional(),
-      end_date: z.string().transform(v => new RFCDate(v)).optional(),
-      amount: z.string().optional(),
+      start_date: types.optional(types.date()),
+      end_date: types.optional(types.date()),
+      amount: types.optional(types.string()),
     }).transform((v) => {
       return remap$(v, {
         "start_date": "startDate",
@@ -1030,12 +1035,14 @@ export const PayrollShowFixedCompensations$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
-  amount: z.string().optional(),
-  job_uuid: z.string().optional(),
-  breakdowns: z.array(
-    z.lazy(() => PayrollShowEmployeeCompensationsBreakdowns$inboundSchema),
-  ).optional(),
+  name: types.optional(types.string()),
+  amount: types.optional(types.string()),
+  job_uuid: types.optional(types.string()),
+  breakdowns: types.optional(
+    z.array(z.lazy(() =>
+      PayrollShowEmployeeCompensationsBreakdowns$inboundSchema
+    )),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "job_uuid": "jobUuid",
@@ -1058,9 +1065,9 @@ export const PayrollShowBreakdowns$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  start_date: z.string().transform(v => new RFCDate(v)).optional(),
-  end_date: z.string().transform(v => new RFCDate(v)).optional(),
-  hours: z.string().optional(),
+  start_date: types.optional(types.date()),
+  end_date: types.optional(types.date()),
+  hours: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "start_date": "startDate",
@@ -1084,14 +1091,15 @@ export const PayrollShowHourlyCompensations$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
-  hours: z.string().optional(),
-  amount: z.string().optional(),
-  job_uuid: z.string().optional(),
-  compensation_multiplier: z.number().optional(),
-  flsa_status: z.string().optional(),
-  breakdowns: z.array(z.lazy(() => PayrollShowBreakdowns$inboundSchema))
-    .optional(),
+  name: types.optional(types.string()),
+  hours: types.optional(types.string()),
+  amount: types.optional(types.string()),
+  job_uuid: types.optional(types.string()),
+  compensation_multiplier: types.optional(types.number()),
+  flsa_status: types.optional(types.string()),
+  breakdowns: types.optional(
+    z.array(z.lazy(() => PayrollShowBreakdowns$inboundSchema)),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "job_uuid": "jobUuid",
@@ -1116,10 +1124,10 @@ export const PayrollShowPaidTimeOff$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
-  hours: z.string().optional(),
-  amount: z.nullable(z.string()).optional(),
-  final_payout_unused_hours_input: z.nullable(z.string()).optional(),
+  name: types.optional(types.string()),
+  hours: types.optional(types.string()),
+  amount: z.nullable(types.string()).optional(),
+  final_payout_unused_hours_input: z.nullable(types.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "final_payout_unused_hours_input": "finalPayoutUnusedHoursInput",
@@ -1142,10 +1150,10 @@ export const PayrollShowReimbursements$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  amount: z.string(),
-  description: z.nullable(z.string()),
-  uuid: z.nullable(z.string()).optional(),
-  recurring: z.boolean().optional(),
+  amount: types.string(),
+  description: types.nullable(types.string()),
+  uuid: z.nullable(types.string()).optional(),
+  recurring: types.optional(types.boolean()),
 });
 
 export function payrollShowReimbursementsFromJSON(
@@ -1165,8 +1173,8 @@ export const PayrollShowEmployeeCompensationsOverrideType$inboundSchema:
 
 /** @internal */
 export const PayrollShowEmployeeCompensationsAmountType$inboundSchema:
-  z.ZodNativeEnum<typeof PayrollShowEmployeeCompensationsAmountType> = z
-    .nativeEnum(PayrollShowEmployeeCompensationsAmountType);
+  z.ZodType<PayrollShowEmployeeCompensationsAmountType, z.ZodTypeDef, unknown> =
+    openEnums.inboundSchema(PayrollShowEmployeeCompensationsAmountType);
 
 /** @internal */
 export const PayrollShowFederal$inboundSchema: z.ZodType<
@@ -1174,11 +1182,13 @@ export const PayrollShowFederal$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  override_type: PayrollShowEmployeeCompensationsOverrideType$inboundSchema
-    .optional(),
-  amount: z.string().optional(),
-  amount_type: PayrollShowEmployeeCompensationsAmountType$inboundSchema
-    .optional(),
+  override_type: types.optional(
+    PayrollShowEmployeeCompensationsOverrideType$inboundSchema,
+  ),
+  amount: types.optional(types.string()),
+  amount_type: types.optional(
+    PayrollShowEmployeeCompensationsAmountType$inboundSchema,
+  ),
 }).transform((v) => {
   return remap$(v, {
     "override_type": "overrideType",
@@ -1203,9 +1213,11 @@ export const PayrollShowOverrideType$inboundSchema: z.ZodNativeEnum<
 
 /** @internal */
 export const PayrollShowEmployeeCompensationsCustomWithholdingsAmountType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof PayrollShowEmployeeCompensationsCustomWithholdingsAmountType
-  > = z.nativeEnum(
+  z.ZodType<
+    PayrollShowEmployeeCompensationsCustomWithholdingsAmountType,
+    z.ZodTypeDef,
+    unknown
+  > = openEnums.inboundSchema(
     PayrollShowEmployeeCompensationsCustomWithholdingsAmountType,
   );
 
@@ -1215,12 +1227,12 @@ export const PayrollShowState$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  employee_state_field_uuid: z.string().optional(),
-  override_type: PayrollShowOverrideType$inboundSchema.optional(),
-  amount: z.string().optional(),
-  amount_type:
-    PayrollShowEmployeeCompensationsCustomWithholdingsAmountType$inboundSchema
-      .optional(),
+  employee_state_field_uuid: types.optional(types.string()),
+  override_type: types.optional(PayrollShowOverrideType$inboundSchema),
+  amount: types.optional(types.string()),
+  amount_type: types.optional(
+    PayrollShowEmployeeCompensationsCustomWithholdingsAmountType$inboundSchema,
+  ),
 }).transform((v) => {
   return remap$(v, {
     "employee_state_field_uuid": "employeeStateFieldUuid",
@@ -1247,7 +1259,7 @@ export const PayrollShowCustomWithholdings$inboundSchema: z.ZodType<
 > = z.object({
   federal: z.nullable(z.lazy(() => PayrollShowFederal$inboundSchema))
     .optional(),
-  state: z.array(z.lazy(() => PayrollShowState$inboundSchema)).optional(),
+  state: types.optional(z.array(z.lazy(() => PayrollShowState$inboundSchema))),
 });
 
 export function payrollShowCustomWithholdingsFromJSON(
@@ -1261,9 +1273,11 @@ export function payrollShowCustomWithholdingsFromJSON(
 }
 
 /** @internal */
-export const PayrollShowAmountType$inboundSchema: z.ZodNativeEnum<
-  typeof PayrollShowAmountType
-> = z.nativeEnum(PayrollShowAmountType);
+export const PayrollShowAmountType$inboundSchema: z.ZodType<
+  PayrollShowAmountType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PayrollShowAmountType);
 
 /** @internal */
 export const PayrollShowDeductions$inboundSchema: z.ZodType<
@@ -1271,11 +1285,11 @@ export const PayrollShowDeductions$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
-  amount: z.string().optional(),
-  amount_type: PayrollShowAmountType$inboundSchema.optional(),
-  uuid: z.string().optional(),
-  updatable_via_payroll: z.boolean().optional(),
+  name: types.optional(types.string()),
+  amount: types.optional(types.string()),
+  amount_type: types.optional(PayrollShowAmountType$inboundSchema),
+  uuid: types.optional(types.string()),
+  updatable_via_payroll: types.optional(types.boolean()),
 }).transform((v) => {
   return remap$(v, {
     "amount_type": "amountType",
@@ -1299,9 +1313,9 @@ export const PayrollShowTaxes$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string(),
-  employer: z.boolean(),
-  amount: z.string(),
+  name: types.string(),
+  employer: types.boolean(),
+  amount: types.string(),
 });
 
 export function payrollShowTaxesFromJSON(
@@ -1320,10 +1334,10 @@ export const PayrollShowBenefits$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
-  employee_deduction: z.string().optional(),
-  company_contribution: z.string().optional(),
-  imputed: z.boolean().optional(),
+  name: types.optional(types.string()),
+  employee_deduction: types.optional(types.string()),
+  company_contribution: types.optional(types.string()),
+  imputed: types.optional(types.boolean()),
 }).transform((v) => {
   return remap$(v, {
     "employee_deduction": "employeeDeduction",
@@ -1347,8 +1361,8 @@ export const PayAdjustments$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
-  amount: z.string().optional(),
+  name: types.optional(types.string()),
+  amount: types.optional(types.string()),
 });
 
 export function payAdjustmentsFromJSON(
@@ -1368,39 +1382,45 @@ export const EmployeeCompensations$inboundSchema: z.ZodType<
   unknown
 > = collectExtraKeys$(
   z.object({
-    employee_uuid: z.string().optional(),
-    excluded: z.boolean().optional(),
-    first_name: z.nullable(z.string()).optional(),
-    preferred_first_name: z.nullable(z.string()).optional(),
-    last_name: z.nullable(z.string()).optional(),
-    gross_pay: z.nullable(z.string()).optional(),
-    net_pay: z.nullable(z.string()).optional(),
-    check_amount: z.nullable(z.string()).optional(),
+    employee_uuid: types.optional(types.string()),
+    excluded: types.optional(types.boolean()),
+    first_name: z.nullable(types.string()).optional(),
+    preferred_first_name: z.nullable(types.string()).optional(),
+    last_name: z.nullable(types.string()).optional(),
+    gross_pay: z.nullable(types.string()).optional(),
+    net_pay: z.nullable(types.string()).optional(),
+    check_amount: z.nullable(types.string()).optional(),
     payment_method: z.nullable(PayrollShowPaymentMethod$inboundSchema)
       .optional(),
-    memo: z.nullable(z.string()).optional(),
-    fixed_compensations: z.array(
-      z.lazy(() => PayrollShowFixedCompensations$inboundSchema),
-    ).optional(),
-    hourly_compensations: z.array(
-      z.lazy(() => PayrollShowHourlyCompensations$inboundSchema),
-    ).optional(),
-    paid_time_off: z.array(z.lazy(() => PayrollShowPaidTimeOff$inboundSchema))
-      .optional(),
-    reimbursements: z.array(
-      z.lazy(() => PayrollShowReimbursements$inboundSchema),
-    ).optional(),
-    custom_withholdings: z.lazy(() =>
-      PayrollShowCustomWithholdings$inboundSchema
-    ).optional(),
-    version: z.any().optional(),
-    deductions: z.array(z.lazy(() => PayrollShowDeductions$inboundSchema))
-      .optional(),
-    taxes: z.array(z.lazy(() => PayrollShowTaxes$inboundSchema)).optional(),
-    benefits: z.array(z.lazy(() => PayrollShowBenefits$inboundSchema))
-      .optional(),
-    pay_adjustments: z.array(z.lazy(() => PayAdjustments$inboundSchema))
-      .optional(),
+    memo: z.nullable(types.string()).optional(),
+    fixed_compensations: types.optional(
+      z.array(z.lazy(() => PayrollShowFixedCompensations$inboundSchema)),
+    ),
+    hourly_compensations: types.optional(
+      z.array(z.lazy(() => PayrollShowHourlyCompensations$inboundSchema)),
+    ),
+    paid_time_off: types.optional(
+      z.array(z.lazy(() => PayrollShowPaidTimeOff$inboundSchema)),
+    ),
+    reimbursements: types.optional(
+      z.array(z.lazy(() => PayrollShowReimbursements$inboundSchema)),
+    ),
+    custom_withholdings: types.optional(
+      z.lazy(() => PayrollShowCustomWithholdings$inboundSchema),
+    ),
+    version: types.optional(z.any()),
+    deductions: types.optional(
+      z.array(z.lazy(() => PayrollShowDeductions$inboundSchema)),
+    ),
+    taxes: types.optional(
+      z.array(z.lazy(() => PayrollShowTaxes$inboundSchema)),
+    ),
+    benefits: types.optional(
+      z.array(z.lazy(() => PayrollShowBenefits$inboundSchema)),
+    ),
+    pay_adjustments: types.optional(
+      z.array(z.lazy(() => PayAdjustments$inboundSchema)),
+    ),
   }).catchall(z.any()),
   "additionalProperties",
   true,
@@ -1438,46 +1458,47 @@ export const PayrollShow$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  payroll_deadline: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  check_date: z.string().optional(),
-  processed: z.boolean().optional(),
-  processed_date: z.nullable(z.string()).optional(),
-  calculated_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  uuid: z.string().optional(),
-  payroll_uuid: z.string().optional(),
-  company_uuid: z.string().optional(),
-  off_cycle: z.boolean().optional(),
+  payroll_deadline: types.optional(types.date()),
+  check_date: types.optional(types.string()),
+  processed: types.optional(types.boolean()),
+  processed_date: z.nullable(types.string()).optional(),
+  calculated_at: z.nullable(types.date()).optional(),
+  uuid: types.optional(types.string()),
+  payroll_uuid: types.optional(types.string()),
+  company_uuid: types.optional(types.string()),
+  off_cycle: types.optional(types.boolean()),
   off_cycle_reason: z.nullable(OffCycleReasonType$inboundSchema).optional(),
-  auto_payroll: z.boolean().optional(),
-  external: z.boolean().optional(),
-  final_termination_payroll: z.boolean().optional(),
+  auto_payroll: types.optional(types.boolean()),
+  external: types.optional(types.boolean()),
+  final_termination_payroll: types.optional(types.boolean()),
   withholding_pay_period: z.nullable(
     PayrollWithholdingPayPeriodType$inboundSchema,
   ).optional(),
-  skip_regular_deductions: z.nullable(z.boolean()).optional(),
-  fixed_withholding_rate: z.nullable(z.boolean()).optional(),
-  pay_period: PayrollPayPeriodType$inboundSchema.optional(),
-  payroll_status_meta: PayrollPayrollStatusMetaType$inboundSchema.optional(),
-  totals: PayrollTotalsType$inboundSchema.optional(),
-  company_taxes: z.array(PayrollCompanyTaxesType$inboundSchema).optional(),
-  payroll_taxes: z.array(PayrollTaxesType$inboundSchema).optional(),
-  payment_speed_changed: PayrollPaymentSpeedChangedType$inboundSchema
-    .optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  submission_blockers: z.array(PayrollSubmissionBlockerType$inboundSchema)
-    .optional(),
-  credit_blockers: z.array(PayrollCreditBlockerType$inboundSchema).optional(),
+  skip_regular_deductions: z.nullable(types.boolean()).optional(),
+  fixed_withholding_rate: z.nullable(types.boolean()).optional(),
+  pay_period: types.optional(PayrollPayPeriodType$inboundSchema),
+  payroll_status_meta: types.optional(
+    PayrollPayrollStatusMetaType$inboundSchema,
+  ),
+  totals: types.optional(PayrollTotalsType$inboundSchema),
+  company_taxes: types.optional(z.array(PayrollCompanyTaxesType$inboundSchema)),
+  payroll_taxes: types.optional(z.array(PayrollTaxesType$inboundSchema)),
+  payment_speed_changed: types.optional(
+    PayrollPaymentSpeedChangedType$inboundSchema,
+  ),
+  created_at: types.optional(types.date()),
+  submission_blockers: types.optional(
+    z.array(PayrollSubmissionBlockerType$inboundSchema),
+  ),
+  credit_blockers: types.optional(
+    z.array(PayrollCreditBlockerType$inboundSchema),
+  ),
   processing_request: z.nullable(PayrollProcessingRequest$inboundSchema)
     .optional(),
-  partner_owned_disbursement: z.nullable(z.boolean()).optional(),
-  employee_compensations: z.array(
-    z.lazy(() => EmployeeCompensations$inboundSchema),
-  ).optional(),
+  partner_owned_disbursement: z.nullable(types.boolean()).optional(),
+  employee_compensations: types.optional(
+    z.array(z.lazy(() => EmployeeCompensations$inboundSchema)),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "payroll_deadline": "payrollDeadline",
@@ -1523,8 +1544,8 @@ export const Workweeks$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  start_date: z.string().transform(v => new RFCDate(v)).optional(),
-  end_date: z.string().transform(v => new RFCDate(v)).optional(),
+  start_date: types.optional(types.date()),
+  end_date: types.optional(types.date()),
 }).transform((v) => {
   return remap$(v, {
     "start_date": "startDate",
@@ -1548,45 +1569,43 @@ export const PayrollPrepared$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  payroll_deadline: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  check_date: z.string().optional(),
-  processed: z.boolean().optional(),
-  processed_date: z.nullable(z.string()).optional(),
-  calculated_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  uuid: z.string().optional(),
-  payroll_uuid: z.string().optional(),
-  company_uuid: z.string().optional(),
-  off_cycle: z.boolean().optional(),
+  payroll_deadline: types.optional(types.date()),
+  check_date: types.optional(types.string()),
+  processed: types.optional(types.boolean()),
+  processed_date: z.nullable(types.string()).optional(),
+  calculated_at: z.nullable(types.date()).optional(),
+  uuid: types.optional(types.string()),
+  payroll_uuid: types.optional(types.string()),
+  company_uuid: types.optional(types.string()),
+  off_cycle: types.optional(types.boolean()),
   off_cycle_reason: z.nullable(OffCycleReasonType$inboundSchema).optional(),
-  auto_payroll: z.boolean().optional(),
-  external: z.boolean().optional(),
-  final_termination_payroll: z.boolean().optional(),
+  auto_payroll: types.optional(types.boolean()),
+  external: types.optional(types.boolean()),
+  final_termination_payroll: types.optional(types.boolean()),
   withholding_pay_period: z.nullable(
     PayrollWithholdingPayPeriodType$inboundSchema,
   ).optional(),
-  skip_regular_deductions: z.nullable(z.boolean()).optional(),
-  fixed_withholding_rate: z.nullable(z.boolean()).optional(),
-  pay_period: PayrollPayPeriodType$inboundSchema.optional(),
+  skip_regular_deductions: z.nullable(types.boolean()).optional(),
+  fixed_withholding_rate: z.nullable(types.boolean()).optional(),
+  pay_period: types.optional(PayrollPayPeriodType$inboundSchema),
   workweeks: z.nullable(z.array(z.lazy(() => Workweeks$inboundSchema)))
     .optional(),
-  payroll_status_meta: PayrollPayrollStatusMetaType$inboundSchema.optional(),
-  employee_compensations: z.array(
-    PayrollEmployeeCompensationsType$inboundSchema,
-  ).optional(),
-  payment_speed_changed: PayrollPaymentSpeedChangedType$inboundSchema
-    .optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  fixed_compensation_types: z.array(
-    PayrollFixedCompensationTypesType$inboundSchema,
-  ).optional(),
+  payroll_status_meta: types.optional(
+    PayrollPayrollStatusMetaType$inboundSchema,
+  ),
+  employee_compensations: types.optional(
+    z.array(PayrollEmployeeCompensationsType$inboundSchema),
+  ),
+  payment_speed_changed: types.optional(
+    PayrollPaymentSpeedChangedType$inboundSchema,
+  ),
+  created_at: types.optional(types.date()),
+  fixed_compensation_types: types.optional(
+    z.array(PayrollFixedCompensationTypesType$inboundSchema),
+  ),
   processing_request: z.nullable(PayrollProcessingRequest$inboundSchema)
     .optional(),
-  partner_owned_disbursement: z.nullable(z.boolean()).optional(),
+  partner_owned_disbursement: z.nullable(types.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "payroll_deadline": "payrollDeadline",
@@ -1626,44 +1645,46 @@ export function payrollPreparedFromJSON(
 /** @internal */
 export const Payroll$inboundSchema: z.ZodType<Payroll, z.ZodTypeDef, unknown> =
   z.object({
-    payroll_deadline: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
-    check_date: z.string().optional(),
-    processed: z.boolean().optional(),
-    processed_date: z.nullable(z.string()).optional(),
-    calculated_at: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    uuid: z.string().optional(),
-    payroll_uuid: z.string().optional(),
-    company_uuid: z.string().optional(),
-    off_cycle: z.boolean().optional(),
+    payroll_deadline: types.optional(types.date()),
+    check_date: types.optional(types.string()),
+    processed: types.optional(types.boolean()),
+    processed_date: z.nullable(types.string()).optional(),
+    calculated_at: z.nullable(types.date()).optional(),
+    uuid: types.optional(types.string()),
+    payroll_uuid: types.optional(types.string()),
+    company_uuid: types.optional(types.string()),
+    off_cycle: types.optional(types.boolean()),
     off_cycle_reason: z.nullable(OffCycleReasonType$inboundSchema).optional(),
-    auto_payroll: z.boolean().optional(),
-    external: z.boolean().optional(),
-    final_termination_payroll: z.boolean().optional(),
+    auto_payroll: types.optional(types.boolean()),
+    external: types.optional(types.boolean()),
+    final_termination_payroll: types.optional(types.boolean()),
     withholding_pay_period: z.nullable(
       PayrollWithholdingPayPeriodType$inboundSchema,
     ).optional(),
-    skip_regular_deductions: z.nullable(z.boolean()).optional(),
-    fixed_withholding_rate: z.nullable(z.boolean()).optional(),
-    pay_period: PayrollPayPeriodType$inboundSchema.optional(),
-    payroll_status_meta: PayrollPayrollStatusMetaType$inboundSchema.optional(),
-    totals: PayrollTotalsType$inboundSchema.optional(),
-    company_taxes: z.array(PayrollCompanyTaxesType$inboundSchema).optional(),
-    payroll_taxes: z.array(PayrollTaxesType$inboundSchema).optional(),
-    payment_speed_changed: PayrollPaymentSpeedChangedType$inboundSchema
-      .optional(),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
-    submission_blockers: z.array(PayrollSubmissionBlockerType$inboundSchema)
-      .optional(),
-    credit_blockers: z.array(PayrollCreditBlockerType$inboundSchema).optional(),
+    skip_regular_deductions: z.nullable(types.boolean()).optional(),
+    fixed_withholding_rate: z.nullable(types.boolean()).optional(),
+    pay_period: types.optional(PayrollPayPeriodType$inboundSchema),
+    payroll_status_meta: types.optional(
+      PayrollPayrollStatusMetaType$inboundSchema,
+    ),
+    totals: types.optional(PayrollTotalsType$inboundSchema),
+    company_taxes: types.optional(
+      z.array(PayrollCompanyTaxesType$inboundSchema),
+    ),
+    payroll_taxes: types.optional(z.array(PayrollTaxesType$inboundSchema)),
+    payment_speed_changed: types.optional(
+      PayrollPaymentSpeedChangedType$inboundSchema,
+    ),
+    created_at: types.optional(types.date()),
+    submission_blockers: types.optional(
+      z.array(PayrollSubmissionBlockerType$inboundSchema),
+    ),
+    credit_blockers: types.optional(
+      z.array(PayrollCreditBlockerType$inboundSchema),
+    ),
     processing_request: z.nullable(PayrollProcessingRequest$inboundSchema)
       .optional(),
-    partner_owned_disbursement: z.nullable(z.boolean()).optional(),
+    partner_owned_disbursement: z.nullable(types.boolean()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "payroll_deadline": "payrollDeadline",
@@ -1708,8 +1729,8 @@ export const PayrollUnprocessedWorkweeks$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  start_date: z.string().transform(v => new RFCDate(v)).optional(),
-  end_date: z.string().transform(v => new RFCDate(v)).optional(),
+  start_date: types.optional(types.date()),
+  end_date: types.optional(types.date()),
 }).transform((v) => {
   return remap$(v, {
     "start_date": "startDate",
@@ -1733,46 +1754,44 @@ export const PayrollUnprocessed$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  payroll_deadline: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  check_date: z.string().optional(),
-  processed: z.boolean().optional(),
-  processed_date: z.nullable(z.string()).optional(),
-  calculated_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  uuid: z.string().optional(),
-  payroll_uuid: z.string().optional(),
-  company_uuid: z.string().optional(),
-  off_cycle: z.boolean().optional(),
+  payroll_deadline: types.optional(types.date()),
+  check_date: types.optional(types.string()),
+  processed: types.optional(types.boolean()),
+  processed_date: z.nullable(types.string()).optional(),
+  calculated_at: z.nullable(types.date()).optional(),
+  uuid: types.optional(types.string()),
+  payroll_uuid: types.optional(types.string()),
+  company_uuid: types.optional(types.string()),
+  off_cycle: types.optional(types.boolean()),
   off_cycle_reason: z.nullable(OffCycleReasonType$inboundSchema).optional(),
-  auto_payroll: z.boolean().optional(),
-  external: z.boolean().optional(),
-  final_termination_payroll: z.boolean().optional(),
+  auto_payroll: types.optional(types.boolean()),
+  external: types.optional(types.boolean()),
+  final_termination_payroll: types.optional(types.boolean()),
   withholding_pay_period: z.nullable(
     PayrollWithholdingPayPeriodType$inboundSchema,
   ).optional(),
-  skip_regular_deductions: z.nullable(z.boolean()).optional(),
-  fixed_withholding_rate: z.nullable(z.boolean()).optional(),
-  pay_period: PayrollPayPeriodType$inboundSchema.optional(),
+  skip_regular_deductions: z.nullable(types.boolean()).optional(),
+  fixed_withholding_rate: z.nullable(types.boolean()).optional(),
+  pay_period: types.optional(PayrollPayPeriodType$inboundSchema),
   workweeks: z.nullable(
     z.array(z.lazy(() => PayrollUnprocessedWorkweeks$inboundSchema)),
   ).optional(),
-  payroll_status_meta: PayrollPayrollStatusMetaType$inboundSchema.optional(),
-  employee_compensations: z.array(
-    PayrollUnprocessedEmployeeCompensationsType$inboundSchema,
-  ).optional(),
-  payment_speed_changed: PayrollPaymentSpeedChangedType$inboundSchema
-    .optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  fixed_compensation_types: z.array(
-    PayrollFixedCompensationTypesType$inboundSchema,
-  ).optional(),
+  payroll_status_meta: types.optional(
+    PayrollPayrollStatusMetaType$inboundSchema,
+  ),
+  employee_compensations: types.optional(
+    z.array(PayrollUnprocessedEmployeeCompensationsType$inboundSchema),
+  ),
+  payment_speed_changed: types.optional(
+    PayrollPaymentSpeedChangedType$inboundSchema,
+  ),
+  created_at: types.optional(types.date()),
+  fixed_compensation_types: types.optional(
+    z.array(PayrollFixedCompensationTypesType$inboundSchema),
+  ),
   processing_request: z.nullable(PayrollProcessingRequest$inboundSchema)
     .optional(),
-  partner_owned_disbursement: z.nullable(z.boolean()).optional(),
+  partner_owned_disbursement: z.nullable(types.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "payroll_deadline": "payrollDeadline",
@@ -1815,26 +1834,21 @@ export const UnprocessedPayroll$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  payroll_deadline: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  check_date: z.string().optional(),
-  processed: z.boolean().optional(),
-  processed_date: z.nullable(z.string()).optional(),
-  calculated_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  uuid: z.string().optional(),
-  payroll_uuid: z.string().optional(),
-  company_uuid: z.string().optional(),
-  off_cycle: z.boolean().optional(),
+  payroll_deadline: types.optional(types.date()),
+  check_date: types.optional(types.string()),
+  processed: types.optional(types.boolean()),
+  processed_date: z.nullable(types.string()).optional(),
+  calculated_at: z.nullable(types.date()).optional(),
+  uuid: types.optional(types.string()),
+  payroll_uuid: types.optional(types.string()),
+  company_uuid: types.optional(types.string()),
+  off_cycle: types.optional(types.boolean()),
   off_cycle_reason: z.nullable(OffCycleReasonType$inboundSchema).optional(),
-  auto_payroll: z.boolean().optional(),
-  external: z.boolean().optional(),
-  pay_period: PayrollPayPeriodType$inboundSchema.optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  partner_owned_disbursement: z.nullable(z.boolean()).optional(),
+  auto_payroll: types.optional(types.boolean()),
+  external: types.optional(types.boolean()),
+  pay_period: types.optional(PayrollPayPeriodType$inboundSchema),
+  created_at: types.optional(types.date()),
+  partner_owned_disbursement: z.nullable(types.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "payroll_deadline": "payrollDeadline",

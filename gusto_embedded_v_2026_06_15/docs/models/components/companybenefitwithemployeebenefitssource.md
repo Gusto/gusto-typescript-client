@@ -8,10 +8,12 @@ The source of the company benefit. This can be "internal", "external", or "partn
 import { CompanyBenefitWithEmployeeBenefitsSource } from "@gusto/embedded-api-v-2026-06-15/models/components/companybenefitwithemployeebenefits.js";
 
 let value: CompanyBenefitWithEmployeeBenefitsSource = "internal";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"internal" | "external" | "partnered"
+"internal" | "external" | "partnered" | Unrecognized<string>
 ```

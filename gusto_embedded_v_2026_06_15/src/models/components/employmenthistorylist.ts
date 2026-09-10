@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -22,7 +24,7 @@ export const EmploymentHistoryListEmploymentStatus = {
 /**
  * The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
  */
-export type EmploymentHistoryListEmploymentStatus = ClosedEnum<
+export type EmploymentHistoryListEmploymentStatus = OpenEnum<
   typeof EmploymentHistoryListEmploymentStatus
 >;
 
@@ -53,10 +55,11 @@ export type EmploymentHistoryList = {
 };
 
 /** @internal */
-export const EmploymentHistoryListEmploymentStatus$inboundSchema:
-  z.ZodNativeEnum<typeof EmploymentHistoryListEmploymentStatus> = z.nativeEnum(
-    EmploymentHistoryListEmploymentStatus,
-  );
+export const EmploymentHistoryListEmploymentStatus$inboundSchema: z.ZodType<
+  EmploymentHistoryListEmploymentStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(EmploymentHistoryListEmploymentStatus);
 
 /** @internal */
 export const EmploymentHistoryList$inboundSchema: z.ZodType<
@@ -64,12 +67,13 @@ export const EmploymentHistoryList$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  hire_date: z.string().optional(),
-  termination_date: z.nullable(z.string()).optional(),
-  file_new_hire_report: z.boolean().optional(),
-  two_percent_shareholder: z.boolean().optional(),
-  employment_status: EmploymentHistoryListEmploymentStatus$inboundSchema
-    .optional(),
+  hire_date: types.optional(types.string()),
+  termination_date: z.nullable(types.string()).optional(),
+  file_new_hire_report: types.optional(types.boolean()),
+  two_percent_shareholder: types.optional(types.boolean()),
+  employment_status: types.optional(
+    EmploymentHistoryListEmploymentStatus$inboundSchema,
+  ),
 }).transform((v) => {
   return remap$(v, {
     "hire_date": "hireDate",

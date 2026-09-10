@@ -5,8 +5,11 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -20,7 +23,7 @@ export const CompanyBenefitWithEmployeeBenefitsSource = {
 /**
  * The source of the company benefit. This can be "internal", "external", or "partnered". Company benefits created via the API default to "external". Certain partners can create company benefits with a source of "partnered".
  */
-export type CompanyBenefitWithEmployeeBenefitsSource = ClosedEnum<
+export type CompanyBenefitWithEmployeeBenefitsSource = OpenEnum<
   typeof CompanyBenefitWithEmployeeBenefitsSource
 >;
 
@@ -28,7 +31,7 @@ export const CompanyBenefitWithEmployeeBenefitsCatchUpType = {
   Elective: "elective",
   Deemed: "deemed",
 } as const;
-export type CompanyBenefitWithEmployeeBenefitsCatchUpType = ClosedEnum<
+export type CompanyBenefitWithEmployeeBenefitsCatchUpType = OpenEnum<
   typeof CompanyBenefitWithEmployeeBenefitsCatchUpType
 >;
 
@@ -203,14 +206,19 @@ export type CompanyBenefitWithEmployeeBenefits = {
 };
 
 /** @internal */
-export const CompanyBenefitWithEmployeeBenefitsSource$inboundSchema:
-  z.ZodNativeEnum<typeof CompanyBenefitWithEmployeeBenefitsSource> = z
-    .nativeEnum(CompanyBenefitWithEmployeeBenefitsSource);
+export const CompanyBenefitWithEmployeeBenefitsSource$inboundSchema: z.ZodType<
+  CompanyBenefitWithEmployeeBenefitsSource,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(CompanyBenefitWithEmployeeBenefitsSource);
 
 /** @internal */
 export const CompanyBenefitWithEmployeeBenefitsCatchUpType$inboundSchema:
-  z.ZodNativeEnum<typeof CompanyBenefitWithEmployeeBenefitsCatchUpType> = z
-    .nativeEnum(CompanyBenefitWithEmployeeBenefitsCatchUpType);
+  z.ZodType<
+    CompanyBenefitWithEmployeeBenefitsCatchUpType,
+    z.ZodTypeDef,
+    unknown
+  > = openEnums.inboundSchema(CompanyBenefitWithEmployeeBenefitsCatchUpType);
 
 /** @internal */
 export const CompanyBenefitWithEmployeeBenefitsValueTiers$inboundSchema:
@@ -219,9 +227,9 @@ export const CompanyBenefitWithEmployeeBenefitsValueTiers$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    rate: z.string().optional(),
-    threshold: z.string().optional(),
-    threshold_delta: z.string().optional(),
+    rate: types.optional(types.string()),
+    threshold: types.optional(types.string()),
+    threshold_delta: types.optional(types.string()),
   }).transform((v) => {
     return remap$(v, {
       "threshold_delta": "thresholdDelta",
@@ -250,9 +258,11 @@ export const CompanyBenefitWithEmployeeBenefitsValue2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  tiers: z.array(
-    z.lazy(() => CompanyBenefitWithEmployeeBenefitsValueTiers$inboundSchema),
-  ).optional(),
+  tiers: types.optional(
+    z.array(z.lazy(() =>
+      CompanyBenefitWithEmployeeBenefitsValueTiers$inboundSchema
+    )),
+  ),
 });
 
 export function companyBenefitWithEmployeeBenefitsValue2FromJSON(
@@ -276,8 +286,8 @@ export const CompanyBenefitWithEmployeeBenefitsValue$inboundSchema: z.ZodType<
   CompanyBenefitWithEmployeeBenefitsValue,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.string(),
+> = smartUnion([
+  types.string(),
   z.lazy(() => CompanyBenefitWithEmployeeBenefitsValue2$inboundSchema),
 ]);
 
@@ -304,11 +314,13 @@ export const CompanyBenefitWithEmployeeBenefitsContribution$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    type: z.string().optional(),
-    value: z.union([
-      z.string(),
-      z.lazy(() => CompanyBenefitWithEmployeeBenefitsValue2$inboundSchema),
-    ]).optional(),
+    type: types.optional(types.string()),
+    value: types.optional(
+      smartUnion([
+        types.string(),
+        z.lazy(() => CompanyBenefitWithEmployeeBenefitsValue2$inboundSchema),
+      ]),
+    ),
   });
 
 export function companyBenefitWithEmployeeBenefitsContributionFromJSON(
@@ -333,17 +345,17 @@ export const EmployeeBenefits$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  employee_uuid: z.string().optional(),
-  company_benefit_uuid: z.string().optional(),
-  active: z.boolean().default(true),
-  deduct_as_percentage: z.boolean().default(false),
-  employee_deduction: z.string().default("0.00"),
-  company_contribution: z.string().optional(),
-  effective_date: z.string().optional(),
-  expiration_date: z.string().optional(),
-  contribution: z.lazy(() =>
-    CompanyBenefitWithEmployeeBenefitsContribution$inboundSchema
-  ).optional(),
+  employee_uuid: types.optional(types.string()),
+  company_benefit_uuid: types.optional(types.string()),
+  active: types.boolean().default(true),
+  deduct_as_percentage: types.boolean().default(false),
+  employee_deduction: types.string().default("0.00"),
+  company_contribution: types.optional(types.string()),
+  effective_date: types.optional(types.string()),
+  expiration_date: types.optional(types.string()),
+  contribution: types.optional(
+    z.lazy(() => CompanyBenefitWithEmployeeBenefitsContribution$inboundSchema),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",
@@ -372,23 +384,26 @@ export const CompanyBenefitWithEmployeeBenefits$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  version: z.string().optional(),
-  company_uuid: z.string().optional(),
-  uuid: z.string(),
-  benefit_type: z.number().int().optional(),
-  active: z.boolean().default(true),
-  description: z.string().optional(),
-  source: CompanyBenefitWithEmployeeBenefitsSource$inboundSchema.optional(),
-  partner_name: z.nullable(z.string()).optional(),
-  deletable: z.boolean().optional(),
-  supports_percentage_amounts: z.boolean().optional(),
-  responsible_for_employer_taxes: z.boolean().optional(),
-  responsible_for_employee_w2: z.boolean().optional(),
+  version: types.optional(types.string()),
+  company_uuid: types.optional(types.string()),
+  uuid: types.string(),
+  benefit_type: types.optional(types.number()),
+  active: types.boolean().default(true),
+  description: types.optional(types.string()),
+  source: types.optional(
+    CompanyBenefitWithEmployeeBenefitsSource$inboundSchema,
+  ),
+  partner_name: z.nullable(types.string()).optional(),
+  deletable: types.optional(types.boolean()),
+  supports_percentage_amounts: types.optional(types.boolean()),
+  responsible_for_employer_taxes: types.optional(types.boolean()),
+  responsible_for_employee_w2: types.optional(types.boolean()),
   catch_up_type: z.nullable(
     CompanyBenefitWithEmployeeBenefitsCatchUpType$inboundSchema,
   ).optional(),
-  employee_benefits: z.array(z.lazy(() => EmployeeBenefits$inboundSchema))
-    .optional(),
+  employee_benefits: types.optional(
+    z.array(z.lazy(() => EmployeeBenefits$inboundSchema)),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

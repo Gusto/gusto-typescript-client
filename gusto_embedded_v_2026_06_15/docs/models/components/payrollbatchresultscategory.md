@@ -11,10 +11,12 @@ Machine-readable category for why the payroll was excluded.
 import { PayrollBatchResultsCategory } from "@gusto/embedded-api-v-2026-06-15/models/components/payrollbatchresults.js";
 
 let value: PayrollBatchResultsCategory = "duplicate_operation";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"not_found" | "duplicate_operation"
+"not_found" | "duplicate_operation" | Unrecognized<string>
 ```

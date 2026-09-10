@@ -5,9 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import { RFCDate } from "../../types/rfcdate.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -32,7 +33,7 @@ export const ContractorPaymentReceiptPaymentMethod = {
 /**
  * The payment method.
  */
-export type ContractorPaymentReceiptPaymentMethod = ClosedEnum<
+export type ContractorPaymentReceiptPaymentMethod = OpenEnum<
   typeof ContractorPaymentReceiptPaymentMethod
 >;
 
@@ -129,7 +130,7 @@ export type ContractorPaymentReceipt = {
   /**
    * The debit date for the contractor payment.
    */
-  debitDate?: RFCDate | undefined;
+  debitDate?: Date | undefined;
   /**
    * Always the fixed string "Your payroll provider partners with Gusto Inc. for payments processing. Gusto Inc. is a licensed money transmitter. Learn more on our license page."
    */
@@ -168,7 +169,7 @@ export const ContractorPaymentReceiptTotals$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  company_debit: z.string().optional(),
+  company_debit: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "company_debit": "companyDebit",
@@ -186,25 +187,27 @@ export function contractorPaymentReceiptTotalsFromJSON(
 }
 
 /** @internal */
-export const ContractorPaymentReceiptPaymentMethod$inboundSchema:
-  z.ZodNativeEnum<typeof ContractorPaymentReceiptPaymentMethod> = z.nativeEnum(
-    ContractorPaymentReceiptPaymentMethod,
-  );
+export const ContractorPaymentReceiptPaymentMethod$inboundSchema: z.ZodType<
+  ContractorPaymentReceiptPaymentMethod,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorPaymentReceiptPaymentMethod);
 
 /** @internal */
 export const ContractorPaymentReceiptContractorPayments$inboundSchema:
   z.ZodType<ContractorPaymentReceiptContractorPayments, z.ZodTypeDef, unknown> =
     z.object({
-      contractor_uuid: z.string().optional(),
-      contractor_first_name: z.string().optional(),
-      contractor_last_name: z.string().optional(),
-      contractor_business_name: z.string().optional(),
-      contractor_type: z.string().optional(),
-      payment_method: ContractorPaymentReceiptPaymentMethod$inboundSchema
-        .optional(),
-      wage: z.string().optional(),
-      bonus: z.string().optional(),
-      reimbursement: z.string().optional(),
+      contractor_uuid: types.optional(types.string()),
+      contractor_first_name: types.optional(types.string()),
+      contractor_last_name: types.optional(types.string()),
+      contractor_business_name: types.optional(types.string()),
+      contractor_type: types.optional(types.string()),
+      payment_method: types.optional(
+        ContractorPaymentReceiptPaymentMethod$inboundSchema,
+      ),
+      wage: types.optional(types.string()),
+      bonus: types.optional(types.string()),
+      reimbursement: types.optional(types.string()),
     }).transform((v) => {
       return remap$(v, {
         "contractor_uuid": "contractorUuid",
@@ -238,12 +241,12 @@ export const Licensee$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
-  address: z.string().optional(),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  postal_code: z.string().optional(),
-  phone_number: z.string().optional(),
+  name: types.optional(types.string()),
+  address: types.optional(types.string()),
+  city: types.optional(types.string()),
+  state: types.optional(types.string()),
+  postal_code: types.optional(types.string()),
+  phone_number: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "postal_code": "postalCode",
@@ -267,20 +270,24 @@ export const ContractorPaymentReceipt$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  contractor_payment_uuid: z.string().optional(),
-  company_uuid: z.string().optional(),
-  name_of_sender: z.string().optional(),
-  name_of_recipient: z.string().optional(),
-  debit_date: z.string().transform(v => new RFCDate(v)).optional(),
-  license: z.string().optional(),
-  license_uri: z.string().optional(),
-  right_to_refund: z.string().optional(),
-  liability_of_licensee: z.string().optional(),
-  totals: z.lazy(() => ContractorPaymentReceiptTotals$inboundSchema).optional(),
-  contractor_payments: z.array(
-    z.lazy(() => ContractorPaymentReceiptContractorPayments$inboundSchema),
-  ).optional(),
-  licensee: z.lazy(() => Licensee$inboundSchema).optional(),
+  contractor_payment_uuid: types.optional(types.string()),
+  company_uuid: types.optional(types.string()),
+  name_of_sender: types.optional(types.string()),
+  name_of_recipient: types.optional(types.string()),
+  debit_date: types.optional(types.date()),
+  license: types.optional(types.string()),
+  license_uri: types.optional(types.string()),
+  right_to_refund: types.optional(types.string()),
+  liability_of_licensee: types.optional(types.string()),
+  totals: types.optional(
+    z.lazy(() => ContractorPaymentReceiptTotals$inboundSchema),
+  ),
+  contractor_payments: types.optional(
+    z.array(z.lazy(() =>
+      ContractorPaymentReceiptContractorPayments$inboundSchema
+    )),
+  ),
+  licensee: types.optional(z.lazy(() => Licensee$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     "contractor_payment_uuid": "contractorPaymentUuid",

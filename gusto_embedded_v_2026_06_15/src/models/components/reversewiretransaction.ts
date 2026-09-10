@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { ClosedEnum, OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -33,7 +35,7 @@ export const ReverseWireTransactionStatus = {
  * - `rejected`: The reverse wire was rejected by the receiving bank (e.g. invalid account, insufficient funds).
  * - `failed`: The reverse wire failed during processing due to a system or network error.
  */
-export type ReverseWireTransactionStatus = ClosedEnum<
+export type ReverseWireTransactionStatus = OpenEnum<
   typeof ReverseWireTransactionStatus
 >;
 
@@ -54,7 +56,7 @@ export const ReverseWireTransactionPaymentEventType = {
   Payroll: "Payroll",
   ContractorPayment: "ContractorPayment",
 } as const;
-export type ReverseWireTransactionPaymentEventType = ClosedEnum<
+export type ReverseWireTransactionPaymentEventType = OpenEnum<
   typeof ReverseWireTransactionPaymentEventType
 >;
 
@@ -107,9 +109,11 @@ export type ReverseWireTransaction = {
 };
 
 /** @internal */
-export const ReverseWireTransactionStatus$inboundSchema: z.ZodNativeEnum<
-  typeof ReverseWireTransactionStatus
-> = z.nativeEnum(ReverseWireTransactionStatus);
+export const ReverseWireTransactionStatus$inboundSchema: z.ZodType<
+  ReverseWireTransactionStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ReverseWireTransactionStatus);
 
 /** @internal */
 export const ReverseWireTransactionPaymentDirection$inboundSchema:
@@ -118,10 +122,11 @@ export const ReverseWireTransactionPaymentDirection$inboundSchema:
   );
 
 /** @internal */
-export const ReverseWireTransactionPaymentEventType$inboundSchema:
-  z.ZodNativeEnum<typeof ReverseWireTransactionPaymentEventType> = z.nativeEnum(
-    ReverseWireTransactionPaymentEventType,
-  );
+export const ReverseWireTransactionPaymentEventType$inboundSchema: z.ZodType<
+  ReverseWireTransactionPaymentEventType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ReverseWireTransactionPaymentEventType);
 
 /** @internal */
 export const ReverseWireTransaction$inboundSchema: z.ZodType<
@@ -129,17 +134,17 @@ export const ReverseWireTransaction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  company_uuid: z.string(),
-  amount: z.string(),
+  company_uuid: types.string(),
+  amount: types.string(),
   status: ReverseWireTransactionStatus$inboundSchema,
   payment_direction: ReverseWireTransactionPaymentDirection$inboundSchema,
-  bank_name: z.nullable(z.string()).optional(),
+  bank_name: z.nullable(types.string()).optional(),
   payment_event_type: z.nullable(
     ReverseWireTransactionPaymentEventType$inboundSchema,
   ).optional(),
-  payment_event_uuid: z.nullable(z.string()).optional(),
-  payment_event_check_date: z.nullable(z.string()).optional(),
-  created_at: z.string(),
+  payment_event_uuid: z.nullable(types.string()).optional(),
+  payment_event_check_date: z.nullable(types.string()).optional(),
+  created_at: types.string(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

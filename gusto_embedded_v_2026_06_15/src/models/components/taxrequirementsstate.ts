@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaxRequirementSet,
@@ -27,9 +28,9 @@ export const TaxRequirementsState$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  company_uuid: z.string().optional(),
-  state: z.string().optional(),
-  requirement_sets: z.array(TaxRequirementSet$inboundSchema).optional(),
+  company_uuid: types.optional(types.string()),
+  state: types.optional(types.string()),
+  requirement_sets: types.optional(z.array(TaxRequirementSet$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

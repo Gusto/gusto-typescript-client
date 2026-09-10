@@ -8,10 +8,12 @@ Type of the time off policy. Only "vacation" and "sick" can be created through t
 import { PolicyType } from "@gusto/embedded-api-v-2026-06-15/models/components/timeoffpolicy.js";
 
 let value: PolicyType = "volunteer";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"vacation" | "sick" | "bereavement" | "custom" | "floating_holiday" | "jury_duty" | "learning_and_development" | "parental_leave" | "personal_day" | "volunteer" | "weather"
+"vacation" | "sick" | "bereavement" | "custom" | "floating_holiday" | "jury_duty" | "learning_and_development" | "parental_leave" | "personal_day" | "volunteer" | "weather" | Unrecognized<string>
 ```

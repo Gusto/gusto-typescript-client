@@ -5,6 +5,8 @@
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -17,7 +19,7 @@ export const TaxRequirementsValue$inboundSchema: z.ZodType<
   TaxRequirementsValue,
   z.ZodTypeDef,
   unknown
-> = z.union([z.boolean(), z.string(), z.number()]);
+> = smartUnion([types.boolean(), types.string(), types.number()]);
 /** @internal */
 export type TaxRequirementsValue$Outbound = boolean | string | number;
 
@@ -26,7 +28,7 @@ export const TaxRequirementsValue$outboundSchema: z.ZodType<
   TaxRequirementsValue$Outbound,
   z.ZodTypeDef,
   TaxRequirementsValue
-> = z.union([z.boolean(), z.string(), z.number()]);
+> = smartUnion([z.boolean(), z.string(), z.number()]);
 
 export function taxRequirementsValueToJSON(
   taxRequirementsValue: TaxRequirementsValue,

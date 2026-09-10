@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -21,7 +23,7 @@ export const WebhookSubscriptionStatus = {
 /**
  * The status of the webhook subscription.
  */
-export type WebhookSubscriptionStatus = ClosedEnum<
+export type WebhookSubscriptionStatus = OpenEnum<
   typeof WebhookSubscriptionStatus
 >;
 
@@ -44,7 +46,7 @@ export const SubscriptionTypes = {
   Signatory: "Signatory",
   TimeOffRequest: "TimeOffRequest",
 } as const;
-export type SubscriptionTypes = ClosedEnum<typeof SubscriptionTypes>;
+export type SubscriptionTypes = OpenEnum<typeof SubscriptionTypes>;
 
 /**
  * The representation of webhook subscription.
@@ -69,14 +71,18 @@ export type WebhookSubscription = {
 };
 
 /** @internal */
-export const WebhookSubscriptionStatus$inboundSchema: z.ZodNativeEnum<
-  typeof WebhookSubscriptionStatus
-> = z.nativeEnum(WebhookSubscriptionStatus);
+export const WebhookSubscriptionStatus$inboundSchema: z.ZodType<
+  WebhookSubscriptionStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(WebhookSubscriptionStatus);
 
 /** @internal */
-export const SubscriptionTypes$inboundSchema: z.ZodNativeEnum<
-  typeof SubscriptionTypes
-> = z.nativeEnum(SubscriptionTypes);
+export const SubscriptionTypes$inboundSchema: z.ZodType<
+  SubscriptionTypes,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(SubscriptionTypes);
 
 /** @internal */
 export const WebhookSubscription$inboundSchema: z.ZodType<
@@ -84,10 +90,10 @@ export const WebhookSubscription$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  url: z.string().optional(),
-  status: WebhookSubscriptionStatus$inboundSchema.optional(),
-  subscription_types: z.array(SubscriptionTypes$inboundSchema).optional(),
+  uuid: types.string(),
+  url: types.optional(types.string()),
+  status: types.optional(WebhookSubscriptionStatus$inboundSchema),
+  subscription_types: types.optional(z.array(SubscriptionTypes$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     "subscription_types": "subscriptionTypes",

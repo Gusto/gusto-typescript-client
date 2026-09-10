@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -21,14 +23,14 @@ export const AuthorizationStatus = {
 /**
  * The employee's authorization status
  */
-export type AuthorizationStatus = ClosedEnum<typeof AuthorizationStatus>;
+export type AuthorizationStatus = OpenEnum<typeof AuthorizationStatus>;
 
 export const DocumentType = {
   UscisAlienRegistrationNumber: "uscis_alien_registration_number",
   FormI94: "form_i94",
   ForeignPassport: "foreign_passport",
 } as const;
-export type DocumentType = ClosedEnum<typeof DocumentType>;
+export type DocumentType = OpenEnum<typeof DocumentType>;
 
 /**
  * An employee's I-9 authorization
@@ -85,13 +87,18 @@ export type I9Authorization = {
 };
 
 /** @internal */
-export const AuthorizationStatus$inboundSchema: z.ZodNativeEnum<
-  typeof AuthorizationStatus
-> = z.nativeEnum(AuthorizationStatus);
+export const AuthorizationStatus$inboundSchema: z.ZodType<
+  AuthorizationStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(AuthorizationStatus);
 
 /** @internal */
-export const DocumentType$inboundSchema: z.ZodNativeEnum<typeof DocumentType> =
-  z.nativeEnum(DocumentType);
+export const DocumentType$inboundSchema: z.ZodType<
+  DocumentType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(DocumentType);
 
 /** @internal */
 export const I9Authorization$inboundSchema: z.ZodType<
@@ -99,18 +106,18 @@ export const I9Authorization$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  form_uuid: z.nullable(z.string()).optional(),
-  version: z.string(),
+  uuid: types.string(),
+  form_uuid: z.nullable(types.string()).optional(),
+  version: types.string(),
   authorization_status: AuthorizationStatus$inboundSchema,
   document_type: z.nullable(DocumentType$inboundSchema).optional(),
-  has_document_number: z.nullable(z.boolean()).optional(),
-  expiration_date: z.nullable(z.string()).optional(),
-  country: z.nullable(z.string()).optional(),
-  employer_signed: z.boolean(),
-  employee_signed: z.boolean(),
-  additional_info: z.nullable(z.string()).optional(),
-  alt_procedure: z.nullable(z.boolean()).optional(),
+  has_document_number: z.nullable(types.boolean()).optional(),
+  expiration_date: z.nullable(types.string()).optional(),
+  country: z.nullable(types.string()).optional(),
+  employer_signed: types.boolean(),
+  employee_signed: types.boolean(),
+  additional_info: z.nullable(types.string()).optional(),
+  alt_procedure: z.nullable(types.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "form_uuid": "formUuid",

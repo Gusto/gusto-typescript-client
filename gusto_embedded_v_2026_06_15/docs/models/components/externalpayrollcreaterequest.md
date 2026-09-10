@@ -6,12 +6,11 @@ The request body for creating an external payroll.
 
 ```typescript
 import { ExternalPayrollCreateRequest } from "@gusto/embedded-api-v-2026-06-15/models/components/externalpayrollcreaterequest.js";
-import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 let value: ExternalPayrollCreateRequest = {
-  checkDate: new RFCDate("2022-06-03"),
-  paymentPeriodStartDate: new RFCDate("2022-05-15"),
-  paymentPeriodEndDate: new RFCDate("2022-05-30"),
+  checkDate: new Date("2022-06-03"),
+  paymentPeriodStartDate: new Date("2022-05-15"),
+  paymentPeriodEndDate: new Date("2022-05-30"),
 };
 ```
 
@@ -19,6 +18,6 @@ let value: ExternalPayrollCreateRequest = {
 
 | Field                                                  | Type                                                   | Required                                               | Description                                            | Example                                                |
 | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
-| `checkDate`                                            | [RFCDate](../../types/rfcdate.md)                      | :heavy_check_mark:                                     | The check date of the external payroll.                | 2022-06-03                                             |
-| `paymentPeriodStartDate`                               | [RFCDate](../../types/rfcdate.md)                      | :heavy_check_mark:                                     | The start date of the external payroll payment period. | 2022-05-15                                             |
-| `paymentPeriodEndDate`                                 | [RFCDate](../../types/rfcdate.md)                      | :heavy_check_mark:                                     | The end date of the external payroll payment period.   | 2022-05-30                                             |
+| `checkDate`                                            | [Date](../../types/rfcdate.md)                         | :heavy_check_mark:                                     | The check date of the external payroll.                | 2022-06-03                                             |
+| `paymentPeriodStartDate`                               | [Date](../../types/rfcdate.md)                         | :heavy_check_mark:                                     | The start date of the external payroll payment period. | 2022-05-15                                             |
+| `paymentPeriodEndDate`                                 | [Date](../../types/rfcdate.md)                         | :heavy_check_mark:                                     | The end date of the external payroll payment period.   | 2022-05-30                                             |

@@ -10,10 +10,12 @@ The form used by the company for federal tax filing. One of:
 import { FilingForm } from "@gusto/embedded-api-v-2026-06-15/models/components/federaltaxdetails.js";
 
 let value: FilingForm = "941";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"941" | "944"
+"941" | "944" | Unrecognized<string>
 ```

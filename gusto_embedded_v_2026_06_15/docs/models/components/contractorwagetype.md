@@ -8,10 +8,12 @@ The contractor's wage type, either "Fixed" or "Hourly".
 import { ContractorWageType } from "@gusto/embedded-api-v-2026-06-15/models/components/contractor.js";
 
 let value: ContractorWageType = "Fixed";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"Fixed" | "Hourly"
+"Fixed" | "Hourly" | Unrecognized<string>
 ```

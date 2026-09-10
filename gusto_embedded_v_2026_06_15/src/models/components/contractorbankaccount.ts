@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -19,7 +21,7 @@ export const ContractorBankAccountAccountType = {
 /**
  * Bank account type
  */
-export type ContractorBankAccountAccountType = ClosedEnum<
+export type ContractorBankAccountAccountType = OpenEnum<
   typeof ContractorBankAccountAccountType
 >;
 
@@ -51,9 +53,11 @@ export type ContractorBankAccount = {
 };
 
 /** @internal */
-export const ContractorBankAccountAccountType$inboundSchema: z.ZodNativeEnum<
-  typeof ContractorBankAccountAccountType
-> = z.nativeEnum(ContractorBankAccountAccountType);
+export const ContractorBankAccountAccountType$inboundSchema: z.ZodType<
+  ContractorBankAccountAccountType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorBankAccountAccountType);
 
 /** @internal */
 export const ContractorBankAccount$inboundSchema: z.ZodType<
@@ -61,12 +65,12 @@ export const ContractorBankAccount$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  contractor_uuid: z.string(),
+  uuid: types.string(),
+  contractor_uuid: types.string(),
   account_type: ContractorBankAccountAccountType$inboundSchema,
-  name: z.string(),
-  routing_number: z.string(),
-  hidden_account_number: z.string(),
+  name: types.string(),
+  routing_number: types.string(),
+  hidden_account_number: types.string(),
 }).transform((v) => {
   return remap$(v, {
     "contractor_uuid": "contractorUuid",

@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import {
   ContractorBankAccount,
   ContractorBankAccount$inboundSchema,
@@ -117,7 +118,9 @@ export const PostV1ContractorsContractorUuidBankAccountsResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Contractor-Bank-Account": ContractorBankAccount$inboundSchema.optional(),
+    "Contractor-Bank-Account": types.optional(
+      ContractorBankAccount$inboundSchema,
+    ),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",

@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const InformationRequestType = {
@@ -15,7 +17,7 @@ export const InformationRequestType = {
   PaymentRequest: "payment_request",
   PaymentError: "payment_error",
 } as const;
-export type InformationRequestType = ClosedEnum<typeof InformationRequestType>;
+export type InformationRequestType = OpenEnum<typeof InformationRequestType>;
 
 /**
  * The status of the information request
@@ -28,7 +30,7 @@ export const InformationRequestStatus = {
 /**
  * The status of the information request
  */
-export type InformationRequestStatus = ClosedEnum<
+export type InformationRequestStatus = OpenEnum<
   typeof InformationRequestStatus
 >;
 
@@ -44,7 +46,7 @@ export const ResponseType = {
 /**
  * The type of response to the question
  */
-export type ResponseType = ClosedEnum<typeof ResponseType>;
+export type ResponseType = OpenEnum<typeof ResponseType>;
 
 export type RequiredQuestions = {
   /**
@@ -92,18 +94,25 @@ export type InformationRequest = {
 };
 
 /** @internal */
-export const InformationRequestType$inboundSchema: z.ZodNativeEnum<
-  typeof InformationRequestType
-> = z.nativeEnum(InformationRequestType);
+export const InformationRequestType$inboundSchema: z.ZodType<
+  InformationRequestType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(InformationRequestType);
 
 /** @internal */
-export const InformationRequestStatus$inboundSchema: z.ZodNativeEnum<
-  typeof InformationRequestStatus
-> = z.nativeEnum(InformationRequestStatus);
+export const InformationRequestStatus$inboundSchema: z.ZodType<
+  InformationRequestStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(InformationRequestStatus);
 
 /** @internal */
-export const ResponseType$inboundSchema: z.ZodNativeEnum<typeof ResponseType> =
-  z.nativeEnum(ResponseType);
+export const ResponseType$inboundSchema: z.ZodType<
+  ResponseType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ResponseType);
 
 /** @internal */
 export const RequiredQuestions$inboundSchema: z.ZodType<
@@ -111,8 +120,8 @@ export const RequiredQuestions$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  question_uuid: z.string(),
-  question_text: z.string(),
+  question_uuid: types.string(),
+  question_text: types.string(),
   response_type: ResponseType$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
@@ -138,13 +147,14 @@ export const InformationRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string().optional(),
-  company_uuid: z.string().optional(),
+  uuid: types.optional(types.string()),
+  company_uuid: types.optional(types.string()),
   type: z.nullable(InformationRequestType$inboundSchema).optional(),
-  status: InformationRequestStatus$inboundSchema.optional(),
-  blocking_payroll: z.boolean().optional(),
-  required_questions: z.array(z.lazy(() => RequiredQuestions$inboundSchema))
-    .optional(),
+  status: types.optional(InformationRequestStatus$inboundSchema),
+  blocking_payroll: types.optional(types.boolean()),
+  required_questions: types.optional(
+    z.array(z.lazy(() => RequiredQuestions$inboundSchema)),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

@@ -9,7 +9,6 @@ Send this object under the JSON root key `employee`. All dates are ISO 8601 (`YY
 
 ```typescript
 import { PutV1HistoricalEmployeesRequestBody } from "@gusto/embedded-api-v-2026-06-15/models/operations/putv1historicalemployees.js";
-import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 let value: PutV1HistoricalEmployeesRequestBody = {
   version: "56d00c178bc7393b2a206ed6a86afcb4",
@@ -17,7 +16,7 @@ let value: PutV1HistoricalEmployeesRequestBody = {
   middleInitial: "A",
   lastName: "Kierkegaard",
   preferredFirstName: "Angel",
-  dateOfBirth: new RFCDate("1995-05-05"),
+  dateOfBirth: new Date("1995-05-05"),
   ssn: "123456294",
   workAddress: {
     locationUuid: "1da85d35-1910-40a7-9c1f-8e2b3d4c5a6f",
@@ -30,11 +29,11 @@ let value: PutV1HistoricalEmployeesRequestBody = {
     zip: "94105",
   },
   termination: {
-    effectiveDate: new RFCDate("2022-01-01"),
+    effectiveDate: new Date("2022-01-01"),
   },
   email: "soren.kierkegaard@example.com",
   job: {
-    hireDate: new RFCDate("2020-01-01"),
+    hireDate: new Date("2020-01-01"),
   },
   employeeStateTaxes: {
     wcCovered: true,
@@ -52,7 +51,7 @@ let value: PutV1HistoricalEmployeesRequestBody = {
 | `middleInitial`                                                                                                                                                   | *string*                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                | Single middle initial, if any.                                                                                                                                    | A                                                                                                                                                                 |
 | `lastName`                                                                                                                                                        | *string*                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                | Legal last name as it appears on government-issued identification.                                                                                                | Kierkegaard                                                                                                                                                       |
 | `preferredFirstName`                                                                                                                                              | *string*                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                | Preferred given name for display; omit when the same as legal first name.                                                                                         | Angel                                                                                                                                                             |
-| `dateOfBirth`                                                                                                                                                     | [RFCDate](../../types/rfcdate.md)                                                                                                                                 | :heavy_check_mark:                                                                                                                                                | Date of birth (YYYY-MM-DD).                                                                                                                                       | 1995-05-05                                                                                                                                                        |
+| `dateOfBirth`                                                                                                                                                     | [Date](../../types/rfcdate.md)                                                                                                                                    | :heavy_check_mark:                                                                                                                                                | Date of birth (YYYY-MM-DD).                                                                                                                                       | 1995-05-05                                                                                                                                                        |
 | `ssn`                                                                                                                                                             | *string*                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                | Nine-digit U.S. Social Security number **without** dashes or spaces. Must pass Gusto/SSA validation in production; use a valid test SSN in sandbox environments.<br/> | 123456294                                                                                                                                                         |
 | `workAddress`                                                                                                                                                     | [operations.WorkAddress](../../models/operations/workaddress.md)                                                                                                  | :heavy_check_mark:                                                                                                                                                | Primary work location for this historical employment row.                                                                                                         |                                                                                                                                                                   |
 | `homeAddress`                                                                                                                                                     | [operations.HomeAddress](../../models/operations/homeaddress.md)                                                                                                  | :heavy_check_mark:                                                                                                                                                | Residential address on file for tax withholding and compliance mail.                                                                                              |                                                                                                                                                                   |

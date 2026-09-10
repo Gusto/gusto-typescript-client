@@ -8,10 +8,12 @@ How often the agency collects the withholding amount. e.g. $500 monthly -> `Mont
 import { PaymentPeriod } from "@gusto/embedded-api-v-2026-06-15/models/components/garnishmentchildsupport.js";
 
 let value: PaymentPeriod = "Monthly";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"Every week" | "Every other week" | "Twice per month" | "Monthly"
+"Every week" | "Every other week" | "Twice per month" | "Monthly" | Unrecognized<string>
 ```

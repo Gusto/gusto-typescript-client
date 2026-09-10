@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -97,7 +98,7 @@ export const PartnerManagedCompanyMigrateResponseMetadata$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    key: z.string().optional(),
+    key: types.optional(types.string()),
   });
 
 export function partnerManagedCompanyMigrateResponseMetadataFromJSON(
@@ -119,13 +120,14 @@ export function partnerManagedCompanyMigrateResponseMetadataFromJSON(
 /** @internal */
 export const Errors$inboundSchema: z.ZodType<Errors, z.ZodTypeDef, unknown> = z
   .object({
-    error_key: z.string().optional(),
-    category: PartnerManagedCompanyMigrateResponseCategory$inboundSchema
-      .optional(),
-    message: z.string().optional(),
-    metadata: z.lazy(() =>
-      PartnerManagedCompanyMigrateResponseMetadata$inboundSchema
-    ).optional(),
+    error_key: types.optional(types.string()),
+    category: types.optional(
+      PartnerManagedCompanyMigrateResponseCategory$inboundSchema,
+    ),
+    message: types.optional(types.string()),
+    metadata: types.optional(
+      z.lazy(() => PartnerManagedCompanyMigrateResponseMetadata$inboundSchema),
+    ),
   }).transform((v) => {
     return remap$(v, {
       "error_key": "errorKey",
@@ -154,7 +156,7 @@ export const PartnerManagedCompanyMigrateResponseWarningsMetadata$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    key: z.string().optional(),
+    key: types.optional(types.string()),
   });
 
 export function partnerManagedCompanyMigrateResponseWarningsMetadataFromJSON(
@@ -179,13 +181,16 @@ export const Warnings$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  error_key: z.string().optional(),
-  category: PartnerManagedCompanyMigrateResponseWarningsCategory$inboundSchema
-    .optional(),
-  message: z.string().optional(),
-  metadata: z.lazy(() =>
-    PartnerManagedCompanyMigrateResponseWarningsMetadata$inboundSchema
-  ).optional(),
+  error_key: types.optional(types.string()),
+  category: types.optional(
+    PartnerManagedCompanyMigrateResponseWarningsCategory$inboundSchema,
+  ),
+  message: types.optional(types.string()),
+  metadata: types.optional(
+    z.lazy(() =>
+      PartnerManagedCompanyMigrateResponseWarningsMetadata$inboundSchema
+    ),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "error_key": "errorKey",
@@ -208,10 +213,10 @@ export const PartnerManagedCompanyMigrateResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  company_uuid: z.string().optional(),
-  migration_status: z.boolean().optional(),
-  errors: z.array(z.lazy(() => Errors$inboundSchema)).optional(),
-  warnings: z.array(z.lazy(() => Warnings$inboundSchema)).optional(),
+  company_uuid: types.optional(types.string()),
+  migration_status: types.optional(types.boolean()),
+  errors: types.optional(z.array(z.lazy(() => Errors$inboundSchema))),
+  warnings: types.optional(z.array(z.lazy(() => Warnings$inboundSchema))),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

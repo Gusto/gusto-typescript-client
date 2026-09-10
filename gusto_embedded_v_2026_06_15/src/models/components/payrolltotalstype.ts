@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -108,28 +109,28 @@ export const PayrollTotalsType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  company_debit: z.string().optional(),
-  net_pay_debit: z.string().optional(),
-  tax_debit: z.string().optional(),
-  reimbursement_debit: z.string().optional(),
-  child_support_debit: z.string().optional(),
-  reimbursements: z.string().optional(),
-  net_pay: z.string().optional(),
-  gross_pay: z.string().optional(),
-  employee_bonuses: z.string().optional(),
-  employee_commissions: z.string().optional(),
-  employee_cash_tips: z.string().optional(),
-  employee_paycheck_tips: z.string().optional(),
-  additional_earnings: z.string().optional(),
-  owners_draw: z.string().optional(),
-  check_amount: z.string().optional(),
-  employer_taxes: z.string().optional(),
-  employee_taxes: z.string().optional(),
-  benefits: z.string().optional(),
-  employee_benefits_deductions: z.string().optional(),
-  imputed_pay: z.string().optional(),
-  deferred_payroll_taxes: z.string().optional(),
-  other_deductions: z.string().optional(),
+  company_debit: types.optional(types.string()),
+  net_pay_debit: types.optional(types.string()),
+  tax_debit: types.optional(types.string()),
+  reimbursement_debit: types.optional(types.string()),
+  child_support_debit: types.optional(types.string()),
+  reimbursements: types.optional(types.string()),
+  net_pay: types.optional(types.string()),
+  gross_pay: types.optional(types.string()),
+  employee_bonuses: types.optional(types.string()),
+  employee_commissions: types.optional(types.string()),
+  employee_cash_tips: types.optional(types.string()),
+  employee_paycheck_tips: types.optional(types.string()),
+  additional_earnings: types.optional(types.string()),
+  owners_draw: types.optional(types.string()),
+  check_amount: types.optional(types.string()),
+  employer_taxes: types.optional(types.string()),
+  employee_taxes: types.optional(types.string()),
+  benefits: types.optional(types.string()),
+  employee_benefits_deductions: types.optional(types.string()),
+  imputed_pay: types.optional(types.string()),
+  deferred_payroll_taxes: types.optional(types.string()),
+  other_deductions: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "company_debit": "companyDebit",

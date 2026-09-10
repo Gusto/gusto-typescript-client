@@ -9,10 +9,12 @@ import { ContractorPaymentGroupPartnerDisbursementsPaymentMethod } from "@gusto/
 
 let value: ContractorPaymentGroupPartnerDisbursementsPaymentMethod =
   "Direct Deposit";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"Direct Deposit" | "Check"
+"Direct Deposit" | "Check" | Unrecognized<string>
 ```

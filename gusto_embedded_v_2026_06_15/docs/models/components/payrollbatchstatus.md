@@ -8,10 +8,12 @@ The lifecycle status of the batch request itself. Terminal values are `completed
 import { PayrollBatchStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/payrollbatch.js";
 
 let value: PayrollBatchStatus = "pending";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"pending" | "processing" | "completed" | "failed"
+"pending" | "processing" | "completed" | "failed" | Unrecognized<string>
 ```

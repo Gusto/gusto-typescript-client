@@ -27,7 +27,6 @@ import {
   GetV1CompaniesCompanyIdPayPeriodsRequest,
   PayrollTypes,
 } from "../models/operations/getv1companiescompanyidpayperiods.js";
-import { RFCDate } from "../types/rfcdate.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -137,8 +136,8 @@ export function setPaySchedulesGetPayPeriodsData(
       xGustoAPIVersion?:
         | GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion
         | undefined;
-      startDate?: RFCDate | undefined;
-      endDate?: RFCDate | undefined;
+      startDate?: Date | undefined;
+      endDate?: Date | undefined;
       payrollTypes?: PayrollTypes | undefined;
     },
   ],
@@ -158,8 +157,8 @@ export function invalidatePaySchedulesGetPayPeriods(
         xGustoAPIVersion?:
           | GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion
           | undefined;
-        startDate?: RFCDate | undefined;
-        endDate?: RFCDate | undefined;
+        startDate?: Date | undefined;
+        endDate?: Date | undefined;
         payrollTypes?: PayrollTypes | undefined;
       },
     ]

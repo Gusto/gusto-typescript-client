@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GarnishmentChildSupport,
@@ -22,7 +24,7 @@ export const GarnishmentType = {
   FederalLoan: "federal_loan",
   OtherGarnishment: "other_garnishment",
 } as const;
-export type GarnishmentType = ClosedEnum<typeof GarnishmentType>;
+export type GarnishmentType = OpenEnum<typeof GarnishmentType>;
 
 /**
  * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
@@ -91,9 +93,11 @@ export type Garnishment = {
 };
 
 /** @internal */
-export const GarnishmentType$inboundSchema: z.ZodNativeEnum<
-  typeof GarnishmentType
-> = z.nativeEnum(GarnishmentType);
+export const GarnishmentType$inboundSchema: z.ZodType<
+  GarnishmentType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(GarnishmentType);
 
 /** @internal */
 export const Garnishment$inboundSchema: z.ZodType<
@@ -101,19 +105,19 @@ export const Garnishment$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  version: z.string().optional(),
-  employee_uuid: z.string().optional(),
-  active: z.boolean().default(true),
-  amount: z.string().optional(),
-  description: z.string().optional(),
-  court_ordered: z.boolean().optional(),
-  times: z.nullable(z.number().int()).default(null),
-  recurring: z.boolean().default(false),
-  annual_maximum: z.nullable(z.string()).default(null),
-  total_amount: z.nullable(z.string()).default(null),
-  pay_period_maximum: z.nullable(z.string()).default(null),
-  deduct_as_percentage: z.boolean().default(false),
+  uuid: types.string(),
+  version: types.optional(types.string()),
+  employee_uuid: types.optional(types.string()),
+  active: types.boolean().default(true),
+  amount: types.optional(types.string()),
+  description: types.optional(types.string()),
+  court_ordered: types.optional(types.boolean()),
+  times: z.nullable(types.number()).default(null),
+  recurring: types.boolean().default(false),
+  annual_maximum: z.nullable(types.string()).default(null),
+  total_amount: z.nullable(types.string()).default(null),
+  pay_period_maximum: z.nullable(types.string()).default(null),
+  deduct_as_percentage: types.boolean().default(false),
   garnishment_type: z.nullable(GarnishmentType$inboundSchema).optional(),
   child_support: z.nullable(GarnishmentChildSupport$inboundSchema).optional(),
 }).transform((v) => {

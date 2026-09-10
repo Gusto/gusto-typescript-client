@@ -18,10 +18,12 @@ READ-ONLY in responses. Possible values:
 import { PayScheduleFrequency } from "@gusto/embedded-api-v-2026-06-15/models/components/payschedulefrequency.js";
 
 let value: PayScheduleFrequency = "Twice per month";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"Every week" | "Every other week" | "Twice per month" | "Monthly" | "Quarterly" | "Annually"
+"Every week" | "Every other week" | "Twice per month" | "Monthly" | "Quarterly" | "Annually" | Unrecognized<string>
 ```

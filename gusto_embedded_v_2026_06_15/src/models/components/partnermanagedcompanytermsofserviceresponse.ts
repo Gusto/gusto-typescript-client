@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PartnerManagedCompanyTermsOfServiceResponse = {
@@ -22,7 +23,7 @@ export const PartnerManagedCompanyTermsOfServiceResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    latest_terms_accepted: z.boolean().optional(),
+    latest_terms_accepted: types.optional(types.boolean()),
   }).transform((v) => {
     return remap$(v, {
       "latest_terms_accepted": "latestTermsAccepted",

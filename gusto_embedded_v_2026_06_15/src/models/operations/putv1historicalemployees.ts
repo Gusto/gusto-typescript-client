@@ -7,7 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import { RFCDate } from "../../types/rfcdate.js";
+import * as types from "../../types/primitives.js";
 import { Employee, Employee$inboundSchema } from "../components/employee.js";
 import {
   HTTPMetadata,
@@ -71,7 +71,7 @@ export type Termination = {
   /**
    * Last day of employment (termination date). This is recorded on the employment; use the calendar date the person stopped working for the company.
    */
-  effectiveDate: RFCDate;
+  effectiveDate: Date;
 };
 
 /**
@@ -81,7 +81,7 @@ export type Job = {
   /**
    * First calendar day the employee was employed in this role at the company.
    */
-  hireDate: RFCDate;
+  hireDate: Date;
 };
 
 /**
@@ -129,7 +129,7 @@ export type PutV1HistoricalEmployeesRequestBody = {
   /**
    * Date of birth (YYYY-MM-DD).
    */
-  dateOfBirth: RFCDate;
+  dateOfBirth: Date;
   /**
    * Nine-digit U.S. Social Security number **without** dashes or spaces. Must pass Gusto/SSA validation in production; use a valid test SSN in sandbox environments.
    *
@@ -255,7 +255,9 @@ export const Termination$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Termination
 > = z.object({
-  effectiveDate: z.instanceof(RFCDate).transform(v => v.toString()),
+  effectiveDate: z.date().transform(v =>
+    v.toISOString().slice(0, "YYYY-MM-DD".length)
+  ),
 }).transform((v) => {
   return remap$(v, {
     effectiveDate: "effective_date",
@@ -274,7 +276,9 @@ export type Job$Outbound = {
 /** @internal */
 export const Job$outboundSchema: z.ZodType<Job$Outbound, z.ZodTypeDef, Job> = z
   .object({
-    hireDate: z.instanceof(RFCDate).transform(v => v.toString()),
+    hireDate: z.date().transform(v =>
+      v.toISOString().slice(0, "YYYY-MM-DD".length)
+    ),
   }).transform((v) => {
     return remap$(v, {
       hireDate: "hire_date",
@@ -342,7 +346,9 @@ export const PutV1HistoricalEmployeesRequestBody$outboundSchema: z.ZodType<
   middleInitial: z.string().optional(),
   lastName: z.string(),
   preferredFirstName: z.string().optional(),
-  dateOfBirth: z.instanceof(RFCDate).transform(v => v.toString()),
+  dateOfBirth: z.date().transform(v =>
+    v.toISOString().slice(0, "YYYY-MM-DD".length)
+  ),
   ssn: z.string(),
   workAddress: z.lazy(() => WorkAddress$outboundSchema),
   homeAddress: z.lazy(() => HomeAddress$outboundSchema),
@@ -421,7 +427,7 @@ export const PutV1HistoricalEmployeesResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  Employee: Employee$inboundSchema.optional(),
+  Employee: types.optional(Employee$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",

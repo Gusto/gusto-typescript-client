@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaxRequirement,
@@ -38,11 +39,11 @@ export const TaxRequirementSet$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  state: z.string().optional(),
-  key: z.string().optional(),
-  label: z.string().optional(),
-  effective_from: z.nullable(z.string()).optional(),
-  requirements: z.array(TaxRequirement$inboundSchema).optional(),
+  state: types.optional(types.string()),
+  key: types.optional(types.string()),
+  label: types.optional(types.string()),
+  effective_from: z.nullable(types.string()).optional(),
+  requirements: types.optional(z.array(TaxRequirement$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     "effective_from": "effectiveFrom",

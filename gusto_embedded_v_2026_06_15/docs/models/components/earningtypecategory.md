@@ -10,10 +10,12 @@ categorized custom bonus earning types.
 import { EarningTypeCategory } from "@gusto/embedded-api-v-2026-06-15/models/components/earningtype.js";
 
 let value: EarningTypeCategory = "ServiceCharges";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"CashTips" | "Commission" | "DiscretionaryBonus" | "BenefitContributions" | "MinimumWageAdjustment" | "MinisterHousing" | "NonDiscretionaryBonus" | "OnCallPay" | "OwnersDraw" | "PaycheckTips" | "CorrectionPayment" | "ServiceCharges" | "SeverancePay" | "Other" | "NonTaxableDisability" | "OtherRegularIncome" | "OtherNonTaxable"
+"CashTips" | "Commission" | "DiscretionaryBonus" | "BenefitContributions" | "MinimumWageAdjustment" | "MinisterHousing" | "NonDiscretionaryBonus" | "OnCallPay" | "OwnersDraw" | "PaycheckTips" | "CorrectionPayment" | "ServiceCharges" | "SeverancePay" | "Other" | "NonTaxableDisability" | "OtherRegularIncome" | "OtherNonTaxable" | Unrecognized<string>
 ```

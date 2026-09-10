@@ -5,9 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import { RFCDate } from "../../types/rfcdate.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   EmployeeCustomField,
@@ -32,7 +33,7 @@ export const EmployeeOnboardingStatus1 = {
   SelfOnboardingCompletedByEmployee: "self_onboarding_completed_by_employee",
   SelfOnboardingAwaitingAdminReview: "self_onboarding_awaiting_admin_review",
 } as const;
-export type EmployeeOnboardingStatus1 = ClosedEnum<
+export type EmployeeOnboardingStatus1 = OpenEnum<
   typeof EmployeeOnboardingStatus1
 >;
 
@@ -60,7 +61,7 @@ export const EmployeePaymentMethod1 = {
 /**
  * The employee's payment method
  */
-export type EmployeePaymentMethod1 = ClosedEnum<typeof EmployeePaymentMethod1>;
+export type EmployeePaymentMethod1 = OpenEnum<typeof EmployeePaymentMethod1>;
 
 export const CurrentEmploymentStatus = {
   FullTime: "full_time",
@@ -69,9 +70,7 @@ export const CurrentEmploymentStatus = {
   Variable: "variable",
   Seasonal: "seasonal",
 } as const;
-export type CurrentEmploymentStatus = ClosedEnum<
-  typeof CurrentEmploymentStatus
->;
+export type CurrentEmploymentStatus = OpenEnum<typeof CurrentEmploymentStatus>;
 
 /**
  * The current status of the member portal invitation.
@@ -86,7 +85,7 @@ export const EmployeeStatus = {
 /**
  * The current status of the member portal invitation.
  */
-export type EmployeeStatus = ClosedEnum<typeof EmployeeStatus>;
+export type EmployeeStatus = OpenEnum<typeof EmployeeStatus>;
 
 /**
  * Member portal invitation status information. Only included when the include param has the portal_invitations value set.
@@ -205,7 +204,7 @@ export type Employee = {
   /**
    * The date when the employee was hired to the company
    */
-  hiredAt?: RFCDate | undefined;
+  hiredAt?: Date | undefined;
   hiddenSsn?: string | undefined;
   /**
    * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Commissioned employees ('Commission Only Exempt') earn wages based only on commission. Commissioned with overtime ('Commission Only Nonexempt') earn wages based on commission, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company.
@@ -226,9 +225,11 @@ export type Employee = {
 };
 
 /** @internal */
-export const EmployeeOnboardingStatus1$inboundSchema: z.ZodNativeEnum<
-  typeof EmployeeOnboardingStatus1
-> = z.nativeEnum(EmployeeOnboardingStatus1);
+export const EmployeeOnboardingStatus1$inboundSchema: z.ZodType<
+  EmployeeOnboardingStatus1,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(EmployeeOnboardingStatus1);
 
 /** @internal */
 export const OnboardingDocumentsConfig$inboundSchema: z.ZodType<
@@ -236,8 +237,8 @@ export const OnboardingDocumentsConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.nullable(z.string()).optional(),
-  i9_document: z.boolean().optional(),
+  uuid: z.nullable(types.string()).optional(),
+  i9_document: types.optional(types.boolean()),
 }).transform((v) => {
   return remap$(v, {
     "i9_document": "i9Document",
@@ -255,19 +256,25 @@ export function onboardingDocumentsConfigFromJSON(
 }
 
 /** @internal */
-export const EmployeePaymentMethod1$inboundSchema: z.ZodNativeEnum<
-  typeof EmployeePaymentMethod1
-> = z.nativeEnum(EmployeePaymentMethod1);
+export const EmployeePaymentMethod1$inboundSchema: z.ZodType<
+  EmployeePaymentMethod1,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(EmployeePaymentMethod1);
 
 /** @internal */
-export const CurrentEmploymentStatus$inboundSchema: z.ZodNativeEnum<
-  typeof CurrentEmploymentStatus
-> = z.nativeEnum(CurrentEmploymentStatus);
+export const CurrentEmploymentStatus$inboundSchema: z.ZodType<
+  CurrentEmploymentStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(CurrentEmploymentStatus);
 
 /** @internal */
-export const EmployeeStatus$inboundSchema: z.ZodNativeEnum<
-  typeof EmployeeStatus
-> = z.nativeEnum(EmployeeStatus);
+export const EmployeeStatus$inboundSchema: z.ZodType<
+  EmployeeStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(EmployeeStatus);
 
 /** @internal */
 export const EmployeeMemberPortalInvitationStatus$inboundSchema: z.ZodType<
@@ -275,14 +282,10 @@ export const EmployeeMemberPortalInvitationStatus$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  status: EmployeeStatus$inboundSchema.optional(),
-  token_expired: z.nullable(z.boolean()).optional(),
-  welcome_email_sent_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  last_password_resent_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
+  status: types.optional(EmployeeStatus$inboundSchema),
+  token_expired: z.nullable(types.boolean()).optional(),
+  welcome_email_sent_at: z.nullable(types.date()).optional(),
+  last_password_resent_at: z.nullable(types.date()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "token_expired": "tokenExpired",
@@ -308,49 +311,49 @@ export const Employee$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  first_name: z.string(),
-  middle_initial: z.nullable(z.string()).optional(),
-  last_name: z.string(),
-  email: z.nullable(z.string()).optional(),
-  company_uuid: z.string().optional(),
-  manager_uuid: z.nullable(z.string()).optional(),
-  version: z.string().optional(),
-  department: z.nullable(z.string()).optional(),
-  terminated: z.boolean().optional(),
-  two_percent_shareholder: z.nullable(z.boolean()).optional(),
-  work_email: z.nullable(z.string()).optional(),
-  onboarded: z.boolean().optional(),
+  uuid: types.string(),
+  first_name: types.string(),
+  middle_initial: z.nullable(types.string()).optional(),
+  last_name: types.string(),
+  email: z.nullable(types.string()).optional(),
+  company_uuid: types.optional(types.string()),
+  manager_uuid: z.nullable(types.string()).optional(),
+  version: types.optional(types.string()),
+  department: z.nullable(types.string()).optional(),
+  terminated: types.optional(types.boolean()),
+  two_percent_shareholder: z.nullable(types.boolean()).optional(),
+  work_email: z.nullable(types.string()).optional(),
+  onboarded: types.optional(types.boolean()),
   onboarding_status: z.nullable(EmployeeOnboardingStatus1$inboundSchema)
     .optional(),
-  onboarding_documents_config: z.lazy(() =>
-    OnboardingDocumentsConfig$inboundSchema
-  ).optional(),
-  jobs: z.array(Job$inboundSchema).optional(),
-  eligible_paid_time_off: z.array(PaidTimeOff$inboundSchema).optional(),
-  terminations: z.array(Termination$inboundSchema).optional(),
-  garnishments: z.array(Garnishment$inboundSchema).optional(),
-  custom_fields: z.array(EmployeeCustomField$inboundSchema).optional(),
-  date_of_birth: z.nullable(z.string()).optional(),
-  has_ssn: z.boolean().optional(),
-  ssn: z.string().optional(),
-  phone: z.nullable(z.string()).optional(),
-  preferred_first_name: z.nullable(z.string()).optional(),
+  onboarding_documents_config: types.optional(
+    z.lazy(() => OnboardingDocumentsConfig$inboundSchema),
+  ),
+  jobs: types.optional(z.array(Job$inboundSchema)),
+  eligible_paid_time_off: types.optional(z.array(PaidTimeOff$inboundSchema)),
+  terminations: types.optional(z.array(Termination$inboundSchema)),
+  garnishments: types.optional(z.array(Garnishment$inboundSchema)),
+  custom_fields: types.optional(z.array(EmployeeCustomField$inboundSchema)),
+  date_of_birth: z.nullable(types.string()).optional(),
+  has_ssn: types.optional(types.boolean()),
+  ssn: types.optional(types.string()),
+  phone: z.nullable(types.string()).optional(),
+  preferred_first_name: z.nullable(types.string()).optional(),
   payment_method: EmployeePaymentMethod1$inboundSchema.default("Check"),
   current_employment_status: z.nullable(CurrentEmploymentStatus$inboundSchema)
     .optional(),
-  historical: z.boolean().optional(),
-  employee_code: z.string().optional(),
-  department_uuid: z.nullable(z.string()).optional(),
-  title: z.string().optional(),
-  hired_at: z.string().transform(v => new RFCDate(v)).optional(),
-  hidden_ssn: z.string().optional(),
-  flsa_status: FlsaStatusType$inboundSchema.optional(),
-  applicable_tax_ids: z.array(z.number()).optional(),
+  historical: types.optional(types.boolean()),
+  employee_code: types.optional(types.string()),
+  department_uuid: z.nullable(types.string()).optional(),
+  title: types.optional(types.string()),
+  hired_at: types.optional(types.date()),
+  hidden_ssn: types.optional(types.string()),
+  flsa_status: types.optional(FlsaStatusType$inboundSchema),
+  applicable_tax_ids: types.optional(z.array(types.number())),
   member_portal_invitation_status: z.nullable(
     z.lazy(() => EmployeeMemberPortalInvitationStatus$inboundSchema),
   ).optional(),
-  partner_portal_invitation_sent: z.nullable(z.boolean()).optional(),
+  partner_portal_invitation_sent: z.nullable(types.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "first_name": "firstName",

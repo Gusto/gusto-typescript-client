@@ -12,10 +12,12 @@ Payment speed. READ-ONLY.
 import { PaymentSpeed } from "@gusto/embedded-api-v-2026-06-15/models/components/paymentconfigs.js";
 
 let value: PaymentSpeed = "2-day";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"1-day" | "2-day" | "4-day"
+"1-day" | "2-day" | "4-day" | Unrecognized<string>
 ```

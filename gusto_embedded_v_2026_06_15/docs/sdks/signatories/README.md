@@ -136,7 +136,6 @@ scope: `signatories:manage`
 <!-- UsageSnippet language="typescript" operationID="post-v1-company-signatories" method="post" path="/v1/companies/{company_uuid}/signatories" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2026-06-15";
-import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -150,7 +149,7 @@ async function run() {
       lastName: "Reichert",
       title: "<value>",
       phone: "914.468.8146 x29683",
-      birthday: new RFCDate("2026-11-04"),
+      birthday: new Date("2026-11-04"),
       email: "Mariah_Huel64@gmail.com",
       ssn: "<value>",
       homeAddress: {
@@ -175,7 +174,6 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-06-15/core.js";
 import { signatoriesCreate } from "@gusto/embedded-api-v-2026-06-15/funcs/signatoriesCreate.js";
-import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -191,7 +189,7 @@ async function run() {
       lastName: "Reichert",
       title: "<value>",
       phone: "914.468.8146 x29683",
-      birthday: new RFCDate("2026-11-04"),
+      birthday: new Date("2026-11-04"),
       email: "Mariah_Huel64@gmail.com",
       ssn: "<value>",
       homeAddress: {

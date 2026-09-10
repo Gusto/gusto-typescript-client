@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -19,7 +21,7 @@ export const ExternalPayrollStatus = {
 /**
  * The status of the external payroll. The status will be `unprocessed` when the external payroll is created and transition to `processed` once tax liabilities are entered and finalized.  Once in the `processed` status all actions that can edit an external payroll will be disabled.
  */
-export type ExternalPayrollStatus = ClosedEnum<typeof ExternalPayrollStatus>;
+export type ExternalPayrollStatus = OpenEnum<typeof ExternalPayrollStatus>;
 
 export type Earnings = {
   amount?: string | undefined;
@@ -134,9 +136,11 @@ export type ExternalPayroll = {
 };
 
 /** @internal */
-export const ExternalPayrollStatus$inboundSchema: z.ZodNativeEnum<
-  typeof ExternalPayrollStatus
-> = z.nativeEnum(ExternalPayrollStatus);
+export const ExternalPayrollStatus$inboundSchema: z.ZodType<
+  ExternalPayrollStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ExternalPayrollStatus);
 
 /** @internal */
 export const Earnings$inboundSchema: z.ZodType<
@@ -144,10 +148,10 @@ export const Earnings$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  amount: z.string().optional(),
-  hours: z.string().optional(),
-  earning_type: z.string().optional(),
-  earning_id: z.number().int().optional(),
+  amount: types.optional(types.string()),
+  hours: types.optional(types.string()),
+  earning_type: types.optional(types.string()),
+  earning_id: types.optional(types.number()),
 }).transform((v) => {
   return remap$(v, {
     "earning_type": "earningType",
@@ -171,9 +175,9 @@ export const Benefits$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  benefit_id: z.number().int().optional(),
-  company_contribution_amount: z.string().optional(),
-  employee_deduction_amount: z.string().optional(),
+  benefit_id: types.optional(types.number()),
+  company_contribution_amount: types.optional(types.string()),
+  employee_deduction_amount: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "benefit_id": "benefitId",
@@ -198,8 +202,8 @@ export const ExternalPayrollTaxes$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  tax_id: z.number().int().optional(),
-  amount: z.string().optional(),
+  tax_id: types.optional(types.number()),
+  amount: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "tax_id": "taxId",
@@ -222,10 +226,12 @@ export const ExternalPayrollItems$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  employee_uuid: z.string().optional(),
-  earnings: z.array(z.lazy(() => Earnings$inboundSchema)).optional(),
-  benefits: z.array(z.lazy(() => Benefits$inboundSchema)).optional(),
-  taxes: z.array(z.lazy(() => ExternalPayrollTaxes$inboundSchema)).optional(),
+  employee_uuid: types.optional(types.string()),
+  earnings: types.optional(z.array(z.lazy(() => Earnings$inboundSchema))),
+  benefits: types.optional(z.array(z.lazy(() => Benefits$inboundSchema))),
+  taxes: types.optional(
+    z.array(z.lazy(() => ExternalPayrollTaxes$inboundSchema)),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",
@@ -248,11 +254,11 @@ export const ApplicableEarnings$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  earning_type: z.string().optional(),
-  earning_id: z.number().optional(),
-  name: z.string().optional(),
-  input_type: z.string().optional(),
-  category: z.string().optional(),
+  earning_type: types.optional(types.string()),
+  earning_id: types.optional(types.number()),
+  name: types.optional(types.string()),
+  input_type: types.optional(types.string()),
+  category: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "earning_type": "earningType",
@@ -277,9 +283,9 @@ export const ApplicableBenefits$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.number().int().optional(),
-  description: z.string().optional(),
-  active: z.boolean().optional(),
+  id: types.optional(types.number()),
+  description: types.optional(types.string()),
+  active: types.optional(types.boolean()),
 });
 
 export function applicableBenefitsFromJSON(
@@ -298,10 +304,10 @@ export const ApplicableTaxes$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.number().int().optional(),
-  name: z.string().optional(),
-  employer_tax: z.boolean().optional(),
-  resident_tax: z.boolean().optional(),
+  id: types.optional(types.number()),
+  name: types.optional(types.string()),
+  employer_tax: types.optional(types.boolean()),
+  resident_tax: types.optional(types.boolean()),
 }).transform((v) => {
   return remap$(v, {
     "employer_tax": "employerTax",
@@ -325,7 +331,7 @@ export const ExternalPayrollMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  deletable: z.boolean().optional(),
+  deletable: types.optional(types.boolean()),
 });
 
 export function externalPayrollMetadataFromJSON(
@@ -344,23 +350,25 @@ export const ExternalPayroll$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  company_uuid: z.string().optional(),
-  check_date: z.string().optional(),
-  payment_period_start_date: z.string().optional(),
-  payment_period_end_date: z.string().optional(),
-  status: ExternalPayrollStatus$inboundSchema.optional(),
-  external_payroll_items: z.array(
-    z.lazy(() => ExternalPayrollItems$inboundSchema),
-  ).optional(),
-  applicable_earnings: z.array(z.lazy(() => ApplicableEarnings$inboundSchema))
-    .optional(),
+  uuid: types.string(),
+  company_uuid: types.optional(types.string()),
+  check_date: types.optional(types.string()),
+  payment_period_start_date: types.optional(types.string()),
+  payment_period_end_date: types.optional(types.string()),
+  status: types.optional(ExternalPayrollStatus$inboundSchema),
+  external_payroll_items: types.optional(
+    z.array(z.lazy(() => ExternalPayrollItems$inboundSchema)),
+  ),
+  applicable_earnings: types.optional(
+    z.array(z.lazy(() => ApplicableEarnings$inboundSchema)),
+  ),
   applicable_benefits: z.nullable(
     z.array(z.lazy(() => ApplicableBenefits$inboundSchema)),
   ).optional(),
-  applicable_taxes: z.array(z.lazy(() => ApplicableTaxes$inboundSchema))
-    .optional(),
-  metadata: z.lazy(() => ExternalPayrollMetadata$inboundSchema).optional(),
+  applicable_taxes: types.optional(
+    z.array(z.lazy(() => ApplicableTaxes$inboundSchema)),
+  ),
+  metadata: types.optional(z.lazy(() => ExternalPayrollMetadata$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

@@ -8,10 +8,12 @@ The employee's employment status. Supplying an invalid option will set the emplo
 import { EmploymentHistoryListEmploymentStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/employmenthistorylist.js";
 
 let value: EmploymentHistoryListEmploymentStatus = "full_time";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"part_time" | "full_time" | "part_time_eligible" | "variable" | "seasonal - not_set"
+"part_time" | "full_time" | "part_time_eligible" | "variable" | "seasonal - not_set" | Unrecognized<string>
 ```

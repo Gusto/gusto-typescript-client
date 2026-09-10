@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -24,7 +26,7 @@ export const ContractorOnboardingStatusOnboardingStatus = {
 /**
  * One of the "onboarding_status" enum values.
  */
-export type ContractorOnboardingStatusOnboardingStatus = ClosedEnum<
+export type ContractorOnboardingStatusOnboardingStatus = OpenEnum<
   typeof ContractorOnboardingStatusOnboardingStatus
 >;
 
@@ -71,8 +73,8 @@ export type ContractorOnboardingStatus = {
 
 /** @internal */
 export const ContractorOnboardingStatusOnboardingStatus$inboundSchema:
-  z.ZodNativeEnum<typeof ContractorOnboardingStatusOnboardingStatus> = z
-    .nativeEnum(ContractorOnboardingStatusOnboardingStatus);
+  z.ZodType<ContractorOnboardingStatusOnboardingStatus, z.ZodTypeDef, unknown> =
+    openEnums.inboundSchema(ContractorOnboardingStatusOnboardingStatus);
 
 /** @internal */
 export const ContractorOnboardingStatusOnboardingStep$inboundSchema: z.ZodType<
@@ -80,11 +82,11 @@ export const ContractorOnboardingStatusOnboardingStep$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  title: z.string().optional(),
-  id: z.string().optional(),
-  required: z.boolean().optional(),
-  completed: z.boolean().optional(),
-  requirements: z.array(z.string()).optional(),
+  title: types.optional(types.string()),
+  id: types.optional(types.string()),
+  required: types.optional(types.boolean()),
+  completed: types.optional(types.boolean()),
+  requirements: types.optional(z.array(types.string())),
 });
 
 export function contractorOnboardingStatusOnboardingStepFromJSON(
@@ -109,12 +111,15 @@ export const ContractorOnboardingStatus$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  onboarding_status: ContractorOnboardingStatusOnboardingStatus$inboundSchema
-    .optional(),
-  onboarding_steps: z.array(
-    z.lazy(() => ContractorOnboardingStatusOnboardingStep$inboundSchema),
-  ).optional(),
+  uuid: types.string(),
+  onboarding_status: types.optional(
+    ContractorOnboardingStatusOnboardingStatus$inboundSchema,
+  ),
+  onboarding_steps: types.optional(
+    z.array(
+      z.lazy(() => ContractorOnboardingStatusOnboardingStep$inboundSchema),
+    ),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "onboarding_status": "onboardingStatus",

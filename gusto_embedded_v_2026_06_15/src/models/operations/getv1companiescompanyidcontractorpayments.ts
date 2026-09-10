@@ -7,6 +7,8 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   ContractorPaymentSummary,
   ContractorPaymentSummary$inboundSchema,
@@ -155,7 +157,7 @@ export const GetV1CompaniesCompanyIdContractorPaymentsResponseBody$inboundSchema
     GetV1CompaniesCompanyIdContractorPaymentsResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.union([
+  > = smartUnion([
     ContractorPaymentSummary$inboundSchema,
     ContractorPaymentSummaryByDates$inboundSchema,
   ]);
@@ -184,10 +186,12 @@ export const GetV1CompaniesCompanyIdContractorPaymentsResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    oneOf: z.union([
-      ContractorPaymentSummary$inboundSchema,
-      ContractorPaymentSummaryByDates$inboundSchema,
-    ]).optional(),
+    oneOf: types.optional(
+      smartUnion([
+        ContractorPaymentSummary$inboundSchema,
+        ContractorPaymentSummaryByDates$inboundSchema,
+      ]),
+    ),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",

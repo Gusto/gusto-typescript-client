@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -40,7 +42,7 @@ export const EarningTypeCategory = {
  * @remarks
  * categorized custom bonus earning types.
  */
-export type EarningTypeCategory = ClosedEnum<typeof EarningTypeCategory>;
+export type EarningTypeCategory = OpenEnum<typeof EarningTypeCategory>;
 
 /**
  * The representation of an earning type in Gusto.
@@ -75,9 +77,11 @@ export type EarningType = {
 };
 
 /** @internal */
-export const EarningTypeCategory$inboundSchema: z.ZodNativeEnum<
-  typeof EarningTypeCategory
-> = z.nativeEnum(EarningTypeCategory);
+export const EarningTypeCategory$inboundSchema: z.ZodType<
+  EarningTypeCategory,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(EarningTypeCategory);
 
 /** @internal */
 export const EarningType$inboundSchema: z.ZodType<
@@ -85,11 +89,11 @@ export const EarningType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
-  uuid: z.string(),
-  active: z.boolean().optional(),
-  category: EarningTypeCategory$inboundSchema.optional(),
-  included_in_overtime_pay: z.boolean().optional(),
+  name: types.optional(types.string()),
+  uuid: types.string(),
+  active: types.optional(types.boolean()),
+  category: types.optional(EarningTypeCategory$inboundSchema),
+  included_in_overtime_pay: types.optional(types.boolean()),
 }).transform((v) => {
   return remap$(v, {
     "included_in_overtime_pay": "includedInOvertimePay",

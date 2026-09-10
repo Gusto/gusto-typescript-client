@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata = {};
@@ -55,8 +56,8 @@ export const PayrollCreditBlockerUnblockOptionWaitForReverseWire$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    unblock_type: z.literal("wait_for_reverse_wire"),
-    check_date: z.string(),
+    unblock_type: types.literal("wait_for_reverse_wire"),
+    check_date: types.string(),
     metadata: z.lazy(() =>
       PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata$inboundSchema
     ),

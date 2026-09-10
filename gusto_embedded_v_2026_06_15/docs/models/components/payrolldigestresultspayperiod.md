@@ -12,7 +12,7 @@ let value: PayrollDigestResultsPayPeriod = {};
 
 | Field                                            | Type                                             | Required                                         | Description                                      |
 | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
-| `startDate`                                      | [RFCDate](../../types/rfcdate.md)                | :heavy_minus_sign:                               | First day of the pay period.                     |
-| `endDate`                                        | [RFCDate](../../types/rfcdate.md)                | :heavy_minus_sign:                               | Last day of the pay period.                      |
-| `checkDate`                                      | [RFCDate](../../types/rfcdate.md)                | :heavy_minus_sign:                               | The date employees get paid.                     |
-| `runPayrollBy`                                   | [RFCDate](../../types/rfcdate.md)                | :heavy_minus_sign:                               | The deadline to run payroll for this pay period. |
+| `startDate`                                      | [Date](../../types/rfcdate.md)                   | :heavy_minus_sign:                               | First day of the pay period.                     |
+| `endDate`                                        | [Date](../../types/rfcdate.md)                   | :heavy_minus_sign:                               | Last day of the pay period.                      |
+| `checkDate`                                      | [Date](../../types/rfcdate.md)                   | :heavy_minus_sign:                               | The date employees get paid.                     |
+| `runPayrollBy`                                   | [Date](../../types/rfcdate.md)                   | :heavy_minus_sign:                               | The deadline to run payroll for this pay period. |

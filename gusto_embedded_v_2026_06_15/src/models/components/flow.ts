@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -17,7 +18,7 @@ export type Flow = {
 /** @internal */
 export const Flow$inboundSchema: z.ZodType<Flow, z.ZodTypeDef, unknown> = z
   .object({
-    url: z.string().optional(),
+    url: types.optional(types.string()),
   });
 
 export function flowFromJSON(

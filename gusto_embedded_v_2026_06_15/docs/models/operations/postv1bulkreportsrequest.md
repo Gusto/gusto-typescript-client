@@ -4,7 +4,6 @@
 
 ```typescript
 import { PostV1BulkReportsRequest } from "@gusto/embedded-api-v-2026-06-15/models/operations/postv1bulkreports.js";
-import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 let value: PostV1BulkReportsRequest = {
   bulkReportBody: {
@@ -22,8 +21,8 @@ let value: PostV1BulkReportsRequest = {
         customName: "Q1 Payroll Export",
         withTotals: false,
         dateFilterType: "check_date",
-        startDate: new RFCDate("2026-01-01"),
-        endDate: new RFCDate("2026-03-31"),
+        startDate: new Date("2026-01-01"),
+        endDate: new Date("2026-03-31"),
         paymentMethod: "check",
         employmentType: "exempt",
         employmentStatus: "active_full_time",

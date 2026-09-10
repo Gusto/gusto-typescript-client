@@ -11,10 +11,12 @@ The status of EIN verification:
 import { FederalTaxDetailsStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/federaltaxdetails.js";
 
 let value: FederalTaxDetailsStatus = "pending";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"pending" | "verified" | "failed"
+"pending" | "verified" | "failed" | Unrecognized<string>
 ```

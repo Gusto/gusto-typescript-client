@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -61,13 +62,13 @@ export const ResourceType$inboundSchema: z.ZodNativeEnum<typeof ResourceType> =
 /** @internal */
 export const Event$inboundSchema: z.ZodType<Event, z.ZodTypeDef, unknown> = z
   .object({
-    uuid: z.string(),
-    event_type: z.string().optional(),
-    resource_type: ResourceType$inboundSchema.optional(),
-    resource_uuid: z.string().optional(),
-    entity_type: z.string().optional(),
-    entity_uuid: z.string().optional(),
-    timestamp: z.number().int().optional(),
+    uuid: types.string(),
+    event_type: types.optional(types.string()),
+    resource_type: types.optional(ResourceType$inboundSchema),
+    resource_uuid: types.optional(types.string()),
+    entity_type: types.optional(types.string()),
+    entity_uuid: types.optional(types.string()),
+    timestamp: types.optional(types.number()),
   }).transform((v) => {
     return remap$(v, {
       "event_type": "eventType",

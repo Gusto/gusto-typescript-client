@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -19,7 +21,7 @@ export const PayrollPartnerDisbursementsPaymentMethod = {
 /**
  * The payment method for the disbursement
  */
-export type PayrollPartnerDisbursementsPaymentMethod = ClosedEnum<
+export type PayrollPartnerDisbursementsPaymentMethod = OpenEnum<
   typeof PayrollPartnerDisbursementsPaymentMethod
 >;
 
@@ -35,7 +37,7 @@ export const PayrollPartnerDisbursementsPaymentStatus = {
 /**
  * The status of the payment
  */
-export type PayrollPartnerDisbursementsPaymentStatus = ClosedEnum<
+export type PayrollPartnerDisbursementsPaymentStatus = OpenEnum<
   typeof PayrollPartnerDisbursementsPaymentStatus
 >;
 
@@ -69,14 +71,18 @@ export type PayrollPartnerDisbursements = {
 };
 
 /** @internal */
-export const PayrollPartnerDisbursementsPaymentMethod$inboundSchema:
-  z.ZodNativeEnum<typeof PayrollPartnerDisbursementsPaymentMethod> = z
-    .nativeEnum(PayrollPartnerDisbursementsPaymentMethod);
+export const PayrollPartnerDisbursementsPaymentMethod$inboundSchema: z.ZodType<
+  PayrollPartnerDisbursementsPaymentMethod,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PayrollPartnerDisbursementsPaymentMethod);
 
 /** @internal */
-export const PayrollPartnerDisbursementsPaymentStatus$inboundSchema:
-  z.ZodNativeEnum<typeof PayrollPartnerDisbursementsPaymentStatus> = z
-    .nativeEnum(PayrollPartnerDisbursementsPaymentStatus);
+export const PayrollPartnerDisbursementsPaymentStatus$inboundSchema: z.ZodType<
+  PayrollPartnerDisbursementsPaymentStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PayrollPartnerDisbursementsPaymentStatus);
 
 /** @internal */
 export const PayrollPartnerDisbursementsDisbursements$inboundSchema: z.ZodType<
@@ -84,11 +90,13 @@ export const PayrollPartnerDisbursementsDisbursements$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  employee_uuid: z.string().optional(),
-  payment_method: PayrollPartnerDisbursementsPaymentMethod$inboundSchema
-    .optional(),
-  payment_status: PayrollPartnerDisbursementsPaymentStatus$inboundSchema
-    .optional(),
+  employee_uuid: types.optional(types.string()),
+  payment_method: types.optional(
+    PayrollPartnerDisbursementsPaymentMethod$inboundSchema,
+  ),
+  payment_status: types.optional(
+    PayrollPartnerDisbursementsPaymentStatus$inboundSchema,
+  ),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",
@@ -119,10 +127,12 @@ export const PayrollPartnerDisbursements$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  payroll_uuid: z.string().optional(),
-  disbursements: z.array(
-    z.lazy(() => PayrollPartnerDisbursementsDisbursements$inboundSchema),
-  ).optional(),
+  payroll_uuid: types.optional(types.string()),
+  disbursements: types.optional(
+    z.array(
+      z.lazy(() => PayrollPartnerDisbursementsDisbursements$inboundSchema),
+    ),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "payroll_uuid": "payrollUuid",

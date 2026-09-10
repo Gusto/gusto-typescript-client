@@ -6,13 +6,12 @@ A single pay period in a pay schedule preview, with check date, period boundarie
 
 ```typescript
 import { PaySchedulePreviewPayPeriod } from "@gusto/embedded-api-v-2026-06-15/models/components/payschedulepreviewpayperiod.js";
-import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 let value: PaySchedulePreviewPayPeriod = {
-  checkDate: new RFCDate("2024-09-27"),
-  startDate: new RFCDate("2024-02-26"),
-  runPayrollBy: new RFCDate("2024-06-30"),
-  endDate: new RFCDate("2025-04-26"),
+  checkDate: new Date("2024-09-27"),
+  startDate: new Date("2024-02-26"),
+  runPayrollBy: new Date("2024-06-30"),
+  endDate: new Date("2025-04-26"),
 };
 ```
 
@@ -20,7 +19,7 @@ let value: PaySchedulePreviewPayPeriod = {
 
 | Field                                                             | Type                                                              | Required                                                          | Description                                                       |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `checkDate`                                                       | [RFCDate](../../types/rfcdate.md)                                 | :heavy_check_mark:                                                | The payment date, "Check date", for the pay period.               |
-| `startDate`                                                       | [RFCDate](../../types/rfcdate.md)                                 | :heavy_check_mark:                                                | The first day of the pay period.                                  |
-| `runPayrollBy`                                                    | [RFCDate](../../types/rfcdate.md)                                 | :heavy_check_mark:                                                | The deadline to run payroll for direct deposit on the check date. |
-| `endDate`                                                         | [RFCDate](../../types/rfcdate.md)                                 | :heavy_check_mark:                                                | The last day of the pay period.                                   |
+| `checkDate`                                                       | [Date](../../types/rfcdate.md)                                    | :heavy_check_mark:                                                | The payment date, "Check date", for the pay period.               |
+| `startDate`                                                       | [Date](../../types/rfcdate.md)                                    | :heavy_check_mark:                                                | The first day of the pay period.                                  |
+| `runPayrollBy`                                                    | [Date](../../types/rfcdate.md)                                    | :heavy_check_mark:                                                | The deadline to run payroll for direct deposit on the check date. |
+| `endDate`                                                         | [Date](../../types/rfcdate.md)                                    | :heavy_check_mark:                                                | The last day of the pay period.                                   |

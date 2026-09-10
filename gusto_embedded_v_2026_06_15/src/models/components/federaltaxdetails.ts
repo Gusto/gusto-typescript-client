@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const TaxPayerType = {
@@ -23,7 +25,7 @@ export const TaxPayerType = {
   JointVenture: "Joint venture",
   NonProfit: "Non-Profit",
 } as const;
-export type TaxPayerType = ClosedEnum<typeof TaxPayerType>;
+export type TaxPayerType = OpenEnum<typeof TaxPayerType>;
 
 /**
  * The form used by the company for federal tax filing. One of:
@@ -43,7 +45,7 @@ export const FilingForm = {
  * - 941 (Quarterly federal tax return form)
  * - 944 (Annual federal tax return form)
  */
-export type FilingForm = ClosedEnum<typeof FilingForm>;
+export type FilingForm = OpenEnum<typeof FilingForm>;
 
 /**
  * The status of EIN verification:
@@ -66,9 +68,7 @@ export const FederalTaxDetailsStatus = {
  * - `verified`: The EIN has been successfully verified as a valid EIN with the IRS.
  * - `failed`: The company's EIN did not pass verification. Common issues are being entered incorrectly or not matching the company's legal name.
  */
-export type FederalTaxDetailsStatus = ClosedEnum<
-  typeof FederalTaxDetailsStatus
->;
+export type FederalTaxDetailsStatus = OpenEnum<typeof FederalTaxDetailsStatus>;
 
 /**
  * Information about the status of verifying the company's Employer Identification Number (EIN)
@@ -156,17 +156,25 @@ export type FederalTaxDetails = {
 };
 
 /** @internal */
-export const TaxPayerType$inboundSchema: z.ZodNativeEnum<typeof TaxPayerType> =
-  z.nativeEnum(TaxPayerType);
+export const TaxPayerType$inboundSchema: z.ZodType<
+  TaxPayerType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(TaxPayerType);
 
 /** @internal */
-export const FilingForm$inboundSchema: z.ZodNativeEnum<typeof FilingForm> = z
-  .nativeEnum(FilingForm);
+export const FilingForm$inboundSchema: z.ZodType<
+  FilingForm,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(FilingForm);
 
 /** @internal */
-export const FederalTaxDetailsStatus$inboundSchema: z.ZodNativeEnum<
-  typeof FederalTaxDetailsStatus
-> = z.nativeEnum(FederalTaxDetailsStatus);
+export const FederalTaxDetailsStatus$inboundSchema: z.ZodType<
+  FederalTaxDetailsStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(FederalTaxDetailsStatus);
 
 /** @internal */
 export const EinVerification$inboundSchema: z.ZodType<
@@ -174,7 +182,7 @@ export const EinVerification$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  status: FederalTaxDetailsStatus$inboundSchema.optional(),
+  status: types.optional(FederalTaxDetailsStatus$inboundSchema),
 });
 
 export function einVerificationFromJSON(
@@ -193,16 +201,16 @@ export const FederalTaxDetails$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  version: z.string().optional(),
+  version: types.optional(types.string()),
   tax_payer_type: z.nullable(TaxPayerType$inboundSchema).optional(),
-  taxable_as_scorp: z.boolean().optional(),
-  filing_form: FilingForm$inboundSchema.optional(),
-  has_ein: z.boolean().optional(),
-  ein_verified: z.boolean().optional(),
-  ein_verification: z.lazy(() => EinVerification$inboundSchema).optional(),
-  legal_name: z.string().optional(),
-  effective_date: z.string().optional(),
-  deposit_schedule: z.string().optional(),
+  taxable_as_scorp: types.optional(types.boolean()),
+  filing_form: types.optional(FilingForm$inboundSchema),
+  has_ein: types.optional(types.boolean()),
+  ein_verified: types.optional(types.boolean()),
+  ein_verification: types.optional(z.lazy(() => EinVerification$inboundSchema)),
+  legal_name: types.optional(types.string()),
+  effective_date: types.optional(types.string()),
+  deposit_schedule: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "tax_payer_type": "taxPayerType",

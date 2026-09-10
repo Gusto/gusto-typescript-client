@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
@@ -128,8 +129,9 @@ export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$inboun
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Payroll-Calculate-Accruing-Time-Off-Hours-Response":
-      PayrollCalculateAccruingTimeOffHoursResponse$inboundSchema.optional(),
+    "Payroll-Calculate-Accruing-Time-Off-Hours-Response": types.optional(
+      PayrollCalculateAccruingTimeOffHoursResponse$inboundSchema,
+    ),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",

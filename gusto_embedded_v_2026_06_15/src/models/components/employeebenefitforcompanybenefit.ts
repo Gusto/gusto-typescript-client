@@ -5,7 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { RFCDate } from "../../types/rfcdate.js";
+import { smartUnion } from "../../types/smartUnion.js";
 
 /**
  * A single tier of a tiered matching scheme.
@@ -180,11 +180,11 @@ export type EmployeeBenefitForCompanyBenefit = {
   /**
    * The date the employee benefit will start.
    */
-  effectiveDate?: RFCDate | undefined;
+  effectiveDate?: Date | undefined;
   /**
    * The date the employee benefit will expire. A null value indicates the benefit will not expire.
    */
-  expirationDate?: RFCDate | null | undefined;
+  expirationDate?: Date | null | undefined;
   /**
    * The UUID of the employee to which the benefit belongs.
    */
@@ -254,7 +254,7 @@ export const EmployeeBenefitForCompanyBenefitValue$outboundSchema: z.ZodType<
   EmployeeBenefitForCompanyBenefitValue$Outbound,
   z.ZodTypeDef,
   EmployeeBenefitForCompanyBenefitValue
-> = z.union([z.string(), z.lazy(() => Value2$outboundSchema)]);
+> = smartUnion([z.string(), z.lazy(() => Value2$outboundSchema)]);
 
 export function employeeBenefitForCompanyBenefitValueToJSON(
   employeeBenefitForCompanyBenefitValue: EmployeeBenefitForCompanyBenefitValue,
@@ -280,7 +280,7 @@ export const EmployeeBenefitForCompanyBenefitContribution$outboundSchema:
     EmployeeBenefitForCompanyBenefitContribution
   > = z.object({
     type: z.string().optional(),
-    value: z.union([z.string(), z.lazy(() => Value2$outboundSchema)])
+    value: smartUnion([z.string(), z.lazy(() => Value2$outboundSchema)])
       .optional(),
   });
 
@@ -361,9 +361,12 @@ export const EmployeeBenefitForCompanyBenefit$outboundSchema: z.ZodType<
   coverageSalaryMultiplier: z.nullable(z.string().default("0.00")),
   companyContribution: z.string().default("0.00"),
   contributeAsPercentage: z.boolean().default(false),
-  effectiveDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
-  expirationDate: z.nullable(z.instanceof(RFCDate).transform(v => v.toString()))
-    .optional(),
+  effectiveDate: z.date().transform(v =>
+    v.toISOString().slice(0, "YYYY-MM-DD".length)
+  ).optional(),
+  expirationDate: z.nullable(
+    z.date().transform(v => v.toISOString().slice(0, "YYYY-MM-DD".length)),
+  ).optional(),
   employeeUuid: z.string(),
   uuid: z.string().optional(),
   action: Action$outboundSchema.optional(),

@@ -8,10 +8,12 @@ The FLSA status for this compensation. Salaried ('Exempt') employees are paid a 
 import { FlsaStatusType } from "@gusto/embedded-api-v-2026-06-15/models/components/flsastatustype.js";
 
 let value: FlsaStatusType = "Owner";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"Exempt" | "Salaried Nonexempt" | "Nonexempt" | "Owner" | "Commission Only Exempt" | "Commission Only Nonexempt"
+"Exempt" | "Salaried Nonexempt" | "Nonexempt" | "Owner" | "Commission Only Exempt" | "Commission Only Nonexempt" | Unrecognized<string>
 ```

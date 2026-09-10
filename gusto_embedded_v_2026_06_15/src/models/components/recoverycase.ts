@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -22,7 +24,7 @@ export const RecoveryCaseStatus = {
 /**
  * Status of the recovery case
  */
-export type RecoveryCaseStatus = ClosedEnum<typeof RecoveryCaseStatus>;
+export type RecoveryCaseStatus = OpenEnum<typeof RecoveryCaseStatus>;
 
 /**
  * Representation of a recovery case
@@ -71,9 +73,11 @@ export type RecoveryCase = {
 };
 
 /** @internal */
-export const RecoveryCaseStatus$inboundSchema: z.ZodNativeEnum<
-  typeof RecoveryCaseStatus
-> = z.nativeEnum(RecoveryCaseStatus);
+export const RecoveryCaseStatus$inboundSchema: z.ZodType<
+  RecoveryCaseStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(RecoveryCaseStatus);
 
 /** @internal */
 export const RecoveryCase$inboundSchema: z.ZodType<
@@ -81,16 +85,16 @@ export const RecoveryCase$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  company_uuid: z.string().optional(),
-  status: RecoveryCaseStatus$inboundSchema.optional(),
-  latest_error_code: z.nullable(z.string()).optional(),
-  original_debit_date: z.nullable(z.string()).optional(),
-  check_date: z.string().optional(),
-  payroll_uuid: z.nullable(z.string()).optional(),
-  contractor_payment_uuids: z.nullable(z.array(z.string())).optional(),
-  amount_outstanding: z.string().optional(),
-  event_total_amount: z.string().optional(),
+  uuid: types.string(),
+  company_uuid: types.optional(types.string()),
+  status: types.optional(RecoveryCaseStatus$inboundSchema),
+  latest_error_code: z.nullable(types.string()).optional(),
+  original_debit_date: z.nullable(types.string()).optional(),
+  check_date: types.optional(types.string()),
+  payroll_uuid: z.nullable(types.string()).optional(),
+  contractor_payment_uuids: z.nullable(z.array(types.string())).optional(),
+  amount_outstanding: types.optional(types.string()),
+  event_total_amount: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

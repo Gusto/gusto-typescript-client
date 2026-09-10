@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -31,8 +32,8 @@ export const EmployeeOnboardingDocument$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.nullable(z.string()).optional(),
-  i9_document: z.boolean().optional(),
+  uuid: z.nullable(types.string()).optional(),
+  i9_document: types.optional(types.boolean()),
 }).transform((v) => {
   return remap$(v, {
     "i9_document": "i9Document",

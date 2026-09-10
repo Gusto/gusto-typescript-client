@@ -6,7 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import { RFCDate } from "../../types/rfcdate.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -34,7 +34,7 @@ export type EmployeeHomeAddressHistoryEntry = {
   /**
    * The date the address became effective.
    */
-  effectiveDate?: RFCDate | undefined;
+  effectiveDate?: Date | undefined;
 };
 
 /** @internal */
@@ -43,15 +43,15 @@ export const EmployeeHomeAddressHistoryEntry$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  street_1: z.nullable(z.string()).optional(),
-  street_2: z.nullable(z.string()).optional(),
-  city: z.nullable(z.string()).optional(),
-  state: z.nullable(z.string()).optional(),
-  zip: z.nullable(z.string()).optional(),
-  country: z.nullable(z.string().default("USA")),
-  active: z.boolean().optional(),
-  uuid: z.string().optional(),
-  effective_date: z.string().transform(v => new RFCDate(v)).optional(),
+  street_1: z.nullable(types.string()).optional(),
+  street_2: z.nullable(types.string()).optional(),
+  city: z.nullable(types.string()).optional(),
+  state: z.nullable(types.string()).optional(),
+  zip: z.nullable(types.string()).optional(),
+  country: z.nullable(types.string().default("USA")),
+  active: types.optional(types.boolean()),
+  uuid: types.optional(types.string()),
+  effective_date: types.optional(types.date()),
 }).transform((v) => {
   return remap$(v, {
     "street_1": "street1",

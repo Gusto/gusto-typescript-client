@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PayScheduleAssignmentEmployeeChange,
@@ -19,7 +21,7 @@ export const PayScheduleAssignmentPreviewType = {
   ByEmployee: "by_employee",
   ByDepartment: "by_department",
 } as const;
-export type PayScheduleAssignmentPreviewType = ClosedEnum<
+export type PayScheduleAssignmentPreviewType = OpenEnum<
   typeof PayScheduleAssignmentPreviewType
 >;
 
@@ -38,9 +40,11 @@ export type PayScheduleAssignmentPreview = {
 };
 
 /** @internal */
-export const PayScheduleAssignmentPreviewType$inboundSchema: z.ZodNativeEnum<
-  typeof PayScheduleAssignmentPreviewType
-> = z.nativeEnum(PayScheduleAssignmentPreviewType);
+export const PayScheduleAssignmentPreviewType$inboundSchema: z.ZodType<
+  PayScheduleAssignmentPreviewType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PayScheduleAssignmentPreviewType);
 
 /** @internal */
 export const PayScheduleAssignmentPreview$inboundSchema: z.ZodType<
@@ -49,8 +53,9 @@ export const PayScheduleAssignmentPreview$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.nullable(PayScheduleAssignmentPreviewType$inboundSchema).optional(),
-  employee_changes: z.array(PayScheduleAssignmentEmployeeChange$inboundSchema)
-    .optional(),
+  employee_changes: types.optional(
+    z.array(PayScheduleAssignmentEmployeeChange$inboundSchema),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "employee_changes": "employeeChanges",

@@ -8,10 +8,12 @@ The status of the company in Gusto. "Approved" companies are approved to run pay
 import { CompanyStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/company.js";
 
 let value: CompanyStatus = "Suspended";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"Approved" | "Not Approved" | "Suspended"
+"Approved" | "Not Approved" | "Suspended" | Unrecognized<string>
 ```

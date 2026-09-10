@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -19,7 +21,7 @@ export const EmployeePaymentDetailsListPaymentMethod = {
 /**
  * The type of payment method.
  */
-export type EmployeePaymentDetailsListPaymentMethod = ClosedEnum<
+export type EmployeePaymentDetailsListPaymentMethod = OpenEnum<
   typeof EmployeePaymentDetailsListPaymentMethod
 >;
 
@@ -27,7 +29,7 @@ export const EmployeePaymentDetailsListSplitBy = {
   Amount: "Amount",
   Percentage: "Percentage",
 } as const;
-export type EmployeePaymentDetailsListSplitBy = ClosedEnum<
+export type EmployeePaymentDetailsListSplitBy = OpenEnum<
   typeof EmployeePaymentDetailsListSplitBy
 >;
 
@@ -94,14 +96,18 @@ export type EmployeePaymentDetailsList = {
 };
 
 /** @internal */
-export const EmployeePaymentDetailsListPaymentMethod$inboundSchema:
-  z.ZodNativeEnum<typeof EmployeePaymentDetailsListPaymentMethod> = z
-    .nativeEnum(EmployeePaymentDetailsListPaymentMethod);
+export const EmployeePaymentDetailsListPaymentMethod$inboundSchema: z.ZodType<
+  EmployeePaymentDetailsListPaymentMethod,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(EmployeePaymentDetailsListPaymentMethod);
 
 /** @internal */
-export const EmployeePaymentDetailsListSplitBy$inboundSchema: z.ZodNativeEnum<
-  typeof EmployeePaymentDetailsListSplitBy
-> = z.nativeEnum(EmployeePaymentDetailsListSplitBy);
+export const EmployeePaymentDetailsListSplitBy$inboundSchema: z.ZodType<
+  EmployeePaymentDetailsListSplitBy,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(EmployeePaymentDetailsListSplitBy);
 
 /** @internal */
 export const EmployeePaymentDetailsListSplits$inboundSchema: z.ZodType<
@@ -109,14 +115,14 @@ export const EmployeePaymentDetailsListSplits$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  bank_account_uuid: z.string().optional(),
-  name: z.string().optional(),
-  hidden_account_number: z.string().optional(),
-  encrypted_account_number: z.nullable(z.string()).optional(),
-  routing_number: z.string().optional(),
-  account_type: z.string().optional(),
-  priority: z.number().int().optional(),
-  split_amount: z.nullable(z.number()).optional(),
+  bank_account_uuid: types.optional(types.string()),
+  name: types.optional(types.string()),
+  hidden_account_number: types.optional(types.string()),
+  encrypted_account_number: z.nullable(types.string()).optional(),
+  routing_number: types.optional(types.string()),
+  account_type: types.optional(types.string()),
+  priority: types.optional(types.number()),
+  split_amount: z.nullable(types.number()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "bank_account_uuid": "bankAccountUuid",
@@ -144,11 +150,12 @@ export const EmployeePaymentDetailsList$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  employee_uuid: z.string().optional(),
-  first_name: z.string().optional(),
-  last_name: z.string().optional(),
-  payment_method: EmployeePaymentDetailsListPaymentMethod$inboundSchema
-    .optional(),
+  employee_uuid: types.optional(types.string()),
+  first_name: types.optional(types.string()),
+  last_name: types.optional(types.string()),
+  payment_method: types.optional(
+    EmployeePaymentDetailsListPaymentMethod$inboundSchema,
+  ),
   split_by: z.nullable(EmployeePaymentDetailsListSplitBy$inboundSchema)
     .optional(),
   splits: z.nullable(

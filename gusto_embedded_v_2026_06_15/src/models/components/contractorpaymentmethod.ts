@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PaymentMethodBankAccount,
@@ -17,7 +19,7 @@ export const ContractorPaymentMethodType = {
   DirectDeposit: "Direct Deposit",
   Check: "Check",
 } as const;
-export type ContractorPaymentMethodType = ClosedEnum<
+export type ContractorPaymentMethodType = OpenEnum<
   typeof ContractorPaymentMethodType
 >;
 
@@ -25,7 +27,7 @@ export const ContractorPaymentMethodSplitBy = {
   Amount: "Amount",
   Percentage: "Percentage",
 } as const;
-export type ContractorPaymentMethodSplitBy = ClosedEnum<
+export type ContractorPaymentMethodSplitBy = OpenEnum<
   typeof ContractorPaymentMethodSplitBy
 >;
 
@@ -46,14 +48,18 @@ export type ContractorPaymentMethod = {
 };
 
 /** @internal */
-export const ContractorPaymentMethodType$inboundSchema: z.ZodNativeEnum<
-  typeof ContractorPaymentMethodType
-> = z.nativeEnum(ContractorPaymentMethodType);
+export const ContractorPaymentMethodType$inboundSchema: z.ZodType<
+  ContractorPaymentMethodType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorPaymentMethodType);
 
 /** @internal */
-export const ContractorPaymentMethodSplitBy$inboundSchema: z.ZodNativeEnum<
-  typeof ContractorPaymentMethodSplitBy
-> = z.nativeEnum(ContractorPaymentMethodSplitBy);
+export const ContractorPaymentMethodSplitBy$inboundSchema: z.ZodType<
+  ContractorPaymentMethodSplitBy,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorPaymentMethodSplitBy);
 
 /** @internal */
 export const ContractorPaymentMethod$inboundSchema: z.ZodType<
@@ -61,7 +67,7 @@ export const ContractorPaymentMethod$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  version: z.string().optional(),
+  version: types.optional(types.string()),
   type: z.nullable(ContractorPaymentMethodType$inboundSchema).optional(),
   split_by: z.nullable(ContractorPaymentMethodSplitBy$inboundSchema).optional(),
   splits: z.nullable(z.array(PaymentMethodBankAccount$inboundSchema))

@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -40,11 +41,11 @@ export const PayrollPaymentSpeedChangedType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  original_check_date: z.string().optional(),
-  current_check_date: z.string().optional(),
-  original_debit_date: z.string().optional(),
-  current_debit_date: z.string().optional(),
-  reason: z.string().optional(),
+  original_check_date: types.optional(types.string()),
+  current_check_date: types.optional(types.string()),
+  original_debit_date: types.optional(types.string()),
+  current_debit_date: types.optional(types.string()),
+  reason: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "original_check_date": "originalCheckDate",

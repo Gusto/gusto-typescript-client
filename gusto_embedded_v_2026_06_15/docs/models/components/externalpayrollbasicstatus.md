@@ -8,10 +8,12 @@ The status of the external payroll. The status will be `unprocessed` when the ex
 import { ExternalPayrollBasicStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/externalpayrollbasic.js";
 
 let value: ExternalPayrollBasicStatus = "unprocessed";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"unprocessed" | "processed"
+"unprocessed" | "processed" | Unrecognized<string>
 ```

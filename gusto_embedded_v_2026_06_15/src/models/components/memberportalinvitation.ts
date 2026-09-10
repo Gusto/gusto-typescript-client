@@ -4,8 +4,10 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -35,7 +37,7 @@ export const MemberPortalInvitationStatus1 = {
  * - `complete`: The member has fully completed their member portal registration.
  * - `cancelled`: The invitation has been cancelled, either via `DELETE` on this endpoint or because it was superseded.
  */
-export type MemberPortalInvitationStatus1 = ClosedEnum<
+export type MemberPortalInvitationStatus1 = OpenEnum<
   typeof MemberPortalInvitationStatus1
 >;
 
@@ -65,9 +67,11 @@ export type MemberPortalInvitation = {
 };
 
 /** @internal */
-export const MemberPortalInvitationStatus1$inboundSchema: z.ZodNativeEnum<
-  typeof MemberPortalInvitationStatus1
-> = z.nativeEnum(MemberPortalInvitationStatus1);
+export const MemberPortalInvitationStatus1$inboundSchema: z.ZodType<
+  MemberPortalInvitationStatus1,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(MemberPortalInvitationStatus1);
 
 /** @internal */
 export const MemberPortalInvitation$inboundSchema: z.ZodType<
@@ -76,7 +80,7 @@ export const MemberPortalInvitation$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   status: MemberPortalInvitationStatus1$inboundSchema,
-  expired: z.boolean(),
+  expired: types.boolean(),
 });
 
 export function memberPortalInvitationFromJSON(

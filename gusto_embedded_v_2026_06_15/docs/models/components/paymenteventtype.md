@@ -8,10 +8,12 @@ The type of payment event associated with the ACH transaction
 import { PaymentEventType } from "@gusto/embedded-api-v-2026-06-15/models/components/achtransaction.js";
 
 let value: PaymentEventType = "ContractorPayment";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"Payroll" | "ContractorPayment"
+"Payroll" | "ContractorPayment" | Unrecognized<string>
 ```

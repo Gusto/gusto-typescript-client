@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { GustoEmbeddedError } from "./gustoembeddederror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
 
@@ -69,7 +70,7 @@ export const PayrollDigestConflictErrorMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  request_uuid: z.string().optional(),
+  request_uuid: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "request_uuid": "requestUuid",
@@ -93,11 +94,12 @@ export const PayrollDigestConflictErrorErrors$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  error_key: z.string().optional(),
-  category: z.string().optional(),
-  message: z.string().optional(),
-  metadata: z.lazy(() => PayrollDigestConflictErrorMetadata$inboundSchema)
-    .optional(),
+  error_key: types.optional(types.string()),
+  category: types.optional(types.string()),
+  message: types.optional(types.string()),
+  metadata: types.optional(
+    z.lazy(() => PayrollDigestConflictErrorMetadata$inboundSchema),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "error_key": "errorKey",
@@ -120,8 +122,9 @@ export const PayrollDigestConflictError$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  errors: z.array(z.lazy(() => PayrollDigestConflictErrorErrors$inboundSchema))
-    .optional(),
+  errors: types.optional(
+    z.array(z.lazy(() => PayrollDigestConflictErrorErrors$inboundSchema)),
+  ),
   request$: z.instanceof(Request),
   response$: z.instanceof(Response),
   body$: z.string(),

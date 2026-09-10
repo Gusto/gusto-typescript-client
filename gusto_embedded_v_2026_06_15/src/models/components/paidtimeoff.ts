@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const Name = {
@@ -14,7 +16,7 @@ export const Name = {
   SickHours: "Sick Hours",
   HolidayHours: "Holiday Hours",
 } as const;
-export type Name = ClosedEnum<typeof Name>;
+export type Name = OpenEnum<typeof Name>;
 
 /**
  * The representation of paid time off in Gusto.
@@ -63,9 +65,8 @@ export type PaidTimeOff = {
 };
 
 /** @internal */
-export const Name$inboundSchema: z.ZodNativeEnum<typeof Name> = z.nativeEnum(
-  Name,
-);
+export const Name$inboundSchema: z.ZodType<Name, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(Name);
 
 /** @internal */
 export const PaidTimeOff$inboundSchema: z.ZodType<
@@ -74,15 +75,15 @@ export const PaidTimeOff$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.nullable(Name$inboundSchema).optional(),
-  policy_name: z.nullable(z.string()).optional(),
-  policy_uuid: z.nullable(z.string()).optional(),
-  accrual_unit: z.nullable(z.string()).optional(),
-  accrual_rate: z.nullable(z.string()).optional(),
-  accrual_method: z.nullable(z.string()).optional(),
-  accrual_period: z.nullable(z.string()).optional(),
-  accrual_balance: z.nullable(z.string()).optional(),
-  maximum_accrual_balance: z.nullable(z.string()).optional(),
-  paid_at_termination: z.boolean().optional(),
+  policy_name: z.nullable(types.string()).optional(),
+  policy_uuid: z.nullable(types.string()).optional(),
+  accrual_unit: z.nullable(types.string()).optional(),
+  accrual_rate: z.nullable(types.string()).optional(),
+  accrual_method: z.nullable(types.string()).optional(),
+  accrual_period: z.nullable(types.string()).optional(),
+  accrual_balance: z.nullable(types.string()).optional(),
+  maximum_accrual_balance: z.nullable(types.string()).optional(),
+  paid_at_termination: types.optional(types.boolean()),
 }).transform((v) => {
   return remap$(v, {
     "policy_name": "policyName",

@@ -12,10 +12,12 @@ The verification status of the bank account.
 import { VerificationStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/companybankaccount.js";
 
 let value: VerificationStatus = "awaiting_deposits";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"awaiting_deposits" | "ready_for_verification" | "verified"
+"awaiting_deposits" | "ready_for_verification" | "verified" | Unrecognized<string>
 ```

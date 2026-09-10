@@ -18,7 +18,6 @@ import {
   PayrollTypes,
 } from "../models/operations/getv1companiescompanyidpayperiods.js";
 import { unwrapAsync } from "../types/fp.js";
-import { RFCDate } from "../types/rfcdate.js";
 export type PaySchedulesGetPayPeriodsQueryData =
   GetV1CompaniesCompanyIdPayPeriodsResponse;
 
@@ -83,8 +82,8 @@ export function queryKeyPaySchedulesGetPayPeriods(
     xGustoAPIVersion?:
       | GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion
       | undefined;
-    startDate?: RFCDate | undefined;
-    endDate?: RFCDate | undefined;
+    startDate?: Date | undefined;
+    endDate?: Date | undefined;
     payrollTypes?: PayrollTypes | undefined;
   },
 ): QueryKey {

@@ -8,10 +8,12 @@ Machine-readable category for why the company was excluded.
 import { PayrollDigestResultsCategory } from "@gusto/embedded-api-v-2026-06-15/models/components/payrolldigestresults.js";
 
 let value: PayrollDigestResultsCategory = "duplicate";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"not_found" | "company_inactive" | "duplicate" | "internal_error"
+"not_found" | "company_inactive" | "duplicate" | "internal_error" | Unrecognized<string>
 ```

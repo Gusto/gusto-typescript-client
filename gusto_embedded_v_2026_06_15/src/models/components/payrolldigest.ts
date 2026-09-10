@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { ClosedEnum, OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -34,7 +36,7 @@ export const PayrollDigestStatus = {
 /**
  * The lifecycle status of the batch request itself. Terminal values are `completed` (processing finished — inspect `results` and `exclusions` for per-company outcomes) and `failed` (request failed; can be retried). This is distinct from the per-company `status` returned inside `results[]` and `exclusions[]`.
  */
-export type PayrollDigestStatus = ClosedEnum<typeof PayrollDigestStatus>;
+export type PayrollDigestStatus = OpenEnum<typeof PayrollDigestStatus>;
 
 /**
  * A payroll digest batch request.
@@ -64,9 +66,11 @@ export const PayrollDigestBatchAction$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(PayrollDigestBatchAction);
 
 /** @internal */
-export const PayrollDigestStatus$inboundSchema: z.ZodNativeEnum<
-  typeof PayrollDigestStatus
-> = z.nativeEnum(PayrollDigestStatus);
+export const PayrollDigestStatus$inboundSchema: z.ZodType<
+  PayrollDigestStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PayrollDigestStatus);
 
 /** @internal */
 export const PayrollDigest$inboundSchema: z.ZodType<
@@ -74,8 +78,8 @@ export const PayrollDigest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  idempotency_key: z.string(),
+  uuid: types.string(),
+  idempotency_key: types.string(),
   batch_action: PayrollDigestBatchAction$inboundSchema,
   status: PayrollDigestStatus$inboundSchema,
 }).transform((v) => {

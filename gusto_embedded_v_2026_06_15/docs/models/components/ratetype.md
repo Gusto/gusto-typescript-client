@@ -11,10 +11,12 @@
 import { RateType } from "@gusto/embedded-api-v-2026-06-15/models/components/taxrequirementmetadata.js";
 
 let value: RateType = "currency_per_hour";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"percent" | "currency_per_hour"
+"percent" | "currency_per_hour" | Unrecognized<string>
 ```

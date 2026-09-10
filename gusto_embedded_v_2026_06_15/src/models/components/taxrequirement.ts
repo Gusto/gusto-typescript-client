@@ -6,6 +6,8 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaxRequirementMetadata,
@@ -79,7 +81,7 @@ export const TaxRequirementValue$inboundSchema: z.ZodType<
   TaxRequirementValue,
   z.ZodTypeDef,
   unknown
-> = z.union([z.boolean(), z.string(), z.number()]);
+> = smartUnion([types.boolean(), types.string(), types.number()]);
 
 export function taxRequirementValueFromJSON(
   jsonString: string,
@@ -97,8 +99,10 @@ export const ApplicableIf$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  key: z.string().optional(),
-  value: z.nullable(z.union([z.boolean(), z.string(), z.number()])).optional(),
+  key: types.optional(types.string()),
+  value: z.nullable(
+    smartUnion([types.boolean(), types.string(), types.number()]),
+  ).optional(),
 });
 
 export function applicableIfFromJSON(
@@ -117,15 +121,17 @@ export const TaxRequirement$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  key: z.string().optional(),
-  applicable_if: z.array(z.lazy(() => ApplicableIf$inboundSchema)).optional(),
-  label: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
+  key: types.optional(types.string()),
+  applicable_if: types.optional(
+    z.array(z.lazy(() => ApplicableIf$inboundSchema)),
+  ),
+  label: types.optional(types.string()),
+  description: z.nullable(types.string()).optional(),
   value: z.nullable(TaxRequirementsValue$inboundSchema).optional(),
-  metadata: TaxRequirementMetadata$inboundSchema.optional(),
-  editable: z.boolean().optional(),
-  payroll_blocking: z.boolean().optional(),
-  default_value_applied: z.boolean().optional(),
+  metadata: types.optional(TaxRequirementMetadata$inboundSchema),
+  editable: types.optional(types.boolean()),
+  payroll_blocking: types.optional(types.boolean()),
+  default_value_applied: types.optional(types.boolean()),
 }).transform((v) => {
   return remap$(v, {
     "applicable_if": "applicableIf",

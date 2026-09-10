@@ -15,8 +15,8 @@ const value: components.BulkReportCustomReportItem = {
     "garnishments",
   ],
   fileType: "csv",
-  startDate: new RFCDate("2026-01-01"),
-  endDate: new RFCDate("2026-03-31"),
+  startDate: new Date("2026-01-01"),
+  endDate: new Date("2026-03-31"),
 };
 ```
 

@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import {
   ExternalPayrollTaxSuggestions,
   ExternalPayrollTaxSuggestions$inboundSchema,
@@ -105,9 +106,9 @@ export const GetV1ExternalPayrollCalculateTaxesResponse$inboundSchema:
   z.ZodType<GetV1ExternalPayrollCalculateTaxesResponse, z.ZodTypeDef, unknown> =
     z.object({
       HttpMeta: HTTPMetadata$inboundSchema,
-      "External-Payroll-Tax-Suggestions": z.array(
-        ExternalPayrollTaxSuggestions$inboundSchema,
-      ).optional(),
+      "External-Payroll-Tax-Suggestions": types.optional(
+        z.array(ExternalPayrollTaxSuggestions$inboundSchema),
+      ),
     }).transform((v) => {
       return remap$(v, {
         "HttpMeta": "httpMeta",

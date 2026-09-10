@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -19,7 +21,7 @@ export const BulkReportItemResultReportType = {
 /**
  * Which report this entry refers to.
  */
-export type BulkReportItemResultReportType = ClosedEnum<
+export type BulkReportItemResultReportType = OpenEnum<
   typeof BulkReportItemResultReportType
 >;
 
@@ -34,7 +36,7 @@ export const BulkReportItemResultStatus = {
 /**
  * The terminal state for this individual report.
  */
-export type BulkReportItemResultStatus = ClosedEnum<
+export type BulkReportItemResultStatus = OpenEnum<
   typeof BulkReportItemResultStatus
 >;
 
@@ -61,14 +63,18 @@ export type BulkReportItemResult = {
 };
 
 /** @internal */
-export const BulkReportItemResultReportType$inboundSchema: z.ZodNativeEnum<
-  typeof BulkReportItemResultReportType
-> = z.nativeEnum(BulkReportItemResultReportType);
+export const BulkReportItemResultReportType$inboundSchema: z.ZodType<
+  BulkReportItemResultReportType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(BulkReportItemResultReportType);
 
 /** @internal */
-export const BulkReportItemResultStatus$inboundSchema: z.ZodNativeEnum<
-  typeof BulkReportItemResultStatus
-> = z.nativeEnum(BulkReportItemResultStatus);
+export const BulkReportItemResultStatus$inboundSchema: z.ZodType<
+  BulkReportItemResultStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(BulkReportItemResultStatus);
 
 /** @internal */
 export const BulkReportItemResult$inboundSchema: z.ZodType<
@@ -77,9 +83,9 @@ export const BulkReportItemResult$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   report_type: BulkReportItemResultReportType$inboundSchema,
-  file_type: z.string(),
+  file_type: types.string(),
   status: BulkReportItemResultStatus$inboundSchema,
-  error: z.nullable(z.string()),
+  error: types.nullable(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "report_type": "reportType",

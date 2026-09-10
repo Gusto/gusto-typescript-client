@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -19,7 +21,7 @@ export const EmployeePayStubsListPaymentMethod = {
 /**
  * The payment method for the pay stub.
  */
-export type EmployeePayStubsListPaymentMethod = ClosedEnum<
+export type EmployeePayStubsListPaymentMethod = OpenEnum<
   typeof EmployeePayStubsListPaymentMethod
 >;
 
@@ -58,9 +60,11 @@ export type EmployeePayStubsList = {
 };
 
 /** @internal */
-export const EmployeePayStubsListPaymentMethod$inboundSchema: z.ZodNativeEnum<
-  typeof EmployeePayStubsListPaymentMethod
-> = z.nativeEnum(EmployeePayStubsListPaymentMethod);
+export const EmployeePayStubsListPaymentMethod$inboundSchema: z.ZodType<
+  EmployeePayStubsListPaymentMethod,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(EmployeePayStubsListPaymentMethod);
 
 /** @internal */
 export const EmployeePayStubsList$inboundSchema: z.ZodType<
@@ -68,13 +72,15 @@ export const EmployeePayStubsList$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  check_date: z.string().optional(),
-  gross_pay: z.string().optional(),
-  net_pay: z.string().optional(),
-  payroll_uuid: z.string().optional(),
-  check_amount: z.string().optional(),
-  payment_method: EmployeePayStubsListPaymentMethod$inboundSchema.optional(),
+  uuid: types.string(),
+  check_date: types.optional(types.string()),
+  gross_pay: types.optional(types.string()),
+  net_pay: types.optional(types.string()),
+  payroll_uuid: types.optional(types.string()),
+  check_amount: types.optional(types.string()),
+  payment_method: types.optional(
+    EmployeePayStubsListPaymentMethod$inboundSchema,
+  ),
 }).transform((v) => {
   return remap$(v, {
     "check_date": "checkDate",

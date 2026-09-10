@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PaymentMethodBankAccount,
@@ -23,7 +25,7 @@ export const EmployeePaymentMethodType = {
 /**
  * The payment method type. If type is Check, then `split_by` and `splits` do not need to be populated. If type is Direct Deposit, `split_by` and `splits` are required.
  */
-export type EmployeePaymentMethodType = ClosedEnum<
+export type EmployeePaymentMethodType = OpenEnum<
   typeof EmployeePaymentMethodType
 >;
 
@@ -31,7 +33,7 @@ export const EmployeePaymentMethodSplitBy = {
   Amount: "Amount",
   Percentage: "Percentage",
 } as const;
-export type EmployeePaymentMethodSplitBy = ClosedEnum<
+export type EmployeePaymentMethodSplitBy = OpenEnum<
   typeof EmployeePaymentMethodSplitBy
 >;
 
@@ -52,14 +54,18 @@ export type EmployeePaymentMethod = {
 };
 
 /** @internal */
-export const EmployeePaymentMethodType$inboundSchema: z.ZodNativeEnum<
-  typeof EmployeePaymentMethodType
-> = z.nativeEnum(EmployeePaymentMethodType);
+export const EmployeePaymentMethodType$inboundSchema: z.ZodType<
+  EmployeePaymentMethodType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(EmployeePaymentMethodType);
 
 /** @internal */
-export const EmployeePaymentMethodSplitBy$inboundSchema: z.ZodNativeEnum<
-  typeof EmployeePaymentMethodSplitBy
-> = z.nativeEnum(EmployeePaymentMethodSplitBy);
+export const EmployeePaymentMethodSplitBy$inboundSchema: z.ZodType<
+  EmployeePaymentMethodSplitBy,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(EmployeePaymentMethodSplitBy);
 
 /** @internal */
 export const EmployeePaymentMethod$inboundSchema: z.ZodType<
@@ -67,8 +73,8 @@ export const EmployeePaymentMethod$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  version: z.string().optional(),
-  type: EmployeePaymentMethodType$inboundSchema.optional(),
+  version: types.optional(types.string()),
+  type: types.optional(EmployeePaymentMethodType$inboundSchema),
   split_by: z.nullable(EmployeePaymentMethodSplitBy$inboundSchema).optional(),
   splits: z.nullable(z.array(PaymentMethodBankAccount$inboundSchema))
     .optional(),

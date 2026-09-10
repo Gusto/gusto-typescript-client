@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -23,7 +25,7 @@ export const RehireEmploymentStatus = {
 /**
  * The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
  */
-export type RehireEmploymentStatus = ClosedEnum<typeof RehireEmploymentStatus>;
+export type RehireEmploymentStatus = OpenEnum<typeof RehireEmploymentStatus>;
 
 export type Rehire = {
   /**
@@ -61,21 +63,23 @@ export type Rehire = {
 };
 
 /** @internal */
-export const RehireEmploymentStatus$inboundSchema: z.ZodNativeEnum<
-  typeof RehireEmploymentStatus
-> = z.nativeEnum(RehireEmploymentStatus);
+export const RehireEmploymentStatus$inboundSchema: z.ZodType<
+  RehireEmploymentStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(RehireEmploymentStatus);
 
 /** @internal */
 export const Rehire$inboundSchema: z.ZodType<Rehire, z.ZodTypeDef, unknown> = z
   .object({
-    version: z.string().optional(),
-    effective_date: z.string().optional(),
-    file_new_hire_report: z.boolean().optional(),
-    work_location_uuid: z.string().optional(),
-    employment_status: RehireEmploymentStatus$inboundSchema.optional(),
-    two_percent_shareholder: z.boolean().optional(),
-    employee_uuid: z.string().optional(),
-    active: z.boolean().optional(),
+    version: types.optional(types.string()),
+    effective_date: types.optional(types.string()),
+    file_new_hire_report: types.optional(types.boolean()),
+    work_location_uuid: types.optional(types.string()),
+    employment_status: types.optional(RehireEmploymentStatus$inboundSchema),
+    two_percent_shareholder: types.optional(types.boolean()),
+    employee_uuid: types.optional(types.string()),
+    active: types.optional(types.boolean()),
   }).transform((v) => {
     return remap$(v, {
       "effective_date": "effectiveDate",

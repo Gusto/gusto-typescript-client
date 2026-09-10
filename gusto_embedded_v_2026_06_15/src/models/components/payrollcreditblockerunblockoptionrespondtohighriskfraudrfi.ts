@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfiMetadata =
@@ -38,7 +39,7 @@ export const PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfiMetadata$
     z.ZodTypeDef,
     unknown
   > = z.object({
-    information_request_uuid: z.string(),
+    information_request_uuid: types.string(),
   }).transform((v) => {
     return remap$(v, {
       "information_request_uuid": "informationRequestUuid",
@@ -67,8 +68,8 @@ export const PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi$inboundS
     z.ZodTypeDef,
     unknown
   > = z.object({
-    unblock_type: z.literal("respond_to_high_risk_fraud_rfi"),
-    check_date: z.string(),
+    unblock_type: types.literal("respond_to_high_risk_fraud_rfi"),
+    check_date: types.string(),
     metadata: z.lazy(() =>
       PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfiMetadata$inboundSchema
     ),

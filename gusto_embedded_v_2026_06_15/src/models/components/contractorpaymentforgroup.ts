@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -21,7 +23,7 @@ export const ContractorPaymentForGroupPaymentMethod = {
 /**
  * The payment method.
  */
-export type ContractorPaymentForGroupPaymentMethod = ClosedEnum<
+export type ContractorPaymentForGroupPaymentMethod = OpenEnum<
   typeof ContractorPaymentForGroupPaymentMethod
 >;
 
@@ -35,7 +37,7 @@ export const ContractorPaymentForGroupStatus = {
 /**
  * The status of the contractor payment.  Will transition to `Funded` during payments processing if the payment should be funded, i.e. has `Direct Deposit` for payment method. Contractors payments with `Check` payment method will remain `Unfunded`.
  */
-export type ContractorPaymentForGroupStatus = ClosedEnum<
+export type ContractorPaymentForGroupStatus = OpenEnum<
   typeof ContractorPaymentForGroupStatus
 >;
 
@@ -49,7 +51,7 @@ export const ContractorPaymentForGroupWageType = {
 /**
  * The wage type for the payment.
  */
-export type ContractorPaymentForGroupWageType = ClosedEnum<
+export type ContractorPaymentForGroupWageType = OpenEnum<
   typeof ContractorPaymentForGroupWageType
 >;
 
@@ -116,20 +118,25 @@ export type ContractorPaymentForGroup = {
 };
 
 /** @internal */
-export const ContractorPaymentForGroupPaymentMethod$inboundSchema:
-  z.ZodNativeEnum<typeof ContractorPaymentForGroupPaymentMethod> = z.nativeEnum(
-    ContractorPaymentForGroupPaymentMethod,
-  );
+export const ContractorPaymentForGroupPaymentMethod$inboundSchema: z.ZodType<
+  ContractorPaymentForGroupPaymentMethod,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorPaymentForGroupPaymentMethod);
 
 /** @internal */
-export const ContractorPaymentForGroupStatus$inboundSchema: z.ZodNativeEnum<
-  typeof ContractorPaymentForGroupStatus
-> = z.nativeEnum(ContractorPaymentForGroupStatus);
+export const ContractorPaymentForGroupStatus$inboundSchema: z.ZodType<
+  ContractorPaymentForGroupStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorPaymentForGroupStatus);
 
 /** @internal */
-export const ContractorPaymentForGroupWageType$inboundSchema: z.ZodNativeEnum<
-  typeof ContractorPaymentForGroupWageType
-> = z.nativeEnum(ContractorPaymentForGroupWageType);
+export const ContractorPaymentForGroupWageType$inboundSchema: z.ZodType<
+  ContractorPaymentForGroupWageType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorPaymentForGroupWageType);
 
 /** @internal */
 export const ContractorPaymentForGroup$inboundSchema: z.ZodType<
@@ -137,21 +144,22 @@ export const ContractorPaymentForGroup$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string().optional(),
-  contractor_uuid: z.string().optional(),
-  bonus: z.string().optional(),
-  hours: z.string().optional(),
-  payment_method: ContractorPaymentForGroupPaymentMethod$inboundSchema
-    .optional(),
-  reimbursement: z.string().optional(),
-  status: ContractorPaymentForGroupStatus$inboundSchema.optional(),
-  hourly_rate: z.string().optional(),
-  may_cancel: z.boolean().optional(),
-  wage: z.string().optional(),
-  wage_type: ContractorPaymentForGroupWageType$inboundSchema.optional(),
-  wage_total: z.string().optional(),
-  invoice_number: z.nullable(z.string()).optional(),
-  memo: z.nullable(z.string()).optional(),
+  uuid: types.optional(types.string()),
+  contractor_uuid: types.optional(types.string()),
+  bonus: types.optional(types.string()),
+  hours: types.optional(types.string()),
+  payment_method: types.optional(
+    ContractorPaymentForGroupPaymentMethod$inboundSchema,
+  ),
+  reimbursement: types.optional(types.string()),
+  status: types.optional(ContractorPaymentForGroupStatus$inboundSchema),
+  hourly_rate: types.optional(types.string()),
+  may_cancel: types.optional(types.boolean()),
+  wage: types.optional(types.string()),
+  wage_type: types.optional(ContractorPaymentForGroupWageType$inboundSchema),
+  wage_total: types.optional(types.string()),
+  invoice_number: z.nullable(types.string()).optional(),
+  memo: z.nullable(types.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "contractor_uuid": "contractorUuid",

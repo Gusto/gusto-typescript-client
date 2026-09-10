@@ -8,10 +8,12 @@ The status of the payroll processing request
 import { PayrollProcessingRequestStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/payrollprocessingrequest.js";
 
 let value: PayrollProcessingRequestStatus = "calculating";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"calculating" | "calculate_success" | "submitting" | "submit_success" | "processing_failed"
+"calculating" | "calculate_success" | "submitting" | "submit_success" | "processing_failed" | Unrecognized<string>
 ```

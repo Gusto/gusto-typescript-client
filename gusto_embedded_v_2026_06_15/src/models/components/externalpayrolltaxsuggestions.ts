@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type TaxSuggestions = {
@@ -39,8 +40,8 @@ export const TaxSuggestions$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  tax_id: z.number().int().optional(),
-  amount: z.string().optional(),
+  tax_id: types.optional(types.number()),
+  amount: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "tax_id": "taxId",
@@ -63,9 +64,10 @@ export const ExternalPayrollTaxSuggestions$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  employee_uuid: z.string().optional(),
-  tax_suggestions: z.array(z.lazy(() => TaxSuggestions$inboundSchema))
-    .optional(),
+  employee_uuid: types.optional(types.string()),
+  tax_suggestions: types.optional(
+    z.array(z.lazy(() => TaxSuggestions$inboundSchema)),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",

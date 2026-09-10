@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -21,7 +23,7 @@ export const EmbeddedTimeOffRequestStatus = {
 /**
  * The status of the time off request.
  */
-export type EmbeddedTimeOffRequestStatus = ClosedEnum<
+export type EmbeddedTimeOffRequestStatus = OpenEnum<
   typeof EmbeddedTimeOffRequestStatus
 >;
 
@@ -102,9 +104,11 @@ export type EmbeddedTimeOffRequest = {
 };
 
 /** @internal */
-export const EmbeddedTimeOffRequestStatus$inboundSchema: z.ZodNativeEnum<
-  typeof EmbeddedTimeOffRequestStatus
-> = z.nativeEnum(EmbeddedTimeOffRequestStatus);
+export const EmbeddedTimeOffRequestStatus$inboundSchema: z.ZodType<
+  EmbeddedTimeOffRequestStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(EmbeddedTimeOffRequestStatus);
 
 /** @internal */
 export const EmbeddedTimeOffRequestEmployee$inboundSchema: z.ZodType<
@@ -112,8 +116,8 @@ export const EmbeddedTimeOffRequestEmployee$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string().optional(),
-  full_name: z.string().optional(),
+  uuid: types.optional(types.string()),
+  full_name: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "full_name": "fullName",
@@ -136,8 +140,8 @@ export const Initiator$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string().optional(),
-  full_name: z.string().optional(),
+  uuid: types.optional(types.string()),
+  full_name: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "full_name": "fullName",
@@ -160,8 +164,8 @@ export const Approver$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string().optional(),
-  full_name: z.string().optional(),
+  uuid: types.optional(types.string()),
+  full_name: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "full_name": "fullName",
@@ -184,16 +188,16 @@ export const EmbeddedTimeOffRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
+  uuid: types.string(),
   status: EmbeddedTimeOffRequestStatus$inboundSchema,
-  employee_note: z.nullable(z.string()),
-  employer_note: z.nullable(z.string()),
-  policy_type: z.nullable(z.string()),
-  policy_uuid: z.nullable(z.string()),
-  days: z.record(z.string()),
+  employee_note: types.nullable(types.string()),
+  employer_note: types.nullable(types.string()),
+  policy_type: types.nullable(types.string()),
+  policy_uuid: types.nullable(types.string()),
+  days: z.record(types.string()),
   employee: z.lazy(() => EmbeddedTimeOffRequestEmployee$inboundSchema),
-  initiator: z.nullable(z.lazy(() => Initiator$inboundSchema)),
-  approver: z.nullable(z.lazy(() => Approver$inboundSchema)),
+  initiator: types.nullable(z.lazy(() => Initiator$inboundSchema)),
+  approver: types.nullable(z.lazy(() => Approver$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     "employee_note": "employeeNote",

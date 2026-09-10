@@ -5,9 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import { RFCDate } from "../../types/rfcdate.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -22,7 +23,7 @@ export const ContractorPaymentListingPaymentMethod = {
 /**
  * The payment method.
  */
-export type ContractorPaymentListingPaymentMethod = ClosedEnum<
+export type ContractorPaymentListingPaymentMethod = OpenEnum<
   typeof ContractorPaymentListingPaymentMethod
 >;
 
@@ -36,7 +37,7 @@ export const ContractorPaymentListingStatus = {
 /**
  * Contractor payment status
  */
-export type ContractorPaymentListingStatus = ClosedEnum<
+export type ContractorPaymentListingStatus = OpenEnum<
   typeof ContractorPaymentListingStatus
 >;
 
@@ -50,7 +51,7 @@ export const ContractorPaymentListingWageType = {
 /**
  * The wage type for the payment.
  */
-export type ContractorPaymentListingWageType = ClosedEnum<
+export type ContractorPaymentListingWageType = OpenEnum<
   typeof ContractorPaymentListingWageType
 >;
 
@@ -65,7 +66,7 @@ export type ContractorPaymentListing = {
   /**
    * The check date for the payment.
    */
-  checkDate?: RFCDate | undefined;
+  checkDate?: Date | undefined;
   /**
    * The bonus amount in the payment.
    */
@@ -105,20 +106,25 @@ export type ContractorPaymentListing = {
 };
 
 /** @internal */
-export const ContractorPaymentListingPaymentMethod$inboundSchema:
-  z.ZodNativeEnum<typeof ContractorPaymentListingPaymentMethod> = z.nativeEnum(
-    ContractorPaymentListingPaymentMethod,
-  );
+export const ContractorPaymentListingPaymentMethod$inboundSchema: z.ZodType<
+  ContractorPaymentListingPaymentMethod,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorPaymentListingPaymentMethod);
 
 /** @internal */
-export const ContractorPaymentListingStatus$inboundSchema: z.ZodNativeEnum<
-  typeof ContractorPaymentListingStatus
-> = z.nativeEnum(ContractorPaymentListingStatus);
+export const ContractorPaymentListingStatus$inboundSchema: z.ZodType<
+  ContractorPaymentListingStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorPaymentListingStatus);
 
 /** @internal */
-export const ContractorPaymentListingWageType$inboundSchema: z.ZodNativeEnum<
-  typeof ContractorPaymentListingWageType
-> = z.nativeEnum(ContractorPaymentListingWageType);
+export const ContractorPaymentListingWageType$inboundSchema: z.ZodType<
+  ContractorPaymentListingWageType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ContractorPaymentListingWageType);
 
 /** @internal */
 export const ContractorPaymentListing$inboundSchema: z.ZodType<
@@ -126,18 +132,19 @@ export const ContractorPaymentListing$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  check_date: z.string().transform(v => new RFCDate(v)).optional(),
-  bonus: z.string().optional(),
-  hours: z.string().optional(),
-  hourly_rate: z.string().optional(),
-  payment_method: ContractorPaymentListingPaymentMethod$inboundSchema
-    .optional(),
-  reimbursement: z.string().optional(),
-  status: ContractorPaymentListingStatus$inboundSchema.optional(),
-  wage: z.string().optional(),
-  wage_type: ContractorPaymentListingWageType$inboundSchema.optional(),
-  wage_total: z.string().optional(),
+  uuid: types.string(),
+  check_date: types.optional(types.date()),
+  bonus: types.optional(types.string()),
+  hours: types.optional(types.string()),
+  hourly_rate: types.optional(types.string()),
+  payment_method: types.optional(
+    ContractorPaymentListingPaymentMethod$inboundSchema,
+  ),
+  reimbursement: types.optional(types.string()),
+  status: types.optional(ContractorPaymentListingStatus$inboundSchema),
+  wage: types.optional(types.string()),
+  wage_type: types.optional(ContractorPaymentListingWageType$inboundSchema),
+  wage_total: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "check_date": "checkDate",

@@ -8,10 +8,12 @@ Latest health status of the webhooks system
 import { WebhooksHealthCheckStatusStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/webhookshealthcheckstatus.js";
 
 let value: WebhooksHealthCheckStatusStatus = "unknown";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"healthy" | "unhealthy" | "unknown"
+"healthy" | "unhealthy" | "unknown" | Unrecognized<string>
 ```

@@ -8,10 +8,12 @@ One of the "onboarding_status" enum values.
 import { ContractorOnboardingStatusOnboardingStatus } from "@gusto/embedded-api-v-2026-06-15/models/components/contractoronboardingstatus.js";
 
 let value: ContractorOnboardingStatusOnboardingStatus = "onboarding_completed";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"onboarding_completed" | "admin_onboarding_review" | "admin_onboarding_incomplete" | "self_onboarding_not_invited" | "self_onboarding_invited" | "self_onboarding_started" | "self_onboarding_review"
+"onboarding_completed" | "admin_onboarding_review" | "admin_onboarding_incomplete" | "self_onboarding_not_invited" | "self_onboarding_invited" | "self_onboarding_started" | "self_onboarding_review" | Unrecognized<string>
 ```

@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import { RFCDate } from "../../types/rfcdate.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
@@ -32,7 +31,7 @@ export type PostV1ContractorsContractorUuidRehireRequestBody = {
   /**
    * The rehire date
    */
-  startDate: RFCDate;
+  startDate: Date;
 };
 
 export type PostV1ContractorsContractorUuidRehireRequest = {
@@ -71,7 +70,9 @@ export const PostV1ContractorsContractorUuidRehireRequestBody$outboundSchema:
     z.ZodTypeDef,
     PostV1ContractorsContractorUuidRehireRequestBody
   > = z.object({
-    startDate: z.instanceof(RFCDate).transform(v => v.toString()),
+    startDate: z.date().transform(v =>
+      v.toISOString().slice(0, "YYYY-MM-DD".length)
+    ),
   }).transform((v) => {
     return remap$(v, {
       startDate: "start_date",

@@ -4,8 +4,10 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -32,7 +34,7 @@ export const Status = {
  * - `completed`: all reports finished
  * - `failed`: the batch failed before completing
  */
-export type Status = ClosedEnum<typeof Status>;
+export type Status = OpenEnum<typeof Status>;
 
 export type CreateBulkReport = {
   /**
@@ -52,8 +54,8 @@ export type CreateBulkReport = {
 };
 
 /** @internal */
-export const Status$inboundSchema: z.ZodNativeEnum<typeof Status> = z
-  .nativeEnum(Status);
+export const Status$inboundSchema: z.ZodType<Status, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(Status);
 
 /** @internal */
 export const CreateBulkReport$inboundSchema: z.ZodType<
@@ -61,7 +63,7 @@ export const CreateBulkReport$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
+  uuid: types.string(),
   status: Status$inboundSchema,
 });
 

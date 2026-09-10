@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -19,7 +21,7 @@ export const EmployeeBankAccountAccountType = {
 /**
  * Bank account type
  */
-export type EmployeeBankAccountAccountType = ClosedEnum<
+export type EmployeeBankAccountAccountType = OpenEnum<
   typeof EmployeeBankAccountAccountType
 >;
 
@@ -51,9 +53,11 @@ export type EmployeeBankAccount = {
 };
 
 /** @internal */
-export const EmployeeBankAccountAccountType$inboundSchema: z.ZodNativeEnum<
-  typeof EmployeeBankAccountAccountType
-> = z.nativeEnum(EmployeeBankAccountAccountType);
+export const EmployeeBankAccountAccountType$inboundSchema: z.ZodType<
+  EmployeeBankAccountAccountType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(EmployeeBankAccountAccountType);
 
 /** @internal */
 export const EmployeeBankAccount$inboundSchema: z.ZodType<
@@ -61,12 +65,12 @@ export const EmployeeBankAccount$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  employee_uuid: z.string().optional(),
-  account_type: EmployeeBankAccountAccountType$inboundSchema.optional(),
-  name: z.string().optional(),
-  routing_number: z.string().optional(),
-  hidden_account_number: z.string().optional(),
+  uuid: types.string(),
+  employee_uuid: types.optional(types.string()),
+  account_type: types.optional(EmployeeBankAccountAccountType$inboundSchema),
+  name: types.optional(types.string()),
+  routing_number: types.optional(types.string()),
+  hidden_account_number: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",

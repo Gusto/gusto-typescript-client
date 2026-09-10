@@ -8,10 +8,12 @@ The employee's payment method
 import { ShowEmployeesPaymentMethod } from "@gusto/embedded-api-v-2026-06-15/models/components/showemployees.js";
 
 let value: ShowEmployeesPaymentMethod = "Check";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"Direct Deposit" | "Check"
+"Direct Deposit" | "Check" | Unrecognized<string>
 ```

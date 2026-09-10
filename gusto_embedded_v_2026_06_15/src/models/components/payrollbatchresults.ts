@@ -5,8 +5,10 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { ClosedEnum, OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -21,7 +23,7 @@ export const PayrollBatchResultsStatus = {
 /**
  * The lifecycle status of the batch request itself. Terminal values are `completed` (processing finished — inspect `results` and `exclusions` for per-payroll outcomes) and `failed` (the batch crashed at the system level; can be retried). This is distinct from the per-payroll `status` returned inside `results[]`. A `completed` batch does not imply every payroll was cancelled.
  */
-export type PayrollBatchResultsStatus = ClosedEnum<
+export type PayrollBatchResultsStatus = OpenEnum<
   typeof PayrollBatchResultsStatus
 >;
 
@@ -43,7 +45,7 @@ export const PayrollBatchResultsResultsStatus = {
  * - `success`: the payroll was cancelled, or required no action (already cancelled / never run)
  * - `failed`: the payroll could not be cancelled; see `errors`
  */
-export type PayrollBatchResultsResultsStatus = ClosedEnum<
+export type PayrollBatchResultsResultsStatus = OpenEnum<
   typeof PayrollBatchResultsResultsStatus
 >;
 
@@ -65,7 +67,7 @@ export const PayrollBatchResultsResultsCategory = {
  * - `not_cancellable`: the payroll is past the point where it can be cancelled
  * - `internal_error`: an unexpected error occurred; the request can be retried
  */
-export type PayrollBatchResultsResultsCategory = ClosedEnum<
+export type PayrollBatchResultsResultsCategory = OpenEnum<
   typeof PayrollBatchResultsResultsCategory
 >;
 
@@ -155,7 +157,7 @@ export const PayrollBatchResultsCategory = {
  * - `not_found`: the payroll does not exist, or is not associated with a company the partner is mapped to
  * - `duplicate_operation`: the same payroll UUID appeared more than once in the request; only the first occurrence is processed
  */
-export type PayrollBatchResultsCategory = ClosedEnum<
+export type PayrollBatchResultsCategory = OpenEnum<
   typeof PayrollBatchResultsCategory
 >;
 
@@ -241,19 +243,25 @@ export type PayrollBatchResults = {
 };
 
 /** @internal */
-export const PayrollBatchResultsStatus$inboundSchema: z.ZodNativeEnum<
-  typeof PayrollBatchResultsStatus
-> = z.nativeEnum(PayrollBatchResultsStatus);
+export const PayrollBatchResultsStatus$inboundSchema: z.ZodType<
+  PayrollBatchResultsStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PayrollBatchResultsStatus);
 
 /** @internal */
-export const PayrollBatchResultsResultsStatus$inboundSchema: z.ZodNativeEnum<
-  typeof PayrollBatchResultsResultsStatus
-> = z.nativeEnum(PayrollBatchResultsResultsStatus);
+export const PayrollBatchResultsResultsStatus$inboundSchema: z.ZodType<
+  PayrollBatchResultsResultsStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PayrollBatchResultsResultsStatus);
 
 /** @internal */
-export const PayrollBatchResultsResultsCategory$inboundSchema: z.ZodNativeEnum<
-  typeof PayrollBatchResultsResultsCategory
-> = z.nativeEnum(PayrollBatchResultsResultsCategory);
+export const PayrollBatchResultsResultsCategory$inboundSchema: z.ZodType<
+  PayrollBatchResultsResultsCategory,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PayrollBatchResultsResultsCategory);
 
 /** @internal */
 export const PayrollBatchResultsErrors$inboundSchema: z.ZodType<
@@ -261,9 +269,9 @@ export const PayrollBatchResultsErrors$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  error_key: z.string().optional(),
-  category: PayrollBatchResultsResultsCategory$inboundSchema.optional(),
-  message: z.string().optional(),
+  error_key: types.optional(types.string()),
+  category: types.optional(PayrollBatchResultsResultsCategory$inboundSchema),
+  message: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "error_key": "errorKey",
@@ -283,11 +291,12 @@ export function payrollBatchResultsErrorsFromJSON(
 /** @internal */
 export const Results$inboundSchema: z.ZodType<Results, z.ZodTypeDef, unknown> =
   z.object({
-    idx: z.number().int().optional(),
-    uuid: z.string().optional(),
-    status: PayrollBatchResultsResultsStatus$inboundSchema.optional(),
-    errors: z.array(z.lazy(() => PayrollBatchResultsErrors$inboundSchema))
-      .optional(),
+    idx: types.optional(types.number()),
+    uuid: types.optional(types.string()),
+    status: types.optional(PayrollBatchResultsResultsStatus$inboundSchema),
+    errors: types.optional(
+      z.array(z.lazy(() => PayrollBatchResultsErrors$inboundSchema)),
+    ),
   });
 
 export function resultsFromJSON(
@@ -311,9 +320,11 @@ export const PayrollBatchResultsExclusionsStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(PayrollBatchResultsExclusionsStatus);
 
 /** @internal */
-export const PayrollBatchResultsCategory$inboundSchema: z.ZodNativeEnum<
-  typeof PayrollBatchResultsCategory
-> = z.nativeEnum(PayrollBatchResultsCategory);
+export const PayrollBatchResultsCategory$inboundSchema: z.ZodType<
+  PayrollBatchResultsCategory,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PayrollBatchResultsCategory);
 
 /** @internal */
 export const Exclusions$inboundSchema: z.ZodType<
@@ -321,13 +332,13 @@ export const Exclusions$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  idx: z.number().int().optional(),
-  entity_type: PayrollBatchResultsEntityType$inboundSchema.optional(),
-  uuid: z.string().optional(),
-  company_uuid: z.string().optional(),
-  status: PayrollBatchResultsExclusionsStatus$inboundSchema.optional(),
-  category: PayrollBatchResultsCategory$inboundSchema.optional(),
-  message: z.string().optional(),
+  idx: types.optional(types.number()),
+  entity_type: types.optional(PayrollBatchResultsEntityType$inboundSchema),
+  uuid: types.optional(types.string()),
+  company_uuid: types.optional(types.string()),
+  status: types.optional(PayrollBatchResultsExclusionsStatus$inboundSchema),
+  category: types.optional(PayrollBatchResultsCategory$inboundSchema),
+  message: types.optional(types.string()),
 }).transform((v) => {
   return remap$(v, {
     "entity_type": "entityType",
@@ -351,20 +362,16 @@ export const PayrollBatchResults$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string(),
-  idempotency_key: z.string(),
+  uuid: types.string(),
+  idempotency_key: types.string(),
   status: PayrollBatchResultsStatus$inboundSchema,
-  submitted_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  completed_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  submitted_items: z.nullable(z.number().int()).optional(),
-  processed_items: z.number().int().optional(),
-  excluded_items: z.number().int().optional(),
-  results: z.array(z.lazy(() => Results$inboundSchema)).optional(),
-  exclusions: z.array(z.lazy(() => Exclusions$inboundSchema)).optional(),
+  submitted_at: types.date(),
+  completed_at: z.nullable(types.date()).optional(),
+  submitted_items: z.nullable(types.number()).optional(),
+  processed_items: types.optional(types.number()),
+  excluded_items: types.optional(types.number()),
+  results: types.optional(z.array(z.lazy(() => Results$inboundSchema))),
+  exclusions: types.optional(z.array(z.lazy(() => Exclusions$inboundSchema))),
 }).transform((v) => {
   return remap$(v, {
     "idempotency_key": "idempotencyKey",
