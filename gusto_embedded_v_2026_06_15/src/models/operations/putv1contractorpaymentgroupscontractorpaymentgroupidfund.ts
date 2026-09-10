@@ -34,15 +34,15 @@ export type PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundHeaderXGusto
 
 export type PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest = {
   /**
-   * The UUID of the contractor payment group
-   */
-  contractorPaymentGroupUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the contractor payment group
+   */
+  contractorPaymentGroupUuid: string;
 };
 
 export type PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse = {
@@ -64,8 +64,8 @@ export const PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundHeaderXGust
 /** @internal */
 export type PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest$Outbound =
   {
-    contractor_payment_group_uuid: string;
     "X-Gusto-API-Version": string;
+    contractor_payment_group_uuid: string;
   };
 
 /** @internal */
@@ -75,14 +75,14 @@ export const PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest$out
     z.ZodTypeDef,
     PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest
   > = z.object({
-    contractorPaymentGroupUuid: z.string(),
     xGustoAPIVersion:
       PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundHeaderXGustoAPIVersion$outboundSchema
         .default("2026-06-15"),
+    contractorPaymentGroupUuid: z.string(),
   }).transform((v) => {
     return remap$(v, {
-      contractorPaymentGroupUuid: "contractor_payment_group_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      contractorPaymentGroupUuid: "contractor_payment_group_uuid",
     });
   });
 

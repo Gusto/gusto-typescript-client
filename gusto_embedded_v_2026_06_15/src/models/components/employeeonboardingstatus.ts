@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,6 +33,45 @@ export type EmployeeOnboardingStatusOnboardingStep = {
 };
 
 /**
+ * The employee field affected.
+ */
+export const Field = {
+  Ssn: "ssn",
+} as const;
+/**
+ * The employee field affected.
+ */
+export type Field = ClosedEnum<typeof Field>;
+
+/**
+ * Category of the blocker. See the array-level description for resolution guidance.
+ */
+export const EmployeeOnboardingStatusCategory = {
+  DuplicateValue: "duplicate_value",
+} as const;
+/**
+ * Category of the blocker. See the array-level description for resolution guidance.
+ */
+export type EmployeeOnboardingStatusCategory = ClosedEnum<
+  typeof EmployeeOnboardingStatusCategory
+>;
+
+export type Blockers = {
+  /**
+   * The employee field affected.
+   */
+  field?: Field | undefined;
+  /**
+   * Category of the blocker. See the array-level description for resolution guidance.
+   */
+  category?: EmployeeOnboardingStatusCategory | undefined;
+  /**
+   * Human-readable description of the blocker.
+   */
+  message?: string | undefined;
+};
+
+/**
  * The representation of an employee's onboarding status.
  */
 export type EmployeeOnboardingStatus = {
@@ -47,6 +87,18 @@ export type EmployeeOnboardingStatus = {
    * List of steps required to onboard an employee.
    */
   onboardingSteps?: Array<EmployeeOnboardingStatusOnboardingStep> | undefined;
+  /**
+   * Validation issues that should be resolved before this employee's onboarding is complete. Each entry identifies an affected field, a category describing the type of problem, and a human-readable message.
+   *
+   * @remarks
+   *
+   * Supported categories:
+   *
+   * - `duplicate_value`: Another employee in the same company already has this value. To resolve, cancel this onboarding and initiate a rehire if it's a returning employee, or contact support to investigate the conflict.
+   *
+   * This list may grow over time as new validation rules are added.
+   */
+  blockers?: Array<Blockers> | undefined;
 };
 
 /** @internal */
@@ -74,6 +126,37 @@ export function employeeOnboardingStatusOnboardingStepFromJSON(
 }
 
 /** @internal */
+export const Field$inboundSchema: z.ZodNativeEnum<typeof Field> = z.nativeEnum(
+  Field,
+);
+
+/** @internal */
+export const EmployeeOnboardingStatusCategory$inboundSchema: z.ZodNativeEnum<
+  typeof EmployeeOnboardingStatusCategory
+> = z.nativeEnum(EmployeeOnboardingStatusCategory);
+
+/** @internal */
+export const Blockers$inboundSchema: z.ZodType<
+  Blockers,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  field: Field$inboundSchema.optional(),
+  category: EmployeeOnboardingStatusCategory$inboundSchema.optional(),
+  message: z.string().optional(),
+});
+
+export function blockersFromJSON(
+  jsonString: string,
+): SafeParseResult<Blockers, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Blockers$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Blockers' from JSON`,
+  );
+}
+
+/** @internal */
 export const EmployeeOnboardingStatus$inboundSchema: z.ZodType<
   EmployeeOnboardingStatus,
   z.ZodTypeDef,
@@ -84,6 +167,7 @@ export const EmployeeOnboardingStatus$inboundSchema: z.ZodType<
   onboarding_steps: z.array(
     z.lazy(() => EmployeeOnboardingStatusOnboardingStep$inboundSchema),
   ).optional(),
+  blockers: z.array(z.lazy(() => Blockers$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "onboarding_status": "onboardingStatus",

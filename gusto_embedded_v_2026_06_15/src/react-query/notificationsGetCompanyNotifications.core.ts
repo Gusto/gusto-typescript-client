@@ -50,8 +50,8 @@ export function buildNotificationsGetCompanyNotificationsQuery(
     queryKey: queryKeyNotificationsGetCompanyNotifications(
       request.companyUuid,
       {
-        status: request.status,
         xGustoAPIVersion: request.xGustoAPIVersion,
+        status: request.status,
         page: request.page,
         per: request.per,
       },
@@ -82,10 +82,10 @@ export function buildNotificationsGetCompanyNotificationsQuery(
 export function queryKeyNotificationsGetCompanyNotifications(
   companyUuid: string,
   parameters: {
-    status?: Status | undefined;
     xGustoAPIVersion?:
       | GetCompanyNotificationsHeaderXGustoAPIVersion
       | undefined;
+    status?: Status | undefined;
     page?: number | undefined;
     per?: number | undefined;
   },

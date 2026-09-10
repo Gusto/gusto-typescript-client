@@ -48,6 +48,8 @@ export function buildPayrollsGetReceiptQuery(
   return {
     queryKey: queryKeyPayrollsGetReceipt(request.payrollUuid, {
       xGustoAPIVersion: request.xGustoAPIVersion,
+      page: request.page,
+      per: request.per,
     }),
     queryFn: async function payrollsGetReceiptQueryFn(
       ctx,
@@ -78,6 +80,8 @@ export function queryKeyPayrollsGetReceipt(
     xGustoAPIVersion?:
       | GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion
       | undefined;
+    page?: number | undefined;
+    per?: number | undefined;
   },
 ): QueryKey {
   return [

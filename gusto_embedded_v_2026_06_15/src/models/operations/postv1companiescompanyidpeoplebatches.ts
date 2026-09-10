@@ -35,24 +35,28 @@ export type PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion =
 /**
  * The action to perform on the batch
  */
-export const BatchAction = {
+export const PostV1CompaniesCompanyIdPeopleBatchesBatchAction = {
   Create: "create",
 } as const;
 /**
  * The action to perform on the batch
  */
-export type BatchAction = ClosedEnum<typeof BatchAction>;
+export type PostV1CompaniesCompanyIdPeopleBatchesBatchAction = ClosedEnum<
+  typeof PostV1CompaniesCompanyIdPeopleBatchesBatchAction
+>;
 
 /**
  * The type of entity to create
  */
-export const EntityType = {
+export const PostV1CompaniesCompanyIdPeopleBatchesEntityType = {
   Employee: "employee",
 } as const;
 /**
  * The type of entity to create
  */
-export type EntityType = ClosedEnum<typeof EntityType>;
+export type PostV1CompaniesCompanyIdPeopleBatchesEntityType = ClosedEnum<
+  typeof PostV1CompaniesCompanyIdPeopleBatchesEntityType
+>;
 
 export type Person = {
   /**
@@ -296,11 +300,11 @@ export type BankAccounts = {
   splitAmount?: string | null | undefined;
 };
 
-export type Batch = {
+export type PostV1CompaniesCompanyIdPeopleBatchesBatch = {
   /**
    * The type of entity to create
    */
-  entityType: EntityType;
+  entityType: PostV1CompaniesCompanyIdPeopleBatchesEntityType;
   person: Person;
   /**
    * Home address for the employee
@@ -339,24 +343,24 @@ export type PostV1CompaniesCompanyIdPeopleBatchesRequestBody = {
   /**
    * The action to perform on the batch
    */
-  batchAction: BatchAction;
+  batchAction: PostV1CompaniesCompanyIdPeopleBatchesBatchAction;
   /**
    * Array of people to create
    */
-  batch: Array<Batch>;
+  batch: Array<PostV1CompaniesCompanyIdPeopleBatchesBatch>;
 };
 
 export type PostV1CompaniesCompanyIdPeopleBatchesRequest = {
-  /**
-   * The UUID of the company
-   */
-  companyId: string;
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the company
+   */
+  companyId: string;
   requestBody: PostV1CompaniesCompanyIdPeopleBatchesRequestBody;
 };
 
@@ -375,12 +379,14 @@ export const PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion$outboun
   > = z.nativeEnum(PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion);
 
 /** @internal */
-export const BatchAction$outboundSchema: z.ZodNativeEnum<typeof BatchAction> = z
-  .nativeEnum(BatchAction);
+export const PostV1CompaniesCompanyIdPeopleBatchesBatchAction$outboundSchema:
+  z.ZodNativeEnum<typeof PostV1CompaniesCompanyIdPeopleBatchesBatchAction> = z
+    .nativeEnum(PostV1CompaniesCompanyIdPeopleBatchesBatchAction);
 
 /** @internal */
-export const EntityType$outboundSchema: z.ZodNativeEnum<typeof EntityType> = z
-  .nativeEnum(EntityType);
+export const PostV1CompaniesCompanyIdPeopleBatchesEntityType$outboundSchema:
+  z.ZodNativeEnum<typeof PostV1CompaniesCompanyIdPeopleBatchesEntityType> = z
+    .nativeEnum(PostV1CompaniesCompanyIdPeopleBatchesEntityType);
 
 /** @internal */
 export type Person$Outbound = {
@@ -654,7 +660,7 @@ export function bankAccountsToJSON(bankAccounts: BankAccounts): string {
 }
 
 /** @internal */
-export type Batch$Outbound = {
+export type PostV1CompaniesCompanyIdPeopleBatchesBatch$Outbound = {
   entity_type: string;
   person: Person$Outbound;
   home_address?:
@@ -670,42 +676,50 @@ export type Batch$Outbound = {
 };
 
 /** @internal */
-export const Batch$outboundSchema: z.ZodType<
-  Batch$Outbound,
-  z.ZodTypeDef,
-  Batch
-> = z.object({
-  entityType: EntityType$outboundSchema,
-  person: z.lazy(() => Person$outboundSchema),
-  homeAddress: z.lazy(() =>
-    PostV1CompaniesCompanyIdPeopleBatchesHomeAddress$outboundSchema
-  ).optional(),
-  workAddress: z.lazy(() =>
-    PostV1CompaniesCompanyIdPeopleBatchesWorkAddress$outboundSchema
-  ).optional(),
-  job: z.lazy(() => PostV1CompaniesCompanyIdPeopleBatchesJob$outboundSchema)
-    .optional(),
-  department: z.lazy(() => Department$outboundSchema).optional(),
-  compensation: z.lazy(() => Compensation$outboundSchema).optional(),
-  bankAccounts: z.array(z.lazy(() => BankAccounts$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    entityType: "entity_type",
-    homeAddress: "home_address",
-    workAddress: "work_address",
-    bankAccounts: "bank_accounts",
+export const PostV1CompaniesCompanyIdPeopleBatchesBatch$outboundSchema:
+  z.ZodType<
+    PostV1CompaniesCompanyIdPeopleBatchesBatch$Outbound,
+    z.ZodTypeDef,
+    PostV1CompaniesCompanyIdPeopleBatchesBatch
+  > = z.object({
+    entityType: PostV1CompaniesCompanyIdPeopleBatchesEntityType$outboundSchema,
+    person: z.lazy(() => Person$outboundSchema),
+    homeAddress: z.lazy(() =>
+      PostV1CompaniesCompanyIdPeopleBatchesHomeAddress$outboundSchema
+    ).optional(),
+    workAddress: z.lazy(() =>
+      PostV1CompaniesCompanyIdPeopleBatchesWorkAddress$outboundSchema
+    ).optional(),
+    job: z.lazy(() => PostV1CompaniesCompanyIdPeopleBatchesJob$outboundSchema)
+      .optional(),
+    department: z.lazy(() => Department$outboundSchema).optional(),
+    compensation: z.lazy(() => Compensation$outboundSchema).optional(),
+    bankAccounts: z.array(z.lazy(() => BankAccounts$outboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      entityType: "entity_type",
+      homeAddress: "home_address",
+      workAddress: "work_address",
+      bankAccounts: "bank_accounts",
+    });
   });
-});
 
-export function batchToJSON(batch: Batch): string {
-  return JSON.stringify(Batch$outboundSchema.parse(batch));
+export function postV1CompaniesCompanyIdPeopleBatchesBatchToJSON(
+  postV1CompaniesCompanyIdPeopleBatchesBatch:
+    PostV1CompaniesCompanyIdPeopleBatchesBatch,
+): string {
+  return JSON.stringify(
+    PostV1CompaniesCompanyIdPeopleBatchesBatch$outboundSchema.parse(
+      postV1CompaniesCompanyIdPeopleBatchesBatch,
+    ),
+  );
 }
 
 /** @internal */
 export type PostV1CompaniesCompanyIdPeopleBatchesRequestBody$Outbound = {
   idempotency_key: string;
   batch_action: string;
-  batch: Array<Batch$Outbound>;
+  batch: Array<PostV1CompaniesCompanyIdPeopleBatchesBatch$Outbound>;
 };
 
 /** @internal */
@@ -716,8 +730,11 @@ export const PostV1CompaniesCompanyIdPeopleBatchesRequestBody$outboundSchema:
     PostV1CompaniesCompanyIdPeopleBatchesRequestBody
   > = z.object({
     idempotencyKey: z.string(),
-    batchAction: BatchAction$outboundSchema,
-    batch: z.array(z.lazy(() => Batch$outboundSchema)),
+    batchAction:
+      PostV1CompaniesCompanyIdPeopleBatchesBatchAction$outboundSchema,
+    batch: z.array(
+      z.lazy(() => PostV1CompaniesCompanyIdPeopleBatchesBatch$outboundSchema),
+    ),
   }).transform((v) => {
     return remap$(v, {
       idempotencyKey: "idempotency_key",
@@ -738,8 +755,8 @@ export function postV1CompaniesCompanyIdPeopleBatchesRequestBodyToJSON(
 
 /** @internal */
 export type PostV1CompaniesCompanyIdPeopleBatchesRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
+  company_id: string;
   RequestBody: PostV1CompaniesCompanyIdPeopleBatchesRequestBody$Outbound;
 };
 
@@ -750,17 +767,17 @@ export const PostV1CompaniesCompanyIdPeopleBatchesRequest$outboundSchema:
     z.ZodTypeDef,
     PostV1CompaniesCompanyIdPeopleBatchesRequest
   > = z.object({
-    companyId: z.string(),
     xGustoAPIVersion:
       PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion$outboundSchema
         .default("2026-06-15"),
+    companyId: z.string(),
     requestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdPeopleBatchesRequestBody$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyId: "company_id",
       requestBody: "RequestBody",
     });
   });

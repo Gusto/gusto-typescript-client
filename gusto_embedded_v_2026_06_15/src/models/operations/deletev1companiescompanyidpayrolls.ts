@@ -27,6 +27,12 @@ export type DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion =
 
 export type DeleteV1CompaniesCompanyIdPayrollsRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the company
    */
   companyId: string;
@@ -38,12 +44,6 @@ export type DeleteV1CompaniesCompanyIdPayrollsRequest = {
    * When true, request an asynchronous delete of the payroll.
    */
   async?: boolean | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?:
-    | DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
-    | undefined;
 };
 
 export type DeleteV1CompaniesCompanyIdPayrollsResponse = {
@@ -58,10 +58,10 @@ export const DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSc
 
 /** @internal */
 export type DeleteV1CompaniesCompanyIdPayrollsRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_id: string;
   payroll_id: string;
   async?: boolean | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -71,17 +71,17 @@ export const DeleteV1CompaniesCompanyIdPayrollsRequest$outboundSchema:
     z.ZodTypeDef,
     DeleteV1CompaniesCompanyIdPayrollsRequest
   > = z.object({
-    companyId: z.string(),
-    payrollId: z.string(),
-    async: z.boolean().optional(),
     xGustoAPIVersion:
       DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema
         .default("2026-06-15"),
+    companyId: z.string(),
+    payrollId: z.string(),
+    async: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       companyId: "company_id",
       payrollId: "payroll_id",
-      xGustoAPIVersion: "X-Gusto-API-Version",
     });
   });
 

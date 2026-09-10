@@ -127,8 +127,8 @@ export function setJobsAndCompensationsGetJobData(
   queryKeyBase: [
     jobId: string,
     parameters: {
-      include?: GetV1JobsJobIdQueryParamInclude | undefined;
       xGustoAPIVersion?: GetV1JobsJobIdHeaderXGustoAPIVersion | undefined;
+      include?: GetV1JobsJobIdQueryParamInclude | undefined;
     },
   ],
   data: JobsAndCompensationsGetJobQueryData,
@@ -144,8 +144,8 @@ export function invalidateJobsAndCompensationsGetJob(
     [
       jobId: string,
       parameters: {
-        include?: GetV1JobsJobIdQueryParamInclude | undefined;
         xGustoAPIVersion?: GetV1JobsJobIdHeaderXGustoAPIVersion | undefined;
+        include?: GetV1JobsJobIdQueryParamInclude | undefined;
       },
     ]
   >,

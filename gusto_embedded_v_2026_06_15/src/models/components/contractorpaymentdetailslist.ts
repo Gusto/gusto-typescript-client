@@ -9,11 +9,13 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const PaymentMethod = {
+export const ContractorPaymentDetailsListPaymentMethod = {
   DirectDeposit: "Direct Deposit",
   Check: "Check",
 } as const;
-export type PaymentMethod = ClosedEnum<typeof PaymentMethod>;
+export type ContractorPaymentDetailsListPaymentMethod = ClosedEnum<
+  typeof ContractorPaymentDetailsListPaymentMethod
+>;
 
 export const SplitBy = {
   Amount: "Amount",
@@ -46,7 +48,7 @@ export type Splits = {
 
 export type ContractorPaymentDetailsList = {
   contractorUuid?: string | undefined;
-  paymentMethod?: PaymentMethod | undefined;
+  paymentMethod?: ContractorPaymentDetailsListPaymentMethod | undefined;
   firstName?: string | undefined;
   lastName?: string | undefined;
   /**
@@ -57,9 +59,9 @@ export type ContractorPaymentDetailsList = {
 };
 
 /** @internal */
-export const PaymentMethod$inboundSchema: z.ZodNativeEnum<
-  typeof PaymentMethod
-> = z.nativeEnum(PaymentMethod);
+export const ContractorPaymentDetailsListPaymentMethod$inboundSchema:
+  z.ZodNativeEnum<typeof ContractorPaymentDetailsListPaymentMethod> = z
+    .nativeEnum(ContractorPaymentDetailsListPaymentMethod);
 
 /** @internal */
 export const SplitBy$inboundSchema: z.ZodNativeEnum<typeof SplitBy> = z
@@ -104,7 +106,8 @@ export const ContractorPaymentDetailsList$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   contractor_uuid: z.string().optional(),
-  payment_method: PaymentMethod$inboundSchema.optional(),
+  payment_method: ContractorPaymentDetailsListPaymentMethod$inboundSchema
+    .optional(),
   first_name: z.string().optional(),
   last_name: z.string().optional(),
   split_by: z.nullable(SplitBy$inboundSchema).optional(),

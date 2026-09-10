@@ -82,6 +82,10 @@ export type GetV1CompaniesCompanyIdPaySchedulesPreviewRequest = {
    * End date for the preview range. If given, this date must be in the future. When unspecified, defaults to 18 months from today.
    */
   endDate?: RFCDate | undefined;
+  /**
+   * Optional UUID of an existing pay schedule. When supplied, the preview is seeded from the persisted schedule — including internal flags (such as arrears handling) that affect period boundaries but are not exposed as request parameters. Any other query parameters override individual attributes on top of the loaded schedule.
+   */
+  payScheduleUuid?: string | undefined;
 };
 
 export type GetV1CompaniesCompanyIdPaySchedulesPreviewResponse = {
@@ -114,6 +118,7 @@ export type GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$Outbound = {
   day_1?: number | undefined;
   day_2?: number | undefined;
   end_date?: string | undefined;
+  pay_schedule_uuid?: string | undefined;
 };
 
 /** @internal */
@@ -133,6 +138,7 @@ export const GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$outboundSchema:
     day1: z.number().int().optional(),
     day2: z.number().int().optional(),
     endDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+    payScheduleUuid: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       xGustoAPIVersion: "X-Gusto-API-Version",
@@ -142,6 +148,7 @@ export const GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$outboundSchema:
       day1: "day_1",
       day2: "day_2",
       endDate: "end_date",
+      payScheduleUuid: "pay_schedule_uuid",
     });
   });
 

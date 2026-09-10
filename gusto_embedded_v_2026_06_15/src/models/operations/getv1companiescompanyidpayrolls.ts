@@ -76,15 +76,15 @@ export type QueryParamSortOrder = ClosedEnum<typeof QueryParamSortOrder>;
 
 export type GetV1CompaniesCompanyIdPayrollsRequest = {
   /**
-   * The UUID of the company
-   */
-  companyId: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the company
+   */
+  companyId: string;
   /**
    * Whether to include processed and/or unprocessed payrolls in the response, defaults to processed, for multiple attributes comma separate the values, i.e. `?processing_statuses=processed,unprocessed`
    */
@@ -171,8 +171,8 @@ export const QueryParamSortOrder$outboundSchema: z.ZodNativeEnum<
 
 /** @internal */
 export type GetV1CompaniesCompanyIdPayrollsRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
+  company_id: string;
   processing_statuses?: Array<string> | undefined;
   payroll_types?: Array<string> | undefined;
   processed?: boolean | undefined;
@@ -192,10 +192,10 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1CompaniesCompanyIdPayrollsRequest
 > = z.object({
-  companyId: z.string(),
   xGustoAPIVersion:
     GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema
       .default("2026-06-15"),
+  companyId: z.string(),
   processingStatuses: z.array(ProcessingStatuses$outboundSchema).optional(),
   payrollTypes: z.array(QueryParamPayrollTypes$outboundSchema).optional(),
   processed: z.boolean().optional(),
@@ -211,8 +211,8 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$outboundSchema: z.ZodType<
   sortOrder: QueryParamSortOrder$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    companyId: "company_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    companyId: "company_id",
     processingStatuses: "processing_statuses",
     payrollTypes: "payroll_types",
     includeOffCycle: "include_off_cycle",

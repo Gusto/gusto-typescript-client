@@ -178,6 +178,10 @@ export type Contractor = {
    */
   email?: string | null | undefined;
   /**
+   * The work email address of the contractor. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
+   */
+  workEmail?: string | null | undefined;
+  /**
    * The contractor's start date.
    */
   startDate?: string | undefined;
@@ -384,6 +388,7 @@ export const Contractor$inboundSchema: z.ZodType<
   ein: z.nullable(z.string()).optional(),
   has_ein: z.nullable(z.boolean()).optional(),
   email: z.nullable(z.string()).optional(),
+  work_email: z.nullable(z.string()).optional(),
   start_date: z.string().optional(),
   address: z.nullable(z.lazy(() => Address$inboundSchema)).optional(),
   hourly_rate: z.string().optional(),
@@ -416,6 +421,7 @@ export const Contractor$inboundSchema: z.ZodType<
     "middle_initial": "middleInitial",
     "business_name": "businessName",
     "has_ein": "hasEin",
+    "work_email": "workEmail",
     "start_date": "startDate",
     "hourly_rate": "hourlyRate",
     "file_new_hire_report": "fileNewHireReport",

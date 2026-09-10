@@ -377,6 +377,7 @@ async function run() {
       day1: 15,
       day2: 31,
       customName: "demo pay schedule",
+      workweekStartDay: "Monday",
     },
   });
 
@@ -411,6 +412,7 @@ async function run() {
       day1: 15,
       day2: 31,
       customName: "demo pay schedule",
+      workweekStartDay: "Monday",
     },
   });
   if (res.ok) {
@@ -732,6 +734,7 @@ async function run() {
       day1: 15,
       day2: 31,
       customName: "demo pay schedule",
+      workweekStartDay: "Monday",
     },
   });
 
@@ -769,6 +772,7 @@ async function run() {
       day1: 15,
       day2: 31,
       customName: "demo pay schedule",
+      workweekStartDay: "Monday",
     },
   });
   if (res.ok) {

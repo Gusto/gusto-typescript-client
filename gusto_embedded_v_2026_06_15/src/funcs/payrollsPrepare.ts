@@ -42,7 +42,7 @@ import { Result } from "../types/fp.js";
  * Prepare a payroll for update
  *
  * @remarks
- * Prepares an unprocessed payroll for update, including: adding or removing eligible employees from the payroll,
+ * Prepares an unprocessed payroll for update, including: adding eligible employees to off-cycle payrolls that support multiple employees (`Bonus`, `Correction`, and `Adhoc`),
  * and updating `check_date`, `payroll_deadline`, and `payroll_status_meta` dates and times.
  *
  * Use this endpoint before calling [PUT /v1/companies/{company_id}/payrolls/{payroll_id}](ref:put-v1-companies-company_id-payrolls).

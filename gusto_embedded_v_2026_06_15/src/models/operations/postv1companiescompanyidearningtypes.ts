@@ -29,11 +29,46 @@ export const PostV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion = {
 export type PostV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion =
   ClosedEnum<typeof PostV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion>;
 
+/**
+ * The earning type category. Only settable when the company has access to categorized custom bonus earning types.
+ */
+export const Category = {
+  CashTips: "CashTips",
+  Commission: "Commission",
+  DiscretionaryBonus: "DiscretionaryBonus",
+  BenefitContributions: "BenefitContributions",
+  MinimumWageAdjustment: "MinimumWageAdjustment",
+  MinisterHousing: "MinisterHousing",
+  NonDiscretionaryBonus: "NonDiscretionaryBonus",
+  OnCallPay: "OnCallPay",
+  OwnersDraw: "OwnersDraw",
+  PaycheckTips: "PaycheckTips",
+  CorrectionPayment: "CorrectionPayment",
+  ServiceCharges: "ServiceCharges",
+  SeverancePay: "SeverancePay",
+  Other: "Other",
+  NonTaxableDisability: "NonTaxableDisability",
+  OtherRegularIncome: "OtherRegularIncome",
+  OtherNonTaxable: "OtherNonTaxable",
+} as const;
+/**
+ * The earning type category. Only settable when the company has access to categorized custom bonus earning types.
+ */
+export type Category = ClosedEnum<typeof Category>;
+
 export type PostV1CompaniesCompanyIdEarningTypesRequestBody = {
   /**
    * The name of the custom earning type.
    */
   name?: string | undefined;
+  /**
+   * The earning type category. Only settable when the company has access to categorized custom bonus earning types.
+   */
+  category?: Category | undefined;
+  /**
+   * Whether earnings of this type are included when calculating an employee's regular rate of pay for overtime purposes. Only settable when `category` is `Other`.
+   */
+  includedInOvertimePay?: boolean | undefined;
 };
 
 export type PostV1CompaniesCompanyIdEarningTypesRequest = {
@@ -65,8 +100,14 @@ export const PostV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion$outbound
   > = z.nativeEnum(PostV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion);
 
 /** @internal */
+export const Category$outboundSchema: z.ZodNativeEnum<typeof Category> = z
+  .nativeEnum(Category);
+
+/** @internal */
 export type PostV1CompaniesCompanyIdEarningTypesRequestBody$Outbound = {
   name: string;
+  category?: string | undefined;
+  included_in_overtime_pay?: boolean | undefined;
 };
 
 /** @internal */
@@ -77,6 +118,12 @@ export const PostV1CompaniesCompanyIdEarningTypesRequestBody$outboundSchema:
     PostV1CompaniesCompanyIdEarningTypesRequestBody
   > = z.object({
     name: z.string().default("Gym Membership"),
+    category: Category$outboundSchema.optional(),
+    includedInOvertimePay: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includedInOvertimePay: "included_in_overtime_pay",
+    });
   });
 
 export function postV1CompaniesCompanyIdEarningTypesRequestBodyToJSON(

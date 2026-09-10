@@ -31,15 +31,15 @@ export type GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion =
 
 export type GetV1WorkAddressesWorkAddressUuidRequest = {
   /**
-   * The UUID of the work address
-   */
-  workAddressUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the work address
+   */
+  workAddressUuid: string;
 };
 
 export type GetV1WorkAddressesWorkAddressUuidResponse = {
@@ -58,8 +58,8 @@ export const GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSch
 
 /** @internal */
 export type GetV1WorkAddressesWorkAddressUuidRequest$Outbound = {
-  work_address_uuid: string;
   "X-Gusto-API-Version": string;
+  work_address_uuid: string;
 };
 
 /** @internal */
@@ -68,14 +68,14 @@ export const GetV1WorkAddressesWorkAddressUuidRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1WorkAddressesWorkAddressUuidRequest
 > = z.object({
-  workAddressUuid: z.string(),
   xGustoAPIVersion:
     GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema
       .default("2026-06-15"),
+  workAddressUuid: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    workAddressUuid: "work_address_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    workAddressUuid: "work_address_uuid",
   });
 });
 

@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const PayrollEmployeeCompensationsTypePaymentMethod = {
@@ -17,6 +18,21 @@ export const PayrollEmployeeCompensationsTypePaymentMethod = {
 export type PayrollEmployeeCompensationsTypePaymentMethod = ClosedEnum<
   typeof PayrollEmployeeCompensationsTypePaymentMethod
 >;
+
+export type Breakdowns = {
+  /**
+   * The start date of the workweek.
+   */
+  startDate?: RFCDate | undefined;
+  /**
+   * The end date of the workweek.
+   */
+  endDate?: RFCDate | undefined;
+  /**
+   * The dollar amount for this workweek.
+   */
+  amount?: string | undefined;
+};
 
 export type FixedCompensations = {
   /**
@@ -31,6 +47,28 @@ export type FixedCompensations = {
    * The UUID of the job for the compensation.
    */
   jobUuid?: string | undefined;
+  /**
+   * Per-workweek amounts for this compensation, one entry per workweek
+   *
+   * @remarks
+   * overlapping the pay period.
+   */
+  breakdowns?: Array<Breakdowns> | undefined;
+};
+
+export type PayrollEmployeeCompensationsTypeBreakdowns = {
+  /**
+   * The start date of the workweek.
+   */
+  startDate?: RFCDate | undefined;
+  /**
+   * The end date of the workweek.
+   */
+  endDate?: RFCDate | undefined;
+  /**
+   * The number of hours worked during this workweek.
+   */
+  hours?: string | undefined;
 };
 
 export type HourlyCompensations = {
@@ -58,6 +96,13 @@ export type HourlyCompensations = {
    * The FLSA Status of the employee's primary job compensation
    */
   flsaStatus?: string | undefined;
+  /**
+   * Per-workweek hours for this compensation, one entry per workweek
+   *
+   * @remarks
+   * overlapping the pay period.
+   */
+  breakdowns?: Array<PayrollEmployeeCompensationsTypeBreakdowns> | undefined;
 };
 
 export type PayrollEmployeeCompensationsTypePaidTimeOff = {
@@ -96,6 +141,116 @@ export type Reimbursements = {
    * Whether the reimbursement is recurring. This field is only available for unprocessed payrolls.
    */
   recurring?: boolean | undefined;
+};
+
+/**
+ * Override mode. Only `one_time` is currently exposed.
+ */
+export const OverrideType = {
+  OneTime: "one_time",
+} as const;
+/**
+ * Override mode. Only `one_time` is currently exposed.
+ */
+export type OverrideType = ClosedEnum<typeof OverrideType>;
+
+/**
+ * How to interpret the amount.
+ */
+export const PayrollEmployeeCompensationsTypeAmountType = {
+  Fixed: "fixed",
+  Percent: "percent",
+} as const;
+/**
+ * How to interpret the amount.
+ */
+export type PayrollEmployeeCompensationsTypeAmountType = ClosedEnum<
+  typeof PayrollEmployeeCompensationsTypeAmountType
+>;
+
+/**
+ * Federal one-time custom withholding override applied to this payroll.
+ */
+export type Federal = {
+  /**
+   * Override mode. Only `one_time` is currently exposed.
+   */
+  overrideType?: OverrideType | undefined;
+  /**
+   * The amount that was withheld for this payroll.
+   */
+  amount?: string | undefined;
+  /**
+   * How to interpret the amount.
+   */
+  amountType?: PayrollEmployeeCompensationsTypeAmountType | undefined;
+};
+
+/**
+ * Override mode. Only `one_time` is currently exposed.
+ */
+export const PayrollEmployeeCompensationsTypeOverrideType = {
+  OneTime: "one_time",
+} as const;
+/**
+ * Override mode. Only `one_time` is currently exposed.
+ */
+export type PayrollEmployeeCompensationsTypeOverrideType = ClosedEnum<
+  typeof PayrollEmployeeCompensationsTypeOverrideType
+>;
+
+/**
+ * How to interpret the amount.
+ */
+export const PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType = {
+  Fixed: "fixed",
+  Percent: "percent",
+} as const;
+/**
+ * How to interpret the amount.
+ */
+export type PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType =
+  ClosedEnum<
+    typeof PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType
+  >;
+
+export type State = {
+  /**
+   * The UUID of the EmployeeStateField this withholding applies to.
+   */
+  employeeStateFieldUuid?: string | undefined;
+  /**
+   * Override mode. Only `one_time` is currently exposed.
+   */
+  overrideType?: PayrollEmployeeCompensationsTypeOverrideType | undefined;
+  /**
+   * The amount that was withheld for this payroll.
+   */
+  amount?: string | undefined;
+  /**
+   * How to interpret the amount.
+   */
+  amountType?:
+    | PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType
+    | undefined;
+};
+
+/**
+ * The one-time custom withholding overrides applied to this payroll for this employee.
+ *
+ * @remarks
+ * `federal` is null when no federal one-time override is set; `state` is an empty
+ * array when no state one-time overrides are set.
+ */
+export type CustomWithholdings = {
+  /**
+   * Federal one-time custom withholding override applied to this payroll.
+   */
+  federal?: Federal | null | undefined;
+  /**
+   * State one-time custom withholding overrides applied to this payroll, one entry per state field.
+   */
+  state?: Array<State> | undefined;
 };
 
 /**
@@ -155,7 +310,7 @@ export type PayrollEmployeeCompensationsType = {
    */
   lastName?: string | null | undefined;
   /**
-   * The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages + cash tips + payroll tips + any other additional earnings, excluding imputed income. This value is only available for processed payrolls.
+   * The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages + cash tips + payroll tips + any other additional earnings, excluding imputed income.
    */
   grossPay?: string | null | undefined;
   /**
@@ -178,7 +333,7 @@ export type PayrollEmployeeCompensationsType = {
    */
   memo?: string | null | undefined;
   /**
-   * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements. If this payroll has been processed, only fixed compensations with a value greater than 0.00 are returned. For an unprocessed payroll, all active fixed compensations are returned.
+   * An array of fixed compensations for the employee. Fixed compensations include tips and bonuses. On regular payrolls, reimbursements are sent via the dedicated `reimbursements` array instead. Off-cycle payrolls continue to include reimbursements in `fixed_compensations`. If this payroll has been processed, only fixed compensations with a value greater than 0.00 are returned. For an unprocessed payroll, all active fixed compensations are returned.
    */
   fixedCompensations?: Array<FixedCompensations> | undefined;
   /**
@@ -193,6 +348,14 @@ export type PayrollEmployeeCompensationsType = {
    * An array of reimbursements for the employee.
    */
   reimbursements?: Array<Reimbursements> | undefined;
+  /**
+   * The one-time custom withholding overrides applied to this payroll for this employee.
+   *
+   * @remarks
+   * `federal` is null when no federal one-time override is set; `state` is an empty
+   * array when no state one-time overrides are set.
+   */
+  customWithholdings?: CustomWithholdings | undefined;
   /**
    * The current version of this employee compensation. This field is only available for prepared payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
    */
@@ -209,6 +372,32 @@ export const PayrollEmployeeCompensationsTypePaymentMethod$inboundSchema:
     .nativeEnum(PayrollEmployeeCompensationsTypePaymentMethod);
 
 /** @internal */
+export const Breakdowns$inboundSchema: z.ZodType<
+  Breakdowns,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  start_date: z.string().transform(v => new RFCDate(v)).optional(),
+  end_date: z.string().transform(v => new RFCDate(v)).optional(),
+  amount: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "start_date": "startDate",
+    "end_date": "endDate",
+  });
+});
+
+export function breakdownsFromJSON(
+  jsonString: string,
+): SafeParseResult<Breakdowns, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Breakdowns$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Breakdowns' from JSON`,
+  );
+}
+
+/** @internal */
 export const FixedCompensations$inboundSchema: z.ZodType<
   FixedCompensations,
   z.ZodTypeDef,
@@ -217,6 +406,7 @@ export const FixedCompensations$inboundSchema: z.ZodType<
   name: z.string().optional(),
   amount: z.string().optional(),
   job_uuid: z.string().optional(),
+  breakdowns: z.array(z.lazy(() => Breakdowns$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "job_uuid": "jobUuid",
@@ -234,6 +424,36 @@ export function fixedCompensationsFromJSON(
 }
 
 /** @internal */
+export const PayrollEmployeeCompensationsTypeBreakdowns$inboundSchema:
+  z.ZodType<PayrollEmployeeCompensationsTypeBreakdowns, z.ZodTypeDef, unknown> =
+    z.object({
+      start_date: z.string().transform(v => new RFCDate(v)).optional(),
+      end_date: z.string().transform(v => new RFCDate(v)).optional(),
+      hours: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "start_date": "startDate",
+        "end_date": "endDate",
+      });
+    });
+
+export function payrollEmployeeCompensationsTypeBreakdownsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PayrollEmployeeCompensationsTypeBreakdowns,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PayrollEmployeeCompensationsTypeBreakdowns$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PayrollEmployeeCompensationsTypeBreakdowns' from JSON`,
+  );
+}
+
+/** @internal */
 export const HourlyCompensations$inboundSchema: z.ZodType<
   HourlyCompensations,
   z.ZodTypeDef,
@@ -245,6 +465,9 @@ export const HourlyCompensations$inboundSchema: z.ZodType<
   job_uuid: z.string().optional(),
   compensation_multiplier: z.number().optional(),
   flsa_status: z.string().optional(),
+  breakdowns: z.array(
+    z.lazy(() => PayrollEmployeeCompensationsTypeBreakdowns$inboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "job_uuid": "jobUuid",
@@ -319,6 +542,100 @@ export function reimbursementsFromJSON(
 }
 
 /** @internal */
+export const OverrideType$inboundSchema: z.ZodNativeEnum<typeof OverrideType> =
+  z.nativeEnum(OverrideType);
+
+/** @internal */
+export const PayrollEmployeeCompensationsTypeAmountType$inboundSchema:
+  z.ZodNativeEnum<typeof PayrollEmployeeCompensationsTypeAmountType> = z
+    .nativeEnum(PayrollEmployeeCompensationsTypeAmountType);
+
+/** @internal */
+export const Federal$inboundSchema: z.ZodType<Federal, z.ZodTypeDef, unknown> =
+  z.object({
+    override_type: OverrideType$inboundSchema.optional(),
+    amount: z.string().optional(),
+    amount_type: PayrollEmployeeCompensationsTypeAmountType$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "override_type": "overrideType",
+      "amount_type": "amountType",
+    });
+  });
+
+export function federalFromJSON(
+  jsonString: string,
+): SafeParseResult<Federal, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Federal$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Federal' from JSON`,
+  );
+}
+
+/** @internal */
+export const PayrollEmployeeCompensationsTypeOverrideType$inboundSchema:
+  z.ZodNativeEnum<typeof PayrollEmployeeCompensationsTypeOverrideType> = z
+    .nativeEnum(PayrollEmployeeCompensationsTypeOverrideType);
+
+/** @internal */
+export const PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType
+  > = z.nativeEnum(
+    PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType,
+  );
+
+/** @internal */
+export const State$inboundSchema: z.ZodType<State, z.ZodTypeDef, unknown> = z
+  .object({
+    employee_state_field_uuid: z.string().optional(),
+    override_type: PayrollEmployeeCompensationsTypeOverrideType$inboundSchema
+      .optional(),
+    amount: z.string().optional(),
+    amount_type:
+      PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType$inboundSchema
+        .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "employee_state_field_uuid": "employeeStateFieldUuid",
+      "override_type": "overrideType",
+      "amount_type": "amountType",
+    });
+  });
+
+export function stateFromJSON(
+  jsonString: string,
+): SafeParseResult<State, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => State$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'State' from JSON`,
+  );
+}
+
+/** @internal */
+export const CustomWithholdings$inboundSchema: z.ZodType<
+  CustomWithholdings,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  federal: z.nullable(z.lazy(() => Federal$inboundSchema)).optional(),
+  state: z.array(z.lazy(() => State$inboundSchema)).optional(),
+});
+
+export function customWithholdingsFromJSON(
+  jsonString: string,
+): SafeParseResult<CustomWithholdings, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CustomWithholdings$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CustomWithholdings' from JSON`,
+  );
+}
+
+/** @internal */
 export const AmountType$inboundSchema: z.ZodNativeEnum<typeof AmountType> = z
   .nativeEnum(AmountType);
 
@@ -377,6 +694,8 @@ export const PayrollEmployeeCompensationsType$inboundSchema: z.ZodType<
   ).optional(),
   reimbursements: z.array(z.lazy(() => Reimbursements$inboundSchema))
     .optional(),
+  custom_withholdings: z.lazy(() => CustomWithholdings$inboundSchema)
+    .optional(),
   version: z.any().optional(),
   deductions: z.array(z.lazy(() => Deductions$inboundSchema)).optional(),
 }).transform((v) => {
@@ -392,6 +711,7 @@ export const PayrollEmployeeCompensationsType$inboundSchema: z.ZodType<
     "fixed_compensations": "fixedCompensations",
     "hourly_compensations": "hourlyCompensations",
     "paid_time_off": "paidTimeOff",
+    "custom_withholdings": "customWithholdings",
   });
 });
 

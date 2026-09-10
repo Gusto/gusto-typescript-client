@@ -4,13 +4,227 @@
 
 ### Available Operations
 
+* [getV1ContractorsContractorUuidPayments](#getv1contractorscontractoruuidpayments) - Get contractor payments
+* [getV1ContractorPaymentsContractorPaymentIdPdf](#getv1contractorpaymentscontractorpaymentidpdf) - Get a contractor payment PDF
 * [list](#list) - Get contractor payments for a company
 * [create](#create) - Create a contractor payment
 * [get](#get) - Get a single contractor payment
 * [delete](#delete) - Cancel a contractor payment
 * [getReceipt](#getreceipt) - Get a single contractor payment receipt
 * [fund](#fund) - Fund a contractor payment [DEMO]
-* [getV1ContractorPaymentsContractorPaymentIdPdf](#getv1contractorpaymentscontractorpaymentidpdf) - Get a contractor payment PDF
+
+## getV1ContractorsContractorUuidPayments
+
+Returns a paginated list of payments for a single contractor.
+
+Results are sortable by `check_date` or `created_at`. Append `:asc` or `:desc` to control direction (e.g., `check_date:desc`).
+
+scope: `contractor_pay_stubs:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get-v1-contractors-contractor_uuid-payments" method="get" path="/v1/contractors/{contractor_uuid}/payments" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api-v-2026-06-15";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.contractorPayments.getV1ContractorsContractorUuidPayments({
+    contractorUuid: "<id>",
+    sortBy: "check_date:desc",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-06-15/core.js";
+import { contractorPaymentsGetV1ContractorsContractorUuidPayments } from "@gusto/embedded-api-v-2026-06-15/funcs/contractorPaymentsGetV1ContractorsContractorUuidPayments.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contractorPaymentsGetV1ContractorsContractorUuidPayments(gustoEmbedded, {
+    contractorUuid: "<id>",
+    sortBy: "check_date:desc",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentsGetV1ContractorsContractorUuidPayments failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useContractorPaymentsGetV1ContractorsContractorUuidPayments,
+  useContractorPaymentsGetV1ContractorsContractorUuidPaymentsSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchContractorPaymentsGetV1ContractorsContractorUuidPayments,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateContractorPaymentsGetV1ContractorsContractorUuidPayments,
+  invalidateAllContractorPaymentsGetV1ContractorsContractorUuidPayments,
+} from "@gusto/embedded-api-v-2026-06-15/react-query/contractorPaymentsGetV1ContractorsContractorUuidPayments.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetV1ContractorsContractorUuidPaymentsRequest](../../models/operations/getv1contractorscontractoruuidpaymentsrequest.md)                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetV1ContractorsContractorUuidPaymentsResponse](../../models/operations/getv1contractorscontractoruuidpaymentsresponse.md)\>**
+
+### Errors
+
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
+
+## getV1ContractorPaymentsContractorPaymentIdPdf
+
+Get a PDF document for a single contractor payment.
+
+scope: `payrolls:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get-v1-contractor_payments-contractor_payment_id-pdf" method="get" path="/v1/contractor_payments/{contractor_payment_id}/pdf" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api-v-2026-06-15";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.contractorPayments.getV1ContractorPaymentsContractorPaymentIdPdf({
+    contractorPaymentId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-06-15/core.js";
+import { contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf } from "@gusto/embedded-api-v-2026-06-15/funcs/contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf(gustoEmbedded, {
+    contractorPaymentId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useContractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf,
+  useContractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdfSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchContractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateContractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf,
+  invalidateAllContractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf,
+} from "@gusto/embedded-api-v-2026-06-15/react-query/contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetV1ContractorPaymentsContractorPaymentIdPdfRequest](../../models/operations/getv1contractorpaymentscontractorpaymentidpdfrequest.md)                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetV1ContractorPaymentsContractorPaymentIdPdfResponse](../../models/operations/getv1contractorpaymentscontractorpaymentidpdfresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## list
 
@@ -648,107 +862,3 @@ import {
 | errors.NotFoundErrorObject      | 404                             | application/json                |
 | errors.UnprocessableEntityError | 422                             | application/json                |
 | errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
-
-## getV1ContractorPaymentsContractorPaymentIdPdf
-
-Get a PDF document for a single contractor payment.
-
-scope: `payrolls:read`
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="get-v1-contractor_payments-contractor_payment_id-pdf" method="get" path="/v1/contractor_payments/{contractor_payment_id}/pdf" -->
-```typescript
-import { GustoEmbedded } from "@gusto/embedded-api-v-2026-06-15";
-
-const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const result = await gustoEmbedded.contractorPayments.getV1ContractorPaymentsContractorPaymentIdPdf({
-    contractorPaymentId: "<id>",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-06-15/core.js";
-import { contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf } from "@gusto/embedded-api-v-2026-06-15/funcs/contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf.js";
-
-// Use `GustoEmbeddedCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf(gustoEmbedded, {
-    contractorPaymentId: "<id>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf failed:", res.error);
-  }
-}
-
-run();
-```
-
-### React hooks and utilities
-
-This method can be used in React components through the following hooks and
-associated utilities.
-
-> Check out [this guide][hook-guide] for information about each of the utilities
-> below and how to get started using React hooks.
-
-[hook-guide]: ../../../REACT_QUERY.md
-
-```tsx
-import {
-  // Query hooks for fetching data.
-  useContractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf,
-  useContractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdfSuspense,
-
-  // Utility for prefetching data during server-side rendering and in React
-  // Server Components that will be immediately available to client components
-  // using the hooks.
-  prefetchContractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf,
-  
-  // Utilities to invalidate the query cache for this query in response to
-  // mutations and other user actions.
-  invalidateContractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf,
-  invalidateAllContractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf,
-} from "@gusto/embedded-api-v-2026-06-15/react-query/contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf.js";
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1ContractorPaymentsContractorPaymentIdPdfRequest](../../models/operations/getv1contractorpaymentscontractorpaymentidpdfrequest.md)                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.GetV1ContractorPaymentsContractorPaymentIdPdfResponse](../../models/operations/getv1contractorpaymentscontractorpaymentidpdfresponse.md)\>**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.NotFoundErrorObject | 404                        | application/json           |
-| errors.APIError            | 4XX, 5XX                   | \*/\*                      |

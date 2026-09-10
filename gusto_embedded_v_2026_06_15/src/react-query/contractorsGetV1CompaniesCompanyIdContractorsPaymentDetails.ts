@@ -166,11 +166,11 @@ export function setContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsDa
   queryKeyBase: [
     companyId: string,
     parameters: {
-      contractorUuid?: string | undefined;
-      contractorPaymentGroupUuid?: string | undefined;
       xGustoAPIVersion?:
         | GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion
         | undefined;
+      contractorUuid?: string | undefined;
+      contractorPaymentGroupUuid?: string | undefined;
     },
   ],
   data: ContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQueryData,
@@ -194,11 +194,11 @@ export function invalidateContractorsGetV1CompaniesCompanyIdContractorsPaymentDe
     [
       companyId: string,
       parameters: {
-        contractorUuid?: string | undefined;
-        contractorPaymentGroupUuid?: string | undefined;
         xGustoAPIVersion?:
           | GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion
           | undefined;
+        contractorUuid?: string | undefined;
+        contractorPaymentGroupUuid?: string | undefined;
       },
     ]
   >,

@@ -152,20 +152,12 @@ import { GustoEmbedded } from "@gusto/embedded-api-v-2026-06-15";
 const gustoEmbedded = new GustoEmbedded();
 
 async function run() {
-  const result = await gustoEmbedded.companies.createPartnerManaged({
-    systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
-  }, {
-    partnerManagedCompanyCreateRequest: {
-      user: {
-        firstName: "Marco",
-        lastName: "Trantow",
-        email: "Jewell_Greenholt72@hotmail.com",
-      },
-      company: {
-        name: "<value>",
-      },
-    },
-  });
+  const result = await gustoEmbedded.companies
+    .putV1PartnerManagedCompaniesCompanyUuidDisassociate({
+      systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
+    }, {
+      companyUuid: "<id>",
+    });
 
   console.log(result);
 }
@@ -202,6 +194,7 @@ run();
 * [getCustomFields](docs/sdks/companies/README.md#getcustomfields) - Get the custom fields of a company
 * [getOnboardingStatus](docs/sdks/companies/README.md#getonboardingstatus) - Get company onboarding status
 * [finishOnboarding](docs/sdks/companies/README.md#finishonboarding) - Finish company onboarding
+* [putV1PartnerManagedCompaniesCompanyUuidDisassociate](docs/sdks/companies/README.md#putv1partnermanagedcompaniescompanyuuiddisassociate) - Disassociate a partner managed company
 * [migrate](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
 * [createPartnerManaged](docs/sdks/companies/README.md#createpartnermanaged) - Create a partner managed company
 * [getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness](docs/sdks/companies/README.md#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
@@ -249,6 +242,17 @@ run();
 * [getPdf](docs/sdks/companyforms/README.md#getpdf) - Get a company form pdf
 * [sign](docs/sdks/companyforms/README.md#sign) - Sign a company form
 
+### [ContractorPayments](docs/sdks/contractorpayments/README.md)
+
+* [getV1ContractorsContractorUuidPayments](docs/sdks/contractorpayments/README.md#getv1contractorscontractoruuidpayments) - Get contractor payments
+* [getV1ContractorPaymentsContractorPaymentIdPdf](docs/sdks/contractorpayments/README.md#getv1contractorpaymentscontractorpaymentidpdf) - Get a contractor payment PDF
+* [list](docs/sdks/contractorpayments/README.md#list) - Get contractor payments for a company
+* [create](docs/sdks/contractorpayments/README.md#create) - Create a contractor payment
+* [get](docs/sdks/contractorpayments/README.md#get) - Get a single contractor payment
+* [delete](docs/sdks/contractorpayments/README.md#delete) - Cancel a contractor payment
+* [getReceipt](docs/sdks/contractorpayments/README.md#getreceipt) - Get a single contractor payment receipt
+* [fund](docs/sdks/contractorpayments/README.md#fund) - Fund a contractor payment [DEMO]
+
 ### [ContractorDocuments](docs/sdks/contractordocuments/README.md)
 
 * [getAll](docs/sdks/contractordocuments/README.md#getall) - Get all contractor documents
@@ -283,16 +287,6 @@ run();
 ### [ContractorPaymentMethods](docs/sdks/contractorpaymentmethods/README.md)
 
 * [createBankAccount](docs/sdks/contractorpaymentmethods/README.md#createbankaccount) - Create a contractor bank account
-
-### [ContractorPayments](docs/sdks/contractorpayments/README.md)
-
-* [list](docs/sdks/contractorpayments/README.md#list) - Get contractor payments for a company
-* [create](docs/sdks/contractorpayments/README.md#create) - Create a contractor payment
-* [get](docs/sdks/contractorpayments/README.md#get) - Get a single contractor payment
-* [delete](docs/sdks/contractorpayments/README.md#delete) - Cancel a contractor payment
-* [getReceipt](docs/sdks/contractorpayments/README.md#getreceipt) - Get a single contractor payment receipt
-* [fund](docs/sdks/contractorpayments/README.md#fund) - Fund a contractor payment [DEMO]
-* [getV1ContractorPaymentsContractorPaymentIdPdf](docs/sdks/contractorpayments/README.md#getv1contractorpaymentscontractorpaymentidpdf) - Get a contractor payment PDF
 
 ### [Contractors](docs/sdks/contractors/README.md)
 
@@ -511,6 +505,15 @@ run();
 * [get](docs/sdks/locations/README.md#get) - Get all company locations
 * [create](docs/sdks/locations/README.md#create) - Create a company location
 
+### [MemberPortalInvitations](docs/sdks/memberportalinvitations/README.md)
+
+* [postV1EmployeesEmployeeIdMemberPortalInvitations](docs/sdks/memberportalinvitations/README.md#postv1employeesemployeeidmemberportalinvitations) - Create an employee member portal invitation
+* [getV1EmployeesEmployeeIdMemberPortalInvitations](docs/sdks/memberportalinvitations/README.md#getv1employeesemployeeidmemberportalinvitations) - Get an employee member portal invitation
+* [deleteV1EmployeesEmployeeIdMemberPortalInvitations](docs/sdks/memberportalinvitations/README.md#deletev1employeesemployeeidmemberportalinvitations) - Cancel an employee member portal invitation
+* [postV1ContractorsContractorUuidMemberPortalInvitations](docs/sdks/memberportalinvitations/README.md#postv1contractorscontractoruuidmemberportalinvitations) - Create a contractor member portal invitation
+* [getV1ContractorsContractorUuidMemberPortalInvitations](docs/sdks/memberportalinvitations/README.md#getv1contractorscontractoruuidmemberportalinvitations) - Get a contractor member portal invitation
+* [deleteV1ContractorsContractorUuidMemberPortalInvitations](docs/sdks/memberportalinvitations/README.md#deletev1contractorscontractoruuidmemberportalinvitations) - Cancel a contractor member portal invitation
+
 ### [Notifications](docs/sdks/notifications/README.md)
 
 * [getCompanyNotifications](docs/sdks/notifications/README.md#getcompanynotifications) - Get notifications for company
@@ -520,6 +523,11 @@ run();
 
 * [get](docs/sdks/paymentconfigs/README.md#get) - Get a company's payment configs
 * [update](docs/sdks/paymentconfigs/README.md#update) - Update a company's payment configs
+
+### [PayrollCancellations](docs/sdks/payrollcancellations/README.md)
+
+* [postV1PayrollBatches](docs/sdks/payrollcancellations/README.md#postv1payrollbatches) - Create a payroll cancellation batch
+* [getV1PayrollBatchesPayrollBatchUuid](docs/sdks/payrollcancellations/README.md#getv1payrollbatchespayrollbatchuuid) - Get a payroll cancellation batch
 
 ### [PayrollDigests](docs/sdks/payrolldigests/README.md)
 
@@ -581,11 +589,17 @@ run();
 
 ### [Reports](docs/sdks/reports/README.md)
 
+* [postV1BulkReports](docs/sdks/reports/README.md#postv1bulkreports) - Create a bulk report batch
+* [getV1BulkReportsRequestUuid](docs/sdks/reports/README.md#getv1bulkreportsrequestuuid) - Get a bulk report batch
 * [postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage](docs/sdks/reports/README.md#postv1companiescompanyidreportsemployeesannualficawage) - Create an employees annual FICA wage report
 * [createCustom](docs/sdks/reports/README.md#createcustom) - Create a custom report
 * [postPayrollsPayrollUuidReportsGeneralLedger](docs/sdks/reports/README.md#postpayrollspayrolluuidreportsgeneralledger) - Create a general ledger report
 * [getReportsRequestUuid](docs/sdks/reports/README.md#getreportsrequestuuid) - Get a report
 * [getTemplate](docs/sdks/reports/README.md#gettemplate) - Get a report template
+
+### [ReverseWireTransactions](docs/sdks/reversewiretransactions/README.md)
+
+* [getReverseWireTransactions](docs/sdks/reversewiretransactions/README.md#getreversewiretransactions) - Get all reverse wire transactions for a company
 
 ### [SalaryEstimates](docs/sdks/salaryestimates/README.md)
 
@@ -685,6 +699,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`companiesListAdmins`](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
 - [`companiesMigrate`](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
 - [`companiesPostV1PartnerManagedCompaniesCompanyUuidTermsOfService`](docs/sdks/companies/README.md#postv1partnermanagedcompaniescompanyuuidtermsofservice) - Accept terms of service for a specific user
+- [`companiesPutV1PartnerManagedCompaniesCompanyUuidDisassociate`](docs/sdks/companies/README.md#putv1partnermanagedcompaniescompanyuuiddisassociate) - Disassociate a partner managed company
 - [`companiesPutV1PartnerManagedCompaniesCompanyUuidTermsOfService`](docs/sdks/companies/README.md#putv1partnermanagedcompaniescompanyuuidtermsofservice) - Check terms of service status for a specific user
 - [`companiesSuspensionsGet`](docs/sdks/suspensions/README.md#get) - Get suspensions for this company
 - [`companiesSuspensionsSuspend`](docs/sdks/suspensions/README.md#suspend) - Suspend a company's account
@@ -736,6 +751,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`contractorPaymentsGet`](docs/sdks/contractorpayments/README.md#get) - Get a single contractor payment
 - [`contractorPaymentsGetReceipt`](docs/sdks/contractorpayments/README.md#getreceipt) - Get a single contractor payment receipt
 - [`contractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf`](docs/sdks/contractorpayments/README.md#getv1contractorpaymentscontractorpaymentidpdf) - Get a contractor payment PDF
+- [`contractorPaymentsGetV1ContractorsContractorUuidPayments`](docs/sdks/contractorpayments/README.md#getv1contractorscontractoruuidpayments) - Get contractor payments
 - [`contractorPaymentsList`](docs/sdks/contractorpayments/README.md#list) - Get contractor payments for a company
 - [`contractorsCreate`](docs/sdks/contractors/README.md#create) - Create a contractor
 - [`contractorsDelete`](docs/sdks/contractors/README.md#delete) - Delete a contractor
@@ -876,10 +892,18 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`locationsGetMinimumWages`](docs/sdks/locations/README.md#getminimumwages) - Get minimum wages for a location
 - [`locationsRetrieve`](docs/sdks/locations/README.md#retrieve) - Get a location
 - [`locationsUpdate`](docs/sdks/locations/README.md#update) - Update a location
+- [`memberPortalInvitationsDeleteV1ContractorsContractorUuidMemberPortalInvitations`](docs/sdks/memberportalinvitations/README.md#deletev1contractorscontractoruuidmemberportalinvitations) - Cancel a contractor member portal invitation
+- [`memberPortalInvitationsDeleteV1EmployeesEmployeeIdMemberPortalInvitations`](docs/sdks/memberportalinvitations/README.md#deletev1employeesemployeeidmemberportalinvitations) - Cancel an employee member portal invitation
+- [`memberPortalInvitationsGetV1ContractorsContractorUuidMemberPortalInvitations`](docs/sdks/memberportalinvitations/README.md#getv1contractorscontractoruuidmemberportalinvitations) - Get a contractor member portal invitation
+- [`memberPortalInvitationsGetV1EmployeesEmployeeIdMemberPortalInvitations`](docs/sdks/memberportalinvitations/README.md#getv1employeesemployeeidmemberportalinvitations) - Get an employee member portal invitation
+- [`memberPortalInvitationsPostV1ContractorsContractorUuidMemberPortalInvitations`](docs/sdks/memberportalinvitations/README.md#postv1contractorscontractoruuidmemberportalinvitations) - Create a contractor member portal invitation
+- [`memberPortalInvitationsPostV1EmployeesEmployeeIdMemberPortalInvitations`](docs/sdks/memberportalinvitations/README.md#postv1employeesemployeeidmemberportalinvitations) - Create an employee member portal invitation
 - [`notificationsGetCompanyNotifications`](docs/sdks/notifications/README.md#getcompanynotifications) - Get notifications for company
 - [`notificationsGetDetails`](docs/sdks/notifications/README.md#getdetails) - Get a notification's details
 - [`paymentConfigsGet`](docs/sdks/paymentconfigs/README.md#get) - Get a company's payment configs
 - [`paymentConfigsUpdate`](docs/sdks/paymentconfigs/README.md#update) - Update a company's payment configs
+- [`payrollCancellationsGetV1PayrollBatchesPayrollBatchUuid`](docs/sdks/payrollcancellations/README.md#getv1payrollbatchespayrollbatchuuid) - Get a payroll cancellation batch
+- [`payrollCancellationsPostV1PayrollBatches`](docs/sdks/payrollcancellations/README.md#postv1payrollbatches) - Create a payroll cancellation batch
 - [`payrollDigestsGetV1PayrollDigestsPayrollDigestUuid`](docs/sdks/payrolldigests/README.md#getv1payrolldigestspayrolldigestuuid) - Get a payroll digest batch
 - [`payrollDigestsPostV1PayrollDigests`](docs/sdks/payrolldigests/README.md#postv1payrolldigests) - Create a payroll digest batch
 - [`payrollsCalculate`](docs/sdks/payrolls/README.md#calculate) - Calculate a payroll
@@ -923,8 +947,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`reportsCreateCustom`](docs/sdks/reports/README.md#createcustom) - Create a custom report
 - [`reportsGetReportsRequestUuid`](docs/sdks/reports/README.md#getreportsrequestuuid) - Get a report
 - [`reportsGetTemplate`](docs/sdks/reports/README.md#gettemplate) - Get a report template
+- [`reportsGetV1BulkReportsRequestUuid`](docs/sdks/reports/README.md#getv1bulkreportsrequestuuid) - Get a bulk report batch
 - [`reportsPostPayrollsPayrollUuidReportsGeneralLedger`](docs/sdks/reports/README.md#postpayrollspayrolluuidreportsgeneralledger) - Create a general ledger report
+- [`reportsPostV1BulkReports`](docs/sdks/reports/README.md#postv1bulkreports) - Create a bulk report batch
 - [`reportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage`](docs/sdks/reports/README.md#postv1companiescompanyidreportsemployeesannualficawage) - Create an employees annual FICA wage report
+- [`reverseWireTransactionsGetReverseWireTransactions`](docs/sdks/reversewiretransactions/README.md#getreversewiretransactions) - Get all reverse wire transactions for a company
 - [`salaryEstimatesGetV1SalaryEstimatesId`](docs/sdks/salaryestimates/README.md#getv1salaryestimatesid) - Get a salary estimate
 - [`salaryEstimatesGetV1SalaryEstimatesOccupations`](docs/sdks/salaryestimates/README.md#getv1salaryestimatesoccupations) - Search for BLS occupations
 - [`salaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimates`](docs/sdks/salaryestimates/README.md#postv1employeesemployeeidsalaryestimates) - Create a salary estimate for an employee
@@ -1012,6 +1039,7 @@ To learn about this feature and how to get started, check
 - [`useCompaniesListAdmins`](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
 - [`useCompaniesMigrateMutation`](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
 - [`useCompaniesPostV1PartnerManagedCompaniesCompanyUuidTermsOfServiceMutation`](docs/sdks/companies/README.md#postv1partnermanagedcompaniescompanyuuidtermsofservice) - Accept terms of service for a specific user
+- [`useCompaniesPutV1PartnerManagedCompaniesCompanyUuidDisassociateMutation`](docs/sdks/companies/README.md#putv1partnermanagedcompaniescompanyuuiddisassociate) - Disassociate a partner managed company
 - [`useCompaniesPutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceMutation`](docs/sdks/companies/README.md#putv1partnermanagedcompaniescompanyuuidtermsofservice) - Check terms of service status for a specific user
 - [`useCompaniesSuspensionsGet`](docs/sdks/suspensions/README.md#get) - Get suspensions for this company
 - [`useCompaniesSuspensionsSuspendMutation`](docs/sdks/suspensions/README.md#suspend) - Suspend a company's account
@@ -1063,6 +1091,7 @@ To learn about this feature and how to get started, check
 - [`useContractorPaymentsGet`](docs/sdks/contractorpayments/README.md#get) - Get a single contractor payment
 - [`useContractorPaymentsGetReceipt`](docs/sdks/contractorpayments/README.md#getreceipt) - Get a single contractor payment receipt
 - [`useContractorPaymentsGetV1ContractorPaymentsContractorPaymentIdPdf`](docs/sdks/contractorpayments/README.md#getv1contractorpaymentscontractorpaymentidpdf) - Get a contractor payment PDF
+- [`useContractorPaymentsGetV1ContractorsContractorUuidPayments`](docs/sdks/contractorpayments/README.md#getv1contractorscontractoruuidpayments) - Get contractor payments
 - [`useContractorPaymentsList`](docs/sdks/contractorpayments/README.md#list) - Get contractor payments for a company
 - [`useContractorsCreateMutation`](docs/sdks/contractors/README.md#create) - Create a contractor
 - [`useContractorsDeleteMutation`](docs/sdks/contractors/README.md#delete) - Delete a contractor
@@ -1203,10 +1232,18 @@ To learn about this feature and how to get started, check
 - [`useLocationsGetMinimumWages`](docs/sdks/locations/README.md#getminimumwages) - Get minimum wages for a location
 - [`useLocationsRetrieve`](docs/sdks/locations/README.md#retrieve) - Get a location
 - [`useLocationsUpdateMutation`](docs/sdks/locations/README.md#update) - Update a location
+- [`useMemberPortalInvitationsDeleteV1ContractorsContractorUuidMemberPortalInvitationsMutation`](docs/sdks/memberportalinvitations/README.md#deletev1contractorscontractoruuidmemberportalinvitations) - Cancel a contractor member portal invitation
+- [`useMemberPortalInvitationsDeleteV1EmployeesEmployeeIdMemberPortalInvitationsMutation`](docs/sdks/memberportalinvitations/README.md#deletev1employeesemployeeidmemberportalinvitations) - Cancel an employee member portal invitation
+- [`useMemberPortalInvitationsGetV1ContractorsContractorUuidMemberPortalInvitations`](docs/sdks/memberportalinvitations/README.md#getv1contractorscontractoruuidmemberportalinvitations) - Get a contractor member portal invitation
+- [`useMemberPortalInvitationsGetV1EmployeesEmployeeIdMemberPortalInvitations`](docs/sdks/memberportalinvitations/README.md#getv1employeesemployeeidmemberportalinvitations) - Get an employee member portal invitation
+- [`useMemberPortalInvitationsPostV1ContractorsContractorUuidMemberPortalInvitationsMutation`](docs/sdks/memberportalinvitations/README.md#postv1contractorscontractoruuidmemberportalinvitations) - Create a contractor member portal invitation
+- [`useMemberPortalInvitationsPostV1EmployeesEmployeeIdMemberPortalInvitationsMutation`](docs/sdks/memberportalinvitations/README.md#postv1employeesemployeeidmemberportalinvitations) - Create an employee member portal invitation
 - [`useNotificationsGetCompanyNotifications`](docs/sdks/notifications/README.md#getcompanynotifications) - Get notifications for company
 - [`useNotificationsGetDetails`](docs/sdks/notifications/README.md#getdetails) - Get a notification's details
 - [`usePaymentConfigsGet`](docs/sdks/paymentconfigs/README.md#get) - Get a company's payment configs
 - [`usePaymentConfigsUpdateMutation`](docs/sdks/paymentconfigs/README.md#update) - Update a company's payment configs
+- [`usePayrollCancellationsGetV1PayrollBatchesPayrollBatchUuid`](docs/sdks/payrollcancellations/README.md#getv1payrollbatchespayrollbatchuuid) - Get a payroll cancellation batch
+- [`usePayrollCancellationsPostV1PayrollBatchesMutation`](docs/sdks/payrollcancellations/README.md#postv1payrollbatches) - Create a payroll cancellation batch
 - [`usePayrollDigestsGetV1PayrollDigestsPayrollDigestUuid`](docs/sdks/payrolldigests/README.md#getv1payrolldigestspayrolldigestuuid) - Get a payroll digest batch
 - [`usePayrollDigestsPostV1PayrollDigestsMutation`](docs/sdks/payrolldigests/README.md#postv1payrolldigests) - Create a payroll digest batch
 - [`usePayrollsCalculateGrossUpMutation`](docs/sdks/payrolls/README.md#calculategrossup) - Calculate gross up for a payroll
@@ -1250,8 +1287,11 @@ To learn about this feature and how to get started, check
 - [`useReportsCreateCustomMutation`](docs/sdks/reports/README.md#createcustom) - Create a custom report
 - [`useReportsGetReportsRequestUuid`](docs/sdks/reports/README.md#getreportsrequestuuid) - Get a report
 - [`useReportsGetTemplate`](docs/sdks/reports/README.md#gettemplate) - Get a report template
+- [`useReportsGetV1BulkReportsRequestUuid`](docs/sdks/reports/README.md#getv1bulkreportsrequestuuid) - Get a bulk report batch
 - [`useReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutation`](docs/sdks/reports/README.md#postpayrollspayrolluuidreportsgeneralledger) - Create a general ledger report
+- [`useReportsPostV1BulkReportsMutation`](docs/sdks/reports/README.md#postv1bulkreports) - Create a bulk report batch
 - [`useReportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageMutation`](docs/sdks/reports/README.md#postv1companiescompanyidreportsemployeesannualficawage) - Create an employees annual FICA wage report
+- [`useReverseWireTransactionsGetReverseWireTransactions`](docs/sdks/reversewiretransactions/README.md#getreversewiretransactions) - Get all reverse wire transactions for a company
 - [`useSalaryEstimatesGetV1SalaryEstimatesId`](docs/sdks/salaryestimates/README.md#getv1salaryestimatesid) - Get a salary estimate
 - [`useSalaryEstimatesGetV1SalaryEstimatesOccupations`](docs/sdks/salaryestimates/README.md#getv1salaryestimatesoccupations) - Search for BLS occupations
 - [`useSalaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimatesMutation`](docs/sdks/salaryestimates/README.md#postv1employeesemployeeidsalaryestimates) - Create a salary estimate for an employee
@@ -1460,7 +1500,7 @@ run();
 * [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts): The base class for HTTP error responses.
   * [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. *
 
-<details><summary>Less common errors (11)</summary>
+<details><summary>Less common errors (13)</summary>
 
 <br />
 
@@ -1473,11 +1513,13 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityError`](./src/models/errors/unprocessableentityerror.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 162 of 301 methods.*
-* [`ConflictErrorObject`](./src/models/errors/conflicterrorobject.ts): Conflict    This error occurs when the resource version provided does not match the current version. Retrieve the latest version and retry. Status code `409`. Applicable to 2 of 301 methods.*
-* [`PeopleBatchConflictError`](./src/models/errors/peoplebatchconflicterror.ts): Error response when a people batch idempotency key conflict occurs. Status code `409`. Applicable to 1 of 301 methods.*
-* [`PayrollDigestConflictError`](./src/models/errors/payrolldigestconflicterror.ts): Error response when a payroll digest idempotency key has already been used by the same partner. Status code `409`. Applicable to 1 of 301 methods.*
-* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 1 of 301 methods.*
+* [`UnprocessableEntityError`](./src/models/errors/unprocessableentityerror.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 170 of 314 methods.*
+* [`ConflictErrorObject`](./src/models/errors/conflicterrorobject.ts): Conflict    This error occurs when the resource version provided does not match the current version. Retrieve the latest version and retry. Status code `409`. Applicable to 2 of 314 methods.*
+* [`ForbiddenErrorObject`](./src/models/errors/forbiddenerrorobject.ts): Forbidden    The targeted company has been archived because its EIN was reassigned to a replacement company. Use the replacement company referenced in the error metadata. Status code `403`. Applicable to 1 of 314 methods.*
+* [`PayrollBatchConflictError`](./src/models/errors/payrollbatchconflicterror.ts): Error response when a payroll cancellation idempotency key has already been used by the same partner. Status code `409`. Applicable to 1 of 314 methods.*
+* [`PayrollDigestConflictError`](./src/models/errors/payrolldigestconflicterror.ts): Error response when a payroll digest idempotency key has already been used by the same partner. Status code `409`. Applicable to 1 of 314 methods.*
+* [`PeopleBatchConflictError`](./src/models/errors/peoplebatchconflicterror.ts): Error response when a people batch idempotency key conflict occurs. Status code `409`. Applicable to 1 of 314 methods.*
+* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 1 of 314 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

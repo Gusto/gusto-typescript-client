@@ -11,6 +11,7 @@ import { GustoEmbeddedCore } from "../core.js";
 import { federalTaxDetailsUpdate } from "../funcs/federalTaxDetailsUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { ForbiddenErrorObject } from "../models/errors/forbiddenerrorobject.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -40,6 +41,7 @@ export type FederalTaxDetailsUpdateMutationData =
   PutV1CompaniesCompanyIdFederalTaxDetailsResponse;
 
 export type FederalTaxDetailsUpdateMutationError =
+  | ForbiddenErrorObject
   | NotFoundErrorObject
   | UnprocessableEntityError
   | GustoEmbeddedError

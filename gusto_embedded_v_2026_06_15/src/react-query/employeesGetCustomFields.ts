@@ -118,11 +118,11 @@ export function setEmployeesGetCustomFieldsData(
   queryKeyBase: [
     employeeId: string,
     parameters: {
-      page?: number | undefined;
-      per?: number | undefined;
       xGustoAPIVersion?:
         | GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion
         | undefined;
+      page?: number | undefined;
+      per?: number | undefined;
     },
   ],
   data: EmployeesGetCustomFieldsQueryData,
@@ -138,11 +138,11 @@ export function invalidateEmployeesGetCustomFields(
     [
       employeeId: string,
       parameters: {
-        page?: number | undefined;
-        per?: number | undefined;
         xGustoAPIVersion?:
           | GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion
           | undefined;
+        page?: number | undefined;
+        per?: number | undefined;
       },
     ]
   >,

@@ -42,7 +42,7 @@ export type GetV1BenefitsResponse = {
   /**
    * Successful
    */
-  supportedBenefits?: Array<SupportedBenefit> | undefined;
+  supportedBenefitList?: Array<SupportedBenefit> | undefined;
 };
 
 /** @internal */
@@ -86,11 +86,11 @@ export const GetV1BenefitsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Supported-Benefits": z.array(SupportedBenefit$inboundSchema).optional(),
+  "Supported-Benefit-List": z.array(SupportedBenefit$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
-    "Supported-Benefits": "supportedBenefits",
+    "Supported-Benefit-List": "supportedBenefitList",
   });
 });
 

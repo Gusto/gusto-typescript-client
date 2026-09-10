@@ -42,6 +42,7 @@ export const SubscriptionTypes = {
   PayrollSync: "PayrollSync",
   PaySchedule: "PaySchedule",
   Signatory: "Signatory",
+  TimeOffRequest: "TimeOffRequest",
 } as const;
 export type SubscriptionTypes = ClosedEnum<typeof SubscriptionTypes>;
 

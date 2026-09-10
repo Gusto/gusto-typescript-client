@@ -125,12 +125,12 @@ export function setJobsAndCompensationsGetJobsData(
   queryKeyBase: [
     employeeId: string,
     parameters: {
-      page?: number | undefined;
-      per?: number | undefined;
-      include?: GetV1EmployeesEmployeeIdJobsQueryParamInclude | undefined;
       xGustoAPIVersion?:
         | GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion
         | undefined;
+      page?: number | undefined;
+      per?: number | undefined;
+      include?: GetV1EmployeesEmployeeIdJobsQueryParamInclude | undefined;
     },
   ],
   data: JobsAndCompensationsGetJobsQueryData,
@@ -146,12 +146,12 @@ export function invalidateJobsAndCompensationsGetJobs(
     [
       employeeId: string,
       parameters: {
-        page?: number | undefined;
-        per?: number | undefined;
-        include?: GetV1EmployeesEmployeeIdJobsQueryParamInclude | undefined;
         xGustoAPIVersion?:
           | GetV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion
           | undefined;
+        page?: number | undefined;
+        per?: number | undefined;
+        include?: GetV1EmployeesEmployeeIdJobsQueryParamInclude | undefined;
       },
     ]
   >,

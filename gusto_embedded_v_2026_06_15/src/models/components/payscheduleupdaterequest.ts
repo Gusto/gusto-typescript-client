@@ -38,6 +38,29 @@ export type PayScheduleUpdateRequestFrequency = ClosedEnum<
 >;
 
 /**
+ * The day of the week that this pay schedule's workweeks start on, used for regular rate of pay overtime calculations.
+ *
+ * @remarks
+ */
+export const PayScheduleUpdateRequestWorkweekStartDay = {
+  Sunday: "Sunday",
+  Monday: "Monday",
+  Tuesday: "Tuesday",
+  Wednesday: "Wednesday",
+  Thursday: "Thursday",
+  Friday: "Friday",
+  Saturday: "Saturday",
+} as const;
+/**
+ * The day of the week that this pay schedule's workweeks start on, used for regular rate of pay overtime calculations.
+ *
+ * @remarks
+ */
+export type PayScheduleUpdateRequestWorkweekStartDay = ClosedEnum<
+  typeof PayScheduleUpdateRequestWorkweekStartDay
+>;
+
+/**
  * Request body for updating a pay schedule. Sent in the pay_schedule_update root key. Version is required for optimistic concurrency. Pay schedules may be automatically adjusted if an onboarded company misses their first pay date; see [Create a pay schedule](https://docs.gusto.com/embedded-payroll/docs/create-a-pay-schedule).
  */
 export type PayScheduleUpdateRequest = {
@@ -71,12 +94,18 @@ export type PayScheduleUpdateRequest = {
    * A custom pay schedule name; null clears any custom name so the default frequency description applies.
    */
   customName?: string | null | undefined;
+  workweekStartDay?: PayScheduleUpdateRequestWorkweekStartDay | undefined;
 };
 
 /** @internal */
 export const PayScheduleUpdateRequestFrequency$outboundSchema: z.ZodNativeEnum<
   typeof PayScheduleUpdateRequestFrequency
 > = z.nativeEnum(PayScheduleUpdateRequestFrequency);
+
+/** @internal */
+export const PayScheduleUpdateRequestWorkweekStartDay$outboundSchema:
+  z.ZodNativeEnum<typeof PayScheduleUpdateRequestWorkweekStartDay> = z
+    .nativeEnum(PayScheduleUpdateRequestWorkweekStartDay);
 
 /** @internal */
 export type PayScheduleUpdateRequest$Outbound = {
@@ -88,6 +117,7 @@ export type PayScheduleUpdateRequest$Outbound = {
   day_1?: number | null | undefined;
   day_2?: number | null | undefined;
   custom_name?: string | null | undefined;
+  workweek_start_day?: string | undefined;
 };
 
 /** @internal */
@@ -105,6 +135,8 @@ export const PayScheduleUpdateRequest$outboundSchema: z.ZodType<
   day1: z.nullable(z.number().int()).optional(),
   day2: z.nullable(z.number().int()).optional(),
   customName: z.nullable(z.string()).optional(),
+  workweekStartDay: PayScheduleUpdateRequestWorkweekStartDay$outboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     autoPayroll: "auto_payroll",
@@ -113,6 +145,7 @@ export const PayScheduleUpdateRequest$outboundSchema: z.ZodType<
     day1: "day_1",
     day2: "day_2",
     customName: "custom_name",
+    workweekStartDay: "workweek_start_day",
   });
 });
 

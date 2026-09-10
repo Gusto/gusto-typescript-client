@@ -40,6 +40,12 @@ export type PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYea
 export type PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest =
   {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    xGustoAPIVersion?:
+      | PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion
+      | undefined;
+    /**
      * The UUID of the employee
      */
     employeeUuid: string;
@@ -47,12 +53,6 @@ export type PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYea
      * The effective year for the Section 603 status
      */
     effectiveYear: number;
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    xGustoAPIVersion?:
-      | PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion
-      | undefined;
     employeeSection603HighEarnerStatusUpdateRequest:
       EmployeeSection603HighEarnerStatusUpdateRequest;
   };
@@ -79,9 +79,9 @@ export const PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYe
 /** @internal */
 export type PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest$Outbound =
   {
+    "X-Gusto-API-Version": string;
     employee_uuid: string;
     effective_year: number;
-    "X-Gusto-API-Version": string;
     "Employee-Section603-High-Earner-Status-Update-Request":
       EmployeeSection603HighEarnerStatusUpdateRequest$Outbound;
   };
@@ -93,18 +93,18 @@ export const PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYe
     z.ZodTypeDef,
     PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest
   > = z.object({
-    employeeUuid: z.string(),
-    effectiveYear: z.number().int(),
     xGustoAPIVersion:
       PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion$outboundSchema
         .default("2026-06-15"),
+    employeeUuid: z.string(),
+    effectiveYear: z.number().int(),
     employeeSection603HighEarnerStatusUpdateRequest:
       EmployeeSection603HighEarnerStatusUpdateRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       employeeUuid: "employee_uuid",
       effectiveYear: "effective_year",
-      xGustoAPIVersion: "X-Gusto-API-Version",
       employeeSection603HighEarnerStatusUpdateRequest:
         "Employee-Section603-High-Earner-Status-Update-Request",
     });

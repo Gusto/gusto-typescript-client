@@ -11,5 +11,5 @@ let value: SubscriptionTypes = "Contractor";
 ## Values
 
 ```typescript
-"BankAccount" | "Company" | "CompanyBenefit" | "Contractor" | "ContractorPayment" | "Employee" | "EmployeeBenefit" | "EmployeeJobCompensation" | "ExternalPayroll" | "Form" | "Location" | "Notification" | "Payroll" | "PayrollSync" | "PaySchedule" | "PeopleBatch" | "Signatory"
+"BankAccount" | "Company" | "CompanyBenefit" | "Contractor" | "ContractorPayment" | "Employee" | "EmployeeBenefit" | "EmployeeJobCompensation" | "ExternalPayroll" | "Form" | "Location" | "Notification" | "Payroll" | "PayrollSync" | "PaySchedule" | "PeopleBatch" | "Signatory" | "TimeOffRequest"
 ```

@@ -139,6 +139,7 @@ export function setPaySchedulesGetPreviewData(
       day1?: number | undefined;
       day2?: number | undefined;
       endDate?: RFCDate | undefined;
+      payScheduleUuid?: string | undefined;
     },
   ],
   data: PaySchedulesGetPreviewQueryData,
@@ -163,6 +164,7 @@ export function invalidatePaySchedulesGetPreview(
         day1?: number | undefined;
         day2?: number | undefined;
         endDate?: RFCDate | undefined;
+        payScheduleUuid?: string | undefined;
       },
     ]
   >,

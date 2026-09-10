@@ -14,6 +14,7 @@ import { companiesGetV1PartnerManagedCompaniesCompanyUuidTermsOfService } from "
 import { companiesListAdmins } from "../funcs/companiesListAdmins.js";
 import { companiesMigrate } from "../funcs/companiesMigrate.js";
 import { companiesPostV1PartnerManagedCompaniesCompanyUuidTermsOfService } from "../funcs/companiesPostV1PartnerManagedCompaniesCompanyUuidTermsOfService.js";
+import { companiesPutV1PartnerManagedCompaniesCompanyUuidDisassociate } from "../funcs/companiesPutV1PartnerManagedCompaniesCompanyUuidDisassociate.js";
 import { companiesPutV1PartnerManagedCompaniesCompanyUuidTermsOfService } from "../funcs/companiesPutV1PartnerManagedCompaniesCompanyUuidTermsOfService.js";
 import { companiesRetrieveTermsOfService } from "../funcs/companiesRetrieveTermsOfService.js";
 import { companiesUpdate } from "../funcs/companiesUpdate.js";
@@ -71,6 +72,11 @@ import {
   PutV1CompaniesRequest,
   PutV1CompaniesResponse,
 } from "../models/operations/putv1companies.js";
+import {
+  PutV1PartnerManagedCompaniesCompanyUuidDisassociateRequest,
+  PutV1PartnerManagedCompaniesCompanyUuidDisassociateResponse,
+  PutV1PartnerManagedCompaniesCompanyUuidDisassociateSecurity,
+} from "../models/operations/putv1partnermanagedcompaniescompanyuuiddisassociate.js";
 import {
   PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest,
   PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
@@ -239,6 +245,33 @@ export class Companies extends ClientSDK {
       request,
       options,
     ));
+  }
+
+  /**
+   * Disassociate a partner managed company
+   *
+   * @remarks
+   * Disassociate a company from your embedded payroll product, reversing an earlier association or migration. You can only disassociate a company that is currently associated with your application.
+   *
+   * 📘 System Access Authentication
+   *
+   * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+   *
+   * scope: `partner_managed_companies:disassociate`
+   */
+  async putV1PartnerManagedCompaniesCompanyUuidDisassociate(
+    security: PutV1PartnerManagedCompaniesCompanyUuidDisassociateSecurity,
+    request: PutV1PartnerManagedCompaniesCompanyUuidDisassociateRequest,
+    options?: RequestOptions,
+  ): Promise<PutV1PartnerManagedCompaniesCompanyUuidDisassociateResponse> {
+    return unwrapAsync(
+      companiesPutV1PartnerManagedCompaniesCompanyUuidDisassociate(
+        this,
+        security,
+        request,
+        options,
+      ),
+    );
   }
 
   /**

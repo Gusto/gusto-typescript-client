@@ -11,6 +11,10 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import {
+  ForbiddenErrorObject,
+  ForbiddenErrorObject$inboundSchema,
+} from "../models/errors/forbiddenerrorobject.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -64,6 +68,7 @@ export function federalTaxDetailsUpdate(
 ): APIPromise<
   Result<
     PutV1CompaniesCompanyIdFederalTaxDetailsResponse,
+    | ForbiddenErrorObject
     | NotFoundErrorObject
     | UnprocessableEntityError
     | GustoEmbeddedError
@@ -91,6 +96,7 @@ async function $do(
   [
     Result<
       PutV1CompaniesCompanyIdFederalTaxDetailsResponse,
+      | ForbiddenErrorObject
       | NotFoundErrorObject
       | UnprocessableEntityError
       | GustoEmbeddedError
@@ -195,6 +201,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1CompaniesCompanyIdFederalTaxDetailsResponse,
+    | ForbiddenErrorObject
     | NotFoundErrorObject
     | UnprocessableEntityError
     | GustoEmbeddedError
@@ -211,6 +218,7 @@ async function $do(
       PutV1CompaniesCompanyIdFederalTaxDetailsResponse$inboundSchema,
       { key: "Federal-Tax-Details" },
     ),
+    M.jsonErr(403, ForbiddenErrorObject$inboundSchema),
     M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr([409, 422], UnprocessableEntityError$inboundSchema),
     M.fail("4XX"),

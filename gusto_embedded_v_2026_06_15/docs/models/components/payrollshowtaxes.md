@@ -8,7 +8,7 @@ import { PayrollShowTaxes } from "@gusto/embedded-api-v-2026-06-15/models/compon
 let value: PayrollShowTaxes = {
   name: "<value>",
   employer: false,
-  amount: 3866.73,
+  amount: "<value>",
 };
 ```
 
@@ -18,4 +18,4 @@ let value: PayrollShowTaxes = {
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `name`             | *string*           | :heavy_check_mark: | N/A                |
 | `employer`         | *boolean*          | :heavy_check_mark: | N/A                |
-| `amount`           | *number*           | :heavy_check_mark: | N/A                |
+| `amount`           | *string*           | :heavy_check_mark: | N/A                |

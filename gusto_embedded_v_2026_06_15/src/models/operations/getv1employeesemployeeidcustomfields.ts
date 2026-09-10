@@ -31,6 +31,12 @@ export type GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion =
 
 export type GetV1EmployeesEmployeeIdCustomFieldsRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the employee
    */
   employeeId: string;
@@ -42,12 +48,6 @@ export type GetV1EmployeesEmployeeIdCustomFieldsRequest = {
    * Number of objects per page. For majority of endpoints will default to 25
    */
   per?: number | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?:
-    | GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion
-    | undefined;
 };
 
 export type GetV1EmployeesEmployeeIdCustomFieldsResponse = {
@@ -66,10 +66,10 @@ export const GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion$outbound
 
 /** @internal */
 export type GetV1EmployeesEmployeeIdCustomFieldsRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   employee_id: string;
   page?: number | undefined;
   per?: number | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -79,16 +79,16 @@ export const GetV1EmployeesEmployeeIdCustomFieldsRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1EmployeesEmployeeIdCustomFieldsRequest
   > = z.object({
-    employeeId: z.string(),
-    page: z.number().int().optional(),
-    per: z.number().int().optional(),
     xGustoAPIVersion:
       GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion$outboundSchema
         .default("2026-06-15"),
+    employeeId: z.string(),
+    page: z.number().int().optional(),
+    per: z.number().int().optional(),
   }).transform((v) => {
     return remap$(v, {
-      employeeId: "employee_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      employeeId: "employee_id",
     });
   });
 
