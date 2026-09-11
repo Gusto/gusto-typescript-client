@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
@@ -125,7 +124,7 @@ export const PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse$inbound
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "I9-Authorization": types.optional(I9Authorization$inboundSchema),
+    "I9-Authorization": I9Authorization$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",

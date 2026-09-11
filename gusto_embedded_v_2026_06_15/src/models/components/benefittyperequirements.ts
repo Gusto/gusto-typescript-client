@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DefaultValue = {
@@ -188,8 +187,8 @@ export const DefaultValue$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  value: types.optional(types.string()),
-  type: types.optional(types.string()),
+  value: z.string().optional(),
+  type: z.string().optional(),
 });
 
 export function defaultValueFromJSON(
@@ -208,11 +207,11 @@ export const EmployeeDeduction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  required: types.optional(types.boolean()),
-  editable: types.optional(types.boolean()),
+  required: z.boolean().optional(),
+  editable: z.boolean().optional(),
   default_value: z.nullable(z.lazy(() => DefaultValue$inboundSchema))
     .optional(),
-  choices: z.nullable(z.array(types.string())).optional(),
+  choices: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "default_value": "defaultValue",
@@ -235,8 +234,8 @@ export const BenefitTypeRequirementsDefaultValue$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  value: types.optional(types.string()),
-  type: types.optional(types.string()),
+  value: z.string().optional(),
+  type: z.string().optional(),
 });
 
 export function benefitTypeRequirementsDefaultValueFromJSON(
@@ -256,12 +255,12 @@ export const Contribution$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  required: types.optional(types.boolean()),
-  editable: types.optional(types.boolean()),
+  required: z.boolean().optional(),
+  editable: z.boolean().optional(),
   default_value: z.nullable(
     z.lazy(() => BenefitTypeRequirementsDefaultValue$inboundSchema),
   ).optional(),
-  choices: z.nullable(z.array(types.string())).optional(),
+  choices: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "default_value": "defaultValue",
@@ -285,8 +284,8 @@ export const BenefitTypeRequirementsDeductAsPercentageDefaultValue$inboundSchema
     z.ZodTypeDef,
     unknown
   > = z.object({
-    value: types.optional(types.string()),
-    type: types.optional(types.string()),
+    value: z.string().optional(),
+    type: z.string().optional(),
   });
 
 export function benefitTypeRequirementsDeductAsPercentageDefaultValueFromJSON(
@@ -311,14 +310,14 @@ export const DeductAsPercentage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  required: types.optional(types.boolean()),
-  editable: types.optional(types.boolean()),
+  required: z.boolean().optional(),
+  editable: z.boolean().optional(),
   default_value: z.nullable(
     z.lazy(() =>
       BenefitTypeRequirementsDeductAsPercentageDefaultValue$inboundSchema
     ),
   ).optional(),
-  choices: z.nullable(z.array(types.string())).optional(),
+  choices: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "default_value": "defaultValue",
@@ -339,8 +338,8 @@ export function deductAsPercentageFromJSON(
 export const BenefitTypeRequirementsCatchUpDefaultValue$inboundSchema:
   z.ZodType<BenefitTypeRequirementsCatchUpDefaultValue, z.ZodTypeDef, unknown> =
     z.object({
-      value: types.optional(types.string()),
-      type: types.optional(types.string()),
+      value: z.string().optional(),
+      type: z.string().optional(),
     });
 
 export function benefitTypeRequirementsCatchUpDefaultValueFromJSON(
@@ -362,12 +361,12 @@ export function benefitTypeRequirementsCatchUpDefaultValueFromJSON(
 /** @internal */
 export const CatchUp$inboundSchema: z.ZodType<CatchUp, z.ZodTypeDef, unknown> =
   z.object({
-    required: types.optional(types.boolean()),
-    editable: types.optional(types.boolean()),
+    required: z.boolean().optional(),
+    editable: z.boolean().optional(),
     default_value: z.nullable(
       z.lazy(() => BenefitTypeRequirementsCatchUpDefaultValue$inboundSchema),
     ).optional(),
-    choices: z.nullable(z.array(types.string())).optional(),
+    choices: z.nullable(z.array(z.string())).optional(),
   }).transform((v) => {
     return remap$(v, {
       "default_value": "defaultValue",
@@ -391,8 +390,8 @@ export const BenefitTypeRequirementsLimitOptionDefaultValue$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    value: types.optional(types.string()),
-    type: types.optional(types.string()),
+    value: z.string().optional(),
+    type: z.string().optional(),
   });
 
 export function benefitTypeRequirementsLimitOptionDefaultValueFromJSON(
@@ -417,12 +416,12 @@ export const LimitOption$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  required: types.optional(types.boolean()),
-  editable: types.optional(types.boolean()),
+  required: z.boolean().optional(),
+  editable: z.boolean().optional(),
   default_value: z.nullable(
     z.lazy(() => BenefitTypeRequirementsLimitOptionDefaultValue$inboundSchema),
   ).optional(),
-  choices: z.nullable(z.array(types.string())).optional(),
+  choices: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "default_value": "defaultValue",
@@ -446,8 +445,8 @@ export const BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue
     z.ZodTypeDef,
     unknown
   > = z.object({
-    value: types.optional(types.string()),
-    type: types.optional(types.string()),
+    value: z.string().optional(),
+    type: z.string().optional(),
   });
 
 export function benefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValueFromJSON(
@@ -471,14 +470,14 @@ export const CompanyContributionAnnualMaximum$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  required: types.optional(types.boolean()),
-  editable: types.optional(types.boolean()),
+  required: z.boolean().optional(),
+  editable: z.boolean().optional(),
   default_value: z.nullable(
     z.lazy(() =>
       BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue$inboundSchema
     ),
   ).optional(),
-  choices: z.nullable(z.array(types.string())).optional(),
+  choices: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "default_value": "defaultValue",
@@ -502,8 +501,8 @@ export const BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue$inbound
     z.ZodTypeDef,
     unknown
   > = z.object({
-    value: types.optional(types.string()),
-    type: types.optional(types.string()),
+    value: z.string().optional(),
+    type: z.string().optional(),
   });
 
 export function benefitTypeRequirementsCoverageSalaryMultiplierDefaultValueFromJSON(
@@ -527,14 +526,14 @@ export const CoverageSalaryMultiplier$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  required: types.optional(types.boolean()),
-  editable: types.optional(types.boolean()),
+  required: z.boolean().optional(),
+  editable: z.boolean().optional(),
   default_value: z.nullable(
     z.lazy(() =>
       BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue$inboundSchema
     ),
   ).optional(),
-  choices: z.nullable(z.array(types.string())).optional(),
+  choices: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "default_value": "defaultValue",
@@ -558,8 +557,8 @@ export const BenefitTypeRequirementsCoverageAmountDefaultValue$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    value: types.optional(types.string()),
-    type: types.optional(types.string()),
+    value: z.string().optional(),
+    type: z.string().optional(),
   });
 
 export function benefitTypeRequirementsCoverageAmountDefaultValueFromJSON(
@@ -584,14 +583,14 @@ export const CoverageAmount$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  required: types.optional(types.boolean()),
-  editable: types.optional(types.boolean()),
+  required: z.boolean().optional(),
+  editable: z.boolean().optional(),
   default_value: z.nullable(
     z.lazy(() =>
       BenefitTypeRequirementsCoverageAmountDefaultValue$inboundSchema
     ),
   ).optional(),
-  choices: z.nullable(z.array(types.string())).optional(),
+  choices: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "default_value": "defaultValue",
@@ -614,22 +613,19 @@ export const BenefitTypeRequirements$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  employee_deduction: types.optional(
-    z.lazy(() => EmployeeDeduction$inboundSchema),
-  ),
-  contribution: types.optional(z.lazy(() => Contribution$inboundSchema)),
-  deduct_as_percentage: types.optional(
-    z.lazy(() => DeductAsPercentage$inboundSchema),
-  ),
-  catch_up: types.optional(z.lazy(() => CatchUp$inboundSchema)),
-  limit_option: types.optional(z.lazy(() => LimitOption$inboundSchema)),
-  company_contribution_annual_maximum: types.optional(
-    z.lazy(() => CompanyContributionAnnualMaximum$inboundSchema),
-  ),
-  coverage_salary_multiplier: types.optional(
-    z.lazy(() => CoverageSalaryMultiplier$inboundSchema),
-  ),
-  coverage_amount: types.optional(z.lazy(() => CoverageAmount$inboundSchema)),
+  employee_deduction: z.lazy(() => EmployeeDeduction$inboundSchema).optional(),
+  contribution: z.lazy(() => Contribution$inboundSchema).optional(),
+  deduct_as_percentage: z.lazy(() => DeductAsPercentage$inboundSchema)
+    .optional(),
+  catch_up: z.lazy(() => CatchUp$inboundSchema).optional(),
+  limit_option: z.lazy(() => LimitOption$inboundSchema).optional(),
+  company_contribution_annual_maximum: z.lazy(() =>
+    CompanyContributionAnnualMaximum$inboundSchema
+  ).optional(),
+  coverage_salary_multiplier: z.lazy(() =>
+    CoverageSalaryMultiplier$inboundSchema
+  ).optional(),
+  coverage_amount: z.lazy(() => CoverageAmount$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "employee_deduction": "employeeDeduction",

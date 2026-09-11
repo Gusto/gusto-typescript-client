@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { RFCDate } from "../../types/rfcdate.js";
 
 /**
  * The signatory's home address.
@@ -41,7 +42,7 @@ export type SignatoryCreateRequest = {
   /**
    * The signatory's date of birth.
    */
-  birthday: Date;
+  birthday: RFCDate;
   /**
    * The signatory's email address.
    */
@@ -119,9 +120,7 @@ export const SignatoryCreateRequest$outboundSchema: z.ZodType<
   lastName: z.string(),
   title: z.string(),
   phone: z.string(),
-  birthday: z.date().transform(v =>
-    v.toISOString().slice(0, "YYYY-MM-DD".length)
-  ),
+  birthday: z.instanceof(RFCDate).transform(v => v.toString()),
   email: z.string(),
   ssn: z.string(),
   homeAddress: z.lazy(() => SignatoryCreateRequestHomeAddress$outboundSchema),

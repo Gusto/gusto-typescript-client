@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RefreshTokenAuthentication = {
@@ -42,12 +41,12 @@ export const RefreshTokenAuthentication$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  access_token: types.string(),
-  token_type: types.string().default("Bearer"),
-  expires_in: types.number().default(7200),
-  created_at: types.number(),
-  refresh_token: types.optional(types.string()),
-  scope: types.optional(types.string()),
+  access_token: z.string(),
+  token_type: z.string().default("Bearer"),
+  expires_in: z.number().default(7200),
+  created_at: z.number(),
+  refresh_token: z.string().optional(),
+  scope: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "access_token": "accessToken",

@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -64,10 +63,10 @@ export const I9AuthorizationDocumentOption$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   section: Section$inboundSchema,
-  description: types.string(),
-  document_type: types.string(),
-  document_title: z.array(types.string()),
-  common_choice: types.boolean(),
+  description: z.string(),
+  document_type: z.string(),
+  document_title: z.array(z.string()),
+  common_choice: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     "document_type": "documentType",

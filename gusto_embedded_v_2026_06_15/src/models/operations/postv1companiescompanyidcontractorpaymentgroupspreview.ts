@@ -7,7 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import {
   ContractorPaymentGroupPreview,
   ContractorPaymentGroupPreview$inboundSchema,
@@ -78,7 +78,7 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody =
     /**
      * Date when payments should be processed
      */
-    checkDate?: Date | undefined;
+    checkDate?: RFCDate | undefined;
   };
 
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest = {
@@ -176,9 +176,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody$o
     contractorPayments: z.array(
       z.lazy(() => ContractorPayments$outboundSchema),
     ),
-    checkDate: z.date().transform(v =>
-      v.toISOString().slice(0, "YYYY-MM-DD".length)
-    ).optional(),
+    checkDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
   }).transform((v) => {
     return remap$(v, {
       contractorPayments: "contractor_payments",
@@ -245,9 +243,8 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse$inbo
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Contractor-Payment-Group-Preview": types.optional(
-      ContractorPaymentGroupPreview$inboundSchema,
-    ),
+    "Contractor-Payment-Group-Preview":
+      ContractorPaymentGroupPreview$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",

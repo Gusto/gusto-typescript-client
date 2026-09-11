@@ -13,6 +13,6 @@ let value:
 
 | Field                                            | Type                                             | Required                                         | Description                                      |
 | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
-| `startDate`                                      | [Date](../../types/rfcdate.md)                   | :heavy_minus_sign:                               | The start date of the workweek.                  |
-| `endDate`                                        | [Date](../../types/rfcdate.md)                   | :heavy_minus_sign:                               | The end date of the workweek.                    |
+| `startDate`                                      | [RFCDate](../../types/rfcdate.md)                | :heavy_minus_sign:                               | The start date of the workweek.                  |
+| `endDate`                                        | [RFCDate](../../types/rfcdate.md)                | :heavy_minus_sign:                               | The end date of the workweek.                    |
 | `hours`                                          | *string*                                         | :heavy_minus_sign:                               | The number of hours worked during this workweek. |

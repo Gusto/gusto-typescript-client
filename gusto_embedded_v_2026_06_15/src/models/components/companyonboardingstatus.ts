@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -113,15 +112,14 @@ export const OnboardingStep$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  title: types.optional(types.string()),
-  id: types.optional(Id$inboundSchema),
-  required: types.optional(types.boolean()),
-  completed: types.optional(types.boolean()),
-  completed_at: z.nullable(types.string()).optional(),
-  skippable: types.optional(types.boolean()),
-  requirements: types.optional(
-    z.array(CompanyOnboardingStatusRequirements$inboundSchema),
-  ),
+  title: z.string().optional(),
+  id: Id$inboundSchema.optional(),
+  required: z.boolean().optional(),
+  completed: z.boolean().optional(),
+  completed_at: z.nullable(z.string()).optional(),
+  skippable: z.boolean().optional(),
+  requirements: z.array(CompanyOnboardingStatusRequirements$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "completed_at": "completedAt",
@@ -144,11 +142,10 @@ export const CompanyOnboardingStatus$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  onboarding_completed: types.optional(types.boolean()),
-  onboarding_steps: types.optional(
-    z.array(z.lazy(() => OnboardingStep$inboundSchema)),
-  ),
+  uuid: z.string(),
+  onboarding_completed: z.boolean().optional(),
+  onboarding_steps: z.array(z.lazy(() => OnboardingStep$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "onboarding_completed": "onboardingCompleted",

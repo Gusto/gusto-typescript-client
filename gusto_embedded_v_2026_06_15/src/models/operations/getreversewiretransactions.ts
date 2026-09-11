@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
@@ -117,9 +116,8 @@ export const GetReverseWireTransactionsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Reverse-Wire-Transaction-List": types.optional(
-    z.array(ReverseWireTransaction$inboundSchema),
-  ),
+  "Reverse-Wire-Transaction-List": z.array(ReverseWireTransaction$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",

@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -109,8 +108,8 @@ export const EarnedFastAchBlockers$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  blocker_type: types.optional(BlockerType$inboundSchema),
-  threshold: types.optional(types.number()),
+  blocker_type: BlockerType$inboundSchema.optional(),
+  threshold: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "blocker_type": "blockerType",
@@ -133,14 +132,14 @@ export const PaymentConfigs$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  company_uuid: types.optional(types.string()),
-  partner_uuid: types.optional(types.string()),
-  fast_payment_limit: z.nullable(types.string()).optional(),
-  payment_speed: types.optional(PaymentSpeed$inboundSchema),
-  partner_owned_disbursement: types.optional(types.boolean()),
-  earned_fast_ach_blockers: types.optional(
-    z.array(z.lazy(() => EarnedFastAchBlockers$inboundSchema)),
-  ),
+  company_uuid: z.string().optional(),
+  partner_uuid: z.string().optional(),
+  fast_payment_limit: z.nullable(z.string()).optional(),
+  payment_speed: PaymentSpeed$inboundSchema.optional(),
+  partner_owned_disbursement: z.boolean().optional(),
+  earned_fast_ach_blockers: z.array(
+    z.lazy(() => EarnedFastAchBlockers$inboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

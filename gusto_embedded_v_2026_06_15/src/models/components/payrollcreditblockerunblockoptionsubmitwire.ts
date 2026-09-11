@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PayrollCreditBlockerUnblockOptionSubmitWireMetadata = {
@@ -46,9 +45,11 @@ export const PayrollCreditBlockerUnblockOptionSubmitWireMetadata$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    wire_in_amount: types.string(),
-    wire_in_deadline: types.date(),
-    wire_in_request_uuid: types.string(),
+    wire_in_amount: z.string(),
+    wire_in_deadline: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    wire_in_request_uuid: z.string(),
   }).transform((v) => {
     return remap$(v, {
       "wire_in_amount": "wireInAmount",
@@ -80,8 +81,8 @@ export const PayrollCreditBlockerUnblockOptionSubmitWire$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    unblock_type: types.literal("submit_wire"),
-    check_date: types.string(),
+    unblock_type: z.literal("submit_wire"),
+    check_date: z.string(),
     metadata: z.lazy(() =>
       PayrollCreditBlockerUnblockOptionSubmitWireMetadata$inboundSchema
     ),

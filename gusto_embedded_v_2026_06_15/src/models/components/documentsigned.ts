@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -144,8 +143,8 @@ export const DocumentSignedPages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  image_url: types.optional(types.string()),
-  page_number: types.optional(types.number()),
+  image_url: z.string().optional(),
+  page_number: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     "image_url": "imageUrl",
@@ -169,15 +168,15 @@ export const DocumentSignedFields$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  key: z.nullable(types.string()).optional(),
-  value: z.nullable(types.string()).optional(),
-  x: z.nullable(types.number()).optional(),
-  y: z.nullable(types.number()).optional(),
-  width: z.nullable(types.number()).optional(),
-  height: z.nullable(types.number()).optional(),
-  page_number: z.nullable(types.number()).optional(),
-  data_type: types.optional(types.string()),
-  required: types.optional(types.boolean()),
+  key: z.nullable(z.string()).optional(),
+  value: z.nullable(z.string()).optional(),
+  x: z.nullable(z.number().int()).optional(),
+  y: z.nullable(z.number().int()).optional(),
+  width: z.nullable(z.number().int()).optional(),
+  height: z.nullable(z.number().int()).optional(),
+  page_number: z.nullable(z.number().int()).optional(),
+  data_type: z.string().optional(),
+  required: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "page_number": "pageNumber",
@@ -201,23 +200,19 @@ export const DocumentSigned$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.optional(types.string()),
-  title: types.optional(types.string()),
-  name: types.optional(types.string()),
-  recipient_type: types.optional(DocumentSignedRecipientType$inboundSchema),
-  recipient_uuid: types.optional(types.string()),
-  pages: types.optional(
-    z.array(z.lazy(() => DocumentSignedPages$inboundSchema)),
-  ),
-  fields: types.optional(
-    z.array(z.lazy(() => DocumentSignedFields$inboundSchema)),
-  ),
-  signed_at: z.nullable(types.string()).optional(),
-  description: types.optional(types.string()),
-  requires_signing: types.optional(types.boolean()),
-  draft: types.optional(types.boolean()),
-  year: z.nullable(types.number()).optional(),
-  quarter: z.nullable(types.number()).optional(),
+  uuid: z.string().optional(),
+  title: z.string().optional(),
+  name: z.string().optional(),
+  recipient_type: DocumentSignedRecipientType$inboundSchema.optional(),
+  recipient_uuid: z.string().optional(),
+  pages: z.array(z.lazy(() => DocumentSignedPages$inboundSchema)).optional(),
+  fields: z.array(z.lazy(() => DocumentSignedFields$inboundSchema)).optional(),
+  signed_at: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  requires_signing: z.boolean().optional(),
+  draft: z.boolean().optional(),
+  year: z.nullable(z.number().int()).optional(),
+  quarter: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "recipient_type": "recipientType",

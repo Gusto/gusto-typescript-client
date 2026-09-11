@@ -7,7 +7,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -66,7 +65,7 @@ export const PayrollBlocker$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   key: Key$inboundSchema,
-  message: types.string(),
+  message: z.string(),
 });
 
 export function payrollBlockerFromJSON(

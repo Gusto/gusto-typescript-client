@@ -129,6 +129,7 @@ scope: `external_payrolls:write`
 <!-- UsageSnippet language="typescript" operationID="post-v1-external-payroll" method="post" path="/v1/companies/{company_uuid}/external_payrolls" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2026-06-15";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -138,9 +139,9 @@ async function run() {
   const result = await gustoEmbedded.externalPayrolls.create({
     companyUuid: "<id>",
     externalPayrollCreateRequest: {
-      checkDate: new Date("2022-06-03"),
-      paymentPeriodStartDate: new Date("2022-05-15"),
-      paymentPeriodEndDate: new Date("2022-05-30"),
+      checkDate: new RFCDate("2022-06-03"),
+      paymentPeriodStartDate: new RFCDate("2022-05-15"),
+      paymentPeriodEndDate: new RFCDate("2022-05-30"),
     },
   });
 
@@ -157,6 +158,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-06-15/core.js";
 import { externalPayrollsCreate } from "@gusto/embedded-api-v-2026-06-15/funcs/externalPayrollsCreate.js";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -168,9 +170,9 @@ async function run() {
   const res = await externalPayrollsCreate(gustoEmbedded, {
     companyUuid: "<id>",
     externalPayrollCreateRequest: {
-      checkDate: new Date("2022-06-03"),
-      paymentPeriodStartDate: new Date("2022-05-15"),
-      paymentPeriodEndDate: new Date("2022-05-30"),
+      checkDate: new RFCDate("2022-06-03"),
+      paymentPeriodStartDate: new RFCDate("2022-05-15"),
+      paymentPeriodEndDate: new RFCDate("2022-05-30"),
     },
   });
   if (res.ok) {

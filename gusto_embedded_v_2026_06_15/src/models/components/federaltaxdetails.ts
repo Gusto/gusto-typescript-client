@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const TaxPayerType = {
@@ -182,7 +181,7 @@ export const EinVerification$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  status: types.optional(FederalTaxDetailsStatus$inboundSchema),
+  status: FederalTaxDetailsStatus$inboundSchema.optional(),
 });
 
 export function einVerificationFromJSON(
@@ -201,16 +200,16 @@ export const FederalTaxDetails$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  version: types.optional(types.string()),
+  version: z.string().optional(),
   tax_payer_type: z.nullable(TaxPayerType$inboundSchema).optional(),
-  taxable_as_scorp: types.optional(types.boolean()),
-  filing_form: types.optional(FilingForm$inboundSchema),
-  has_ein: types.optional(types.boolean()),
-  ein_verified: types.optional(types.boolean()),
-  ein_verification: types.optional(z.lazy(() => EinVerification$inboundSchema)),
-  legal_name: types.optional(types.string()),
-  effective_date: types.optional(types.string()),
-  deposit_schedule: types.optional(types.string()),
+  taxable_as_scorp: z.boolean().optional(),
+  filing_form: FilingForm$inboundSchema.optional(),
+  has_ein: z.boolean().optional(),
+  ein_verified: z.boolean().optional(),
+  ein_verification: z.lazy(() => EinVerification$inboundSchema).optional(),
+  legal_name: z.string().optional(),
+  effective_date: z.string().optional(),
+  deposit_schedule: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tax_payer_type": "taxPayerType",

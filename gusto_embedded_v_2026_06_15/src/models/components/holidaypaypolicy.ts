@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type NewYearsDay = {
@@ -124,9 +123,9 @@ export const NewYearsDay$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  selected: types.optional(types.boolean()),
-  name: types.optional(types.string()),
-  date: types.optional(types.string()),
+  selected: z.boolean().optional(),
+  name: z.string().optional(),
+  date: z.string().optional(),
 });
 
 export function newYearsDayFromJSON(
@@ -142,9 +141,9 @@ export function newYearsDayFromJSON(
 /** @internal */
 export const MlkDay$inboundSchema: z.ZodType<MlkDay, z.ZodTypeDef, unknown> = z
   .object({
-    selected: types.optional(types.boolean()),
-    name: types.optional(types.string()),
-    date: types.optional(types.string()),
+    selected: z.boolean().optional(),
+    name: z.string().optional(),
+    date: z.string().optional(),
   });
 
 export function mlkDayFromJSON(
@@ -163,9 +162,9 @@ export const PresidentsDay$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  selected: types.optional(types.boolean()),
-  name: types.optional(types.string()),
-  date: types.optional(types.string()),
+  selected: z.boolean().optional(),
+  name: z.string().optional(),
+  date: z.string().optional(),
 });
 
 export function presidentsDayFromJSON(
@@ -184,9 +183,9 @@ export const MemorialDay$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  selected: types.optional(types.boolean()),
-  name: types.optional(types.string()),
-  date: types.optional(types.string()),
+  selected: z.boolean().optional(),
+  name: z.string().optional(),
+  date: z.string().optional(),
 });
 
 export function memorialDayFromJSON(
@@ -205,9 +204,9 @@ export const Juneteenth$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  selected: types.optional(types.boolean()),
-  name: types.optional(types.string()),
-  date: types.optional(types.string()),
+  selected: z.boolean().optional(),
+  name: z.string().optional(),
+  date: z.string().optional(),
 });
 
 export function juneteenthFromJSON(
@@ -226,9 +225,9 @@ export const IndependenceDay$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  selected: types.optional(types.boolean()),
-  name: types.optional(types.string()),
-  date: types.optional(types.string()),
+  selected: z.boolean().optional(),
+  name: z.string().optional(),
+  date: z.string().optional(),
 });
 
 export function independenceDayFromJSON(
@@ -247,9 +246,9 @@ export const LaborDay$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  selected: types.optional(types.boolean()),
-  name: types.optional(types.string()),
-  date: types.optional(types.string()),
+  selected: z.boolean().optional(),
+  name: z.string().optional(),
+  date: z.string().optional(),
 });
 
 export function laborDayFromJSON(
@@ -268,9 +267,9 @@ export const ColumbusDay$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  selected: types.optional(types.boolean()),
-  name: types.optional(types.string()),
-  date: types.optional(types.string()),
+  selected: z.boolean().optional(),
+  name: z.string().optional(),
+  date: z.string().optional(),
 });
 
 export function columbusDayFromJSON(
@@ -289,9 +288,9 @@ export const VeteransDay$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  selected: types.optional(types.boolean()),
-  name: types.optional(types.string()),
-  date: types.optional(types.string()),
+  selected: z.boolean().optional(),
+  name: z.string().optional(),
+  date: z.string().optional(),
 });
 
 export function veteransDayFromJSON(
@@ -310,9 +309,9 @@ export const Thanksgiving$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  selected: types.optional(types.boolean()),
-  name: types.optional(types.string()),
-  date: types.optional(types.string()),
+  selected: z.boolean().optional(),
+  name: z.string().optional(),
+  date: z.string().optional(),
 });
 
 export function thanksgivingFromJSON(
@@ -331,9 +330,9 @@ export const ChristmasDay$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  selected: types.optional(types.boolean()),
-  name: types.optional(types.string()),
-  date: types.optional(types.string()),
+  selected: z.boolean().optional(),
+  name: z.string().optional(),
+  date: z.string().optional(),
 });
 
 export function christmasDayFromJSON(
@@ -352,17 +351,17 @@ export const FederalHolidays$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  new_years_day: types.optional(z.lazy(() => NewYearsDay$inboundSchema)),
-  mlk_day: types.optional(z.lazy(() => MlkDay$inboundSchema)),
-  presidents_day: types.optional(z.lazy(() => PresidentsDay$inboundSchema)),
-  memorial_day: types.optional(z.lazy(() => MemorialDay$inboundSchema)),
-  juneteenth: types.optional(z.lazy(() => Juneteenth$inboundSchema)),
-  independence_day: types.optional(z.lazy(() => IndependenceDay$inboundSchema)),
-  labor_day: types.optional(z.lazy(() => LaborDay$inboundSchema)),
-  columbus_day: types.optional(z.lazy(() => ColumbusDay$inboundSchema)),
-  veterans_day: types.optional(z.lazy(() => VeteransDay$inboundSchema)),
-  thanksgiving: types.optional(z.lazy(() => Thanksgiving$inboundSchema)),
-  christmas_day: types.optional(z.lazy(() => ChristmasDay$inboundSchema)),
+  new_years_day: z.lazy(() => NewYearsDay$inboundSchema).optional(),
+  mlk_day: z.lazy(() => MlkDay$inboundSchema).optional(),
+  presidents_day: z.lazy(() => PresidentsDay$inboundSchema).optional(),
+  memorial_day: z.lazy(() => MemorialDay$inboundSchema).optional(),
+  juneteenth: z.lazy(() => Juneteenth$inboundSchema).optional(),
+  independence_day: z.lazy(() => IndependenceDay$inboundSchema).optional(),
+  labor_day: z.lazy(() => LaborDay$inboundSchema).optional(),
+  columbus_day: z.lazy(() => ColumbusDay$inboundSchema).optional(),
+  veterans_day: z.lazy(() => VeteransDay$inboundSchema).optional(),
+  thanksgiving: z.lazy(() => Thanksgiving$inboundSchema).optional(),
+  christmas_day: z.lazy(() => ChristmasDay$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "new_years_day": "newYearsDay",
@@ -393,7 +392,7 @@ export const HolidayPayPolicyEmployees$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.optional(types.string()),
+  uuid: z.string().optional(),
 });
 
 export function holidayPayPolicyEmployeesFromJSON(
@@ -412,8 +411,8 @@ export const HolidayPayPolicy$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  version: types.string(),
-  company_uuid: types.string(),
+  version: z.string(),
+  company_uuid: z.string(),
   federal_holidays: z.lazy(() => FederalHolidays$inboundSchema),
   employees: z.array(z.lazy(() => HolidayPayPolicyEmployees$inboundSchema)),
 }).transform((v) => {

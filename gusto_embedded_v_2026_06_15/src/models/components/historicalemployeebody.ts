@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { RFCDate } from "../../types/rfcdate.js";
 
 /**
  * Primary work location for this historical employment row.
@@ -48,7 +49,7 @@ export type HistoricalEmployeeBodyTermination = {
   /**
    * Last day of employment (termination date). This is recorded on the employment; use the calendar date the person stopped working for the company.
    */
-  effectiveDate: Date;
+  effectiveDate: RFCDate;
 };
 
 /**
@@ -58,7 +59,7 @@ export type HistoricalEmployeeBodyJob = {
   /**
    * First calendar day the employee was employed in this role at the company.
    */
-  hireDate: Date;
+  hireDate: RFCDate;
 };
 
 /**
@@ -102,7 +103,7 @@ export type HistoricalEmployeeBody = {
   /**
    * Date of birth (YYYY-MM-DD).
    */
-  dateOfBirth: Date;
+  dateOfBirth: RFCDate;
   /**
    * Nine-digit U.S. Social Security number **without** dashes or spaces. Must pass Gusto/SSA validation in production; use a valid test SSN in sandbox environments.
    *
@@ -199,9 +200,7 @@ export const HistoricalEmployeeBodyTermination$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   HistoricalEmployeeBodyTermination
 > = z.object({
-  effectiveDate: z.date().transform(v =>
-    v.toISOString().slice(0, "YYYY-MM-DD".length)
-  ),
+  effectiveDate: z.instanceof(RFCDate).transform(v => v.toString()),
 }).transform((v) => {
   return remap$(v, {
     effectiveDate: "effective_date",
@@ -229,9 +228,7 @@ export const HistoricalEmployeeBodyJob$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   HistoricalEmployeeBodyJob
 > = z.object({
-  hireDate: z.date().transform(v =>
-    v.toISOString().slice(0, "YYYY-MM-DD".length)
-  ),
+  hireDate: z.instanceof(RFCDate).transform(v => v.toString()),
 }).transform((v) => {
   return remap$(v, {
     hireDate: "hire_date",
@@ -301,9 +298,7 @@ export const HistoricalEmployeeBody$outboundSchema: z.ZodType<
   middleInitial: z.string().optional(),
   lastName: z.string(),
   preferredFirstName: z.string().optional(),
-  dateOfBirth: z.date().transform(v =>
-    v.toISOString().slice(0, "YYYY-MM-DD".length)
-  ),
+  dateOfBirth: z.instanceof(RFCDate).transform(v => v.toString()),
   ssn: z.string(),
   workAddress: z.lazy(() => WorkAddress$outboundSchema),
   homeAddress: z.lazy(() => HomeAddress$outboundSchema),

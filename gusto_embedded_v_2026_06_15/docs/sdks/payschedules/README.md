@@ -361,6 +361,7 @@ scope: `pay_schedules:write`
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-pay_schedules" method="post" path="/v1/companies/{company_id}/pay_schedules" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2026-06-15";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -371,8 +372,8 @@ async function run() {
     companyId: "<id>",
     payScheduleCreateRequest: {
       frequency: "Twice per month",
-      anchorPayDate: new Date("2020-05-15"),
-      anchorEndOfPayPeriod: new Date("2020-05-08"),
+      anchorPayDate: new RFCDate("2020-05-15"),
+      anchorEndOfPayPeriod: new RFCDate("2020-05-08"),
       day1: 15,
       day2: 31,
       customName: "demo pay schedule",
@@ -393,6 +394,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-06-15/core.js";
 import { paySchedulesCreate } from "@gusto/embedded-api-v-2026-06-15/funcs/paySchedulesCreate.js";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -405,8 +407,8 @@ async function run() {
     companyId: "<id>",
     payScheduleCreateRequest: {
       frequency: "Twice per month",
-      anchorPayDate: new Date("2020-05-15"),
-      anchorEndOfPayPeriod: new Date("2020-05-08"),
+      anchorPayDate: new RFCDate("2020-05-15"),
+      anchorEndOfPayPeriod: new RFCDate("2020-05-08"),
       day1: 15,
       day2: 31,
       customName: "demo pay schedule",
@@ -477,6 +479,7 @@ scope: `pay_schedules:write`
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-pay_schedules-preview" method="get" path="/v1/companies/{company_id}/pay_schedules/preview" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2026-06-15";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -486,8 +489,8 @@ async function run() {
   const result = await gustoEmbedded.paySchedules.getPreview({
     companyId: "<id>",
     frequency: "Twice per month",
-    anchorPayDate: new Date("2020-05-15"),
-    anchorEndOfPayPeriod: new Date("2020-05-08"),
+    anchorPayDate: new RFCDate("2020-05-15"),
+    anchorEndOfPayPeriod: new RFCDate("2020-05-08"),
     day1: 15,
     day2: 31,
   });
@@ -505,6 +508,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-06-15/core.js";
 import { paySchedulesGetPreview } from "@gusto/embedded-api-v-2026-06-15/funcs/paySchedulesGetPreview.js";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -516,8 +520,8 @@ async function run() {
   const res = await paySchedulesGetPreview(gustoEmbedded, {
     companyId: "<id>",
     frequency: "Twice per month",
-    anchorPayDate: new Date("2020-05-15"),
-    anchorEndOfPayPeriod: new Date("2020-05-08"),
+    anchorPayDate: new RFCDate("2020-05-15"),
+    anchorEndOfPayPeriod: new RFCDate("2020-05-08"),
     day1: 15,
     day2: 31,
   });
@@ -711,6 +715,7 @@ scope: `pay_schedules:write`
 <!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_id-pay_schedules-pay_schedule_id" method="put" path="/v1/companies/{company_id}/pay_schedules/{pay_schedule_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2026-06-15";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -724,8 +729,8 @@ async function run() {
       version: "68934a3e9455fa72420237eb05902327",
       autoPayroll: true,
       frequency: "Twice per month",
-      anchorPayDate: new Date("2021-10-15"),
-      anchorEndOfPayPeriod: new Date("2021-10-15"),
+      anchorPayDate: new RFCDate("2021-10-15"),
+      anchorEndOfPayPeriod: new RFCDate("2021-10-15"),
       day1: 15,
       day2: 31,
       customName: "demo pay schedule",
@@ -746,6 +751,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-06-15/core.js";
 import { paySchedulesUpdate } from "@gusto/embedded-api-v-2026-06-15/funcs/paySchedulesUpdate.js";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -761,8 +767,8 @@ async function run() {
       version: "68934a3e9455fa72420237eb05902327",
       autoPayroll: true,
       frequency: "Twice per month",
-      anchorPayDate: new Date("2021-10-15"),
-      anchorEndOfPayPeriod: new Date("2021-10-15"),
+      anchorPayDate: new RFCDate("2021-10-15"),
+      anchorEndOfPayPeriod: new RFCDate("2021-10-15"),
       day1: 15,
       day2: 31,
       customName: "demo pay schedule",

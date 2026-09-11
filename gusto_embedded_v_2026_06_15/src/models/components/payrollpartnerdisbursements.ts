@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -90,13 +89,11 @@ export const PayrollPartnerDisbursementsDisbursements$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  employee_uuid: types.optional(types.string()),
-  payment_method: types.optional(
-    PayrollPartnerDisbursementsPaymentMethod$inboundSchema,
-  ),
-  payment_status: types.optional(
-    PayrollPartnerDisbursementsPaymentStatus$inboundSchema,
-  ),
+  employee_uuid: z.string().optional(),
+  payment_method: PayrollPartnerDisbursementsPaymentMethod$inboundSchema
+    .optional(),
+  payment_status: PayrollPartnerDisbursementsPaymentStatus$inboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",
@@ -127,12 +124,10 @@ export const PayrollPartnerDisbursements$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  payroll_uuid: types.optional(types.string()),
-  disbursements: types.optional(
-    z.array(
-      z.lazy(() => PayrollPartnerDisbursementsDisbursements$inboundSchema),
-    ),
-  ),
+  payroll_uuid: z.string().optional(),
+  disbursements: z.array(
+    z.lazy(() => PayrollPartnerDisbursementsDisbursements$inboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "payroll_uuid": "payrollUuid",

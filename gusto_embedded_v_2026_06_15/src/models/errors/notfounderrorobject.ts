@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { GustoEmbeddedError } from "./gustoembeddederror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
 
@@ -67,9 +66,9 @@ export class NotFoundErrorObject extends GustoEmbeddedError {
 /** @internal */
 export const Errors$inboundSchema: z.ZodType<Errors, z.ZodTypeDef, unknown> = z
   .object({
-    error_key: types.string(),
-    category: types.string(),
-    message: types.optional(types.string()),
+    error_key: z.string(),
+    category: z.string(),
+    message: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "error_key": "errorKey",

@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -84,11 +83,13 @@ export const PayPeriodPayroll$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  payroll_uuid: types.optional(types.string()),
-  check_date: types.optional(types.string()),
-  processed: types.optional(types.boolean()),
-  payroll_deadline: types.optional(types.date()),
-  payroll_type: types.optional(PayrollType$inboundSchema),
+  payroll_uuid: z.string().optional(),
+  check_date: z.string().optional(),
+  processed: z.boolean().optional(),
+  payroll_deadline: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
+  ).optional(),
+  payroll_type: PayrollType$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "payroll_uuid": "payrollUuid",
@@ -114,10 +115,10 @@ export const PayPeriod$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  start_date: types.optional(types.string()),
-  end_date: types.optional(types.string()),
-  pay_schedule_uuid: types.optional(types.string()),
-  payroll: types.optional(z.lazy(() => PayPeriodPayroll$inboundSchema)),
+  start_date: z.string().optional(),
+  end_date: z.string().optional(),
+  pay_schedule_uuid: z.string().optional(),
+  payroll: z.lazy(() => PayPeriodPayroll$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "start_date": "startDate",

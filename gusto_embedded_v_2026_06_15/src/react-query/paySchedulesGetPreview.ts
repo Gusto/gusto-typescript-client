@@ -27,6 +27,7 @@ import {
   GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
 } from "../models/operations/getv1companiescompanyidpayschedulespreview.js";
+import { RFCDate } from "../types/rfcdate.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -133,11 +134,11 @@ export function setPaySchedulesGetPreviewData(
         | GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion
         | undefined;
       frequency: Frequency;
-      anchorPayDate: Date;
-      anchorEndOfPayPeriod: Date;
+      anchorPayDate: RFCDate;
+      anchorEndOfPayPeriod: RFCDate;
       day1?: number | undefined;
       day2?: number | undefined;
-      endDate?: Date | undefined;
+      endDate?: RFCDate | undefined;
       payScheduleUuid?: string | undefined;
     },
   ],
@@ -158,11 +159,11 @@ export function invalidatePaySchedulesGetPreview(
           | GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion
           | undefined;
         frequency: Frequency;
-        anchorPayDate: Date;
-        anchorEndOfPayPeriod: Date;
+        anchorPayDate: RFCDate;
+        anchorEndOfPayPeriod: RFCDate;
         day1?: number | undefined;
         day2?: number | undefined;
-        endDate?: Date | undefined;
+        endDate?: RFCDate | undefined;
         payScheduleUuid?: string | undefined;
       },
     ]

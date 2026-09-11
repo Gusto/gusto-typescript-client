@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ContractorPayment,
@@ -63,8 +62,8 @@ export type ContractorPaymentSummary = {
 /** @internal */
 export const Total$inboundSchema: z.ZodType<Total, z.ZodTypeDef, unknown> = z
   .object({
-    reimbursements: types.optional(types.string()),
-    wages: types.optional(types.string()),
+    reimbursements: z.string().optional(),
+    wages: z.string().optional(),
   });
 
 export function totalFromJSON(
@@ -83,10 +82,10 @@ export const ContractorPayments$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  contractor_uuid: types.optional(types.number()),
-  reimbursement_total: types.optional(types.string()),
-  wage_total: types.optional(types.string()),
-  payments: types.optional(z.array(ContractorPayment$inboundSchema)),
+  contractor_uuid: z.number().optional(),
+  reimbursement_total: z.string().optional(),
+  wage_total: z.string().optional(),
+  payments: z.array(ContractorPayment$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "contractor_uuid": "contractorUuid",
@@ -111,10 +110,9 @@ export const ContractorPaymentSummary$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  total: types.optional(z.lazy(() => Total$inboundSchema)),
-  contractor_payments: types.optional(
-    z.array(z.lazy(() => ContractorPayments$inboundSchema)),
-  ),
+  total: z.lazy(() => Total$inboundSchema).optional(),
+  contractor_payments: z.array(z.lazy(() => ContractorPayments$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "contractor_payments": "contractorPayments",

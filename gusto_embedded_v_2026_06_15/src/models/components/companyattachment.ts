@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -74,10 +73,10 @@ export const CompanyAttachment$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  name: types.string(),
+  uuid: z.string(),
+  name: z.string(),
   category: Category$inboundSchema,
-  upload_time: types.string(),
+  upload_time: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "upload_time": "uploadTime",

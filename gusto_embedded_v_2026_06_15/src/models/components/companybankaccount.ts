@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -180,18 +179,18 @@ export const CompanyBankAccount$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  company_uuid: types.optional(types.string()),
-  account_type: types.optional(AccountType$inboundSchema),
-  routing_number: types.optional(types.string()),
-  hidden_account_number: types.optional(types.string()),
-  verification_status: types.optional(VerificationStatus$inboundSchema),
-  verification_type: types.optional(VerificationType$inboundSchema),
+  uuid: z.string(),
+  company_uuid: z.string().optional(),
+  account_type: AccountType$inboundSchema.optional(),
+  routing_number: z.string().optional(),
+  hidden_account_number: z.string().optional(),
+  verification_status: VerificationStatus$inboundSchema.optional(),
+  verification_type: VerificationType$inboundSchema.optional(),
   plaid_status: z.nullable(PlaidStatus$inboundSchema).optional(),
-  last_cached_balance: z.nullable(types.string()).optional(),
-  balance_fetched_date: z.nullable(types.string()).optional(),
-  name: types.optional(types.string()),
-  reverse_wire_enabled: z.nullable(types.boolean()).optional(),
+  last_cached_balance: z.nullable(z.string()).optional(),
+  balance_fetched_date: z.nullable(z.string()).optional(),
+  name: z.string().optional(),
+  reverse_wire_enabled: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

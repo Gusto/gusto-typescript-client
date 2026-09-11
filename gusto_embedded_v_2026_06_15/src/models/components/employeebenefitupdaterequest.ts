@@ -5,7 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { smartUnion } from "../../types/smartUnion.js";
+import { RFCDate } from "../../types/rfcdate.js";
 
 /**
  * The company contribution scheme.
@@ -141,11 +141,11 @@ export type EmployeeBenefitUpdateRequest = {
   /**
    * The date the employee benefit will start.
    */
-  effectiveDate?: Date | undefined;
+  effectiveDate?: RFCDate | undefined;
   /**
    * The date the employee benefit will expire. A null value indicates the benefit will not expire.
    */
-  expirationDate?: Date | null | undefined;
+  expirationDate?: RFCDate | null | undefined;
   /**
    * An object representing the type and value of the company contribution.
    */
@@ -243,7 +243,7 @@ export const EmployeeBenefitUpdateRequestValue$outboundSchema: z.ZodType<
   EmployeeBenefitUpdateRequestValue$Outbound,
   z.ZodTypeDef,
   EmployeeBenefitUpdateRequestValue
-> = smartUnion([
+> = z.union([
   z.string(),
   z.array(z.lazy(() => EmployeeBenefitUpdateRequestValue2$outboundSchema)),
 ]);
@@ -274,7 +274,7 @@ export const EmployeeBenefitUpdateRequestContribution$outboundSchema: z.ZodType<
   EmployeeBenefitUpdateRequestContribution
 > = z.object({
   type: EmployeeBenefitUpdateRequestType$outboundSchema.optional(),
-  value: smartUnion([
+  value: z.union([
     z.string(),
     z.array(z.lazy(() => EmployeeBenefitUpdateRequestValue2$outboundSchema)),
   ]).optional(),
@@ -334,12 +334,9 @@ export const EmployeeBenefitUpdateRequest$outboundSchema: z.ZodType<
   employeeDeduction: z.string().default("0.00"),
   deductAsPercentage: z.boolean().optional(),
   employeeDeductionAnnualMaximum: z.nullable(z.string()).optional(),
-  effectiveDate: z.date().transform(v =>
-    v.toISOString().slice(0, "YYYY-MM-DD".length)
-  ).optional(),
-  expirationDate: z.nullable(
-    z.date().transform(v => v.toISOString().slice(0, "YYYY-MM-DD".length)),
-  ).optional(),
+  effectiveDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  expirationDate: z.nullable(z.instanceof(RFCDate).transform(v => v.toString()))
+    .optional(),
   contribution: z.lazy(() =>
     EmployeeBenefitUpdateRequestContribution$outboundSchema
   ).optional(),

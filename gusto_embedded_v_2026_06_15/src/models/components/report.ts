@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Report = {
@@ -27,9 +26,9 @@ export type Report = {
 /** @internal */
 export const Report$inboundSchema: z.ZodType<Report, z.ZodTypeDef, unknown> = z
   .object({
-    request_uuid: types.optional(types.string()),
-    status: types.optional(types.string()),
-    report_urls: types.optional(z.array(types.string())),
+    request_uuid: z.string().optional(),
+    status: z.string().optional(),
+    report_urls: z.array(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "request_uuid": "requestUuid",

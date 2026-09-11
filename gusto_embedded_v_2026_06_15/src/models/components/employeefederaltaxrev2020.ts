@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -71,17 +70,17 @@ export const EmployeeFederalTaxRev2020$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  version: types.string(),
-  employee_uuid: types.optional(types.string()),
-  employee_id: types.optional(types.number()),
-  company_id: types.optional(types.number()),
-  w4_data_type: types.literal("rev_2020_w4"),
-  filing_status: types.nullable(types.string()),
-  extra_withholding: types.nullable(types.string()),
-  two_jobs: types.nullable(types.boolean()),
-  dependents_amount: types.nullable(types.string()),
-  other_income: types.nullable(types.string()),
-  deductions: types.nullable(types.string()),
+  version: z.string(),
+  employee_uuid: z.string().optional(),
+  employee_id: z.number().int().optional(),
+  company_id: z.number().int().optional(),
+  w4_data_type: z.literal("rev_2020_w4"),
+  filing_status: z.nullable(z.string()),
+  extra_withholding: z.nullable(z.string()),
+  two_jobs: z.nullable(z.boolean()),
+  dependents_amount: z.nullable(z.string()),
+  other_income: z.nullable(z.string()),
+  deductions: z.nullable(z.string()),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",

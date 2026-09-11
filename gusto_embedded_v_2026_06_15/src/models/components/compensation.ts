@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FlsaStatusType,
@@ -108,9 +107,9 @@ export const MinimumWages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.optional(types.string()),
-  wage: types.optional(types.string()),
-  effective_date: types.optional(types.string()),
+  uuid: z.string().optional(),
+  wage: z.string().optional(),
+  effective_date: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "effective_date": "effectiveDate",
@@ -133,19 +132,17 @@ export const Compensation$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  version: types.optional(types.string()),
-  job_uuid: types.optional(types.string()),
-  employee_uuid: types.optional(types.string()),
-  rate: types.optional(types.string()),
-  payment_unit: types.optional(PaymentUnit$inboundSchema),
-  flsa_status: types.optional(FlsaStatusType$inboundSchema),
-  title: types.optional(types.string()),
-  effective_date: types.optional(types.string()),
-  adjust_for_minimum_wage: types.optional(types.boolean()),
-  minimum_wages: types.optional(
-    z.array(z.lazy(() => MinimumWages$inboundSchema)),
-  ),
+  uuid: z.string(),
+  version: z.string().optional(),
+  job_uuid: z.string().optional(),
+  employee_uuid: z.string().optional(),
+  rate: z.string().optional(),
+  payment_unit: PaymentUnit$inboundSchema.optional(),
+  flsa_status: FlsaStatusType$inboundSchema.optional(),
+  title: z.string().optional(),
+  effective_date: z.string().optional(),
+  adjust_for_minimum_wage: z.boolean().optional(),
+  minimum_wages: z.array(z.lazy(() => MinimumWages$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "job_uuid": "jobUuid",

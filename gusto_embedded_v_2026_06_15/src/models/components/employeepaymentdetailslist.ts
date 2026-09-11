@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -115,14 +114,14 @@ export const EmployeePaymentDetailsListSplits$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  bank_account_uuid: types.optional(types.string()),
-  name: types.optional(types.string()),
-  hidden_account_number: types.optional(types.string()),
-  encrypted_account_number: z.nullable(types.string()).optional(),
-  routing_number: types.optional(types.string()),
-  account_type: types.optional(types.string()),
-  priority: types.optional(types.number()),
-  split_amount: z.nullable(types.number()).optional(),
+  bank_account_uuid: z.string().optional(),
+  name: z.string().optional(),
+  hidden_account_number: z.string().optional(),
+  encrypted_account_number: z.nullable(z.string()).optional(),
+  routing_number: z.string().optional(),
+  account_type: z.string().optional(),
+  priority: z.number().int().optional(),
+  split_amount: z.nullable(z.number()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "bank_account_uuid": "bankAccountUuid",
@@ -150,12 +149,11 @@ export const EmployeePaymentDetailsList$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  employee_uuid: types.optional(types.string()),
-  first_name: types.optional(types.string()),
-  last_name: types.optional(types.string()),
-  payment_method: types.optional(
-    EmployeePaymentDetailsListPaymentMethod$inboundSchema,
-  ),
+  employee_uuid: z.string().optional(),
+  first_name: z.string().optional(),
+  last_name: z.string().optional(),
+  payment_method: EmployeePaymentDetailsListPaymentMethod$inboundSchema
+    .optional(),
   split_by: z.nullable(EmployeePaymentDetailsListSplitBy$inboundSchema)
     .optional(),
   splits: z.nullable(

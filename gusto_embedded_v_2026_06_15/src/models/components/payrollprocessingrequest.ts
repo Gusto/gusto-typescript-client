@@ -7,7 +7,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   EntityErrorObject,
@@ -55,8 +54,8 @@ export const PayrollProcessingRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  status: types.optional(PayrollProcessingRequestStatus$inboundSchema),
-  errors: types.optional(z.array(EntityErrorObject$inboundSchema)),
+  status: PayrollProcessingRequestStatus$inboundSchema.optional(),
+  errors: z.array(EntityErrorObject$inboundSchema).optional(),
 });
 
 export function payrollProcessingRequestFromJSON(

@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PayScheduleAssignmentEmployee = {
@@ -26,8 +25,8 @@ export const PayScheduleAssignmentEmployee$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  employee_uuid: types.optional(types.string()),
-  pay_schedule_uuid: z.nullable(types.string()).optional(),
+  employee_uuid: z.string().optional(),
+  pay_schedule_uuid: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",

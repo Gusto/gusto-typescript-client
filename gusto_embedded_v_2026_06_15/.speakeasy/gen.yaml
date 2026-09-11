@@ -34,7 +34,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.3.0-rc.3
+  version: 0.3.0-rc.4
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
@@ -76,7 +76,7 @@ typescript:
   inferUnionDiscriminators: true
   inputModelSuffix: input
   jsonpath: legacy
-  laxMode: lax
+  laxMode: strict
   legacyFileNaming: true
   maxMethodParams: 0
   methodArguments: require-security-and-request
@@ -92,7 +92,7 @@ typescript:
   responseFormat: envelope-http
   sseFlatResponse: false
   templateVersion: v2
-  unionStrategy: populated-fields
+  unionStrategy: left-to-right
   usageSDKInitImports: []
   useIndexModules: false
   useOxlint: false

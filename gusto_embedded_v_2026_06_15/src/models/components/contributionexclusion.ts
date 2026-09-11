@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -33,9 +32,9 @@ export const ContributionExclusion$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  contribution_uuid: types.string(),
-  contribution_type: types.string(),
-  excluded: types.boolean(),
+  contribution_uuid: z.string(),
+  contribution_type: z.string(),
+  excluded: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     "contribution_uuid": "contributionUuid",

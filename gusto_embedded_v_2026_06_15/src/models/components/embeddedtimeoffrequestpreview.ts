@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -45,12 +44,12 @@ export const EmbeddedTimeOffRequestPreview$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  balance_hours: types.nullable(types.string()),
-  this_request_hours: types.string(),
-  other_requested_hours: types.string(),
-  remaining_balance_hours: types.nullable(types.string()),
-  allow_negative_balance: types.boolean(),
-  unlimited: types.boolean(),
+  balance_hours: z.nullable(z.string()),
+  this_request_hours: z.string(),
+  other_requested_hours: z.string(),
+  remaining_balance_hours: z.nullable(z.string()),
+  allow_negative_balance: z.boolean(),
+  unlimited: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     "balance_hours": "balanceHours",

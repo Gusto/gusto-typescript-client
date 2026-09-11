@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { GustoEmbeddedError } from "./gustoembeddederror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
 
@@ -74,8 +73,8 @@ export const PeopleBatchConflictErrorMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  entity_uuid: types.optional(types.string()),
-  entity_type: types.optional(types.string()),
+  entity_uuid: z.string().optional(),
+  entity_type: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "entity_uuid": "entityUuid",
@@ -99,12 +98,11 @@ export const PeopleBatchConflictErrorErrors$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  error_key: types.optional(types.string()),
-  category: types.optional(types.string()),
-  message: types.optional(types.string()),
-  metadata: types.optional(
-    z.lazy(() => PeopleBatchConflictErrorMetadata$inboundSchema),
-  ),
+  error_key: z.string().optional(),
+  category: z.string().optional(),
+  message: z.string().optional(),
+  metadata: z.lazy(() => PeopleBatchConflictErrorMetadata$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "error_key": "errorKey",
@@ -127,9 +125,8 @@ export const PeopleBatchConflictError$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  errors: types.optional(
-    z.array(z.lazy(() => PeopleBatchConflictErrorErrors$inboundSchema)),
-  ),
+  errors: z.array(z.lazy(() => PeopleBatchConflictErrorErrors$inboundSchema))
+    .optional(),
   request$: z.instanceof(Request),
   response$: z.instanceof(Response),
   body$: z.string(),

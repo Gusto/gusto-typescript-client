@@ -7,7 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
@@ -94,7 +94,7 @@ export type Person = {
   /**
    * Date of birth (YYYY-MM-DD)
    */
-  dateOfBirth?: Date | null | undefined;
+  dateOfBirth?: RFCDate | null | undefined;
   /**
    * Whether the employee will complete their own onboarding
    */
@@ -156,7 +156,7 @@ export type PostV1CompaniesCompanyIdPeopleBatchesJob = {
   /**
    * The date when the employee was hired or rehired for the job.
    */
-  hireDate: Date;
+  hireDate: RFCDate;
   /**
    * Whether the employee owns at least 2% of the company. Can only be `true` for S-Corp companies.
    */
@@ -416,9 +416,8 @@ export const Person$outboundSchema: z.ZodType<
   email: z.nullable(z.string()).optional(),
   workEmail: z.nullable(z.string()).optional(),
   ssn: z.nullable(z.string()).optional(),
-  dateOfBirth: z.nullable(
-    z.date().transform(v => v.toISOString().slice(0, "YYYY-MM-DD".length)),
-  ).optional(),
+  dateOfBirth: z.nullable(z.instanceof(RFCDate).transform(v => v.toString()))
+    .optional(),
   selfOnboarding: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -527,9 +526,7 @@ export const PostV1CompaniesCompanyIdPeopleBatchesJob$outboundSchema: z.ZodType<
   PostV1CompaniesCompanyIdPeopleBatchesJob
 > = z.object({
   title: z.string(),
-  hireDate: z.date().transform(v =>
-    v.toISOString().slice(0, "YYYY-MM-DD".length)
-  ),
+  hireDate: z.instanceof(RFCDate).transform(v => v.toString()),
   twoPercentShareholder: z.boolean().optional(),
   stateWcCovered: z.nullable(z.boolean()).optional(),
   stateWcClassCode: z.nullable(z.string()).optional(),
@@ -804,7 +801,7 @@ export const PostV1CompaniesCompanyIdPeopleBatchesResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "People-Batch": types.optional(PeopleBatch$inboundSchema),
+    "People-Batch": PeopleBatch$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",

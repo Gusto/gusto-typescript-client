@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -35,14 +34,14 @@ export const CompanyAddress$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  street_1: types.optional(types.string()),
-  street_2: z.nullable(types.string()).optional(),
-  city: types.optional(types.string()),
-  state: types.optional(types.string()),
-  zip: types.optional(types.string()),
-  country: types.string().default("USA"),
-  inactive: types.optional(types.boolean()),
-  active: types.optional(types.boolean()),
+  street_1: z.string().optional(),
+  street_2: z.nullable(z.string()).optional(),
+  city: z.string().optional(),
+  state: z.string().optional(),
+  zip: z.string().optional(),
+  country: z.string().default("USA"),
+  inactive: z.boolean().optional(),
+  active: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "street_1": "street1",

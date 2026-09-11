@@ -7,7 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import {
   EmployeeWorkAddress,
   EmployeeWorkAddress$inboundSchema,
@@ -40,7 +40,7 @@ export type PostV1EmployeesEmployeeIdWorkAddressesRequestBody = {
   /**
    * Date the employee began working at the company location
    */
-  effectiveDate?: Date | undefined;
+  effectiveDate?: RFCDate | undefined;
 };
 
 export type PostV1EmployeesEmployeeIdWorkAddressesRequest = {
@@ -87,9 +87,8 @@ export const PostV1EmployeesEmployeeIdWorkAddressesRequestBody$outboundSchema:
     PostV1EmployeesEmployeeIdWorkAddressesRequestBody
   > = z.object({
     locationUuid: z.string().optional(),
-    effectiveDate: z.date().transform(v =>
-      v.toISOString().slice(0, "YYYY-MM-DD".length)
-    ).optional(),
+    effectiveDate: z.instanceof(RFCDate).transform(v => v.toString())
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       locationUuid: "location_uuid",
@@ -156,7 +155,7 @@ export const PostV1EmployeesEmployeeIdWorkAddressesResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Employee-Work-Address": types.optional(EmployeeWorkAddress$inboundSchema),
+    "Employee-Work-Address": EmployeeWorkAddress$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",

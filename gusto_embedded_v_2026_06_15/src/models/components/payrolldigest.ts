@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { ClosedEnum, OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -78,8 +77,8 @@ export const PayrollDigest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  idempotency_key: types.string(),
+  uuid: z.string(),
+  idempotency_key: z.string(),
   batch_action: PayrollDigestBatchAction$inboundSchema,
   status: PayrollDigestStatus$inboundSchema,
 }).transform((v) => {

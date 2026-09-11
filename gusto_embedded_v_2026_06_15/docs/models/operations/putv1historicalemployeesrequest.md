@@ -4,6 +4,7 @@
 
 ```typescript
 import { PutV1HistoricalEmployeesRequest } from "@gusto/embedded-api-v-2026-06-15/models/operations/putv1historicalemployees.js";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 let value: PutV1HistoricalEmployeesRequest = {
   companyUuid: "7b1d0df1-6403-4a06-8768-c1dd7d24d27a",
@@ -14,7 +15,7 @@ let value: PutV1HistoricalEmployeesRequest = {
     middleInitial: "A",
     lastName: "Kierkegaard",
     preferredFirstName: "Angel",
-    dateOfBirth: new Date("1995-05-05"),
+    dateOfBirth: new RFCDate("1995-05-05"),
     ssn: "123456294",
     workAddress: {
       locationUuid: "1da85d35-1910-40a7-9c1f-8e2b3d4c5a6f",
@@ -27,11 +28,11 @@ let value: PutV1HistoricalEmployeesRequest = {
       zip: "94105",
     },
     termination: {
-      effectiveDate: new Date("2022-01-01"),
+      effectiveDate: new RFCDate("2022-01-01"),
     },
     email: "soren.kierkegaard@example.com",
     job: {
-      hireDate: new Date("2020-01-01"),
+      hireDate: new RFCDate("2020-01-01"),
     },
     employeeStateTaxes: {
       wcCovered: true,

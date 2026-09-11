@@ -4,12 +4,13 @@
 
 ```typescript
 import { PostV1EmployeesEmployeeIdWorkAddressesRequest } from "@gusto/embedded-api-v-2026-06-15/models/operations/postv1employeesemployeeidworkaddresses.js";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 let value: PostV1EmployeesEmployeeIdWorkAddressesRequest = {
   employeeId: "<id>",
   requestBody: {
     locationUuid: "6a119be7-b4b0-4e27-aaa0-89d5f2524635",
-    effectiveDate: new Date("2023-05-15"),
+    effectiveDate: new RFCDate("2023-05-15"),
   },
 };
 ```

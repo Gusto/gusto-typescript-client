@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import {
   EmbeddedTimeOffRequest,
   EmbeddedTimeOffRequest$inboundSchema,
@@ -150,9 +149,8 @@ export const GetV1CompaniesCompanyUuidTimeOffRequestsResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Embedded-Time-Off-Requests": types.optional(
-      z.array(EmbeddedTimeOffRequest$inboundSchema),
-    ),
+    "Embedded-Time-Off-Requests": z.array(EmbeddedTimeOffRequest$inboundSchema)
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",

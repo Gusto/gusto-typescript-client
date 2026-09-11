@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { RFCDate } from "../../types/rfcdate.js";
 
 /**
  * The employee's compensation payment method. Invalid values will be ignored.
@@ -24,11 +25,11 @@ export type PayrollUpdateBreakdowns = {
   /**
    * The start date of the workweek.
    */
-  startDate?: Date | undefined;
+  startDate?: RFCDate | undefined;
   /**
    * The end date of the workweek.
    */
-  endDate?: Date | undefined;
+  endDate?: RFCDate | undefined;
   /**
    * The dollar amount for this workweek.
    */
@@ -66,11 +67,11 @@ export type PayrollUpdateEmployeeCompensationsBreakdowns = {
   /**
    * The start date of the workweek.
    */
-  startDate?: Date | undefined;
+  startDate?: RFCDate | undefined;
   /**
    * The end date of the workweek.
    */
-  endDate?: Date | undefined;
+  endDate?: RFCDate | undefined;
   /**
    * The number of hours worked during this workweek.
    */
@@ -380,12 +381,8 @@ export const PayrollUpdateBreakdowns$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PayrollUpdateBreakdowns
 > = z.object({
-  startDate: z.date().transform(v =>
-    v.toISOString().slice(0, "YYYY-MM-DD".length)
-  ).optional(),
-  endDate: z.date().transform(v =>
-    v.toISOString().slice(0, "YYYY-MM-DD".length)
-  ).optional(),
+  startDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  endDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
   amount: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -451,12 +448,8 @@ export const PayrollUpdateEmployeeCompensationsBreakdowns$outboundSchema:
     z.ZodTypeDef,
     PayrollUpdateEmployeeCompensationsBreakdowns
   > = z.object({
-    startDate: z.date().transform(v =>
-      v.toISOString().slice(0, "YYYY-MM-DD".length)
-    ).optional(),
-    endDate: z.date().transform(v =>
-      v.toISOString().slice(0, "YYYY-MM-DD".length)
-    ).optional(),
+    startDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+    endDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
     hours: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {

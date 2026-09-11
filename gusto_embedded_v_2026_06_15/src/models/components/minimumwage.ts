@@ -6,7 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -28,7 +28,7 @@ export type MinimumWage = {
   /**
    * The date the minimum wage rule is effective on.
    */
-  effectiveDate: Date;
+  effectiveDate: RFCDate;
   /**
    * The governing authority that created the minimum wage, e.g. "City", "State", or "Federal".
    */
@@ -45,12 +45,12 @@ export const MinimumWage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  wage: types.string(),
-  wage_type: types.string(),
-  effective_date: types.date(),
-  authority: types.string(),
-  notes: types.optional(types.string()),
+  uuid: z.string(),
+  wage: z.string(),
+  wage_type: z.string(),
+  effective_date: z.string().transform(v => new RFCDate(v)),
+  authority: z.string(),
+  notes: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "wage_type": "wageType",

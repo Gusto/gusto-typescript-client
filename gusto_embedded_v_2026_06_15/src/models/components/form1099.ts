@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Form1099 = {
@@ -58,16 +57,16 @@ export const Form1099$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  name: types.optional(types.string()),
-  title: types.optional(types.string()),
-  description: types.optional(types.string()),
-  draft: types.optional(types.boolean()),
-  year: z.nullable(types.number()).optional(),
-  quarter: z.nullable(types.number()).optional(),
-  requires_signing: types.optional(types.boolean()),
-  document_content_type: z.nullable(types.string()).optional(),
-  contractor_uuid: types.optional(types.string()),
+  uuid: z.string(),
+  name: z.string().optional(),
+  title: z.string().optional(),
+  description: z.string().optional(),
+  draft: z.boolean().optional(),
+  year: z.nullable(z.number().int()).optional(),
+  quarter: z.nullable(z.number().int()).optional(),
+  requires_signing: z.boolean().optional(),
+  document_content_type: z.nullable(z.string()).optional(),
+  contractor_uuid: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "requires_signing": "requiresSigning",

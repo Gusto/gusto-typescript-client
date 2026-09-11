@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -37,10 +36,10 @@ export const PaidHoliday$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  holiday_key: z.nullable(types.string()).optional(),
-  holiday_name: types.optional(types.string()),
-  start_date: types.optional(types.string()),
-  end_date: types.optional(types.string()),
+  holiday_key: z.nullable(z.string()).optional(),
+  holiday_name: z.string().optional(),
+  start_date: z.string().optional(),
+  end_date: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "holiday_key": "holidayKey",

@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ReportTemplate = {
@@ -34,10 +33,10 @@ export const ReportTemplate$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  columns: types.optional(z.array(types.string())),
-  groupings: types.optional(z.array(types.string())),
-  company_uuid: types.optional(types.string()),
-  report_type: types.optional(types.string()),
+  columns: z.array(z.string()).optional(),
+  groupings: z.array(z.string()).optional(),
+  company_uuid: z.string().optional(),
+  report_type: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -67,13 +66,12 @@ export const EmploymentHistoryList$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  hire_date: types.optional(types.string()),
-  termination_date: z.nullable(types.string()).optional(),
-  file_new_hire_report: types.optional(types.boolean()),
-  two_percent_shareholder: types.optional(types.boolean()),
-  employment_status: types.optional(
-    EmploymentHistoryListEmploymentStatus$inboundSchema,
-  ),
+  hire_date: z.string().optional(),
+  termination_date: z.nullable(z.string()).optional(),
+  file_new_hire_report: z.boolean().optional(),
+  two_percent_shareholder: z.boolean().optional(),
+  employment_status: EmploymentHistoryListEmploymentStatus$inboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "hire_date": "hireDate",

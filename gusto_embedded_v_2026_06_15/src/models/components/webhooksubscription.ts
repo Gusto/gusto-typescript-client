@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -90,10 +89,10 @@ export const WebhookSubscription$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  url: types.optional(types.string()),
-  status: types.optional(WebhookSubscriptionStatus$inboundSchema),
-  subscription_types: types.optional(z.array(SubscriptionTypes$inboundSchema)),
+  uuid: z.string(),
+  url: z.string().optional(),
+  status: WebhookSubscriptionStatus$inboundSchema.optional(),
+  subscription_types: z.array(SubscriptionTypes$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "subscription_types": "subscriptionTypes",

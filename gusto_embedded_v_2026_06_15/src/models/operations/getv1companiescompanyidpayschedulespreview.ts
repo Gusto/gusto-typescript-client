@@ -7,7 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
@@ -65,11 +65,11 @@ export type GetV1CompaniesCompanyIdPaySchedulesPreviewRequest = {
   /**
    * The first date that employees on this pay schedule are paid with Gusto.
    */
-  anchorPayDate: Date;
+  anchorPayDate: RFCDate;
   /**
    * The last date of the first pay period. This can be the same date as the anchor pay date.
    */
-  anchorEndOfPayPeriod: Date;
+  anchorEndOfPayPeriod: RFCDate;
   /**
    * An integer between 1 and 31 indicating the first day of the month that employees are paid. This field is only relevant for pay schedules with the "Twice per month" and "Monthly" frequencies. It will be null for pay schedules with other frequencies.
    */
@@ -81,7 +81,7 @@ export type GetV1CompaniesCompanyIdPaySchedulesPreviewRequest = {
   /**
    * End date for the preview range. If given, this date must be in the future. When unspecified, defaults to 18 months from today.
    */
-  endDate?: Date | undefined;
+  endDate?: RFCDate | undefined;
   /**
    * Optional UUID of an existing pay schedule. When supplied, the preview is seeded from the persisted schedule — including internal flags (such as arrears handling) that affect period boundaries but are not exposed as request parameters. Any other query parameters override individual attributes on top of the loaded schedule.
    */
@@ -133,17 +133,11 @@ export const GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$outboundSchema:
         .default("2026-06-15"),
     companyId: z.string(),
     frequency: Frequency$outboundSchema,
-    anchorPayDate: z.date().transform(v =>
-      v.toISOString().slice(0, "YYYY-MM-DD".length)
-    ),
-    anchorEndOfPayPeriod: z.date().transform(v =>
-      v.toISOString().slice(0, "YYYY-MM-DD".length)
-    ),
+    anchorPayDate: z.instanceof(RFCDate).transform(v => v.toString()),
+    anchorEndOfPayPeriod: z.instanceof(RFCDate).transform(v => v.toString()),
     day1: z.number().int().optional(),
     day2: z.number().int().optional(),
-    endDate: z.date().transform(v =>
-      v.toISOString().slice(0, "YYYY-MM-DD".length)
-    ).optional(),
+    endDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
     payScheduleUuid: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -177,7 +171,7 @@ export const GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Pay-Schedule-Preview": types.optional(PaySchedulePreview$inboundSchema),
+    "Pay-Schedule-Preview": PaySchedulePreview$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",

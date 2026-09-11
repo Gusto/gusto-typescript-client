@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -151,20 +150,20 @@ export const AchTransaction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  company_uuid: types.optional(types.string()),
-  payment_event_type: types.optional(PaymentEventType$inboundSchema),
-  payment_event_uuid: types.optional(types.string()),
+  uuid: z.string(),
+  company_uuid: z.string().optional(),
+  payment_event_type: PaymentEventType$inboundSchema.optional(),
+  payment_event_uuid: z.string().optional(),
   recipient_type: z.nullable(RecipientType$inboundSchema).optional(),
-  recipient_uuid: types.optional(types.string()),
-  error_code: z.nullable(types.string()).optional(),
-  transaction_type: types.optional(types.string()),
-  payment_status: types.optional(PaymentStatus$inboundSchema),
-  payment_direction: types.optional(PaymentDirection$inboundSchema),
-  payment_event_check_date: types.optional(types.string()),
-  payment_date: types.optional(types.string()),
-  amount: types.optional(types.string()),
-  description: types.optional(types.string()),
+  recipient_uuid: z.string().optional(),
+  error_code: z.nullable(z.string()).optional(),
+  transaction_type: z.string().optional(),
+  payment_status: PaymentStatus$inboundSchema.optional(),
+  payment_direction: PaymentDirection$inboundSchema.optional(),
+  payment_event_check_date: z.string().optional(),
+  payment_date: z.string().optional(),
+  amount: z.string().optional(),
+  description: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

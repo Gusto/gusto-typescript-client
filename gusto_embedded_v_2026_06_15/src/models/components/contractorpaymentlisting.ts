@@ -8,7 +8,7 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -66,7 +66,7 @@ export type ContractorPaymentListing = {
   /**
    * The check date for the payment.
    */
-  checkDate?: Date | undefined;
+  checkDate?: RFCDate | undefined;
   /**
    * The bonus amount in the payment.
    */
@@ -132,19 +132,18 @@ export const ContractorPaymentListing$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  check_date: types.optional(types.date()),
-  bonus: types.optional(types.string()),
-  hours: types.optional(types.string()),
-  hourly_rate: types.optional(types.string()),
-  payment_method: types.optional(
-    ContractorPaymentListingPaymentMethod$inboundSchema,
-  ),
-  reimbursement: types.optional(types.string()),
-  status: types.optional(ContractorPaymentListingStatus$inboundSchema),
-  wage: types.optional(types.string()),
-  wage_type: types.optional(ContractorPaymentListingWageType$inboundSchema),
-  wage_total: types.optional(types.string()),
+  uuid: z.string(),
+  check_date: z.string().transform(v => new RFCDate(v)).optional(),
+  bonus: z.string().optional(),
+  hours: z.string().optional(),
+  hourly_rate: z.string().optional(),
+  payment_method: ContractorPaymentListingPaymentMethod$inboundSchema
+    .optional(),
+  reimbursement: z.string().optional(),
+  status: ContractorPaymentListingStatus$inboundSchema.optional(),
+  wage: z.string().optional(),
+  wage_type: ContractorPaymentListingWageType$inboundSchema.optional(),
+  wage_total: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "check_date": "checkDate",

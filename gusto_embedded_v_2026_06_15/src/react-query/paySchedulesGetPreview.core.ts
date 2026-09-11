@@ -18,6 +18,7 @@ import {
   GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
 } from "../models/operations/getv1companiescompanyidpayschedulespreview.js";
 import { unwrapAsync } from "../types/fp.js";
+import { RFCDate } from "../types/rfcdate.js";
 export type PaySchedulesGetPreviewQueryData =
   GetV1CompaniesCompanyIdPaySchedulesPreviewResponse;
 
@@ -87,11 +88,11 @@ export function queryKeyPaySchedulesGetPreview(
       | GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion
       | undefined;
     frequency: Frequency;
-    anchorPayDate: Date;
-    anchorEndOfPayPeriod: Date;
+    anchorPayDate: RFCDate;
+    anchorEndOfPayPeriod: RFCDate;
     day1?: number | undefined;
     day2?: number | undefined;
-    endDate?: Date | undefined;
+    endDate?: RFCDate | undefined;
     payScheduleUuid?: string | undefined;
   },
 ): QueryKey {

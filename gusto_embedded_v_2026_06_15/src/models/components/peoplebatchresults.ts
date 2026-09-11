@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { ClosedEnum, OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -213,9 +212,9 @@ export const PeopleBatchResultsErrors$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  error_key: types.optional(types.string()),
-  category: types.optional(types.string()),
-  message: z.nullable(types.string()).optional(),
+  error_key: z.string().optional(),
+  category: z.string().optional(),
+  message: z.nullable(z.string()).optional(),
   errors: z.nullable(
     z.array(z.lazy(() => PeopleBatchResultsResultsErrors$inboundSchema)),
   ).optional(),
@@ -241,12 +240,12 @@ export const PeopleBatchResultsResults$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  external_id: types.optional(types.string()),
-  role: types.optional(Role$inboundSchema),
-  status: types.optional(PeopleBatchResultsResultsStatus$inboundSchema),
-  idx: types.optional(types.number()),
-  uuid: types.optional(types.string()),
-  employee_uuid: types.optional(types.string()),
+  external_id: z.string().optional(),
+  role: Role$inboundSchema.optional(),
+  status: PeopleBatchResultsResultsStatus$inboundSchema.optional(),
+  idx: z.number().int().optional(),
+  uuid: z.string().optional(),
+  employee_uuid: z.string().optional(),
   errors: z.nullable(
     z.array(z.lazy(() => PeopleBatchResultsErrors$inboundSchema)),
   ).optional(),
@@ -273,10 +272,10 @@ export const PeopleBatchResultsExclusions$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  external_id: types.optional(types.string()),
-  category: types.optional(types.string()),
-  message: types.optional(types.string()),
-  item_count: types.optional(types.number()),
+  external_id: z.string().optional(),
+  category: z.string().optional(),
+  message: z.string().optional(),
+  item_count: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     "external_id": "externalId",
@@ -300,17 +299,20 @@ export const PeopleBatchResults$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  idempotency_key: types.string(),
+  uuid: z.string(),
+  idempotency_key: z.string(),
   status: PeopleBatchResultsStatus$inboundSchema,
-  submitted_at: types.optional(types.date()),
-  completed_at: z.nullable(types.date()).optional(),
-  submitted_items: z.nullable(types.number()).optional(),
-  processed_items: types.optional(types.number()),
-  excluded_items: types.optional(types.number()),
-  results: types.optional(
-    z.array(z.lazy(() => PeopleBatchResultsResults$inboundSchema)),
-  ),
+  submitted_at: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
+  ).optional(),
+  completed_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  submitted_items: z.nullable(z.number().int()).optional(),
+  processed_items: z.number().int().optional(),
+  excluded_items: z.number().int().optional(),
+  results: z.array(z.lazy(() => PeopleBatchResultsResults$inboundSchema))
+    .optional(),
   exclusions: z.nullable(
     z.array(z.lazy(() => PeopleBatchResultsExclusions$inboundSchema)),
   ).optional(),

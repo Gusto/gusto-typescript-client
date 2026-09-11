@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -134,9 +133,9 @@ export const Resources$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   entity_type: NotificationEntityType$inboundSchema,
-  entity_uuid: types.string(),
-  reference_type: types.optional(types.string()),
-  reference_uuid: types.optional(types.string()),
+  entity_uuid: z.string(),
+  reference_type: z.string().optional(),
+  reference_uuid: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "entity_type": "entityType",
@@ -162,17 +161,17 @@ export const Notification$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  company_uuid: types.string(),
-  title: types.string(),
-  message: types.string(),
+  uuid: z.string(),
+  company_uuid: z.string(),
+  title: z.string(),
+  message: z.string(),
   status: NotificationStatus$inboundSchema,
-  category: types.string(),
-  actionable: types.boolean(),
-  can_block_payroll: types.boolean(),
-  published_at: types.string(),
-  due_at: types.nullable(types.string()),
-  template_variables: types.optional(z.record(types.string())),
+  category: z.string(),
+  actionable: z.boolean(),
+  can_block_payroll: z.boolean(),
+  published_at: z.string(),
+  due_at: z.nullable(z.string()),
+  template_variables: z.record(z.string()).optional(),
   resources: z.array(z.lazy(() => Resources$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {

@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -106,18 +105,18 @@ export const I9Authorization$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  form_uuid: z.nullable(types.string()).optional(),
-  version: types.string(),
+  uuid: z.string(),
+  form_uuid: z.nullable(z.string()).optional(),
+  version: z.string(),
   authorization_status: AuthorizationStatus$inboundSchema,
   document_type: z.nullable(DocumentType$inboundSchema).optional(),
-  has_document_number: z.nullable(types.boolean()).optional(),
-  expiration_date: z.nullable(types.string()).optional(),
-  country: z.nullable(types.string()).optional(),
-  employer_signed: types.boolean(),
-  employee_signed: types.boolean(),
-  additional_info: z.nullable(types.string()).optional(),
-  alt_procedure: z.nullable(types.boolean()).optional(),
+  has_document_number: z.nullable(z.boolean()).optional(),
+  expiration_date: z.nullable(z.string()).optional(),
+  country: z.nullable(z.string()).optional(),
+  employer_signed: z.boolean(),
+  employee_signed: z.boolean(),
+  additional_info: z.nullable(z.string()).optional(),
+  alt_procedure: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "form_uuid": "formUuid",

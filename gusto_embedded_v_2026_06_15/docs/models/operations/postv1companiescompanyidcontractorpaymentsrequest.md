@@ -4,12 +4,13 @@
 
 ```typescript
 import { PostV1CompaniesCompanyIdContractorPaymentsRequest } from "@gusto/embedded-api-v-2026-06-15/models/operations/postv1companiescompanyidcontractorpayments.js";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 let value: PostV1CompaniesCompanyIdContractorPaymentsRequest = {
   companyId: "<id>",
   contractorPaymentBody: {
     contractorUuid: "<id>",
-    date: new Date("2020-01-01"),
+    date: new RFCDate("2020-01-01"),
     wage: "5000",
     hours: "40",
     bonus: "500",

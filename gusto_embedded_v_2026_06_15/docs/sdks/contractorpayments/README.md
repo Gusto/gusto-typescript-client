@@ -347,6 +347,7 @@ scope: `payrolls:run`
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-contractor_payments" method="post" path="/v1/companies/{company_id}/contractor_payments" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2026-06-15";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -357,7 +358,7 @@ async function run() {
     companyId: "<id>",
     contractorPaymentBody: {
       contractorUuid: "<id>",
-      date: new Date("2020-01-01"),
+      date: new RFCDate("2020-01-01"),
       wage: "5000",
       hours: "40",
       bonus: "500",
@@ -380,6 +381,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-06-15/core.js";
 import { contractorPaymentsCreate } from "@gusto/embedded-api-v-2026-06-15/funcs/contractorPaymentsCreate.js";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -392,7 +394,7 @@ async function run() {
     companyId: "<id>",
     contractorPaymentBody: {
       contractorUuid: "<id>",
-      date: new Date("2020-01-01"),
+      date: new RFCDate("2020-01-01"),
       wage: "5000",
       hours: "40",
       bonus: "500",

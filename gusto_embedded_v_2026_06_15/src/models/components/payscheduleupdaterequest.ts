@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { RFCDate } from "../../types/rfcdate.js";
 
 /**
  * The frequency that employees on this pay schedule are paid with Gusto. Only weekly, bi-weekly, twice per month, and monthly are supported on create and update.
@@ -75,8 +76,8 @@ export type PayScheduleUpdateRequest = {
    */
   autoPayroll?: boolean | undefined;
   frequency?: PayScheduleUpdateRequestFrequency | undefined;
-  anchorPayDate?: Date | undefined;
-  anchorEndOfPayPeriod?: Date | undefined;
+  anchorPayDate?: RFCDate | undefined;
+  anchorEndOfPayPeriod?: RFCDate | undefined;
   /**
    * An integer between 1 and 31 indicating the first day of the month that employees are paid. This field is only relevant for pay schedules with the "Twice per month" and "Monthly" frequencies. It will be null for pay schedules with other frequencies.
    *
@@ -128,12 +129,9 @@ export const PayScheduleUpdateRequest$outboundSchema: z.ZodType<
   version: z.string(),
   autoPayroll: z.boolean().optional(),
   frequency: PayScheduleUpdateRequestFrequency$outboundSchema.optional(),
-  anchorPayDate: z.date().transform(v =>
-    v.toISOString().slice(0, "YYYY-MM-DD".length)
-  ).optional(),
-  anchorEndOfPayPeriod: z.date().transform(v =>
-    v.toISOString().slice(0, "YYYY-MM-DD".length)
-  ).optional(),
+  anchorPayDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  anchorEndOfPayPeriod: z.instanceof(RFCDate).transform(v => v.toString())
+    .optional(),
   day1: z.nullable(z.number().int()).optional(),
   day2: z.nullable(z.number().int()).optional(),
   customName: z.nullable(z.string()).optional(),

@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { ClosedEnum, OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -134,17 +133,17 @@ export const ReverseWireTransaction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  company_uuid: types.string(),
-  amount: types.string(),
+  company_uuid: z.string(),
+  amount: z.string(),
   status: ReverseWireTransactionStatus$inboundSchema,
   payment_direction: ReverseWireTransactionPaymentDirection$inboundSchema,
-  bank_name: z.nullable(types.string()).optional(),
+  bank_name: z.nullable(z.string()).optional(),
   payment_event_type: z.nullable(
     ReverseWireTransactionPaymentEventType$inboundSchema,
   ).optional(),
-  payment_event_uuid: z.nullable(types.string()).optional(),
-  payment_event_check_date: z.nullable(types.string()).optional(),
-  created_at: types.string(),
+  payment_event_uuid: z.nullable(z.string()).optional(),
+  payment_event_check_date: z.nullable(z.string()).optional(),
+  created_at: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

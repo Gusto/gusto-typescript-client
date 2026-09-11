@@ -4,6 +4,7 @@
 
 ```typescript
 import { PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest } from "@gusto/embedded-api-v-2026-06-15/models/operations/putv1companiescompanyidpayschedulespayscheduleid.js";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 let value: PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest = {
   companyId: "<id>",
@@ -12,8 +13,8 @@ let value: PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest = {
     version: "68934a3e9455fa72420237eb05902327",
     autoPayroll: true,
     frequency: "Twice per month",
-    anchorPayDate: new Date("2021-10-15"),
-    anchorEndOfPayPeriod: new Date("2021-10-15"),
+    anchorPayDate: new RFCDate("2021-10-15"),
+    anchorEndOfPayPeriod: new RFCDate("2021-10-15"),
     day1: 15,
     day2: 31,
     customName: "demo pay schedule",

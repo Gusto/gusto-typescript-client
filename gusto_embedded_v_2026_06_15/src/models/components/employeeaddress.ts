@@ -6,7 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { WarningObject, WarningObject$inboundSchema } from "./warningobject.js";
 
@@ -22,7 +22,7 @@ export type EmployeeAddress = {
   /**
    * The date the employee started living at the address.
    */
-  effectiveDate?: Date | undefined;
+  effectiveDate?: RFCDate | undefined;
   /**
    * Determines if home taxes should be withheld and paid for employee.
    */
@@ -53,19 +53,19 @@ export const EmployeeAddress$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  employee_uuid: types.optional(types.string()),
-  effective_date: types.optional(types.date()),
-  courtesy_withholding: types.optional(types.boolean()),
-  street_1: types.optional(types.string()),
-  street_2: z.nullable(types.string()).optional(),
-  city: types.optional(types.string()),
-  state: types.optional(types.string()),
-  zip: types.optional(types.string()),
-  country: types.string().default("USA"),
-  active: types.optional(types.boolean()),
-  version: types.string(),
-  warnings: types.optional(z.array(WarningObject$inboundSchema)),
+  uuid: z.string(),
+  employee_uuid: z.string().optional(),
+  effective_date: z.string().transform(v => new RFCDate(v)).optional(),
+  courtesy_withholding: z.boolean().optional(),
+  street_1: z.string().optional(),
+  street_2: z.nullable(z.string()).optional(),
+  city: z.string().optional(),
+  state: z.string().optional(),
+  zip: z.string().optional(),
+  country: z.string().default("USA"),
+  active: z.boolean().optional(),
+  version: z.string(),
+  warnings: z.array(WarningObject$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",

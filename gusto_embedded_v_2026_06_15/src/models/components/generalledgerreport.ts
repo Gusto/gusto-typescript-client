@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -62,10 +61,10 @@ export const GeneralLedgerReport$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  payroll_uuid: types.optional(types.string()),
-  aggregation: types.optional(GeneralLedgerReportAggregation$inboundSchema),
-  integration_type: z.nullable(types.string()).optional(),
-  request_uuid: types.optional(types.string()),
+  payroll_uuid: z.string().optional(),
+  aggregation: GeneralLedgerReportAggregation$inboundSchema.optional(),
+  integration_type: z.nullable(z.string()).optional(),
+  request_uuid: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "payroll_uuid": "payrollUuid",

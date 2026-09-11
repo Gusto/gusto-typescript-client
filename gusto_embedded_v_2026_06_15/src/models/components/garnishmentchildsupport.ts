@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -74,12 +73,12 @@ export const GarnishmentChildSupport$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  state: types.optional(types.string()),
-  payment_period: types.optional(PaymentPeriod$inboundSchema),
-  fips_code: types.optional(types.string()),
-  case_number: z.nullable(types.string()).optional(),
-  order_number: z.nullable(types.string()).optional(),
-  remittance_number: z.nullable(types.string()).optional(),
+  state: z.string().optional(),
+  payment_period: PaymentPeriod$inboundSchema.optional(),
+  fips_code: z.string().optional(),
+  case_number: z.nullable(z.string()).optional(),
+  order_number: z.nullable(z.string()).optional(),
+  remittance_number: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "payment_period": "paymentPeriod",

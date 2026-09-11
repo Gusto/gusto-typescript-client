@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { WarningObject, WarningObject$inboundSchema } from "./warningobject.js";
 
@@ -72,23 +71,23 @@ export const Location$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  version: types.optional(types.string()),
-  company_uuid: types.optional(types.string()),
-  phone_number: types.optional(types.string()),
-  street_1: types.optional(types.string()),
-  street_2: z.nullable(types.string()).optional(),
-  city: types.optional(types.string()),
-  state: types.optional(types.string()),
-  zip: types.optional(types.string()),
-  country: types.string().default("USA"),
-  mailing_address: types.optional(types.boolean()),
-  filing_address: types.optional(types.boolean()),
-  created_at: types.optional(types.string()),
-  updated_at: types.optional(types.string()),
-  active: types.optional(types.boolean()),
-  inactive: types.optional(types.boolean()),
-  warnings: types.optional(z.array(WarningObject$inboundSchema)),
+  uuid: z.string(),
+  version: z.string().optional(),
+  company_uuid: z.string().optional(),
+  phone_number: z.string().optional(),
+  street_1: z.string().optional(),
+  street_2: z.nullable(z.string()).optional(),
+  city: z.string().optional(),
+  state: z.string().optional(),
+  zip: z.string().optional(),
+  country: z.string().default("USA"),
+  mailing_address: z.boolean().optional(),
+  filing_address: z.boolean().optional(),
+  created_at: z.string().optional(),
+  updated_at: z.string().optional(),
+  active: z.boolean().optional(),
+  inactive: z.boolean().optional(),
+  warnings: z.array(WarningObject$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

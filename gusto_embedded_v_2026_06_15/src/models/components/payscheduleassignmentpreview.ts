@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PayScheduleAssignmentEmployeeChange,
@@ -53,9 +52,8 @@ export const PayScheduleAssignmentPreview$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.nullable(PayScheduleAssignmentPreviewType$inboundSchema).optional(),
-  employee_changes: types.optional(
-    z.array(PayScheduleAssignmentEmployeeChange$inboundSchema),
-  ),
+  employee_changes: z.array(PayScheduleAssignmentEmployeeChange$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "employee_changes": "employeeChanges",

@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata = {
@@ -42,8 +41,8 @@ export const PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata$inbou
     z.ZodTypeDef,
     unknown
   > = z.object({
-    information_request_uuid: types.string(),
-    bank_account_last_four_digits: z.nullable(types.string()).optional(),
+    information_request_uuid: z.string(),
+    bank_account_last_four_digits: z.nullable(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "information_request_uuid": "informationRequestUuid",
@@ -73,8 +72,8 @@ export const PayrollCreditBlockerUnblockOptionSubmitBankScreenshot$inboundSchema
     z.ZodTypeDef,
     unknown
   > = z.object({
-    unblock_type: types.literal("submit_bank_screenshot"),
-    check_date: types.string(),
+    unblock_type: z.literal("submit_bank_screenshot"),
+    check_date: z.string(),
     metadata: z.lazy(() =>
       PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata$inboundSchema
     ),

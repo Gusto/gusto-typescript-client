@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -37,10 +36,10 @@ export const YtdBenefitAmountsFromDifferentCompany$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  benefit_type: types.number(),
-  ytd_employee_deduction_amount: types.string(),
-  ytd_company_contribution_amount: types.string(),
+  uuid: z.string(),
+  benefit_type: z.number().int(),
+  ytd_employee_deduction_amount: z.string(),
+  ytd_company_contribution_amount: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "benefit_type": "benefitType",

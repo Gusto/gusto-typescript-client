@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FipsCodes = {
@@ -85,8 +84,8 @@ export const FipsCodes$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  code: types.optional(types.string()),
-  county: z.nullable(types.string()).optional(),
+  code: z.string().optional(),
+  county: z.nullable(z.string()).optional(),
 });
 
 export function fipsCodesFromJSON(
@@ -112,8 +111,8 @@ export const RequiredAttributes$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  key: types.optional(ChildSupportDataKey$inboundSchema),
-  label: types.optional(types.string()),
+  key: ChildSupportDataKey$inboundSchema.optional(),
+  label: z.string().optional(),
 });
 
 export function requiredAttributesFromJSON(
@@ -132,13 +131,12 @@ export const Agencies$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  state: types.optional(types.string()),
-  name: types.optional(types.string()),
-  manual_payment_required: types.optional(types.boolean()),
-  fips_codes: types.optional(z.array(z.lazy(() => FipsCodes$inboundSchema))),
-  required_attributes: types.optional(
-    z.array(z.lazy(() => RequiredAttributes$inboundSchema)),
-  ),
+  state: z.string().optional(),
+  name: z.string().optional(),
+  manual_payment_required: z.boolean().optional(),
+  fips_codes: z.array(z.lazy(() => FipsCodes$inboundSchema)).optional(),
+  required_attributes: z.array(z.lazy(() => RequiredAttributes$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "manual_payment_required": "manualPaymentRequired",
@@ -163,7 +161,7 @@ export const ChildSupportData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  agencies: types.optional(z.array(z.lazy(() => Agencies$inboundSchema))),
+  agencies: z.array(z.lazy(() => Agencies$inboundSchema)).optional(),
 });
 
 export function childSupportDataFromJSON(

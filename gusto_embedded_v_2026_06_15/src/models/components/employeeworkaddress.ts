@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type EmployeeWorkAddress = {
@@ -48,18 +47,18 @@ export const EmployeeWorkAddress$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  effective_date: types.optional(types.string()),
-  active: types.optional(types.boolean()),
-  location_uuid: types.optional(types.string()),
-  employee_uuid: types.optional(types.string()),
-  version: types.string(),
-  street_1: types.optional(types.string()),
-  street_2: z.nullable(types.string()).optional(),
-  city: types.optional(types.string()),
-  state: types.optional(types.string()),
-  zip: types.optional(types.string()),
-  country: types.string().default("USA"),
+  uuid: z.string(),
+  effective_date: z.string().optional(),
+  active: z.boolean().optional(),
+  location_uuid: z.string().optional(),
+  employee_uuid: z.string().optional(),
+  version: z.string(),
+  street_1: z.string().optional(),
+  street_2: z.nullable(z.string()).optional(),
+  city: z.string().optional(),
+  state: z.string().optional(),
+  zip: z.string().optional(),
+  country: z.string().default("USA"),
 }).transform((v) => {
   return remap$(v, {
     "effective_date": "effectiveDate",

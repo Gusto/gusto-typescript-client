@@ -375,6 +375,7 @@ scope: `contractors:write`
 <!-- UsageSnippet language="typescript" operationID="post-v1-contractors-contractor_uuid-rehire" method="post" path="/v1/contractors/{contractor_uuid}/rehire" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2026-06-15";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -384,7 +385,7 @@ async function run() {
   const result = await gustoEmbedded.contractors.postV1ContractorsContractorUuidRehire({
     contractorUuid: "<id>",
     requestBody: {
-      startDate: new Date("2025-07-01"),
+      startDate: new RFCDate("2025-07-01"),
     },
   });
 
@@ -401,6 +402,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-06-15/core.js";
 import { contractorsPostV1ContractorsContractorUuidRehire } from "@gusto/embedded-api-v-2026-06-15/funcs/contractorsPostV1ContractorsContractorUuidRehire.js";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -412,7 +414,7 @@ async function run() {
   const res = await contractorsPostV1ContractorsContractorUuidRehire(gustoEmbedded, {
     contractorUuid: "<id>",
     requestBody: {
-      startDate: new Date("2025-07-01"),
+      startDate: new RFCDate("2025-07-01"),
     },
   });
   if (res.ok) {
@@ -585,6 +587,7 @@ scope: `contractors:write`
 <!-- UsageSnippet language="typescript" operationID="post-v1-contractors-contractor_uuid-termination" method="post" path="/v1/contractors/{contractor_uuid}/termination" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2026-06-15";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -594,7 +597,7 @@ async function run() {
   const result = await gustoEmbedded.contractors.postV1ContractorsContractorUuidTermination({
     contractorUuid: "<id>",
     requestBody: {
-      endDate: new Date("2025-06-15"),
+      endDate: new RFCDate("2025-06-15"),
     },
   });
 
@@ -611,6 +614,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-06-15/core.js";
 import { contractorsPostV1ContractorsContractorUuidTermination } from "@gusto/embedded-api-v-2026-06-15/funcs/contractorsPostV1ContractorsContractorUuidTermination.js";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -622,7 +626,7 @@ async function run() {
   const res = await contractorsPostV1ContractorsContractorUuidTermination(gustoEmbedded, {
     contractorUuid: "<id>",
     requestBody: {
-      endDate: new Date("2025-06-15"),
+      endDate: new RFCDate("2025-06-15"),
     },
   });
   if (res.ok) {

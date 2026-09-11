@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ContractorPaymentForGroup,
@@ -117,11 +116,11 @@ export const ContractorPaymentGroupTotals$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  amount: types.optional(types.string()),
-  debit_amount: types.optional(types.string()),
-  wage_amount: types.optional(types.string()),
-  reimbursement_amount: types.optional(types.string()),
-  check_amount: types.optional(types.string()),
+  amount: z.string().optional(),
+  debit_amount: z.string().optional(),
+  wage_amount: z.string().optional(),
+  reimbursement_amount: z.string().optional(),
+  check_amount: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "debit_amount": "debitAmount",
@@ -147,25 +146,19 @@ export const ContractorPaymentGroup$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.optional(types.string()),
-  company_uuid: types.optional(types.string()),
-  check_date: types.optional(types.string()),
-  debit_date: types.optional(types.string()),
-  status: types.optional(ContractorPaymentGroupStatus$inboundSchema),
-  creation_token: z.nullable(types.string()).optional(),
-  partner_owned_disbursement: z.nullable(types.boolean()).optional(),
-  submission_blockers: types.optional(
-    z.array(PayrollSubmissionBlockerType$inboundSchema),
-  ),
-  credit_blockers: types.optional(
-    z.array(PayrollCreditBlockerType$inboundSchema),
-  ),
-  totals: types.optional(
-    z.lazy(() => ContractorPaymentGroupTotals$inboundSchema),
-  ),
-  contractor_payments: types.optional(
-    z.array(ContractorPaymentForGroup$inboundSchema),
-  ),
+  uuid: z.string().optional(),
+  company_uuid: z.string().optional(),
+  check_date: z.string().optional(),
+  debit_date: z.string().optional(),
+  status: ContractorPaymentGroupStatus$inboundSchema.optional(),
+  creation_token: z.nullable(z.string()).optional(),
+  partner_owned_disbursement: z.nullable(z.boolean()).optional(),
+  submission_blockers: z.array(PayrollSubmissionBlockerType$inboundSchema)
+    .optional(),
+  credit_blockers: z.array(PayrollCreditBlockerType$inboundSchema).optional(),
+  totals: z.lazy(() => ContractorPaymentGroupTotals$inboundSchema).optional(),
+  contractor_payments: z.array(ContractorPaymentForGroup$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

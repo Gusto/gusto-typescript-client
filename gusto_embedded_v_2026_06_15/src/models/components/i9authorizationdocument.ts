@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -41,11 +40,11 @@ export const I9AuthorizationDocument$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  document_type: types.string(),
-  document_title: types.string(),
-  expiration_date: z.nullable(types.string()).optional(),
-  issuing_authority: types.string(),
+  uuid: z.string(),
+  document_type: z.string(),
+  document_title: z.string(),
+  expiration_date: z.nullable(z.string()).optional(),
+  issuing_authority: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "document_type": "documentType",

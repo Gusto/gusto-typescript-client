@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type WarningObject = {
@@ -30,9 +29,9 @@ export const WarningObject$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  error_key: types.optional(types.string()),
-  category: types.optional(types.string()),
-  message: types.optional(types.string()),
+  error_key: z.string().optional(),
+  category: z.string().optional(),
+  message: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "error_key": "errorKey",

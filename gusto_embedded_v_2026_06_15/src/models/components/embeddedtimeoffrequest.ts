@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -116,8 +115,8 @@ export const EmbeddedTimeOffRequestEmployee$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.optional(types.string()),
-  full_name: types.optional(types.string()),
+  uuid: z.string().optional(),
+  full_name: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "full_name": "fullName",
@@ -140,8 +139,8 @@ export const Initiator$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.optional(types.string()),
-  full_name: types.optional(types.string()),
+  uuid: z.string().optional(),
+  full_name: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "full_name": "fullName",
@@ -164,8 +163,8 @@ export const Approver$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.optional(types.string()),
-  full_name: types.optional(types.string()),
+  uuid: z.string().optional(),
+  full_name: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "full_name": "fullName",
@@ -188,16 +187,16 @@ export const EmbeddedTimeOffRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
+  uuid: z.string(),
   status: EmbeddedTimeOffRequestStatus$inboundSchema,
-  employee_note: types.nullable(types.string()),
-  employer_note: types.nullable(types.string()),
-  policy_type: types.nullable(types.string()),
-  policy_uuid: types.nullable(types.string()),
-  days: z.record(types.string()),
+  employee_note: z.nullable(z.string()),
+  employer_note: z.nullable(z.string()),
+  policy_type: z.nullable(z.string()),
+  policy_uuid: z.nullable(z.string()),
+  days: z.record(z.string()),
   employee: z.lazy(() => EmbeddedTimeOffRequestEmployee$inboundSchema),
-  initiator: types.nullable(z.lazy(() => Initiator$inboundSchema)),
-  approver: types.nullable(z.lazy(() => Approver$inboundSchema)),
+  initiator: z.nullable(z.lazy(() => Initiator$inboundSchema)),
+  approver: z.nullable(z.lazy(() => Approver$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     "employee_note": "employeeNote",

@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -41,11 +40,11 @@ export const PaymentMethodBankAccount$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  name: types.optional(types.string()),
-  hidden_account_number: types.optional(types.string()),
-  priority: types.optional(types.number()),
-  split_amount: z.nullable(types.number()).optional(),
+  uuid: z.string(),
+  name: z.string().optional(),
+  hidden_account_number: z.string().optional(),
+  priority: z.number().int().optional(),
+  split_amount: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "hidden_account_number": "hiddenAccountNumber",

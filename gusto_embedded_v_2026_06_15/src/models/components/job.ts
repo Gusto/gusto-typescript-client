@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Compensation, Compensation$inboundSchema } from "./compensation.js";
 import { Location, Location$inboundSchema } from "./location.js";
@@ -80,21 +79,21 @@ export type Job = {
 /** @internal */
 export const Job$inboundSchema: z.ZodType<Job, z.ZodTypeDef, unknown> = z
   .object({
-    uuid: types.string(),
-    version: types.optional(types.string()),
-    employee_uuid: types.optional(types.string()),
-    hire_date: types.optional(types.string()),
-    title: z.nullable(types.string()).default(null),
-    primary: types.optional(types.boolean()),
-    rate: types.optional(types.string()),
-    payment_unit: z.nullable(types.string()).optional(),
-    current_compensation_uuid: types.optional(types.string()),
-    two_percent_shareholder: types.optional(types.boolean()),
-    state_wc_covered: z.nullable(types.boolean()).optional(),
-    state_wc_class_code: z.nullable(types.string()).optional(),
-    compensations: types.optional(z.array(Compensation$inboundSchema)),
-    location_uuid: types.optional(types.string()),
-    location: types.optional(Location$inboundSchema),
+    uuid: z.string(),
+    version: z.string().optional(),
+    employee_uuid: z.string().optional(),
+    hire_date: z.string().optional(),
+    title: z.nullable(z.string()).default(null),
+    primary: z.boolean().optional(),
+    rate: z.string().optional(),
+    payment_unit: z.nullable(z.string()).optional(),
+    current_compensation_uuid: z.string().optional(),
+    two_percent_shareholder: z.boolean().optional(),
+    state_wc_covered: z.nullable(z.boolean()).optional(),
+    state_wc_class_code: z.nullable(z.string()).optional(),
+    compensations: z.array(Compensation$inboundSchema).optional(),
+    location_uuid: z.string().optional(),
+    location: Location$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "employee_uuid": "employeeUuid",

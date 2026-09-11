@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GarnishmentChildSupport,
@@ -105,19 +104,19 @@ export const Garnishment$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  version: types.optional(types.string()),
-  employee_uuid: types.optional(types.string()),
-  active: types.boolean().default(true),
-  amount: types.optional(types.string()),
-  description: types.optional(types.string()),
-  court_ordered: types.optional(types.boolean()),
-  times: z.nullable(types.number()).default(null),
-  recurring: types.boolean().default(false),
-  annual_maximum: z.nullable(types.string()).default(null),
-  total_amount: z.nullable(types.string()).default(null),
-  pay_period_maximum: z.nullable(types.string()).default(null),
-  deduct_as_percentage: types.boolean().default(false),
+  uuid: z.string(),
+  version: z.string().optional(),
+  employee_uuid: z.string().optional(),
+  active: z.boolean().default(true),
+  amount: z.string().optional(),
+  description: z.string().optional(),
+  court_ordered: z.boolean().optional(),
+  times: z.nullable(z.number().int()).default(null),
+  recurring: z.boolean().default(false),
+  annual_maximum: z.nullable(z.string()).default(null),
+  total_amount: z.nullable(z.string()).default(null),
+  pay_period_maximum: z.nullable(z.string()).default(null),
+  deduct_as_percentage: z.boolean().default(false),
   garnishment_type: z.nullable(GarnishmentType$inboundSchema).optional(),
   child_support: z.nullable(GarnishmentChildSupport$inboundSchema).optional(),
 }).transform((v) => {

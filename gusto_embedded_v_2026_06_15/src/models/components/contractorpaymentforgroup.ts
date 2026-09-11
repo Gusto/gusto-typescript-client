@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -144,22 +143,21 @@ export const ContractorPaymentForGroup$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.optional(types.string()),
-  contractor_uuid: types.optional(types.string()),
-  bonus: types.optional(types.string()),
-  hours: types.optional(types.string()),
-  payment_method: types.optional(
-    ContractorPaymentForGroupPaymentMethod$inboundSchema,
-  ),
-  reimbursement: types.optional(types.string()),
-  status: types.optional(ContractorPaymentForGroupStatus$inboundSchema),
-  hourly_rate: types.optional(types.string()),
-  may_cancel: types.optional(types.boolean()),
-  wage: types.optional(types.string()),
-  wage_type: types.optional(ContractorPaymentForGroupWageType$inboundSchema),
-  wage_total: types.optional(types.string()),
-  invoice_number: z.nullable(types.string()).optional(),
-  memo: z.nullable(types.string()).optional(),
+  uuid: z.string().optional(),
+  contractor_uuid: z.string().optional(),
+  bonus: z.string().optional(),
+  hours: z.string().optional(),
+  payment_method: ContractorPaymentForGroupPaymentMethod$inboundSchema
+    .optional(),
+  reimbursement: z.string().optional(),
+  status: ContractorPaymentForGroupStatus$inboundSchema.optional(),
+  hourly_rate: z.string().optional(),
+  may_cancel: z.boolean().optional(),
+  wage: z.string().optional(),
+  wage_type: ContractorPaymentForGroupWageType$inboundSchema.optional(),
+  wage_total: z.string().optional(),
+  invoice_number: z.nullable(z.string()).optional(),
+  memo: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "contractor_uuid": "contractorUuid",

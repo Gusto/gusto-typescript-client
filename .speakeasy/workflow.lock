@@ -56,7 +56,7 @@ targets:
         sourceRevisionDigest: sha256:b0c847da87e9e283b545793d352a8bcb564832b67913a932ac9e3f60887bf59a
         sourceBlobDigest: sha256:48dc48c38aaae092367049c3a835d01d6dcf010c92eaaeac4ceb70587a58963e
         codeSamplesNamespace: gusto-embedded-oas-typescript-code-samples-v2026-06-15
-        codeSamplesRevisionDigest: sha256:bda9fb4957666f6b2ec313f7485ebafa32afabce2e187b86a62ff94908e101bb
+        codeSamplesRevisionDigest: sha256:ca1f5e894cd2242743c6d4adc814f9cbf03f6598d7ae6171111b43060ed85345
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

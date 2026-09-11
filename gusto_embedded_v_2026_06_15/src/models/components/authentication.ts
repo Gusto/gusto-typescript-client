@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   CreateTokenAuthentication,
@@ -25,7 +24,7 @@ export const Authentication$inboundSchema: z.ZodType<
   Authentication,
   z.ZodTypeDef,
   unknown
-> = smartUnion([
+> = z.union([
   CreateTokenAuthentication$inboundSchema,
   RefreshTokenAuthentication$inboundSchema,
 ]);

@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -280,12 +279,12 @@ export const ContractorType$inboundSchema: z.ZodType<
 /** @internal */
 export const Address$inboundSchema: z.ZodType<Address, z.ZodTypeDef, unknown> =
   z.object({
-    street_1: types.optional(types.string()),
-    street_2: z.nullable(types.string()).optional(),
-    city: types.optional(types.string()),
-    state: types.optional(types.string()),
-    zip: types.optional(types.string()),
-    country: types.optional(types.string()),
+    street_1: z.string().optional(),
+    street_2: z.nullable(z.string()).optional(),
+    city: z.string().optional(),
+    state: z.string().optional(),
+    zip: z.string().optional(),
+    country: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "street_1": "street1",
@@ -323,8 +322,8 @@ export const UpcomingEmployment$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  start_date: types.optional(types.string()),
-  setup_status: z.nullable(types.string()).optional(),
+  start_date: z.string().optional(),
+  setup_status: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "start_date": "startDate",
@@ -355,10 +354,14 @@ export const MemberPortalInvitationStatus$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  status: types.optional(ContractorStatus$inboundSchema),
-  token_expired: z.nullable(types.boolean()).optional(),
-  welcome_email_sent_at: z.nullable(types.date()).optional(),
-  last_password_resent_at: z.nullable(types.date()).optional(),
+  status: ContractorStatus$inboundSchema.optional(),
+  token_expired: z.nullable(z.boolean()).optional(),
+  welcome_email_sent_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  last_password_resent_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "token_expired": "tokenExpired",
@@ -383,42 +386,42 @@ export const Contractor$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  company_uuid: types.optional(types.string()),
-  wage_type: types.optional(ContractorWageType$inboundSchema),
-  is_active: types.boolean().default(true),
-  version: types.optional(types.string()),
-  type: types.optional(ContractorType$inboundSchema),
-  first_name: z.nullable(types.string()).optional(),
-  last_name: z.nullable(types.string()).optional(),
-  middle_initial: z.nullable(types.string()).optional(),
-  business_name: z.nullable(types.string()).optional(),
-  ein: z.nullable(types.string()).optional(),
-  has_ein: z.nullable(types.boolean()).optional(),
-  email: z.nullable(types.string()).optional(),
-  work_email: z.nullable(types.string()).optional(),
-  start_date: types.optional(types.string()),
+  uuid: z.string(),
+  company_uuid: z.string().optional(),
+  wage_type: ContractorWageType$inboundSchema.optional(),
+  is_active: z.boolean().default(true),
+  version: z.string().optional(),
+  type: ContractorType$inboundSchema.optional(),
+  first_name: z.nullable(z.string()).optional(),
+  last_name: z.nullable(z.string()).optional(),
+  middle_initial: z.nullable(z.string()).optional(),
+  business_name: z.nullable(z.string()).optional(),
+  ein: z.nullable(z.string()).optional(),
+  has_ein: z.nullable(z.boolean()).optional(),
+  email: z.nullable(z.string()).optional(),
+  work_email: z.nullable(z.string()).optional(),
+  start_date: z.string().optional(),
   address: z.nullable(z.lazy(() => Address$inboundSchema)).optional(),
-  hourly_rate: types.optional(types.string()),
-  file_new_hire_report: z.nullable(types.boolean()).optional(),
-  work_state: z.nullable(types.string()).optional(),
-  onboarded: types.optional(types.boolean()),
-  onboarding_status: types.optional(OnboardingStatus$inboundSchema),
+  hourly_rate: z.string().optional(),
+  file_new_hire_report: z.nullable(z.boolean()).optional(),
+  work_state: z.nullable(z.string()).optional(),
+  onboarded: z.boolean().optional(),
+  onboarding_status: OnboardingStatus$inboundSchema.optional(),
   payment_method: z.nullable(ContractorPaymentMethod1$inboundSchema).optional(),
-  has_ssn: types.optional(types.boolean()),
-  department_uuid: z.nullable(types.string()).optional(),
-  department: z.nullable(types.string()).optional(),
-  department_title: z.nullable(types.string()).optional(),
-  dismissal_date: z.nullable(types.string()).optional(),
+  has_ssn: z.boolean().optional(),
+  department_uuid: z.nullable(z.string()).optional(),
+  department: z.nullable(z.string()).optional(),
+  department_title: z.nullable(z.string()).optional(),
+  dismissal_date: z.nullable(z.string()).optional(),
   upcoming_employment: z.nullable(
     z.lazy(() => UpcomingEmployment$inboundSchema),
   ).optional(),
-  dismissal_cancellation_eligible: types.optional(types.boolean()),
-  rehire_cancellation_eligible: types.optional(types.boolean()),
+  dismissal_cancellation_eligible: z.boolean().optional(),
+  rehire_cancellation_eligible: z.boolean().optional(),
   member_portal_invitation_status: z.nullable(
     z.lazy(() => MemberPortalInvitationStatus$inboundSchema),
   ).optional(),
-  partner_portal_invitation_sent: z.nullable(types.boolean()).optional(),
+  partner_portal_invitation_sent: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

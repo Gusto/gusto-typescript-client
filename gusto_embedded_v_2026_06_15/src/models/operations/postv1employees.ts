@@ -7,7 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import { Employee, Employee$inboundSchema } from "../components/employee.js";
 import {
   HTTPMetadata,
@@ -40,7 +40,7 @@ export type PostV1EmployeesRequestBody = {
    * The employee's work email address.
    */
   workEmail?: string | undefined;
-  dateOfBirth?: Date | undefined;
+  dateOfBirth?: RFCDate | undefined;
   ssn?: string | undefined;
   preferredFirstName?: string | undefined;
   /**
@@ -99,9 +99,7 @@ export const PostV1EmployeesRequestBody$outboundSchema: z.ZodType<
   lastName: z.string(),
   email: z.nullable(z.string()).optional(),
   workEmail: z.string().optional(),
-  dateOfBirth: z.date().transform(v =>
-    v.toISOString().slice(0, "YYYY-MM-DD".length)
-  ).optional(),
+  dateOfBirth: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
   ssn: z.string().optional(),
   preferredFirstName: z.string().optional(),
   selfOnboarding: z.boolean().optional(),
@@ -166,7 +164,7 @@ export const PostV1EmployeesResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  Employee: types.optional(Employee$inboundSchema),
+  Employee: Employee$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",

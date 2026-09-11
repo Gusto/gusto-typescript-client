@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -72,14 +71,14 @@ export const RehireEmploymentStatus$inboundSchema: z.ZodType<
 /** @internal */
 export const Rehire$inboundSchema: z.ZodType<Rehire, z.ZodTypeDef, unknown> = z
   .object({
-    version: types.optional(types.string()),
-    effective_date: types.optional(types.string()),
-    file_new_hire_report: types.optional(types.boolean()),
-    work_location_uuid: types.optional(types.string()),
-    employment_status: types.optional(RehireEmploymentStatus$inboundSchema),
-    two_percent_shareholder: types.optional(types.boolean()),
-    employee_uuid: types.optional(types.string()),
-    active: types.optional(types.boolean()),
+    version: z.string().optional(),
+    effective_date: z.string().optional(),
+    file_new_hire_report: z.boolean().optional(),
+    work_location_uuid: z.string().optional(),
+    employment_status: RehireEmploymentStatus$inboundSchema.optional(),
+    two_percent_shareholder: z.boolean().optional(),
+    employee_uuid: z.string().optional(),
+    active: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "effective_date": "effectiveDate",

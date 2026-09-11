@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UnblockOptions = {
@@ -72,9 +71,9 @@ export const UnblockOptions$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  unblock_type: types.optional(types.string()),
-  check_date: types.optional(types.string()),
-  metadata: types.optional(z.record(z.any())),
+  unblock_type: z.string().optional(),
+  check_date: z.string().optional(),
+  metadata: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "unblock_type": "unblockType",
@@ -105,13 +104,12 @@ export const PayrollSubmissionBlockerType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  blocker_type: types.optional(types.string()),
-  blocker_name: types.optional(types.string()),
-  unblock_options: types.optional(
-    z.array(z.lazy(() => UnblockOptions$inboundSchema)),
-  ),
-  selected_option: z.nullable(types.string()).optional(),
-  status: types.optional(PayrollSubmissionBlockerTypeStatus$inboundSchema),
+  blocker_type: z.string().optional(),
+  blocker_name: z.string().optional(),
+  unblock_options: z.array(z.lazy(() => UnblockOptions$inboundSchema))
+    .optional(),
+  selected_option: z.nullable(z.string()).optional(),
+  status: PayrollSubmissionBlockerTypeStatus$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "blocker_type": "blockerType",

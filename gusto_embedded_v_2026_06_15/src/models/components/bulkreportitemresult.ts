@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -83,9 +82,9 @@ export const BulkReportItemResult$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   report_type: BulkReportItemResultReportType$inboundSchema,
-  file_type: types.string(),
+  file_type: z.string(),
   status: BulkReportItemResultStatus$inboundSchema,
-  error: types.nullable(types.string()),
+  error: z.nullable(z.string()),
 }).transform((v) => {
   return remap$(v, {
     "report_type": "reportType",

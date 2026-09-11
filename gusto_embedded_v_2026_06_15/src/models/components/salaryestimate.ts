@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -112,12 +111,12 @@ export const Occupations$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  code: types.string(),
-  name: types.optional(types.string()),
-  description: types.optional(types.string()),
+  code: z.string(),
+  name: z.string().optional(),
+  description: z.string().optional(),
   experience_level: ExperienceLevel$inboundSchema,
-  time_percentage: types.string(),
-  primary: types.optional(types.boolean()),
+  time_percentage: z.string(),
+  primary: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "experience_level": "experienceLevel",
@@ -141,15 +140,17 @@ export const SalaryEstimate$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  employee_uuid: types.nullable(types.string()),
-  employee_job_uuid: z.nullable(types.string()).optional(),
-  annual_net_revenue: types.nullable(types.string()),
-  zip_code: types.nullable(types.string()),
-  result: z.nullable(types.number()).optional(),
-  accepted_at: z.nullable(types.date()).optional(),
-  created_at: types.date(),
-  updated_at: types.date(),
+  uuid: z.string(),
+  employee_uuid: z.nullable(z.string()),
+  employee_job_uuid: z.nullable(z.string()).optional(),
+  annual_net_revenue: z.nullable(z.string()),
+  zip_code: z.nullable(z.string()),
+  result: z.nullable(z.number().int()).optional(),
+  accepted_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   occupations: z.array(z.lazy(() => Occupations$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {

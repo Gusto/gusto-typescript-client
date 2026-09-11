@@ -7,7 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
@@ -54,11 +54,11 @@ export type GetV1CompaniesCompanyIdPayPeriodsRequest = {
   /**
    * Start date (YYYY-MM-DD) for the pay periods range. Defaults to 6 months ago.
    */
-  startDate?: Date | undefined;
+  startDate?: RFCDate | undefined;
   /**
    * End date (YYYY-MM-DD) for the pay periods range. Cannot be more than 3 months in the future. Defaults to today.
    */
-  endDate?: Date | undefined;
+  endDate?: RFCDate | undefined;
   /**
    * Comma-separated list of payroll types to include (regular, transition). Defaults to regular only.
    */
@@ -102,12 +102,8 @@ export const GetV1CompaniesCompanyIdPayPeriodsRequest$outboundSchema: z.ZodType<
     GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion$outboundSchema
       .default("2026-06-15"),
   companyId: z.string(),
-  startDate: z.date().transform(v =>
-    v.toISOString().slice(0, "YYYY-MM-DD".length)
-  ).optional(),
-  endDate: z.date().transform(v =>
-    v.toISOString().slice(0, "YYYY-MM-DD".length)
-  ).optional(),
+  startDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  endDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
   payrollTypes: PayrollTypes$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -137,7 +133,7 @@ export const GetV1CompaniesCompanyIdPayPeriodsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Pay-Periods": types.optional(z.array(PayPeriod$inboundSchema)),
+  "Pay-Periods": z.array(PayPeriod$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",

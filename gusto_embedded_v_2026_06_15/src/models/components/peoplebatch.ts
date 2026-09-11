@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -61,10 +60,10 @@ export const PeopleBatch$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  idempotency_key: types.string(),
+  uuid: z.string(),
+  idempotency_key: z.string(),
   status: PeopleBatchStatus$inboundSchema,
-  batch_action: types.string(),
+  batch_action: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "idempotency_key": "idempotencyKey",

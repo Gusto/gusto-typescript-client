@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { ClosedEnum, OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -269,9 +268,9 @@ export const PayrollBatchResultsErrors$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  error_key: types.optional(types.string()),
-  category: types.optional(PayrollBatchResultsResultsCategory$inboundSchema),
-  message: types.optional(types.string()),
+  error_key: z.string().optional(),
+  category: PayrollBatchResultsResultsCategory$inboundSchema.optional(),
+  message: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "error_key": "errorKey",
@@ -291,12 +290,11 @@ export function payrollBatchResultsErrorsFromJSON(
 /** @internal */
 export const Results$inboundSchema: z.ZodType<Results, z.ZodTypeDef, unknown> =
   z.object({
-    idx: types.optional(types.number()),
-    uuid: types.optional(types.string()),
-    status: types.optional(PayrollBatchResultsResultsStatus$inboundSchema),
-    errors: types.optional(
-      z.array(z.lazy(() => PayrollBatchResultsErrors$inboundSchema)),
-    ),
+    idx: z.number().int().optional(),
+    uuid: z.string().optional(),
+    status: PayrollBatchResultsResultsStatus$inboundSchema.optional(),
+    errors: z.array(z.lazy(() => PayrollBatchResultsErrors$inboundSchema))
+      .optional(),
   });
 
 export function resultsFromJSON(
@@ -332,13 +330,13 @@ export const Exclusions$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  idx: types.optional(types.number()),
-  entity_type: types.optional(PayrollBatchResultsEntityType$inboundSchema),
-  uuid: types.optional(types.string()),
-  company_uuid: types.optional(types.string()),
-  status: types.optional(PayrollBatchResultsExclusionsStatus$inboundSchema),
-  category: types.optional(PayrollBatchResultsCategory$inboundSchema),
-  message: types.optional(types.string()),
+  idx: z.number().int().optional(),
+  entity_type: PayrollBatchResultsEntityType$inboundSchema.optional(),
+  uuid: z.string().optional(),
+  company_uuid: z.string().optional(),
+  status: PayrollBatchResultsExclusionsStatus$inboundSchema.optional(),
+  category: PayrollBatchResultsCategory$inboundSchema.optional(),
+  message: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "entity_type": "entityType",
@@ -362,16 +360,20 @@ export const PayrollBatchResults$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  idempotency_key: types.string(),
+  uuid: z.string(),
+  idempotency_key: z.string(),
   status: PayrollBatchResultsStatus$inboundSchema,
-  submitted_at: types.date(),
-  completed_at: z.nullable(types.date()).optional(),
-  submitted_items: z.nullable(types.number()).optional(),
-  processed_items: types.optional(types.number()),
-  excluded_items: types.optional(types.number()),
-  results: types.optional(z.array(z.lazy(() => Results$inboundSchema))),
-  exclusions: types.optional(z.array(z.lazy(() => Exclusions$inboundSchema))),
+  submitted_at: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
+  ),
+  completed_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  submitted_items: z.nullable(z.number().int()).optional(),
+  processed_items: z.number().int().optional(),
+  excluded_items: z.number().int().optional(),
+  results: z.array(z.lazy(() => Results$inboundSchema)).optional(),
+  exclusions: z.array(z.lazy(() => Exclusions$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "idempotency_key": "idempotencyKey",

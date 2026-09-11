@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PayScheduleAssignmentDepartment,
@@ -73,9 +72,9 @@ export const PayScheduleAssignment$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.nullable(PayScheduleAssignmentType$inboundSchema).optional(),
-  hourly_pay_schedule_uuid: z.nullable(types.string()).optional(),
-  salaried_pay_schedule_uuid: z.nullable(types.string()).optional(),
-  default_pay_schedule_uuid: z.nullable(types.string()).optional(),
+  hourly_pay_schedule_uuid: z.nullable(z.string()).optional(),
+  salaried_pay_schedule_uuid: z.nullable(z.string()).optional(),
+  default_pay_schedule_uuid: z.nullable(z.string()).optional(),
   employees: z.nullable(z.array(PayScheduleAssignmentEmployee$inboundSchema))
     .optional(),
   departments: z.nullable(

@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -89,11 +88,11 @@ export const EarningType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: types.optional(types.string()),
-  uuid: types.string(),
-  active: types.optional(types.boolean()),
-  category: types.optional(EarningTypeCategory$inboundSchema),
-  included_in_overtime_pay: types.optional(types.boolean()),
+  name: z.string().optional(),
+  uuid: z.string(),
+  active: z.boolean().optional(),
+  category: EarningTypeCategory$inboundSchema.optional(),
+  included_in_overtime_pay: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "included_in_overtime_pay": "includedInOvertimePay",

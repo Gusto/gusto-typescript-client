@@ -8,7 +8,7 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { ClosedEnum, OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -70,19 +70,19 @@ export type PayrollDigestResultsPayPeriod = {
   /**
    * First day of the pay period.
    */
-  startDate?: Date | null | undefined;
+  startDate?: RFCDate | null | undefined;
   /**
    * Last day of the pay period.
    */
-  endDate?: Date | null | undefined;
+  endDate?: RFCDate | null | undefined;
   /**
    * The date employees get paid.
    */
-  checkDate?: Date | null | undefined;
+  checkDate?: RFCDate | null | undefined;
   /**
    * The deadline to run payroll for this pay period.
    */
-  runPayrollBy?: Date | null | undefined;
+  runPayrollBy?: RFCDate | null | undefined;
 };
 
 export type PaySchedule = {
@@ -318,8 +318,8 @@ export const PayrollDigestResultsBlockers$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: types.optional(types.string()),
-  description: types.optional(types.string()),
+  type: z.string().optional(),
+  description: z.string().optional(),
 });
 
 export function payrollDigestResultsBlockersFromJSON(
@@ -338,10 +338,11 @@ export const PayrollDigestResultsPayPeriod$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  start_date: z.nullable(types.date()).optional(),
-  end_date: z.nullable(types.date()).optional(),
-  check_date: z.nullable(types.date()).optional(),
-  run_payroll_by: z.nullable(types.date()).optional(),
+  start_date: z.nullable(z.string().transform(v => new RFCDate(v))).optional(),
+  end_date: z.nullable(z.string().transform(v => new RFCDate(v))).optional(),
+  check_date: z.nullable(z.string().transform(v => new RFCDate(v))).optional(),
+  run_payroll_by: z.nullable(z.string().transform(v => new RFCDate(v)))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "start_date": "startDate",
@@ -367,9 +368,9 @@ export const PaySchedule$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.optional(types.string()),
-  frequency: types.optional(types.string()),
-  custom_name: z.nullable(types.string()).optional(),
+  uuid: z.string().optional(),
+  frequency: z.string().optional(),
+  custom_name: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "custom_name": "customName",
@@ -392,9 +393,9 @@ export const PayrollDigestResultsTotals$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  total_debit_amount: types.optional(types.string()),
-  net_pay: types.optional(types.string()),
-  total_employer_cost: types.optional(types.string()),
+  total_debit_amount: z.string().optional(),
+  net_pay: z.string().optional(),
+  total_employer_cost: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "total_debit_amount": "totalDebitAmount",
@@ -419,14 +420,13 @@ export const Payrolls$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  payroll_uuid: z.nullable(types.string()).optional(),
-  payroll_type: types.optional(types.string()),
-  display_title: types.optional(types.string()),
-  auto_payroll: types.optional(types.boolean()),
-  status: types.optional(types.string()),
-  pay_period: types.optional(
-    z.lazy(() => PayrollDigestResultsPayPeriod$inboundSchema),
-  ),
+  payroll_uuid: z.nullable(z.string()).optional(),
+  payroll_type: z.string().optional(),
+  display_title: z.string().optional(),
+  auto_payroll: z.boolean().optional(),
+  status: z.string().optional(),
+  pay_period: z.lazy(() => PayrollDigestResultsPayPeriod$inboundSchema)
+    .optional(),
   pay_schedule: z.nullable(z.lazy(() => PaySchedule$inboundSchema)).optional(),
   totals: z.nullable(z.lazy(() => PayrollDigestResultsTotals$inboundSchema))
     .optional(),
@@ -457,15 +457,14 @@ export const PayrollDigestResultsResults$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  idx: types.optional(types.number()),
-  entity_type: types.optional(PayrollDigestResultsEntityType$inboundSchema),
-  uuid: types.optional(types.string()),
-  name: types.optional(types.string()),
-  status: types.optional(PayrollDigestResultsResultsStatus$inboundSchema),
-  blockers: types.optional(
-    z.array(z.lazy(() => PayrollDigestResultsBlockers$inboundSchema)),
-  ),
-  payrolls: types.optional(z.array(z.lazy(() => Payrolls$inboundSchema))),
+  idx: z.number().int().optional(),
+  entity_type: PayrollDigestResultsEntityType$inboundSchema.optional(),
+  uuid: z.string().optional(),
+  name: z.string().optional(),
+  status: PayrollDigestResultsResultsStatus$inboundSchema.optional(),
+  blockers: z.array(z.lazy(() => PayrollDigestResultsBlockers$inboundSchema))
+    .optional(),
+  payrolls: z.array(z.lazy(() => Payrolls$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "entity_type": "entityType",
@@ -506,14 +505,13 @@ export const PayrollDigestResultsExclusions$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  idx: types.optional(types.number()),
-  entity_type: types.optional(
-    PayrollDigestResultsExclusionsEntityType$inboundSchema,
-  ),
-  uuid: types.optional(types.string()),
-  status: types.optional(PayrollDigestResultsExclusionsStatus$inboundSchema),
-  category: types.optional(PayrollDigestResultsCategory$inboundSchema),
-  message: types.optional(types.string()),
+  idx: z.number().int().optional(),
+  entity_type: PayrollDigestResultsExclusionsEntityType$inboundSchema
+    .optional(),
+  uuid: z.string().optional(),
+  status: PayrollDigestResultsExclusionsStatus$inboundSchema.optional(),
+  category: PayrollDigestResultsCategory$inboundSchema.optional(),
+  message: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "entity_type": "entityType",
@@ -536,20 +534,23 @@ export const PayrollDigestResults$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  idempotency_key: types.string(),
+  uuid: z.string(),
+  idempotency_key: z.string(),
   status: PayrollDigestResultsStatus$inboundSchema,
-  submitted_at: types.date(),
-  completed_at: z.nullable(types.date()).optional(),
-  submitted_items: z.nullable(types.number()).optional(),
-  processed_items: types.optional(types.number()),
-  excluded_items: types.optional(types.number()),
-  results: types.optional(
-    z.array(z.lazy(() => PayrollDigestResultsResults$inboundSchema)),
+  submitted_at: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
   ),
-  exclusions: types.optional(
-    z.array(z.lazy(() => PayrollDigestResultsExclusions$inboundSchema)),
-  ),
+  completed_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  submitted_items: z.nullable(z.number().int()).optional(),
+  processed_items: z.number().int().optional(),
+  excluded_items: z.number().int().optional(),
+  results: z.array(z.lazy(() => PayrollDigestResultsResults$inboundSchema))
+    .optional(),
+  exclusions: z.array(
+    z.lazy(() => PayrollDigestResultsExclusions$inboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "idempotency_key": "idempotencyKey",

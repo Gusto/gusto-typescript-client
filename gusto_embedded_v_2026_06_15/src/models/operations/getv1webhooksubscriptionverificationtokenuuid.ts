@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
@@ -141,9 +140,8 @@ export const GetV1WebhookSubscriptionVerificationTokenUuidResponse$inboundSchema
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Webhook-Verification-Token-Response": types.optional(
-      WebhookVerificationTokenResponse$inboundSchema,
-    ),
+    "Webhook-Verification-Token-Response":
+      WebhookVerificationTokenResponse$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",

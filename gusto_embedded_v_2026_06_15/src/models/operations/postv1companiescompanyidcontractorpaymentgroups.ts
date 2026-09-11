@@ -7,7 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import {
   ContractorPaymentGroup,
   ContractorPaymentGroup$inboundSchema,
@@ -112,7 +112,7 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody = {
   /**
    * The payment check date
    */
-  checkDate: Date;
+  checkDate: RFCDate;
   /**
    * A token used to make contractor payment group creation idempotent. The string must be unique for each group you intend to create.
    */
@@ -283,9 +283,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$outbound
     z.ZodTypeDef,
     PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody
   > = z.object({
-    checkDate: z.date().transform(v =>
-      v.toISOString().slice(0, "YYYY-MM-DD".length)
-    ),
+    checkDate: z.instanceof(RFCDate).transform(v => v.toString()),
     creationToken: z.string(),
     submissionBlockers: z.array(z.lazy(() => SubmissionBlockers$outboundSchema))
       .optional(),
@@ -362,9 +360,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsResponse$inboundSche
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Contractor-Payment-Group": types.optional(
-      ContractorPaymentGroup$inboundSchema,
-    ),
+    "Contractor-Payment-Group": ContractorPaymentGroup$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",

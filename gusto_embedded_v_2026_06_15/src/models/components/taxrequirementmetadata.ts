@@ -8,8 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
-import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -203,7 +201,7 @@ export const TaxRequirementMetadataValue$inboundSchema: z.ZodType<
   TaxRequirementMetadataValue,
   z.ZodTypeDef,
   unknown
-> = smartUnion([types.string(), types.boolean()]);
+> = z.union([z.string(), z.boolean()]);
 
 export function taxRequirementMetadataValueFromJSON(
   jsonString: string,
@@ -218,9 +216,9 @@ export function taxRequirementMetadataValueFromJSON(
 /** @internal */
 export const Options$inboundSchema: z.ZodType<Options, z.ZodTypeDef, unknown> =
   z.object({
-    label: types.string(),
-    value: smartUnion([types.string(), types.boolean()]),
-    short_label: z.nullable(types.string()).optional(),
+    label: z.string(),
+    value: z.union([z.string(), z.boolean()]),
+    short_label: z.nullable(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "short_label": "shortLabel",
@@ -258,9 +256,9 @@ export const Validation$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: TaxRequirementMetadataType$inboundSchema,
-  min: types.optional(types.string()),
-  max: types.optional(types.string()),
-  rates: types.optional(z.array(types.string())),
+  min: z.string().optional(),
+  max: z.string().optional(),
+  rates: z.array(z.string()).optional(),
 });
 
 export function validationFromJSON(
@@ -280,13 +278,13 @@ export const TaxRequirementMetadata$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: Type$inboundSchema,
-  options: types.optional(z.array(z.lazy(() => Options$inboundSchema))),
-  risk_class_code: types.optional(types.string()),
-  risk_class_description: types.optional(types.string()),
-  rate_type: types.optional(RateType$inboundSchema),
-  mask: z.nullable(types.string()).optional(),
-  prefix: z.nullable(types.string()).optional(),
-  validation: types.optional(z.lazy(() => Validation$inboundSchema)),
+  options: z.array(z.lazy(() => Options$inboundSchema)).optional(),
+  risk_class_code: z.string().optional(),
+  risk_class_description: z.string().optional(),
+  rate_type: RateType$inboundSchema.optional(),
+  mask: z.nullable(z.string()).optional(),
+  prefix: z.nullable(z.string()).optional(),
+  validation: z.lazy(() => Validation$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "risk_class_code": "riskClassCode",

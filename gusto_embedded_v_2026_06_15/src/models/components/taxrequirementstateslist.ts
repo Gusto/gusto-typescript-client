@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -71,10 +70,10 @@ export const TaxRequirementStatesList$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  state: types.optional(types.string()),
-  setup_status: types.optional(SetupStatus$inboundSchema),
-  default_rates_applied: types.optional(types.boolean()),
-  ready_to_run_payroll: types.optional(types.boolean()),
+  state: z.string().optional(),
+  setup_status: SetupStatus$inboundSchema.optional(),
+  default_rates_applied: z.boolean().optional(),
+  ready_to_run_payroll: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "setup_status": "setupStatus",

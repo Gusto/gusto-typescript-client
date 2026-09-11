@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { startCountingDefaultToZeroValue } from "./defaultToZeroValue.js";
 import { startCountingUnrecognized } from "./unrecognized.js";
 
 const UNKNOWN = Symbol("UNKNOWN");
@@ -76,19 +75,17 @@ export function discriminatedUnion<
 
     // Start counters before parsing to track nested unrecognized/zeroDefault values
     const unrecognizedCtr = startCountingUnrecognized();
-    const zeroDefaultCtr = startCountingDefaultToZeroValue();
 
     const result = schema.safeParse(input);
     if (!result.success) {
       // Parse failed - don't propagate any counts from the failed attempt
       unrecognizedCtr.end(0);
-      zeroDefaultCtr.end(0);
+
       return fallback;
     }
 
     // Parse succeeded - propagate the actual counts
     unrecognizedCtr.end();
-    zeroDefaultCtr.end();
 
     if (outputPropertyName) {
       (result.data as any)[outputPropertyName] = discriminator;

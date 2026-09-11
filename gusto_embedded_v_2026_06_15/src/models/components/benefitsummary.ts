@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type BenefitSummaryPayPeriod = {
@@ -111,8 +110,8 @@ export const BenefitSummaryPayPeriod$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  start_date: z.nullable(types.string()).optional(),
-  end_date: z.nullable(types.string()).optional(),
+  start_date: z.nullable(z.string()).optional(),
+  end_date: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "start_date": "startDate",
@@ -136,16 +135,14 @@ export const PayrollBenefits$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  payroll_uuid: types.optional(types.string()),
-  payroll_type: types.optional(types.string()),
-  check_date: types.optional(types.string()),
-  gross_pay: types.optional(types.string()),
-  imputed_pay: types.optional(types.string()),
-  company_benefit_deduction: types.optional(types.string()),
-  company_benefit_contribution: types.optional(types.string()),
-  pay_period: types.optional(
-    z.lazy(() => BenefitSummaryPayPeriod$inboundSchema),
-  ),
+  payroll_uuid: z.string().optional(),
+  payroll_type: z.string().optional(),
+  check_date: z.string().optional(),
+  gross_pay: z.string().optional(),
+  imputed_pay: z.string().optional(),
+  company_benefit_deduction: z.string().optional(),
+  company_benefit_contribution: z.string().optional(),
+  pay_period: z.lazy(() => BenefitSummaryPayPeriod$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "payroll_uuid": "payrollUuid",
@@ -175,16 +172,15 @@ export const Employees$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.optional(types.string()),
-  company_benefit_deduction: types.optional(types.string()),
-  company_benefit_contribution: types.optional(types.string()),
-  benefit_deduction: types.optional(types.string()),
-  benefit_contribution: types.optional(types.string()),
-  gross_pay: types.optional(types.string()),
-  imputed_pay: types.optional(types.string()),
-  payroll_benefits: types.optional(
-    z.array(z.lazy(() => PayrollBenefits$inboundSchema)),
-  ),
+  uuid: z.string().optional(),
+  company_benefit_deduction: z.string().optional(),
+  company_benefit_contribution: z.string().optional(),
+  benefit_deduction: z.string().optional(),
+  benefit_contribution: z.string().optional(),
+  gross_pay: z.string().optional(),
+  imputed_pay: z.string().optional(),
+  payroll_benefits: z.array(z.lazy(() => PayrollBenefits$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_benefit_deduction": "companyBenefitDeduction",
@@ -213,12 +209,12 @@ export const BenefitSummary$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  start_date: types.optional(types.string()),
-  end_date: types.optional(types.string()),
-  description: types.optional(types.string()),
-  company_benefit_deduction: types.optional(types.string()),
-  company_benefit_contribution: types.optional(types.string()),
-  employees: types.optional(z.array(z.lazy(() => Employees$inboundSchema))),
+  start_date: z.string().optional(),
+  end_date: z.string().optional(),
+  description: z.string().optional(),
+  company_benefit_deduction: z.string().optional(),
+  company_benefit_contribution: z.string().optional(),
+  employees: z.array(z.lazy(() => Employees$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "start_date": "startDate",

@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ActiveCompanies = {
@@ -44,10 +43,10 @@ export const ActiveCompanies$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  company_uuid: types.optional(types.string()),
-  active_employees: types.optional(types.number()),
-  active_contractors: types.optional(types.number()),
-  initial_invoice_period: types.optional(types.string()),
+  company_uuid: z.string().optional(),
+  active_employees: z.number().int().optional(),
+  active_contractors: z.number().int().optional(),
+  initial_invoice_period: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -73,9 +72,8 @@ export const InvoiceData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  active_companies: types.optional(
-    z.array(z.lazy(() => ActiveCompanies$inboundSchema)),
-  ),
+  active_companies: z.array(z.lazy(() => ActiveCompanies$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "active_companies": "activeCompanies",

@@ -9,7 +9,6 @@ import {
   safeParse,
 } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -38,12 +37,12 @@ export const MetadataWithOneEntity$inboundSchema: z.ZodType<
   unknown
 > = collectExtraKeys$(
   z.object({
-    entity_type: types.optional(types.string()),
-    entity_uuid: types.optional(types.string()),
-    valid_from: z.nullable(types.string()).optional(),
-    valid_up_to: z.nullable(types.string()).optional(),
-    key: z.nullable(types.string()).optional(),
-    state: z.nullable(types.string()).optional(),
+    entity_type: z.string().optional(),
+    entity_uuid: z.string().optional(),
+    valid_from: z.nullable(z.string()).optional(),
+    valid_up_to: z.nullable(z.string()).optional(),
+    key: z.nullable(z.string()).optional(),
+    state: z.nullable(z.string()).optional(),
   }).catchall(z.any()),
   "additionalProperties",
   true,

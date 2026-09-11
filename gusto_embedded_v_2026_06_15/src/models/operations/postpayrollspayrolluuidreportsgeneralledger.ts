@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import {
   GeneralLedgerReport,
   GeneralLedgerReport$inboundSchema,
@@ -114,7 +113,7 @@ export const PostPayrollsPayrollUuidReportsGeneralLedgerResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "General-Ledger-Report": types.optional(GeneralLedgerReport$inboundSchema),
+    "General-Ledger-Report": GeneralLedgerReport$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",

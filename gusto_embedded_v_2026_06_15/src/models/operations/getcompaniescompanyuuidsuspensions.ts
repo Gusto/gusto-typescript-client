@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import {
   CompanySuspension,
   CompanySuspension$inboundSchema,
@@ -97,9 +96,8 @@ export const GetCompaniesCompanyUuidSuspensionsResponse$inboundSchema:
   z.ZodType<GetCompaniesCompanyUuidSuspensionsResponse, z.ZodTypeDef, unknown> =
     z.object({
       HttpMeta: HTTPMetadata$inboundSchema,
-      "Company-Suspension-List": types.optional(
-        z.array(CompanySuspension$inboundSchema),
-      ),
+      "Company-Suspension-List": z.array(CompanySuspension$inboundSchema)
+        .optional(),
     }).transform((v) => {
       return remap$(v, {
         "HttpMeta": "httpMeta",

@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const InformationRequestType = {
@@ -120,8 +119,8 @@ export const RequiredQuestions$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  question_uuid: types.string(),
-  question_text: types.string(),
+  question_uuid: z.string(),
+  question_text: z.string(),
   response_type: ResponseType$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
@@ -147,14 +146,13 @@ export const InformationRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.optional(types.string()),
-  company_uuid: types.optional(types.string()),
+  uuid: z.string().optional(),
+  company_uuid: z.string().optional(),
   type: z.nullable(InformationRequestType$inboundSchema).optional(),
-  status: types.optional(InformationRequestStatus$inboundSchema),
-  blocking_payroll: types.optional(types.boolean()),
-  required_questions: types.optional(
-    z.array(z.lazy(() => RequiredQuestions$inboundSchema)),
-  ),
+  status: InformationRequestStatus$inboundSchema.optional(),
+  blocking_payroll: z.boolean().optional(),
+  required_questions: z.array(z.lazy(() => RequiredQuestions$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

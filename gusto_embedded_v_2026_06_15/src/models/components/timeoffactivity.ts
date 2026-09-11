@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -74,14 +73,14 @@ export const TimeOffActivity$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  policy_uuid: z.nullable(types.string()).optional(),
-  time_off_type: types.optional(TimeOffType$inboundSchema),
-  policy_name: z.nullable(types.string()).optional(),
-  event_type: types.optional(types.string()),
-  event_description: z.nullable(types.string()).optional(),
-  effective_time: z.nullable(types.string()).optional(),
-  balance: z.nullable(types.string()).optional(),
-  balance_change: z.nullable(types.string()).optional(),
+  policy_uuid: z.nullable(z.string()).optional(),
+  time_off_type: TimeOffType$inboundSchema.optional(),
+  policy_name: z.nullable(z.string()).optional(),
+  event_type: z.string().optional(),
+  event_description: z.nullable(z.string()).optional(),
+  effective_time: z.nullable(z.string()).optional(),
+  balance: z.nullable(z.string()).optional(),
+  balance_change: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "policy_uuid": "policyUuid",

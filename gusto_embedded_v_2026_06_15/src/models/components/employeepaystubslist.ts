@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -72,15 +71,13 @@ export const EmployeePayStubsList$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  check_date: types.optional(types.string()),
-  gross_pay: types.optional(types.string()),
-  net_pay: types.optional(types.string()),
-  payroll_uuid: types.optional(types.string()),
-  check_amount: types.optional(types.string()),
-  payment_method: types.optional(
-    EmployeePayStubsListPaymentMethod$inboundSchema,
-  ),
+  uuid: z.string(),
+  check_date: z.string().optional(),
+  gross_pay: z.string().optional(),
+  net_pay: z.string().optional(),
+  payroll_uuid: z.string().optional(),
+  check_amount: z.string().optional(),
+  payment_method: EmployeePayStubsListPaymentMethod$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "check_date": "checkDate",

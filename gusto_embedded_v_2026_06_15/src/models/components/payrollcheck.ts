@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type EmployeeCheckNumberMapping = {
@@ -53,8 +52,8 @@ export const EmployeeCheckNumberMapping$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  employee_uuid: types.optional(types.string()),
-  check_number: types.optional(types.number()),
+  employee_uuid: z.string().optional(),
+  check_number: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",
@@ -78,14 +77,14 @@ export const PayrollCheck$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  payroll_uuid: types.optional(types.string()),
-  printing_format: types.optional(types.string()),
-  starting_check_number: z.nullable(types.number()).optional(),
-  request_uuid: types.optional(types.string()),
-  status: types.optional(types.string()),
-  employee_check_number_mapping: types.optional(
-    z.array(z.lazy(() => EmployeeCheckNumberMapping$inboundSchema)),
-  ),
+  payroll_uuid: z.string().optional(),
+  printing_format: z.string().optional(),
+  starting_check_number: z.nullable(z.number().int()).optional(),
+  request_uuid: z.string().optional(),
+  status: z.string().optional(),
+  employee_check_number_mapping: z.array(
+    z.lazy(() => EmployeeCheckNumberMapping$inboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "payroll_uuid": "payrollUuid",

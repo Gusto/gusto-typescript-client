@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -104,8 +103,8 @@ export const Resource$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: types.optional(types.string()),
-  uuid: types.optional(types.string()),
+  type: z.string().optional(),
+  uuid: z.string().optional(),
 });
 
 export function resourceFromJSON(
@@ -131,8 +130,8 @@ export const ResourceOwner$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: types.optional(TokenInfoType$inboundSchema),
-  uuid: types.optional(types.string()),
+  type: TokenInfoType$inboundSchema.optional(),
+  uuid: z.string().optional(),
 });
 
 export function resourceOwnerFromJSON(
@@ -151,7 +150,7 @@ export const TokenInfo$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  scope: types.optional(types.string()),
+  scope: z.string().optional(),
   resource: z.nullable(z.lazy(() => Resource$inboundSchema)).optional(),
   resource_owner: z.nullable(z.lazy(() => ResourceOwner$inboundSchema))
     .optional(),

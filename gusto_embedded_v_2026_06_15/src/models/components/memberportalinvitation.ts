@@ -7,7 +7,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -80,7 +79,7 @@ export const MemberPortalInvitation$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   status: MemberPortalInvitationStatus1$inboundSchema,
-  expired: types.boolean(),
+  expired: z.boolean(),
 });
 
 export function memberPortalInvitationFromJSON(

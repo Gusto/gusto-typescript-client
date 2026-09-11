@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -53,9 +52,9 @@ export const GeneratedDocument$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  request_uuid: types.optional(types.string()),
-  status: types.optional(GeneratedDocumentStatus$inboundSchema),
-  document_urls: types.optional(z.array(types.string())),
+  request_uuid: z.string().optional(),
+  status: GeneratedDocumentStatus$inboundSchema.optional(),
+  document_urls: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "request_uuid": "requestUuid",

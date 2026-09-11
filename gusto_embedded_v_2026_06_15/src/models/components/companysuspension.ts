@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -99,8 +98,8 @@ export const TaxRefunds$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  amount: types.optional(types.string()),
-  description: types.optional(types.string()),
+  amount: z.string().optional(),
+  description: z.string().optional(),
 });
 
 export function taxRefundsFromJSON(
@@ -119,16 +118,16 @@ export const CompanySuspension$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.optional(types.string()),
-  company_uuid: types.optional(types.string()),
-  effective_date: types.optional(types.string()),
-  leaving_for: z.nullable(types.string()).optional(),
-  reason: types.optional(types.string()),
-  reconcile_tax_method: types.optional(ReconcileTaxMethod$inboundSchema),
-  file_quarterly_forms: types.optional(types.boolean()),
-  file_yearly_forms: types.optional(types.boolean()),
-  comments: z.nullable(types.string()).optional(),
-  tax_refunds: types.optional(z.array(z.lazy(() => TaxRefunds$inboundSchema))),
+  uuid: z.string().optional(),
+  company_uuid: z.string().optional(),
+  effective_date: z.string().optional(),
+  leaving_for: z.nullable(z.string()).optional(),
+  reason: z.string().optional(),
+  reconcile_tax_method: ReconcileTaxMethod$inboundSchema.optional(),
+  file_quarterly_forms: z.boolean().optional(),
+  file_yearly_forms: z.boolean().optional(),
+  comments: z.nullable(z.string()).optional(),
+  tax_refunds: z.array(z.lazy(() => TaxRefunds$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",

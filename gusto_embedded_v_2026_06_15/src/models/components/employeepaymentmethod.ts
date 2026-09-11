@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PaymentMethodBankAccount,
@@ -73,8 +72,8 @@ export const EmployeePaymentMethod$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  version: types.optional(types.string()),
-  type: types.optional(EmployeePaymentMethodType$inboundSchema),
+  version: z.string().optional(),
+  type: EmployeePaymentMethodType$inboundSchema.optional(),
   split_by: z.nullable(EmployeePaymentMethodSplitBy$inboundSchema).optional(),
   splits: z.nullable(z.array(PaymentMethodBankAccount$inboundSchema))
     .optional(),

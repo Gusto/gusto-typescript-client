@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   EmployeeCustomField,
@@ -26,7 +25,7 @@ export const EmployeeCustomFieldList$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  custom_fields: types.optional(z.array(EmployeeCustomField$inboundSchema)),
+  custom_fields: z.array(EmployeeCustomField$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "custom_fields": "customFields",

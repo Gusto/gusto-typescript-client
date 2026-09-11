@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -104,14 +103,14 @@ export const Disbursements$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  contractor_payment_uuid: types.optional(types.string()),
-  contractor_uuid: types.optional(types.string()),
-  payment_method: types.optional(
-    ContractorPaymentGroupPartnerDisbursementsPaymentMethod$inboundSchema,
-  ),
-  payment_status: types.optional(
-    ContractorPaymentGroupPartnerDisbursementsPaymentStatus$inboundSchema,
-  ),
+  contractor_payment_uuid: z.string().optional(),
+  contractor_uuid: z.string().optional(),
+  payment_method:
+    ContractorPaymentGroupPartnerDisbursementsPaymentMethod$inboundSchema
+      .optional(),
+  payment_status:
+    ContractorPaymentGroupPartnerDisbursementsPaymentStatus$inboundSchema
+      .optional(),
 }).transform((v) => {
   return remap$(v, {
     "contractor_payment_uuid": "contractorPaymentUuid",
@@ -135,10 +134,9 @@ export function disbursementsFromJSON(
 export const ContractorPaymentGroupPartnerDisbursements$inboundSchema:
   z.ZodType<ContractorPaymentGroupPartnerDisbursements, z.ZodTypeDef, unknown> =
     z.object({
-      contractor_payment_group_uuid: types.optional(types.string()),
-      disbursements: types.optional(
-        z.array(z.lazy(() => Disbursements$inboundSchema)),
-      ),
+      contractor_payment_group_uuid: z.string().optional(),
+      disbursements: z.array(z.lazy(() => Disbursements$inboundSchema))
+        .optional(),
     }).transform((v) => {
       return remap$(v, {
         "contractor_payment_group_uuid": "contractorPaymentGroupUuid",

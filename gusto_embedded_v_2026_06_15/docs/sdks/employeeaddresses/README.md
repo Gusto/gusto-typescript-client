@@ -134,6 +134,7 @@ scope: `employees:write`
 <!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-home_addresses" method="post" path="/v1/employees/{employee_id}/home_addresses" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2026-06-15";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -147,7 +148,7 @@ async function run() {
       city: "San Francisco",
       state: "CA",
       zip: "94107",
-      effectiveDate: new Date("2022-01-31"),
+      effectiveDate: new RFCDate("2022-01-31"),
     },
   });
 
@@ -164,6 +165,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-06-15/core.js";
 import { employeeAddressesCreate } from "@gusto/embedded-api-v-2026-06-15/funcs/employeeAddressesCreate.js";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -179,7 +181,7 @@ async function run() {
       city: "San Francisco",
       state: "CA",
       zip: "94107",
-      effectiveDate: new Date("2022-01-31"),
+      effectiveDate: new RFCDate("2022-01-31"),
     },
   });
   if (res.ok) {
@@ -649,6 +651,7 @@ scope: `employees:manage`
 <!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-work_addresses" method="post" path="/v1/employees/{employee_id}/work_addresses" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2026-06-15";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -659,7 +662,7 @@ async function run() {
     employeeId: "<id>",
     requestBody: {
       locationUuid: "6a119be7-b4b0-4e27-aaa0-89d5f2524635",
-      effectiveDate: new Date("2023-05-15"),
+      effectiveDate: new RFCDate("2023-05-15"),
     },
   });
 
@@ -676,6 +679,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-06-15/core.js";
 import { employeeAddressesCreateWorkAddress } from "@gusto/embedded-api-v-2026-06-15/funcs/employeeAddressesCreateWorkAddress.js";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -688,7 +692,7 @@ async function run() {
     employeeId: "<id>",
     requestBody: {
       locationUuid: "6a119be7-b4b0-4e27-aaa0-89d5f2524635",
-      effectiveDate: new Date("2023-05-15"),
+      effectiveDate: new RFCDate("2023-05-15"),
     },
   });
   if (res.ok) {
@@ -855,6 +859,7 @@ scope: `employees:manage`
 <!-- UsageSnippet language="typescript" operationID="put-v1-work_addresses-work_address_uuid" method="put" path="/v1/work_addresses/{work_address_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api-v-2026-06-15";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -866,7 +871,7 @@ async function run() {
     requestBody: {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       locationUuid: "6a119be7-b4b0-4e27-aaa0-89d5f2524635",
-      effectiveDate: new Date("2023-05-15"),
+      effectiveDate: new RFCDate("2023-05-15"),
     },
   });
 
@@ -883,6 +888,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2026-06-15/core.js";
 import { employeeAddressesUpdateWorkAddress } from "@gusto/embedded-api-v-2026-06-15/funcs/employeeAddressesUpdateWorkAddress.js";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -896,7 +902,7 @@ async function run() {
     requestBody: {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       locationUuid: "6a119be7-b4b0-4e27-aaa0-89d5f2524635",
-      effectiveDate: new Date("2023-05-15"),
+      effectiveDate: new RFCDate("2023-05-15"),
     },
   });
   if (res.ok) {

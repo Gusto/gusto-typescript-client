@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   CustomFieldType,
@@ -41,13 +40,13 @@ export const EmployeeCustomField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: types.string(),
-  company_custom_field_id: types.string(),
-  name: types.string(),
+  id: z.string(),
+  company_custom_field_id: z.string(),
+  name: z.string(),
   type: CustomFieldType$inboundSchema,
-  description: z.nullable(types.string()).optional(),
-  value: types.string(),
-  selection_options: z.nullable(z.array(types.string())).optional(),
+  description: z.nullable(z.string()).optional(),
+  value: z.string(),
+  selection_options: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_custom_field_id": "companyCustomFieldId",

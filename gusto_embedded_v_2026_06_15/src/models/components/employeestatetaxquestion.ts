@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   EmployeeStateTaxAnswer,
@@ -41,10 +40,10 @@ export const EmployeeStateTaxQuestion$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  label: types.string(),
-  description: types.nullable(types.string()),
-  key: types.string(),
-  is_question_for_admin_only: types.boolean(),
+  label: z.string(),
+  description: z.nullable(z.string()),
+  key: z.string(),
+  is_question_for_admin_only: z.boolean(),
   input_question_format: EmployeeStateTaxInputQuestionFormat$inboundSchema,
   answers: z.array(EmployeeStateTaxAnswer$inboundSchema),
 }).transform((v) => {

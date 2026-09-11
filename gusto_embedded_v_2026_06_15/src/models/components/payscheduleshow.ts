@@ -7,7 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PayScheduleAutoPayrollEnablementBlocker,
@@ -65,11 +65,11 @@ export type PayScheduleShow = {
   /**
    * The first date that employees on this pay schedule are paid with Gusto (ISO 8601 YYYY-MM-DD).
    */
-  anchorPayDate?: Date | undefined;
+  anchorPayDate?: RFCDate | undefined;
   /**
    * The last date of the first pay period. This can be the same date as the anchor pay date (ISO 8601 YYYY-MM-DD).
    */
-  anchorEndOfPayPeriod?: Date | undefined;
+  anchorEndOfPayPeriod?: RFCDate | undefined;
   /**
    * An integer between 1 and 31 indicating the first day of the month that employees are paid. This field is only relevant for pay schedules with the "Twice per month" and "Monthly" frequencies. It will be null for pay schedules with other frequencies.
    *
@@ -131,17 +131,18 @@ export const PayScheduleShow$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  version: types.string(),
-  frequency: types.optional(PayScheduleFrequency$inboundSchema),
-  anchor_pay_date: types.optional(types.date()),
-  anchor_end_of_pay_period: types.optional(types.date()),
-  day_1: z.nullable(types.number()).optional(),
-  day_2: z.nullable(types.number()).optional(),
-  name: z.nullable(types.string()).optional(),
-  custom_name: types.optional(types.string()),
-  auto_payroll: types.optional(types.boolean()),
-  active: types.optional(types.boolean()),
+  uuid: z.string(),
+  version: z.string(),
+  frequency: PayScheduleFrequency$inboundSchema.optional(),
+  anchor_pay_date: z.string().transform(v => new RFCDate(v)).optional(),
+  anchor_end_of_pay_period: z.string().transform(v => new RFCDate(v))
+    .optional(),
+  day_1: z.nullable(z.number().int()).optional(),
+  day_2: z.nullable(z.number().int()).optional(),
+  name: z.nullable(z.string()).optional(),
+  custom_name: z.string().optional(),
+  auto_payroll: z.boolean().optional(),
+  active: z.boolean().optional(),
   auto_payroll_enablement_blockers: z.nullable(
     z.array(PayScheduleAutoPayrollEnablementBlocker$inboundSchema),
   ).optional(),

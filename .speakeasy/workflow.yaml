@@ -36,13 +36,7 @@ sources:
             location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-v2026-02-01
     GustoEmbedded-OAS-v2026-06-15:
         inputs:
-            - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/generated/embedded/api.v2026-06-15.embedded.yaml
-              authHeader: Authorization
-              authSecret: $openapi_doc_auth_token
-        overlays:
-            - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/.speakeasy/speakeasy-modifications-overlay.yaml
-              authHeader: Authorization
-              authSecret: $openapi_doc_auth_token
+            - location: gusto_embedded_v_2026_06_15/.speakeasy/pinned-rc2-baseline.openapi.yaml
         registry:
             location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-v2026-06-15
 targets:

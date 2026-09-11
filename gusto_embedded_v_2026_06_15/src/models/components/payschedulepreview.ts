@@ -6,7 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PaySchedulePreviewPayPeriod,
@@ -29,7 +29,7 @@ export type PaySchedulePreview = {
   /**
    * A list of dates for bank closures (ISO date strings); may affect payroll processing.
    */
-  holidays?: Array<Date> | undefined;
+  holidays?: Array<RFCDate> | undefined;
 };
 
 /** @internal */
@@ -38,10 +38,8 @@ export const PaySchedulePreview$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  pay_periods: types.optional(
-    z.array(PaySchedulePreviewPayPeriod$inboundSchema),
-  ),
-  holidays: types.optional(z.array(types.date())),
+  pay_periods: z.array(PaySchedulePreviewPayPeriod$inboundSchema).optional(),
+  holidays: z.array(z.string().transform(v => new RFCDate(v))).optional(),
 }).transform((v) => {
   return remap$(v, {
     "pay_periods": "payPeriods",

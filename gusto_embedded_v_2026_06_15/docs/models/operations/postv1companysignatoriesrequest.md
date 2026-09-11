@@ -4,6 +4,7 @@
 
 ```typescript
 import { PostV1CompanySignatoriesRequest } from "@gusto/embedded-api-v-2026-06-15/models/operations/postv1companysignatories.js";
+import { RFCDate } from "@gusto/embedded-api-v-2026-06-15/types/rfcdate.js";
 
 let value: PostV1CompanySignatoriesRequest = {
   companyUuid: "<id>",
@@ -12,7 +13,7 @@ let value: PostV1CompanySignatoriesRequest = {
     lastName: "Parker",
     title: "<value>",
     phone: "(477) 342-4434 x6800",
-    birthday: new Date("2026-01-20"),
+    birthday: new RFCDate("2026-01-20"),
     email: "Hayley44@gmail.com",
     ssn: "<value>",
     homeAddress: {

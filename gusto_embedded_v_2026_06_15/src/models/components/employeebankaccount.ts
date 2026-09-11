@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -65,12 +64,12 @@ export const EmployeeBankAccount$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: types.string(),
-  employee_uuid: types.optional(types.string()),
-  account_type: types.optional(EmployeeBankAccountAccountType$inboundSchema),
-  name: types.optional(types.string()),
-  routing_number: types.optional(types.string()),
-  hidden_account_number: types.optional(types.string()),
+  uuid: z.string(),
+  employee_uuid: z.string().optional(),
+  account_type: EmployeeBankAccountAccountType$inboundSchema.optional(),
+  name: z.string().optional(),
+  routing_number: z.string().optional(),
+  hidden_account_number: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",

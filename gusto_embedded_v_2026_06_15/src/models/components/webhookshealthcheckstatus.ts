@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -53,8 +52,10 @@ export const WebhooksHealthCheckStatus$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  status: types.optional(WebhooksHealthCheckStatusStatus$inboundSchema),
-  last_checked_at: types.optional(types.date()),
+  status: WebhooksHealthCheckStatusStatus$inboundSchema.optional(),
+  last_checked_at: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "last_checked_at": "lastCheckedAt",

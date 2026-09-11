@@ -10,7 +10,6 @@ import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi,
@@ -125,9 +124,9 @@ export const PayrollCreditBlockerType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  blocker_type: types.optional(types.string()),
-  blocker_name: types.optional(types.string()),
-  unblock_options: types.optional(z.array(discriminatedUnion("unblock_type", {
+  blocker_type: z.string().optional(),
+  blocker_name: z.string().optional(),
+  unblock_options: z.array(discriminatedUnion("unblock_type", {
     submit_wire: PayrollCreditBlockerUnblockOptionSubmitWire$inboundSchema,
     submit_bank_screenshot:
       PayrollCreditBlockerUnblockOptionSubmitBankScreenshot$inboundSchema,
@@ -135,9 +134,9 @@ export const PayrollCreditBlockerType$inboundSchema: z.ZodType<
       PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi$inboundSchema,
     wait_for_reverse_wire:
       PayrollCreditBlockerUnblockOptionWaitForReverseWire$inboundSchema,
-  }, { outputPropertyName: "unblockType" }))),
-  selected_option: z.nullable(types.string()).optional(),
-  status: types.optional(PayrollCreditBlockerTypeStatus$inboundSchema),
+  }, { outputPropertyName: "unblockType" })).optional(),
+  selected_option: z.nullable(z.string()).optional(),
+  status: PayrollCreditBlockerTypeStatus$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "blocker_type": "blockerType",

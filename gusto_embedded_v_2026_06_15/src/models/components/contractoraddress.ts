@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { WarningObject, WarningObject$inboundSchema } from "./warningobject.js";
 
@@ -41,16 +40,16 @@ export const ContractorAddress$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  contractor_uuid: types.optional(types.string()),
-  street_1: z.nullable(types.string()).optional(),
-  street_2: z.nullable(types.string()).optional(),
-  city: z.nullable(types.string()).optional(),
-  state: z.nullable(types.string()).optional(),
-  zip: z.nullable(types.string()).optional(),
-  country: z.nullable(types.string().default("USA")),
-  active: types.optional(types.boolean()),
-  version: types.optional(types.string()),
-  warnings: types.optional(z.array(WarningObject$inboundSchema)),
+  contractor_uuid: z.string().optional(),
+  street_1: z.nullable(z.string()).optional(),
+  street_2: z.nullable(z.string()).optional(),
+  city: z.nullable(z.string()).optional(),
+  state: z.nullable(z.string()).optional(),
+  zip: z.nullable(z.string()).optional(),
+  country: z.nullable(z.string().default("USA")),
+  active: z.boolean().optional(),
+  version: z.string().optional(),
+  warnings: z.array(WarningObject$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "contractor_uuid": "contractorUuid",

@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -109,19 +108,19 @@ export const CompanyBenefit$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  version: types.optional(types.string()),
-  enrollment_count: types.optional(types.number()),
-  company_uuid: types.optional(types.string()),
-  uuid: types.string(),
-  benefit_type: types.optional(types.number()),
-  active: types.boolean().default(true),
-  description: types.optional(types.string()),
-  source: types.optional(Source$inboundSchema),
-  partner_name: z.nullable(types.string()).optional(),
-  deletable: types.optional(types.boolean()),
-  supports_percentage_amounts: types.optional(types.boolean()),
-  responsible_for_employer_taxes: types.optional(types.boolean()),
-  responsible_for_employee_w2: types.optional(types.boolean()),
+  version: z.string().optional(),
+  enrollment_count: z.number().int().optional(),
+  company_uuid: z.string().optional(),
+  uuid: z.string(),
+  benefit_type: z.number().int().optional(),
+  active: z.boolean().default(true),
+  description: z.string().optional(),
+  source: Source$inboundSchema.optional(),
+  partner_name: z.nullable(z.string()).optional(),
+  deletable: z.boolean().optional(),
+  supports_percentage_amounts: z.boolean().optional(),
+  responsible_for_employer_taxes: z.boolean().optional(),
+  responsible_for_employee_w2: z.boolean().optional(),
   catch_up_type: z.nullable(CatchUpType$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

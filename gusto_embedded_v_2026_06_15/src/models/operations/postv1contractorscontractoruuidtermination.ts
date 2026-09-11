@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
@@ -32,7 +33,7 @@ export type PostV1ContractorsContractorUuidTerminationRequestBody = {
   /**
    * The date of dismissal
    */
-  endDate: Date;
+  endDate: RFCDate;
 };
 
 export type PostV1ContractorsContractorUuidTerminationRequest = {
@@ -75,9 +76,7 @@ export const PostV1ContractorsContractorUuidTerminationRequestBody$outboundSchem
     z.ZodTypeDef,
     PostV1ContractorsContractorUuidTerminationRequestBody
   > = z.object({
-    endDate: z.date().transform(v =>
-      v.toISOString().slice(0, "YYYY-MM-DD".length)
-    ),
+    endDate: z.instanceof(RFCDate).transform(v => v.toString()),
   }).transform((v) => {
     return remap$(v, {
       endDate: "end_date",

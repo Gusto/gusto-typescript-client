@@ -6,8 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
-import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   MetadataWithMultipleEntities,
@@ -51,7 +49,7 @@ export const Metadata$inboundSchema: z.ZodType<
   Metadata,
   z.ZodTypeDef,
   unknown
-> = smartUnion([
+> = z.union([
   MetadataWithMultipleEntities$inboundSchema,
   MetadataWithOneEntity$inboundSchema,
 ]);
@@ -72,18 +70,14 @@ export const EntityErrorObject$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  error_key: types.string(),
-  category: types.string(),
-  message: types.optional(types.string()),
-  metadata: types.optional(
-    smartUnion([
-      MetadataWithMultipleEntities$inboundSchema,
-      MetadataWithOneEntity$inboundSchema,
-    ]),
-  ),
-  errors: types.optional(
-    z.array(z.lazy(() => EntityErrorObject$inboundSchema)),
-  ),
+  error_key: z.string(),
+  category: z.string(),
+  message: z.string().optional(),
+  metadata: z.union([
+    MetadataWithMultipleEntities$inboundSchema,
+    MetadataWithOneEntity$inboundSchema,
+  ]).optional(),
+  errors: z.array(z.lazy(() => EntityErrorObject$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "error_key": "errorKey",
