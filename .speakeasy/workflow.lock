@@ -1,4 +1,4 @@
-speakeasyVersion: 1.796.4
+speakeasyVersion: 1.798.0
 sources:
     GustoEmbedded-OAS:
         sourceNamespace: gusto-embedded-oas
@@ -56,7 +56,7 @@ targets:
         sourceRevisionDigest: sha256:b0c847da87e9e283b545793d352a8bcb564832b67913a932ac9e3f60887bf59a
         sourceBlobDigest: sha256:48dc48c38aaae092367049c3a835d01d6dcf010c92eaaeac4ceb70587a58963e
         codeSamplesNamespace: gusto-embedded-oas-typescript-code-samples-v2026-06-15
-        codeSamplesRevisionDigest: sha256:7c4a018ad3efade6693c5bbf0188a975c385df6579cb1768f928d100755d1f07
+        codeSamplesRevisionDigest: sha256:b1be0aa0e2296667fab20425522394c10e42ece63fc6ab2de26d278fa9b2b9fc
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -97,6 +97,8 @@ workflow:
         GustoEmbedded-OAS-v2026-06-15:
             inputs:
                 - location: gusto_embedded_v_2026_06_15/.speakeasy/pinned-rc2-baseline.openapi.yaml
+            overlays:
+                - location: gusto_embedded_v_2026_06_15/.speakeasy/payroll-blocker-open-enum.overlay.yaml
             registry:
                 location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-v2026-06-15
     targets:
