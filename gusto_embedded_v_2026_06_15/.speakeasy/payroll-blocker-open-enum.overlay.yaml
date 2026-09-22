@@ -1,0 +1,12 @@
+overlay: 1.0.0
+info:
+  title: Open the Payroll-Blocker key enum
+  version: 0.0.1
+# Marks the payroll blocker `key` enum as open so the generated client tolerates
+# unknown values (e.g. `partner_tos_not_accepted`) instead of throwing a Zod
+# validation error and crashing the app. Scoped to this one enum only; this is a
+# temporary measure until forward-compatible enum generation lands more broadly.
+actions:
+  - target: $.components.schemas["Payroll-Blocker"].properties.key
+    update:
+      x-speakeasy-unknown-values: allow
