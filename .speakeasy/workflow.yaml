@@ -43,6 +43,7 @@ sources:
             - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/.speakeasy/speakeasy-modifications-overlay.yaml
               authHeader: Authorization
               authSecret: $openapi_doc_auth_token
+            - location: gusto_embedded_v_2026_06_15/.speakeasy/payroll-blocker-open-enum.overlay.yaml
         registry:
             location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-v2026-06-15
 targets:
