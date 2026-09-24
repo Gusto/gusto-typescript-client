@@ -36,6 +36,27 @@ export const Frequency = {
 export type Frequency = ClosedEnum<typeof Frequency>;
 
 /**
+ * The day of the week that this pay schedule's workweeks start on, used for regular rate of pay overtime calculations.
+ *
+ * @remarks
+ */
+export const WorkweekStartDay = {
+  Sunday: "Sunday",
+  Monday: "Monday",
+  Tuesday: "Tuesday",
+  Wednesday: "Wednesday",
+  Thursday: "Thursday",
+  Friday: "Friday",
+  Saturday: "Saturday",
+} as const;
+/**
+ * The day of the week that this pay schedule's workweeks start on, used for regular rate of pay overtime calculations.
+ *
+ * @remarks
+ */
+export type WorkweekStartDay = ClosedEnum<typeof WorkweekStartDay>;
+
+/**
  * Request body for creating a pay schedule. Required when a company has no pay schedules (onboarding) or when adding an additional schedule. Be sure to [check state laws](https://www.dol.gov/agencies/whd/state/payday) to know what schedule is right for your customers.
  *
  * @remarks
@@ -71,11 +92,17 @@ export type PayScheduleCreateRequest = {
    * When null or omitted, the system generates a description from the pay frequency and pay days (e.g. "every 1st and 15th of the month" for twice-monthly, "every 11th of the month" for monthly, "every Friday" for weekly). The response returns this generated value in `custom_name` when no custom name was set. When provided, the value you set is stored and returned.
    */
   customName?: string | null | undefined;
+  workweekStartDay?: WorkweekStartDay | undefined;
 };
 
 /** @internal */
 export const Frequency$outboundSchema: z.ZodNativeEnum<typeof Frequency> = z
   .nativeEnum(Frequency);
+
+/** @internal */
+export const WorkweekStartDay$outboundSchema: z.ZodNativeEnum<
+  typeof WorkweekStartDay
+> = z.nativeEnum(WorkweekStartDay);
 
 /** @internal */
 export type PayScheduleCreateRequest$Outbound = {
@@ -85,6 +112,7 @@ export type PayScheduleCreateRequest$Outbound = {
   day_1?: number | null | undefined;
   day_2?: number | null | undefined;
   custom_name?: string | null | undefined;
+  workweek_start_day?: string | undefined;
 };
 
 /** @internal */
@@ -99,6 +127,7 @@ export const PayScheduleCreateRequest$outboundSchema: z.ZodType<
   day1: z.nullable(z.number().int()).optional(),
   day2: z.nullable(z.number().int()).optional(),
   customName: z.nullable(z.string()).optional(),
+  workweekStartDay: WorkweekStartDay$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     anchorPayDate: "anchor_pay_date",
@@ -106,6 +135,7 @@ export const PayScheduleCreateRequest$outboundSchema: z.ZodType<
     day1: "day_1",
     day2: "day_2",
     customName: "custom_name",
+    workweekStartDay: "workweek_start_day",
   });
 });
 

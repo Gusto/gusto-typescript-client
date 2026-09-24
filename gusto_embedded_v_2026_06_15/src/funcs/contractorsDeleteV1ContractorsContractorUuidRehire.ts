@@ -47,7 +47,7 @@ import { Result } from "../types/fp.js";
  * - The contractor must have a pending rehire (upcoming employment)
  *
  * ## Related webhooks
- * - `contractor.deactivated`: Fires when the contractor returns to inactive state after cancellation
+ * - `contractor.reactivation_cancelled`: Fires when the pending rehire is cancelled
  *
  * scope: `contractors:write`
  *

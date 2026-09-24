@@ -12,11 +12,11 @@ export type PayrollPayPeriodType = {
   /**
    * The start date, inclusive, of the pay period.
    */
-  startDate?: string | undefined;
+  startDate?: string | null | undefined;
   /**
    * The start date, inclusive, of the pay period.
    */
-  endDate?: string | undefined;
+  endDate?: string | null | undefined;
   /**
    * The UUID of the pay schedule for the payroll.
    */
@@ -29,8 +29,8 @@ export const PayrollPayPeriodType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  start_date: z.string().optional(),
-  end_date: z.string().optional(),
+  start_date: z.nullable(z.string()).optional(),
+  end_date: z.nullable(z.string()).optional(),
   pay_schedule_uuid: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {

@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { RFCDate } from "../../types/rfcdate.js";
 
 /**
  * The employee's compensation payment method. Invalid values will be ignored.
@@ -19,6 +20,21 @@ export const PayrollUpdatePaymentMethod = {
 export type PayrollUpdatePaymentMethod = ClosedEnum<
   typeof PayrollUpdatePaymentMethod
 >;
+
+export type PayrollUpdateBreakdowns = {
+  /**
+   * The start date of the workweek.
+   */
+  startDate?: RFCDate | undefined;
+  /**
+   * The end date of the workweek.
+   */
+  endDate?: RFCDate | undefined;
+  /**
+   * The dollar amount for this workweek.
+   */
+  amount?: string | undefined;
+};
 
 /**
  * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements.
@@ -36,6 +52,30 @@ export type PayrollUpdateFixedCompensations = {
    * The UUID of the job for the compensation.
    */
   jobUuid?: string | undefined;
+  /**
+   * Per-workweek amounts to record for this compensation. Not
+   *
+   * @remarks
+   * applicable to reimbursements. Submitted breakdowns must tile the
+   * pay period's workweeks exactly (no gaps or overlaps), and their
+   * amounts must sum to the compensation's total `amount`.
+   */
+  breakdowns?: Array<PayrollUpdateBreakdowns> | undefined;
+};
+
+export type PayrollUpdateEmployeeCompensationsBreakdowns = {
+  /**
+   * The start date of the workweek.
+   */
+  startDate?: RFCDate | undefined;
+  /**
+   * The end date of the workweek.
+   */
+  endDate?: RFCDate | undefined;
+  /**
+   * The number of hours worked during this workweek.
+   */
+  hours?: string | undefined;
 };
 
 /**
@@ -54,6 +94,16 @@ export type PayrollUpdateHourlyCompensations = {
    * The UUIDs of the job for the compensation.
    */
   jobUuid?: string | undefined;
+  /**
+   * Per-workweek hours to record for this compensation. Submitted
+   *
+   * @remarks
+   * breakdowns must tile the pay period's workweeks exactly (no gaps
+   * or overlaps). Either every hourly compensation for a job must
+   * include breakdowns, or none of them may. Hours must sum to the
+   * compensation's total `hours`.
+   */
+  breakdowns?: Array<PayrollUpdateEmployeeCompensationsBreakdowns> | undefined;
 };
 
 /**
@@ -319,10 +369,42 @@ export const PayrollUpdatePaymentMethod$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(PayrollUpdatePaymentMethod);
 
 /** @internal */
+export type PayrollUpdateBreakdowns$Outbound = {
+  start_date?: string | undefined;
+  end_date?: string | undefined;
+  amount?: string | undefined;
+};
+
+/** @internal */
+export const PayrollUpdateBreakdowns$outboundSchema: z.ZodType<
+  PayrollUpdateBreakdowns$Outbound,
+  z.ZodTypeDef,
+  PayrollUpdateBreakdowns
+> = z.object({
+  startDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  endDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  amount: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    startDate: "start_date",
+    endDate: "end_date",
+  });
+});
+
+export function payrollUpdateBreakdownsToJSON(
+  payrollUpdateBreakdowns: PayrollUpdateBreakdowns,
+): string {
+  return JSON.stringify(
+    PayrollUpdateBreakdowns$outboundSchema.parse(payrollUpdateBreakdowns),
+  );
+}
+
+/** @internal */
 export type PayrollUpdateFixedCompensations$Outbound = {
   name?: string | undefined;
   amount?: string | undefined;
   job_uuid?: string | undefined;
+  breakdowns?: Array<PayrollUpdateBreakdowns$Outbound> | undefined;
 };
 
 /** @internal */
@@ -334,6 +416,8 @@ export const PayrollUpdateFixedCompensations$outboundSchema: z.ZodType<
   name: z.string().optional(),
   amount: z.string().optional(),
   jobUuid: z.string().optional(),
+  breakdowns: z.array(z.lazy(() => PayrollUpdateBreakdowns$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     jobUuid: "job_uuid",
@@ -351,10 +435,48 @@ export function payrollUpdateFixedCompensationsToJSON(
 }
 
 /** @internal */
+export type PayrollUpdateEmployeeCompensationsBreakdowns$Outbound = {
+  start_date?: string | undefined;
+  end_date?: string | undefined;
+  hours?: string | undefined;
+};
+
+/** @internal */
+export const PayrollUpdateEmployeeCompensationsBreakdowns$outboundSchema:
+  z.ZodType<
+    PayrollUpdateEmployeeCompensationsBreakdowns$Outbound,
+    z.ZodTypeDef,
+    PayrollUpdateEmployeeCompensationsBreakdowns
+  > = z.object({
+    startDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+    endDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+    hours: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startDate: "start_date",
+      endDate: "end_date",
+    });
+  });
+
+export function payrollUpdateEmployeeCompensationsBreakdownsToJSON(
+  payrollUpdateEmployeeCompensationsBreakdowns:
+    PayrollUpdateEmployeeCompensationsBreakdowns,
+): string {
+  return JSON.stringify(
+    PayrollUpdateEmployeeCompensationsBreakdowns$outboundSchema.parse(
+      payrollUpdateEmployeeCompensationsBreakdowns,
+    ),
+  );
+}
+
+/** @internal */
 export type PayrollUpdateHourlyCompensations$Outbound = {
   name?: string | undefined;
   hours?: string | undefined;
   job_uuid?: string | undefined;
+  breakdowns?:
+    | Array<PayrollUpdateEmployeeCompensationsBreakdowns$Outbound>
+    | undefined;
 };
 
 /** @internal */
@@ -366,6 +488,9 @@ export const PayrollUpdateHourlyCompensations$outboundSchema: z.ZodType<
   name: z.string().optional(),
   hours: z.string().optional(),
   jobUuid: z.string().optional(),
+  breakdowns: z.array(
+    z.lazy(() => PayrollUpdateEmployeeCompensationsBreakdowns$outboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     jobUuid: "job_uuid",

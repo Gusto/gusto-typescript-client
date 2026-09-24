@@ -45,6 +45,10 @@ export type GetTaxPaymentsRequest = {
    */
   jurisdiction?: Array<string> | undefined;
   /**
+   * Filter to tax payments associated with one or more payrolls, given as a comma-separated list of payroll UUIDs.
+   */
+  payrollUuids?: Array<string> | undefined;
+  /**
    * Lower-bound (inclusive) date filter on due_date.
    */
   dueDateFrom?: RFCDate | undefined;
@@ -117,6 +121,7 @@ export type GetTaxPaymentsRequest$Outbound = {
   "X-Gusto-API-Version": string;
   company_uuid: string;
   jurisdiction?: Array<string> | undefined;
+  payroll_uuids?: Array<string> | undefined;
   due_date_from?: string | undefined;
   due_date_to?: string | undefined;
   payment_sent_on_from?: string | undefined;
@@ -143,6 +148,7 @@ export const GetTaxPaymentsRequest$outboundSchema: z.ZodType<
   ),
   companyUuid: z.string(),
   jurisdiction: z.array(z.string()).optional(),
+  payrollUuids: z.array(z.string()).optional(),
   dueDateFrom: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
   dueDateTo: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
   paymentSentOnFrom: z.instanceof(RFCDate).transform(v => v.toString())
@@ -163,6 +169,7 @@ export const GetTaxPaymentsRequest$outboundSchema: z.ZodType<
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",
     companyUuid: "company_uuid",
+    payrollUuids: "payroll_uuids",
     dueDateFrom: "due_date_from",
     dueDateTo: "due_date_to",
     paymentSentOnFrom: "payment_sent_on_from",

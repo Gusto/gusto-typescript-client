@@ -47,7 +47,7 @@ import { Result } from "../types/fp.js";
  * - The contractor must have a pending dismissal (scheduled or within the grace period)
  *
  * ## Related webhooks
- * - `contractor.reactivated`: Fires when the contractor becomes active again after cancellation
+ * - `contractor.deactivation_cancelled`: Fires when the pending dismissal is cancelled
  *
  * scope: `contractors:write`
  *

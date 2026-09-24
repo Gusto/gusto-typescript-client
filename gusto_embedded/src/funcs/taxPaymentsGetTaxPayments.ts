@@ -120,6 +120,7 @@ async function $do(
   const query = queryJoin(
     encodeFormQuery({
       "jurisdiction": payload.jurisdiction,
+      "payroll_uuids": payload.payroll_uuids,
     }, { explode: false }),
     encodeFormQuery({
       "amount_max": payload.amount_max,

@@ -11,6 +11,10 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import {
+  ConflictErrorObject,
+  ConflictErrorObject$inboundSchema,
+} from "../models/errors/conflicterrorobject.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -60,6 +64,7 @@ export function payrollsUpdate(
   Result<
     PutV1CompaniesCompanyIdPayrollsResponse,
     | NotFoundErrorObject
+    | ConflictErrorObject
     | UnprocessableEntityError
     | GustoEmbeddedError
     | ResponseValidationError
@@ -87,6 +92,7 @@ async function $do(
     Result<
       PutV1CompaniesCompanyIdPayrollsResponse,
       | NotFoundErrorObject
+      | ConflictErrorObject
       | UnprocessableEntityError
       | GustoEmbeddedError
       | ResponseValidationError
@@ -191,6 +197,7 @@ async function $do(
   const [result] = await M.match<
     PutV1CompaniesCompanyIdPayrollsResponse,
     | NotFoundErrorObject
+    | ConflictErrorObject
     | UnprocessableEntityError
     | GustoEmbeddedError
     | ResponseValidationError
@@ -205,7 +212,8 @@ async function $do(
       key: "Payroll-Prepared",
     }),
     M.jsonErr(404, NotFoundErrorObject$inboundSchema),
-    M.jsonErr([409, 422], UnprocessableEntityError$inboundSchema),
+    M.jsonErr(409, ConflictErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
