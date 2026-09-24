@@ -16,6 +16,10 @@ permissions:
         description: optionally set a specific SDK version
         type: string
   schedule:
+    # Nightly run. Scheduled runs execute as the actor who last edited this
+    # block, so that actor must stay authorized to trigger Actions. Re-saved
+    # by an active maintainer to reassign the actor (previous owner's account
+    # lost Actions-trigger access, causing daily startup failures).
     - cron: 0 0 * * *
 jobs:
   generate:
