@@ -98,97 +98,149 @@
 <body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
 
 <ul>
-<li><code>gustoembedded.companies.putV1PartnerManagedCompaniesCompanyUuidDisassociate()</code>: <strong>Added</strong></li>
-<li><code>gustoembedded.reverseWireTransactions.getReverseWireTransactions()</code>: <strong>Added</strong></li>
-<li><code>gustoembedded.taxPayments.getTaxPayments()</code>: <strong>Added</strong></li>
-<li><code>gustoembedded.taxPayments.getTaxPayment()</code>: <strong>Added</strong></li>
-<li><code>gustoembedded.companies.suspensions.suspend()</code>:
+<li><code>gustoembedded.historicalEmployees.update()</code>:  <code>response.jobs[].currentCompensationUuid</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.employees.list()</code>:  <code>response.[].jobs[].currentCompensationUuid</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.jobsAndCompensations.getJobs()</code>:  <code>response.[].currentCompensationUuid</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.jobsAndCompensations.createJob()</code>:  <code>response.currentCompensationUuid</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.taxPayments.getTaxPayment()</code>: <code>response</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>request.requestBody.leavingFor</code> <strong>Changed</strong>
+<li><code>dueDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>periodStart</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>gustoembedded.taxPayments.getTaxPayments()</code>:
 
 <ul>
-<li><code>enum(otherPeo)</code> <strong>Added</strong></li>
-<li><code>enum(toast)</code> <strong>Added</strong></li>
-</ul></li>
-</ul></li>
-<li><code>gustoembedded.reports.postV1BulkReports()</code>:
+<li><code>request.payrollUuids</code> <strong>Added</strong></li>
+<li><code>response.[]</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>request.bulkReportBody.batch[].union(custom_report).columns[]</code> <strong>Changed</strong>
+<li><code>dueDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>periodStart</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+</ul></li>
+</ul></li>
+<li><code>gustoembedded.payrolls.update()</code>:
 
 <ul>
-<li><code>enum(additionalEarnings)</code> <strong>Added</strong></li>
-<li><code>enum(employeeStateIncomeTax)</code> <strong>Added</strong></li>
-</ul></li>
-</ul></li>
-<li><code>gustoembedded.reports.createCustom()</code>:
+<li><code>request.payrollUpdate.employeeCompensations[]</code> <strong>Changed</strong>
 
 <ul>
-<li><code>request.createReportBody.columns[]</code> <strong>Changed</strong>
+<li><code>fixedCompensations[].breakdowns</code> <strong>Added</strong></li>
+<li><code>hourlyCompensations[].breakdowns</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>response</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>enum(additionalEarnings)</code> <strong>Added</strong></li>
-<li><code>enum(employeeStateIncomeTax)</code> <strong>Added</strong></li>
+<li><code>employeeCompensations[].fixedCompensations[].breakdowns</code> <strong>Added</strong></li>
+<li><code>employeeCompensations[].hourlyCompensations[].breakdowns</code> <strong>Added</strong></li>
+<li><code>payPeriod.endDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>payPeriod.startDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>workweeks</code> <strong>Added</strong></li>
 </ul></li>
-</ul></li>
-<li><code>gustoembedded.taxRequirements.get()</code>: <code>response.requirementSets[].requirements[]</code> <strong>Changed</strong>
+<li><code>errors[]</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>defaultValueApplied</code> <strong>Added</strong></li>
-<li><code>payrollBlocking</code> <strong>Added</strong></li>
+<li><code>errors</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>metadata</code> <strong>Removed</strong> (Breaking ⚠️)</li>
 </ul></li>
-<li><code>gustoembedded.jobsAndCompensations.getJob()</code>:  <code>response.location.warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.jobsAndCompensations.update()</code>:  <code>response.location.warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.jobsAndCompensations.getJobs()</code>:  <code>response.[].location.warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.jobsAndCompensations.createJob()</code>:  <code>response.location.warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.contractors.getAddress()</code>:  <code>response.warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.contractors.updateAddress()</code>:  <code>response.warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.contractors.get()</code>:  <code>response.workEmail</code> <strong>Added</strong></li>
-<li><code>gustoembedded.contractors.update()</code>:
+</ul></li>
+<li><code>gustoembedded.employees.get()</code>:  <code>response.jobs[].currentCompensationUuid</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.employees.update()</code>:  <code>response.jobs[].currentCompensationUuid</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.jobsAndCompensations.getJob()</code>:  <code>response.currentCompensationUuid</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.employees.create()</code>:  <code>response.jobs[].currentCompensationUuid</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.employees.createHistorical()</code>:  <code>response.jobs[].currentCompensationUuid</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.jobsAndCompensations.update()</code>:  <code>response.currentCompensationUuid</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>gustoembedded.payrolls.list()</code>: <code>response.[].payPeriod</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>request.contractorUpdateRequestBody.workEmail</code> <strong>Added</strong></li>
-<li><code>response.workEmail</code> <strong>Added</strong></li>
+<li><code>endDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>startDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
 </ul></li>
-<li><code>gustoembedded.contractors.list()</code>:  <code>response.[].workEmail</code> <strong>Added</strong></li>
-<li><code>gustoembedded.contractors.create()</code>:
+<li><code>gustoembedded.payrolls.get()</code>: <code>response</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>request.contractorCreateRequestBody.workEmail</code> <strong>Added</strong></li>
-<li><code>response.workEmail</code> <strong>Added</strong></li>
+<li><code>employeeCompensations[].fixedCompensations[].breakdowns</code> <strong>Added</strong></li>
+<li><code>employeeCompensations[].hourlyCompensations[].breakdowns</code> <strong>Added</strong></li>
+<li><code>employeeCompensations[].payAdjustments</code> <strong>Added</strong></li>
+<li><code>payPeriod.endDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>payPeriod.startDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
 </ul></li>
-<li><code>gustoembedded.contractorPaymentGroups.patchV1ContractorPaymentGroupsIdPartnerDisbursements()</code>:
+<li><code>gustoembedded.payrolls.createOffCycle()</code>: <code>response</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>request.requestBody.disbursements[].paymentMethod</code> <strong>Changed</strong>
+<li><code>employeeCompensations[].fixedCompensations[].breakdowns</code> <strong>Added</strong></li>
+<li><code>employeeCompensations[].hourlyCompensations[].breakdowns</code> <strong>Added</strong></li>
+<li><code>payPeriod.endDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>payPeriod.startDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>workweeks</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.payrolls.cancel()</code>: <code>response.payPeriod</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>enum(correctionPayment)</code> <strong>Added</strong></li>
-<li><code>enum(historicalPayment)</code> <strong>Added</strong></li>
+<li><code>endDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>startDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
 </ul></li>
-</ul></li>
-<li><code>gustoembedded.employees.get()</code>:  <code>response.jobs[].location.warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.employees.update()</code>:  <code>response.jobs[].location.warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.employees.list()</code>:  <code>response.[].jobs[].location.warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.employees.create()</code>:  <code>response.jobs[].location.warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.employees.createHistorical()</code>:  <code>response.jobs[].location.warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.payrolls.getReceipt()</code>: <code>request</code> <strong>Changed</strong>
+<li><code>gustoembedded.payrolls.prepare()</code>: <code>response</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>page</code> <strong>Added</strong></li>
-<li><code>per</code> <strong>Added</strong></li>
+<li><code>employeeCompensations[].fixedCompensations[].breakdowns</code> <strong>Added</strong></li>
+<li><code>employeeCompensations[].hourlyCompensations[].breakdowns</code> <strong>Added</strong></li>
+<li><code>payPeriod.endDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>payPeriod.startDate</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>workweeks</code> <strong>Added</strong></li>
 </ul></li>
-<li><code>gustoembedded.payrolls.skip()</code>:  <code>error.status[409]</code> <strong>Added</strong></li>
-<li><code>gustoembedded.historicalEmployees.update()</code>:  <code>response.jobs[].location.warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.employeeAddresses.get()</code>:  <code>response.[].warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.employeeAddresses.create()</code>:  <code>response.warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.employeeAddresses.retrieveHomeAddress()</code>:  <code>response.warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.employeeAddresses.update()</code>:  <code>response.warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.locations.retrieve()</code>:  <code>response.warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.locations.update()</code>:  <code>response.warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.locations.get()</code>:  <code>response.[].warnings</code> <strong>Added</strong></li>
-<li><code>gustoembedded.locations.create()</code>:  <code>response.warnings</code> <strong>Added</strong></li>
+<li><code>gustoembedded.paySchedules.get()</code>:  <code>response.workweekStartDay</code> <strong>Added</strong></li>
+<li><code>gustoembedded.paySchedules.getAll()</code>:  <code>response.[].workweekStartDay</code> <strong>Added</strong></li>
+<li><code>gustoembedded.paySchedules.create()</code>:
+
+<ul>
+<li><code>request.payScheduleCreateRequest.workweekStartDay</code> <strong>Added</strong></li>
+<li><code>response.workweekStartDay</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.earningTypes.update()</code>:
+
+<ul>
+<li><code>request.requestBody</code> <strong>Changed</strong>
+
+<ul>
+<li><code>category</code> <strong>Added</strong></li>
+<li><code>includedInOvertimePay</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>response</code> <strong>Changed</strong>
+
+<ul>
+<li><code>category</code> <strong>Added</strong></li>
+<li><code>includedInOvertimePay</code> <strong>Added</strong></li>
+</ul></li>
+</ul></li>
+<li><code>gustoembedded.paySchedules.update()</code>:
+
+<ul>
+<li><code>request.payScheduleUpdateRequest.workweekStartDay</code> <strong>Added</strong></li>
+<li><code>response.workweekStartDay</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>gustoembedded.earningTypes.create()</code>:
+
+<ul>
+<li><code>request.requestBody</code> <strong>Changed</strong>
+
+<ul>
+<li><code>category</code> <strong>Added</strong></li>
+<li><code>includedInOvertimePay</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>response</code> <strong>Changed</strong>
+
+<ul>
+<li><code>category</code> <strong>Added</strong></li>
+<li><code>includedInOvertimePay</code> <strong>Added</strong></li>
+</ul></li>
+</ul></li>
+<li><code>gustoembedded.earningTypes.list()</code>: <code>response.default[]</code> <strong>Changed</strong>
+
+<ul>
+<li><code>category</code> <strong>Added</strong></li>
+<li><code>includedInOvertimePay</code> <strong>Added</strong></li>
+</ul></li>
 </ul>
 </body>
 </html>

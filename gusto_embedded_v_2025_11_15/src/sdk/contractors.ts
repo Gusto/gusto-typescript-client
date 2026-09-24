@@ -176,7 +176,8 @@ export class Contractors extends ClientSDK {
    * 2. The contractor must not already have an upcoming employment
    *
    * ## Related webhooks
-   * - `contractor.reactivated`: Fires when the contractor becomes active again (on or after start_date)
+   * - `contractor.reactivated`: Fires when the rehire is recorded
+   * - `contractor.reactivation_effective`: Fires when the rehire takes effect (on start_date)
    *
    * scope: `contractors:write`
    */
@@ -204,7 +205,7 @@ export class Contractors extends ClientSDK {
    * - The contractor must have a pending rehire (upcoming employment)
    *
    * ## Related webhooks
-   * - `contractor.deactivated`: Fires when the contractor returns to inactive state after cancellation
+   * - `contractor.reactivation_cancelled`: Fires when the pending rehire is cancelled
    *
    * scope: `contractors:write`
    */
@@ -232,7 +233,8 @@ export class Contractors extends ClientSDK {
    * 2. The contractor must have a current employment
    *
    * ## Related webhooks
-   * - `contractor.deactivated`: Fires when the contractor becomes inactive (on or after end_date)
+   * - `contractor.deactivated`: Fires when the dismissal is recorded
+   * - `contractor.deactivation_effective`: Fires when the dismissal takes effect (the day after end_date)
    *
    * scope: `contractors:write`
    */
@@ -260,7 +262,7 @@ export class Contractors extends ClientSDK {
    * - The contractor must have a pending dismissal (scheduled or within the grace period)
    *
    * ## Related webhooks
-   * - `contractor.reactivated`: Fires when the contractor becomes active again after cancellation
+   * - `contractor.deactivation_cancelled`: Fires when the pending dismissal is cancelled
    *
    * scope: `contractors:write`
    */

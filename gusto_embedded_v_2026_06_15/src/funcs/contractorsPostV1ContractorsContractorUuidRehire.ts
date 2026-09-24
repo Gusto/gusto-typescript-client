@@ -47,7 +47,8 @@ import { Result } from "../types/fp.js";
  * 2. The contractor must not already have an upcoming employment
  *
  * ## Related webhooks
- * - `contractor.reactivated`: Fires when the contractor becomes active again (on or after start_date)
+ * - `contractor.reactivated`: Fires when the rehire is recorded
+ * - `contractor.reactivation_effective`: Fires when the rehire takes effect (on start_date)
  *
  * scope: `contractors:write`
  *

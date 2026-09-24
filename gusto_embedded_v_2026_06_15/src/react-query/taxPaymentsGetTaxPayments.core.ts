@@ -49,6 +49,7 @@ export function buildTaxPaymentsGetTaxPaymentsQuery(
     queryKey: queryKeyTaxPaymentsGetTaxPayments(request.companyUuid, {
       xGustoAPIVersion: request.xGustoAPIVersion,
       jurisdiction: request.jurisdiction,
+      payrollUuids: request.payrollUuids,
       dueDateFrom: request.dueDateFrom,
       dueDateTo: request.dueDateTo,
       paymentSentOnFrom: request.paymentSentOnFrom,
@@ -91,6 +92,7 @@ export function queryKeyTaxPaymentsGetTaxPayments(
   parameters: {
     xGustoAPIVersion?: GetTaxPaymentsHeaderXGustoAPIVersion | undefined;
     jurisdiction?: Array<string> | undefined;
+    payrollUuids?: Array<string> | undefined;
     dueDateFrom?: RFCDate | undefined;
     dueDateTo?: RFCDate | undefined;
     paymentSentOnFrom?: RFCDate | undefined;

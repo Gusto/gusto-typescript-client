@@ -37,6 +37,14 @@ export type PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody = {
    * The name of the custom earning type.
    */
   name?: string | undefined;
+  /**
+   * The earning type category. Set at creation and immutable afterward — submitting a value that differs from the current one returns a 422. Submitting the current value (e.g. when echoing back the full resource) is allowed.
+   */
+  category?: string | undefined;
+  /**
+   * Whether earnings of this type are included in overtime pay calculations. Set at creation and immutable afterward — submitting a value that differs from the current one returns a 422. Submitting the current value (e.g. when echoing back the full resource) is allowed.
+   */
+  includedInOvertimePay?: boolean | undefined;
 };
 
 export type PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest = {
@@ -77,6 +85,8 @@ export const PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidHeaderXGustoAPIVe
 export type PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$Outbound =
   {
     name?: string | undefined;
+    category?: string | undefined;
+    included_in_overtime_pay?: boolean | undefined;
   };
 
 /** @internal */
@@ -87,6 +97,12 @@ export const PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$outbo
     PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody
   > = z.object({
     name: z.string().optional(),
+    category: z.string().optional(),
+    includedInOvertimePay: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includedInOvertimePay: "included_in_overtime_pay",
+    });
   });
 
 export function putV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBodyToJSON(

@@ -123,6 +123,7 @@ export function setTaxPaymentsGetTaxPaymentsData(
     parameters: {
       xGustoAPIVersion?: GetTaxPaymentsHeaderXGustoAPIVersion | undefined;
       jurisdiction?: Array<string> | undefined;
+      payrollUuids?: Array<string> | undefined;
       dueDateFrom?: RFCDate | undefined;
       dueDateTo?: RFCDate | undefined;
       paymentSentOnFrom?: RFCDate | undefined;
@@ -153,6 +154,7 @@ export function invalidateTaxPaymentsGetTaxPayments(
       parameters: {
         xGustoAPIVersion?: GetTaxPaymentsHeaderXGustoAPIVersion | undefined;
         jurisdiction?: Array<string> | undefined;
+        payrollUuids?: Array<string> | undefined;
         dueDateFrom?: RFCDate | undefined;
         dueDateTo?: RFCDate | undefined;
         paymentSentOnFrom?: RFCDate | undefined;

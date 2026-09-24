@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const PayrollEmployeeCompensationsTypePaymentMethod = {
@@ -17,6 +18,21 @@ export const PayrollEmployeeCompensationsTypePaymentMethod = {
 export type PayrollEmployeeCompensationsTypePaymentMethod = ClosedEnum<
   typeof PayrollEmployeeCompensationsTypePaymentMethod
 >;
+
+export type Breakdowns = {
+  /**
+   * The start date of the workweek.
+   */
+  startDate?: RFCDate | undefined;
+  /**
+   * The end date of the workweek.
+   */
+  endDate?: RFCDate | undefined;
+  /**
+   * The dollar amount for this workweek.
+   */
+  amount?: string | undefined;
+};
 
 export type FixedCompensations = {
   /**
@@ -31,6 +47,28 @@ export type FixedCompensations = {
    * The UUID of the job for the compensation.
    */
   jobUuid?: string | undefined;
+  /**
+   * Per-workweek amounts for this compensation, one entry per workweek
+   *
+   * @remarks
+   * overlapping the pay period.
+   */
+  breakdowns?: Array<Breakdowns> | undefined;
+};
+
+export type PayrollEmployeeCompensationsTypeBreakdowns = {
+  /**
+   * The start date of the workweek.
+   */
+  startDate?: RFCDate | undefined;
+  /**
+   * The end date of the workweek.
+   */
+  endDate?: RFCDate | undefined;
+  /**
+   * The number of hours worked during this workweek.
+   */
+  hours?: string | undefined;
 };
 
 export type HourlyCompensations = {
@@ -58,6 +96,13 @@ export type HourlyCompensations = {
    * The FLSA Status of the employee's primary job compensation
    */
   flsaStatus?: string | undefined;
+  /**
+   * Per-workweek hours for this compensation, one entry per workweek
+   *
+   * @remarks
+   * overlapping the pay period.
+   */
+  breakdowns?: Array<PayrollEmployeeCompensationsTypeBreakdowns> | undefined;
 };
 
 export type PayrollEmployeeCompensationsTypePaidTimeOff = {
@@ -265,7 +310,7 @@ export type PayrollEmployeeCompensationsType = {
    */
   lastName?: string | null | undefined;
   /**
-   * The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages + cash tips + payroll tips + any other additional earnings, excluding imputed income. This value is only available for processed payrolls.
+   * The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages + cash tips + payroll tips + any other additional earnings, excluding imputed income.
    */
   grossPay?: string | null | undefined;
   /**
@@ -327,6 +372,32 @@ export const PayrollEmployeeCompensationsTypePaymentMethod$inboundSchema:
     .nativeEnum(PayrollEmployeeCompensationsTypePaymentMethod);
 
 /** @internal */
+export const Breakdowns$inboundSchema: z.ZodType<
+  Breakdowns,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  start_date: z.string().transform(v => new RFCDate(v)).optional(),
+  end_date: z.string().transform(v => new RFCDate(v)).optional(),
+  amount: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "start_date": "startDate",
+    "end_date": "endDate",
+  });
+});
+
+export function breakdownsFromJSON(
+  jsonString: string,
+): SafeParseResult<Breakdowns, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Breakdowns$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Breakdowns' from JSON`,
+  );
+}
+
+/** @internal */
 export const FixedCompensations$inboundSchema: z.ZodType<
   FixedCompensations,
   z.ZodTypeDef,
@@ -335,6 +406,7 @@ export const FixedCompensations$inboundSchema: z.ZodType<
   name: z.string().optional(),
   amount: z.string().optional(),
   job_uuid: z.string().optional(),
+  breakdowns: z.array(z.lazy(() => Breakdowns$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "job_uuid": "jobUuid",
@@ -352,6 +424,36 @@ export function fixedCompensationsFromJSON(
 }
 
 /** @internal */
+export const PayrollEmployeeCompensationsTypeBreakdowns$inboundSchema:
+  z.ZodType<PayrollEmployeeCompensationsTypeBreakdowns, z.ZodTypeDef, unknown> =
+    z.object({
+      start_date: z.string().transform(v => new RFCDate(v)).optional(),
+      end_date: z.string().transform(v => new RFCDate(v)).optional(),
+      hours: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "start_date": "startDate",
+        "end_date": "endDate",
+      });
+    });
+
+export function payrollEmployeeCompensationsTypeBreakdownsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PayrollEmployeeCompensationsTypeBreakdowns,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PayrollEmployeeCompensationsTypeBreakdowns$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PayrollEmployeeCompensationsTypeBreakdowns' from JSON`,
+  );
+}
+
+/** @internal */
 export const HourlyCompensations$inboundSchema: z.ZodType<
   HourlyCompensations,
   z.ZodTypeDef,
@@ -363,6 +465,9 @@ export const HourlyCompensations$inboundSchema: z.ZodType<
   job_uuid: z.string().optional(),
   compensation_multiplier: z.number().optional(),
   flsa_status: z.string().optional(),
+  breakdowns: z.array(
+    z.lazy(() => PayrollEmployeeCompensationsTypeBreakdowns$inboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "job_uuid": "jobUuid",

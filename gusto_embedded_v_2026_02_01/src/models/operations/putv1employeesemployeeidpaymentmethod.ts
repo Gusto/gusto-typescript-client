@@ -65,7 +65,7 @@ export type Splits = {
    */
   priority?: number | undefined;
   /**
-   * If split_by is Amount, value is in cents (e.g., 500 for $5.00) and exactly one account must have null to capture the remainder. If split_by is Percentage, value is the percentage (e.g., 60 for 60%).
+   * If split_by is Amount, value is in cents (e.g., 500 for $5.00) and exactly one account must have null to capture the remainder. Amount must be less than or equal to 2147483647. If split_by is Percentage, value is the percentage (e.g., 60 for 60%).
    */
   splitAmount?: number | null | undefined;
 };

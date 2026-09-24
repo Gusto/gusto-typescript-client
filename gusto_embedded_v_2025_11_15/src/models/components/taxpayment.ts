@@ -34,17 +34,17 @@ export type TaxPayment = {
    */
   jurisdiction: string;
   /**
-   * The start date of the period this payment covers
+   * The start date of the period this payment covers. Null for legacy tax payments where the period start was never recorded.
    */
-  periodStart: RFCDate;
+  periodStart: RFCDate | null;
   /**
    * The end date of the period this payment covers
    */
   periodEnd: RFCDate;
   /**
-   * The date this payment is due
+   * The date this payment is due. Null for legacy tax payments where the due date was never recorded.
    */
-  dueDate: RFCDate;
+  dueDate: RFCDate | null;
   /**
    * The date Gusto submitted this payment to the tax agency. It is null until submitted, and also if the payment is returned or cancelled after being sent. It is not guaranteed to stay set once populated.
    */
@@ -73,9 +73,9 @@ export const TaxPayment$inboundSchema: z.ZodType<
   company_uuid: z.string(),
   agency_name: z.string(),
   jurisdiction: z.string(),
-  period_start: z.string().transform(v => new RFCDate(v)),
+  period_start: z.nullable(z.string().transform(v => new RFCDate(v))),
   period_end: z.string().transform(v => new RFCDate(v)),
-  due_date: z.string().transform(v => new RFCDate(v)),
+  due_date: z.nullable(z.string().transform(v => new RFCDate(v))),
   payment_sent_on: z.nullable(z.string().transform(v => new RFCDate(v)))
     .optional(),
   amount: z.string(),

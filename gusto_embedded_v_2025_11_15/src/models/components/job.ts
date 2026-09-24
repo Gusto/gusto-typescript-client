@@ -47,9 +47,9 @@ export type Job = {
    */
   paymentUnit?: string | null | undefined;
   /**
-   * The UUID of the current active compensation record for this job. Requires the `compensations:read` scope.
+   * The UUID of the current active compensation record for this job. Null when the job has no current compensation. Requires the `compensations:read` scope.
    */
-  currentCompensationUuid?: string | undefined;
+  currentCompensationUuid?: string | null | undefined;
   /**
    * Whether the employee owns at least 2% of the company.
    */
@@ -87,7 +87,7 @@ export const Job$inboundSchema: z.ZodType<Job, z.ZodTypeDef, unknown> = z
     primary: z.boolean().optional(),
     rate: z.string().optional(),
     payment_unit: z.nullable(z.string()).optional(),
-    current_compensation_uuid: z.string().optional(),
+    current_compensation_uuid: z.nullable(z.string()).optional(),
     two_percent_shareholder: z.boolean().optional(),
     state_wc_covered: z.nullable(z.boolean()).optional(),
     state_wc_class_code: z.nullable(z.string()).optional(),

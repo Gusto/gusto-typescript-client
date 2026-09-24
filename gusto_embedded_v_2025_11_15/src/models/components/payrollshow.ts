@@ -10,6 +10,7 @@ import {
 } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PayrollCompanyTaxesType,
@@ -97,6 +98,21 @@ export type PayrollShowPaymentMethod = ClosedEnum<
   typeof PayrollShowPaymentMethod
 >;
 
+export type PayrollShowEmployeeCompensationsBreakdowns = {
+  /**
+   * The start date of the workweek.
+   */
+  startDate?: RFCDate | undefined;
+  /**
+   * The end date of the workweek.
+   */
+  endDate?: RFCDate | undefined;
+  /**
+   * The dollar amount for this workweek.
+   */
+  amount?: string | undefined;
+};
+
 export type PayrollShowFixedCompensations = {
   /**
    * The name of the compensation. This also serves as the unique, immutable identifier for this compensation.
@@ -110,6 +126,28 @@ export type PayrollShowFixedCompensations = {
    * The UUID of the job for the compensation.
    */
   jobUuid?: string | undefined;
+  /**
+   * Per-workweek amounts for this compensation, one entry per workweek
+   *
+   * @remarks
+   * overlapping the pay period.
+   */
+  breakdowns?: Array<PayrollShowEmployeeCompensationsBreakdowns> | undefined;
+};
+
+export type PayrollShowBreakdowns = {
+  /**
+   * The start date of the workweek.
+   */
+  startDate?: RFCDate | undefined;
+  /**
+   * The end date of the workweek.
+   */
+  endDate?: RFCDate | undefined;
+  /**
+   * The number of hours worked during this workweek.
+   */
+  hours?: string | undefined;
 };
 
 export type PayrollShowHourlyCompensations = {
@@ -137,6 +175,13 @@ export type PayrollShowHourlyCompensations = {
    * The FLSA Status of the employee's primary job compensation
    */
   flsaStatus?: string | undefined;
+  /**
+   * Per-workweek hours for this compensation, one entry per workweek
+   *
+   * @remarks
+   * overlapping the pay period.
+   */
+  breakdowns?: Array<PayrollShowBreakdowns> | undefined;
 };
 
 export type PayrollShowPaidTimeOff = {
@@ -333,6 +378,17 @@ export type PayrollShowBenefits = {
   imputed?: boolean | undefined;
 };
 
+export type PayAdjustments = {
+  /**
+   * The name of the pay adjustment.
+   */
+  name?: string | undefined;
+  /**
+   * The dollar amount of the adjustment.
+   */
+  amount?: string | undefined;
+};
+
 export type EmployeeCompensations = {
   /**
    * The UUID of the employee.
@@ -355,7 +411,7 @@ export type EmployeeCompensations = {
    */
   lastName?: string | null | undefined;
   /**
-   * The employee's gross pay, equal to regular wages + cash tips + payroll tips + any other additional earnings, excluding imputed income. This value is only available for processed payrolls.
+   * The employee's gross pay, equal to regular wages + cash tips + payroll tips + any other additional earnings, excluding imputed income.
    */
   grossPay?: number | null | undefined;
   /**
@@ -414,6 +470,14 @@ export type EmployeeCompensations = {
    * An array of employee benefits for the pay period. Benefits are only included for processed payroll when the include parameter is present.
    */
   benefits?: Array<PayrollShowBenefits> | undefined;
+  /**
+   * Adjustments applied when calculating the employee's regular rate of pay for
+   *
+   * @remarks
+   * overtime purposes (e.g. a discretionary bonus allocated across workweeks),
+   * on calculated or processed payrolls.
+   */
+  payAdjustments?: Array<PayAdjustments> | undefined;
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
@@ -523,6 +587,17 @@ export type PayrollShow = {
   employeeCompensations?: Array<EmployeeCompensations> | undefined;
 };
 
+export type Workweeks = {
+  /**
+   * The start date of the workweek.
+   */
+  startDate?: RFCDate | undefined;
+  /**
+   * The end date of the workweek.
+   */
+  endDate?: RFCDate | undefined;
+};
+
 /**
  * The response from preparing a payroll for update. Contains refreshed employee compensations, updated payroll dates, and version information needed for subsequent payroll updates.
  */
@@ -592,6 +667,14 @@ export type PayrollPrepared = {
    */
   fixedWithholdingRate?: boolean | null | undefined;
   payPeriod?: PayrollPayPeriodType | undefined;
+  /**
+   * The workweeks overlapping this payroll's pay period, one entry per workweek.
+   *
+   * @remarks
+   * Null when workweek boundaries can't be determined for this payroll (e.g. some
+   * off-cycle payrolls without a defined payment period).
+   */
+  workweeks?: Array<Workweeks> | null | undefined;
   /**
    * Information about the payroll's status and expected dates
    */
@@ -718,6 +801,17 @@ export type Payroll = {
   partnerOwnedDisbursement?: boolean | null | undefined;
 };
 
+export type PayrollUnprocessedWorkweeks = {
+  /**
+   * The start date of the workweek.
+   */
+  startDate?: RFCDate | undefined;
+  /**
+   * The end date of the workweek.
+   */
+  endDate?: RFCDate | undefined;
+};
+
 /**
  * An unprocessed payroll with employee compensations.
  */
@@ -787,6 +881,14 @@ export type PayrollUnprocessed = {
    */
   fixedWithholdingRate?: boolean | null | undefined;
   payPeriod?: PayrollPayPeriodType | undefined;
+  /**
+   * The workweeks overlapping this payroll's pay period, one entry per workweek.
+   *
+   * @remarks
+   * Null when workweek boundaries can't be determined for this payroll (e.g. some
+   * off-cycle payrolls without a defined payment period).
+   */
+  workweeks?: Array<PayrollUnprocessedWorkweeks> | null | undefined;
   /**
    * Information about the payroll's status and expected dates
    */
@@ -889,6 +991,36 @@ export const PayrollShowPaymentMethod$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(PayrollShowPaymentMethod);
 
 /** @internal */
+export const PayrollShowEmployeeCompensationsBreakdowns$inboundSchema:
+  z.ZodType<PayrollShowEmployeeCompensationsBreakdowns, z.ZodTypeDef, unknown> =
+    z.object({
+      start_date: z.string().transform(v => new RFCDate(v)).optional(),
+      end_date: z.string().transform(v => new RFCDate(v)).optional(),
+      amount: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "start_date": "startDate",
+        "end_date": "endDate",
+      });
+    });
+
+export function payrollShowEmployeeCompensationsBreakdownsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PayrollShowEmployeeCompensationsBreakdowns,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PayrollShowEmployeeCompensationsBreakdowns$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PayrollShowEmployeeCompensationsBreakdowns' from JSON`,
+  );
+}
+
+/** @internal */
 export const PayrollShowFixedCompensations$inboundSchema: z.ZodType<
   PayrollShowFixedCompensations,
   z.ZodTypeDef,
@@ -897,6 +1029,9 @@ export const PayrollShowFixedCompensations$inboundSchema: z.ZodType<
   name: z.string().optional(),
   amount: z.string().optional(),
   job_uuid: z.string().optional(),
+  breakdowns: z.array(
+    z.lazy(() => PayrollShowEmployeeCompensationsBreakdowns$inboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "job_uuid": "jobUuid",
@@ -914,6 +1049,32 @@ export function payrollShowFixedCompensationsFromJSON(
 }
 
 /** @internal */
+export const PayrollShowBreakdowns$inboundSchema: z.ZodType<
+  PayrollShowBreakdowns,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  start_date: z.string().transform(v => new RFCDate(v)).optional(),
+  end_date: z.string().transform(v => new RFCDate(v)).optional(),
+  hours: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "start_date": "startDate",
+    "end_date": "endDate",
+  });
+});
+
+export function payrollShowBreakdownsFromJSON(
+  jsonString: string,
+): SafeParseResult<PayrollShowBreakdowns, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PayrollShowBreakdowns$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollShowBreakdowns' from JSON`,
+  );
+}
+
+/** @internal */
 export const PayrollShowHourlyCompensations$inboundSchema: z.ZodType<
   PayrollShowHourlyCompensations,
   z.ZodTypeDef,
@@ -925,6 +1086,8 @@ export const PayrollShowHourlyCompensations$inboundSchema: z.ZodType<
   job_uuid: z.string().optional(),
   compensation_multiplier: z.number().optional(),
   flsa_status: z.string().optional(),
+  breakdowns: z.array(z.lazy(() => PayrollShowBreakdowns$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "job_uuid": "jobUuid",
@@ -1174,6 +1337,26 @@ export function payrollShowBenefitsFromJSON(
 }
 
 /** @internal */
+export const PayAdjustments$inboundSchema: z.ZodType<
+  PayAdjustments,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  amount: z.string().optional(),
+});
+
+export function payAdjustmentsFromJSON(
+  jsonString: string,
+): SafeParseResult<PayAdjustments, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PayAdjustments$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayAdjustments' from JSON`,
+  );
+}
+
+/** @internal */
 export const EmployeeCompensations$inboundSchema: z.ZodType<
   EmployeeCompensations,
   z.ZodTypeDef,
@@ -1211,6 +1394,8 @@ export const EmployeeCompensations$inboundSchema: z.ZodType<
     taxes: z.array(z.lazy(() => PayrollShowTaxes$inboundSchema)).optional(),
     benefits: z.array(z.lazy(() => PayrollShowBenefits$inboundSchema))
       .optional(),
+    pay_adjustments: z.array(z.lazy(() => PayAdjustments$inboundSchema))
+      .optional(),
   }).catchall(z.any()),
   "additionalProperties",
   true,
@@ -1228,6 +1413,7 @@ export const EmployeeCompensations$inboundSchema: z.ZodType<
     "hourly_compensations": "hourlyCompensations",
     "paid_time_off": "paidTimeOff",
     "custom_withholdings": "customWithholdings",
+    "pay_adjustments": "payAdjustments",
   });
 });
 
@@ -1327,6 +1513,31 @@ export function payrollShowFromJSON(
 }
 
 /** @internal */
+export const Workweeks$inboundSchema: z.ZodType<
+  Workweeks,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  start_date: z.string().transform(v => new RFCDate(v)).optional(),
+  end_date: z.string().transform(v => new RFCDate(v)).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "start_date": "startDate",
+    "end_date": "endDate",
+  });
+});
+
+export function workweeksFromJSON(
+  jsonString: string,
+): SafeParseResult<Workweeks, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Workweeks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Workweeks' from JSON`,
+  );
+}
+
+/** @internal */
 export const PayrollPrepared$inboundSchema: z.ZodType<
   PayrollPrepared,
   z.ZodTypeDef,
@@ -1355,6 +1566,8 @@ export const PayrollPrepared$inboundSchema: z.ZodType<
   skip_regular_deductions: z.nullable(z.boolean()).optional(),
   fixed_withholding_rate: z.nullable(z.boolean()).optional(),
   pay_period: PayrollPayPeriodType$inboundSchema.optional(),
+  workweeks: z.nullable(z.array(z.lazy(() => Workweeks$inboundSchema)))
+    .optional(),
   payroll_status_meta: PayrollPayrollStatusMetaType$inboundSchema.optional(),
   employee_compensations: z.array(
     PayrollEmployeeCompensationsType$inboundSchema,
@@ -1485,6 +1698,31 @@ export function payrollFromJSON(
 }
 
 /** @internal */
+export const PayrollUnprocessedWorkweeks$inboundSchema: z.ZodType<
+  PayrollUnprocessedWorkweeks,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  start_date: z.string().transform(v => new RFCDate(v)).optional(),
+  end_date: z.string().transform(v => new RFCDate(v)).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "start_date": "startDate",
+    "end_date": "endDate",
+  });
+});
+
+export function payrollUnprocessedWorkweeksFromJSON(
+  jsonString: string,
+): SafeParseResult<PayrollUnprocessedWorkweeks, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PayrollUnprocessedWorkweeks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollUnprocessedWorkweeks' from JSON`,
+  );
+}
+
+/** @internal */
 export const PayrollUnprocessed$inboundSchema: z.ZodType<
   PayrollUnprocessed,
   z.ZodTypeDef,
@@ -1513,6 +1751,9 @@ export const PayrollUnprocessed$inboundSchema: z.ZodType<
   skip_regular_deductions: z.nullable(z.boolean()).optional(),
   fixed_withholding_rate: z.nullable(z.boolean()).optional(),
   pay_period: PayrollPayPeriodType$inboundSchema.optional(),
+  workweeks: z.nullable(
+    z.array(z.lazy(() => PayrollUnprocessedWorkweeks$inboundSchema)),
+  ).optional(),
   payroll_status_meta: PayrollPayrollStatusMetaType$inboundSchema.optional(),
   employee_compensations: z.array(
     PayrollUnprocessedEmployeeCompensationsType$inboundSchema,

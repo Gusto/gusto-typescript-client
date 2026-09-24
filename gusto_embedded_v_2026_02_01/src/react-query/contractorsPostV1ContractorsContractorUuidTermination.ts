@@ -63,7 +63,8 @@ export type ContractorsPostV1ContractorsContractorUuidTerminationMutationError =
  * 2. The contractor must have a current employment
  *
  * ## Related webhooks
- * - `contractor.deactivated`: Fires when the contractor becomes inactive (on or after end_date)
+ * - `contractor.deactivated`: Fires when the dismissal is recorded
+ * - `contractor.deactivation_effective`: Fires when the dismissal takes effect (the day after end_date)
  *
  * scope: `contractors:write`
  */

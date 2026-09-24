@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const PayrollUnprocessedEmployeeCompensationsTypePaymentMethod = {
@@ -16,6 +17,21 @@ export const PayrollUnprocessedEmployeeCompensationsTypePaymentMethod = {
 } as const;
 export type PayrollUnprocessedEmployeeCompensationsTypePaymentMethod =
   ClosedEnum<typeof PayrollUnprocessedEmployeeCompensationsTypePaymentMethod>;
+
+export type PayrollUnprocessedEmployeeCompensationsTypeBreakdowns = {
+  /**
+   * The start date of the workweek.
+   */
+  startDate?: RFCDate | undefined;
+  /**
+   * The end date of the workweek.
+   */
+  endDate?: RFCDate | undefined;
+  /**
+   * The dollar amount for this workweek.
+   */
+  amount?: string | undefined;
+};
 
 export type PayrollUnprocessedEmployeeCompensationsTypeFixedCompensations = {
   /**
@@ -30,7 +46,32 @@ export type PayrollUnprocessedEmployeeCompensationsTypeFixedCompensations = {
    * The UUID of the job for the compensation.
    */
   jobUuid?: string | undefined;
+  /**
+   * Per-workweek amounts for this compensation, one entry per workweek
+   *
+   * @remarks
+   * overlapping the pay period.
+   */
+  breakdowns?:
+    | Array<PayrollUnprocessedEmployeeCompensationsTypeBreakdowns>
+    | undefined;
 };
+
+export type PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensationsBreakdowns =
+  {
+    /**
+     * The start date of the workweek.
+     */
+    startDate?: RFCDate | undefined;
+    /**
+     * The end date of the workweek.
+     */
+    endDate?: RFCDate | undefined;
+    /**
+     * The number of hours worked during this workweek.
+     */
+    hours?: string | undefined;
+  };
 
 export type PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensations = {
   /**
@@ -57,6 +98,17 @@ export type PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensations = {
    * The FLSA Status of the employee's primary job compensation
    */
   flsaStatus?: string | undefined;
+  /**
+   * Per-workweek hours for this compensation, one entry per workweek
+   *
+   * @remarks
+   * overlapping the pay period.
+   */
+  breakdowns?:
+    | Array<
+      PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensationsBreakdowns
+    >
+    | undefined;
 };
 
 export type PayrollUnprocessedEmployeeCompensationsTypePaidTimeOff = {
@@ -238,7 +290,7 @@ export type PayrollUnprocessedEmployeeCompensationsType = {
    */
   lastName?: string | null | undefined;
   /**
-   * The employee's gross pay, equal to regular wages + cash tips + payroll tips + any other additional earnings, excluding imputed income. This value is only available for processed payrolls.
+   * The employee's gross pay, equal to regular wages + cash tips + payroll tips + any other additional earnings, excluding imputed income.
    */
   grossPay?: number | null | undefined;
   /**
@@ -307,6 +359,39 @@ export const PayrollUnprocessedEmployeeCompensationsTypePaymentMethod$inboundSch
   > = z.nativeEnum(PayrollUnprocessedEmployeeCompensationsTypePaymentMethod);
 
 /** @internal */
+export const PayrollUnprocessedEmployeeCompensationsTypeBreakdowns$inboundSchema:
+  z.ZodType<
+    PayrollUnprocessedEmployeeCompensationsTypeBreakdowns,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    start_date: z.string().transform(v => new RFCDate(v)).optional(),
+    end_date: z.string().transform(v => new RFCDate(v)).optional(),
+    amount: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "start_date": "startDate",
+      "end_date": "endDate",
+    });
+  });
+
+export function payrollUnprocessedEmployeeCompensationsTypeBreakdownsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PayrollUnprocessedEmployeeCompensationsTypeBreakdowns,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PayrollUnprocessedEmployeeCompensationsTypeBreakdowns$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PayrollUnprocessedEmployeeCompensationsTypeBreakdowns' from JSON`,
+  );
+}
+
+/** @internal */
 export const PayrollUnprocessedEmployeeCompensationsTypeFixedCompensations$inboundSchema:
   z.ZodType<
     PayrollUnprocessedEmployeeCompensationsTypeFixedCompensations,
@@ -316,6 +401,11 @@ export const PayrollUnprocessedEmployeeCompensationsTypeFixedCompensations$inbou
     name: z.string().optional(),
     amount: z.string().optional(),
     job_uuid: z.string().optional(),
+    breakdowns: z.array(
+      z.lazy(() =>
+        PayrollUnprocessedEmployeeCompensationsTypeBreakdowns$inboundSchema
+      ),
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       "job_uuid": "jobUuid",
@@ -338,6 +428,38 @@ export function payrollUnprocessedEmployeeCompensationsTypeFixedCompensationsFro
 }
 
 /** @internal */
+export const PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensationsBreakdowns$inboundSchema:
+  z.ZodType<
+    PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensationsBreakdowns,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    start_date: z.string().transform(v => new RFCDate(v)).optional(),
+    end_date: z.string().transform(v => new RFCDate(v)).optional(),
+    hours: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "start_date": "startDate",
+      "end_date": "endDate",
+    });
+  });
+
+export function payrollUnprocessedEmployeeCompensationsTypeHourlyCompensationsBreakdownsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensationsBreakdowns,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensationsBreakdowns$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensationsBreakdowns' from JSON`,
+  );
+}
+
+/** @internal */
 export const PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensations$inboundSchema:
   z.ZodType<
     PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensations,
@@ -350,6 +472,11 @@ export const PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensations$inbo
     job_uuid: z.string().optional(),
     compensation_multiplier: z.number().optional(),
     flsa_status: z.string().optional(),
+    breakdowns: z.array(
+      z.lazy(() =>
+        PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensationsBreakdowns$inboundSchema
+      ),
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       "job_uuid": "jobUuid",

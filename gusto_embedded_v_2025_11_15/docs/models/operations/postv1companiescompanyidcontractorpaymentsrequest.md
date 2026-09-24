@@ -11,10 +11,10 @@ let value: PostV1CompaniesCompanyIdContractorPaymentsRequest = {
   contractorPaymentBody: {
     contractorUuid: "<id>",
     date: new RFCDate("2020-01-01"),
-    wage: "5000",
-    hours: "40",
-    bonus: "500",
-    reimbursement: "20",
+    wage: "5000.00",
+    hours: "40.5",
+    bonus: "500.00",
+    reimbursement: "20.00",
   },
 };
 ```

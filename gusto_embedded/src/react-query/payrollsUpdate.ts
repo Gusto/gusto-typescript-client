@@ -11,6 +11,7 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsUpdate } from "../funcs/payrollsUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { ConflictErrorObject } from "../models/errors/conflicterrorobject.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -41,6 +42,7 @@ export type PayrollsUpdateMutationData =
 
 export type PayrollsUpdateMutationError =
   | NotFoundErrorObject
+  | ConflictErrorObject
   | UnprocessableEntityError
   | GustoEmbeddedError
   | ResponseValidationError

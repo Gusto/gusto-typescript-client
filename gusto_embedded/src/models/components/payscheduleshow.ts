@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,6 +17,19 @@ import {
   PayScheduleFrequency,
   PayScheduleFrequency$inboundSchema,
 } from "./payschedulefrequency.js";
+
+export const PayScheduleWorkweekStartDay = {
+  Sunday: "Sunday",
+  Monday: "Monday",
+  Tuesday: "Tuesday",
+  Wednesday: "Wednesday",
+  Thursday: "Thursday",
+  Friday: "Friday",
+  Saturday: "Saturday",
+} as const;
+export type PayScheduleWorkweekStartDay = ClosedEnum<
+  typeof PayScheduleWorkweekStartDay
+>;
 
 /**
  * Pay schedule returned from pay schedule endpoints (GET by ID, POST create, PUT update). Same fields as Pay-Schedule with a required `version` for [optimistic concurrency](https://docs.gusto.com/embedded-payroll/docs/api-fundamentals#optimistic-version-control).
@@ -105,7 +119,18 @@ export type PayScheduleShow = {
     | Array<PayScheduleAutoPayrollEnablementBlocker>
     | null
     | undefined;
+  /**
+   * The day of the week that this pay schedule's workweeks start on, used for regular rate of pay overtime calculations. Null when no workweek start day has been configured (e.g. legacy pay schedules).
+   *
+   * @remarks
+   */
+  workweekStartDay?: PayScheduleWorkweekStartDay | null | undefined;
 };
+
+/** @internal */
+export const PayScheduleWorkweekStartDay$inboundSchema: z.ZodNativeEnum<
+  typeof PayScheduleWorkweekStartDay
+> = z.nativeEnum(PayScheduleWorkweekStartDay);
 
 /** @internal */
 export const PayScheduleShow$inboundSchema: z.ZodType<
@@ -129,6 +154,8 @@ export const PayScheduleShow$inboundSchema: z.ZodType<
   auto_payroll_enablement_blockers: z.nullable(
     z.array(PayScheduleAutoPayrollEnablementBlocker$inboundSchema),
   ).optional(),
+  workweek_start_day: z.nullable(PayScheduleWorkweekStartDay$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "anchor_pay_date": "anchorPayDate",
@@ -139,6 +166,7 @@ export const PayScheduleShow$inboundSchema: z.ZodType<
     "auto_pilot": "autoPilot",
     "auto_payroll": "autoPayroll",
     "auto_payroll_enablement_blockers": "autoPayrollEnablementBlockers",
+    "workweek_start_day": "workweekStartDay",
   });
 });
 
