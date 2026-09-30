@@ -59,13 +59,13 @@ tags:
   - name: Member Portal Invitations
 info:
   title: Gusto API
-  version: '2026-06-15'
+  version: '2026-02-01'
   termsOfService: https://gusto.com/about/terms/developer-terms-of-service
   description: Welcome to Gusto's Embedded Payroll API documentation!
   contact:
     name: Developer Relations
     email: developer@gusto.com
-  x-release-status: stable
+  x-release-status: deprecated
 servers:
   - url: https://api.gusto-demo.com
     description: Demo
@@ -319,7 +319,7 @@ components:
             city: Richmond
             state: VA
             zip: '23218'
-            country: USA,
+            country: USA
             mailing_address: true
             filing_address: false
             created_at: '2023-09-12T16:42:25.000-07:00'
@@ -357,16 +357,6 @@ components:
             - error_key: request
               category: not_found
               message: The requested resource was not found.
-        deprecated_accept_terms_of_service:
-          errors:
-            - error_key: request
-              category: deprecated_endpoint
-              message: The requested endpoint is no longer supported in the requested API version. Use POST /v1/partner_managed_companies/:company_uuid/terms_of_service instead
-        deprecated_retrieve_terms_of_service:
-          errors:
-            - error_key: request
-              category: deprecated_endpoint
-              message: The requested endpoint is no longer supported in the requested API version. Use PUT /v1/partner_managed_companies/:company_uuid/terms_of_service instead
     Conflict-Error-Object:
       description: "Conflict\n  \nThis may happen when the resource version provided does not match the current version — retrieve the latest version and retry — or when the request conflicts with another in-progress operation on the same resource. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details."
       type: object
@@ -993,11 +983,6 @@ components:
             - error_key: base
               category: invalid_operation
               message: This type of payroll cannot be modified or processed. It is reserved for system processes.
-        employee_uuids_required:
-          errors:
-            - error_key: employee_uuids
-              category: invalid_attribute_value
-              message: At least one employee_uuid is required to create an off-cycle payroll.
         invalid_employee_uuids_format:
           errors:
             - error_key: employee_uuids
@@ -4806,20 +4791,16 @@ components:
           description: The date an employee will be paid if the payroll is submitted now.
           readOnly: true
         initial_check_date:
-          type:
-            - string
-            - 'null'
-          description: The normal check date for the associated pay period. Returns `null` for off-cycle payrolls (not meaningful for off-cycle).
+          type: string
+          description: The normal check date for the associated pay period.
           readOnly: true
         expected_debit_time:
           type: string
           description: The time the employer's account will be debited if the payroll is submitted now.
           readOnly: true
         payroll_late:
-          type:
-            - boolean
-            - 'null'
-          description: expected_check_date > initial_check_date. Returns `null` for off-cycle payrolls (not meaningful for off-cycle).
+          type: boolean
+          description: expected_check_date > initial_check_date.
           readOnly: true
         initial_debit_cutoff_time:
           type: string
@@ -4934,8 +4915,8 @@ components:
               employer:
                 type: boolean
               amount:
-                type: string
-                format: float
+                type: number
+                minLength: 1
             required:
               - name
               - employer
@@ -4953,12 +4934,10 @@ components:
                 type: string
                 readOnly: true
               employee_deduction:
-                type: string
-                format: float
+                type: number
                 readOnly: true
               company_contribution:
-                type: string
-                format: float
+                type: number
                 readOnly: true
               imputed:
                 type: boolean
@@ -4975,8 +4954,7 @@ components:
                 type: string
                 description: The name of the deduction.
               amount:
-                type: string
-                format: float
+                type: number
                 description: The amount of the deduction for the pay period.
               amount_type:
                 type: string
@@ -5042,21 +5020,21 @@ components:
           readOnly: true
         gross_pay:
           type:
-            - string
+            - number
             - 'null'
-          description: The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages + cash tips + payroll tips + any other additional earnings, excluding imputed income.
+          description: The employee's gross pay, equal to regular wages + cash tips + payroll tips + any other additional earnings, excluding imputed income.
           readOnly: true
         net_pay:
           type:
-            - string
+            - number
             - 'null'
-          description: The employee's net pay (as a string-formatted decimal, e.g. "1234.56"), equal to gross_pay - employee taxes - employee deductions or garnishments - cash tips. This value is only available for processed payrolls.
+          description: The employee's net pay, equal to gross_pay - employee taxes - employee deductions or garnishments - cash tips. This value is only available for processed payrolls.
           readOnly: true
         check_amount:
           type:
-            - string
+            - number
             - 'null'
-          description: The employee's check amount (as a string-formatted decimal, e.g. "1234.56"), equal to net_pay + reimbursements. This value is only available for processed payrolls.
+          description: The employee's check amount, equal to net_pay + reimbursements. This value is only available for processed payrolls.
           readOnly: true
         payment_method:
           description: The employee's compensation payment method. Is *only* `Historical` when retrieving external payrolls initially run outside of Gusto, then put into Gusto.
@@ -5076,7 +5054,7 @@ components:
         fixed_compensations:
           type: array
           uniqueItems: false
-          description: An array of fixed compensations for the employee. Fixed compensations include tips and bonuses. On regular payrolls, reimbursements are sent via the dedicated `reimbursements` array instead. Off-cycle payrolls continue to include reimbursements in `fixed_compensations`. If this payroll has been processed, only fixed compensations with a value greater than 0.00 are returned. For an unprocessed payroll, all active fixed compensations are returned.
+          description: An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements. If this payroll has been processed, only fixed compensations with a value greater than 0.00 are returned. For an unprocessed payroll, all active fixed compensations are returned.
           items:
             type: object
             properties:
@@ -5175,12 +5153,6 @@ components:
               hours:
                 type: string
                 description: The hours of this PTO taken during the pay period.
-              amount:
-                type:
-                  - string
-                  - 'null'
-                description: The dollar amount paid for this PTO entry during the pay period (as a string-formatted decimal, e.g. "1234.56"). Only available for processed payrolls.
-                readOnly: true
               final_payout_unused_hours_input:
                 type:
                   - string
@@ -13750,7 +13722,6 @@ components:
             - processing
             - completed
             - failed
-            - partial_success
           description: The current status of the batch processing.
         batch_action:
           type: string
@@ -13791,7 +13762,6 @@ components:
             - processing
             - completed
             - failed
-            - partial_success
           description: The current status of the batch processing.
         submitted_at:
           type: string
@@ -14617,7 +14587,6 @@ components:
             - soft_suspended
             - suspended
           example: needs_approval
-          x-speakeasy-unknown-values: allow
         message:
           type: string
           description: A human-readable message describing the payroll blocker and what action is needed to resolve it.
@@ -17249,10 +17218,12 @@ components:
       x-examples:
         success_status:
           - state: GA
+            setup_complete: false
             setup_status: not_started
             default_rates_applied: false
             ready_to_run_payroll: false
           - state: CA
+            setup_complete: true
             setup_status: complete
             default_rates_applied: false
             ready_to_run_payroll: true
@@ -17261,6 +17232,9 @@ components:
         properties:
           state:
             "$ref": "#/components/schemas/State"
+          setup_complete:
+            type: boolean
+            description: Whether all requirements for the state have been satisfied such that the company can complete onboarding. A company must be `setup_complete` in all relevant states to complete the `state_setup` company onboarding step.
           setup_status:
             type: string
             enum:
@@ -17277,7 +17251,7 @@ components:
             description: Whether the state is using system-assigned default SUI rates rather than employer-specific rates.
           ready_to_run_payroll:
             type: boolean
-            description: Whether the state tax setup is sufficiently complete for the company to run payroll.
+            description: Whether the state tax setup is sufficiently complete for the company to run payroll. This will be `true` when `setup_complete` is `true`.
     Tax-Requirement-Set-Update:
       type: array
       description: Array of requirement sets to update. Each set corresponds to a category of requirements for the state.
@@ -21154,11 +21128,15 @@ components:
           type: string
           description: Unique identifier of the company to which the tax payment belongs
         agency_name:
-          type: string
-          description: The name of the tax agency this payment is submitted to
+          type:
+            - string
+            - 'null'
+          description: The name of the tax agency this payment is submitted to. Null for legacy tax payments whose agent has no reference-data agency.
         jurisdiction:
-          type: string
-          description: The tax jurisdiction this payment is for. A two-letter state code, or US for federal.
+          type:
+            - string
+            - 'null'
+          description: The tax jurisdiction this payment is for. A two-letter state code, or US for federal. Null for legacy tax payments whose agent has no reference-data agency.
         period_start:
           type:
             - string
@@ -21267,8 +21245,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -21351,8 +21329,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -21412,8 +21390,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -21475,8 +21453,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       operationId: get-v1-benefits
@@ -21509,8 +21487,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: benefit_id
           in: path
@@ -21549,8 +21527,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: benefit_id
           in: path
@@ -21598,8 +21576,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       operationId: post-v1-bulk_reports
@@ -21641,8 +21619,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: request_uuid
           in: path
@@ -21684,8 +21662,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -21732,8 +21710,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -21798,8 +21776,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -21850,8 +21828,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -21916,8 +21894,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -21973,8 +21951,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -22030,8 +22008,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -22076,8 +22054,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -22136,8 +22114,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -22189,8 +22167,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -22271,8 +22249,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -22343,8 +22321,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -22411,8 +22389,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_benefit_id
           in: path
@@ -22479,8 +22457,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_benefit_id
           in: path
@@ -22546,8 +22524,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_benefit_id
           in: path
@@ -22606,8 +22584,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_benefit_id
           in: path
@@ -22656,8 +22634,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_benefit_id
           in: path
@@ -22722,8 +22700,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_benefit_id
           in: path
@@ -22798,8 +22776,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_benefit_id
           in: path
@@ -22870,8 +22848,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_benefit_id
           in: path
@@ -22941,8 +22919,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -23001,8 +22979,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -23074,8 +23052,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: form_id
           in: path
@@ -23122,8 +23100,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: form_id
           in: path
@@ -23170,8 +23148,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: form_id
           in: path
@@ -23252,8 +23230,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -23296,8 +23274,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -23362,8 +23340,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -23420,8 +23398,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -23473,8 +23451,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -23541,8 +23519,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -23591,8 +23569,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -23660,8 +23638,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -23704,8 +23682,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -23822,8 +23800,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -23871,8 +23849,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -23935,8 +23913,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -24010,8 +23988,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -24058,8 +24036,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -24143,8 +24121,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: job_id
           in: path
@@ -24220,8 +24198,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: job_id
           in: path
@@ -24291,8 +24269,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: compensation_id
           in: path
@@ -24339,8 +24317,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: compensation_id
           in: path
@@ -24405,8 +24383,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: compensation_id
           in: path
@@ -24462,8 +24440,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -24509,8 +24487,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -24574,8 +24552,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -24624,8 +24602,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -24678,8 +24656,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -24732,8 +24710,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -24778,8 +24756,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -24837,8 +24815,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -24916,8 +24894,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -25032,8 +25010,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_payment_group_uuid
           in: path
@@ -25086,8 +25064,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -25161,8 +25139,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -25311,8 +25289,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_payment_group_uuid
           in: path
@@ -25358,8 +25336,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_payment_group_uuid
           in: path
@@ -25411,8 +25389,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: id
           in: path
@@ -25456,8 +25434,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: id
           in: path
@@ -25543,8 +25521,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -25592,8 +25570,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -25676,8 +25654,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -25754,8 +25732,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -25844,8 +25822,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -25907,8 +25885,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -25961,8 +25939,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -26020,8 +25998,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -26085,8 +26063,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_payment_uuid
           in: path
@@ -26140,8 +26118,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_payment_uuid
           in: path
@@ -26194,8 +26172,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_payment_id
           in: path
@@ -26236,8 +26214,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -26300,8 +26278,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -26351,8 +26329,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -26415,8 +26393,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -26466,8 +26444,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -26528,8 +26506,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -26593,8 +26571,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -26645,8 +26623,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -26759,8 +26737,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -26822,8 +26800,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -26899,8 +26877,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -26971,8 +26949,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: department_uuid
           in: path
@@ -27018,8 +26996,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: department_uuid
           in: path
@@ -27086,8 +27064,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: department_uuid
           in: path
@@ -27139,8 +27117,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: department_uuid
           in: path
@@ -27202,8 +27180,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: department_uuid
           in: path
@@ -27265,8 +27243,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -27312,8 +27290,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -27375,8 +27353,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -27425,8 +27403,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: document_uuid
           in: path
@@ -27482,8 +27460,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: document_uuid
           in: path
@@ -27539,8 +27517,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: document_uuid
           in: path
@@ -27630,8 +27608,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -27684,8 +27662,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -27769,8 +27747,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -27836,7 +27814,7 @@ paths:
                   description: The earning type category. Set at creation and immutable afterward — submitting a value that differs from the current one returns a 422. Submitting the current value (e.g. when echoing back the full resource) is allowed.
                 included_in_overtime_pay:
                   type: boolean
-                  description: Whether earnings of this type are included in overtime pay calculations. Set at creation and immutable afterward — submitting a value that differs from the current one returns a 422. Submitting the current value (e.g. when echoing back the full resource) is allowed.
+                  description: Whether earnings of this type are included in overtime pay calculations. Editable only when the category is `Other`; otherwise immutable — submitting a value that differs from the current one returns a 422. Submitting the current value (e.g. when echoing back the full resource) is allowed.
         required: true
       x-speakeasy-group: earningTypes
       x-speakeasy-name-override: update
@@ -27848,8 +27826,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -27899,8 +27877,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -27960,8 +27938,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -28023,8 +28001,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -28091,8 +28069,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -28150,8 +28128,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -28226,8 +28204,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -28292,8 +28270,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_benefit_id
           in: path
@@ -28342,8 +28320,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_benefit_id
           in: path
@@ -28407,8 +28385,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_benefit_id
           in: path
@@ -28463,8 +28441,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -28523,8 +28501,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_uuid
           in: path
@@ -28570,8 +28548,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_uuid
           in: path
@@ -28683,8 +28661,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -28733,8 +28711,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -28787,8 +28765,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -28841,8 +28819,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -29012,8 +28990,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -29098,8 +29076,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -29145,8 +29123,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -29258,8 +29236,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -29308,8 +29286,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -29371,8 +29349,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -29434,8 +29412,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -29488,8 +29466,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_uuid
           in: path
@@ -29534,8 +29512,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_uuid
           in: path
@@ -29599,8 +29577,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_uuid
           in: path
@@ -29657,8 +29635,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_uuid
           in: path
@@ -29722,8 +29700,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_uuid
           in: path
@@ -29777,8 +29755,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_uuid
           in: path
@@ -29839,8 +29817,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_uuid
           in: path
@@ -29902,8 +29880,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -29973,8 +29951,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -30045,8 +30023,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -30144,8 +30122,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -30196,8 +30174,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -30339,8 +30317,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -30429,8 +30407,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -30512,8 +30490,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -30595,8 +30573,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -30652,8 +30630,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -30701,8 +30679,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: starting_after_uuid
           in: query
@@ -30773,8 +30751,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -30834,8 +30812,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -30897,8 +30875,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -30946,8 +30924,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -31013,8 +30991,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -31069,8 +31047,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -31122,8 +31100,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -31190,8 +31168,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -31249,8 +31227,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -31314,8 +31292,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -31389,8 +31367,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -31450,8 +31428,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -31513,8 +31491,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       operationId: get-v1-garnishments-child_support
@@ -31546,8 +31524,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: garnishment_id
           in: path
@@ -31593,8 +31571,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: garnishment_id
           in: path
@@ -31656,8 +31634,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: payroll_uuid
           in: path
@@ -31718,8 +31696,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: document_type
           in: path
@@ -31774,8 +31752,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -31837,8 +31815,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -31910,8 +31888,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -31956,8 +31934,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -32011,8 +31989,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -32069,8 +32047,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -32116,8 +32094,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -32186,8 +32164,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -32256,8 +32234,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -32303,8 +32281,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -32391,8 +32369,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: home_address_uuid
           in: path
@@ -32438,8 +32416,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: home_address_uuid
           in: path
@@ -32522,8 +32500,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: home_address_uuid
           in: path
@@ -32573,8 +32551,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -32625,8 +32603,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -32707,8 +32685,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -32760,8 +32738,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -32812,8 +32790,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -32874,8 +32852,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -32936,8 +32914,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -33014,8 +32992,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -33070,8 +33048,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: invoice_period
           in: path
@@ -33132,8 +33110,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: job_id
           in: path
@@ -33193,8 +33171,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: job_id
           in: path
@@ -33255,8 +33233,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: job_id
           in: path
@@ -33308,8 +33286,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -33382,8 +33360,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -33445,8 +33423,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: location_uuid
           in: path
@@ -33496,8 +33474,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: location_id
           in: path
@@ -33540,8 +33518,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: location_id
           in: path
@@ -33634,8 +33612,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -33695,8 +33673,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -33759,8 +33737,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -33809,8 +33787,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -33854,8 +33832,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -33907,8 +33885,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -33957,8 +33935,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -34002,8 +33980,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: contractor_uuid
           in: path
@@ -34055,8 +34033,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: notification_uuid
           in: path
@@ -34115,8 +34093,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -34183,8 +34161,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -34235,8 +34213,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -34305,8 +34283,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       operationId: post-v1-partner-managed-companies
@@ -34349,8 +34327,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -34395,8 +34373,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -34421,12 +34399,30 @@ paths:
       x-gusto-integration-type:
         - embedded
       responses:
+        '200':
+          description: Example response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Partner-Managed-Company-Terms-Of-Service-Response"
         '404':
-          description: Deprecated endpoint
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Not-Found-Error-Object"
+        '422':
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
       requestBody:
         content:
           application/json:
@@ -34443,8 +34439,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -34468,12 +34464,30 @@ paths:
       x-gusto-integration-type:
         - embedded
       responses:
+        '200':
+          description: Example response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Partner-Managed-Company-Terms-Of-Service-Response"
         '404':
-          description: Deprecated endpoint
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Not-Found-Error-Object"
+        '422':
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
       requestBody:
         content:
           application/json:
@@ -34490,8 +34504,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -34537,8 +34551,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -34601,8 +34615,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -34662,8 +34676,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -34752,8 +34766,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -34805,8 +34819,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -34865,8 +34879,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -34942,8 +34956,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -35059,8 +35073,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -35113,8 +35127,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -35201,8 +35215,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -35264,8 +35278,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -35324,8 +35338,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -35373,8 +35387,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -35431,8 +35445,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: payroll_id
           in: path
@@ -35482,8 +35496,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -35530,8 +35544,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -35618,8 +35632,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       operationId: post-v1-payroll_batches
@@ -35706,8 +35720,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: payroll_batch_uuid
           in: path
@@ -35752,8 +35766,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       operationId: post-v1-payroll_digests
@@ -35835,8 +35849,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: payroll_digest_uuid
           in: path
@@ -35881,8 +35895,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -35940,8 +35954,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -36037,8 +36051,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -36112,8 +36126,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -36167,8 +36181,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -36315,8 +36329,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -36400,9 +36414,10 @@ paths:
                   description: A pay schedule is required for transition from old pay schedule payroll to identify the matching transition pay period.
                   type: string
                 employee_uuids:
-                  description: A list of employee UUIDs to include on the payroll. At least one UUID is required for non-termination off-cycle payrolls.
-                  type: array
-                  minItems: 1
+                  description: A list of employee uuids to include on the payroll.
+                  type:
+                    - array
+                    - 'null'
                   items:
                     type: string
                 check_date:
@@ -36439,8 +36454,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: payroll_uuid
           in: path
@@ -36471,8 +36486,8 @@ paths:
         * Hour and dollar amounts are returned as string representations of numeric decimals.
         * Dollar amounts are represented to the cent.
         * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
-        * Employee compensations are always paginated. Maximum page size is 100 employee compensations per request.
-        * Responses include the `X-Page`, `X-Total-Count`, `X-Total-Pages`, and `X-Per-Page` pagination headers.
+        * Pagination is optional. Supplying `page` and/or `per` returns only the requested page of employee compensations and includes the `X-Page`, `X-Total-Count`, `X-Total-Pages`, and `X-Per-Page` response headers. Without either parameter, all employee compensations are returned without pagination headers.
+        * Maximum page size is 100 employee compensations per request.
 
         scope: `payrolls:read`
       tags:
@@ -36502,8 +36517,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -36564,8 +36579,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -36672,8 +36687,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -36731,8 +36746,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -36780,8 +36795,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -36873,8 +36888,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -36943,8 +36958,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: payroll_uuid
           in: path
@@ -37004,8 +37019,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: payroll_id
           in: path
@@ -37079,8 +37094,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -37383,8 +37398,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: people_batch_uuid
           in: path
@@ -37428,8 +37443,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       operationId: post-v1-plaid-processor_token
@@ -37482,8 +37497,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -37544,8 +37559,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: recovery_case_uuid
           in: path
@@ -37601,8 +37616,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -37656,8 +37671,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -37722,8 +37737,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: id
           in: path
@@ -37765,8 +37780,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: id
           in: path
@@ -37835,8 +37850,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: id
           in: path
@@ -37875,8 +37890,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -37937,8 +37952,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: payroll_uuid
           in: path
@@ -38001,8 +38016,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: request_uuid
           in: path
@@ -38050,8 +38065,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -38112,8 +38127,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -38176,8 +38191,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -38290,8 +38305,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: uuid
           in: path
@@ -38333,8 +38348,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: uuid
           in: path
@@ -38442,8 +38457,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: uuid
           in: path
@@ -38507,8 +38522,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: search
           in: query
@@ -38551,8 +38566,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       operationId: post-v1-sandbox-generate_w2
@@ -38616,8 +38631,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       operationId: post-v1-sandbox-generate_1099
@@ -38681,8 +38696,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -38732,8 +38747,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -38802,8 +38817,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -38867,8 +38882,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -38943,8 +38958,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -38995,8 +39010,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -39158,8 +39173,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -39210,8 +39225,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -39262,8 +39277,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -39342,8 +39357,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -39396,8 +39411,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -39444,8 +39459,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -39528,8 +39543,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -39608,8 +39623,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -39677,8 +39692,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -39780,8 +39795,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -39856,8 +39871,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -39932,8 +39947,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: time_off_request_uuid
           in: path
@@ -39974,8 +39989,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: time_off_request_uuid
           in: path
@@ -40022,8 +40037,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: time_off_request_uuid
           in: path
@@ -40093,8 +40108,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: time_off_request_uuid
           in: path
@@ -40160,8 +40175,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -40207,8 +40222,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -40264,8 +40279,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: time_off_policy_uuid
           in: path
@@ -40309,8 +40324,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: time_off_policy_uuid
           in: path
@@ -40368,8 +40383,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: time_off_policy_uuid
           in: path
@@ -40419,8 +40434,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: time_off_policy_uuid
           in: path
@@ -40495,8 +40510,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: time_off_policy_uuid
           in: path
@@ -40565,8 +40580,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: time_off_policy_uuid
           in: path
@@ -40639,8 +40654,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       operationId: oauth-access-token
@@ -40721,8 +40736,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       operationId: get-v1-token-info
@@ -40754,8 +40769,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       operationId: get-v1-webhook-subscriptions
@@ -40785,8 +40800,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       operationId: post-v1-webhook-subscription
@@ -40861,8 +40876,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: webhook_subscription_uuid
           in: path
@@ -40905,8 +40920,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: webhook_subscription_uuid
           in: path
@@ -40991,8 +41006,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: webhook_subscription_uuid
           in: path
@@ -41032,8 +41047,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: webhook_subscription_uuid
           in: path
@@ -41077,8 +41092,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: webhook_subscription_uuid
           in: path
@@ -41143,8 +41158,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       operationId: get-v1-webhooks-health_check
@@ -41172,8 +41187,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: wire_in_request_uuid
           in: path
@@ -41219,8 +41234,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: wire_in_request_uuid
           in: path
@@ -41282,8 +41297,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -41333,8 +41348,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -41379,8 +41394,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -41447,8 +41462,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: work_address_uuid
           in: path
@@ -41492,8 +41507,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: work_address_uuid
           in: path
@@ -41560,8 +41575,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: work_address_uuid
           in: path
@@ -41608,8 +41623,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -41670,8 +41685,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2026-06-15'
-            default: '2026-06-15'
+              - '2026-02-01'
+            default: '2026-02-01'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path

@@ -1,20 +1,20 @@
 lockVersion: 2.0.0
 id: 22100e84-a263-4e8d-82e8-5ec9ca80e378
 management:
-  docChecksum: 20f88244ccaa09192bc1df66e91459db
+  docChecksum: 74b9cbbba9534e779c6b6f30f3822c34
   docVersion: "2026-06-15"
-  speakeasyVersion: 1.798.0
-  generationVersion: 2.938.0
-  releaseVersion: 0.3.0
-  configChecksum: dffc7ba79087c05577f53538d528ed26
+  speakeasyVersion: 1.800.0
+  generationVersion: 2.943.0
+  releaseVersion: 0.3.1
+  configChecksum: 4109642b725438bd0e3e023be1bcb4a7
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded_v_2026_06_15
   installationURL: https://github.com/Gusto/gusto-typescript-client
   published: true
 persistentEdits:
-  generation_id: 221cd9cc-0a91-48a9-9119-55a974e9e55f
-  pristine_commit_hash: 6d602c2cb483a2fe55941effcfc9d422e08a21f1
-  pristine_tree_hash: 97bfdda6349b92e56ddf5e09e10a6f315298dc76
+  generation_id: 56e319dc-ab7a-4c49-b488-0d10ad6a92a9
+  pristine_commit_hash: d8d84bc5299e3c57df518b32c20c37a3511f6785
+  pristine_tree_hash: edb1d17f8fd099c1abd1b06b27f27a4b35338ca4
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -42,7 +42,7 @@ features:
     retries: 2.83.2
     sdkHooks: 0.4.0
     serverIDs: 2.81.2
-    unions: 2.86.5
+    unions: 2.86.7
     uploadStreams: 0.1.1
 trackedFiles:
   .devcontainer/README.md:
@@ -2863,8 +2863,8 @@ trackedFiles:
     pristine_git_object: db0ed68c492e1461dab5617f9f799887560c01a5
   docs/models/components/taxpayment.md:
     id: 166c4ab6530d
-    last_write_checksum: sha1:ff00a8c0abdde951ee1df089e13aae798fc76681
-    pristine_git_object: 5ac8e1f933df8c54654ad4331bfec84dbd5651b6
+    last_write_checksum: sha1:09435a7debacaf9407577a87ba864c214c0138e7
+    pristine_git_object: f12579f5fde8734416da652e20e52ee02dad8676
   docs/models/components/taxpaymentlineitem.md:
     id: 0d570b684b57
     last_write_checksum: sha1:e63fc28d9db48b46da86c266fbe32f99b2f1ed7f
@@ -6655,8 +6655,8 @@ trackedFiles:
     pristine_git_object: c1faaf940f81816654cfbdf481792d3f50325cda
   docs/models/operations/putv1companiescompanyidearningtypesearningtypeuuidrequestbody.md:
     id: 861adae4afbf
-    last_write_checksum: sha1:dda3ac583fc0904118dd7ddc2bf88b488be3334f
-    pristine_git_object: d7ec239a58c1714b0fea35a88ce991d69a2851d4
+    last_write_checksum: sha1:5f2ef2e09d39e88265d8dd03394a3b7ebbb84326
+    pristine_git_object: 59068c83884df1c1d7258cda30fe9c2ec5bad501
   docs/models/operations/putv1companiescompanyidearningtypesearningtypeuuidresponse.md:
     id: 8b7bdb2e00f9
     last_write_checksum: sha1:30ddcb67ac8a452d4558ce4d051c449e672e33a1
@@ -7963,12 +7963,12 @@ trackedFiles:
     pristine_git_object: c7089b13c0969a2aeef09ad6225968a029bd3115
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:27420cbc417bb6f29fdd8a61fa69320b0bd15e25
-    pristine_git_object: b143f035c59e38a358c938f75ed259e37f42fde9
+    last_write_checksum: sha1:2577b1113641237382a059a06f9de78be298b1fe
+    pristine_git_object: d3ede14b0bdfa9edd0fb7a60471cc3fbd898e4c6
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:293fd98a94b1782eb1a389b0afabf71d273875c1
-    pristine_git_object: d603ba42ee245036062590bd2cc7a29163046dca
+    last_write_checksum: sha1:8268a44b4b306c3d8a708c368682395323f736a5
+    pristine_git_object: 6e25b6b3fbcb5c69bfe69cc908fae1a7c9590f37
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:3a89ce46214a969ac38e8f08dfbe693a1a2416f7
@@ -9255,8 +9255,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:e7e9791cdbc5e6dea17b40416caa09e081d620b6
-    pristine_git_object: 2b557daf6706e227cf29fe98eac795a7cf0d5d9c
+    last_write_checksum: sha1:8412364806ed08146a1c2285750fc9913b4846c3
+    pristine_git_object: f7c8e02b2a9e2ff93bf8edbe84eb872250098a4c
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -10263,8 +10263,8 @@ trackedFiles:
     pristine_git_object: 341720f096500fca93c2ed159159bbfdbea14d81
   src/models/components/taxpayment.ts:
     id: d1325077d837
-    last_write_checksum: sha1:ebb4d64a3abf1433442d903ef5d88eec0bc9f9d7
-    pristine_git_object: 7f4c55909e6861b228bb7fa67b48fed4cbd61541
+    last_write_checksum: sha1:9412050edbefaed7d5c0c92d7dda0b24411c4c62
+    pristine_git_object: b7c59b5fe9ef48d1cd94e39ac773e9d5677a8144
   src/models/components/taxpaymentlineitem.ts:
     id: 71c3f55feda7
     last_write_checksum: sha1:87469a2b648c83da900094e8559e5c86f16666e7
@@ -11415,8 +11415,8 @@ trackedFiles:
     pristine_git_object: b530da570ac2521e5efced08401ef0fb230d4067
   src/models/operations/putv1companiescompanyidearningtypesearningtypeuuid.ts:
     id: 4727c62444d9
-    last_write_checksum: sha1:d15e3a63f73c5add00fc61bb3e9df6f8b1cbbf50
-    pristine_git_object: 17eb3d23b4f77cfefa27037cb90a154ceced0a2c
+    last_write_checksum: sha1:3dafd568936be0928a11d5c8fe5bfbe018214cc9
+    pristine_git_object: 0f73c7af9a96b83e600ec0ba8e4e6b4b88f9736a
   src/models/operations/putv1companiescompanyidfederaltaxdetails.ts:
     id: 17ded9c6ece0
     last_write_checksum: sha1:f75721ad390203dada70941751cda56f65283836
@@ -18170,4 +18170,7 @@ examples:
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `gustoembedded.historicalEmployees.update()`:  `response.jobs[].currentCompensationUuid` **Changed** (Breaking ⚠️)\n* `gustoembedded.employees.list()`:  `response.[].jobs[].currentCompensationUuid` **Changed** (Breaking ⚠️)\n* `gustoembedded.jobsAndCompensations.getJobs()`:  `response.[].currentCompensationUuid` **Changed** (Breaking ⚠️)\n* `gustoembedded.jobsAndCompensations.createJob()`:  `response.currentCompensationUuid` **Changed** (Breaking ⚠️)\n* `gustoembedded.taxPayments.getTaxPayment()`:  `response` **Changed** (Breaking ⚠️)\n* `gustoembedded.taxPayments.getTaxPayments()`: \n  *  `request.payrollUuids` **Added**\n  *  `response.[]` **Changed** (Breaking ⚠️)\n* `gustoembedded.payrolls.update()`: \n  *  `request.payrollUpdate.employeeCompensations[]` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `errors[]` **Changed** (Breaking ⚠️)\n* `gustoembedded.employees.get()`:  `response.jobs[].currentCompensationUuid` **Changed** (Breaking ⚠️)\n* `gustoembedded.employees.update()`:  `response.jobs[].currentCompensationUuid` **Changed** (Breaking ⚠️)\n* `gustoembedded.jobsAndCompensations.getJob()`:  `response.currentCompensationUuid` **Changed** (Breaking ⚠️)\n* `gustoembedded.employees.create()`:  `response.jobs[].currentCompensationUuid` **Changed** (Breaking ⚠️)\n* `gustoembedded.employees.createHistorical()`:  `response.jobs[].currentCompensationUuid` **Changed** (Breaking ⚠️)\n* `gustoembedded.jobsAndCompensations.update()`:  `response.currentCompensationUuid` **Changed** (Breaking ⚠️)\n* `gustoembedded.payrolls.list()`:  `response.[].payPeriod` **Changed** (Breaking ⚠️)\n* `gustoembedded.payrolls.get()`:  `response` **Changed** (Breaking ⚠️)\n* `gustoembedded.payrolls.createOffCycle()`:  `response` **Changed** (Breaking ⚠️)\n* `gustoembedded.payrolls.cancel()`:  `response.payPeriod` **Changed** (Breaking ⚠️)\n* `gustoembedded.payrolls.prepare()`:  `response` **Changed** (Breaking ⚠️)\n* `gustoembedded.paySchedules.get()`:  `response.workweekStartDay` **Added**\n* `gustoembedded.paySchedules.getAll()`:  `response.[].workweekStartDay` **Added**\n* `gustoembedded.paySchedules.create()`: \n  *  `request.payScheduleCreateRequest.workweekStartDay` **Added**\n  *  `response.workweekStartDay` **Added**\n* `gustoembedded.earningTypes.update()`: \n  *  `request.requestBody` **Changed**\n  *  `response` **Changed**\n* `gustoembedded.paySchedules.update()`: \n  *  `request.payScheduleUpdateRequest.workweekStartDay` **Added**\n  *  `response.workweekStartDay` **Added**\n* `gustoembedded.earningTypes.create()`: \n  *  `request.requestBody` **Changed**\n  *  `response` **Changed**\n* `gustoembedded.earningTypes.list()`:  `response.default[]` **Changed**\n"
+releaseNotes: |
+  ## Typescript SDK Changes:
+  * `gustoembedded.taxPayments.getTaxPayments()`:  `response.[]` **Changed** (Breaking ⚠️)
+  * `gustoembedded.taxPayments.getTaxPayment()`:  `response` **Changed** (Breaking ⚠️)
