@@ -26,13 +26,13 @@ export type TaxPayment = {
    */
   companyUuid: string;
   /**
-   * The name of the tax agency this payment is submitted to
+   * The name of the tax agency this payment is submitted to. Null for legacy tax payments whose agent has no reference-data agency.
    */
-  agencyName: string;
+  agencyName: string | null;
   /**
-   * The tax jurisdiction this payment is for. A two-letter state code, or US for federal.
+   * The tax jurisdiction this payment is for. A two-letter state code, or US for federal. Null for legacy tax payments whose agent has no reference-data agency.
    */
-  jurisdiction: string;
+  jurisdiction: string | null;
   /**
    * The start date of the period this payment covers. Null for legacy tax payments where the period start was never recorded.
    */
@@ -71,8 +71,8 @@ export const TaxPayment$inboundSchema: z.ZodType<
 > = z.object({
   uuid: z.string(),
   company_uuid: z.string(),
-  agency_name: z.string(),
-  jurisdiction: z.string(),
+  agency_name: z.nullable(z.string()),
+  jurisdiction: z.nullable(z.string()),
   period_start: z.nullable(z.string().transform(v => new RFCDate(v))),
   period_end: z.string().transform(v => new RFCDate(v)),
   due_date: z.nullable(z.string().transform(v => new RFCDate(v))),

@@ -42,7 +42,7 @@ export type PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody = {
    */
   category?: string | undefined;
   /**
-   * Whether earnings of this type are included in overtime pay calculations. Set at creation and immutable afterward — submitting a value that differs from the current one returns a 422. Submitting the current value (e.g. when echoing back the full resource) is allowed.
+   * Whether earnings of this type are included in overtime pay calculations. Editable only when the category is `Other`; otherwise immutable — submitting a value that differs from the current one returns a 422. Submitting the current value (e.g. when echoing back the full resource) is allowed.
    */
   includedInOvertimePay?: boolean | undefined;
 };
