@@ -539,11 +539,6 @@ run();
 * [getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements](docs/sdks/payrolls/README.md#getv1companiescompanyidpayrollsidpartnerdisbursements) - Get partner disbursements for a payroll
 * [patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements](docs/sdks/payrolls/README.md#patchv1companiescompanyidpayrollsidpartnerdisbursements) - Update partner disbursements for a payroll
 * [getApprovedReversals](docs/sdks/payrolls/README.md#getapprovedreversals) - Get approved payroll reversals
-* [get](docs/sdks/payrolls/README.md#get) - Get a single payroll
-* [update](docs/sdks/payrolls/README.md#update) - Update a payroll by ID
-* [delete](docs/sdks/payrolls/README.md#delete) - Delete a payroll
-* [list](docs/sdks/payrolls/README.md#list) - Get all payrolls for a company
-* [createOffCycle](docs/sdks/payrolls/README.md#createoffcycle) - Create an off-cycle payroll
 * [getReceipt](docs/sdks/payrolls/README.md#getreceipt) - Get a single payroll receipt
 * [cancel](docs/sdks/payrolls/README.md#cancel) - Cancel a payroll
 * [prepare](docs/sdks/payrolls/README.md#prepare) - Prepare a payroll for update
@@ -552,6 +547,11 @@ run();
 * [skip](docs/sdks/payrolls/README.md#skip) - Skip a payroll
 * [submit](docs/sdks/payrolls/README.md#submit) - Submit payroll
 * [calculateGrossUp](docs/sdks/payrolls/README.md#calculategrossup) - Calculate gross up for a payroll
+* [get](docs/sdks/payrolls/README.md#get) - Get a single payroll
+* [update](docs/sdks/payrolls/README.md#update) - Update a payroll by ID
+* [delete](docs/sdks/payrolls/README.md#delete) - Delete a payroll
+* [list](docs/sdks/payrolls/README.md#list) - Get all payrolls for a company
+* [createOffCycle](docs/sdks/payrolls/README.md#createoffcycle) - Create an off-cycle payroll
 
 ### [PaySchedules](docs/sdks/payschedules/README.md)
 

@@ -5,7 +5,7 @@ A payroll that has been transitioned back to unprocessed state after cancellatio
 ## Example Usage
 
 ```typescript
-import { UnprocessedPayroll } from "@gusto/embedded-api-v-2026-06-15/models/components/payrollshow.js";
+import { UnprocessedPayroll } from "@gusto/embedded-api-v-2026-06-15/models/components/unprocessedpayroll.js";
 
 let value: UnprocessedPayroll = {};
 ```

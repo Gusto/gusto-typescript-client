@@ -5,7 +5,7 @@ An unprocessed payroll with employee compensations.
 ## Example Usage
 
 ```typescript
-import { PayrollUnprocessed } from "@gusto/embedded-api-v-2026-02-01/models/components/payrollshow.js";
+import { PayrollUnprocessed } from "@gusto/embedded-api-v-2026-02-01/models/components/unprocessedpayroll.js";
 
 let value: PayrollUnprocessed = {};
 ```

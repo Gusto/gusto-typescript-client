@@ -12,14 +12,14 @@ import {
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  PayrollPrepared,
-  PayrollPrepared$inboundSchema,
-} from "../components/payrollshow.js";
-import {
   PayrollUpdate,
   PayrollUpdate$Outbound,
   PayrollUpdate$outboundSchema,
 } from "../components/payrollupdate.js";
+import {
+  PayrollPrepared,
+  PayrollPrepared$inboundSchema,
+} from "../components/unprocessedpayroll.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**

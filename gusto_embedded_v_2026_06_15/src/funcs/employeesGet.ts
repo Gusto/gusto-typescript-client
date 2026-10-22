@@ -189,7 +189,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, GetV1EmployeesResponse$inboundSchema, { key: "Employee" }),
+    M.json(200, GetV1EmployeesResponse$inboundSchema, { key: "Employee-Show" }),
     M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

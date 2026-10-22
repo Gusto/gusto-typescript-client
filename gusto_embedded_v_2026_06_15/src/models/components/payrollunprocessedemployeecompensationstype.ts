@@ -128,6 +128,12 @@ export type PayrollUnprocessedEmployeeCompensationsTypePaidTimeOff = {
    * The outstanding hours paid upon termination. This field is only applicable for termination payrolls.
    */
   finalPayoutUnusedHoursInput?: string | null | undefined;
+  /**
+   * Total hours of approved time off requests overlapping this pay period for this time-off policy. Only populated on unprocessed (draft) payrolls; absent on processed payrolls. Read-only.
+   *
+   * @remarks
+   */
+  approvedRequestHours?: string | null | undefined;
 };
 
 export type PayrollUnprocessedEmployeeCompensationsTypeReimbursements = {
@@ -294,7 +300,7 @@ export type PayrollUnprocessedEmployeeCompensationsType = {
    */
   lastName?: string | null | undefined;
   /**
-   * The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages + cash tips + payroll tips + any other additional earnings, excluding imputed income.
+   * The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages + cash tips + payroll tips + any other additional earnings + `pay_adjustments`, excluding imputed income.
    */
   grossPay?: string | null | undefined;
   /**
@@ -515,9 +521,11 @@ export const PayrollUnprocessedEmployeeCompensationsTypePaidTimeOff$inboundSchem
     hours: z.string().optional(),
     amount: z.nullable(z.string()).optional(),
     final_payout_unused_hours_input: z.nullable(z.string()).optional(),
+    approved_request_hours: z.nullable(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "final_payout_unused_hours_input": "finalPayoutUnusedHoursInput",
+      "approved_request_hours": "approvedRequestHours",
     });
   });
 

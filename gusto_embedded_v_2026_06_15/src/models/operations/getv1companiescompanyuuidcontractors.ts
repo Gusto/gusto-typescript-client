@@ -8,9 +8,9 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
-  Contractor,
-  Contractor$inboundSchema,
-} from "../components/contractor.js";
+  ContractorShow,
+  ContractorShow$inboundSchema,
+} from "../components/contractorshow.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
@@ -93,7 +93,7 @@ export type GetV1CompaniesCompanyUuidContractorsResponse = {
   /**
    * Successful
    */
-  contractors?: Array<Contractor> | undefined;
+  showContractors?: Array<ContractorShow> | undefined;
 };
 
 /** @internal */
@@ -175,11 +175,11 @@ export const GetV1CompaniesCompanyUuidContractorsResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    Contractors: z.array(Contractor$inboundSchema).optional(),
+    "Show-Contractors": z.array(ContractorShow$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Contractors": "contractors",
+      "Show-Contractors": "showContractors",
     });
   });
 

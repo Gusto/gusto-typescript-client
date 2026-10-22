@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PayScheduleWorkweekStartDay } from "@gusto/embedded-api/models/components/payscheduleshow.js";
+import { PayScheduleWorkweekStartDay } from "@gusto/embedded-api/models/components/payschedulelistitem.js";
 
 let value: PayScheduleWorkweekStartDay = "Saturday";
 ```

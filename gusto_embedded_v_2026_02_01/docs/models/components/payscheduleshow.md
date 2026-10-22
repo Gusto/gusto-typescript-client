@@ -8,7 +8,7 @@ For API version 2025-11-15 and later, responses use `auto_payroll`; earlier vers
 ## Example Usage
 
 ```typescript
-import { PayScheduleShow } from "@gusto/embedded-api-v-2026-02-01/models/components/payscheduleshow.js";
+import { PayScheduleShow } from "@gusto/embedded-api-v-2026-02-01/models/components/payschedulelistitem.js";
 
 let value: PayScheduleShow = {
   uuid: "bed031e5-a840-46f5-ad2a-849171f45704",
