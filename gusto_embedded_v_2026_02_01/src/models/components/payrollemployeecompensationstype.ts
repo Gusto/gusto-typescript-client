@@ -118,6 +118,12 @@ export type PayrollEmployeeCompensationsTypePaidTimeOff = {
    * The outstanding hours paid upon termination. This field is only applicable for termination payrolls.
    */
   finalPayoutUnusedHoursInput?: string | null | undefined;
+  /**
+   * Total hours of approved time off requests overlapping this pay period for this time-off policy. Only populated on unprocessed (draft) payrolls; absent on processed payrolls. Read-only.
+   *
+   * @remarks
+   */
+  approvedRequestHours?: string | null | undefined;
 };
 
 export type Reimbursements = {
@@ -153,16 +159,17 @@ export type OverrideType = ClosedEnum<typeof OverrideType>;
 /**
  * How to interpret the amount.
  */
-export const PayrollEmployeeCompensationsTypeAmountType = {
+export const PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType = {
   Fixed: "fixed",
   Percent: "percent",
 } as const;
 /**
  * How to interpret the amount.
  */
-export type PayrollEmployeeCompensationsTypeAmountType = ClosedEnum<
-  typeof PayrollEmployeeCompensationsTypeAmountType
->;
+export type PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType =
+  ClosedEnum<
+    typeof PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType
+  >;
 
 /**
  * Federal one-time custom withholding override applied to this payroll.
@@ -179,7 +186,9 @@ export type Federal = {
   /**
    * How to interpret the amount.
    */
-  amountType?: PayrollEmployeeCompensationsTypeAmountType | undefined;
+  amountType?:
+    | PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType
+    | undefined;
 };
 
 /**
@@ -198,17 +207,16 @@ export type PayrollEmployeeCompensationsTypeOverrideType = ClosedEnum<
 /**
  * How to interpret the amount.
  */
-export const PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType = {
+export const PayrollEmployeeCompensationsTypeAmountType = {
   Fixed: "fixed",
   Percent: "percent",
 } as const;
 /**
  * How to interpret the amount.
  */
-export type PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType =
-  ClosedEnum<
-    typeof PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType
-  >;
+export type PayrollEmployeeCompensationsTypeAmountType = ClosedEnum<
+  typeof PayrollEmployeeCompensationsTypeAmountType
+>;
 
 export type State = {
   /**
@@ -226,9 +234,7 @@ export type State = {
   /**
    * How to interpret the amount.
    */
-  amountType?:
-    | PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType
-    | undefined;
+  amountType?: PayrollEmployeeCompensationsTypeAmountType | undefined;
 };
 
 /**
@@ -306,7 +312,7 @@ export type PayrollEmployeeCompensationsType = {
    */
   lastName?: string | null | undefined;
   /**
-   * The employee's gross pay, equal to regular wages + cash tips + payroll tips + any other additional earnings, excluding imputed income.
+   * The employee's gross pay, equal to regular wages + cash tips + payroll tips + any other additional earnings + `pay_adjustments`, excluding imputed income.
    */
   grossPay?: number | null | undefined;
   /**
@@ -492,9 +498,11 @@ export const PayrollEmployeeCompensationsTypePaidTimeOff$inboundSchema:
     name: z.string().optional(),
     hours: z.string().optional(),
     final_payout_unused_hours_input: z.nullable(z.string()).optional(),
+    approved_request_hours: z.nullable(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "final_payout_unused_hours_input": "finalPayoutUnusedHoursInput",
+      "approved_request_hours": "approvedRequestHours",
     });
   });
 
@@ -541,17 +549,21 @@ export const OverrideType$inboundSchema: z.ZodNativeEnum<typeof OverrideType> =
   z.nativeEnum(OverrideType);
 
 /** @internal */
-export const PayrollEmployeeCompensationsTypeAmountType$inboundSchema:
-  z.ZodNativeEnum<typeof PayrollEmployeeCompensationsTypeAmountType> = z
-    .nativeEnum(PayrollEmployeeCompensationsTypeAmountType);
+export const PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType
+  > = z.nativeEnum(
+    PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType,
+  );
 
 /** @internal */
 export const Federal$inboundSchema: z.ZodType<Federal, z.ZodTypeDef, unknown> =
   z.object({
     override_type: OverrideType$inboundSchema.optional(),
     amount: z.string().optional(),
-    amount_type: PayrollEmployeeCompensationsTypeAmountType$inboundSchema
-      .optional(),
+    amount_type:
+      PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType$inboundSchema
+        .optional(),
   }).transform((v) => {
     return remap$(v, {
       "override_type": "overrideType",
@@ -575,12 +587,9 @@ export const PayrollEmployeeCompensationsTypeOverrideType$inboundSchema:
     .nativeEnum(PayrollEmployeeCompensationsTypeOverrideType);
 
 /** @internal */
-export const PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType
-  > = z.nativeEnum(
-    PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType,
-  );
+export const PayrollEmployeeCompensationsTypeAmountType$inboundSchema:
+  z.ZodNativeEnum<typeof PayrollEmployeeCompensationsTypeAmountType> = z
+    .nativeEnum(PayrollEmployeeCompensationsTypeAmountType);
 
 /** @internal */
 export const State$inboundSchema: z.ZodType<State, z.ZodTypeDef, unknown> = z
@@ -589,9 +598,8 @@ export const State$inboundSchema: z.ZodType<State, z.ZodTypeDef, unknown> = z
     override_type: PayrollEmployeeCompensationsTypeOverrideType$inboundSchema
       .optional(),
     amount: z.string().optional(),
-    amount_type:
-      PayrollEmployeeCompensationsTypeCustomWithholdingsAmountType$inboundSchema
-        .optional(),
+    amount_type: PayrollEmployeeCompensationsTypeAmountType$inboundSchema
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "employee_state_field_uuid": "employeeStateFieldUuid",

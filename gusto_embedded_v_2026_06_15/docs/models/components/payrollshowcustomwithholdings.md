@@ -8,7 +8,7 @@ array when no state one-time overrides are set.
 ## Example Usage
 
 ```typescript
-import { PayrollShowCustomWithholdings } from "@gusto/embedded-api-v-2026-06-15/models/components/payrollshow.js";
+import { PayrollShowCustomWithholdings } from "@gusto/embedded-api-v-2026-06-15/models/components/unprocessedpayroll.js";
 
 let value: PayrollShowCustomWithholdings = {};
 ```

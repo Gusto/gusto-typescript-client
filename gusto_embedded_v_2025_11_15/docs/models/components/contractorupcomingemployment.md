@@ -1,0 +1,18 @@
+# ContractorUpcomingEmployment
+
+The contractor's upcoming employment details, if a rehire is scheduled.
+
+## Example Usage
+
+```typescript
+import { ContractorUpcomingEmployment } from "@gusto/embedded-api-v-2025-11-15/models/components/contractor.js";
+
+let value: ContractorUpcomingEmployment = {};
+```
+
+## Fields
+
+| Field                                        | Type                                         | Required                                     | Description                                  |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| `startDate`                                  | *string*                                     | :heavy_minus_sign:                           | The start date of the upcoming employment.   |
+| `setupStatus`                                | *string*                                     | :heavy_minus_sign:                           | The setup status of the upcoming employment. |

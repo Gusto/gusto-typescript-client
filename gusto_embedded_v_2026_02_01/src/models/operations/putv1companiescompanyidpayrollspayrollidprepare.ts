@@ -14,7 +14,7 @@ import {
 import {
   PayrollPrepared,
   PayrollPrepared$inboundSchema,
-} from "../components/payrollshow.js";
+} from "../components/unprocessedpayroll.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**

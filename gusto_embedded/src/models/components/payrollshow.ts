@@ -197,6 +197,12 @@ export type PayrollShowPaidTimeOff = {
    * The outstanding hours paid upon termination. This field is only applicable for termination payrolls.
    */
   finalPayoutUnusedHoursInput?: string | null | undefined;
+  /**
+   * Total hours of approved time off requests overlapping this pay period for this time-off policy. Only populated on unprocessed (draft) payrolls; absent on processed payrolls. Read-only.
+   *
+   * @remarks
+   */
+  approvedRequestHours?: string | null | undefined;
 };
 
 export type PayrollShowReimbursements = {
@@ -380,7 +386,7 @@ export type PayrollShowBenefits = {
 
 export type PayAdjustments = {
   /**
-   * The name of the pay adjustment.
+   * The compensation type the adjustment applies to (e.g. `Overtime`, `Double Overtime`).
    */
   name?: string | undefined;
   /**
@@ -411,7 +417,7 @@ export type EmployeeCompensations = {
    */
   lastName?: string | null | undefined;
   /**
-   * The employee's gross pay, equal to regular wages + cash tips + payroll tips + any other additional earnings, excluding imputed income.
+   * The employee's gross pay, equal to regular wages + cash tips + payroll tips + any other additional earnings + `pay_adjustments`, excluding imputed income.
    */
   grossPay?: number | null | undefined;
   /**
@@ -471,11 +477,15 @@ export type EmployeeCompensations = {
    */
   benefits?: Array<PayrollShowBenefits> | undefined;
   /**
-   * Adjustments applied when calculating the employee's regular rate of pay for
+   * Overtime adjustments for workweeks that have earnings on more than one payroll.
    *
    * @remarks
-   * overtime purposes (e.g. a discretionary bonus allocated across workweeks),
-   * on calculated or processed payrolls.
+   * When earnings on one payroll change the regular rate of pay for a workweek whose
+   * overtime is paid on another payroll, the resulting difference in overtime pay is
+   * reported here. For example, a bonus on this payroll for a workweek that had
+   * overtime paid on an earlier payroll. Adjustment amounts are included in
+   * `gross_pay` but are not repeated in `hourly_compensations`. Only present on
+   * calculated or processed payrolls.
    */
   payAdjustments?: Array<PayAdjustments> | undefined;
   additionalProperties?: { [k: string]: any } | undefined;
@@ -1115,9 +1125,11 @@ export const PayrollShowPaidTimeOff$inboundSchema: z.ZodType<
   name: z.string().optional(),
   hours: z.string().optional(),
   final_payout_unused_hours_input: z.nullable(z.string()).optional(),
+  approved_request_hours: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "final_payout_unused_hours_input": "finalPayoutUnusedHoursInput",
+    "approved_request_hours": "approvedRequestHours",
   });
 });
 

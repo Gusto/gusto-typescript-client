@@ -225,130 +225,6 @@ export class Payrolls extends ClientSDK {
   }
 
   /**
-   * Get a single payroll
-   *
-   * @remarks
-   * Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals.
-   *
-   * Results are paginated, with a maximum page size of 100 employee_compensations.
-   *
-   * Notes:
-   * * Hour and dollar amounts are returned as string representations of numeric decimals.
-   * * Hours are represented to the thousands place; dollar amounts are represented to the cent.
-   * * Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts) or "0.000" (for hours ).
-   * * When include parameter with benefits value is passed, employee_benefits:read scope is required to return benefits
-   *   * Benefits containing PHI are only visible with the `employee_benefits:read:phi` scope
-   *
-   * scope: `payrolls:read`
-   */
-  async get(
-    request: GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyIdPayrollsPayrollIdResponse> {
-    return unwrapAsync(payrollsGet(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update a payroll by ID
-   *
-   * @remarks
-   * This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.  You can think of the **unprocessed**
-   * payroll object as a template of fields that you can update.  You cannot modify the structure of the payroll object through this endpoint, only values
-   * of the fields included in the payroll.  If you do not include specific employee compensations, fixed/hourly compensations, or deductions in your request body, they
-   * will not be removed from the payroll. A maximum of 100 employee_compensations can be updated at a time. Only the employee compensation objects that were
-   * inputted will be returned.
-   *
-   * scope: `payrolls:write`
-   */
-  async update(
-    request: PutV1CompaniesCompanyIdPayrollsRequest,
-    options?: RequestOptions,
-  ): Promise<PutV1CompaniesCompanyIdPayrollsResponse> {
-    return unwrapAsync(payrollsUpdate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete a payroll
-   *
-   * @remarks
-   * This endpoint allows you to delete an **unprocessed** payroll.
-   *
-   * By default the payroll and associated data is deleted synchronously. To request an asynchronous delete, use the `async=true` query parameter. In both cases validation of ability to delete will be performed and an Unprocessable Entity error will be returned if the payroll is not able to be deleted. A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for asynchronous deletion, `202/Accepted` will be returned.
-   *
-   * scope: `payrolls:run`
-   */
-  async delete(
-    request: DeleteV1CompaniesCompanyIdPayrollsRequest,
-    options?: RequestOptions,
-  ): Promise<DeleteV1CompaniesCompanyIdPayrollsResponse> {
-    return unwrapAsync(payrollsDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get all payrolls for a company
-   *
-   * @remarks
-   * Returns a list of payrolls for a company. You can change the payrolls returned by updating the processing_status, payroll_types, start_date, & end_date params.
-   *
-   * By default, will return processed, regular payrolls for the past 6 months.
-   *
-   * Notes:
-   * * Dollar amounts are returned as string representations of numeric decimals, are represented to the cent.
-   * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1 year apart.
-   * * Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
-   *
-   * scope: `payrolls:read`
-   */
-  async list(
-    request: GetV1CompaniesCompanyIdPayrollsRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyIdPayrollsResponse> {
-    return unwrapAsync(payrollsList(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create an off-cycle payroll
-   *
-   * @remarks
-   * Creates a new, unprocessed, off-cycle payroll.
-   *
-   * ## `off_cycle_reason`
-   * By default:
-   * - External benefits and deductions will be included when the `off_cycle_reason` is set to `Correction`.
-   * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
-   *
-   * These elections can be overridden with the `skip_regular_deductions` boolean.
-   *
-   * scope: `payrolls:run`
-   */
-  async createOffCycle(
-    request: PostV1CompaniesCompanyIdPayrollsRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1CompaniesCompanyIdPayrollsResponse> {
-    return unwrapAsync(payrollsCreateOffCycle(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get a single payroll receipt
    *
    * @remarks
@@ -526,6 +402,130 @@ export class Payrolls extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PostPayrollsGrossUpPayrollUuidResponse> {
     return unwrapAsync(payrollsCalculateGrossUp(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get a single payroll
+   *
+   * @remarks
+   * Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals.
+   *
+   * Results are paginated, with a maximum page size of 100 employee_compensations.
+   *
+   * Notes:
+   * * Hour and dollar amounts are returned as string representations of numeric decimals.
+   * * Hours are represented to the thousands place; dollar amounts are represented to the cent.
+   * * Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts) or "0.000" (for hours ).
+   * * When include parameter with benefits value is passed, employee_benefits:read scope is required to return benefits
+   *   * Benefits containing PHI are only visible with the `employee_benefits:read:phi` scope
+   *
+   * scope: `payrolls:read`
+   */
+  async get(
+    request: GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyIdPayrollsPayrollIdResponse> {
+    return unwrapAsync(payrollsGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update a payroll by ID
+   *
+   * @remarks
+   * This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.  You can think of the **unprocessed**
+   * payroll object as a template of fields that you can update.  You cannot modify the structure of the payroll object through this endpoint, only values
+   * of the fields included in the payroll.  If you do not include specific employee compensations, fixed/hourly compensations, or deductions in your request body, they
+   * will not be removed from the payroll. A maximum of 100 employee_compensations can be updated at a time. Only the employee compensation objects that were
+   * inputted will be returned.
+   *
+   * scope: `payrolls:write`
+   */
+  async update(
+    request: PutV1CompaniesCompanyIdPayrollsRequest,
+    options?: RequestOptions,
+  ): Promise<PutV1CompaniesCompanyIdPayrollsResponse> {
+    return unwrapAsync(payrollsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a payroll
+   *
+   * @remarks
+   * This endpoint allows you to delete an **unprocessed** payroll.
+   *
+   * By default the payroll and associated data is deleted synchronously. To request an asynchronous delete, use the `async=true` query parameter. In both cases validation of ability to delete will be performed and an Unprocessable Entity error will be returned if the payroll is not able to be deleted. A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for asynchronous deletion, `202/Accepted` will be returned.
+   *
+   * scope: `payrolls:run`
+   */
+  async delete(
+    request: DeleteV1CompaniesCompanyIdPayrollsRequest,
+    options?: RequestOptions,
+  ): Promise<DeleteV1CompaniesCompanyIdPayrollsResponse> {
+    return unwrapAsync(payrollsDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get all payrolls for a company
+   *
+   * @remarks
+   * Returns a list of payrolls for a company. You can change the payrolls returned by updating the processing_status, payroll_types, start_date, & end_date params.
+   *
+   * By default, will return processed, regular payrolls for the past 6 months.
+   *
+   * Notes:
+   * * Dollar amounts are returned as string representations of numeric decimals, are represented to the cent.
+   * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1 year apart.
+   * * Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
+   *
+   * scope: `payrolls:read`
+   */
+  async list(
+    request: GetV1CompaniesCompanyIdPayrollsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyIdPayrollsResponse> {
+    return unwrapAsync(payrollsList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create an off-cycle payroll
+   *
+   * @remarks
+   * Creates a new, unprocessed, off-cycle payroll.
+   *
+   * ## `off_cycle_reason`
+   * By default:
+   * - External benefits and deductions will be included when the `off_cycle_reason` is set to `Correction`.
+   * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
+   *
+   * These elections can be overridden with the `skip_regular_deductions` boolean.
+   *
+   * scope: `payrolls:run`
+   */
+  async createOffCycle(
+    request: PostV1CompaniesCompanyIdPayrollsRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1CompaniesCompanyIdPayrollsResponse> {
+    return unwrapAsync(payrollsCreateOffCycle(
       this,
       request,
       options,

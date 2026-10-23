@@ -11,7 +11,10 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import { Payroll, Payroll$inboundSchema } from "../components/payrollshow.js";
+import {
+  Payroll,
+  Payroll$inboundSchema,
+} from "../components/unprocessedpayroll.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**

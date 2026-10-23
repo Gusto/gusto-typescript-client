@@ -5,7 +5,7 @@ The contractor's upcoming employment details, if a rehire is scheduled.
 ## Example Usage
 
 ```typescript
-import { UpcomingEmployment } from "@gusto/embedded-api-v-2026-02-01/models/components/contractor.js";
+import { UpcomingEmployment } from "@gusto/embedded-api-v-2026-02-01/models/components/contractorshow.js";
 
 let value: UpcomingEmployment = {};
 ```

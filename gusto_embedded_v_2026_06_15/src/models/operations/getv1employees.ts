@@ -7,7 +7,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import { Employee, Employee$inboundSchema } from "../components/employee.js";
+import {
+  EmployeeShow,
+  EmployeeShow$inboundSchema,
+} from "../components/employeeshow.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
@@ -59,7 +62,7 @@ export type GetV1EmployeesResponse = {
   /**
    * successful
    */
-  employee?: Employee | undefined;
+  employeeShow?: EmployeeShow | undefined;
 };
 
 /** @internal */
@@ -113,11 +116,11 @@ export const GetV1EmployeesResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  Employee: Employee$inboundSchema.optional(),
+  "Employee-Show": EmployeeShow$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
-    "Employee": "employee",
+    "Employee-Show": "employeeShow",
   });
 });
 

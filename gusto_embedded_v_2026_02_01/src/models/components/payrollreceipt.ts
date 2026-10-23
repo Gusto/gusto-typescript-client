@@ -60,7 +60,7 @@ export type PayrollReceiptPaymentMethod = ClosedEnum<
   typeof PayrollReceiptPaymentMethod
 >;
 
-export type PayrollReceiptEmployeeCompensations = {
+export type EmployeeCompensations = {
   /**
    * The UUID of the employee.
    */
@@ -175,9 +175,7 @@ export type PayrollReceipt = {
   /**
    * An array of employee compensations and withholdings for this payroll
    */
-  employeeCompensations?:
-    | Array<PayrollReceiptEmployeeCompensations>
-    | undefined;
+  employeeCompensations?: Array<EmployeeCompensations> | undefined;
   /**
    * The licensed payroll processor
    */
@@ -238,8 +236,8 @@ export const PayrollReceiptPaymentMethod$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(PayrollReceiptPaymentMethod);
 
 /** @internal */
-export const PayrollReceiptEmployeeCompensations$inboundSchema: z.ZodType<
-  PayrollReceiptEmployeeCompensations,
+export const EmployeeCompensations$inboundSchema: z.ZodType<
+  EmployeeCompensations,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -266,14 +264,13 @@ export const PayrollReceiptEmployeeCompensations$inboundSchema: z.ZodType<
   });
 });
 
-export function payrollReceiptEmployeeCompensationsFromJSON(
+export function employeeCompensationsFromJSON(
   jsonString: string,
-): SafeParseResult<PayrollReceiptEmployeeCompensations, SDKValidationError> {
+): SafeParseResult<EmployeeCompensations, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      PayrollReceiptEmployeeCompensations$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayrollReceiptEmployeeCompensations' from JSON`,
+    (x) => EmployeeCompensations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EmployeeCompensations' from JSON`,
   );
 }
 
@@ -325,7 +322,7 @@ export const PayrollReceipt$inboundSchema: z.ZodType<
   totals: z.lazy(() => PayrollReceiptTotals$inboundSchema).optional(),
   taxes: z.array(z.lazy(() => Taxes$inboundSchema)).optional(),
   employee_compensations: z.array(
-    z.lazy(() => PayrollReceiptEmployeeCompensations$inboundSchema),
+    z.lazy(() => EmployeeCompensations$inboundSchema),
   ).optional(),
   licensee: z.lazy(() => PayrollReceiptLicensee$inboundSchema).optional(),
 }).transform((v) => {

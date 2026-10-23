@@ -5,7 +5,7 @@ How to interpret the amount.
 ## Example Usage
 
 ```typescript
-import { PayrollShowEmployeeCompensationsCustomWithholdingsAmountType } from "@gusto/embedded-api-v-2026-02-01/models/components/payrollshow.js";
+import { PayrollShowEmployeeCompensationsCustomWithholdingsAmountType } from "@gusto/embedded-api-v-2026-02-01/models/components/unprocessedpayroll.js";
 
 let value: PayrollShowEmployeeCompensationsCustomWithholdingsAmountType =
   "percent";

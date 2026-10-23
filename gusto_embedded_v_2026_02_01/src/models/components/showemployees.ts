@@ -124,7 +124,7 @@ export type ShowEmployeesMemberPortalInvitationStatus = {
 };
 
 /**
- * The representation of an employee in Gusto.
+ * An employee, with additional fields that are only ever returned on GET requests gated behind the `include` query parameter.
  */
 export type ShowEmployees = {
   /**
@@ -241,7 +241,14 @@ export type ShowEmployees = {
    * Whether an external partner portal invitation webhook has been sent for this employee. Only included when the include param has the portal_invitations value set.
    */
   partnerPortalInvitationSent?: boolean | null | undefined;
+  /**
+   * The name of the company the employee is associated with. Only included when the include param has the company_name value set.
+   */
+  companyName?: string | undefined;
   currentHomeAddress?: EmployeeHomeAddress | undefined;
+  /**
+   * All of the employee's home addresses, past and present. Only included when the include param has the all_home_addresses value set.
+   */
   allHomeAddresses?: Array<EmployeeHomeAddressHistoryEntry> | undefined;
   additionalProperties?: { [k: string]: any } | undefined;
 };
@@ -381,6 +388,7 @@ export const ShowEmployees$inboundSchema: z.ZodType<
       z.lazy(() => ShowEmployeesMemberPortalInvitationStatus$inboundSchema),
     ).optional(),
     partner_portal_invitation_sent: z.nullable(z.boolean()).optional(),
+    company_name: z.string().optional(),
     current_home_address: EmployeeHomeAddress$inboundSchema.optional(),
     all_home_addresses: z.array(EmployeeHomeAddressHistoryEntry$inboundSchema)
       .optional(),
@@ -413,6 +421,7 @@ export const ShowEmployees$inboundSchema: z.ZodType<
     "applicable_tax_ids": "applicableTaxIds",
     "member_portal_invitation_status": "memberPortalInvitationStatus",
     "partner_portal_invitation_sent": "partnerPortalInvitationSent",
+    "company_name": "companyName",
     "current_home_address": "currentHomeAddress",
     "all_home_addresses": "allHomeAddresses",
   });

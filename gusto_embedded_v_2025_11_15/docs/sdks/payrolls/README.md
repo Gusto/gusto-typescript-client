@@ -10,11 +10,6 @@
 * [getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements](#getv1companiescompanyidpayrollsidpartnerdisbursements) - Get partner disbursements for a payroll
 * [patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements](#patchv1companiescompanyidpayrollsidpartnerdisbursements) - Update partner disbursements for a payroll
 * [getApprovedReversals](#getapprovedreversals) - Get approved payroll reversals
-* [get](#get) - Get a single payroll
-* [update](#update) - Update a payroll by ID
-* [delete](#delete) - Delete a payroll
-* [list](#list) - Get all payrolls for a company
-* [createOffCycle](#createoffcycle) - Create an off-cycle payroll
 * [getReceipt](#getreceipt) - Get a single payroll receipt
 * [cancel](#cancel) - Cancel a payroll
 * [prepare](#prepare) - Prepare a payroll for update
@@ -23,6 +18,11 @@
 * [skip](#skip) - Skip a payroll
 * [submit](#submit) - Submit payroll
 * [calculateGrossUp](#calculategrossup) - Calculate gross up for a payroll
+* [get](#get) - Get a single payroll
+* [update](#update) - Update a payroll by ID
+* [delete](#delete) - Delete a payroll
+* [list](#list) - Get all payrolls for a company
+* [createOffCycle](#createoffcycle) - Create an off-cycle payroll
 
 ## generatePrintableChecks
 
@@ -655,551 +655,6 @@ import {
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.NotFoundErrorObject | 404                        | application/json           |
 | errors.APIError            | 4XX, 5XX                   | \*/\*                      |
-
-## get
-
-Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals.
-
-Results are paginated, with a maximum page size of 100 employee_compensations.
-
-Notes:
-* Hour and dollar amounts are returned as string representations of numeric decimals.
-* Hours are represented to the thousands place; dollar amounts are represented to the cent.
-* Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts) or "0.000" (for hours ).
-* When include parameter with benefits value is passed, employee_benefits:read scope is required to return benefits
-  * Benefits containing PHI are only visible with the `employee_benefits:read:phi` scope
-
-scope: `payrolls:read`
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-payrolls-payroll_id" method="get" path="/v1/companies/{company_id}/payrolls/{payroll_id}" -->
-```typescript
-import { GustoEmbedded } from "@gusto/embedded-api-v-2025-11-15";
-
-const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const result = await gustoEmbedded.payrolls.get({
-    companyId: "<id>",
-    payrollId: "<id>",
-    sortBy: "first_name:asc",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2025-11-15/core.js";
-import { payrollsGet } from "@gusto/embedded-api-v-2025-11-15/funcs/payrollsGet.js";
-
-// Use `GustoEmbeddedCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await payrollsGet(gustoEmbedded, {
-    companyId: "<id>",
-    payrollId: "<id>",
-    sortBy: "first_name:asc",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("payrollsGet failed:", res.error);
-  }
-}
-
-run();
-```
-
-### React hooks and utilities
-
-This method can be used in React components through the following hooks and
-associated utilities.
-
-> Check out [this guide][hook-guide] for information about each of the utilities
-> below and how to get started using React hooks.
-
-[hook-guide]: ../../../REACT_QUERY.md
-
-```tsx
-import {
-  // Query hooks for fetching data.
-  usePayrollsGet,
-  usePayrollsGetSuspense,
-
-  // Utility for prefetching data during server-side rendering and in React
-  // Server Components that will be immediately available to client components
-  // using the hooks.
-  prefetchPayrollsGet,
-  
-  // Utilities to invalidate the query cache for this query in response to
-  // mutations and other user actions.
-  invalidatePayrollsGet,
-  invalidateAllPayrollsGet,
-} from "@gusto/embedded-api-v-2025-11-15/react-query/payrollsGet.js";
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1CompaniesCompanyIdPayrollsPayrollIdRequest](../../models/operations/getv1companiescompanyidpayrollspayrollidrequest.md)                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.GetV1CompaniesCompanyIdPayrollsPayrollIdResponse](../../models/operations/getv1companiescompanyidpayrollspayrollidresponse.md)\>**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.NotFoundErrorObject | 404                        | application/json           |
-| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
-
-## update
-
-This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.  You can think of the **unprocessed**
-payroll object as a template of fields that you can update.  You cannot modify the structure of the payroll object through this endpoint, only values
-of the fields included in the payroll.  If you do not include specific employee compensations, fixed/hourly compensations, or deductions in your request body, they
-will not be removed from the payroll. A maximum of 100 employee_compensations can be updated at a time. Only the employee compensation objects that were
-inputted will be returned.
-
-scope: `payrolls:write`
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_id-payrolls" method="put" path="/v1/companies/{company_id}/payrolls/{payroll_id}" -->
-```typescript
-import { GustoEmbedded } from "@gusto/embedded-api-v-2025-11-15";
-
-const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const result = await gustoEmbedded.payrolls.update({
-    companyId: "<id>",
-    payrollId: "<id>",
-    payrollUpdate: {
-      employeeCompensations: [
-        {},
-      ],
-    },
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2025-11-15/core.js";
-import { payrollsUpdate } from "@gusto/embedded-api-v-2025-11-15/funcs/payrollsUpdate.js";
-
-// Use `GustoEmbeddedCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await payrollsUpdate(gustoEmbedded, {
-    companyId: "<id>",
-    payrollId: "<id>",
-    payrollUpdate: {
-      employeeCompensations: [
-        {},
-      ],
-    },
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("payrollsUpdate failed:", res.error);
-  }
-}
-
-run();
-```
-
-### React hooks and utilities
-
-This method can be used in React components through the following hooks and
-associated utilities.
-
-> Check out [this guide][hook-guide] for information about each of the utilities
-> below and how to get started using React hooks.
-
-[hook-guide]: ../../../REACT_QUERY.md
-
-```tsx
-import {
-  // Mutation hook for triggering the API call.
-  usePayrollsUpdateMutation
-} from "@gusto/embedded-api-v-2025-11-15/react-query/payrollsUpdate.js";
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PutV1CompaniesCompanyIdPayrollsRequest](../../models/operations/putv1companiescompanyidpayrollsrequest.md)                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.PutV1CompaniesCompanyIdPayrollsResponse](../../models/operations/putv1companiescompanyidpayrollsresponse.md)\>**
-
-### Errors
-
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| errors.NotFoundErrorObject      | 404                             | application/json                |
-| errors.ConflictErrorObject      | 409                             | application/json                |
-| errors.UnprocessableEntityError | 422                             | application/json                |
-| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
-
-## delete
-
-This endpoint allows you to delete an **unprocessed** payroll.
-
-By default the payroll and associated data is deleted synchronously. To request an asynchronous delete, use the `async=true` query parameter. In both cases validation of ability to delete will be performed and an Unprocessable Entity error will be returned if the payroll is not able to be deleted. A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for asynchronous deletion, `202/Accepted` will be returned.
-
-scope: `payrolls:run`
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="delete-v1-companies-company_id-payrolls" method="delete" path="/v1/companies/{company_id}/payrolls/{payroll_id}" -->
-```typescript
-import { GustoEmbedded } from "@gusto/embedded-api-v-2025-11-15";
-
-const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const result = await gustoEmbedded.payrolls.delete({
-    companyId: "<id>",
-    payrollId: "<id>",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2025-11-15/core.js";
-import { payrollsDelete } from "@gusto/embedded-api-v-2025-11-15/funcs/payrollsDelete.js";
-
-// Use `GustoEmbeddedCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await payrollsDelete(gustoEmbedded, {
-    companyId: "<id>",
-    payrollId: "<id>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("payrollsDelete failed:", res.error);
-  }
-}
-
-run();
-```
-
-### React hooks and utilities
-
-This method can be used in React components through the following hooks and
-associated utilities.
-
-> Check out [this guide][hook-guide] for information about each of the utilities
-> below and how to get started using React hooks.
-
-[hook-guide]: ../../../REACT_QUERY.md
-
-```tsx
-import {
-  // Mutation hook for triggering the API call.
-  usePayrollsDeleteMutation
-} from "@gusto/embedded-api-v-2025-11-15/react-query/payrollsDelete.js";
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteV1CompaniesCompanyIdPayrollsRequest](../../models/operations/deletev1companiescompanyidpayrollsrequest.md)                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.DeleteV1CompaniesCompanyIdPayrollsResponse](../../models/operations/deletev1companiescompanyidpayrollsresponse.md)\>**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.NotFoundErrorObject | 404                        | application/json           |
-| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
-
-## list
-
-Returns a list of payrolls for a company. You can change the payrolls returned by updating the processing_status, payroll_types, start_date, & end_date params.
-
-By default, will return processed, regular payrolls for the past 6 months.
-
-Notes:
-* Dollar amounts are returned as string representations of numeric decimals, are represented to the cent.
-* end_date can be at most 3 months in the future and start_date and end_date can't be more than 1 year apart.
-* Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
-
-scope: `payrolls:read`
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-payrolls" method="get" path="/v1/companies/{company_id}/payrolls" -->
-```typescript
-import { GustoEmbedded } from "@gusto/embedded-api-v-2025-11-15";
-
-const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const result = await gustoEmbedded.payrolls.list({
-    companyId: "<id>",
-    startDate: "2020-01-31",
-    endDate: "2020-01-31",
-    dateFilterBy: "check_date",
-    sortOrder: "asc",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2025-11-15/core.js";
-import { payrollsList } from "@gusto/embedded-api-v-2025-11-15/funcs/payrollsList.js";
-
-// Use `GustoEmbeddedCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await payrollsList(gustoEmbedded, {
-    companyId: "<id>",
-    startDate: "2020-01-31",
-    endDate: "2020-01-31",
-    dateFilterBy: "check_date",
-    sortOrder: "asc",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("payrollsList failed:", res.error);
-  }
-}
-
-run();
-```
-
-### React hooks and utilities
-
-This method can be used in React components through the following hooks and
-associated utilities.
-
-> Check out [this guide][hook-guide] for information about each of the utilities
-> below and how to get started using React hooks.
-
-[hook-guide]: ../../../REACT_QUERY.md
-
-```tsx
-import {
-  // Query hooks for fetching data.
-  usePayrollsList,
-  usePayrollsListSuspense,
-
-  // Utility for prefetching data during server-side rendering and in React
-  // Server Components that will be immediately available to client components
-  // using the hooks.
-  prefetchPayrollsList,
-  
-  // Utilities to invalidate the query cache for this query in response to
-  // mutations and other user actions.
-  invalidatePayrollsList,
-  invalidateAllPayrollsList,
-} from "@gusto/embedded-api-v-2025-11-15/react-query/payrollsList.js";
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1CompaniesCompanyIdPayrollsRequest](../../models/operations/getv1companiescompanyidpayrollsrequest.md)                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.GetV1CompaniesCompanyIdPayrollsResponse](../../models/operations/getv1companiescompanyidpayrollsresponse.md)\>**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.NotFoundErrorObject | 404                        | application/json           |
-| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
-
-## createOffCycle
-
-Creates a new, unprocessed, off-cycle payroll.
-
-## `off_cycle_reason`
-By default:
-- External benefits and deductions will be included when the `off_cycle_reason` is set to `Correction`.
-- All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
-
-These elections can be overridden with the `skip_regular_deductions` boolean.
-
-scope: `payrolls:run`
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-payrolls" method="post" path="/v1/companies/{company_id}/payrolls" -->
-```typescript
-import { GustoEmbedded } from "@gusto/embedded-api-v-2025-11-15";
-
-const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const result = await gustoEmbedded.payrolls.createOffCycle({
-    companyId: "<id>",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2025-11-15/core.js";
-import { payrollsCreateOffCycle } from "@gusto/embedded-api-v-2025-11-15/funcs/payrollsCreateOffCycle.js";
-
-// Use `GustoEmbeddedCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await payrollsCreateOffCycle(gustoEmbedded, {
-    companyId: "<id>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("payrollsCreateOffCycle failed:", res.error);
-  }
-}
-
-run();
-```
-
-### React hooks and utilities
-
-This method can be used in React components through the following hooks and
-associated utilities.
-
-> Check out [this guide][hook-guide] for information about each of the utilities
-> below and how to get started using React hooks.
-
-[hook-guide]: ../../../REACT_QUERY.md
-
-```tsx
-import {
-  // Mutation hook for triggering the API call.
-  usePayrollsCreateOffCycleMutation
-} from "@gusto/embedded-api-v-2025-11-15/react-query/payrollsCreateOffCycle.js";
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostV1CompaniesCompanyIdPayrollsRequest](../../models/operations/postv1companiescompanyidpayrollsrequest.md)                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.PostV1CompaniesCompanyIdPayrollsResponse](../../models/operations/postv1companiescompanyidpayrollsresponse.md)\>**
-
-### Errors
-
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| errors.NotFoundErrorObject      | 404                             | application/json                |
-| errors.UnprocessableEntityError | 422                             | application/json                |
-| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## getReceipt
 
@@ -2021,6 +1476,551 @@ import {
 ### Response
 
 **Promise\<[operations.PostPayrollsGrossUpPayrollUuidResponse](../../models/operations/postpayrollsgrossuppayrolluuidresponse.md)\>**
+
+### Errors
+
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
+
+## get
+
+Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals.
+
+Results are paginated, with a maximum page size of 100 employee_compensations.
+
+Notes:
+* Hour and dollar amounts are returned as string representations of numeric decimals.
+* Hours are represented to the thousands place; dollar amounts are represented to the cent.
+* Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts) or "0.000" (for hours ).
+* When include parameter with benefits value is passed, employee_benefits:read scope is required to return benefits
+  * Benefits containing PHI are only visible with the `employee_benefits:read:phi` scope
+
+scope: `payrolls:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-payrolls-payroll_id" method="get" path="/v1/companies/{company_id}/payrolls/{payroll_id}" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api-v-2025-11-15";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.payrolls.get({
+    companyId: "<id>",
+    payrollId: "<id>",
+    sortBy: "first_name:asc",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2025-11-15/core.js";
+import { payrollsGet } from "@gusto/embedded-api-v-2025-11-15/funcs/payrollsGet.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await payrollsGet(gustoEmbedded, {
+    companyId: "<id>",
+    payrollId: "<id>",
+    sortBy: "first_name:asc",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("payrollsGet failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  usePayrollsGet,
+  usePayrollsGetSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchPayrollsGet,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidatePayrollsGet,
+  invalidateAllPayrollsGet,
+} from "@gusto/embedded-api-v-2025-11-15/react-query/payrollsGet.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetV1CompaniesCompanyIdPayrollsPayrollIdRequest](../../models/operations/getv1companiescompanyidpayrollspayrollidrequest.md)                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetV1CompaniesCompanyIdPayrollsPayrollIdResponse](../../models/operations/getv1companiescompanyidpayrollspayrollidresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
+
+## update
+
+This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.  You can think of the **unprocessed**
+payroll object as a template of fields that you can update.  You cannot modify the structure of the payroll object through this endpoint, only values
+of the fields included in the payroll.  If you do not include specific employee compensations, fixed/hourly compensations, or deductions in your request body, they
+will not be removed from the payroll. A maximum of 100 employee_compensations can be updated at a time. Only the employee compensation objects that were
+inputted will be returned.
+
+scope: `payrolls:write`
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_id-payrolls" method="put" path="/v1/companies/{company_id}/payrolls/{payroll_id}" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api-v-2025-11-15";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.payrolls.update({
+    companyId: "<id>",
+    payrollId: "<id>",
+    payrollUpdate: {
+      employeeCompensations: [
+        {},
+      ],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2025-11-15/core.js";
+import { payrollsUpdate } from "@gusto/embedded-api-v-2025-11-15/funcs/payrollsUpdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await payrollsUpdate(gustoEmbedded, {
+    companyId: "<id>",
+    payrollId: "<id>",
+    payrollUpdate: {
+      employeeCompensations: [
+        {},
+      ],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("payrollsUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  usePayrollsUpdateMutation
+} from "@gusto/embedded-api-v-2025-11-15/react-query/payrollsUpdate.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.PutV1CompaniesCompanyIdPayrollsRequest](../../models/operations/putv1companiescompanyidpayrollsrequest.md)                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.PutV1CompaniesCompanyIdPayrollsResponse](../../models/operations/putv1companiescompanyidpayrollsresponse.md)\>**
+
+### Errors
+
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.NotFoundErrorObject      | 404                             | application/json                |
+| errors.ConflictErrorObject      | 409                             | application/json                |
+| errors.UnprocessableEntityError | 422                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
+
+## delete
+
+This endpoint allows you to delete an **unprocessed** payroll.
+
+By default the payroll and associated data is deleted synchronously. To request an asynchronous delete, use the `async=true` query parameter. In both cases validation of ability to delete will be performed and an Unprocessable Entity error will be returned if the payroll is not able to be deleted. A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for asynchronous deletion, `202/Accepted` will be returned.
+
+scope: `payrolls:run`
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="delete-v1-companies-company_id-payrolls" method="delete" path="/v1/companies/{company_id}/payrolls/{payroll_id}" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api-v-2025-11-15";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.payrolls.delete({
+    companyId: "<id>",
+    payrollId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2025-11-15/core.js";
+import { payrollsDelete } from "@gusto/embedded-api-v-2025-11-15/funcs/payrollsDelete.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await payrollsDelete(gustoEmbedded, {
+    companyId: "<id>",
+    payrollId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("payrollsDelete failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  usePayrollsDeleteMutation
+} from "@gusto/embedded-api-v-2025-11-15/react-query/payrollsDelete.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.DeleteV1CompaniesCompanyIdPayrollsRequest](../../models/operations/deletev1companiescompanyidpayrollsrequest.md)                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.DeleteV1CompaniesCompanyIdPayrollsResponse](../../models/operations/deletev1companiescompanyidpayrollsresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
+
+## list
+
+Returns a list of payrolls for a company. You can change the payrolls returned by updating the processing_status, payroll_types, start_date, & end_date params.
+
+By default, will return processed, regular payrolls for the past 6 months.
+
+Notes:
+* Dollar amounts are returned as string representations of numeric decimals, are represented to the cent.
+* end_date can be at most 3 months in the future and start_date and end_date can't be more than 1 year apart.
+* Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
+
+scope: `payrolls:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-payrolls" method="get" path="/v1/companies/{company_id}/payrolls" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api-v-2025-11-15";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.payrolls.list({
+    companyId: "<id>",
+    startDate: "2020-01-31",
+    endDate: "2020-01-31",
+    dateFilterBy: "check_date",
+    sortOrder: "asc",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2025-11-15/core.js";
+import { payrollsList } from "@gusto/embedded-api-v-2025-11-15/funcs/payrollsList.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await payrollsList(gustoEmbedded, {
+    companyId: "<id>",
+    startDate: "2020-01-31",
+    endDate: "2020-01-31",
+    dateFilterBy: "check_date",
+    sortOrder: "asc",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("payrollsList failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  usePayrollsList,
+  usePayrollsListSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchPayrollsList,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidatePayrollsList,
+  invalidateAllPayrollsList,
+} from "@gusto/embedded-api-v-2025-11-15/react-query/payrollsList.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetV1CompaniesCompanyIdPayrollsRequest](../../models/operations/getv1companiescompanyidpayrollsrequest.md)                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetV1CompaniesCompanyIdPayrollsResponse](../../models/operations/getv1companiescompanyidpayrollsresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
+
+## createOffCycle
+
+Creates a new, unprocessed, off-cycle payroll.
+
+## `off_cycle_reason`
+By default:
+- External benefits and deductions will be included when the `off_cycle_reason` is set to `Correction`.
+- All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
+
+These elections can be overridden with the `skip_regular_deductions` boolean.
+
+scope: `payrolls:run`
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-payrolls" method="post" path="/v1/companies/{company_id}/payrolls" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api-v-2025-11-15";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.payrolls.createOffCycle({
+    companyId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api-v-2025-11-15/core.js";
+import { payrollsCreateOffCycle } from "@gusto/embedded-api-v-2025-11-15/funcs/payrollsCreateOffCycle.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await payrollsCreateOffCycle(gustoEmbedded, {
+    companyId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("payrollsCreateOffCycle failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  usePayrollsCreateOffCycleMutation
+} from "@gusto/embedded-api-v-2025-11-15/react-query/payrollsCreateOffCycle.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.PostV1CompaniesCompanyIdPayrollsRequest](../../models/operations/postv1companiescompanyidpayrollsrequest.md)                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.PostV1CompaniesCompanyIdPayrollsResponse](../../models/operations/postv1companiescompanyidpayrollsresponse.md)\>**
 
 ### Errors
 

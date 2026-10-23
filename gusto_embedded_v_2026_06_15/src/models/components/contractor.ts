@@ -36,7 +36,7 @@ export type ContractorType = ClosedEnum<typeof ContractorType>;
 /**
  * The contractor’s home address.
  */
-export type Address = {
+export type ContractorAddress1 = {
   street1?: string | undefined;
   street2?: string | null | undefined;
   city?: string | undefined;
@@ -48,7 +48,7 @@ export type Address = {
 /**
  * One of the "onboarding_status" enum values.
  */
-export const OnboardingStatus = {
+export const ContractorOnboardingStatus1 = {
   AdminOnboardingIncomplete: "admin_onboarding_incomplete",
   AdminOnboardingReview: "admin_onboarding_review",
   SelfOnboardingNotInvited: "self_onboarding_not_invited",
@@ -60,7 +60,9 @@ export const OnboardingStatus = {
 /**
  * One of the "onboarding_status" enum values.
  */
-export type OnboardingStatus = ClosedEnum<typeof OnboardingStatus>;
+export type ContractorOnboardingStatus1 = ClosedEnum<
+  typeof ContractorOnboardingStatus1
+>;
 
 export const ContractorPaymentMethod1 = {
   DirectDeposit: "Direct Deposit",
@@ -73,7 +75,7 @@ export type ContractorPaymentMethod1 = ClosedEnum<
 /**
  * The contractor's upcoming employment details, if a rehire is scheduled.
  */
-export type UpcomingEmployment = {
+export type ContractorUpcomingEmployment = {
   /**
    * The start date of the upcoming employment.
    */
@@ -102,7 +104,7 @@ export type ContractorStatus = ClosedEnum<typeof ContractorStatus>;
 /**
  * Member portal invitation status information. Only included when the include param has the portal_invitations value set.
  */
-export type MemberPortalInvitationStatus = {
+export type ContractorMemberPortalInvitationStatus = {
   /**
    * The current status of the member portal invitation.
    */
@@ -188,7 +190,7 @@ export type Contractor = {
   /**
    * The contractor’s home address.
    */
-  address?: Address | null | undefined;
+  address?: ContractorAddress1 | null | undefined;
   /**
    * The contractor’s hourly rate. This attribute is required if the wage_type is “Hourly”.
    */
@@ -211,7 +213,7 @@ export type Contractor = {
   /**
    * One of the "onboarding_status" enum values.
    */
-  onboardingStatus?: OnboardingStatus | undefined;
+  onboardingStatus?: ContractorOnboardingStatus1 | undefined;
   /**
    * The contractor's payment method.
    */
@@ -239,7 +241,7 @@ export type Contractor = {
   /**
    * The contractor's upcoming employment details, if a rehire is scheduled.
    */
-  upcomingEmployment?: UpcomingEmployment | null | undefined;
+  upcomingEmployment?: ContractorUpcomingEmployment | null | undefined;
   /**
    * Whether the contractor's pending dismissal can be cancelled.
    */
@@ -252,7 +254,7 @@ export type Contractor = {
    * Member portal invitation status information. Only included when the include param has the portal_invitations value set.
    */
   memberPortalInvitationStatus?:
-    | MemberPortalInvitationStatus
+    | ContractorMemberPortalInvitationStatus
     | null
     | undefined;
   /**
@@ -272,35 +274,38 @@ export const ContractorType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ContractorType);
 
 /** @internal */
-export const Address$inboundSchema: z.ZodType<Address, z.ZodTypeDef, unknown> =
-  z.object({
-    street_1: z.string().optional(),
-    street_2: z.nullable(z.string()).optional(),
-    city: z.string().optional(),
-    state: z.string().optional(),
-    zip: z.string().optional(),
-    country: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "street_1": "street1",
-      "street_2": "street2",
-    });
+export const ContractorAddress1$inboundSchema: z.ZodType<
+  ContractorAddress1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  street_1: z.string().optional(),
+  street_2: z.nullable(z.string()).optional(),
+  city: z.string().optional(),
+  state: z.string().optional(),
+  zip: z.string().optional(),
+  country: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "street_1": "street1",
+    "street_2": "street2",
   });
+});
 
-export function addressFromJSON(
+export function contractorAddress1FromJSON(
   jsonString: string,
-): SafeParseResult<Address, SDKValidationError> {
+): SafeParseResult<ContractorAddress1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Address$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Address' from JSON`,
+    (x) => ContractorAddress1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ContractorAddress1' from JSON`,
   );
 }
 
 /** @internal */
-export const OnboardingStatus$inboundSchema: z.ZodNativeEnum<
-  typeof OnboardingStatus
-> = z.nativeEnum(OnboardingStatus);
+export const ContractorOnboardingStatus1$inboundSchema: z.ZodNativeEnum<
+  typeof ContractorOnboardingStatus1
+> = z.nativeEnum(ContractorOnboardingStatus1);
 
 /** @internal */
 export const ContractorPaymentMethod1$inboundSchema: z.ZodNativeEnum<
@@ -308,8 +313,8 @@ export const ContractorPaymentMethod1$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ContractorPaymentMethod1);
 
 /** @internal */
-export const UpcomingEmployment$inboundSchema: z.ZodType<
-  UpcomingEmployment,
+export const ContractorUpcomingEmployment$inboundSchema: z.ZodType<
+  ContractorUpcomingEmployment,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -322,13 +327,13 @@ export const UpcomingEmployment$inboundSchema: z.ZodType<
   });
 });
 
-export function upcomingEmploymentFromJSON(
+export function contractorUpcomingEmploymentFromJSON(
   jsonString: string,
-): SafeParseResult<UpcomingEmployment, SDKValidationError> {
+): SafeParseResult<ContractorUpcomingEmployment, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpcomingEmployment$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpcomingEmployment' from JSON`,
+    (x) => ContractorUpcomingEmployment$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ContractorUpcomingEmployment' from JSON`,
   );
 }
 
@@ -338,8 +343,8 @@ export const ContractorStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ContractorStatus);
 
 /** @internal */
-export const MemberPortalInvitationStatus$inboundSchema: z.ZodType<
-  MemberPortalInvitationStatus,
+export const ContractorMemberPortalInvitationStatus$inboundSchema: z.ZodType<
+  ContractorMemberPortalInvitationStatus,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -359,13 +364,14 @@ export const MemberPortalInvitationStatus$inboundSchema: z.ZodType<
   });
 });
 
-export function memberPortalInvitationStatusFromJSON(
+export function contractorMemberPortalInvitationStatusFromJSON(
   jsonString: string,
-): SafeParseResult<MemberPortalInvitationStatus, SDKValidationError> {
+): SafeParseResult<ContractorMemberPortalInvitationStatus, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => MemberPortalInvitationStatus$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MemberPortalInvitationStatus' from JSON`,
+    (x) =>
+      ContractorMemberPortalInvitationStatus$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ContractorMemberPortalInvitationStatus' from JSON`,
   );
 }
 
@@ -390,12 +396,13 @@ export const Contractor$inboundSchema: z.ZodType<
   email: z.nullable(z.string()).optional(),
   work_email: z.nullable(z.string()).optional(),
   start_date: z.string().optional(),
-  address: z.nullable(z.lazy(() => Address$inboundSchema)).optional(),
+  address: z.nullable(z.lazy(() => ContractorAddress1$inboundSchema))
+    .optional(),
   hourly_rate: z.string().optional(),
   file_new_hire_report: z.nullable(z.boolean()).optional(),
   work_state: z.nullable(z.string()).optional(),
   onboarded: z.boolean().optional(),
-  onboarding_status: OnboardingStatus$inboundSchema.optional(),
+  onboarding_status: ContractorOnboardingStatus1$inboundSchema.optional(),
   payment_method: z.nullable(ContractorPaymentMethod1$inboundSchema).optional(),
   has_ssn: z.boolean().optional(),
   department_uuid: z.nullable(z.string()).optional(),
@@ -403,12 +410,12 @@ export const Contractor$inboundSchema: z.ZodType<
   department_title: z.nullable(z.string()).optional(),
   dismissal_date: z.nullable(z.string()).optional(),
   upcoming_employment: z.nullable(
-    z.lazy(() => UpcomingEmployment$inboundSchema),
+    z.lazy(() => ContractorUpcomingEmployment$inboundSchema),
   ).optional(),
   dismissal_cancellation_eligible: z.boolean().optional(),
   rehire_cancellation_eligible: z.boolean().optional(),
   member_portal_invitation_status: z.nullable(
-    z.lazy(() => MemberPortalInvitationStatus$inboundSchema),
+    z.lazy(() => ContractorMemberPortalInvitationStatus$inboundSchema),
   ).optional(),
   partner_portal_invitation_sent: z.nullable(z.boolean()).optional(),
 }).transform((v) => {

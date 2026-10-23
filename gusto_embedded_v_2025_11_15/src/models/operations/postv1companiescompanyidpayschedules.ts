@@ -19,7 +19,7 @@ import {
 import {
   PayScheduleShow,
   PayScheduleShow$inboundSchema,
-} from "../components/payscheduleshow.js";
+} from "../components/payschedulelistitem.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**

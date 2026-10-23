@@ -1,7 +1,20 @@
 ## Typescript SDK Changes:
-* `gustoembedded.taxPayments.getTaxPayments()`: `response.[]` **Changed** (Breaking ⚠️)
-    - `agencyName` **Changed** (Breaking ⚠️)
-    - `jurisdiction` **Changed** (Breaking ⚠️)
-* `gustoembedded.taxPayments.getTaxPayment()`: `response` **Changed** (Breaking ⚠️)
-    - `agencyName` **Changed** (Breaking ⚠️)
-    - `jurisdiction` **Changed** (Breaking ⚠️)
+* `gustoembedded.paySchedules.getAll()`: `response.[]` **Changed** (Breaking ⚠️)
+    - `autoPayrollEnablementBlockers` **Removed** (Breaking ⚠️)
+    - `autoPayroll` **Removed** (Breaking ⚠️)
+* `gustoembedded.contractors.get()`: `response` **Changed**
+    - `additionalProperties` **Added**
+    - `companyName` **Added**
+* `gustoembedded.contractors.list()`: `response.[]` **Changed**
+    - `additionalProperties` **Added**
+    - `companyName` **Added**
+* `gustoembedded.employees.get()`: `response` **Changed**
+    - `additionalProperties` **Added**
+    - `allHomeAddresses` **Added**
+    - `companyName` **Added**
+    - `currentHomeAddress` **Added**
+* `gustoembedded.employees.list()`:  `response.[].companyName` **Added**
+* `gustoembedded.payrolls.get()`:  `response.employeeCompensations[].paidTimeOff[].approvedRequestHours` **Added**
+* `gustoembedded.payrolls.update()`:  `response.employeeCompensations[].paidTimeOff[].approvedRequestHours` **Added**
+* `gustoembedded.payrolls.createOffCycle()`:  `response.employeeCompensations[].paidTimeOff[].approvedRequestHours` **Added**
+* `gustoembedded.payrolls.prepare()`:  `response.employeeCompensations[].paidTimeOff[].approvedRequestHours` **Added**
