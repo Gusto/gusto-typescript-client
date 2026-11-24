@@ -8,6 +8,10 @@ permissions:
 "on":
   workflow_dispatch:
     inputs:
+      target:
+        description: Optional target name from .speakeasy/workflow.yaml; blank generates all targets
+        type: string
+        required: false
       force:
         description: Force generation of SDKs
         type: boolean
@@ -16,15 +20,14 @@ permissions:
         description: optionally set a specific SDK version
         type: string
   schedule:
-    # Nightly run. Scheduled runs execute as the actor who last edited this
-    # block, so that actor must stay authorized to trigger Actions. Re-saved
-    # by an active maintainer to reassign the actor (previous owner's account
-    # lost Actions-trigger access, causing daily startup failures).
-    - cron: 0 0 * * *
+    # Scheduled runs use the actor who last changed the cron syntax.
+    # That account must remain authorized to trigger Actions.
+    - cron: 17 0 * * *
 jobs:
   generate:
     uses: Gusto/sdk-generation-action/.github/workflows/workflow-executor.yaml@main
     with:
+      target: ${{ github.event.inputs.target }}
       force: ${{ github.event.inputs.force }}
       mode: pr
       set_version: ${{ github.event.inputs.set_version }}
